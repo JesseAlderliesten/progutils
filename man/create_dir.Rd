@@ -4,42 +4,34 @@
 \alias{create_dir}
 \title{Create a directory}
 \usage{
-create_dir(dir = ".", subdir = "output", add_date = TRUE, quietly = FALSE)
+create_dir(dir = file.path(".", "output"), add_date = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{Non-empty character string containing the first part of the path,
-see \code{Details}. The default \code{"."} indicates the working directory.}
-
-\item{subdir}{Character string containing the last part of the path, possibly
-empty (\code{""}) to not create a subdirectory (a subdirectory with the date will
-still be added if \code{add_date} is \code{TRUE}). See \code{Details}.}
+\item{dir}{Non-empty character string containing the path to the directory,
+not ending with a (back)slash. See \code{Details}.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: should a subdirectory be created with the
-current date? If created, it has format format \code{YYYY_MM_DD}.}
+current date?}
 
-\item{quietly}{\code{TRUE} or \code{FALSE}: should printing of messages be suppressed?}
+\item{quietly}{\code{TRUE} or \code{FALSE}: should the printing of messages indicating
+which directory was created be suppressed?}
 }
 \value{
 A character string with the created path, returned
-\link[=invisible]{invisibly}. The path will be composed of \code{dir} and \code{subdir}, with
-a subdirectory with the current date if \code{add_date} is \code{TRUE}. The
-\link[=getwd]{working directory} is returned if the attempt to create a directory
-fails, with a warning.
+\link[=invisible]{invisibly}. The path will be composed of the elements in \code{dir},
+separated with the platform-dependent \link[=file.path]{file separator} and, if
+\code{add_date} is \code{TRUE}, a subdirectory with the current date in the format
+\code{YYYY_MM_DD}. The \link[=getwd]{working directory} is returned if the attempt to
+create a directory fails, with a warning.
 }
 \description{
 Create a directory if it does not yet exist.
 }
 \details{
-\code{dir} and \code{subdir} can contain (back)slashes (\code{/} or \verb{\\}) to indicate
-subdirectories but they should not end with a (back)slash because that would
-result in mismatches between the created directory and the returned path
-because trailing (back)slashes are removed when the directory is created.
-
-In addition, \code{dir} and \code{subdir} cannot be zero-length because, as documented
-in \code{\link[=file.path]{file.path()}}, that would result in \code{character(0)} as path, even if one of
-them is a character string; (3) \code{dir} cannot be an empty character string
-(\code{""}); (4) \code{subdir} cannot be \code{"."} because it does not make sense to specify the current
-\link[=getwd]{working directory} as subdirectory.
+The default \code{dir} uses \code{\link[=file.path]{file.path()}} to use the correct (platform-dependent)
+path separator when indicating subdirectory \code{output} in the
+\link[=getwd]{working directory}. That is not the case if a character string with
+(back)slashes (\code{/} or \verb{\\}) is used to indicate subdirectories.
 }
 \section{Side effects}{
 
@@ -48,19 +40,11 @@ The requested directory is created if does not yet exist.
 
 \section{Wishlist}{
 
-Should a warning be issued if a directory is created that only differs from
-an existing directory through case changes?
-}
-
-\section{Programming notes}{
-
-\itemize{
-\item Status: code OK, annotation OK, tests OK.
-\item Is the problem that tests create folders that are left instead of temporary
-folders also present with package \code{tinytest}?
-}
+Use a temporary directory for the unit tests, to solve the problem that tests
+create directories that are left. See the suggestions in test_create_dir.R.
 }
 
 \seealso{
-\code{\link[=check_file]{check_file()}} \code{\link[=file.path]{file.path()}} \code{\link[=is_file]{is_file()}}
+\code{\link[=file.path]{file.path()}} and \code{\link[=dir.create]{dir.create()}} that are used in this function.
+\code{\link[=check_file]{check_file()}} to check if a file exists.
 }
