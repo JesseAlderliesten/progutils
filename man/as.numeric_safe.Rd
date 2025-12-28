@@ -7,29 +7,36 @@
 as.numeric_safe(x)
 }
 \arguments{
-\item{x}{A character, factor, or numeric object to be converted to numeric.}
+\item{x}{A factor, or a character or numeric vector to be converted to a
+numeric vector.}
 }
 \value{
-A numeric object.
+A numeric vector.
 }
 \description{
-Convert x to numeric in a way that works irrespective if \code{x} is character,
-factor, or already numeric.
+Convert x to a numeric vector in a way that works irrespective if \code{x} is a
+factor, a character vector, or already a numeric vector.
 }
 \details{
-\code{as.numeric()} \emph{cannot} be used to convert a factor to numeric, because that
-returns their underlying numeric (integer) representation (i.e., the indices
-of the factor levels), see the \code{Warnings} in \code{\link[=as.numeric]{as.numeric()}} and \code{\link[=factor]{factor()}}.
+\code{as.numeric_safe()} uses a suggestion from \code{\link[=factor]{factor()}} and
+\href{https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f}{\R FAQ 7.10}
+that not only works if \code{x} is a factor but also if \code{x} is a character vector
+or already is a numeric vector (even though though the last example of
+\code{as.numeric} comments that this approach is less efficient for long vectors).
 
-The conversions \code{as.numeric(levels(x))[x]} (suggested in the \code{Warning} of
-\code{\link[=factor]{factor()}} and \code{as.numeric(levels(x))[as.integer(x)]} (suggested in
-\href{https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f}{\R FAQ 7.10})
-\emph{only} work if \code{x} is factor.
+In contrast, the alternative conversions \code{as.numeric(levels(x))[x]} (suggested
+in the \code{Warning} of \code{factor()}) and \code{as.numeric(levels(x))[as.integer(x)]}
+(suggested in \R \verb{FAQ 7.10}) \emph{only} work if \code{x} is factor, see the \code{Examples}.
 
-\code{as.numeric_safe()} uses the alternative also suggested in \code{factor()} and
-\R \verb{FAQ 7.10} that works irrespective if \code{x} is a factor, character or
-numeric (even though the last example of \code{as.numeric} comments that it is
-less efficient for long vectors).
+Furthermore, \code{as.numeric()} \emph{cannot} be used to convert a factor to numeric,
+because it returns their underlying numeric (integer) representation (i.e.,
+the indices of the factor levels), see the \code{Warnings} in \code{\link[=as.numeric]{as.numeric()}} and
+\code{\link[=factor]{factor()}}.
+}
+\note{
+NULL and zero-length vectors are converted to numeric(0). Logical vectors of
+length > 0 are converted to a vector of numerical NAs (i.e., \code{NA_real_}),
+with a warning.
 }
 \section{Wishlist}{
 
@@ -44,9 +51,9 @@ x_char <- as.character(x_int)
 x_fact <- as.factor(x_int)
 
 str_as_num_safe <- function(x) {str(as.numeric_safe(x))}
-str_as_num_base <- function(x) {str(as.numeric(x))}
 str_as_num_fact <- function(x) {str(as.numeric(levels(x))[x])}
 str_as_num_7.10 <- function(x) {str(as.numeric(levels(x))[as.integer(x)])}
+str_as_num_base <- function(x) {str(as.numeric(x))}
 
 # as.numeric_safe() works irrespective the type of x
 str_as_num_safe(x_int)  # num [1:3] 5 6 7 # fine
@@ -60,17 +67,17 @@ str_as_num_fact(x_num)  # num [1:3] NA NA NA # wrong, but clearly so.
 str_as_num_fact(x_char) # num [1:3] NA NA NA # wrong, but clearly so.
 str_as_num_fact(x_fact) # num [1:3] 5 6 7 # fine
 
-# as.numeric() gives the *indices* of the factor levels for factors
-str_as_num_base(x_int)  # num [1:3] 5 6 7 # fine
-str_as_num_base(x_num)  # num [1:3] 5 6 7 # fine
-str_as_num_base(x_char) # num [1:3] 5 6 7 # fine
-str_as_num_base(x_fact) # num [1:3] 1 2 3 # wrong!
-
 # The 'more efficient' suggestion in R FAQ 7.10 *only* works for factors.
 str_as_num_7.10(x_int)  # num [1:3] NA NA NA # wrong, but clearly so.
 str_as_num_7.10(x_num)  # num [1:3] NA NA NA # wrong, but clearly so.
 str_as_num_7.10(x_char) # num [1:3] NA NA NA # wrong, but clearly so.
 str_as_num_7.10(x_fact) # num [1:3] 5 6 7 # fine
+
+# as.numeric() gives the *indices* of the factor levels for factors
+str_as_num_base(x_int)  # num [1:3] 5 6 7 # fine
+str_as_num_base(x_num)  # num [1:3] 5 6 7 # fine
+str_as_num_base(x_char) # num [1:3] 5 6 7 # fine
+str_as_num_base(x_fact) # num [1:3] 1 2 3 # wrong!
 
 }
 \seealso{
