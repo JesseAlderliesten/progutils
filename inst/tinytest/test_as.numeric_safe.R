@@ -1,17 +1,17 @@
 #### Create objects to use in tests ####
 int_example <- 5:7
-num_example <- as.numeric(int_example)
 char_example <- as.character(int_example)
 fact_example <- as.factor(int_example)
+num_example <- as.numeric(int_example)
 out_NA_example <- rep(NA_real_, 3L)
 
-x_num <- c(1, 20, 20, 5, 5)
 x_char_mix <- c("1.0", "-3", "NA", "Inf", "5.0", "1.3", "-1.3", "13.4", "0.013")
+x_num <- c(1, 20, 20, 5, 5)
 out_num_mix <- c(1, -3, NA, Inf, 5, 1.3, -1.3, 13.4, 0.013)
 
-as_num_base <- function(x) {as.numeric(x)}
 as_num_fact <- function(x) {as.numeric(levels(x))[x]}
 as_num_7.10 <- function(x) {as.numeric(levels(x))[as.integer(x)]}
+as_num_base <- function(x) {as.numeric(x)}
 
 
 #### Test the examples ####
@@ -27,17 +27,17 @@ expect_identical(as_num_fact(num_example), out_NA_example)
 expect_identical(as_num_fact(char_example), out_NA_example)
 expect_identical(as_num_fact(fact_example), num_example)
 
-# as.numeric() gives the *indices* of the factor levels for factors
-expect_identical(as_num_base(int_example), num_example)
-expect_identical(as_num_base(num_example), num_example)
-expect_identical(as_num_base(char_example), num_example)
-expect_identical(as_num_base(fact_example), c(1, 2, 3))
-
 # The 'more efficient' suggestion in R FAQ 7.10 *only* works for factors.
 expect_identical(as_num_7.10(int_example), out_NA_example)
 expect_identical(as_num_7.10(num_example), out_NA_example)
 expect_identical(as_num_7.10(char_example), out_NA_example)
 expect_identical(as_num_7.10(fact_example), num_example)
+
+# as.numeric() gives the *indices* of the factor levels for factors
+expect_identical(as_num_base(int_example), num_example)
+expect_identical(as_num_base(num_example), num_example)
+expect_identical(as_num_base(char_example), num_example)
+expect_identical(as_num_base(fact_example), c(1, 2, 3))
 
 
 #### Tests ####
@@ -76,6 +76,10 @@ expect_silent(expect_equal(
 expect_silent(expect_equal(
   as.numeric_safe(factor(1:3, levels = 1:4)),
   c(1, 2, 3)))
+expect_warning(expect_equal(
+  as.numeric_safe(c(TRUE, FALSE, NA)),
+  c(NA_real_, NA_real_, NA_real_)),
+  pattern = "NAs introduced by coercion", strict = TRUE)
 
 
 #### Remove objects used in tests ####
