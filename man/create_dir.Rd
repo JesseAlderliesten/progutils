@@ -17,12 +17,13 @@ current date?}
 which directory was created be suppressed?}
 }
 \value{
-A character string with the created path, returned
-\link[=invisible]{invisibly}. The path will be composed of the elements in \code{dir},
-separated with the platform-dependent \link[=file.path]{file separator} and, if
-\code{add_date} is \code{TRUE}, a subdirectory with the current date in the format
-\code{YYYY_MM_DD}. The \link[=getwd]{working directory} is returned if the attempt to
-create a directory fails, with a warning.
+A character string with \link[=normalizePath]{normalized} form of the
+created path, returned \link[=invisible]{invisibly}. The path will be composed of
+the elements in \code{dir}, separated with the platform-dependent
+\link[=file.path]{file separator} and, if \code{add_date} is \code{TRUE}, a subdirectory
+with the current date in the format \code{YYYY_MM_DD}. The
+\link[=getwd]{working directory} is returned if the attempt to create a directory
+fails, with a warning.
 }
 \description{
 Create a directory if it does not yet exist.
@@ -40,10 +41,37 @@ The requested directory is created if does not yet exist.
 
 \section{Wishlist}{
 
-Use a temporary directory for the unit tests, to solve the problem that tests
-create directories that are left. See the suggestions in test_create_dir.R.
+Do not allow paths ending in a trailing dot or a trailing space, see
+?dir.create().
+
+Add a test for a failed creation.
 }
 
+\examples{
+# Use a temporary directory to not write in the user's directory
+my_tempdir <- tempdir()
+
+# Create directory 'dir_one' inside this temporary directory
+res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+                          add_date = FALSE)
+dir.exists(res_dir_one) # TRUE
+
+# An attempt to create a directory that already exists does not change any
+# directory and the same directory is returned. However, the message now
+# indicates the directory already exists.
+res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+                             add_date = FALSE)
+identical(res_dir_one, res_dir_one_v2) # TRUE
+
+# Create directory 'dir_two' with a subdirectory containing the current date
+res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
+                          add_date = TRUE)
+dir.exists(res_dir_two) # TRUE
+
+# Cleaning up
+unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
+
+}
 \seealso{
 \code{\link[=file.path]{file.path()}} and \code{\link[=dir.create]{dir.create()}} that are used in this function.
 \code{\link[=check_file]{check_file()}} to check if a file exists.
