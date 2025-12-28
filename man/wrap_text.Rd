@@ -22,8 +22,8 @@ a maximum of \code{width} characters. \code{x} of length larger than one is past
 a single string, separating the parts by spaces. Consecutive white space in
 \code{x} is collapsed into a single blank character, except for double spaces
 after periods, question marks and exclamation marks (as documented in the
-section \code{Details} of \code{\link[base:strwrap]{base::strwrap()}}). Leading white space in \code{x} is
-completely removed.
+section \code{Details} of \code{\link[=strwrap]{strwrap()}}). Leading white space in \code{x} is completely
+removed.
 }
 \description{
 Wrap text at blank characters to achieve a maximum line width.
@@ -32,12 +32,12 @@ Wrap text at blank characters to achieve a maximum line width.
 A warning is issued if the width of a fragment in the output exceeds \code{width}.
 
 The output is printed as a string with newlines represented as \verb{\\n}. Use
-\code{\link[base:cat]{base::cat()}} on the output to print it in the way it is formatted in messages.
+\code{\link[=cat]{cat()}} on the output to print it in the way it is formatted in messages.
 
 Argument \code{width} in \code{wrap_text()} indicates the maximum width of text after
 wrapping, i.e., the width \emph{after} which text should be wrapped. In contrast,
-argument \code{width} in \code{\link[base:strwrap]{base::strwrap()}} indicates the width \emph{at} which text
-should be wrapped.
+argument \code{width} in \code{\link[=strwrap]{strwrap()}} indicates the width \emph{at} which text should be
+wrapped.
 }
 \section{Programming note}{
 
@@ -54,7 +54,7 @@ cat(wrap_text("A piece\nof text that you want to wrap over multiple lines",
 
 }
 \seealso{
-\code{\link[base:cat]{base::cat()}} \code{\link[base:paste]{base::paste()}} \code{\link[base:strwrap]{base::strwrap()}}
+\code{\link[=cat]{cat()}} \code{\link[=paste]{paste()}} \code{\link[=strwrap]{strwrap()}}
 
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},

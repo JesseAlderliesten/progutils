@@ -14,8 +14,8 @@
 #' a single string, separating the parts by spaces. Consecutive white space in
 #' `x` is collapsed into a single blank character, except for double spaces
 #' after periods, question marks and exclamation marks (as documented in the
-#' section `Details` of [base::strwrap()]). Leading white space in `x` is
-#' completely removed.
+#' section `Details` of [strwrap()]). Leading white space in `x` is completely
+#' removed.
 #'
 #' @section Programming note:
 #' The call `wrap_text(x, width)` can be replaced by
@@ -26,14 +26,14 @@
 #' A warning is issued if the width of a fragment in the output exceeds `width`.
 #'
 #' The output is printed as a string with newlines represented as `\n`. Use
-#' [base::cat()] on the output to print it in the way it is formatted in messages.
+#' [cat()] on the output to print it in the way it is formatted in messages.
 #'
 #' Argument `width` in `wrap_text()` indicates the maximum width of text after
 #' wrapping, i.e., the width *after* which text should be wrapped. In contrast,
-#' argument `width` in [base::strwrap()] indicates the width *at* which text
-#' should be wrapped.
+#' argument `width` in [strwrap()] indicates the width *at* which text should be
+#' wrapped.
 #'
-#' @seealso [base::cat()] [base::paste()] [base::strwrap()]
+#' @seealso [cat()] [paste()] [strwrap()]
 #' @family functions to modify character vectors
 #'
 #' @examples
