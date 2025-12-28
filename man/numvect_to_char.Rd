@@ -45,8 +45,6 @@ Implement customized rounding using \code{signif_custom()}, e.g.,
 To get a cross-tabulation of \code{x} into a character string, one could use
 \code{paste0(numvect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")},
 see the last \code{Example}.
-
-Dropped the use of \code{range_to_char()}.
 }
 
 \examples{

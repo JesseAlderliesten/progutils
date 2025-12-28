@@ -29,8 +29,6 @@
 #' `paste0(numvect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")`,
 #' see the last `Example`.
 #'
-#' Dropped the use of `range_to_char()`.
-#'
 #' @seealso [base::toString()] which can be used as `toString(x)` or
 #' `toString(signif_custom(x, ...))` if `x` is unnamed or names can be removed.
 #' @family functions to modify character vectors
