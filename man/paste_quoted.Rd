@@ -4,12 +4,10 @@
 \alias{paste_quoted}
 \title{Concatenate text to a single string of quoted elements.}
 \usage{
-paste_quoted(x, ...)
+paste_quoted(x)
 }
 \arguments{
 \item{x}{Vector to be converted to a single character string.}
-
-\item{...}{Not used. Present as a programming tool, see \code{Details}.}
 }
 \value{
 A character string consisting of the elements of \code{x} surrounded by
@@ -19,35 +17,18 @@ quotes (i.e., \verb{'}), separated by commas (i.e., \verb{,}).
 Concatenate text to a single string of quoted elements, printing \code{NULL} and
 \code{character(0)} as \code{"'NULL'"}.
 }
-\details{
-The use of ellipsis (\code{...}) as second argument makes it possible to detect if
-arguments other than \code{x} are not named. Then a warning is raised because then
-\code{x} was probably accidentally not concatenated. For example, the call
-\code{paste_quoted("a", "b")} would return \code{"bab"} if no ellipses were present
-(using \code{'b'} as argument \code{surround}), whereas now \code{"'a'"} is returned, with a
-warning that the probably intended call is \code{paste_quoted(c("a", "b"))}.
-}
 \note{
 \code{NULL} and \code{character(0)} are printed as \code{"'NULL'"}. Other zero-length
 objects are printed as \code{"''"}.
 
-A warning is issued if \code{x} has names or if unnamed arguments (other
-than \code{x}) are present, see the \code{Wishlist}.
+An error occurs if multiple arguments are provided. Then \code{x} was probably
+accidentally not concatenated. For example, the call \code{paste_quoted("a", "b")}
+will return the error \verb{unused argument ("b")}. The probably intended call is
+\code{paste_quoted(c("a", "b"))}.
 }
 \section{To do}{
 
 See also \code{\link[=dQuote]{dQuote()}}, \code{\link[=sQuote]{sQuote()}} and \code{\link[=Quotes]{Quotes()}}
-
-Is there a way to check that arguments are not formal arguments without using
-the ellipsis argument? See (1) \code{test_function()} for a more elaborate code to
-warn about arguments that are not formal arguments of the called function;
-(2) \code{\link[=chkDots]{chkDots()}} with argument \code{allowed} implemented from \R 4.6.0;
-(3) \link[methods:dotsMethods]{methods::dotsMethods}; (4) functions \code{check_dots_empty()},
-\code{check_dots_unnamed()}, and \code{check_dots_used()} in package \code{ellipsis};
-(5a) \code{chk_used()} and \code{vld_used()} from package \code{chk};
-(5b) \href{https://stackoverflow.com/questions/64001629}{this StackOverflow post};
-(6) \href{https://www.rostrum.blog/posts/2024-03-12-eclipse/}{this blog post};
-(7) ellipsis.txt in my private progutils.
 }
 
 \section{Wishlist}{

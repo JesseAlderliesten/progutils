@@ -6,9 +6,6 @@ list_output <- list("'a'", "'a', 'b'", "'a', 'b', 'a'",
 list_input_zerolength <- list(NULL, character(0), numeric(0), logical(0), "")
 list_output_zerolength <- list("'NULL'", "'NULL'", "''", "''", "''")
 
-warn_ignored <- paste0("unnamed arguments that are not formal arguments",
-                       " of paste_quoted\\(). Did\nyou forget to combine 'x'")
-
 
 #### Test the examples ####
 expect_identical(paste_quoted(c(3, 4)), "'3', '4'")
@@ -20,10 +17,6 @@ expect_identical(paste_quoted(NULL), "'NULL'")
 
 
 #### Test other sections ####
-# 'Details'
-expect_warning(expect_identical(paste_quoted("a", "b"), "'a'"),
-               pattern = paste0("Ignored 1 ", warn_ignored), strict = TRUE)
-
 # 'Note'
 expect_identical(paste_quoted(NULL), "'NULL'")
 expect_identical(paste_quoted(character(0)), "'NULL'")
@@ -36,22 +29,21 @@ for(index in seq_along(list_input)) {
   expect_identical(paste_quoted(x = list_input[[index]]), list_output[[index]])
 }
 
-expect_warning(expect_identical(
-  paste_quoted(3, 4), "'3'"),
-  pattern = paste0("Ignored 1 ", warn_ignored), strict = TRUE)
+expect_error(
+  paste_quoted(3, 4),
+  pattern = "unused argument (4)", fixed = TRUE)
 
-expect_warning(expect_identical(
-  paste_quoted(c(3, 4), 5:6), "'3', '4'"),
-  pattern = paste0("Ignored 1 ", warn_ignored), strict = TRUE)
+expect_error(
+  paste_quoted(c(3, 4), 5:6),
+  pattern = "unused argument (5:6)", fixed = TRUE)
 
-expect_warning(expect_identical(
-  paste_quoted(c(3, 4), 5:6, 7), "'3', '4'"),
-  pattern = paste0("Ignored 2 ", warn_ignored), strict = TRUE)
+expect_error(
+  paste_quoted(c(3, 4), 5:6, 7),
+  pattern = "unused arguments (5:6, 7)", fixed = TRUE)
 
-expect_warning(expect_identical(
-  paste_quoted(c(3, 4), h = 5, 7), "'3', '4'"),
-  pattern = paste0("Ignored arguments 'h' and 1 unnamed arguments that are not",
-                   " formal arguments of"), strict = TRUE)
+expect_error(
+  paste_quoted(c(3, 4), h = 5, 7),
+  pattern = "unused arguments (h = 5, 7)", fixed = TRUE)
 
 expect_warning(expect_identical(
   paste_quoted(c(a = 3, b = 4)), "'3', '4'"),
@@ -67,4 +59,4 @@ for(index_NULL in seq_along(list_input_zerolength)) {
 
 #### Remove objects used in tests ####
 rm(index, index_NULL, list_input, list_input_zerolength, list_output,
-   list_output_zerolength, warn_ignored)
+   list_output_zerolength)
