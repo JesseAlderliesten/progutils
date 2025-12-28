@@ -2,13 +2,16 @@
 % Please edit documentation in R/check_file.R
 \name{check_file}
 \alias{check_file}
-\title{Check if a file is present}
+\title{Check if only a single matching file is present}
 \usage{
-check_file(pattern, ignore_case = TRUE, quietly = FALSE)
+check_file(path = ".", pattern = NULL, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{pattern}{Character string containing a \link[base:regex]{regular expression}
-to match to file names in the \link[=getwd]{working directory}.}
+\item{path}{Character string with a full path name. Passed to \code{\link[=list.files]{list.files()}}.}
+
+\item{pattern}{NULL, or a character string containing a
+\link[base:regex]{regular expression} to match to file names in the path
+indicated by \code{path}. Passed to \code{\link[=list.files]{list.files()}}.}
 
 \item{ignore_case}{\code{TRUE} or \code{FALSE}: should matching file names be
 case-insensitive?}
@@ -17,26 +20,45 @@ case-insensitive?}
 be suppressed?}
 }
 \value{
-A character string with a file name matching \code{pattern}. The first
-match is used if \code{pattern} matches multiple names, with a warning. An error
-is thrown if \code{pattern} does not match any names.
+A character string with the file name in \code{dir} that matches
+\code{pattern} if there is exactly one match to \code{pattern}. An error is thrown if
+no file name in \code{dir} matches \code{pattern} or if multiple file names in \code{dir}
+match \code{pattern}.
 }
 \description{
-Check if a file is present in the working directory.
+Check if only a single matching file is present. This function is intended to
+be used before reading a file. Throwing an error if multiple matches are
+present, instead of using the first matching file, is intended to prevent
+erroneous matches.
 }
 \details{
+The default \code{"."} for \code{path} indicates the \link[=getwd]{working directory}.
+
 If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, it is
-checked if a case-insensitive match would be found. If such a match is found,
-it is reported in error message.
+checked if a case-insensitive match would be found. It is reported in the
+error message if such a match is found or not.
 }
 \examples{
-check_file(pattern <- "AMESP") # Using file 'NAMESPACE'
-check_file(pattern <- "amesp", ignore_case = TRUE) # Using file 'NAMESPACE'
-check_file(pattern <- "amesp", ignore_case = FALSE) # Error reporting presence of case-insensitive match 'NAMESPACE'
-check_file(pattern <- "abc", ignore_case = FALSE) # Error reporting no match found.
-check_file(pattern <- "ICEN") # Multiple matches, using the first.
+# Create filenames in a temporary directory so we know what is present.
+my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
+# Create the files
+file.create(my_tempfiles)
+
+check_file(path = tempdir(), pattern = "First")
+# Default for 'ignore_case' is TRUE, so the same file is found:
+check_file(path = tempdir(), pattern = "FIRST")
+# Error reporting presence of case-insensitive match.
+try(check_file(path = tempdir(), pattern = "FIRST", ignore_case = FALSE))
+# Error reporting no match found.
+try(check_file(path = tempdir(), pattern = "abc", ignore_case = FALSE))
+# Error because multiple matches are present.
+try(check_file(path = tempdir(), pattern = "File"))
+
+# Deleting the created temporary files
+unlink(x = my_tempfiles)
 
 }
 \seealso{
-\code{\link[=is_file]{is_file()}} \code{\link[=create_dir]{create_dir()}}
+\code{\link[=list.files]{list.files()}} that is used by this function. \code{\link[=create_dir]{create_dir()}} to
+create a directory.
 }
