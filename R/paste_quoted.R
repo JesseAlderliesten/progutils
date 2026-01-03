@@ -12,7 +12,7 @@
 #' See also [dQuote()], [sQuote()] and [Quotes()]
 #'
 #' @section Wishlist: Implement preserving names, e.g., using
-#' `paste(names(x), x, sep = ": ", collapse = ", ")` (used in [numvect_to_char()])
+#' `paste(names(x), x, sep = ": ", collapse = ", ")` (used in [vect_to_char()])
 #' or `paste0("'", paste(names(x), x, sep = ": ", collapse = "', '"), "'")`. Add
 #' argument 'use_names = c("numeric", "all", "none") to use that?
 #'
@@ -46,7 +46,7 @@ paste_quoted <- function(x) {
   if(!is.null(names(x))) {
     warning_text <- "'x' has names, these will be discarded."
     if(is.numeric(x)) {
-      warning_text <- paste0(warning_text, " Use numvect_to_char() instead of",
+      warning_text <- paste0(warning_text, " Use vect_to_char() instead of",
                              " paste_quoted() to preserve names of numeric 'x'.")
     }
     warning(wrap_text(warning_text))

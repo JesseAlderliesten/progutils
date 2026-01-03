@@ -33,7 +33,7 @@ See also \code{\link[=dQuote]{dQuote()}}, \code{\link[=sQuote]{sQuote()}} and \c
 
 \section{Wishlist}{
  Implement preserving names, e.g., using
-\code{paste(names(x), x, sep = ": ", collapse = ", ")} (used in \code{\link[=numvect_to_char]{numvect_to_char()}})
+\code{paste(names(x), x, sep = ": ", collapse = ", ")} (used in \code{\link[=vect_to_char]{vect_to_char()}})
 or \code{paste0("'", paste(names(x), x, sep = ": ", collapse = "', '"), "'")}. Add
 argument 'use_names = c("numeric", "all", "none") to use that?
 }
@@ -50,7 +50,7 @@ paste_quoted(c(a = 3, b = 4)) # "'3', '4'" # Warns about dropping names.
 
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},
-\code{\link{numvect_to_char}()},
+\code{\link{vect_to_char}()},
 \code{\link{wrap_text}()}
 }
 \concept{functions to modify character vectors}
