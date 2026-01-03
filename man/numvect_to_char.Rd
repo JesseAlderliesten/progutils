@@ -2,21 +2,21 @@
 % Please edit documentation in R/numvect_to_char.R
 \name{numvect_to_char}
 \alias{numvect_to_char}
-\title{Convert a numeric vector to a character string}
+\title{Convert a vector to a character string}
 \usage{
 numvect_to_char(x, signif = 3L, sep = ": ", collapse = ", ", width = Inf)
 }
 \arguments{
-\item{x}{a numeric vector or a non-dataframe list that can be unlisted to
-obtain a numeric vector.}
+\item{x}{A vector or a non-dataframe list that can be unlisted to obtain a
+vector.}
 
-\item{signif}{positive integer of length one indicating the number of
-significant digits to round to.}
+\item{signif}{Positive number of length one, rounded to the nearest positive
+integer indicating the number of significant digits to round numeric \code{x} to.}
 
 \item{sep}{Character string of length one used to separate the names and the
 values.}
 
-\item{collapse}{character string of length one to collapse values into a
+\item{collapse}{Character string of length one to collapse values into a
 single character string, or \code{NULL} to return each value as an element of a
 character vector.}
 
@@ -25,11 +25,11 @@ line width (in characters) after wrapping. Can be \code{Inf} to not wrap text.}
 }
 \value{
 A character string with the values in \code{x}, preserving names and
-rounded to \code{signif} digits.
+rounded numeric \code{x} to \code{signif} digits, wrapped to \code{width}.
 }
 \description{
-Convert a numeric vector to a character string, optionally preserving names
-and rounding the values.
+Convert a vector to a character string, preserving names and rounding numeric
+values.
 }
 \section{Wishlist}{
 
@@ -37,7 +37,7 @@ Write a similar function for dataframes or matrices, with the name of the
 relevant columns only once.
 
 Implement customized rounding using \code{signif_custom()}, e.g.,
-\code{rounded_vals <- signif_custom(x = x, digits = signif, type = type)}
+\code{x <- signif_custom(x = x, digits = signif, type = type)}
 }
 
 \section{Programming note}{
@@ -47,16 +47,25 @@ To get a cross-tabulation of \code{x} into a character string, one could use
 see the last \code{Example}.
 }
 
+\section{To do}{
+
+Rename to \code{vect_to_char()}.
+}
+
 \examples{
 x <- 1:3
 names(x) <- letters[x]
 numvect_to_char(x = x) # "a: 1, b: 2, c: 3"
+numvect_to_char(x = x, collapse = NULL) # c("a: 1", "b: 2", "c: 3")
 numvect_to_char(x = unname(x)) # "1, 2, 3"
-y <- x
-y <- y / 7
+y <- x / 7
 numvect_to_char(x = y, signif = 7) # "a: 0.1428571, b: 0.2857143, c: 0.4285714"
 numvect_to_char(x = y, signif = 2, sep = " = ", collapse = " and ", width = 15)
 # "a = 0.14 and b\n= 0.29 and c =\n0.43"
+
+x_char <- c(a = "abc", b = "def", c = "this is text")
+numvect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
+numvect_to_char(x = unname(x_char)) # "abc, def, this is some text"
 
 # Showing the use of numvect_to_char to get a frequency table
 x <- 1:10
