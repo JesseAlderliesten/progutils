@@ -1,33 +1,36 @@
-#' Convert a numeric vector to a character string
+#' Convert a vector to a character string
 #'
-#' Convert a numeric vector to a character string, optionally preserving names
-#' and rounding the values.
+#' Convert a vector to a character string, preserving names and rounding numeric
+#' values.
 #'
-#' @param x a numeric vector or a non-dataframe list that can be unlisted to
-#' obtain a numeric vector.
-#' @param signif positive integer of length one indicating the number of
-#' significant digits to round to.
+#' @param x A vector or a non-dataframe list that can be unlisted to obtain a
+#' vector.
+#' @param signif Positive integer of length one indicating the number of
+#' significant digits to round numeric `x` to.
 #' @param sep Character string of length one used to separate the names and the
 #' values.
-#' @param collapse character string of length one to collapse values into a
+#' @param collapse Character string of length one to collapse values into a
 #' single character string, or `NULL` to return each value as an element of a
 #' character vector.
 #' @inheritParams wrap_text
 #'
 #' @returns A character string with the values in `x`, preserving names and
-#' rounded to `signif` digits.
+#' rounded numeric `x` to `signif` digits, wrapped to `width`.
 #'
 #' @section Wishlist:
 #' Write a similar function for dataframes or matrices, with the name of the
 #' relevant columns only once.
 #'
 #' Implement customized rounding using `signif_custom()`, e.g.,
-#' `rounded_vals <- signif_custom(x = x, digits = signif, type = type)`
+#' `x <- signif_custom(x = x, digits = signif, type = type)`
 #'
 #' @section Programming note:
 #' To get a cross-tabulation of `x` into a character string, one could use
 #' `paste0(numvect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")`,
 #' see the last `Example`.
+#'
+#' @section To do:
+#' Rename to `vect_to_char()`.
 #'
 #' @seealso [base::toString()] which can be used as `toString(x)` or
 #' `toString(signif_custom(x, ...))` if `x` is unnamed or names can be removed.
@@ -62,15 +65,17 @@ numvect_to_char <- function(x, signif = 3L, sep = ": ", collapse = ", ",
     x <- base::unlist(x, use.names = TRUE)
     warning("Unlisted 'x' to obtain a vector!")
   }
-  stopifnot(is.vector(x), is.numeric(x))
+  stopifnot(is.vector(x))
 
-  rounded_vals <- signif(x = x, digits = signif)
+  if(is.numeric(x)) {
+    x <- signif(x = x, digits = signif)
+  }
+
   if(checkinput::all_characters(x = names(x), allow_empty = TRUE,
                                 allow_zero = TRUE, allow_NA = TRUE)) {
-    out_char <- paste(names(rounded_vals), rounded_vals, sep = sep,
-                      collapse = collapse)
+    out_char <- paste(names(x), x, sep = sep, collapse = collapse)
   } else {
-    out_char <- paste(rounded_vals, collapse = collapse)
+    out_char <- paste(x, collapse = collapse)
   }
   wrap_text(x = out_char, width = width)
 }
