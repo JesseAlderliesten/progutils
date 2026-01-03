@@ -26,11 +26,8 @@
 #'
 #' @section Programming note:
 #' To get a cross-tabulation of `x` into a character string, one could use
-#' `paste0(numvect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")`,
+#' `paste0(vect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")`,
 #' see the last `Example`.
-#'
-#' @section To do:
-#' Rename to `vect_to_char()`.
 #'
 #' @seealso [base::toString()] which can be used as `toString(x)` or
 #' `toString(signif_custom(x, ...))` if `x` is unnamed or names can be removed.
@@ -39,29 +36,29 @@
 #' @examples
 #' x <- 1:3
 #' names(x) <- letters[x]
-#' numvect_to_char(x = x) # "a: 1, b: 2, c: 3"
-#' numvect_to_char(x = x, collapse = NULL) # c("a: 1", "b: 2", "c: 3")
-#' numvect_to_char(x = unname(x)) # "1, 2, 3"
+#' vect_to_char(x = x) # "a: 1, b: 2, c: 3"
+#' vect_to_char(x = x, collapse = NULL) # c("a: 1", "b: 2", "c: 3")
+#' vect_to_char(x = unname(x)) # "1, 2, 3"
 #' y <- x / 7
-#' numvect_to_char(x = y, signif = 7) # "a: 0.1428571, b: 0.2857143, c: 0.4285714"
-#' numvect_to_char(x = y, signif = 2, sep = " = ", collapse = " and ", width = 15)
+#' vect_to_char(x = y, signif = 7) # "a: 0.1428571, b: 0.2857143, c: 0.4285714"
+#' vect_to_char(x = y, signif = 2, sep = " = ", collapse = " and ", width = 15)
 #' # "a = 0.14 and b\n= 0.29 and c =\n0.43"
 #'
 #' x_char <- c(a = "abc", b = "def", c = "this is text")
-#' numvect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
-#' numvect_to_char(x = unname(x_char)) # "abc, def, this is some text"
+#' vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
+#' vect_to_char(x = unname(x_char)) # "abc, def, this is some text"
 #'
-#' # Showing the use of numvect_to_char to get a frequency table
+#' # Showing the use of vect_to_char to get a frequency table
 #' x <- 1:10
 #' names(x) <- letters[x]
 #' y <- 5:15
 #' names(y) <- letters[y]
 #' z <- c(x, y)
-#' paste0(numvect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")
+#' paste0(vect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")
 #'
 #' @export
-numvect_to_char <- function(x, signif = 3L, sep = ": ", collapse = ", ",
-                            width = Inf) {
+vect_to_char <- function(x, signif = 3L, sep = ": ", collapse = ", ",
+                         width = Inf) {
   stopifnot(checkinput::is_positive(signif), checkinput::is_character(sep),
             is.null(collapse) || checkinput::is_character(collapse),
             checkinput::is_positive(width))
