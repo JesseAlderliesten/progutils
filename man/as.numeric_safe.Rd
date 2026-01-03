@@ -82,8 +82,8 @@ str_as_num_base(x_fact) # num [1:3] 1 2 3 # wrong!
 }
 \seealso{
 Other functions to modify character vectors: 
-\code{\link{numvect_to_char}()},
 \code{\link{paste_quoted}()},
+\code{\link{vect_to_char}()},
 \code{\link{wrap_text}()}
 }
 \concept{functions to modify character vectors}

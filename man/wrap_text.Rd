@@ -58,7 +58,7 @@ cat(wrap_text("A piece\nof text that you want to wrap over multiple lines",
 
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},
-\code{\link{numvect_to_char}()},
-\code{\link{paste_quoted}()}
+\code{\link{paste_quoted}()},
+\code{\link{vect_to_char}()}
 }
 \concept{functions to modify character vectors}
