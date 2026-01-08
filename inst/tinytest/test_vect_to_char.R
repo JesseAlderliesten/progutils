@@ -36,40 +36,46 @@ expect_identical(
 
 
 #### Tests ####
-expect_identical(vect_to_char(x = x_in), x_out_named)
-expect_identical(vect_to_char(x = unname(x_in)), paste(x_in, collapse = ", "))
+expect_silent(expect_identical(vect_to_char(x = x_in), x_out_named))
+expect_silent(expect_identical(vect_to_char(x = unname(x_in)),
+                               paste(x_in, collapse = ", ")))
 
-expect_identical(vect_to_char(x = x_in_char), x_out_char)
-expect_identical(vect_to_char(x = unname(x_in_char)), "abc, def, this is text")
+expect_silent(expect_identical(vect_to_char(x = x_in_char), x_out_char))
+expect_silent(expect_identical(vect_to_char(x = unname(x_in_char)),
+                               "abc, def, this is text"))
 
-expect_identical(
+expect_silent(expect_identical(
   vect_to_char(x = x_in / 8, signif = 2L),
-  paste(names(x_in), signif(x = x_in / 8, digits = 2L), sep = ": ", collapse = ", "))
-expect_identical(vect_to_char(x = unname(x_in) / 8, signif = 2L), x_out_nonint)
+  paste(names(x_in), signif(x = x_in / 8, digits = 2L), sep = ": ",
+        collapse = ", ")))
+expect_silent(expect_identical(vect_to_char(x = unname(x_in) / 8, signif = 2L),
+                               x_out_nonint))
 
-expect_identical(
+expect_silent(expect_identical(
   vect_to_char(x = x_in / 8, signif = 2L),
-  paste(names(x_in), signif(x = x_in / 8, digits = 2), sep = ": ", collapse = ", "))
-expect_identical(vect_to_char(x = unname(x_in) / 8, signif = 2L), x_out_nonint)
+  paste(names(x_in), signif(x = x_in / 8, digits = 2), sep = ": ",
+        collapse = ", ")))
+expect_silent(expect_identical(vect_to_char(x = unname(x_in) / 8, signif = 2L),
+                               x_out_nonint))
 
-expect_identical(
+expect_silent(expect_identical(
   vect_to_char(x = x_in, sep = "=", collapse = " & "),
   gsub(pattern = ", ", replacement = " & ",
        x = gsub(pattern = ": ", replacement = "=", x = x_out_named, fixed = TRUE),
-       fixed = TRUE))
+       fixed = TRUE)))
 
-expect_identical(
+expect_silent(expect_identical(
   vect_to_char(x = x_in_char, sep = "=", collapse = " & "),
   gsub(pattern = ", ", replacement = " & ",
        x = gsub(pattern = ": ", replacement = "=", x = x_out_char, fixed = TRUE),
-       fixed = TRUE))
+       fixed = TRUE)))
 
-expect_identical(vect_to_char(x = x_in_InfNa),
-                 paste(names(x_in_InfNa), x_in_InfNa, sep = ": ", collapse = ", "))
+expect_silent(expect_identical(vect_to_char(x = x_in_InfNa),
+                 paste(names(x_in_InfNa), x_in_InfNa, sep = ": ", collapse = ", ")))
 
 # If the use of 'signif_custom()' is implemented, the next test should change to:
 # expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14286")
-expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14300")
+expect_silent(expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14300"))
 
 expect_warning(expect_identical(
   vect_to_char(x = list(x_in_InfNa, b, unname(b)), signif = 2),
@@ -81,29 +87,37 @@ expect_error(vect_to_char(x = data.frame(a = 1:3)),
              pattern = "is.vector(x) is not TRUE", fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, signif = 0L),
-             pattern = "checkinput::is_positive(signif) is not TRUE", fixed = TRUE)
+             pattern = "checkinput::is_positive(signif) is not TRUE",
+             fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, signif = c(3L, 4L)),
-             pattern = "checkinput::is_positive(signif) is not TRUE", fixed = TRUE)
+             pattern = "checkinput::is_positive(signif) is not TRUE",
+             fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, sep = c(":", "=")),
-             pattern = "checkinput::is_character(sep) is not TRUE", fixed = TRUE)
+             pattern = "checkinput::is_character(sep) is not TRUE",
+             fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, sep = NULL),
-             pattern = "checkinput::is_character(sep) is not TRUE", fixed = TRUE)
+             pattern = "checkinput::is_character(sep) is not TRUE",
+             fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, sep = 3),
-             pattern = "checkinput::is_character(sep) is not TRUE", fixed = TRUE)
+             pattern = "checkinput::is_character(sep) is not TRUE",
+             fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, collapse = c(":", "=")),
-             pattern = "checkinput::is_character(collapse) is not TRUE", fixed = TRUE)
+             pattern = "checkinput::is_character(collapse) is not TRUE",
+             fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, collapse = 3),
-             pattern = "checkinput::is_character(collapse) is not TRUE", fixed = TRUE)
+             pattern = "checkinput::is_character(collapse) is not TRUE",
+             fixed = TRUE)
 
 expect_silent(expect_identical(
   vect_to_char(x = x_in / 8, signif = 2, collapse = NULL),
-  paste(names(x_in), signif(x = x_in / 8, digits = 2), sep = ": ", collapse = NULL)))
+  paste(names(x_in), signif(x = x_in / 8, digits = 2), sep = ": ",
+        collapse = NULL)))
 
 expect_silent(expect_identical(
   vect_to_char(x = unname(x_in / 8), signif = 2L, collapse = NULL),

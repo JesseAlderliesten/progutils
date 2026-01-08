@@ -51,7 +51,7 @@ my_tempdir <- tempdir()
 dir <- file.path(my_tempdir, "temp_subdirF_dateF")
 expected_path <- dir
 
-expect_false(dir.exists(expected_path))
+expect_silent(expect_false(dir.exists(expected_path)))
 expect_message(
   expect_identical(
     create_dir(dir = dir, add_date = FALSE),

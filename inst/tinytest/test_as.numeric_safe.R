@@ -46,9 +46,9 @@ expect_silent(expect_equal(as.numeric_safe(as.factor(as.character(x_num))), x_nu
 expect_silent(expect_equal(as.numeric_safe(x_num), x_num))
 
 expect_warning(expect_equal(as.numeric_safe(x_char_mix), out_num_mix),
-               pattern = "NAs introduced by coercion", strict = TRUE)
+               pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
 expect_warning(expect_equal(as.numeric_safe(as.factor(x_char_mix)), out_num_mix),
-               pattern = "NAs introduced by coercion", strict = TRUE)
+               pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
 expect_silent(expect_equal(as.numeric_safe(out_num_mix), out_num_mix))
 # input with NA_character_ instead of "NA"
 expect_silent(expect_equal(
@@ -62,11 +62,11 @@ expect_silent(expect_equal(
 expect_warning(expect_equal(
   as.numeric_safe(c(1:3, letters[1:3])),
   c(1:3, rep(NA_real_, 3L))),
-  pattern = "NAs introduced by coercion", strict = TRUE)
+  pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
 expect_warning(expect_equal(
   as.numeric_safe(as.factor(c(1:3, letters[1:3]))),
   c(1:3, rep(NA_real_, 3L))),
-  pattern = "NAs introduced by coercion", strict = TRUE)
+  pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
 
 expect_silent(expect_equal(as.numeric_safe(NULL), numeric(0)))
 expect_silent(expect_equal(as.numeric_safe(character(0)), numeric(0)))
@@ -79,7 +79,7 @@ expect_silent(expect_equal(
 expect_warning(expect_equal(
   as.numeric_safe(c(TRUE, FALSE, NA)),
   c(NA_real_, NA_real_, NA_real_)),
-  pattern = "NAs introduced by coercion", strict = TRUE)
+  pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
 
 
 #### Remove objects used in tests ####

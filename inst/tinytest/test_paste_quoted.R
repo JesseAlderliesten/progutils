@@ -12,7 +12,7 @@ expect_identical(paste_quoted(c(3, 4)), "'3', '4'")
 expect_warning(expect_identical(
   paste_quoted(c(a = 3, b = 4)), "'3', '4'"),
   pattern = "'x' has names, these will be discarded. Use vect_to_char",
-  strict = TRUE)
+  strict = TRUE, fixed = TRUE)
 expect_identical(paste_quoted(NULL), "'NULL'")
 
 
@@ -48,12 +48,12 @@ expect_error(
 expect_warning(expect_identical(
   paste_quoted(c(a = 3, b = 4)), "'3', '4'"),
   pattern = "'x' has names, these will be discarded. Use vect_to_char",
-  strict = TRUE)
+  strict = TRUE, fixed = TRUE)
 
 for(index_NULL in seq_along(list_input_zerolength)) {
-  expect_identical(
+  expect_silent(expect_identical(
     paste_quoted(list_input_zerolength[[index_NULL]]),
-    list_output_zerolength[[index_NULL]])
+    list_output_zerolength[[index_NULL]]))
 }
 
 

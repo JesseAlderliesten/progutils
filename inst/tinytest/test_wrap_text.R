@@ -11,8 +11,8 @@ x_single <- "123 567\n911 141 719 123 262 931"
 expect_x_early <- "123\n567\n911 141 719\n123 262 931"
 blank_x_single <- paste0(" \t ", x_single)
 
-warn_too_long <- paste0("Width of 1 text fragments \\(11 characters) exceeds",
-                        " 'width' \\(10 characters)")
+warn_too_long <- paste0("Width of 1 text fragments (11 characters) exceeds",
+                        " 'width' (10 characters)")
 
 
 #### Test the examples ####
@@ -41,19 +41,19 @@ expect_warning(
   expect_identical(
     wrap_text(x = paste0(x_text, x_text_nospace), width = 15),
     paste0("A piece of text\nto wrap over\nmultiple\nlines", x_text_nospace)),
-  pattern = paste0("Width of 1 text fragments \\(40 characters) exceeds",
-                   " 'width' \\(15 characters)"),
-  strict = TRUE)
+  pattern = paste0("Width of 1 text fragments (40 characters) exceeds 'width'",
+                   " (15 characters)"),
+  strict = TRUE, fixed = TRUE)
 
 
 #### Tests ####
-expect_identical(wrap_text(x = "", width = 1L), "")
+expect_silent(expect_identical(wrap_text(x = "", width = 1L), ""))
 
 for(width in (nchar_x - 10L):(nchar_x + 3L)) {
-  expect_true(max(lapply(
+  expect_silent(expect_true(max(lapply(
     X = strsplit(x = wrap_text(x, width = width),
                  split = "\\n", fixed = FALSE),
-    FUN = nchar)[[1]]) <= width)
+    FUN = nchar)[[1]]) <= width))
 }
 
 # newline ignored, width => nchar_x: x not wrapped, existing newline removed
@@ -116,29 +116,29 @@ expect_identical(wrap_text(x = blank_x_single, width = nchar_x - 8L,
 expect_warning(expect_identical(
   wrap_text(x = "12345678911", width = 10L),
   "12345678911"),
-  pattern = warn_too_long, strict = TRUE)
+  pattern = warn_too_long, strict = TRUE, fixed = TRUE)
 
 expect_warning(expect_identical(
   wrap_text(x = "12345678911 XXX YYY ZZZZZZ", width = 10L),
   "12345678911\nXXX YYY\nZZZZZZ"),
-  pattern = warn_too_long, strict = TRUE)
+  pattern = warn_too_long, strict = TRUE, fixed = TRUE)
 
 expect_warning(expect_identical(
   wrap_text(x = "XXX YYY 12345678911 ZZZZZZ", width = 10L),
   "XXX YYY\n12345678911\nZZZZZZ"),
-  pattern = warn_too_long, strict = TRUE)
+  pattern = warn_too_long, strict = TRUE, fixed = TRUE)
 
 expect_warning(expect_identical(
   wrap_text(x = "XXX YYY ZZZZZZ 12345678911", width = 10L),
   "XXX YYY\nZZZZZZ\n12345678911"),
-  pattern = warn_too_long, strict = TRUE)
+  pattern = warn_too_long, strict = TRUE, fixed = TRUE)
 
 expect_warning(expect_identical(
   wrap_text(x = "123456789111315 XXX YYY 1234567891113 ZZZZZZ 12345678911",
             width = 10L),
   "123456789111315\nXXX YYY\n1234567891113\nZZZZZZ\n12345678911"),
-  pattern = paste0("Width of 3 text fragments \\(15, 13, 11 characters)",
-                   " exceeds 'width' \\(10 characters)"), strict = TRUE)
+  pattern = paste0("Width of 3 text fragments (15, 13, 11 characters) exceeds",
+                   " 'width' (10 characters)"), strict = TRUE, fixed = TRUE)
 
 ##### x of length > 1 #####
 expect_identical(
@@ -161,12 +161,12 @@ expect_identical(
 ##### Error for width < 6L #####
 expect_error(
   wrap_text(x = x, width = 0L),
-  pattern = "is_positive\\(width) is not TRUE")
+  pattern = "is_positive(width) is not TRUE", fixed = TRUE)
 
 expect_warning(expect_identical(
   wrap_text(x = x, width = 1L), "123\n567\n911\n141\n719\n123\n262\n931"),
-  pattern = paste0("Width of 8 text fragments \\(3, 3, 3, 3, 3, 3, 3, 3",
-                   " characters) exceeds 'width' \\(1 characters)"), strict = TRUE)
+  pattern = paste0("Width of 8 text fragments (3, 3, 3, 3, 3, 3, 3, 3 characters)",
+                   " exceeds 'width' (1 characters)"), strict = TRUE, fixed = TRUE)
 
 
 #### Remove objects used in tests ####

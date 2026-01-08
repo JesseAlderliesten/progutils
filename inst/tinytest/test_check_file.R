@@ -1,5 +1,6 @@
 #### Create objects to use in tests ####
-warning("Not yet implemented tests for check_file()!")
+warning("No tests present in check_file()!")
+
 
 #### Test the examples ####
 
