@@ -25,7 +25,8 @@ numeric differences. The tolerance makes \code{are_equal()} safer than
 }
 \section{Acknowledgement}{
 
-Code taken from \code{dplyr::near()}, with added argument checking.
+Code \code{abs(x - y) < tol} taken from \code{dplyr::near()}, with added argument
+checking.
 }
 
 \section{Programming note}{
@@ -47,7 +48,10 @@ are_equal(x = 3, y = c(2, 3, 3 + 1e-8, NA, Inf))
 
 }
 \seealso{
-\code{\link[=all.equal]{all.equal()}} to compare objects more generally for near-equality,
-\link{Comparison} to compare two vectors using binary operators, \code{\link[=match]{match()}} to
-compare character vectors.
+\code{\link[checkinput:all_natural]{checkinput::all_natural()}} to check for near-equality to positive integers;
+\code{\link[=all.equal]{all.equal()}} to check more generally for near-equality; \code{\link[=identical]{identical()}} to
+check for exact equality; \link{Comparison} to compare two vectors using binary
+operators; \code{\link[=match]{match()}} to compare character vectors. The vignette about type
+conversion in package \code{checkinput}:
+\code{vignette("Type_Coercion", package = "checkinput")}.
 }

@@ -14,7 +14,8 @@
 #' [infinite values][Inf] with the same sign.
 #'
 #' @section Acknowledgement:
-#' Code taken from `dplyr::near()`, with added argument checking.
+#' Code `abs(x - y) < tol` taken from `dplyr::near()`, with added argument
+#' checking.
 #'
 #' @section Programming note:
 #' Legacy code contained `near_adj()`, a more-elaborate version of `are_equal()`
@@ -22,9 +23,12 @@
 #' compatible [dimensions][dim()]) and contained optional type conversion.
 #'
 #' @seealso
-#' [all.equal()] to compare objects more generally for near-equality,
-#' [Comparison] to compare two vectors using binary operators, [match()] to
-#' compare character vectors.
+#' [checkinput::all_natural()] to check for near-equality to positive integers;
+#' [all.equal()] to check more generally for near-equality; [identical()] to
+#' check for exact equality; [Comparison] to compare two vectors using binary
+#' operators; [match()] to compare character vectors. The vignette about type
+#' conversion in package `checkinput`:
+#' `vignette("Type_Coercion", package = "checkinput")`.
 #'
 #' @examples
 #' x <- sqrt(2)^2
