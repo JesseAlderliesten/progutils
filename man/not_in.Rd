@@ -2,27 +2,29 @@
 % Please edit documentation in R/not_in.R
 \name{not_in}
 \alias{not_in}
-\title{Check if values from a vector are not present in another vector}
+\title{Are values not present in \code{table}}
 \usage{
-not_in(x, y, value = TRUE)
+not_in(x, table, value = TRUE)
 }
 \arguments{
-\item{x}{Vector with values to look for absence from \code{y}.}
+\item{x}{Non-numeric vector or factor with values to test absence from
+\code{table}. \code{x} should have a length larger than zero.}
 
-\item{y}{Vector in which to look for absence of values \code{x}.}
+\item{table}{Non-numeric vector or factor in which to test for absence of \code{x}.
+\code{table} should have a length larger than zero.}
 
 \item{value}{\code{TRUE} or \code{FALSE}: should a vector with values be returned
 instead of a boolean vector?}
 }
 \value{
-If \code{value} is \code{TRUE}: the values in \code{x} that are absent from \code{y} or, if none
-of the values in \code{x} are absent from \code{y} (i.e., all are present in \code{y}), a
-zero-length object of the same type as \code{x}, e.g., \code{character(0)} or
-\code{logical(0)}. If \code{value} is \code{FALSE}: a boolean vector indicating for each
-element in \code{x} if it is absent from \code{y}, i.e., \code{!(x \%in\% y)}.
+If \code{value} is \code{TRUE}: the values in \code{x} that are absent from \code{table} or, if
+none of the values in \code{x} are absent from \code{table} (i.e., all are present in
+\code{table}), a zero-length object of the same type as \code{x}, e.g., \code{character(0)}
+or \code{logical(0)}. If \code{value} is \code{FALSE}: a boolean vector indicating for each
+element in \code{x} if it is absent from \code{table}.
 }
 \description{
-Check if values from a vector are not present in another vector
+Check if values from one vector are not present in another vector
 }
 \details{
 Duplicates in \code{x} are kept, in contrast to \code{\link[=setdiff]{setdiff()}}, see the \code{Examples}.
@@ -30,30 +32,50 @@ Duplicates in \code{x} are kept, in contrast to \code{\link[=setdiff]{setdiff()}
 \link[=factor]{Factor-input} to \code{x} is converted to character, to prevent
 returning a factor with all values of \code{x} as \link{levels}.
 
-\link{NA}s of different types match each other.
+\link{NA}s are allowed in \code{x} or \code{table} and they behave the same as other values:
+if \code{NA}s are present in \code{x} but absent from \code{table}, \code{not_in()} returns \code{NA}s
+of the same type as those in \code{x} if \code{value} is \code{TRUE}, and returns \code{TRUE} if
+\code{value} is \code{FALSE}. \code{NA}s of different types in \code{x} and \code{table} match each
+other, and the returned zero-length value has the same type as \code{x} if \code{value}
+is \code{TRUE}.
 }
 \section{Programming note}{
 
-\code{not_in(x, y, value = FALSE)} gives the same output as function \verb{\%notin\%}
-that is present in \R\verb{-devel base} since 05/12/2025 with definition
-\code{match(x, table, nomatch = 0L) == 0L}.
+\code{not_in()} does not allow numeric input because matching numeric input should
+take small numerical errors into account by using a tolerance, see
+\code{\link[=are_equal]{are_equal()}}.
+
+\code{not_in()} does not allow zero-length input because zero-length input behaves
+slightly different from other values: if \code{character(0)} is present in \code{x} but
+absent from \code{table}, \code{not_in()} would return \code{logical(0)} if \code{value} is
+\code{FALSE}. If \code{value} is \code{TRUE}, the behaviour would be normal: returning
+\code{character(0)}.
+
+Apart from not allowing numeric or zero-length input,
+\code{not_in(x, table, value = TRUE)} is equivalent to the unexported function
+\code{tools:::'\%w/o\%'}. Similarly, \code{not_in(x, table, value = FALSE)} is equivalent
+to the function \code{'\%notin\%'} which is present as exported function in
+\verb{base-}\R from version \verb{4.6.0} onwards and before that was present as
+unexported function \code{tools:::'\%notin\%'}.
 }
 
 \examples{
 x <- letters[1:4]
-y <- letters[3:6]
-not_in(x, y) # c("a", "b")
-not_in(as.factor(x), as.factor(y)) # c("a", "b")
-not_in(x, y, value = FALSE) # c(TRUE, TRUE, FALSE, FALSE), same as !(x \%in\% y)
+table <- letters[3:6]
+not_in(x, table) # c("a", "b")
+not_in(as.factor(x), as.factor(table)) # c("a", "b")
+not_in(x, table, value = FALSE) # c(TRUE, TRUE, FALSE, FALSE), same as !(x \%in\% table)
 
 x_dupl <- c(x, letters[c(2, 4:6, 5)])
-y_dupl <- letters[c(3:8, 5:7)]
-not_in(x_dupl, y_dupl) # c("a", "b", "b")
-setdiff(x_dupl, y_dupl) # c("a", "b")
-not_in(x_dupl, y_dupl, value = FALSE)
+table_dupl <- letters[c(3:8, 5:7)]
+not_in(x_dupl, table_dupl) # c("a", "b", "b")
+setdiff(x_dupl, table_dupl) # c("a", "b")
+not_in(x_dupl, table_dupl, value = FALSE)
 # c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)
 
 }
 \seealso{
-\code{\link[=match]{match()}} \code{\link[=setdiff]{setdiff()}} \verb{\%notin\%} (from \R 4.6.0 onwards)
+\code{\link[=match]{match()}} on which this function is based; \code{\link[=setdiff]{setdiff()}} for a similar function
+which removes duplicates; from \R \verb{4.6.0} onwards, \code{'\%notin\%'}; \code{\link[=are_equal]{are_equal()}}
+to match numeric input using a tolerance.
 }
