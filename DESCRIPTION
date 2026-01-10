@@ -1,6 +1,6 @@
 Package: progutils
 Title: Programming Utilities
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
     person("Jesse", "Alderliesten", email = "jessealderliesten@hotmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1132-4310"))
