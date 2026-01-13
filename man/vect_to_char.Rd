@@ -7,14 +7,13 @@
 vect_to_char(x, signif = 3L, sep = ": ", collapse = ", ", width = Inf)
 }
 \arguments{
-\item{x}{A vector or a non-dataframe list that can be unlisted to obtain a
-vector.}
+\item{x}{A vector, \link{factor}, non-dataframe \link{list}, or \code{NULL}.}
 
 \item{signif}{Positive number of length one, rounded to the nearest positive
 integer indicating the number of significant digits to round numeric \code{x} to.}
 
 \item{sep}{Character string of length one used to separate the names and the
-values.}
+values. Not used if \code{x} does not have names.}
 
 \item{collapse}{Character string of length one to collapse values into a
 single character string, or \code{NULL} to return each value as an element of a
@@ -24,12 +23,25 @@ character vector.}
 line width (in characters) after wrapping. Can be \code{Inf} to not wrap text.}
 }
 \value{
-A character string with the values in \code{x}, preserving names and
-rounded numeric \code{x} to \code{signif} digits, wrapped to \code{width}.
+A character string containing the names and rounded values in \code{x}, separating
+name-value pairs by \code{collapse}. If \code{collapse} is \code{NULL}, a character \emph{vector}
+with the same elements as \code{x} is returned. The output is wrapped to \code{width}
+characters.
 }
 \description{
-Convert a vector to a character string, preserving names and rounding numeric
-values.
+Convert a vector to a character string, preserving names, rounding numeric
+values, returning \code{NULL} as \code{"'NULL'"} and returning other zero-length
+objects as \code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
+}
+\details{
+Numeric \code{x} is rounded to \code{signif} digits.
+
+\code{NULL} is returned as \code{"'NULL'"}, other zero-length objects are returned as
+\code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
+
+The output is wrapped to \code{width} characters if \code{width} is not \code{NULL}. This
+occurs on a per-element basis if a character vector is returned because
+\code{collapse} is \code{NULL}.
 }
 \section{Wishlist}{
 
@@ -37,7 +49,14 @@ Write a similar function for dataframes or matrices, with the name of the
 relevant columns only once.
 
 Implement customized rounding using \code{signif_custom()}, e.g.,
-\code{x <- signif_custom(x = x, digits = signif, type = type)}
+\code{x <- signif_custom(x = x, digits = signif, type = type)}.
+
+See also:
+\itemize{
+\item wrMisc::convToNum()
+\item num_as_char() in https://github.com/hneth/ds4psy/blob/master/R/num_util_fun.R
+\item drop_sci_note() in https://github.com/trinker/textclean/blob/master/R/utils.R
+}
 }
 
 \section{Programming note}{
@@ -62,7 +81,7 @@ x_char <- c(a = "abc", b = "def", c = "this is text")
 vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
 vect_to_char(x = unname(x_char)) # "abc, def, this is some text"
 
-# Showing the use of vect_to_char to get a frequency table
+# Using vect_to_char() to get a frequency table
 x <- 1:10
 names(x) <- letters[x]
 y <- 5:15
@@ -72,8 +91,7 @@ paste0(vect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")
 
 }
 \seealso{
-\code{\link[base:toString]{base::toString()}} which can be used as \code{toString(x)} or
-\code{toString(signif_custom(x, ...))} if \code{x} is unnamed or names can be removed.
+\code{\link[=toString]{toString()}} which can be used if names of \code{x} can be removed.
 
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},
