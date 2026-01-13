@@ -1,12 +1,11 @@
-#' Are numbers equal within a tolerance?
+#' Are numeric vectors nearly equal
 #'
-#' Test element-wise equality of numeric vectors while allowing for small
-#' numeric differences. The tolerance makes `are_equal()` safer than
-#' [==][Comparison] when used on numeric vectors.
+#' Test element-wise near-equality of numeric vectors by allowing for small
+#' numeric errors to make `are_equal()` safer than [==][Comparison].
 #'
 #' @param x,y Numeric vectors to compare for equality.
-#' @param tol A small [positive][checkinput::is_positive()] number. Numbers with
-#' absolute differences smaller than `tol` are considered to be equal.
+#' @param tol A small [positive][checkinput::is_positive()] number. Numbers that
+#' differ less in value than `tol` are considered to be equal.
 #'
 #' @returns A vector with logical values (`TRUE`, `FALSE` or `NA`) indicating if
 #' elements in `x` and `y` are equal to each other. [NA] is returned for
@@ -14,8 +13,7 @@
 #' [infinite values][Inf] with the same sign.
 #'
 #' @section Acknowledgement:
-#' Code `abs(x - y) < tol` taken from `dplyr::near()`, with added argument
-#' checking.
+#' Code `abs(x - y) < tol` was taken from `dplyr::near()`.
 #'
 #' @section Programming note:
 #' Legacy code contained `near_adj()`, a more-elaborate version of `are_equal()`
@@ -23,11 +21,12 @@
 #' compatible [dimensions][dim()]) and contained optional type conversion.
 #'
 #' @seealso
-#' [checkinput::all_natural()] to check for near-equality to positive integers;
+#' `progutils::are_equal()` to check for element-wise near-equality of numbers;
 #' [all.equal()] to check more generally for near-equality; [identical()] to
 #' check for exact equality; [Comparison] to compare two vectors using binary
-#' operators; [match()] to compare character vectors. The vignette about type
-#' conversion in package `checkinput`:
+#' operators; [match()] to compare non-numeric vectors; [\R FAQ 7.31](
+#' https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
+#' for background on numerical equality; the vignette about type coercion:
 #' `vignette("Type_Coercion", package = "checkinput")`.
 #'
 #' @examples
