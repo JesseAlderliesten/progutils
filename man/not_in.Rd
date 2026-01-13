@@ -75,7 +75,7 @@ not_in(x_dupl, table_dupl, value = FALSE)
 
 }
 \seealso{
-\code{\link[=match]{match()}} on which this function is based; \code{\link[=setdiff]{setdiff()}} for a similar function
-which removes duplicates; from \R \verb{4.6.0} onwards, \code{'\%notin\%'}; \code{\link[=are_equal]{are_equal()}}
-to match numeric input using a tolerance.
+\code{\link[=match]{match()}}, and, from \R \verb{4.6.0} onwards, \code{'\%notin\%'}, on which this function
+is based; \code{\link[=setdiff]{setdiff()}} for a similar function which removes duplicates;
+\code{\link[=are_equal]{are_equal()}} to match numeric input using a tolerance.
 }

@@ -29,8 +29,8 @@ in the \code{Warning} of \code{factor()}) and \code{as.numeric(levels(x))[as.int
 (suggested in \R \verb{FAQ 7.10}) \emph{only} work if \code{x} is factor, see the \code{Examples}.
 
 Furthermore, \code{as.numeric()} \emph{cannot} be used to convert a factor to numeric,
-because it returns their underlying numeric (integer) representation (i.e.,
-the indices of the factor levels), see the \code{Warnings} in \code{\link[=as.numeric]{as.numeric()}} and
+because it returns their underlying numeric integer representation (i.e., the
+indices of the factor levels), see the \code{Warnings} in \code{\link[=as.numeric]{as.numeric()}} and
 \code{\link[=factor]{factor()}}.
 }
 \note{
@@ -81,6 +81,8 @@ str_as_num_base(x_fact) # num [1:3] 1 2 3 # wrong!
 
 }
 \seealso{
+\code{\link[=are_numerish]{are_numerish()}} to check that \code{x} represents a number.
+
 Other functions to modify character vectors: 
 \code{\link{paste_quoted}()},
 \code{\link{vect_to_char}()},

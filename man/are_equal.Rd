@@ -2,15 +2,15 @@
 % Please edit documentation in R/are_equal.R
 \name{are_equal}
 \alias{are_equal}
-\title{Are numbers equal within a tolerance?}
+\title{Are numeric vectors nearly equal}
 \usage{
 are_equal(x, y, tol = sqrt(.Machine$double.eps))
 }
 \arguments{
 \item{x, y}{Numeric vectors to compare for equality.}
 
-\item{tol}{A small \link[checkinput:is_number]{positive} number. Numbers with
-absolute differences smaller than \code{tol} are considered to be equal.}
+\item{tol}{A small \link[checkinput:is_number]{positive} number. Numbers that
+differ less in value than \code{tol} are considered to be equal.}
 }
 \value{
 A vector with logical values (\code{TRUE}, \code{FALSE} or \code{NA}) indicating if
@@ -19,14 +19,12 @@ comparisons involving \code{NA}s or \link{NaN}s and for comparisons of
 \link[=Inf]{infinite values} with the same sign.
 }
 \description{
-Test element-wise equality of numeric vectors while allowing for small
-numeric differences. The tolerance makes \code{are_equal()} safer than
-\link[=Comparison]{==} when used on numeric vectors.
+Test element-wise near-equality of numeric vectors by allowing for small
+numeric errors to make \code{are_equal()} safer than \link[=Comparison]{==}.
 }
 \section{Acknowledgement}{
 
-Code \code{abs(x - y) < tol} taken from \code{dplyr::near()}, with added argument
-checking.
+Code \code{abs(x - y) < tol} was taken from \code{dplyr::near()}.
 }
 
 \section{Programming note}{
@@ -48,10 +46,10 @@ are_equal(x = 3, y = c(2, 3, 3 + 1e-8, NA, Inf))
 
 }
 \seealso{
-\code{\link[checkinput:all_natural]{checkinput::all_natural()}} to check for near-equality to positive integers;
+\code{progutils::are_equal()} to check for element-wise near-equality of numbers;
 \code{\link[=all.equal]{all.equal()}} to check more generally for near-equality; \code{\link[=identical]{identical()}} to
 check for exact equality; \link{Comparison} to compare two vectors using binary
-operators; \code{\link[=match]{match()}} to compare character vectors. The vignette about type
-conversion in package \code{checkinput}:
+operators; \code{\link[=match]{match()}} to compare non-numeric vectors; \href{https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f}{\R FAQ 7.31}
+for background on numerical equality; the vignette about type coercion:
 \code{vignette("Type_Coercion", package = "checkinput")}.
 }
