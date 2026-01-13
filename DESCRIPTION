@@ -10,7 +10,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
-    checkinput,
+    checkinput (>= 0.0.4),
     methods
 Remotes: github::JesseAlderliesten/checkinput
 Suggests:
