@@ -20,8 +20,8 @@
 #' (suggested in \R `FAQ 7.10`) *only* work if `x` is factor, see the `Examples`.
 #'
 #' Furthermore, `as.numeric()` *cannot* be used to convert a factor to numeric,
-#' because it returns their underlying numeric (integer) representation (i.e.,
-#' the indices of the factor levels), see the `Warnings` in [as.numeric()] and
+#' because it returns their underlying numeric integer representation (i.e., the
+#' indices of the factor levels), see the `Warnings` in [as.numeric()] and
 #' [factor()].
 #'
 #' @section Wishlist:
@@ -33,6 +33,7 @@
 #' length > 0 are converted to a vector of numerical NAs (i.e., `NA_real_`),
 #' with a warning.
 #'
+#' @seealso [are_numerish()] to check that `x` represents a number.
 #' @family functions to modify character vectors
 #' @family functions to modify factors
 #'
