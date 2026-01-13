@@ -13,6 +13,10 @@ x_in_char <- c(a = "abc", b = "def", c = "this is text")
 x_out_named <- paste(names(x_in), x_in, sep = ": ", collapse = ", ")
 x_out_nonint <- paste(signif(x = x_in / 8, digits = 2), collapse = ", ")
 x_out_char <- "a: abc, b: def, c: this is text"
+x_fact_ind <- c(4:6, 5L)
+x_fact <- as.factor(letters[x_fact_ind])
+x_fact_int <- as.factor(x_fact_ind)
+x_fact_num <- as.factor(x_fact_ind / 16)
 
 
 #### Test the examples ####
@@ -77,6 +81,11 @@ expect_silent(expect_identical(vect_to_char(x = x_in_InfNa),
 # expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14286")
 expect_silent(expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14300"))
 
+expect_silent(expect_identical(vect_to_char(x = x_fact), "d, e, f, e"))
+expect_silent(expect_identical(vect_to_char(x = x_fact_int), "4, 5, 6, 5"))
+expect_silent(expect_identical(vect_to_char(x = x_fact_num),
+                               "0.25, 0.3125, 0.375, 0.3125"))
+
 expect_warning(expect_identical(
   vect_to_char(x = list(x_in_InfNa, b, unname(b)), signif = 2),
   paste0("am: -1, bm: -2, i: 9, l: NA, m: NaN, n: Inf, o: -Inf, j: 10, z: 26,",
@@ -84,7 +93,8 @@ expect_warning(expect_identical(
   pattern = "Unlisted 'x' to obtain a vector!", strict = TRUE)
 
 expect_error(vect_to_char(x = data.frame(a = 1:3)),
-             pattern = "is.vector(x) is not TRUE", fixed = TRUE)
+             pattern = "is.vector(x) || is.factor(x) || is.null(x) is not TRUE",
+             fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, signif = 0L),
              pattern = "checkinput::is_positive(signif) is not TRUE",
@@ -125,4 +135,5 @@ expect_silent(expect_identical(
 
 
 #### Remove objects used in tests ####
-rm(a, b, c, d, x_in, x_in_char, x_in_InfNa, x_out_char, x_out_named, x_out_nonint)
+rm(a, b, c, d, x_fact, x_fact_ind, x_fact_int, x_fact_num, x_in, x_in_char,
+   x_in_InfNa, x_out_char, x_out_named, x_out_nonint)
