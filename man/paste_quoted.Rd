@@ -2,40 +2,45 @@
 % Please edit documentation in R/paste_quoted.R
 \name{paste_quoted}
 \alias{paste_quoted}
-\title{Concatenate text to a single string of quoted elements.}
+\title{Concatenate a character vector to a single string of quoted elements.}
 \usage{
 paste_quoted(x)
 }
 \arguments{
-\item{x}{Vector to be converted to a single character string.}
+\item{x}{Character vector to be converted to a single character string.}
 }
 \value{
 A character string consisting of the elements of \code{x} surrounded by
-quotes (i.e., \verb{'}), separated by commas (i.e., \verb{,}).
+single quotes, separated by commas.
 }
 \description{
-Concatenate text to a single string of quoted elements, printing \code{NULL} and
-\code{character(0)} as \code{"'NULL'"}.
+Concatenate a character vector to a single string of quoted elements,
+returning \code{NULL} as \code{"'NULL'"} and other zero-length objects as
+\code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
 }
 \note{
-\code{NULL} and \code{character(0)} are printed as \code{"'NULL'"}. Other zero-length
-objects are printed as \code{"''"}.
+\code{NULL} is returned as \code{"'NULL'"} and other zero-length objects are returned
+as \code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
 
-An error occurs if multiple arguments are provided. Then \code{x} was probably
-accidentally not concatenated. For example, the call \code{paste_quoted("a", "b")}
-will return the error \verb{unused argument ("b")}. The probably intended call is
-\code{paste_quoted(c("a", "b"))}.
+An error occurs if multiple arguments are provided because then \code{x} probably
+was accidentally not \link[=c]{combined}. For example, the call
+\code{paste_quoted("a", "b")} will return the error \verb{unused argument ("b")}. The
+probably intended call is \code{paste_quoted(c("a", "b"))}, returning \code{"'a', 'b'"}.
 }
 \section{To do}{
 
-See also \code{\link[=dQuote]{dQuote()}}, \code{\link[=sQuote]{sQuote()}} and \code{\link[=Quotes]{Quotes()}}
+Can replace the first part of this function by vect_to_char()?
+
+See also \code{\link[=dQuote]{dQuote()}}, \code{\link[=sQuote]{sQuote()}} and \code{\link[=Quotes]{Quotes()}}; testdat::as_english_list() at
+https://github.com/socialresearchcentre/testdat/blob/master/R/utils.R
 }
 
 \section{Wishlist}{
- Implement preserving names, e.g., using
+
+Add argument \code{use_names = c("numeric", "all", "none")} to implement
+preserving names, e.g., using
 \code{paste(names(x), x, sep = ": ", collapse = ", ")} (used in \code{\link[=vect_to_char]{vect_to_char()}})
-or \code{paste0("'", paste(names(x), x, sep = ": ", collapse = "', '"), "'")}. Add
-argument 'use_names = c("numeric", "all", "none") to use that?
+or \code{paste0("'", paste(names(x), x, sep = ": ", collapse = "', '"), "'")}.
 }
 
 \examples{
@@ -45,8 +50,8 @@ paste_quoted(c(a = 3, b = 4)) # "'3', '4'" # Warns about dropping names.
 
 }
 \seealso{
-\code{\link[=paste0]{paste0()}} \code{\link[=toString]{toString()}} which can be used instead of
-\code{paste(x, collapse = ", ")}
+\code{\link[=paste0]{paste0()}} that is used by this function; \code{\link[=toString]{toString()}} which can be used
+instead of \code{paste(x, collapse = ", ")}
 
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},

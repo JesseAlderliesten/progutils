@@ -1,32 +1,38 @@
-#' Concatenate text to a single string of quoted elements.
+#' Concatenate a character vector to a single string of quoted elements.
 #'
-#' Concatenate text to a single string of quoted elements, printing `NULL` and
-#' `character(0)` as `"'NULL'"`.
+#' Concatenate a character vector to a single string of quoted elements,
+#' returning `NULL` as `"'NULL'"` and other zero-length objects as
+#' `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
 #'
-#' @param x Vector to be converted to a single character string.
+#' @param x Character vector to be converted to a single character string.
 #'
 #' @returns A character string consisting of the elements of `x` surrounded by
-#' quotes (i.e., `'`), separated by commas (i.e., `,`).
+#' single quotes, separated by commas.
 #'
 #' @section To do:
-#' See also [dQuote()], [sQuote()] and [Quotes()]
+#' Can replace the first part of this function by vect_to_char()?
 #'
-#' @section Wishlist: Implement preserving names, e.g., using
+#' See also [dQuote()], [sQuote()] and [Quotes()]; testdat::as_english_list() at
+#' https://github.com/socialresearchcentre/testdat/blob/master/R/utils.R
+#'
+#' @section Wishlist:
+#' Add argument `use_names = c("numeric", "all", "none")` to implement
+#' preserving names, e.g., using
 #' `paste(names(x), x, sep = ": ", collapse = ", ")` (used in [vect_to_char()])
-#' or `paste0("'", paste(names(x), x, sep = ": ", collapse = "', '"), "'")`. Add
-#' argument 'use_names = c("numeric", "all", "none") to use that?
+#' or `paste0("'", paste(names(x), x, sep = ": ", collapse = "', '"), "'")`.
 #'
 #' @note
-#' `NULL` and `character(0)` are printed as `"'NULL'"`. Other zero-length
-#' objects are printed as `"''"`.
+#' `NULL` is returned as `"'NULL'"` and other zero-length objects are returned
+#' as `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
 #'
-#' An error occurs if multiple arguments are provided. Then `x` was probably
-#' accidentally not concatenated. For example, the call `paste_quoted("a", "b")`
-#' will return the error `unused argument ("b")`. The probably intended call is
-#' `paste_quoted(c("a", "b"))`.
+#' An error occurs if multiple arguments are provided because then `x` probably
+#' was accidentally not [combined][c()]. For example, the call
+#' `paste_quoted("a", "b")` will return the error `unused argument ("b")`. The
+#' probably intended call is `paste_quoted(c("a", "b"))`, returning `"'a', 'b'"`.
 #'
-#' @seealso [paste0()] [toString()] which can be used instead of
-#' `paste(x, collapse = ", ")`
+#' @seealso
+#' [paste0()] that is used by this function; [toString()] which can be used
+#' instead of `paste(x, collapse = ", ")`
 #' @family functions to modify character vectors
 #'
 #' @examples
@@ -38,11 +44,6 @@
 paste_quoted <- function(x) {
   stopifnot(is.vector(x) || is.factor(x) || is.null(x))
 
-  if(is.factor(x)) {
-    warning("'x' is a factor and will be converted to numeric.")
-    x <- as.numeric_safe(x)
-  }
-
   if(!is.null(names(x))) {
     warning_text <- "'x' has names, these will be discarded."
     if(is.numeric(x)) {
@@ -52,8 +53,13 @@ paste_quoted <- function(x) {
     warning(wrap_text(warning_text))
   }
 
-  if(is.null(x) || identical(x, character(0))) {
+  if(is.null(x)) {
     x <- "NULL"
   }
+
+  if(length(x) == 0L) {
+    x <- paste0(class(x), "(0)")
+  }
+
   paste0("'", paste(x, collapse = "', '"), "'")
 }
