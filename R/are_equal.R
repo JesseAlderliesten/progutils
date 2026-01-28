@@ -9,8 +9,8 @@
 #'
 #' @returns A vector with logical values (`TRUE`, `FALSE` or `NA`) indicating if
 #' elements in `x` and `y` are equal to each other. [NA] is returned for
-#' comparisons involving `NA`s or [NaN]s and for comparisons of
-#' [infinite values][Inf] with the same sign.
+#' comparisons involving numeric `NA`s (i.e., `NA_integer_` and `NA_real_`) or
+#' [NaN]s and for comparisons of [infinite values][Inf] with the same sign.
 #'
 #' @section Acknowledgement:
 #' Code `abs(x - y) < tol` was taken from `dplyr::near()`.
@@ -21,7 +21,6 @@
 #' compatible [dimensions][dim()]) and contained optional type conversion.
 #'
 #' @seealso
-#' `progutils::are_equal()` to check for element-wise near-equality of numbers;
 #' [all.equal()] to check more generally for near-equality; [identical()] to
 #' check for exact equality; [Comparison] to compare two vectors using binary
 #' operators; [match()] to compare non-numeric vectors; [\R FAQ 7.31](
@@ -41,7 +40,8 @@
 #'
 #' @export
 are_equal <- function(x, y, tol = sqrt(.Machine$double.eps)) {
-  stopifnot(checkinput::all_numbers(x), checkinput::all_numbers(y),
+  stopifnot(checkinput::all_numbers(x, allow_NA = TRUE, allow_NaN = TRUE),
+            checkinput::all_numbers(y, allow_NA = TRUE, allow_NaN = TRUE),
             checkinput::is_positive(tol))
 
   length_x <- length(x)
