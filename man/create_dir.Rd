@@ -7,44 +7,50 @@
 create_dir(dir = file.path(".", "output"), add_date = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{Non-empty character string containing the path to the directory,
-not ending with a (back)slash. See \code{Details}.}
+\item{dir}{Non-empty character string containing the path to a directory.
+Checking if it already exists uses case-insensitive matching.}
 
-\item{add_date}{\code{TRUE} or \code{FALSE}: should a subdirectory be created with the
-current date?}
+\item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
+date in the format \code{YYYY_MM_DD}?}
 
-\item{quietly}{\code{TRUE} or \code{FALSE}: should the printing of messages indicating
-which directory was created be suppressed?}
+\item{quietly}{\code{TRUE} or \code{FALSE}: suppress the message indicating which
+directory was created?}
 }
 \value{
-A character string with \link[=normalizePath]{normalized} form of the
+A character string with the \link[=normalizePath]{normalized} form of the
 created path, returned \link[=invisible]{invisibly}. The path will be composed of
-the elements in \code{dir}, separated with the platform-dependent
-\link[=file.path]{file separator} and, if \code{add_date} is \code{TRUE}, a subdirectory
-with the current date in the format \code{YYYY_MM_DD}. The
-\link[=getwd]{working directory} is returned if the attempt to create a directory
-fails, with a warning.
+\code{dir}, and, if \code{add_date} is \code{TRUE}, a subdirectory with the current date in
+the format \code{YYYY_MM_DD}. The \link[=getwd]{working directory} is returned if the
+attempt to create a directory fails, with a warning.
 }
 \description{
 Create a directory if it does not yet exist.
 }
 \details{
-The default \code{dir} uses \code{\link[=file.path]{file.path()}} to use the correct (platform-dependent)
-path separator when indicating subdirectory \code{output} in the
-\link[=getwd]{working directory}. That is not the case if a character string with
-(back)slashes (\code{/} or \verb{\\}) is used to indicate subdirectories.
+The \code{"."} in the default for \code{dir} indicates the \link[=getwd]{working directory}.
+Using \code{\link[=file.path]{file.path()}} to create \code{dir} ensures the correct (platform-dependent)
+file separator is used to indicate subdirectories.
+
+Several limitations are imposed on \code{dir} to facilitate handling of paths by
+Windows, see \code{\link[=dir.create]{dir.create()}}: \code{dir} should not end in a slash, backslash, or
+space, which would be removed when the \link[=dir.create]{directory is created},
+leading to a mismatch between the created directory and the returned path.
+\code{dir} should also not end in a dot. Finally, \code{dir} should not contain the
+characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, or \code{>}.
 }
 \section{Side effects}{
 
 The requested directory is created if does not yet exist.
 }
 
-\section{Wishlist}{
+\section{To do}{
 
-Do not allow paths ending in a trailing dot or a trailing space, see
-?dir.create().
-
-Add a test for a failed creation.
+\itemize{
+\item What happens if 'dir' points to an existing file instead of to an existing
+directory?
+\item Why are paths only \link[=normalizePath]{normalized} to use in messages, not
+before checking existence?
+}
 }
 
 \examples{
@@ -63,6 +69,12 @@ res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
                              add_date = FALSE)
 identical(res_dir_one, res_dir_one_v2) # TRUE
 
+# Directories are case-insensitive, so adding 'dir_ONE' gives the same result
+# as above:
+res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
+                             add_date = FALSE)
+identical(res_dir_one, res_dir_one_v3) # TRUE
+
 # Create directory 'dir_two' with a subdirectory containing the current date
 res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
                           add_date = TRUE)
@@ -73,6 +85,16 @@ unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
 
 }
 \seealso{
-\code{\link[=file.path]{file.path()}} and \code{\link[=dir.create]{dir.create()}} that are used in this function.
-\code{\link[=check_file]{check_file()}} to check if a file exists.
+\code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function; \code{\link[=check_file]{check_file()}} to
+check if a file exists and is a unique match to a pattern; \code{\link[=file.path]{file.path()}} to
+construct the path to a file from components in a platform-independent way;
+\code{\link[=normalizePath]{normalizePath()}} to create absolute paths.
+
+\code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths,
+looking for a wider range of invalid characters.
+
+Other functions to check and modify paths and directories: 
+\code{\link{check_file}()},
+\code{\link{get_paths}()}
 }
+\concept{functions to check and modify paths and directories}

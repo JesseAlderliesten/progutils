@@ -2,38 +2,52 @@
 #'
 #' Create a directory if it does not yet exist.
 #'
-#' @param dir Non-empty character string containing the path to the directory,
-#' not ending with a (back)slash. See `Details`.
-#' @param add_date `TRUE` or `FALSE`: should a subdirectory be created with the
-#' current date?
-#' @param quietly `TRUE` or `FALSE`: should the printing of messages indicating
-#' which directory was created be suppressed?
+#' @param dir Non-empty character string containing the path to a directory.
+#' Case-insensitive matching is used to checking if it already exists.
+#' @param add_date `TRUE` or `FALSE`: create a subdirectory with the current
+#' date in the format `YYYY_MM_DD`?
+#' @param quietly `TRUE` or `FALSE`: suppress the message indicating which
+#' directory was created?
 #'
 #' @details
-#' The default `dir` uses [file.path()] to use the correct (platform-dependent)
-#' path separator when indicating subdirectory `output` in the
-#' [working directory][getwd()]. That is not the case if a character string with
-#' (back)slashes (`/` or `\`) is used to indicate subdirectories.
+#' The `"."` in the default for `dir` indicates the [working directory][getwd()].
+#' Using [file.path()] to create `dir` ensures the correct (platform-dependent)
+#' file separator is used to indicate subdirectories.
 #'
-#' @returns A character string with [normalized][normalizePath()] form of the
+#' Several limitations are imposed on `dir` to facilitate handling of paths by
+#' Windows, see [dir.create()]: `dir` should not end in a slash, backslash, or
+#' space, which would be removed when the [directory is created][dir.create()],
+#' leading to a mismatch between the created directory and the returned path.
+#' `dir` should also not end in a dot. Finally, `dir` should not contain the
+#' characters `"`, `*`, `?`, `|`, `<`, or `>`.
+#'
+#' @returns
+#' A character string with the [normalized][normalizePath()] form of the
 #' created path, returned [invisibly][invisible]. The path will be composed of
-#' the elements in `dir`, separated with the platform-dependent
-#' [file separator][file.path()] and, if `add_date` is `TRUE`, a subdirectory
-#' with the current date in the format `YYYY_MM_DD`. The
-#' [working directory][getwd()] is returned if the attempt to create a directory
-#' fails, with a warning.
+#' `dir`, and, if `add_date` is `TRUE`, a subdirectory with the current date in
+#' the format `YYYY_MM_DD`. The [working directory][getwd()] is returned if the
+#' attempt to create a directory fails, with a warning.
 #'
 #' @section Side effects:
 #' The requested directory is created if does not yet exist.
 #'
-#' @section Wishlist:
-#' Do not allow paths ending in a trailing dot or a trailing space, see
-#' ?dir.create().
+#' @section To do:
+#' - What happens if 'dir' points to an existing file instead of to an existing
+#'   directory?
+#' - Why are paths only [normalized][normalizePath()] to use in messages, not
+#'   before checking existence?
 #'
-#' Add a test for a failed creation.
+#' @seealso
+#' [dir.exists()] and [dir.create()] used by this function; [check_file()] to
+#' check if a file exists and is a unique match to a pattern; [file.path()] to
+#' construct the path to a file from components in a platform-independent way;
+#' [normalizePath()] to create absolute paths.
 #'
-#' @seealso [file.path()] and [dir.create()] that are used in this function.
-#' [check_file()] to check if a file exists.
+#' `fs::path_sanitize()` to *remove* invalid characters from potential paths,
+#' looking for a wider range of invalid characters.
+#'
+#' @family
+#' functions to check and modify paths and directories
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory
@@ -51,6 +65,12 @@
 #'                              add_date = FALSE)
 #' identical(res_dir_one, res_dir_one_v2) # TRUE
 #'
+#' # Directories are case-insensitive, so adding 'dir_ONE' gives the same result
+#' # as above:
+#' res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
+#'                              add_date = FALSE)
+#' identical(res_dir_one, res_dir_one_v3) # TRUE
+#'
 #' # Create directory 'dir_two' with a subdirectory containing the current date
 #' res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
 #'                           add_date = TRUE)
@@ -62,15 +82,19 @@
 #' @export
 create_dir <- function(dir = file.path(".", "output"), add_date = TRUE,
                        quietly = FALSE) {
+  # See 'Details' about the restrictions imposed on 'dir'.
   stopifnot(checkinput::is_character(dir),
-            # 'dir' should not end with a (back)slash: that would result in a
-            # mismatch between the created directory and the returned path
-            # because trailing (back)slashes are removed when the directory is
-            # created.
             "'dir' should not end with '/'" =
               substring(text = dir, first = nchar(dir)) != "/",
             "'dir' should not end with '\\'" =
               substring(text = dir, first = nchar(dir)) != "\\",
+            "'dir' should not end with '.'" =
+              basename(dir) == "." ||
+              substring(text = dir, first = nchar(dir)) != ".",
+            "'dir' should not end with ' ' (i.e., a space)" =
+              substring(text = dir, first = nchar(dir)) != " ",
+            "'dir' should not contain any of the following characters: \" * ? | < >" =
+              !grepl(pattern = '[<>"|?*]', x = dir),
             checkinput::is_logical(add_date), checkinput::is_logical(quietly))
 
   if(add_date) {
@@ -99,7 +123,7 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE,
       warning(wrap_text(paste0(
         "Attempt to create directory '", normalizePath(dir), "' failed",
         if(file.exists(dir)) {": it points to a file, not to a directory"},
-        "!\nReturning working directory ('", getwd(), "') instead.")))
+        "!\nReturning the working directory ('", getwd(), "') instead.")))
       dir <- normalizePath(getwd())
     }
   }
