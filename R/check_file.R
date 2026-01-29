@@ -108,7 +108,8 @@ check_file <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) 
     stop(wrap_text(x = paste0("No ", msg_match, ".")))
   }
 
-  if(file.info(files_present)$isdir) {
+  # Need isTRUE() to work around 'isdir' being NA for temporary files
+  if(isTRUE(file.info(files_present)$isdir)) {
     stop("A single match to 'pattern' ('", pattern, "') is present in 'dir' (",
          dir, ")\nbut that match points to a directory, not to a file!")
   }
