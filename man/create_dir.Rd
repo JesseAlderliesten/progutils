@@ -8,7 +8,7 @@ create_dir(dir = file.path(".", "output"), add_date = TRUE, quietly = FALSE)
 }
 \arguments{
 \item{dir}{Non-empty character string containing the path to a directory.
-Checking if it already exists uses case-insensitive matching.}
+Case-insensitive matching is used to checking if it already exists.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
 date in the format \code{YYYY_MM_DD}?}
