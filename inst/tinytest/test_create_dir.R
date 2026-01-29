@@ -10,6 +10,11 @@
 #   expect_true(dir.exists(expected_path)).
 
 
+#### To do ####
+# - Add tests on using an existing file [sic] name in 'dir'.
+# - Add a test for a failed creation.
+
+
 #### Wishlist ####
 # - tinytest supports tracking of side-effects, but I'm not yet sure how to
 #   properly use it. E.g.,
@@ -33,6 +38,11 @@ expect_message(res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one
                              add_date = FALSE),
                pattern = "already exists", strict = TRUE, fixed = TRUE)
 expect_identical(res_dir_one, res_dir_one_v2)
+
+expect_message(res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
+                            add_date = FALSE),
+               pattern = "already exists", strict = TRUE, fixed = TRUE)
+expect_identical(res_dir_one, res_dir_one_v3)
 
 expect_message(res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
                           add_date = TRUE),
@@ -159,6 +169,40 @@ for(dir in list(paste0(my_tempdir, ".\\"), paste0(my_tempdir, "temp_p1\\"))) {
     create_dir(dir = dir),
     pattern = "'dir' should not end with '\\'", fixed = TRUE)
 }
+
+for(dir in list(paste0(my_tempdir, ".."), paste0(my_tempdir, "temp_p1."))) {
+  expect_error(
+    create_dir(dir = dir),
+    pattern = "'dir' should not end with '.'", fixed = TRUE)
+}
+
+for(dir in list(paste0(my_tempdir, ". "), paste0(my_tempdir, "temp_p1 "))) {
+  expect_error(
+    create_dir(dir = dir),
+    pattern = "'dir' should not end with ' ' (i.e., a space)", fixed = TRUE)
+}
+
+# Check if illegal characters are recognised
+expect_false(grepl(pattern = "[<]", x = "abc"))
+expect_false(grepl(pattern = "[>]", x = "abc"))
+expect_false(grepl(pattern = '["]', x = 'abc'))
+expect_false(grepl(pattern = "[|]", x = "abc"))
+expect_false(grepl(pattern = "[?]", x = "abc"))
+expect_false(grepl(pattern = "[*]", x = "abc"))
+
+expect_true(grepl(pattern = "[<]", x = "ab<c"))
+expect_true(grepl(pattern = "[>]", x = "ab>c"))
+expect_true(grepl(pattern = '["]', x = 'ab"c'))
+expect_true(grepl(pattern = "[|]", x = "ab|c"))
+expect_true(grepl(pattern = "[?]", x = "ab?c"))
+expect_true(grepl(pattern = "[*]", x = "ab*c"))
+
+expect_true(grepl(pattern = '[<>"|?*]', x = "ab<c"))
+expect_true(grepl(pattern = '[<>"|?*]', x = "ab>c"))
+expect_true(grepl(pattern = '[<>"|?*]', x = 'ab"c'))
+expect_true(grepl(pattern = '[<>"|?*]', x = "ab|c"))
+expect_true(grepl(pattern = '[<>"|?*]', x = "ab?c"))
+expect_true(grepl(pattern = '[<>"|?*]', x = "ab*c"))
 
 # 6 Checks on input to 'add_date'
 for(add_date in list(3, NA)) {
