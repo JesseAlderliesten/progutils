@@ -4,61 +4,71 @@
 \alias{check_file}
 \title{Check if only a single matching file is present}
 \usage{
-check_file(path = ".", pattern = NULL, ignore_case = TRUE, quietly = FALSE)
+check_file(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{path}{Character string with a full path name. Passed to \code{\link[=list.files]{list.files()}}.}
+\item{dir}{Character string giving the \link[=file.path]{path} to a directory.}
 
-\item{pattern}{NULL, or a character string containing a
-\link[base:regex]{regular expression} to match to file names in the path
-indicated by \code{path}. Passed to \code{\link[=list.files]{list.files()}}.}
+\item{pattern}{Character string containing a \link[base:regex]{regular expression}
+used to select file names in the directory indicated by \code{dir}.}
 
-\item{ignore_case}{\code{TRUE} or \code{FALSE}: should matching file names be
-case-insensitive?}
+\item{ignore_case}{\code{TRUE} or \code{FALSE}: use case-insensitive pattern matching?}
 
-\item{quietly}{\code{TRUE} or \code{FALSE}: should the message with the found file name
-be suppressed?}
+\item{quietly}{\code{TRUE} or \code{FALSE}: suppress the message with the found file
+name?}
 }
 \value{
-A character string with the file name in \code{dir} that matches
-\code{pattern} if there is exactly one match to \code{pattern}. An error is thrown if
-no file name in \code{dir} matches \code{pattern} or if multiple file names in \code{dir}
-match \code{pattern}.
+If there is exactly one file with a name matching \code{pattern} in directory
+\code{dir}: a character string with the matching file name. Otherwise an error is
+thrown.
 }
 \description{
-Check if only a single matching file is present. This function is intended to
-be used before reading a file. Throwing an error if multiple matches are
-present, instead of using the first matching file, is intended to prevent
-erroneous matches.
+Check if only a single file in \code{dir} matches \code{pattern}, for example before
+attempting to \link[=read.table]{read a file}.
 }
 \details{
-The default \code{"."} for \code{path} indicates the \link[=getwd]{working directory}.
+The default \code{"."} for \code{dir} indicates the \link[=getwd]{working directory}.
 
 If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, it is
-checked if a case-insensitive match would be found. It is reported in the
-error message if such a match is found or not.
+checked if any case-insensitive match is present. The error message indicates
+if such a match was found or not.
 }
+\section{Programming note / To do}{
+
+\itemize{
+\item Should paths be \link[=normalizePath]{normalized} (to use in messages, or
+before checking existence)? See how that is done in \code{\link[=create_dir]{create_dir()}}.
+}
+}
+
 \examples{
 # Create filenames in a temporary directory so we know what is present.
 my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
 # Create the files
 file.create(my_tempfiles)
 
-check_file(path = tempdir(), pattern = "First")
-# Default for 'ignore_case' is TRUE, so the same file is found:
-check_file(path = tempdir(), pattern = "FIRST")
+check_file(dir = tempdir(), pattern = "First")
+# The same file is found if case-insensitive matching is used:
+check_file(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE)
 # Error reporting presence of case-insensitive match.
-try(check_file(path = tempdir(), pattern = "FIRST", ignore_case = FALSE))
+try(check_file(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
 # Error reporting no match found.
-try(check_file(path = tempdir(), pattern = "abc", ignore_case = FALSE))
+try(check_file(dir = tempdir(), pattern = "abc", ignore_case = FALSE))
 # Error because multiple matches are present.
-try(check_file(path = tempdir(), pattern = "File"))
+try(check_file(dir = tempdir(), pattern = "File"))
 
 # Deleting the created temporary files
 unlink(x = my_tempfiles)
 
 }
 \seealso{
-\code{\link[=list.files]{list.files()}} that is used by this function. \code{\link[=create_dir]{create_dir()}} to
-create a directory.
+\code{\link[=dir.exists]{dir.exists()}}, \code{\link[=file.exists]{file.exists()}}, and \code{\link[=list.files]{list.files()}} to check for existence of
+files or directories without checking that it is a unique match to a pattern;
+\code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or
+directories.
+
+Other functions to check and modify paths and directories: 
+\code{\link{create_dir}()},
+\code{\link{get_paths}()}
 }
+\concept{functions to check and modify paths and directories}

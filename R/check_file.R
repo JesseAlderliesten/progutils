@@ -1,33 +1,39 @@
 #' Check if only a single matching file is present
 #'
-#' Check if only a single matching file is present. This function is intended to
-#' be used before reading a file. Throwing an error if multiple matches are
-#' present, instead of using the first matching file, is intended to prevent
-#' erroneous matches.
+#' Check if only a single file in `dir` matches `pattern`, for example before
+#' attempting to [read a file][read.table()].
 #'
-#' @param path Character string with a full path name. Passed to [list.files()].
-#' @param pattern NULL, or a character string containing a
-#' [regular expression][base::regex] to match to file names in the path
-#' indicated by `path`. Passed to [list.files()].
-#' @param ignore_case `TRUE` or `FALSE`: should matching file names be
-#' case-insensitive?
-#' @param quietly `TRUE` or `FALSE`: should the message with the found file name
-#' be suppressed?
+#' @param dir Character string giving the [path][file.path()] to a directory.
+#' @param pattern Character string containing a [regular expression][base::regex]
+#' used to select file names in the directory indicated by `dir`.
+#' @param ignore_case `TRUE` or `FALSE`: use case-insensitive pattern matching?
+#' @param quietly `TRUE` or `FALSE`: suppress the message with the found file
+#' name?
 #'
-#' @returns A character string with the file name in `dir` that matches
-#' `pattern` if there is exactly one match to `pattern`. An error is thrown if
-#' no file name in `dir` matches `pattern` or if multiple file names in `dir`
-#' match `pattern`.
+#' @returns
+#' If there is exactly one file with a name matching `pattern` in directory
+#' `dir`: a character string with the matching file name. Otherwise an error is
+#' thrown.
 #'
 #' @details
-#' The default `"."` for `path` indicates the [working directory][getwd()].
+#' The default `"."` for `dir` indicates the [working directory][getwd()].
 #'
 #' If `ignore_case` is `FALSE` and no case-sensitive match is found, it is
-#' checked if a case-insensitive match would be found. It is reported in the
-#' error message if such a match is found or not.
+#' checked if any case-insensitive match is present. The error message indicates
+#' if such a match was found or not.
 #'
-#' @seealso [list.files()] that is used by this function. [create_dir()] to
-#' create a directory.
+#' @section Programming note / To do:
+#' - Should paths be [normalized][normalizePath()] (to use in messages, or
+#'   before checking existence)? See how that is done in [create_dir()].
+#'
+#' @seealso
+#' [dir.exists()], [file.exists()], and [list.files()] to check for existence of
+#' files or directories without checking that it is a unique match to a pattern;
+#' [file.info()] and [file.access()] to extract information about files or
+#' directories.
+#'
+#' @family
+#' functions to check and modify paths and directories
 #'
 #' @examples
 #' # Create filenames in a temporary directory so we know what is present.
@@ -35,61 +41,80 @@
 #' # Create the files
 #' file.create(my_tempfiles)
 #'
-#' check_file(path = tempdir(), pattern = "First")
-#' # Default for 'ignore_case' is TRUE, so the same file is found:
-#' check_file(path = tempdir(), pattern = "FIRST")
+#' check_file(dir = tempdir(), pattern = "First")
+#' # The same file is found if case-insensitive matching is used:
+#' check_file(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE)
 #' # Error reporting presence of case-insensitive match.
-#' try(check_file(path = tempdir(), pattern = "FIRST", ignore_case = FALSE))
+#' try(check_file(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
 #' # Error reporting no match found.
-#' try(check_file(path = tempdir(), pattern = "abc", ignore_case = FALSE))
+#' try(check_file(dir = tempdir(), pattern = "abc", ignore_case = FALSE))
 #' # Error because multiple matches are present.
-#' try(check_file(path = tempdir(), pattern = "File"))
+#' try(check_file(dir = tempdir(), pattern = "File"))
 #'
 #' # Deleting the created temporary files
 #' unlink(x = my_tempfiles)
 #'
 #' @export
-check_file <- function(path = ".", pattern = NULL, ignore_case = TRUE,
-                       quietly = FALSE) {
-  stopifnot(checkinput::is_character(path),
-            is.null(pattern) || checkinput::is_character(pattern),
-            checkinput::is_logical(ignore_case),
-            checkinput::is_logical(quietly))
+check_file <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
+  stopifnot(checkinput::is_character(dir), checkinput::is_character(pattern),
+            checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 
-  files_present <- list.files(path = path, pattern = pattern,
-                              ignore.case = ignore_case)
+  if(!dir.exists(dir)) {
+    stop("'", dir, "' does not exist!")
+  }
+
+  if(!file.info(dir)$isdir) {
+    stop("'dir' ('", dir, "') exists but is not a directory!")
+  }
+
+  # 'include.dirs' is TRUE to be able to find, and warn about, matches to a
+  # directory instead of to a file.
+  files_present <- list.files(path = dir, pattern = pattern, all.files = TRUE,
+                              ignore.case = ignore_case, include.dirs = TRUE)
 
   msg_match <- paste0(
-    "case-", if(ignore_case) {"in"}, "sensitive matches to pattern ",
-    progutils::paste_quoted(pattern), " are present in directory '",
-    path, "')")
+    "case-", if(ignore_case) {"in"}, "sensitive matches to pattern '",
+    pattern, "' are present in directory '", dir, "'")
+
+  if(length(files_present) > 1L) {
+    stop(wrap_text(x = paste0(
+      "Multiple ", msg_match, ": ", paste_quoted(files_present), "!"
+    )))
+  }
 
   if(length(files_present) == 0L) {
     if(!ignore_case) {
-      match_case_insensitive <- list.files(path = path, pattern = pattern,
+      # Check if any case-insensitive match is present
+      match_case_insensitive <- list.files(path = dir, pattern = pattern,
                                            ignore.case = TRUE)
 
-      if(length(match_case_insensitive) > 0L) {
-        msg_match <- paste0(
-          msg_match,
-          ". However, a case-insensitive match to 'pattern' is present: ",
-          progutils::paste_quoted(match_case_insensitive))
-      } else {
+      if(length(match_case_insensitive) == 0L) {
         msg_match <- paste0(
           msg_match, ". No case-insensitive match is present either")
+      } else {
+        if(length(match_case_insensitive) == 1L) {
+          msg_match <- paste0(
+            msg_match,
+            ". However, a case-insensitive match to 'pattern' is present: ",
+            paste_quoted(match_case_insensitive))
+        } else {
+          msg_match <- paste0(
+            msg_match,
+            ". However, case-insensitive matches to 'pattern' are present: ",
+            paste_quoted(match_case_insensitive))
+        }
       }
     }
-    stop(progutils::wrap_text(x = paste0("No ", msg_match, ".")))
+    stop(wrap_text(x = paste0("No ", msg_match, ".")))
   }
 
-  if(length(files_present) > 1L) {
-    stop(progutils::wrap_text(x = paste0(
-      "Multiple ", msg_match, ": ", progutils::paste_quoted(files_present),
-      "!")))
+  if(file.info(files_present)$isdir) {
+    stop("A single match to 'pattern' ('", pattern, "') is present in 'dir' (",
+         dir, ")\nbut that match points to a directory, not to a file!")
   }
 
   if(!quietly) {
-    message("Using file ", progutils::paste_quoted(files_present))
+    message("Using file ", paste_quoted(files_present))
   }
 
   files_present
