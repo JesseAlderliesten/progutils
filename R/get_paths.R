@@ -12,7 +12,7 @@
 #' See `InstallPkgs::prepare_install()` where `get_paths()` is checked and used.
 #'
 #' @family
-#' functions to check and modify paths and directories
+#' functions to check paths and create directories
 #'
 #' @examples
 #' .libPaths()
