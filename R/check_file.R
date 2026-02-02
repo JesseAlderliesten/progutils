@@ -11,32 +11,34 @@
 #' name?
 #'
 #' @returns
-#' If there is exactly one file with a name matching `pattern` in directory
-#' `dir`: a character string with the matching file name. Otherwise an error is
+#' A character string with the matching file name if there is exactly one file
+#' with a name matching `pattern` in directory `dir`. Otherwise an error is
 #' thrown.
 #'
 #' @details
 #' The default `"."` for `dir` indicates the [working directory][getwd()].
 #'
-#' If `ignore_case` is `FALSE` and no case-sensitive match is found, it is
-#' checked if any case-insensitive match is present. The error message indicates
-#' if such a match was found or not.
+#' If `ignore_case` is `FALSE` and no case-sensitive match is found, the error
+#' message indicates if any case-insensitive match is present.
 #'
-#' @section Programming note / To do:
-#' - Should paths be [normalized][normalizePath()] (to use in messages, or
-#'   before checking existence)? See how that is done in [create_dir()].
+#' In contrast to the default of [list.files()], `check_file` also finds
+#' 'hidden' files, i.e., files which names start with a dot.
+#'
+#' Paths will be [normalized][normalizePath()] before use, so the form of paths
+#' reported in messages might differ from the input to `dir`.
 #'
 #' @seealso
-#' [dir.exists()], [file.exists()], and [list.files()] to check for existence of
-#' files or directories without checking that it is a unique match to a pattern;
-#' [file.info()] and [file.access()] to extract information about files or
-#' directories.
+#' [create_dir()] to create a directory if does not yet exist; [file.exists()]
+#' and [list.files()] to check for existence of files without checking they are
+#' a unique match to a pattern; [file.info()] and [file.access()] to extract
+#' information about files or directories; [file.path()] to construct file paths
+#' in a platform-independent way; [normalizePath()] to create absolute paths.
 #'
 #' @family
-#' functions to check and modify paths and directories
+#' functions to check paths and create directories
 #'
 #' @examples
-#' # Create filenames in a temporary directory so we know what is present.
+#' # Create files in a temporary directory so we know what is present.
 #' my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
 #' # Create the files
 #' file.create(my_tempfiles)
@@ -47,7 +49,8 @@
 #' # Error reporting presence of case-insensitive match.
 #' try(check_file(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
 #' # Error reporting no match found.
-#' try(check_file(dir = tempdir(), pattern = "abc", ignore_case = FALSE))
+#' try(check_file(dir = tempdir(), pattern = "abcde", ignore_case = TRUE))
+#' try(check_file(dir = tempdir(), pattern = "abcde", ignore_case = FALSE))
 #' # Error because multiple matches are present.
 #' try(check_file(dir = tempdir(), pattern = "File"))
 #'
@@ -59,18 +62,23 @@ check_file <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) 
   stopifnot(checkinput::is_character(dir), checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 
+  dir <- normalizePath(dir, mustWork = FALSE)
   if(!dir.exists(dir)) {
-    stop("'", dir, "' does not exist!")
+    if(file.exists(dir)) {
+      stop("The path in 'dir' ('", dir,
+           "') points to a file but should point to a directory!")
+    } else {
+      stop("'", dir, "' does not exist!")
+    }
   }
 
-  if(!file.info(dir)$isdir) {
-    stop("'dir' ('", dir, "') exists but is not a directory!")
-  }
-
-  # 'include.dirs' is TRUE to be able to find, and warn about, matches to a
-  # directory instead of to a file.
-  files_present <- list.files(path = dir, pattern = pattern, all.files = TRUE,
-                              ignore.case = ignore_case, include.dirs = TRUE)
+  # That 'include.dirs' is FALSE does not have an effect because 'recursive' is
+  # FALSE ase well.
+  paths_present <- list.files(path = dir, pattern = pattern, all.files = TRUE,
+                              ignore.case = ignore_case)
+  files_present <- not_in(paths_present,
+                          list.dirs(path = dir, full.names = FALSE,
+                                    recursive = FALSE))
 
   msg_match <- paste0(
     "case-", if(ignore_case) {"in"}, "sensitive matches to pattern '",
@@ -106,12 +114,6 @@ check_file <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) 
       }
     }
     stop(wrap_text(x = paste0("No ", msg_match, ".")))
-  }
-
-  # Need isTRUE() to work around 'isdir' being NA for temporary files
-  if(isTRUE(file.info(files_present)$isdir)) {
-    stop("A single match to 'pattern' ('", pattern, "') is present in 'dir' (",
-         dir, ")\nbut that match points to a directory, not to a file!")
   }
 
   if(!quietly) {

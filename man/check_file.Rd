@@ -18,8 +18,8 @@ used to select file names in the directory indicated by \code{dir}.}
 name?}
 }
 \value{
-If there is exactly one file with a name matching \code{pattern} in directory
-\code{dir}: a character string with the matching file name. Otherwise an error is
+A character string with the matching file name if there is exactly one file
+with a name matching \code{pattern} in directory \code{dir}. Otherwise an error is
 thrown.
 }
 \description{
@@ -29,20 +29,17 @@ attempting to \link[=read.table]{read a file}.
 \details{
 The default \code{"."} for \code{dir} indicates the \link[=getwd]{working directory}.
 
-If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, it is
-checked if any case-insensitive match is present. The error message indicates
-if such a match was found or not.
-}
-\section{Programming note / To do}{
+If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, the error
+message indicates if any case-insensitive match is present.
 
-\itemize{
-\item Should paths be \link[=normalizePath]{normalized} (to use in messages, or
-before checking existence)? See how that is done in \code{\link[=create_dir]{create_dir()}}.
-}
-}
+In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{check_file} also finds
+'hidden' files, i.e., files which names start with a dot.
 
+Paths will be \link[=normalizePath]{normalized} before use, so the form of paths
+reported in messages might differ from the input to \code{dir}.
+}
 \examples{
-# Create filenames in a temporary directory so we know what is present.
+# Create files in a temporary directory so we know what is present.
 my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
 # Create the files
 file.create(my_tempfiles)
@@ -53,7 +50,8 @@ check_file(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE)
 # Error reporting presence of case-insensitive match.
 try(check_file(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
 # Error reporting no match found.
-try(check_file(dir = tempdir(), pattern = "abc", ignore_case = FALSE))
+try(check_file(dir = tempdir(), pattern = "abcde", ignore_case = TRUE))
+try(check_file(dir = tempdir(), pattern = "abcde", ignore_case = FALSE))
 # Error because multiple matches are present.
 try(check_file(dir = tempdir(), pattern = "File"))
 
@@ -62,13 +60,14 @@ unlink(x = my_tempfiles)
 
 }
 \seealso{
-\code{\link[=dir.exists]{dir.exists()}}, \code{\link[=file.exists]{file.exists()}}, and \code{\link[=list.files]{list.files()}} to check for existence of
-files or directories without checking that it is a unique match to a pattern;
-\code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or
-directories.
+\code{\link[=create_dir]{create_dir()}} to create a directory if does not yet exist; \code{\link[=file.exists]{file.exists()}}
+and \code{\link[=list.files]{list.files()}} to check for existence of files without checking they are
+a unique match to a pattern; \code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract
+information about files or directories; \code{\link[=file.path]{file.path()}} to construct file paths
+in a platform-independent way; \code{\link[=normalizePath]{normalizePath()}} to create absolute paths.
 
-Other functions to check and modify paths and directories: 
+Other functions to check paths and create directories: 
 \code{\link{create_dir}()},
 \code{\link{get_paths}()}
 }
-\concept{functions to check and modify paths and directories}
+\concept{functions to check paths and create directories}
