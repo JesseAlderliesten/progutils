@@ -72,13 +72,15 @@ check_file <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) 
     }
   }
 
-  # That 'include.dirs' is FALSE does not have an effect because 'recursive' is
-  # FALSE ase well.
-  paths_present <- list.files(path = dir, pattern = pattern, all.files = TRUE,
+  files_present <- list.files(path = dir, pattern = pattern, all.files = TRUE,
                               ignore.case = ignore_case)
-  files_present <- not_in(paths_present,
-                          list.dirs(path = dir, full.names = FALSE,
-                                    recursive = FALSE))
+  # 'list.files()' also returns directories (even though 'include.dirs' is FALSE
+  # by default) because 'recursive' is also FALSE.
+  if(length(files_present) > 0L) {
+    files_present <- not_in(files_present,
+                            list.dirs(path = dir, full.names = FALSE,
+                                      recursive = FALSE))
+  }
 
   msg_match <- paste0(
     "case-", if(ignore_case) {"in"}, "sensitive matches to pattern '",
