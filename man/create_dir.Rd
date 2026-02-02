@@ -7,33 +7,31 @@
 create_dir(dir = file.path(".", "output"), add_date = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{Non-empty character string containing the path to a directory.
-Case-insensitive matching is used to checking if it already exists.}
+\item{dir}{Non-empty character string containing the path to a directory.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
-date in the format \code{YYYY_MM_DD}?}
+date (format: \code{YYYY_MM_DD})?}
 
 \item{quietly}{\code{TRUE} or \code{FALSE}: suppress the message indicating which
 directory was created?}
 }
 \value{
-A character string with the \link[=normalizePath]{normalized} form of the
-created path, returned \link[=invisible]{invisibly}. The path will be composed of
-\code{dir}, and, if \code{add_date} is \code{TRUE}, a subdirectory with the current date in
-the format \code{YYYY_MM_DD}. The \link[=getwd]{working directory} is returned if the
-attempt to create a directory fails, with a warning.
+A character string with the \link[=normalizePath]{normalized} path to the
+requested directory, returned \link[=invisible]{invisibly}. The
+\link[=getwd]{working directory} is returned if an attempt to create a directory
+fails, with a warning.
 }
 \description{
 Create a directory if it does not yet exist.
 }
 \details{
-The \code{"."} in the default for \code{dir} indicates the \link[=getwd]{working directory}.
-Using \code{\link[=file.path]{file.path()}} to create \code{dir} ensures the correct (platform-dependent)
-file separator is used to indicate subdirectories.
+Using \code{\link[=file.path]{file.path()}} ensures the correct (platform-dependent) file separator
+is used to indicate subdirectories. The \code{"."} in the default for \code{dir}
+indicates the \link[=getwd]{working directory}.
 
 Several limitations are imposed on \code{dir} to facilitate handling of paths by
 Windows, see \code{\link[=dir.create]{dir.create()}}: \code{dir} should not end in a slash, backslash, or
-space, which would be removed when the \link[=dir.create]{directory is created},
+space because those characters would be removed when the directory is created,
 leading to a mismatch between the created directory and the returned path.
 \code{dir} should also not end in a dot. Finally, \code{dir} should not contain the
 characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, or \code{>}.
@@ -41,16 +39,6 @@ characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, or \code{>}.
 \section{Side effects}{
 
 The requested directory is created if does not yet exist.
-}
-
-\section{To do}{
-
-\itemize{
-\item What happens if 'dir' points to an existing file instead of to an existing
-directory?
-\item Why are paths only \link[=normalizePath]{normalized} to use in messages, not
-before checking existence?
-}
 }
 
 \examples{
@@ -85,16 +73,16 @@ unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
 
 }
 \seealso{
-\code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function; \code{\link[=check_file]{check_file()}} to
-check if a file exists and is a unique match to a pattern; \code{\link[=file.path]{file.path()}} to
-construct the path to a file from components in a platform-independent way;
-\code{\link[=normalizePath]{normalizePath()}} to create absolute paths.
+\code{\link[=check_file]{check_file()}} to check if a file exists and is a unique match to a pattern;
+\code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
+\code{\link[=normalizePath]{normalizePath()}} to create absolute paths; \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}}
+used by this function.
 
 \code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths,
 looking for a wider range of invalid characters.
 
-Other functions to check and modify paths and directories: 
+Other functions to check paths and create directories: 
 \code{\link{check_file}()},
 \code{\link{get_paths}()}
 }
-\concept{functions to check and modify paths and directories}
+\concept{functions to check paths and create directories}
