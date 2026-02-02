@@ -7,11 +7,11 @@
 not_in(x, table, value = TRUE)
 }
 \arguments{
-\item{x}{Non-numeric vector or factor with values to test absence from
-\code{table}. \code{x} should have a length larger than zero.}
+\item{x}{Vector or factor with values to test absence from \code{table}. \code{x}
+should have a length larger than zero and not be of \link[=typeof]{type} \code{double}.}
 
-\item{table}{Non-numeric vector or factor in which to test for absence of \code{x}.
-\code{table} should have a length larger than zero.}
+\item{table}{Vector or factor in which to test for absence of \code{x}. \code{table}
+should have a length larger than zero and not be of \code{type} \code{double}.}
 
 \item{value}{\code{TRUE} or \code{FALSE}: should a vector with values be returned
 instead of a boolean vector?}
@@ -32,18 +32,17 @@ Duplicates in \code{x} are kept, in contrast to \code{\link[=setdiff]{setdiff()}
 \link[=factor]{Factor-input} to \code{x} is converted to character, to prevent
 returning a factor with all values of \code{x} as \link{levels}.
 
-\link{NA}s are allowed in \code{x} or \code{table} and they behave the same as other values:
-if \code{NA}s are present in \code{x} but absent from \code{table}, \code{not_in()} returns \code{NA}s
-of the same type as those in \code{x} if \code{value} is \code{TRUE}, and returns \code{TRUE} if
-\code{value} is \code{FALSE}. \code{NA}s of different types in \code{x} and \code{table} match each
-other, and the returned zero-length value has the same type as \code{x} if \code{value}
-is \code{TRUE}.
+\link{NA}s are allowed in \code{x} and \code{table} and behave the same as other values: the
+returned \code{NA}s (if \code{value} is \code{TRUE}) and the returned zero-length value (if
+\code{value} is \code{FALSE}) have the same type as the \code{NA}s in \code{x} if no \code{NA}s are
+present in \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
+other.
 }
 \section{Programming note}{
 
-\code{not_in()} does not allow numeric input because matching numeric input should
-take small numerical errors into account by using a tolerance, see
-\code{\link[=are_equal]{are_equal()}}.
+\code{not_in()} does not allow input of \link[=typeof]{type} \code{double} because matching
+such input should take small numerical errors into account by using a
+tolerance, for example, as the error message indicates, using \code{\link[=are_equal]{are_equal()}}.
 
 \code{not_in()} does not allow zero-length input because zero-length input behaves
 slightly different from other values: if \code{character(0)} is present in \code{x} but
@@ -64,7 +63,8 @@ x <- letters[1:4]
 table <- letters[3:6]
 not_in(x, table) # c("a", "b")
 not_in(as.factor(x), as.factor(table)) # c("a", "b")
-not_in(x, table, value = FALSE) # c(TRUE, TRUE, FALSE, FALSE), same as !(x \%in\% table)
+# c(TRUE, TRUE, FALSE, FALSE), same as !(x \%in\% table):
+not_in(x, table, value = FALSE)
 
 x_dupl <- c(x, letters[c(2, 4:6, 5)])
 table_dupl <- letters[c(3:8, 5:7)]

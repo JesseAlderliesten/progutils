@@ -40,28 +40,46 @@ expect_silent(expect_identical(
 
 
 #### Tests ####
-# 1 (unique and duplicated values present zero to two times in table, return boolean)
+# 1a (unique and duplicated values present zero to two times in table, return boolean)
 expect_silent(expect_identical(
   not_in(x = x, table = table, value = FALSE),
   out_boolean))
 
-# 2 (unique and duplicated values present zero to two times in table, return values)
+# 1b (unique and duplicated values present zero to two times in table, return values)
 expect_silent(expect_identical(
   not_in(x = x, table = table, value = TRUE),
   c("only_x_double", "only_x_single", "only_x_double")))
 
+# 2a (allow integer input)
+expect_silent(expect_identical(
+  not_in(x = 10:13, table = 12:15, value = TRUE),
+  c(10:11)))
+
+expect_silent(expect_identical(
+  not_in(x = 12:15, table = 10:13, value = FALSE),
+  rep(c(FALSE, TRUE), each = 2L)))
+
+# 2b (not allow input of type 'double')
+expect_error(
+  not_in(x = c(10, 11, 12, 13), table = c(12, 13, 14, 15), value = TRUE),
+  pattern = "Use are_equal() to match input of type 'double'", fixed = TRUE)
+
+expect_error(
+  not_in(x = c(10, 11, 12, 13), table = c(12, 13, 14, 15), value = FALSE),
+  pattern = "Use are_equal() to match input of type 'double'", fixed = TRUE)
+
 for(value in c(TRUE, FALSE)) {
   ##### Behaviour of NAs #####
-  # 3a (numeric NAs are not allowed in 'table')
+  # 3a (NA_real_ is not allowed in 'table' because it is of type 'double')
   expect_error(
     not_in(x = c("a", "b"), table = NA_real_, value = value),
-    pattern = "!is.numeric(table) is not TRUE",
+    pattern = "Use are_equal() to match input of type 'double'",
     fixed = TRUE)
 
   # 3b (logical NAs are not allowed in 'x')
   expect_error(
     not_in(x = NA_real_, table = c("a", "b"), value = value),
-    pattern = "!is.numeric(x) is not TRUE",
+    pattern = "Use are_equal() to match input of type 'double'",
     fixed = TRUE)
 
   # 3c (NAs match each other, the returned zero-length value has the same type

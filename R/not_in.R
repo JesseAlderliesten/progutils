@@ -2,10 +2,10 @@
 #'
 #' Check if values from one vector are not present in another vector
 #'
-#' @param x Non-numeric vector or factor with values to test absence from
-#' `table`. `x` should have a length larger than zero.
-#' @param table Non-numeric vector or factor in which to test for absence of `x`.
-#' `table` should have a length larger than zero.
+#' @param x Vector or factor with values to test absence from `table`. `x`
+#' should have a length larger than zero and not be of [type][typeof] `double`.
+#' @param table Vector or factor in which to test for absence of `x`. `table`
+#' should have a length larger than zero and not be of `type` `double`.
 #' @param value `TRUE` or `FALSE`: should a vector with values be returned
 #' instead of a boolean vector?
 #'
@@ -15,12 +15,11 @@
 #' [Factor-input][factor()] to `x` is converted to character, to prevent
 #' returning a factor with all values of `x` as [levels].
 #'
-#' [NA]s are allowed in `x` or `table` and they behave the same as other values:
-#' if `NA`s are present in `x` but absent from `table`, `not_in()` returns `NA`s
-#' of the same type as those in `x` if `value` is `TRUE`, and returns `TRUE` if
-#' `value` is `FALSE`. `NA`s of different types in `x` and `table` match each
-#' other, and the returned zero-length value has the same type as `x` if `value`
-#' is `TRUE`.
+#' [NA]s are allowed in `x` and `table` and behave the same as other values: the
+#' returned `NA`s (if `value` is `TRUE`) and the returned zero-length value (if
+#' `value` is `FALSE`) have the same type as the `NA`s in `x` if no `NA`s are
+#' present in `table`. `NA`s of different types in `x` and `table` match each
+#' other.
 #'
 #' @returns
 #' If `value` is `TRUE`: the values in `x` that are absent from `table` or, if
@@ -30,9 +29,9 @@
 #' element in `x` if it is absent from `table`.
 #'
 #' @section Programming note:
-#' `not_in()` does not allow numeric input because matching numeric input should
-#' take small numerical errors into account by using a tolerance, see
-#' [are_equal()].
+#' `not_in()` does not allow input of [type][typeof] `double` because matching
+#' such input should take small numerical errors into account by using a
+#' tolerance, for example, as the error message indicates, using [are_equal()].
 #'
 #' `not_in()` does not allow zero-length input because zero-length input behaves
 #' slightly different from other values: if `character(0)` is present in `x` but
@@ -57,7 +56,8 @@
 #' table <- letters[3:6]
 #' not_in(x, table) # c("a", "b")
 #' not_in(as.factor(x), as.factor(table)) # c("a", "b")
-#' not_in(x, table, value = FALSE) # c(TRUE, TRUE, FALSE, FALSE), same as !(x %in% table)
+#' # c(TRUE, TRUE, FALSE, FALSE), same as !(x %in% table):
+#' not_in(x, table, value = FALSE)
 #'
 #' x_dupl <- c(x, letters[c(2, 4:6, 5)])
 #' table_dupl <- letters[c(3:8, 5:7)]
@@ -68,8 +68,10 @@
 #'
 #' @export
 not_in <- function(x, table, value = TRUE) {
-  stopifnot(is.null(dim(x)), length(x) > 0L, !is.numeric(x),
-            is.null(dim(table)), length(table) > 0L, !is.numeric(table),
+  stopifnot(is.null(dim(x)), length(x) > 0L,
+            "Use are_equal() to match input of type 'double'" = !is.double(x),
+            is.null(dim(table)), length(table) > 0L,
+            "Use are_equal() to match input of type 'double'" = !is.double(table),
             checkinput::is_logical(value))
   if(is.factor(x)) {
     x <- as.character(x)
