@@ -46,7 +46,7 @@ expect_true(dir.exists(res_dir_two))
 
 # Cleaning up
 unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
+rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
 
 
 #### Tests ####
