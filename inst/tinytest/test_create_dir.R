@@ -10,11 +10,6 @@
 #   expect_true(dir.exists(expected_path)).
 
 
-#### To do ####
-# - Add tests on using an existing file [sic] name in 'dir'.
-# - Add a test for a failed creation.
-
-
 #### Wishlist ####
 # - tinytest supports tracking of side-effects, but I'm not yet sure how to
 #   properly use it. E.g.,
@@ -56,6 +51,10 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 
 #### Tests ####
 my_tempdir <- tempdir()
+my_tempfile <- file.path(tempdir(), "test_df.csv")
+# Write csv-file, modified from example in help(write.table)
+write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
+
 
 # 1a without date directory
 dir <- file.path(my_tempdir, "temp_subdirF_dateF")
@@ -204,6 +203,12 @@ expect_true(grepl(pattern = '[<>"|?*]', x = "ab|c"))
 expect_true(grepl(pattern = '[<>"|?*]', x = "ab?c"))
 expect_true(grepl(pattern = '[<>"|?*]', x = "ab*c"))
 
+# 'dir' points to a file instead of a directory
+expect_warning(
+  expect_equal(create_dir(dir = my_tempfile, add_date = FALSE),
+               normalizePath(getwd())),
+  pattern = paste0("failed! Returning\nthe working directory"))
+
 # 6 Checks on input to 'add_date'
 for(add_date in list(3, NA)) {
   expect_error(
@@ -219,5 +224,9 @@ for(quietly in list(3, NA)) {
 }
 
 
+#### Delete the created temporary files ####
+unlink(my_tempfile, recursive = TRUE)
+
+
 #### Remove objects used in tests ####
-rm(add_date, dir, expected_path, my_tempdir, quietly)
+rm(add_date, dir, expected_path, my_tempdir, my_tempfile, quietly)
