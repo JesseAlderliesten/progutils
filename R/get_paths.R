@@ -6,12 +6,13 @@
 #' @param paths The paths to use.
 #'
 #' @details
-#' This is a wrapper around [.libPaths()] to first return paths containing the
+#' This is a wrapper around [.libPaths()] to return paths containing the
 #' currently used \R [version number][getRversion()] in the form of directory
-#' `R-x.y.z` or directory `x.y`, with a warning if none such path is present.
+#' `R-x.y.z` or directory `x.y`, with a warning if none such path is present,
+#' before other paths.
 #'
-#' A warning is also issued if the returned vector is of length zero or only
-#' contains empty paths (`""`).
+#' A warning is issued if the returned vector is of length zero or only contains
+#' empty paths (`""`).
 #'
 #' @returns
 #' A character vector containing the same elements as [.libPaths()], possibly in

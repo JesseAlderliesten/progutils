@@ -18,12 +18,13 @@ Get the paths \R knows about, with paths containing the currently used \R
 version number given before other paths.
 }
 \details{
-This is a wrapper around \code{\link[=.libPaths]{.libPaths()}} to first return paths containing the
+This is a wrapper around \code{\link[=.libPaths]{.libPaths()}} to return paths containing the
 currently used \R \link[=getRversion]{version number} in the form of directory
-\code{R-x.y.z} or directory \code{x.y}, with a warning if none such path is present.
+\code{R-x.y.z} or directory \code{x.y}, with a warning if none such path is present,
+before other paths.
 
-A warning is also issued if the returned vector is of length zero or only
-contains empty paths (\code{""}).
+A warning is issued if the returned vector is of length zero or only contains
+empty paths (\code{""}).
 }
 \examples{
 .libPaths()
