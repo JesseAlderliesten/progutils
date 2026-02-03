@@ -1,7 +1,7 @@
 #### Create objects to use in tests ####
 x <- "123 567 911 141 719 123 262 931"
 nchar_x <- nchar(x)
-x_text <- "A piece of text to wrap over multiple lines"
+x_text <- "A piece\nof text that you want to wrap over multiple lines"
 x_text_nospace <- gsub(pattern = " ", replacement = "", x = x_text, fixed = TRUE)
 x_last <- "123 567 911 141 719 123 262\n931"
 x_multiple <- "123 567 911\n141 719 123\n262 931"
@@ -9,15 +9,17 @@ x_multiple_early <- "123\n567\n911 141 719 123 262 931"
 x_nonspace_blanks <- "123\f567\n911 141\f719\t123\t262\t931"
 x_single <- "123 567\n911 141 719 123 262 931"
 expect_x_early <- "123\n567\n911 141 719\n123 262 931"
-blank_x_single <- paste0(" \t ", x_single)
+x_single_blank <- paste0(" \t ", x_single)
 
 warn_too_long <- paste0("Width of 1 text fragments (11 characters) exceeds",
                         " 'width' (10 characters)")
 
 
 #### Test the examples ####
-expect_identical(wrap_text(x_text, width = 15),
-                 "A piece of text\nto wrap over\nmultiple lines")
+expect_identical(wrap_text(x_text, width = 20, ignore_newlines = TRUE),
+                 "A piece of text that\nyou want to wrap\nover multiple lines")
+expect_identical(wrap_text(x_text, width = 20, ignore_newlines = FALSE),
+                 "A piece\nof text that you\nwant to wrap over\nmultiple lines")
 
 
 #### Test other sections ####
@@ -31,16 +33,13 @@ expect_identical(
 expect_identical(
   wrap_text(x_text, width = 15),
   paste0(strwrap(x_text, width = 15 + 1), collapse = "\n"))
-expect_identical(
-  wrap_text(x_text, width = 15),
-  paste0(strwrap(x_text, width = 15 + 1, prefix = "\n", initial = ""),
-         collapse = ""))
 
 ##### Note #####
 expect_warning(
   expect_identical(
     wrap_text(x = paste0(x_text, x_text_nospace), width = 15),
-    paste0("A piece of text\nto wrap over\nmultiple\nlines", x_text_nospace)),
+    paste0("A piece of text\nthat you want\nto wrap over\nmultiple\nlines",
+           x_text_nospace)),
   pattern = paste0("Width of 1 text fragments (40 characters) exceeds 'width'",
                    " (15 characters)"),
   strict = TRUE, fixed = TRUE)
@@ -105,11 +104,11 @@ expect_identical(wrap_text(x = x_multiple_early, width = 12L,
 # wrap_text() removes leading whitespace
 expect_identical(wrap_text(x = paste0(" \t ", x), width = nchar_x + 1L), x)
 
-expect_identical(wrap_text(x = blank_x_single, width = nchar_x + 1L), x)
+expect_identical(wrap_text(x = x_single_blank, width = nchar_x + 1L), x)
 
-expect_identical(wrap_text(x = blank_x_single, width = nchar_x + 1L,
+expect_identical(wrap_text(x = x_single_blank, width = nchar_x + 1L,
                            ignore_newlines = FALSE), x_single)
-expect_identical(wrap_text(x = blank_x_single, width = nchar_x - 8L,
+expect_identical(wrap_text(x = x_single_blank, width = nchar_x - 8L,
                            ignore_newlines = FALSE), x_single)
 
 ##### Fragments longer than width #####
@@ -142,6 +141,9 @@ expect_warning(expect_identical(
 
 ##### x of length > 1 #####
 expect_identical(
+  wrap_text(x = letters[1:3], width = Inf), "a b c")
+
+expect_identical(
   wrap_text(x = c(x, x_single), width = 11L),
   paste0(x_multiple, " 123\n567 911 141\n719 123 262\n931"))
 
@@ -170,6 +172,6 @@ expect_warning(expect_identical(
 
 
 #### Remove objects used in tests ####
-rm(expect_x_early, width, blank_x_single, nchar_x,
-   warn_too_long, x, x_last, x_multiple, x_multiple_early,
-   x_nonspace_blanks, x_single, x_text, x_text_nospace)
+rm(expect_x_early, width, nchar_x, warn_too_long, x, x_last, x_multiple,
+   x_multiple_early, x_nonspace_blanks, x_single, x_single_blank, x_text,
+   x_text_nospace)
