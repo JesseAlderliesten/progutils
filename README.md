@@ -17,6 +17,10 @@ if(!requireNamespace("remotes")) {
 remotes::install_github("JesseAlderliesten/progutils")
 ```
 
+For information about installing and configuring R and RStudio, or about
+setting up and using Git and GitHub, see my [repository
+‘InstallPkgs’](https://github.com/JesseAlderliesten/InstallPkgs).
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
