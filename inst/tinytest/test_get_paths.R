@@ -3,54 +3,56 @@ current_R <- as.character(getRversion())
 string_R <- paste0("R-", current_R)
 old_R <- paste(as.integer(R.version$major) - 1L, R.version$minor, sep = ".")
 
-paths_test <- c(
+paths <- c(
   xyz_current = paste0("C:/Program Files/R/R-", current_R, "/library"),
-  xyz_old = paste0("C:/Program Files/R/R-", old_R, ", /library"),
   xy_current = paste0("C:/Users/Eigenaar/AppData/Local/R/win-library/",
                       substr(x = current_R, start = 1, stop = 3)),
+  xyz_old = paste0("C:/Program Files/R/R-", old_R, "/library"),
   xy_old = paste0("C:/Users/Eigenaar/AppData/Local/R/win-library/",
                   substr(x = old_R, start = 1, stop = 3)))
+paths_alt <- c(no_R = "ab", empty = "", "NA" = NA_character_)
 
 
 #### Test the examples ####
-expect_true(all(.libPaths() %in% get_paths()))
-expect_true(all(get_paths() %in% .libPaths()))
+expect_true(all(.libPaths() %in% get_paths(paths = .libPaths())))
+expect_true(all(get_paths(paths = .libPaths()) %in% .libPaths()))
 
 
 #### Tests ####
-paths_in <- paths_test[1:4]
-bool_Rversion <- grepl(pattern = string_R, x = paths_in, fixed = TRUE)
-expect_equal(c(paths_in[bool_Rversion], paths_in[!bool_Rversion]),
-             paths_test[1:4])
+expect_silent(
+  expect_equal(get_paths(paths = paths[1:4]), paths)
+)
+expect_silent(
+  expect_equal(get_paths(paths = paths[c(3:4, 1:2)]), paths)
+)
+expect_silent(
+  expect_equal(get_paths(paths = paths[4:1]), paths[c(2:1, 4:3)])
+)
 
-paths_in <- paths_test[4:1]
-bool_Rversion <- grepl(pattern = string_R, x = paths_in, fixed = TRUE)
-expect_equal(c(paths_in[bool_Rversion], paths_in[!bool_Rversion]),
-             paths_test[c(1, 4:2)])
+expect_silent(
+  expect_equal(get_paths(paths = c(paths_alt, paths[c(2:1)])),
+               c(paths[2:1], paths_alt))
+)
 
-paths_in <- paths_test[c(3, 4, 1, 2)]
-bool_Rversion <- grepl(pattern = string_R, x = paths_in, fixed = TRUE)
-expect_equal(c(paths_in[bool_Rversion], paths_in[!bool_Rversion]),
-             paths_test[c(1, 3, 4, 2)])
+expect_silent(
+  expect_equal(get_paths(paths = c(paths_alt, paths[2])), c(paths[2], paths_alt))
+)
 
-paths_in <- c(ok = "ab", empty = "", "NA" = NA_character_, paths_test[c(2:1)])
-bool_Rversion <- grepl(pattern = string_R, x = paths_in, fixed = TRUE)
-expect_equal(bool_Rversion, c(rep(FALSE, 4L), TRUE))
-expect_equal(c(paths_in[bool_Rversion], paths_in[!bool_Rversion]),
-             c(paths_in[5], paths_in[1:4]))
+expect_silent(
+  expect_equal(get_paths(paths = rep(paths[1], 2L)), rep(paths[1], 2L))
+)
 
-paths_in <- c(ok = "ab", empty = "", "NA" = NA_character_, paths_test[2])
-bool_Rversion <- grepl(pattern = string_R, x = paths_in, fixed = TRUE)
-expect_equal(bool_Rversion, c(rep(FALSE, 4L)))
-expect_equal(c(paths_in[bool_Rversion], paths_in[!bool_Rversion]),
-             paths_in)
+expect_warning(
+  expect_equal(get_paths(paths = c("", "")), c("", "")),
+  pattern = "'.libPaths()' did not return any non-empty paths",
+  strict = TRUE, fixed = TRUE)
 
-paths_in <- rep(paths_test[1], 2L)
-bool_Rversion <- grepl(pattern = string_R, x = paths_in, fixed = TRUE)
-expect_equal(bool_Rversion, c(rep(TRUE, 2L)))
-expect_equal(c(paths_in[bool_Rversion], paths_in[!bool_Rversion]),
-             paths_in)
+expect_warning(
+  expect_equal(get_paths(paths = paths_alt), paths_alt),
+  pattern = paste0("The currently used R version (4.5.2) is not present as",
+                   " directory 'R-4.5.2' or\n'4.5' in any of the retrieved paths"),
+  strict = TRUE, fixed = TRUE)
 
 
 #### Remove objects used in tests ####
-rm(bool_Rversion, current_R, old_R, paths_in, paths_test, string_R)
+rm(current_R, old_R, paths, paths_alt, string_R)
