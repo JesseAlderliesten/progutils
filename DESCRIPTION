@@ -11,7 +11,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
     checkinput (>= 0.0.5),
-    methods
+    methods,
+    utils
 Remotes: github::JesseAlderliesten/checkinput
 Suggests:
     tinytest
