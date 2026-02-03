@@ -9,16 +9,11 @@
 #'
 #' @returns A vector with logical values (`TRUE`, `FALSE` or `NA`) indicating if
 #' elements in `x` and `y` are equal to each other. [NA] is returned for
-#' comparisons involving numeric `NA`s (i.e., `NA_integer_` and `NA_real_`) or
-#' [NaN]s and for comparisons of [infinite values][Inf] with the same sign.
+#' comparisons involving numeric `NA`s (i.e., `NA_integer_` and `NA_real_`),
+#' [NaN]s, or [infinite values][Inf] with the same sign.
 #'
 #' @section Acknowledgement:
 #' Code `abs(x - y) < tol` was taken from `dplyr::near()`.
-#'
-#' @section Programming note:
-#' Legacy code contained `near_adj()`, a more-elaborate version of `are_equal()`
-#' that also worked on [data.frame]s and [matrices][matrix()] (with checks for
-#' compatible [dimensions][dim()]) and contained optional type conversion.
 #'
 #' @seealso
 #' [all.equal()] to check more generally for near-equality; [identical()] to

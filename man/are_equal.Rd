@@ -15,8 +15,8 @@ differ less in value than \code{tol} are considered to be equal.}
 \value{
 A vector with logical values (\code{TRUE}, \code{FALSE} or \code{NA}) indicating if
 elements in \code{x} and \code{y} are equal to each other. \link{NA} is returned for
-comparisons involving numeric \code{NA}s (i.e., \code{NA_integer_} and \code{NA_real_}) or
-\link{NaN}s and for comparisons of \link[=Inf]{infinite values} with the same sign.
+comparisons involving numeric \code{NA}s (i.e., \code{NA_integer_} and \code{NA_real_}),
+\link{NaN}s, or \link[=Inf]{infinite values} with the same sign.
 }
 \description{
 Test element-wise near-equality of numeric vectors by allowing for small
@@ -25,13 +25,6 @@ numeric errors to make \code{are_equal()} safer than \link[=Comparison]{==}.
 \section{Acknowledgement}{
 
 Code \code{abs(x - y) < tol} was taken from \code{dplyr::near()}.
-}
-
-\section{Programming note}{
-
-Legacy code contained \code{near_adj()}, a more-elaborate version of \code{are_equal()}
-that also worked on \link{data.frame}s and \link[=matrix]{matrices} (with checks for
-compatible \link[=dim]{dimensions}) and contained optional type conversion.
 }
 
 \examples{
