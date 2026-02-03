@@ -1,38 +1,25 @@
-#' Concatenate a character vector to a single string of quoted elements.
+#' Concatenate x to a string with quoted elements.
 #'
-#' Concatenate a character vector to a single string of quoted elements,
-#' returning `NULL` as `"'NULL'"` and other zero-length objects as
-#' `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
+#' Concatenate a vector to a string with quoted elements, returning `NULL` as
+#' `"'NULL'"` and other zero-length objects as `"'<class>(0)'"`, e.g.,
+#' `"'logical(0)'"`.
 #'
-#' @param x Character vector to be converted to a single character string.
+#' @param x Vector to be converted to a character string.
 #'
-#' @returns A character string consisting of the elements of `x` surrounded by
-#' single quotes, separated by commas.
-#'
-#' @section To do:
-#' Can replace the first part of this function by vect_to_char()?
-#'
-#' See also [dQuote()], [sQuote()] and [Quotes()]; testdat::as_english_list() at
-#' https://github.com/socialresearchcentre/testdat/blob/master/R/utils.R
-#'
-#' @section Wishlist:
-#' Add argument `use_names = c("numeric", "all", "none")` to implement
-#' preserving names, e.g., using
-#' `paste(names(x), x, sep = ": ", collapse = ", ")` (used in [vect_to_char()])
-#' or `paste0("'", paste(names(x), x, sep = ": ", collapse = "', '"), "'")`.
+#' @returns
+#' A character string consisting of the elements of `x` surrounded by single
+#' quotes, separated by commas. `NULL` is returned as `"'NULL'"`, other
+#' zero-length objects are returned as `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
 #'
 #' @note
-#' `NULL` is returned as `"'NULL'"` and other zero-length objects are returned
-#' as `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
-#'
 #' An error occurs if multiple arguments are provided because then `x` probably
 #' was accidentally not [combined][c()]. For example, the call
 #' `paste_quoted("a", "b")` will return the error `unused argument ("b")`. The
 #' probably intended call is `paste_quoted(c("a", "b"))`, returning `"'a', 'b'"`.
 #'
 #' @seealso
-#' [paste0()] that is used by this function; [toString()] which can be used
-#' instead of `paste(x, collapse = ", ")`
+#' [sQuote()]; [toString()] which can be used instead of
+#' `paste(x, collapse = ", ")`; [paste0()].
 #' @family functions to modify character vectors
 #'
 #' @examples
@@ -61,5 +48,6 @@ paste_quoted <- function(x) {
     x <- paste0(class(x), "(0)")
   }
 
+  # Same as paste0(sQuote(x, q = FALSE), collapse = ", ") but much faster
   paste0("'", paste(x, collapse = "', '"), "'")
 }
