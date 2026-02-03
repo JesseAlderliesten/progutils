@@ -4,7 +4,7 @@
 \alias{vect_to_char}
 \title{Convert a vector to a character string}
 \usage{
-vect_to_char(x, signif = 3L, sep = ": ", collapse = ", ", width = Inf)
+vect_to_char(x, signif = 3L, width = Inf, sep = ": ", collapse = ", ")
 }
 \arguments{
 \item{x}{A vector, \link{factor}, non-dataframe \link{list}, or \code{NULL}.}
@@ -12,57 +12,37 @@ vect_to_char(x, signif = 3L, sep = ": ", collapse = ", ", width = Inf)
 \item{signif}{Positive number of length one, rounded to the nearest positive
 integer indicating the number of significant digits to round numeric \code{x} to.}
 
+\item{width}{A positive number giving the maximum line width (in characters)
+after wrapping. Can be \code{Inf} to not wrap text.}
+
 \item{sep}{Character string of length one used to separate the names and the
-values. Not used if \code{x} does not have names.}
+values. Ignored if \code{x} does not have names.}
 
 \item{collapse}{Character string of length one to collapse values into a
 single character string, or \code{NULL} to return each value as an element of a
 character vector.}
-
-\item{width}{A positive number (rounded to a whole number) giving the maximum
-line width (in characters) after wrapping. Can be \code{Inf} to not wrap text.}
 }
 \value{
-A character string containing the names and rounded values in \code{x}, separating
-name-value pairs by \code{collapse}. If \code{collapse} is \code{NULL}, a character \emph{vector}
-with the same elements as \code{x} is returned. The output is wrapped to \code{width}
-characters.
-}
-\description{
-Convert a vector to a character string, preserving names, rounding numeric
-values, returning \code{NULL} as \code{"'NULL'"} and returning other zero-length
-objects as \code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
-}
-\details{
-Numeric \code{x} is rounded to \code{signif} digits.
+The names and values in \code{x}, with values of numeric \code{x} rounded to \code{signif}
+\link[=signif]{significant} digits, wrapped to \code{width} characters.
+
+If \code{collapse} is \code{NULL}, a character \emph{vector} with the same elements as \code{x}
+is returned, wrapping on a per-element basis. If \code{collapse} is not \code{NULL},
+the name-value pairs are separated by \code{collapse}, thus returning a character
+\emph{string}.
 
 \code{NULL} is returned as \code{"'NULL'"}, other zero-length objects are returned as
 \code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
-
-The output is wrapped to \code{width} characters if \code{width} is not \code{NULL}. This
-occurs on a per-element basis if a character vector is returned because
-\code{collapse} is \code{NULL}.
 }
-\section{Wishlist}{
-
-Write a similar function for dataframes or matrices, with the name of the
-relevant columns only once.
-
-Implement customized rounding using \code{signif_custom()}, e.g.,
-\code{x <- signif_custom(x = x, digits = signif, type = type)}.
-
-See also:
-\itemize{
-\item wrMisc::convToNum()
-\item num_as_char() in https://github.com/hneth/ds4psy/blob/master/R/num_util_fun.R
-\item drop_sci_note() in https://github.com/trinker/textclean/blob/master/R/utils.R
+\description{
+Convert a vector to a character string, preserving names, rounding numeric
+values, returning \code{NULL} as \code{"'NULL'"} and other zero-length objects as
+\code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
 }
-}
-
 \section{Programming note}{
 
-To get a cross-tabulation of \code{x} into a character string, one could use
-\code{paste0(vect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")},
+To get a cross-tabulation of \code{x} into a character string, one can use
+\code{paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")},
 see the last \code{Example}.
 }
 
@@ -86,8 +66,8 @@ x <- 1:10
 names(x) <- letters[x]
 y <- 5:15
 names(y) <- letters[y]
-z <- c(x, y)
-paste0(vect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")
+x <- c(x, y)
+paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")
 
 }
 \seealso{

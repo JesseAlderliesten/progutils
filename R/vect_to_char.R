@@ -1,50 +1,34 @@
 #' Convert a vector to a character string
 #'
 #' Convert a vector to a character string, preserving names, rounding numeric
-#' values, returning `NULL` as `"'NULL'"` and returning other zero-length
-#' objects as `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
+#' values, returning `NULL` as `"'NULL'"` and other zero-length objects as
+#' `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
 #'
 #' @param x A vector, [factor], non-dataframe [list], or `NULL`.
 #' @param signif Positive number of length one, rounded to the nearest positive
 #' integer indicating the number of significant digits to round numeric `x` to.
 #' @param sep Character string of length one used to separate the names and the
-#' values. Not used if `x` does not have names.
+#' values. Ignored if `x` does not have names.
 #' @param collapse Character string of length one to collapse values into a
 #' single character string, or `NULL` to return each value as an element of a
 #' character vector.
 #' @inheritParams wrap_text
 #'
-#' @details
-#' Numeric `x` is rounded to `signif` digits.
+#' @returns
+#' The names and values in `x`, with values of numeric `x` rounded to `signif`
+#' [significant][signif()] digits, wrapped to `width` characters.
+#'
+#' If `collapse` is `NULL`, a character *vector* with the same elements as `x`
+#' is returned, wrapping on a per-element basis. If `collapse` is not `NULL`,
+#' the name-value pairs are separated by `collapse`, thus returning a character
+#' *string*.
 #'
 #' `NULL` is returned as `"'NULL'"`, other zero-length objects are returned as
 #' `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
 #'
-#' The output is wrapped to `width` characters if `width` is not `NULL`. This
-#' occurs on a per-element basis if a character vector is returned because
-#' `collapse` is `NULL`.
-#'
-#' @returns
-#' A character string containing the names and rounded values in `x`, separating
-#' name-value pairs by `collapse`. If `collapse` is `NULL`, a character *vector*
-#' with the same elements as `x` is returned. The output is wrapped to `width`
-#' characters.
-#'
-#' @section Wishlist:
-#' Write a similar function for dataframes or matrices, with the name of the
-#' relevant columns only once.
-#'
-#' Implement customized rounding using `signif_custom()`, e.g.,
-#' `x <- signif_custom(x = x, digits = signif, type = type)`.
-#'
-#' See also:
-#' - wrMisc::convToNum()
-#' - num_as_char() in https://github.com/hneth/ds4psy/blob/master/R/num_util_fun.R
-#' - drop_sci_note() in https://github.com/trinker/textclean/blob/master/R/utils.R
-#'
 #' @section Programming note:
-#' To get a cross-tabulation of `x` into a character string, one could use
-#' `paste0(vect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")`,
+#' To get a cross-tabulation of `x` into a character string, one can use
+#' `paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")`,
 #' see the last `Example`.
 #'
 #' @seealso [toString()] which can be used if names of `x` can be removed.
@@ -70,15 +54,15 @@
 #' names(x) <- letters[x]
 #' y <- 5:15
 #' names(y) <- letters[y]
-#' z <- c(x, y)
-#' paste0(vect_to_char(c(table(z)), sep = " (", collapse =  "), "), ")")
+#' x <- c(x, y)
+#' paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")
 #'
 #' @export
-vect_to_char <- function(x, signif = 3L, sep = ": ", collapse = ", ",
-                         width = Inf) {
-  stopifnot(checkinput::is_positive(signif), checkinput::is_character(sep),
-            is.null(collapse) || checkinput::is_character(collapse),
-            checkinput::is_positive(width))
+vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
+                         collapse = ", ") {
+  stopifnot(checkinput::is_positive(signif), checkinput::is_positive(width),
+            checkinput::is_character(sep),
+            is.null(collapse) || checkinput::is_character(collapse))
 
   if(is.list(x) && !is.data.frame(x)) {
     x <- unlist(x, use.names = TRUE)
