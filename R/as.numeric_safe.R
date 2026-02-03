@@ -1,12 +1,13 @@
 #' Convert x to numeric
 #'
-#' Convert x to a numeric vector in a way that works irrespective if `x` is a
-#' factor, a character vector, or already a numeric vector.
+#' Convert `x` to a vector with [numeric][as.numeric()] [mode] in a way that
+#' works irrespective if `x` is a [factor], a character vector, or already a
+#' numeric vector.
 #'
 #' @param x A factor, or a character or numeric vector to be converted to a
 #' numeric vector.
 #'
-#' @returns A numeric vector.
+#' @returns A numeric vector, possibly `numeric(0)` or containing `NA_real_`.
 #'
 #' @details
 #' `as.numeric_safe()` uses a suggestion from [factor()] and
@@ -16,24 +17,26 @@
 #' `as.numeric` comments that this approach is less efficient for long vectors).
 #'
 #' In contrast, the alternative conversions `as.numeric(levels(x))[x]` (suggested
-#' in the `Warning` of `factor()`) and `as.numeric(levels(x))[as.integer(x)]`
-#' (suggested in \R `FAQ 7.10`) *only* work if `x` is factor, see the `Examples`.
+#' in the `Warning` of [factor()]) and `as.numeric(levels(x))[as.integer(x)]`
+#' (suggested in \R `FAQ 7.10` linked to above) *only* work if `x` is factor,
+#' see the `Examples`.
 #'
 #' Furthermore, `as.numeric()` *cannot* be used to convert a factor to numeric,
 #' because it returns their underlying numeric integer representation (i.e., the
 #' indices of the factor levels), see the `Warnings` in [as.numeric()] and
 #' [factor()].
 #'
-#' @section Wishlist:
-#' Could add argument `keep_integer` indicating if input of type [integer()]
-#' should be returned as-is, i.e., without converting to numeric type.
+#' `as.numeric_safe()` changes the [type][typeof] of [integers][integer()] from
+#' `integer` to `double`, even though integers already have [mode]
+#' [numeric][as.numeric()].
 #'
 #' @note
-#' NULL and zero-length vectors are converted to numeric(0). Logical vectors of
-#' length > 0 are converted to a vector of numerical NAs (i.e., `NA_real_`),
-#' with a warning.
+#' `NULL` and zero-length vectors are converted to `numeric(0)`. Logical vectors
+#' of length larger than zero are converted to a vector of `NA_real_`, with a
+#' warning.
 #'
-#' @seealso [are_numerish()] to check that `x` represents a number.
+#' @seealso [utils::type.convert()]; [formatC()] and [option][options()]
+#' `scipen` on formatting numbers.
 #' @family functions to modify character vectors
 #' @family functions to modify factors
 #'

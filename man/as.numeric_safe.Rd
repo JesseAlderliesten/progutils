@@ -11,11 +11,12 @@ as.numeric_safe(x)
 numeric vector.}
 }
 \value{
-A numeric vector.
+A numeric vector, possibly \code{numeric(0)} or containing \code{NA_real_}.
 }
 \description{
-Convert x to a numeric vector in a way that works irrespective if \code{x} is a
-factor, a character vector, or already a numeric vector.
+Convert \code{x} to a vector with \link[=as.numeric]{numeric} \link{mode} in a way that
+works irrespective if \code{x} is a \link{factor}, a character vector, or already a
+numeric vector.
 }
 \details{
 \code{as.numeric_safe()} uses a suggestion from \code{\link[=factor]{factor()}} and
@@ -25,25 +26,24 @@ or already is a numeric vector (even though though the last example of
 \code{as.numeric} comments that this approach is less efficient for long vectors).
 
 In contrast, the alternative conversions \code{as.numeric(levels(x))[x]} (suggested
-in the \code{Warning} of \code{factor()}) and \code{as.numeric(levels(x))[as.integer(x)]}
-(suggested in \R \verb{FAQ 7.10}) \emph{only} work if \code{x} is factor, see the \code{Examples}.
+in the \code{Warning} of \code{\link[=factor]{factor()}}) and \code{as.numeric(levels(x))[as.integer(x)]}
+(suggested in \R \verb{FAQ 7.10} linked to above) \emph{only} work if \code{x} is factor,
+see the \code{Examples}.
 
 Furthermore, \code{as.numeric()} \emph{cannot} be used to convert a factor to numeric,
 because it returns their underlying numeric integer representation (i.e., the
 indices of the factor levels), see the \code{Warnings} in \code{\link[=as.numeric]{as.numeric()}} and
 \code{\link[=factor]{factor()}}.
+
+\code{as.numeric_safe()} changes the \link[=typeof]{type} of \link[=integer]{integers} from
+\code{integer} to \code{double}, even though integers already have \link{mode}
+\link[=as.numeric]{numeric}.
 }
 \note{
-NULL and zero-length vectors are converted to numeric(0). Logical vectors of
-length > 0 are converted to a vector of numerical NAs (i.e., \code{NA_real_}),
-with a warning.
+\code{NULL} and zero-length vectors are converted to \code{numeric(0)}. Logical vectors
+of length larger than zero are converted to a vector of \code{NA_real_}, with a
+warning.
 }
-\section{Wishlist}{
-
-Could add argument \code{keep_integer} indicating if input of type \code{\link[=integer]{integer()}}
-should be returned as-is, i.e., without converting to numeric type.
-}
-
 \examples{
 x_int <- 5:7
 x_num <- as.numeric(x_int)
@@ -81,7 +81,8 @@ str_as_num_base(x_fact) # num [1:3] 1 2 3 # wrong!
 
 }
 \seealso{
-\code{\link[=are_numerish]{are_numerish()}} to check that \code{x} represents a number.
+\code{\link[utils:type.convert]{utils::type.convert()}}; \code{\link[=formatC]{formatC()}} and \link[=options]{option}
+\code{scipen} on formatting numbers.
 
 Other functions to modify character vectors: 
 \code{\link{paste_quoted}()},
