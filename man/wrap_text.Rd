@@ -9,28 +9,32 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE)
 \arguments{
 \item{x}{Character vector to be wrapped.}
 
-\item{width}{A positive number (rounded to a whole number) giving the maximum
-line width (in characters) after wrapping. Can be \code{Inf} to not wrap text.}
+\item{width}{A positive number giving the maximum line width (in characters)
+after wrapping. Can be \code{Inf} to not wrap text.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
-by a space character? If \code{FALSE}, newlines are respected, although a newline
-at the end of \code{x} is always removed.}
+by a blank character? Newlines at the end of \code{x} are always removed.}
 }
 \value{
-\code{x} with newlines inserted at blank characters to wrap \code{x} to
-a maximum of \code{width} characters. \code{x} of length larger than one is pasted into
-a single string, separating the parts by spaces. Consecutive white space in
-\code{x} is collapsed into a single blank character, except for double spaces
-after periods, question marks and exclamation marks (as documented in the
-section \code{Details} of \code{\link[=strwrap]{strwrap()}}). Leading white space in \code{x} is completely
-removed.
+A string containing \code{x} wrapped to a maximum of \code{width} characters, with
+newlines inserted at blank characters. A warning is issued if the width of a
+fragment in the output exceeds \code{width}: this occurs if a stretch of
+characters longer than \code{width} occurs without a blank character to wrap at.
 }
 \description{
 Wrap text at blank characters to achieve a maximum line width.
 }
-\note{
-A warning is issued if the width of a fragment in the output exceeds \code{width}.
+\details{
+\code{x} of length larger than one is pasted into a single string, separating the
+parts by blank characters.
 
+Leading white space in \code{x} is completely removed.
+
+Consecutive white space in \code{x} is collapsed into a single blank character,
+except for double spaces after periods, question marks and exclamation marks
+(as documented in the section \code{Details} of \code{\link[=strwrap]{strwrap()}}).
+}
+\note{
 The output is printed as a string with newlines represented as \verb{\\n}. Use
 \code{\link[=cat]{cat()}} on the output to print it in the way it is formatted in messages.
 
@@ -47,14 +51,15 @@ The call \code{wrap_text(x, width)} can be replaced by
 }
 
 \examples{
-cat(wrap_text("A piece\nof text that you want to wrap over multiple lines",
+example_text <- "A piece\nof text that you want to wrap over multiple lines"
+cat(wrap_text(example_text,
               width = 20, ignore_newlines = TRUE))
-cat(wrap_text("A piece\nof text that you want to wrap over multiple lines",
+cat(wrap_text(example_text,
               width = 20, ignore_newlines = FALSE))
 
 }
 \seealso{
-\code{\link[=cat]{cat()}} \code{\link[=paste]{paste()}} \code{\link[=strwrap]{strwrap()}}
+\code{\link[=cat]{cat()}}; \code{\link[=paste]{paste()}}; \code{\link[=strwrap]{strwrap()}}; \code{bbmle:::strwrapx()}.
 
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},

@@ -3,19 +3,26 @@
 #' Wrap text at blank characters to achieve a maximum line width.
 #'
 #' @param x Character vector to be wrapped.
-#' @param width A positive number (rounded to a whole number) giving the maximum
-#' line width (in characters) after wrapping. Can be `Inf` to not wrap text.
+#' @param width A positive number giving the maximum line width (in characters)
+#' after wrapping. Can be `Inf` to not wrap text.
 #' @param ignore_newlines `TRUE` or `FALSE`: should newlines in `x` be replaced
-#' by a space character? If `FALSE`, newlines are respected, although a newline
-#' at the end of `x` is always removed.
+#' by a blank character? Newlines at the end of `x` are always removed.
 #'
-#' @returns `x` with newlines inserted at blank characters to wrap `x` to
-#' a maximum of `width` characters. `x` of length larger than one is pasted into
-#' a single string, separating the parts by spaces. Consecutive white space in
-#' `x` is collapsed into a single blank character, except for double spaces
-#' after periods, question marks and exclamation marks (as documented in the
-#' section `Details` of [strwrap()]). Leading white space in `x` is completely
-#' removed.
+#' @details
+#' `x` of length larger than one is pasted into a single string, separating the
+#' parts by blank characters.
+#'
+#' Leading white space in `x` is completely removed.
+#'
+#' Consecutive white space in `x` is collapsed into a single blank character,
+#' except for double spaces after periods, question marks and exclamation marks
+#' (as documented in the section `Details` of [strwrap()]).
+#'
+#' @returns
+#' A string containing `x` wrapped to a maximum of `width` characters, with
+#' newlines inserted at blank characters. A warning is issued if the width of a
+#' fragment in the output exceeds `width`: this occurs if a stretch of
+#' characters longer than `width` occurs without a blank character to wrap at.
 #'
 #' @section Programming note:
 #' The call `wrap_text(x, width)` can be replaced by
@@ -23,8 +30,6 @@
 #' `ignore_newlines` is `TRUE`.
 #'
 #' @note
-#' A warning is issued if the width of a fragment in the output exceeds `width`.
-#'
 #' The output is printed as a string with newlines represented as `\n`. Use
 #' [cat()] on the output to print it in the way it is formatted in messages.
 #'
@@ -33,13 +38,14 @@
 #' argument `width` in [strwrap()] indicates the width *at* which text should be
 #' wrapped.
 #'
-#' @seealso [cat()] [paste()] [strwrap()]
+#' @seealso [cat()]; [paste()]; [strwrap()]; `bbmle:::strwrapx()`.
 #' @family functions to modify character vectors
 #'
 #' @examples
-#' cat(wrap_text("A piece\nof text that you want to wrap over multiple lines",
+#' example_text <- "A piece\nof text that you want to wrap over multiple lines"
+#' cat(wrap_text(example_text,
 #'               width = 20, ignore_newlines = TRUE))
-#' cat(wrap_text("A piece\nof text that you want to wrap over multiple lines",
+#' cat(wrap_text(example_text,
 #'               width = 20, ignore_newlines = FALSE))
 #'
 #' @export
@@ -50,8 +56,8 @@ wrap_text <- function(x, width = 80L, ignore_newlines = TRUE) {
   if(length(x) > 1L) {
     x <- paste0(x, collapse = " ")
   }
-  # round(Inf) is Inf, whereas as.integer(Inf) is NA.
-  width <- round(x = width, digits = 0)
+  # floor(Inf) is Inf, whereas as.integer(Inf) is NA.
+  width <- floor(x = width)
   if(!ignore_newlines) {
     x <- strsplit(x = x, split = "\n")[[1]]
   }
