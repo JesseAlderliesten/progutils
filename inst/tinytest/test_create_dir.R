@@ -24,24 +24,20 @@
 
 #### Test the examples ####
 my_tempdir <- tempdir()
-expect_message(res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
-                                         add_date = FALSE),
-               pattern = "Created directory", strict = TRUE, fixed = TRUE)
+expect_silent(res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+                                         add_date = FALSE))
 expect_true(dir.exists(res_dir_one))
 
-expect_message(res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
-                             add_date = FALSE),
-               pattern = "already exists", strict = TRUE, fixed = TRUE)
+expect_silent(res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+                             add_date = FALSE))
 expect_identical(res_dir_one, res_dir_one_v2)
 
-expect_message(res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
-                            add_date = FALSE),
-               pattern = "already exists", strict = TRUE, fixed = TRUE)
+expect_silent(res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
+                            add_date = FALSE))
 expect_identical(res_dir_one, res_dir_one_v3)
 
-expect_message(res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
-                          add_date = TRUE),
-               pattern = "Created directory", strict = TRUE, fixed = TRUE)
+expect_silent(res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
+                          add_date = TRUE))
 expect_true(dir.exists(res_dir_two))
 
 # Cleaning up
@@ -61,19 +57,17 @@ dir <- file.path(my_tempdir, "temp_subdirF_dateF")
 expected_path <- dir
 
 expect_silent(expect_false(dir.exists(expected_path)))
-expect_message(
+expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = FALSE),
-    normalizePath(expected_path, mustWork = FALSE)),
-  pattern = "Created directory", strict = TRUE, fixed = TRUE)
+    normalizePath(expected_path, mustWork = FALSE)))
 expect_true(dir.exists(expected_path))
 
 # 1b without date directory, directory already exists
-expect_message(
+expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = FALSE),
-    normalizePath(expected_path, mustWork = FALSE)),
-  pattern = "already exists", strict = TRUE, fixed = TRUE)
+    normalizePath(expected_path, mustWork = FALSE)))
 if(expect_true(dir.exists(expected_path))) {
   expect_equal(unlink(x = expected_path, recursive = TRUE), 0,
                info = "Check if removing temporary directories was successful")
@@ -84,26 +78,23 @@ dir <- file.path(my_tempdir, "temp_subdirF_dateT")
 expected_path <- file.path(dir, format(Sys.time(), format = "%Y_%m_%d"))
 
 expect_false(dir.exists(expected_path))
-expect_message(
+expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)),
-  pattern = "Created directory", strict = TRUE, fixed = TRUE)
+    normalizePath(expected_path, mustWork = FALSE)))
 expect_true(dir.exists(expected_path))
 
 # 2b with date directory, directory already exists
-expect_message(
+expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)),
-  pattern = "already exists", strict = TRUE, fixed = TRUE)
+    normalizePath(expected_path, mustWork = FALSE)))
 
 # Also recognise that a directory already exists if it has subdirectories
-expect_message(
+expect_silent(
   expect_identical(
     create_dir(dir = dir),
-    normalizePath(expected_path, mustWork = FALSE)),
-  pattern = "already exists", strict = TRUE, fixed = TRUE)
+    normalizePath(expected_path, mustWork = FALSE)))
 if(expect_true(dir.exists(expected_path))) {
   expect_equal(
     unlink(x = dirname(expected_path), recursive = TRUE), 0,
@@ -115,19 +106,17 @@ dir <- file.path(my_tempdir, "temp_subdirT_dateT")
 expected_path <- file.path(dir, "subdir", format(Sys.time(), format = "%Y_%m_%d"))
 
 expect_false(dir.exists(expected_path))
-expect_message(
+expect_silent(
   expect_identical(
     create_dir(dir = file.path(dir, "subdir"), add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)),
-  pattern = "Created directory", strict = TRUE, fixed = TRUE)
+    normalizePath(expected_path, mustWork = FALSE)))
 expect_true(dir.exists(expected_path))
 
 # 3b with subdirectories, with date directory, directory already exists
-expect_message(
+expect_silent(
   expect_identical(
     create_dir(dir = file.path(dir, "subdir"), add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)),
-  pattern = "already exists", strict = TRUE, fixed = TRUE)
+    normalizePath(expected_path, mustWork = FALSE)))
 if(expect_true(dir.exists(expected_path))) {
   expect_equal(
     unlink(x = dirname(dirname(expected_path)), recursive = TRUE),
@@ -140,11 +129,10 @@ expected_path <- paste0(dir, .Platform$file.sep,
                         format(Sys.time(), format = "%Y_%m_%d"))
 
 expect_false(dir.exists(expected_path))
-expect_message(
+expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)),
-  pattern = "Created directory", strict = TRUE, fixed = TRUE)
+    normalizePath(expected_path, mustWork = FALSE)))
 if(expect_true(dir.exists(file.path(expected_path)))) {
   expect_equal(unlink(x = expected_path, recursive = TRUE), 0,
                info = "Check if removing temporary directories was successful")
@@ -216,17 +204,10 @@ for(add_date in list(3, NA)) {
     pattern = "is_logical(add_date) is not TRUE", fixed = TRUE)
 }
 
-# 7 Checks on input to 'quietly'
-for(quietly in list(3, NA)) {
-  expect_error(
-    create_dir(dir = my_tempdir, quietly = quietly),
-    pattern = "is_logical(quietly) is not TRUE", fixed = TRUE)
-}
-
 
 #### Delete the created temporary files ####
 unlink(my_tempfile, recursive = TRUE)
 
 
 #### Remove objects used in tests ####
-rm(add_date, dir, expected_path, my_tempdir, my_tempfile, quietly)
+rm(add_date, dir, expected_path, my_tempdir, my_tempfile)

@@ -5,8 +5,6 @@
 #' @param dir Non-empty character string containing the path to a directory.
 #' @param add_date `TRUE` or `FALSE`: create a subdirectory with the current
 #' date (format: `YYYY_MM_DD`)?
-#' @param quietly `TRUE` or `FALSE`: suppress the message indicating which
-#' directory was created?
 #'
 #' @details
 #' Using [file.path()] ensures the correct (platform-dependent) file separator
@@ -51,8 +49,7 @@
 #' dir.exists(res_dir_one) # TRUE
 #'
 #' # An attempt to create a directory that already exists does not change any
-#' # directory and the same directory is returned. However, the message now
-#' # indicates the directory already exists.
+#' # directory and the same directory is returned.
 #' res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
 #'                              add_date = FALSE)
 #' identical(res_dir_one, res_dir_one_v2) # TRUE
@@ -73,8 +70,7 @@
 #' rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
 #'
 #' @export
-create_dir <- function(dir = file.path(".", "output"), add_date = TRUE,
-                       quietly = FALSE) {
+create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
   # See 'Details' about the restrictions imposed on 'dir'.
   stopifnot(checkinput::is_character(dir),
             "'dir' should not end with '/'" =
@@ -88,7 +84,7 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE,
               substring(text = dir, first = nchar(dir)) != " ",
             "'dir' should not contain any of the following characters: \" * ? | < >" =
               !grepl(pattern = '[<>"|?*]', x = dir),
-            checkinput::is_logical(add_date), checkinput::is_logical(quietly))
+            checkinput::is_logical(add_date))
 
   if(add_date) {
     dir <- file.path(dir, format(Sys.time(), format = "%Y_%m_%d"))
@@ -97,11 +93,7 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE,
   dir <- normalizePath(dir, mustWork = FALSE)
 
   # dir.exists() returns FALSE if 'dir' is a file instead of a directory.
-  if(dir.exists(dir)) {
-    if(!quietly) {
-      message("Directory '", dir, "' already exists.")
-    }
-  } else {
+  if(!dir.exists(dir)) {
     # Notes:
     # - This branch is only used if the directory did not yet exist, so it is
     #   not a problem that dir.create() returns FALSE if a directory already
@@ -109,11 +101,7 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE,
     # - Using 'recursive = TRUE' to allow creation of subdirectories inside a
     #   not-yet existing directory (e.g., creating './output/<date>' if
     #   './output' does not yet exist).
-    if(dir.create(path = dir, recursive = TRUE, showWarnings = FALSE)) {
-      if(!quietly) {
-        message("Created directory '", dir, "'.")
-      }
-    } else {
+    if(!dir.create(path = dir, recursive = TRUE, showWarnings = FALSE)) {
       warning(wrap_text(paste0(
         "Attempt to create directory '", dir, "' failed",
         "!\nReturning the working directory ('", getwd(), "') instead.")))

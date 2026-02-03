@@ -4,16 +4,13 @@
 \alias{create_dir}
 \title{Create a directory}
 \usage{
-create_dir(dir = file.path(".", "output"), add_date = TRUE, quietly = FALSE)
+create_dir(dir = file.path(".", "output"), add_date = TRUE)
 }
 \arguments{
 \item{dir}{Non-empty character string containing the path to a directory.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
 date (format: \code{YYYY_MM_DD})?}
-
-\item{quietly}{\code{TRUE} or \code{FALSE}: suppress the message indicating which
-directory was created?}
 }
 \value{
 A character string with the \link[=normalizePath]{normalized} path to the
@@ -51,8 +48,7 @@ res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
 dir.exists(res_dir_one) # TRUE
 
 # An attempt to create a directory that already exists does not change any
-# directory and the same directory is returned. However, the message now
-# indicates the directory already exists.
+# directory and the same directory is returned.
 res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
                              add_date = FALSE)
 identical(res_dir_one, res_dir_one_v2) # TRUE
