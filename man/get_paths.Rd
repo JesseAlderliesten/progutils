@@ -4,22 +4,27 @@
 \alias{get_paths}
 \title{Get paths to directories}
 \usage{
-get_paths()
+get_paths(paths = .libPaths())
+}
+\arguments{
+\item{paths}{The paths to use.}
 }
 \value{
 A character vector containing the same elements as \code{\link[=.libPaths]{.libPaths()}}, possibly in
 a different order.
 }
 \description{
-Wrapper around \code{\link[=.libPaths]{.libPaths()}} to get the paths \R knows about, with paths
-containing the same \R \link[=getRversion]{version number} (\code{x.y.z}) as the
-currently running \R session given before other paths.
+Get the paths \R knows about, with paths containing the currently used \R
+version number given before other paths.
 }
-\section{Programming note}{
+\details{
+This is a wrapper around \code{\link[=.libPaths]{.libPaths()}} to first return paths containing the
+currently used \R \link[=getRversion]{version number} in the form of directory
+\code{R-x.y.z} or directory \code{x.y}, with a warning if none such path is present.
 
-See \code{InstallPkgs::prepare_install()} where \code{get_paths()} is checked and used.
+A warning is also issued if the returned vector is of length zero or only
+contains empty paths (\code{""}).
 }
-
 \examples{
 .libPaths()
 get_paths() # The same elements as above, possibly in a different order
