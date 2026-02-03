@@ -70,7 +70,7 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
 
 }
 \seealso{
-\code{\link[=check_file]{check_file()}} to check if a file exists and is a unique match to a pattern;
+\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern;
 \code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
 \code{\link[=normalizePath]{normalizePath()}} to create absolute paths; \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}}
 used by this function.
@@ -79,7 +79,7 @@ used by this function.
 looking for a wider range of invalid characters.
 
 Other functions to check paths and create directories: 
-\code{\link{check_file}()},
+\code{\link{get_filename}()},
 \code{\link{get_paths}()}
 }
 \concept{functions to check paths and create directories}

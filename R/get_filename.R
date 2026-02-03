@@ -16,7 +16,7 @@
 #' If `ignore_case` is `FALSE` and no case-sensitive match is found, the error
 #' message indicates if any case-insensitive match is present.
 #'
-#' In contrast to the default of [list.files()], `check_file` also finds
+#' In contrast to the default of [list.files()], `get_filename()` also finds
 #' 'hidden' files, i.e., files which names start with a dot.
 #'
 #' Paths will be [normalized][normalizePath()] before use, so the form of paths
@@ -42,22 +42,22 @@
 #' # Create the files
 #' file.create(my_tempfiles)
 #'
-#' check_file(dir = tempdir(), pattern = "First")
+#' get_filename(dir = tempdir(), pattern = "First")
 #' # The same file is found if case-insensitive matching is used:
-#' check_file(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE)
+#' get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE)
 #' # Error reporting presence of case-insensitive match.
-#' try(check_file(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
+#' try(get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
 #' # Error reporting no match found.
-#' try(check_file(dir = tempdir(), pattern = "abcde", ignore_case = TRUE))
-#' try(check_file(dir = tempdir(), pattern = "abcde", ignore_case = FALSE))
+#' try(get_filename(dir = tempdir(), pattern = "abcde", ignore_case = TRUE))
+#' try(get_filename(dir = tempdir(), pattern = "abcde", ignore_case = FALSE))
 #' # Error because multiple matches are present.
-#' try(check_file(dir = tempdir(), pattern = "File"))
+#' try(get_filename(dir = tempdir(), pattern = "File"))
 #'
 #' # Deleting the created temporary files
 #' unlink(x = my_tempfiles)
 #'
 #' @export
-check_file <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
+get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
   stopifnot(checkinput::is_character(dir), checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 

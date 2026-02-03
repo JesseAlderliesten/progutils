@@ -34,7 +34,7 @@ getRversion() # The currently used R version
 }
 \seealso{
 Other functions to check paths and create directories: 
-\code{\link{check_file}()},
-\code{\link{create_dir}()}
+\code{\link{create_dir}()},
+\code{\link{get_filename}()}
 }
 \concept{functions to check paths and create directories}

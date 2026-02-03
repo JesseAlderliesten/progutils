@@ -28,7 +28,7 @@
 #' The requested directory is created if does not yet exist.
 #'
 #' @seealso
-#' [check_file()] to check if a file exists and is a unique match to a pattern;
+#' [get_filename()] to check if a file exists and is a unique match to a pattern;
 #' [file.path()] to construct file paths in a platform-independent way;
 #' [normalizePath()] to create absolute paths; [dir.exists()] and [dir.create()]
 #' used by this function.

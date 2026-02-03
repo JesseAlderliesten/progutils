@@ -2,9 +2,9 @@
 
 export(are_equal)
 export(as.numeric_safe)
-export(check_file)
 export(check_os_is_windows)
 export(create_dir)
+export(get_filename)
 export(get_paths)
 export(not_in)
 export(paste_quoted)
