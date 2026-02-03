@@ -1,19 +1,14 @@
 #' Check if only a single matching file is present
 #'
-#' Check if only a single file in `dir` matches `pattern`, for example before
-#' attempting to [read a file][read.table()].
+#' Check if only one file in directory `dir` has a name matching `pattern`, for
+#' example before attempting to [read a file][read.table()].
 #'
 #' @param dir Character string giving the [path][file.path()] to a directory.
 #' @param pattern Character string containing a [regular expression][base::regex]
-#' used to select file names in the directory indicated by `dir`.
+#' used to select file names in `dir`.
 #' @param ignore_case `TRUE` or `FALSE`: use case-insensitive pattern matching?
 #' @param quietly `TRUE` or `FALSE`: suppress the message with the found file
 #' name?
-#'
-#' @returns
-#' A character string with the matching file name if there is exactly one file
-#' with a name matching `pattern` in directory `dir`. Otherwise an error is
-#' thrown.
 #'
 #' @details
 #' The default `"."` for `dir` indicates the [working directory][getwd()].
@@ -26,6 +21,10 @@
 #'
 #' Paths will be [normalized][normalizePath()] before use, so the form of paths
 #' reported in messages might differ from the input to `dir`.
+#'
+#' @returns
+#' A character string with the file name matching `pattern` if there is exactly
+#' one such file in directory `dir`. Otherwise an error is thrown.
 #'
 #' @seealso
 #' [create_dir()] to create a directory if does not yet exist; [file.exists()]
@@ -77,9 +76,10 @@ check_file <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) 
   # 'list.files()' also returns directories (even though 'include.dirs' is FALSE
   # by default) because 'recursive' is also FALSE.
   if(length(files_present) > 0L) {
-    files_present <- not_in(files_present,
-                            list.dirs(path = dir, full.names = FALSE,
-                                      recursive = FALSE))
+    dirs_present <- list.dirs(path = dir, full.names = FALSE, recursive = FALSE)
+    if(length(dirs_present) > 0L) {
+      files_present <- not_in(files_present, dirs_present)
+    }
   }
 
   msg_match <- paste0(

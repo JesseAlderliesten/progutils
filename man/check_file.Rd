@@ -10,7 +10,7 @@ check_file(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 \item{dir}{Character string giving the \link[=file.path]{path} to a directory.}
 
 \item{pattern}{Character string containing a \link[base:regex]{regular expression}
-used to select file names in the directory indicated by \code{dir}.}
+used to select file names in \code{dir}.}
 
 \item{ignore_case}{\code{TRUE} or \code{FALSE}: use case-insensitive pattern matching?}
 
@@ -18,13 +18,12 @@ used to select file names in the directory indicated by \code{dir}.}
 name?}
 }
 \value{
-A character string with the matching file name if there is exactly one file
-with a name matching \code{pattern} in directory \code{dir}. Otherwise an error is
-thrown.
+A character string with the file name matching \code{pattern} if there is exactly
+one such file in directory \code{dir}. Otherwise an error is thrown.
 }
 \description{
-Check if only a single file in \code{dir} matches \code{pattern}, for example before
-attempting to \link[=read.table]{read a file}.
+Check if only one file in directory \code{dir} has a name matching \code{pattern}, for
+example before attempting to \link[=read.table]{read a file}.
 }
 \details{
 The default \code{"."} for \code{dir} indicates the \link[=getwd]{working directory}.
