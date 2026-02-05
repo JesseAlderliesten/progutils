@@ -18,7 +18,7 @@ released versions.
 - None.
 
 ### Updated documentation
-- None.
+- Added a NEWS-file.
 
 ### Updated tests
 - None.
