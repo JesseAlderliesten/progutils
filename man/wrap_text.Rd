@@ -34,7 +34,15 @@ Consecutive white space in \code{x} is collapsed into a single blank character,
 except for double spaces after periods, question marks and exclamation marks
 (as documented in the section \code{Details} of \code{\link[=strwrap]{strwrap()}}).
 }
-\note{
+\section{Programming notes}{
+
+The call \code{wrap_text(x, width)} can be replaced by
+\code{paste0(strwrap(x, width + 1L), collapse = "\\n")} if \code{x} has length one and
+\code{ignore_newlines} is \code{TRUE}.
+}
+
+\section{Notes}{
+
 The output is printed as a string with newlines represented as \verb{\\n}. Use
 \code{\link[=cat]{cat()}} on the output to print it in the way it is formatted in messages.
 
@@ -42,12 +50,6 @@ Argument \code{width} in \code{wrap_text()} indicates the maximum width of text 
 wrapping, i.e., the width \emph{after} which text should be wrapped. In contrast,
 argument \code{width} in \code{\link[=strwrap]{strwrap()}} indicates the width \emph{at} which text should be
 wrapped.
-}
-\section{Programming note}{
-
-The call \code{wrap_text(x, width)} can be replaced by
-\code{paste0(strwrap(x, width + 1L), collapse = "\\n")} if \code{x} has length one and
-\code{ignore_newlines} is \code{TRUE}.
 }
 
 \examples{

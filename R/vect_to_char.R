@@ -26,7 +26,7 @@
 #' `NULL` is returned as `"'NULL'"`, other zero-length objects are returned as
 #' `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
 #'
-#' @section Programming note:
+#' @section Programming notes:
 #' To get a cross-tabulation of `x` into a character string, one can use
 #' `paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")`,
 #' see the last `Example`.

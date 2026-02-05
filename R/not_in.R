@@ -28,7 +28,7 @@
 #' or `logical(0)`. If `value` is `FALSE`: a boolean vector indicating for each
 #' element in `x` if it is absent from `table`.
 #'
-#' @section Programming note:
+#' @section Programming notes:
 #' `not_in()` does not allow input of [type][typeof] `double` because matching
 #' such input should take small numerical errors into account by using a
 #' tolerance, for example, as the error message indicates, using [are_equal()].

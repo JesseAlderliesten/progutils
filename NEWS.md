@@ -6,7 +6,7 @@ released versions.
 - Nothing.
 
 ### Breaking changes
-- None.
+- Bump checkinput version to 0.0.6.
 
 ### Bug fixes
 - None.
@@ -18,10 +18,8 @@ released versions.
 - None.
 
 ### Updated documentation
-- Added a NEWS-file.
-
-### Updated tests
-- None.
+- Replace section title `Note` (created through @Note) by
+  section title 'Notes' (created through #' @section Notes:). Idem for 'Programming note'.
 
 
 # progutils 0.0.2

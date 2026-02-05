@@ -19,12 +19,14 @@ Concatenate a vector to a string with quoted elements, returning \code{NULL} as
 \code{"'NULL'"} and other zero-length objects as \code{"'<class>(0)'"}, e.g.,
 \code{"'logical(0)'"}.
 }
-\note{
+\section{Notes}{
+
 An error occurs if multiple arguments are provided because then \code{x} probably
 was accidentally not \link[=c]{combined}. For example, the call
 \code{paste_quoted("a", "b")} will return the error \verb{unused argument ("b")}. The
 probably intended call is \code{paste_quoted(c("a", "b"))}, returning \code{"'a', 'b'"}.
 }
+
 \examples{
 paste_quoted(c(3, 4)) # "'3', '4'"
 paste_quoted(NULL) # "'NULL'"

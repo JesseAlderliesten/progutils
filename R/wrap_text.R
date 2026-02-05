@@ -24,12 +24,12 @@
 #' fragment in the output exceeds `width`: this occurs if a stretch of
 #' characters longer than `width` occurs without a blank character to wrap at.
 #'
-#' @section Programming note:
+#' @section Programming notes:
 #' The call `wrap_text(x, width)` can be replaced by
 #' `paste0(strwrap(x, width + 1L), collapse = "\n")` if `x` has length one and
 #' `ignore_newlines` is `TRUE`.
 #'
-#' @note
+#' @section Notes:
 #' The output is printed as a string with newlines represented as `\n`. Use
 #' [cat()] on the output to print it in the way it is formatted in messages.
 #'

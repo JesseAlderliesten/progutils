@@ -38,7 +38,7 @@ returned \code{NA}s (if \code{value} is \code{TRUE}) and the returned zero-lengt
 present in \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
 other.
 }
-\section{Programming note}{
+\section{Programming notes}{
 
 \code{not_in()} does not allow input of \link[=typeof]{type} \code{double} because matching
 such input should take small numerical errors into account by using a
