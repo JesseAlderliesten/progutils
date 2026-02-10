@@ -67,6 +67,7 @@ in a platform-independent way; \code{\link[=normalizePath]{normalizePath()}} to 
 
 Other functions to check paths and create directories: 
 \code{\link{create_dir}()},
+\code{\link{create_path}()},
 \code{\link{get_paths}()}
 }
 \concept{functions to check paths and create directories}
