@@ -21,6 +21,9 @@
 #' @family
 #' functions to check paths and create directories
 #'
+#' @section To do:
+#' What is the advantage of `get_paths()` over [.libPaths()]?
+#'
 #' @examples
 #' .libPaths()
 #' get_paths() # The same elements as above, possibly in a different order

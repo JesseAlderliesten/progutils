@@ -26,6 +26,11 @@ before other paths.
 A warning is issued if the returned vector is of length zero or only contains
 empty paths (\code{""}).
 }
+\section{To do}{
+
+What is the advantage of \code{get_paths()} over \code{\link[=.libPaths]{.libPaths()}}?
+}
+
 \examples{
 .libPaths()
 get_paths() # The same elements as above, possibly in a different order
@@ -35,6 +40,7 @@ getRversion() # The currently used R version
 \seealso{
 Other functions to check paths and create directories: 
 \code{\link{create_dir}()},
+\code{\link{create_path}()},
 \code{\link{get_filename}()}
 }
 \concept{functions to check paths and create directories}
