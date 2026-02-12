@@ -73,7 +73,6 @@ function to create a directory if it does not yet exists.
 
 Other functions to check paths and create directories: 
 \code{\link{create_dir}()},
-\code{\link{get_filename}()},
-\code{\link{get_paths}()}
+\code{\link{get_filename}()}
 }
 \concept{functions to check paths and create directories}

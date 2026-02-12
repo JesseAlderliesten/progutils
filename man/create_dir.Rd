@@ -80,7 +80,6 @@ looking for a wider range of invalid characters.
 
 Other functions to check paths and create directories: 
 \code{\link{create_path}()},
-\code{\link{get_filename}()},
-\code{\link{get_paths}()}
+\code{\link{get_filename}()}
 }
 \concept{functions to check paths and create directories}

@@ -7,6 +7,7 @@ released versions.
 
 ### Breaking changes
 - Increased minimum version of `checkinput` to 0.0.6.
+- Deleted function `get_paths()`: use `.libPaths()` instead.
 
 ### Bug fixes
 - None.
