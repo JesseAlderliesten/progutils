@@ -17,23 +17,25 @@ equality, functions to construct messages about an input vector, and functions
 to handle files and directories.
 
 
-## Installation
+# Installation
 
 You can install `progutils` from 
 [GitHub](https://github.com/JesseAlderliesten/progutils) with:
     
 ```{r, eval = FALSE}
-if(!requireNamespace("remotes")) {
-  install.packages("remotes")
+if(!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages(pkgs = "remotes", quiet = FALSE)
 }
-remotes::install_github("JesseAlderliesten/progutils")
+remotes::install_github(repo = "JesseAlderliesten/progutils", dependencies = TRUE,
+                        upgrade = FALSE, force = FALSE, quiet = FALSE,
+                        build_vignettes = TRUE, lib = .libPaths(),
+                        verbose = getOption("verbose"))
 ```
 
-For information about installing and configuring R and RStudio, or about setting
-up and using Git and GitHub, see my
-[repository 'InstallPkgs'](https://github.com/JesseAlderliesten/InstallPkgs).
+For information about installing and configuring R and RStudio, see my
+[repository 'checkrpkgs'](https://github.com/JesseAlderliesten/checkrpkgs).
 
-## Example
+# Example
 
 This is a basic example which shows you how to solve a common problem:
 
