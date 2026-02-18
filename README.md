@@ -16,7 +16,7 @@ if(!requireNamespace("remotes", quietly = TRUE)) {
 }
 remotes::install_github(repo = "JesseAlderliesten/progutils", dependencies = TRUE,
                         upgrade = FALSE, force = FALSE, quiet = FALSE,
-                        build_vignettes = TRUE, lib = .libPaths(),
+                        build_vignettes = TRUE, lib = NULL,
                         verbose = getOption("verbose"))
 ```
 
