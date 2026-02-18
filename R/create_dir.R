@@ -2,14 +2,15 @@
 #'
 #' Create a directory if it does not yet exist.
 #'
-#' @param dir Non-empty character string containing the path to a directory.
+#' @param dir Non-empty character string containing the path to a directory that
+#' should be created if it does not yet exist.
 #' @param add_date `TRUE` or `FALSE`: create a subdirectory with the current
-#' date (format: `YYYY_MM_DD`)?
+#' date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
-#' Using [file.path()] ensures the correct (platform-dependent) file separator
-#' is used to indicate subdirectories. The `"."` in the default for `dir`
-#' indicates the [working directory][getwd()].
+#' Using [file.path()] ensures the correct ([platform][.Platform]-dependent)
+#' file separator is used to indicate subdirectories. The `"."` in the default
+#' for `dir` indicates the [working directory][getwd()].
 #'
 #' Several limitations are imposed on `dir` to facilitate handling of paths by
 #' Windows, see [dir.create()]: `dir` should not end in a slash, backslash, or
@@ -29,9 +30,8 @@
 #'
 #' @seealso
 #' [get_filename()] to check if a file exists and is a unique match to a pattern;
-#' [file.path()] to construct file paths in a platform-independent way;
-#' [normalizePath()] to create absolute paths; [dir.exists()] and [dir.create()]
-#' used by this function.
+#' [create_path()] to create a path, and references there about file paths;
+#' [dir.exists()] and [dir.create()] used by this function.
 #'
 #' `fs::path_sanitize()` to *remove* invalid characters from potential paths,
 #' looking for a wider range of invalid characters.

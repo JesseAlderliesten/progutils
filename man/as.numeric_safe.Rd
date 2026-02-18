@@ -39,11 +39,13 @@ indices of the factor levels), see the \code{Warnings} in \code{\link[=as.numeri
 \code{integer} to \code{double}, even though integers already have \link{mode}
 \link[=as.numeric]{numeric}.
 }
-\note{
+\section{Notes}{
+
 \code{NULL} and zero-length vectors are converted to \code{numeric(0)}. Logical vectors
 of length larger than zero are converted to a vector of \code{NA_real_}, with a
 warning.
 }
+
 \examples{
 x_int <- 5:7
 x_num <- as.numeric(x_int)

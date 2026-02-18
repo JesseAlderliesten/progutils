@@ -23,7 +23,7 @@ one such file in directory \code{dir}. Otherwise an error is thrown.
 }
 \description{
 Check if only one file in directory \code{dir} has a name matching \code{pattern}, for
-example before attempting to \link[=read.table]{read a file}.
+example before attempting to \link[utils:read.table]{read a file}.
 }
 \details{
 The default \code{"."} for \code{dir} indicates the \link[=getwd]{working directory}.
@@ -67,6 +67,6 @@ in a platform-independent way; \code{\link[=normalizePath]{normalizePath()}} to 
 
 Other functions to check paths and create directories: 
 \code{\link{create_dir}()},
-\code{\link{get_paths}()}
+\code{\link{create_path}()}
 }
 \concept{functions to check paths and create directories}

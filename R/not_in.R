@@ -28,7 +28,7 @@
 #' or `logical(0)`. If `value` is `FALSE`: a boolean vector indicating for each
 #' element in `x` if it is absent from `table`.
 #'
-#' @section Programming note:
+#' @section Programming notes:
 #' `not_in()` does not allow input of [type][typeof] `double` because matching
 #' such input should take small numerical errors into account by using a
 #' tolerance, for example, as the error message indicates, using [are_equal()].
@@ -40,11 +40,11 @@
 #' `character(0)`.
 #'
 #' Apart from not allowing numeric or zero-length input,
-#' `not_in(x, table, value = TRUE)` is equivalent to the unexported function
-#' `tools:::'%w/o%'`. Similarly, `not_in(x, table, value = FALSE)` is equivalent
-#' to the function `'%notin%'` which is present as exported function in
-#' `base-`\R from version `4.6.0` onwards and before that was present as
-#' unexported function `tools:::'%notin%'`.
+#' `not_in(x, table, value = TRUE)` is equivalent to `x %w/o% table`, where
+#' `%w/o%` is an unexported function from `tools`: `tools:::'%w/o%'`. Similarly,
+#' `not_in(x, table, value = FALSE)` is equivalent to `x %notin% table`, where
+#' `%notin%` is an exported function from `base-`\R since version `4.6.0` which
+#' before that was present as unexported function `tools:::'%notin%'`.
 #'
 #' @seealso
 #' [setdiff()] for a similar function which removes duplicates; [are_equal()] to

@@ -38,7 +38,7 @@ returned \code{NA}s (if \code{value} is \code{TRUE}) and the returned zero-lengt
 present in \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
 other.
 }
-\section{Programming note}{
+\section{Programming notes}{
 
 \code{not_in()} does not allow input of \link[=typeof]{type} \code{double} because matching
 such input should take small numerical errors into account by using a
@@ -51,11 +51,11 @@ absent from \code{table}, \code{not_in()} would return \code{logical(0)} if \cod
 \code{character(0)}.
 
 Apart from not allowing numeric or zero-length input,
-\code{not_in(x, table, value = TRUE)} is equivalent to the unexported function
-\code{tools:::'\%w/o\%'}. Similarly, \code{not_in(x, table, value = FALSE)} is equivalent
-to the function \code{'\%notin\%'} which is present as exported function in
-\verb{base-}\R from version \verb{4.6.0} onwards and before that was present as
-unexported function \code{tools:::'\%notin\%'}.
+\code{not_in(x, table, value = TRUE)} is equivalent to \code{x \%w/o\% table}, where
+\verb{\%w/o\%} is an unexported function from \code{tools}: \code{tools:::'\%w/o\%'}. Similarly,
+\code{not_in(x, table, value = FALSE)} is equivalent to \code{x \%notin\% table}, where
+\verb{\%notin\%} is an exported function from \verb{base-}\R since version \verb{4.6.0} which
+before that was present as unexported function \code{tools:::'\%notin\%'}.
 }
 
 \examples{

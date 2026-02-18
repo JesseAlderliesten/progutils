@@ -11,7 +11,7 @@
 #' quotes, separated by commas. `NULL` is returned as `"'NULL'"`, other
 #' zero-length objects are returned as `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
 #'
-#' @note
+#' @section Notes:
 #' An error occurs if multiple arguments are provided because then `x` probably
 #' was accidentally not [combined][c()]. For example, the call
 #' `paste_quoted("a", "b")` will return the error `unused argument ("b")`. The

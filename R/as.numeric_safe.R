@@ -30,7 +30,7 @@
 #' `integer` to `double`, even though integers already have [mode]
 #' [numeric][as.numeric()].
 #'
-#' @note
+#' @section Notes:
 #' `NULL` and zero-length vectors are converted to `numeric(0)`. Logical vectors
 #' of length larger than zero are converted to a vector of `NA_real_`, with a
 #' warning.

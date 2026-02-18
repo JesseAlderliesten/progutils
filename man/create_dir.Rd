@@ -7,10 +7,11 @@
 create_dir(dir = file.path(".", "output"), add_date = TRUE)
 }
 \arguments{
-\item{dir}{Non-empty character string containing the path to a directory.}
+\item{dir}{Non-empty character string containing the path to a directory that
+should be created if it does not yet exist.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
-date (format: \code{YYYY_MM_DD})?}
+date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
 A character string with the \link[=normalizePath]{normalized} path to the
@@ -22,9 +23,9 @@ fails, with a warning.
 Create a directory if it does not yet exist.
 }
 \details{
-Using \code{\link[=file.path]{file.path()}} ensures the correct (platform-dependent) file separator
-is used to indicate subdirectories. The \code{"."} in the default for \code{dir}
-indicates the \link[=getwd]{working directory}.
+Using \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Platform]{platform}-dependent)
+file separator is used to indicate subdirectories. The \code{"."} in the default
+for \code{dir} indicates the \link[=getwd]{working directory}.
 
 Several limitations are imposed on \code{dir} to facilitate handling of paths by
 Windows, see \code{\link[=dir.create]{dir.create()}}: \code{dir} should not end in a slash, backslash, or
@@ -71,15 +72,14 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
 }
 \seealso{
 \code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern;
-\code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
-\code{\link[=normalizePath]{normalizePath()}} to create absolute paths; \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}}
-used by this function.
+\code{\link[=create_path]{create_path()}} to create a path, and references there about file paths;
+\code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function.
 
 \code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths,
 looking for a wider range of invalid characters.
 
 Other functions to check paths and create directories: 
-\code{\link{get_filename}()},
-\code{\link{get_paths}()}
+\code{\link{create_path}()},
+\code{\link{get_filename}()}
 }
 \concept{functions to check paths and create directories}

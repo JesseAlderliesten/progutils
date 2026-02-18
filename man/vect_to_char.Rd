@@ -39,7 +39,7 @@ Convert a vector to a character string, preserving names, rounding numeric
 values, returning \code{NULL} as \code{"'NULL'"} and other zero-length objects as
 \code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
 }
-\section{Programming note}{
+\section{Programming notes}{
 
 To get a cross-tabulation of \code{x} into a character string, one can use
 \code{paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")},
