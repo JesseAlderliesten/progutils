@@ -1,4 +1,6 @@
 
+![](https://img.shields.io/github/r-package/v/JesseAlderliesten/progutils)
+
 # progutils
 
 `progutils` contains utility functions I frequently use: functions to
