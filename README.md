@@ -1,5 +1,5 @@
 
-![](https://img.shields.io/github/r-package/v/JesseAlderliesten/progutils)
+![](https://img.shields.io/github/r-package/v/JesseAlderliesten/progutils?color=blue)
 
 # progutils
 
