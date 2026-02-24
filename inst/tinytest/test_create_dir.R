@@ -128,7 +128,9 @@ dir <- file.path(my_tempdir, ".")
 expected_path <- paste0(dir, .Platform$file.sep,
                         format(Sys.time(), format = "%Y_%m_%d"))
 
-expect_false(dir.exists(expected_path))
+if(file.exists(expected_path)) {
+  unlink(expected_path, recursive = TRUE)
+}
 expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = TRUE),
