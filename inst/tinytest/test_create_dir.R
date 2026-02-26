@@ -23,7 +23,7 @@
 
 
 #### Test the examples ####
-my_tempdir <- tempdir()
+my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
 expect_silent(res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
                                          add_date = FALSE))
 expect_true(dir.exists(res_dir_one))
@@ -46,7 +46,7 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
 
 
 #### Tests ####
-my_tempdir <- tempdir()
+my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
 my_tempfile <- file.path(tempdir(), "test_df.csv")
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
@@ -60,14 +60,14 @@ expect_silent(expect_false(dir.exists(expected_path)))
 expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = FALSE),
-    normalizePath(expected_path, mustWork = FALSE)))
+    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
 expect_true(dir.exists(expected_path))
 
 # 1b without date directory, directory already exists
 expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = FALSE),
-    normalizePath(expected_path, mustWork = FALSE)))
+    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
 if(expect_true(dir.exists(expected_path))) {
   expect_equal(unlink(x = expected_path, recursive = TRUE), 0,
                info = "Check if removing temporary directories was successful")
@@ -81,20 +81,20 @@ expect_false(dir.exists(expected_path))
 expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)))
+    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
 expect_true(dir.exists(expected_path))
 
 # 2b with date directory, directory already exists
 expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)))
+    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
 
 # Also recognise that a directory already exists if it has subdirectories
 expect_silent(
   expect_identical(
     create_dir(dir = dir),
-    normalizePath(expected_path, mustWork = FALSE)))
+    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
 if(expect_true(dir.exists(expected_path))) {
   expect_equal(
     unlink(x = dirname(expected_path), recursive = TRUE), 0,
@@ -109,14 +109,14 @@ expect_false(dir.exists(expected_path))
 expect_silent(
   expect_identical(
     create_dir(dir = file.path(dir, "subdir"), add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)))
+    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
 expect_true(dir.exists(expected_path))
 
 # 3b with subdirectories, with date directory, directory already exists
 expect_silent(
   expect_identical(
     create_dir(dir = file.path(dir, "subdir"), add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)))
+    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
 if(expect_true(dir.exists(expected_path))) {
   expect_equal(
     unlink(x = dirname(dirname(expected_path)), recursive = TRUE),
@@ -134,7 +134,7 @@ if(file.exists(expected_path)) {
 expect_silent(
   expect_identical(
     create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, mustWork = FALSE)))
+    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
 if(expect_true(dir.exists(file.path(expected_path)))) {
   expect_equal(unlink(x = expected_path, recursive = TRUE), 0,
                info = "Check if removing temporary directories was successful")
@@ -196,7 +196,7 @@ expect_true(grepl(pattern = '[<>"|?*]', x = "ab*c"))
 # 'dir' points to a file instead of a directory
 expect_warning(
   expect_equal(create_dir(dir = my_tempfile, add_date = FALSE),
-               normalizePath(getwd())),
+               normalizePath(getwd(), winslash = "/", mustWork = FALSE)),
   pattern = paste0("failed! Returning\nthe working directory"))
 
 # 6 Checks on input to 'add_date'
