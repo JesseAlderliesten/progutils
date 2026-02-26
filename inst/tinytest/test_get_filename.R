@@ -61,7 +61,9 @@ expect_error(get_filename(dir = my_tempfile, pattern = "test_"),
 
 # 'dir' points to a non-existing directory
 expect_error(get_filename(dir = file.path(my_tempdir, "abc"), pattern = "test_"),
-             pattern = "does not exist")
+             pattern = paste0(
+               normalizePath(path = file.path(my_tempdir, "abc"), winslash = "/",
+                             mustWork = FALSE), "' does not exist"))
 
 # 'pattern' points to an existing directory instead of to an existing file
 dir.create(path = file.path(tempdir(), "test_dir"), recursive = TRUE)
