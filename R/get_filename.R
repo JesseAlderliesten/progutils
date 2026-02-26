@@ -19,8 +19,10 @@
 #' In contrast to the default of [list.files()], `get_filename()` also finds
 #' 'hidden' files, i.e., files which names start with a dot.
 #'
-#' Paths will be [normalized][normalizePath()] before use, so the form of paths
-#' reported in messages might differ from the input to `dir`.
+#' Paths will be [normalized][normalizePath()] before use, to ensure they still
+#' work if the [working directory][getwd()] changes. `"/"` instead of `"\\"` is
+#' used as argument [winslash][normalizePath()] such that the returned path can
+#' be used in Windows' file system.
 #'
 #' @returns
 #' A character string with the file name matching `pattern` if there is exactly
@@ -61,7 +63,7 @@ get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE
   stopifnot(checkinput::is_character(dir), checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 
-  dir <- normalizePath(dir, mustWork = FALSE)
+  dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)
   if(!dir.exists(dir)) {
     if(file.exists(dir)) {
       stop("The path in 'dir' ('", dir,

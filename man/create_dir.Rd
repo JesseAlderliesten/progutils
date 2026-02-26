@@ -8,14 +8,15 @@ create_dir(dir = file.path(".", "output"), add_date = TRUE)
 }
 \arguments{
 \item{dir}{Non-empty character string containing the path to a directory that
-should be created if it does not yet exist.}
+should be created if it does not yet exist. A dot (i.e., ".") indicates the
+current working directory.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
 date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
-A character string with the \link[=normalizePath]{normalized} path to the
-requested directory, returned \link[=invisible]{invisibly}. The
+A character string with the absolute \link[=normalizePath]{normalized} path to
+the requested directory, returned \link[=invisible]{invisibly}. The
 \link[=getwd]{working directory} is returned if an attempt to create a directory
 fails, with a warning.
 }
@@ -23,9 +24,11 @@ fails, with a warning.
 Create a directory if it does not yet exist.
 }
 \details{
-Using \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Platform]{platform}-dependent)
-file separator is used to indicate subdirectories. The \code{"."} in the default
-for \code{dir} indicates the \link[=getwd]{working directory}.
+The default \code{dir} is a subdirectory with the current date in the
+\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
+directory. \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Platform]{platform}-dependent)
+file separator is used to indicate subdirectories, and \code{"."} indicates the
+\link[=getwd]{working directory}.
 
 Several limitations are imposed on \code{dir} to facilitate handling of paths by
 Windows, see \code{\link[=dir.create]{dir.create()}}: \code{dir} should not end in a slash, backslash, or
@@ -33,6 +36,14 @@ space because those characters would be removed when the directory is created,
 leading to a mismatch between the created directory and the returned path.
 \code{dir} should also not end in a dot. Finally, \code{dir} should not contain the
 characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, or \code{>}.
+
+If creating the directory fails, the working directory is returned instead.
+This happens if \code{dir} points to an existing file instead of an directory.
+
+The absolute \link[=normalizePath]{normalised} path is returned such that the
+returned path still works if the \link[=getwd]{working directory} changes. \code{"/"}
+instead of \code{"\\\\"} is used as \link[=normalizePath]{winslash} during normalisation,
+such that the returned path can be used in Windows' file system.
 }
 \section{Side effects}{
 

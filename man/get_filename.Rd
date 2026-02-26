@@ -34,8 +34,10 @@ message indicates if any case-insensitive match is present.
 In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_filename()} also finds
 'hidden' files, i.e., files which names start with a dot.
 
-Paths will be \link[=normalizePath]{normalized} before use, so the form of paths
-reported in messages might differ from the input to \code{dir}.
+Paths will be \link[=normalizePath]{normalized} before use, to ensure they still
+work if the \link[=getwd]{working directory} changes. \code{"/"} instead of \code{"\\\\"} is
+used as argument \link[=normalizePath]{winslash} such that the returned path can
+be used in Windows' file system.
 }
 \examples{
 # Create files in a temporary directory so we know what is present.

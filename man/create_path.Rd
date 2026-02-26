@@ -17,10 +17,13 @@ extension like \code{.csv} or \code{.txt}.}
 
 \item{format_stamp}{A character string indicating the \link[=strftime]{format} of
 the stamp to be added in front of the file name. No stamp is added if
-\code{format_stamp} is an empty string (i.e., \code{""}).}
+\code{format_stamp} is an empty string (i.e., \code{""}). The formatted stamp is
+treated as part of the filename, such that the same restrictions apply, see
+\code{Details}.}
 
 \item{dir}{Non-empty character string containing the path to a directory that
-should be created if it does not yet exist.}
+should be created if it does not yet exist. A dot (i.e., ".") indicates the
+current working directory.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
 date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
@@ -32,23 +35,30 @@ The created file path, returned \link[=invisible]{invisibly}.
 Create a file path, creating the indicated directory if it does not yet exist.
 }
 \details{
-\code{filename} should contain a file extension: a dot followed by alphanumeric
-characters until the end of the file name. An error occurs if no file
-extension is present. Non-alphanumeric characters in \code{filename} before the
-file extension are replaced by underscores, with a warning.
+\code{filename} should contain a file extension (i.e., a dot followed by
+alphanumeric characters until the end of the file name). It should not
+contain slashes or backslashes: use \code{dir} to indicate (sub)directories.
+Non-alphanumeric characters other than underscores before the file extension
+are replaced by dots, with a warning.
 
-A warning is issued if the file indicated by the returned path already exists.
-Use \code{"\%OSn"} as part of \code{format_stamp} to truncate seconds to \verb{0 <= n <= 6}
-decimal places for precise stamps, see \code{\link[=strftime]{strftime()}} for details.
+The default \code{dir} is a subdirectory with the current date in the
+\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
+directory. \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Platform]{platform}-dependent)
+file separator is used to indicate subdirectories, and \code{"."} indicates the
+\link[=getwd]{working directory}.
 
-The directory for the returned path is \link[=create_dir]{created} if it does not
-yet exist. By default it is a subdirectory with the current date in format
-\code{YYYY_mm_dd} in directory \code{output} below the current working directory.
+Various restrictions are imposed on \code{dir}, see \code{\link[=create_dir]{create_dir()}}.
 
-The returned path is \link[=normalizePath]{normalised} such that it still works
-if the \link[=getwd]{working directory} changes. \code{"/"} instead of \code{"\\\\"} is used
-as \link[=normalizePath]{winslash}, such that the returned path can be used in
-Windows' file system.
+The absolute \link[=normalizePath]{normalised} path is returned such that the
+returned path still works if the \link[=getwd]{working directory} changes. \code{"/"}
+instead of \code{"\\\\"} is used as argument \link[=normalizePath]{winslash} such that
+the returned path can be used in Windows' file system.
+
+The \emph{directory} for the returned path is \link[=create_dir]{created} if it does
+not yet exist. A warning is issued if the \emph{file} indicated by the returned
+path already exists. Use \code{"\%OSn"} as part of \code{format_stamp} to create precise
+stamps by truncating seconds to \verb{0 <= n <= 6} decimal places to prevent this,
+see \code{\link[=strftime]{strftime()}} for details.
 }
 \section{Side effects}{
 
@@ -58,18 +68,46 @@ yet exist.
 
 \section{Programming notes}{
 
-File names that end in a dot are handled incorrectly by \code{create_path()}:
-\code{\link[tools:fileutils]{tools::file_path_sans_ext()}} does not recognise the extension of file names
-that end in a dot, whereas \code{\link[tools:fileutils]{tools::file_ext()}} does recognise such extension.
-Therefore, \code{create_path("ff..txt")} produces the nonsense result ending in
-\code{"ff__txt.txt"} instead of ending in \code{"ff_.txt"}.
+\code{\link[tools:fileutils]{tools::file_path_sans_ext()}} does \emph{not} recognise the extension of file names
+that end in a dot, whereas \code{\link[tools:fileutils]{tools::file_ext()}} \emph{does} recognise such
+extensions. Using \code{\link[=file_path_sans_ext]{file_path_sans_ext()}} from \code{progutils} prevents
+problems caused by this discrepancy, see the \code{Examples} of
+\code{\link[=file_path_sans_ext]{file_path_sans_ext()}} from \code{progutils}.
 }
 
+\examples{
+# Use a temporary directory to not write in the user's directory
+my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = NA)
+
+(create_path(filename = "abc.txt", format_stamp = "",
+            dir = my_tempdir, add_date = TRUE))
+(create_path(filename = "abc.txt", format_stamp = "\%d_\%m_\%Y",
+            dir = my_tempdir, add_date = TRUE))
+(create_path(filename = "def.html", format_stamp = "",
+            dir = my_tempdir, add_date = FALSE))
+(create_path(filename = "def.html", format_stamp = "\%d_\%m_\%Y",
+            dir = my_tempdir, add_date = FALSE))
+(create_path(filename = "abc.txt", format_stamp = "",
+            dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+(create_path(filename = "abc.txt", format_stamp = "\%d_\%m_\%Y",
+            dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+(create_path(filename = "def.html", format_stamp = "",
+            dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+(create_path(filename = "def.html", format_stamp = "\%d_\%m_\%Y",
+            dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+
+# Cleaning up
+unlink(x = file.path(my_tempdir,
+                     c(format(Sys.time(), format = "\%Y_\%m_\%d"), "subdir")),
+       recursive = TRUE)
+rm(my_tempdir)
+
+}
 \seealso{
 \code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern;
 \code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
-\code{\link[=normalizePath]{normalizePath()}} to create absolute paths; \code{\link[=create_dir]{create_dir()}} used by this
-function to create a directory if it does not yet exists.
+\code{\link[=normalizePath]{normalizePath()}} to create absolute normalised paths; \code{\link[=create_dir]{create_dir()}} to
+create a directory if it does not yet exists.
 
 Other functions to check paths and create directories: 
 \code{\link{create_dir}()},

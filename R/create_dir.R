@@ -3,14 +3,17 @@
 #' Create a directory if it does not yet exist.
 #'
 #' @param dir Non-empty character string containing the path to a directory that
-#' should be created if it does not yet exist.
+#' should be created if it does not yet exist. A dot (i.e., ".") indicates the
+#' current working directory.
 #' @param add_date `TRUE` or `FALSE`: create a subdirectory with the current
 #' date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
-#' Using [file.path()] ensures the correct ([platform][.Platform]-dependent)
-#' file separator is used to indicate subdirectories. The `"."` in the default
-#' for `dir` indicates the [working directory][getwd()].
+#' The default `dir` is a subdirectory with the current date in the
+#' [format][strftime()] `YYYY_mm_dd` in directory `output` below the working
+#' directory. [file.path()] ensures the correct ([platform][.Platform]-dependent)
+#' file separator is used to indicate subdirectories, and `"."` indicates the
+#' [working directory][getwd()].
 #'
 #' Several limitations are imposed on `dir` to facilitate handling of paths by
 #' Windows, see [dir.create()]: `dir` should not end in a slash, backslash, or
@@ -19,9 +22,17 @@
 #' `dir` should also not end in a dot. Finally, `dir` should not contain the
 #' characters `"`, `*`, `?`, `|`, `<`, or `>`.
 #'
+#' If creating the directory fails, the working directory is returned instead.
+#' This happens if `dir` points to an existing file instead of an directory.
+#'
+#' The absolute [normalised][normalizePath()] path is returned such that the
+#' returned path still works if the [working directory][getwd()] changes. `"/"`
+#' instead of `"\\"` is used as [winslash][normalizePath()] during normalisation,
+#' such that the returned path can be used in Windows' file system.
+#'
 #' @returns
-#' A character string with the [normalized][normalizePath()] path to the
-#' requested directory, returned [invisibly][invisible]. The
+#' A character string with the absolute [normalized][normalizePath()] path to
+#' the requested directory, returned [invisibly][invisible]. The
 #' [working directory][getwd()] is returned if an attempt to create a directory
 #' fails, with a warning.
 #'
@@ -90,22 +101,25 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
     dir <- file.path(dir, format(Sys.time(), format = "%Y_%m_%d"))
   }
 
-  dir <- normalizePath(dir, mustWork = FALSE)
+  dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)
 
   # dir.exists() returns FALSE if 'dir' is a file instead of a directory.
   if(!dir.exists(dir)) {
     # Notes:
-    # - This branch is only used if the directory did not yet exist, so it is
-    #   not a problem that dir.create() returns FALSE if a directory already
-    #   exists.
+    # - This branch is only used if the directory did not yet exist as directory,
+    #   so it is not a problem that dir.create() returns FALSE if a directory
+    #   already exists. However, the path can already exist as a file: then
+    #   creating the attempt to create it as a directory will fail (indicated by
+    #   a warning) and the working directory will be used instead (indicated by
+    #   an additional warning).
     # - Using 'recursive = TRUE' to allow creation of subdirectories inside a
     #   not-yet existing directory (e.g., creating './output/<date>' if
     #   './output' does not yet exist).
-    if(!dir.create(path = dir, recursive = TRUE, showWarnings = FALSE)) {
+    if(!dir.create(path = dir, recursive = TRUE, showWarnings = TRUE)) {
       warning(wrap_text(paste0(
         "Attempt to create directory '", dir, "' failed",
         "!\nReturning the working directory ('", getwd(), "') instead.")))
-      dir <- normalizePath(getwd(), mustWork = NA)
+      dir <- normalizePath(getwd(), winslash = "/", mustWork = NA)
     }
   }
 
