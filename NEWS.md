@@ -1,6 +1,4 @@
-# progutils (development version)
-The development-branch of `progutils` is *work in progress*: see below for the
-released versions.
+# progutils 0.0.3
 
 ### Breaking changes
 - Increased minimum version of `checkinput` to 0.1.0.
