@@ -57,9 +57,7 @@ orig
 
 }
 \seealso{
-\code{\link[=round_levels]{round_levels()}} to sort character levels that represent numeric values by
-increasing numeric value (use \code{level_order = NULL} to do so); \link{reorder_cols};
-\code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor.
+\link{reorder_cols}; \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor.
 
 Other functions for reordering: 
 \code{\link{reorder_cols}()}

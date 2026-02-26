@@ -39,9 +39,7 @@
 #' functions for reordering
 #'
 #' @seealso
-#' [round_levels()] to sort character levels that represent numeric values by
-#' increasing numeric value (use `level_order = NULL` to do so); [reorder_cols];
-#' [stats::relevel()] to assign one reference level to a factor.
+#' [reorder_cols]; [stats::relevel()] to assign one reference level to a factor.
 #'
 #' @examples
 #' orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
