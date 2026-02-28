@@ -16,12 +16,16 @@
 #' Code `abs(x - y) < tol` was taken from `dplyr::near()`.
 #'
 #' @seealso
-#' [all.equal()] to check more generally for near-equality; [identical()] to
-#' check for exact equality; [Comparison] to compare two vectors using binary
-#' operators; [match()] to compare non-numeric vectors; [\R FAQ 7.31](
+#' [all.equal()] to check more generally for near-equality,
+#' [identical()] to check for exact equality,
+#' [Comparison] and [match()] to use binary operators to check (in)equality
+#'
+#' [\R FAQ 7.31](
 #' https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
-#' for background on numerical equality; the vignette about type coercion:
-#' `vignette("Type_Coercion", package = "checkinput")`.
+#' for background on numerical equality;
+#' the vignette about type coercion: `vignette("Type_Coercion", package = "checkinput")`.
+#'
+#' @family functions to check equality
 #'
 #' @examples
 #' x <- sqrt(2)^2

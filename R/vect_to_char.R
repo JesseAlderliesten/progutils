@@ -32,7 +32,9 @@
 #' see the last `Example`.
 #'
 #' @seealso [toString()] which can be used if names of `x` can be removed.
+#'
 #' @family functions to modify character vectors
+#' @family functions to modify factors
 #'
 #' @examples
 #' x <- 1:3

@@ -75,7 +75,16 @@ paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")
 
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},
+\code{\link{file_path_sans_ext}()},
 \code{\link{paste_quoted}()},
+\code{\link{reorder_cols}()},
+\code{\link{replace_vals}()},
 \code{\link{wrap_text}()}
+
+Other functions to modify factors: 
+\code{\link{as.numeric_safe}()},
+\code{\link{reorder_levels}()},
+\code{\link{replace_vals}()}
 }
 \concept{functions to modify character vectors}
+\concept{functions to modify factors}

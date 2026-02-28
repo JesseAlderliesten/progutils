@@ -40,3 +40,19 @@ paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))
 paste0(progutils::file_path_sans_ext(filename), ".", tools::file_ext(filename))
 
 }
+\seealso{
+Other functions to handle paths and directories: 
+\code{\link{create_dir}()},
+\code{\link{create_path}()},
+\code{\link{get_filename}()}
+
+Other functions to modify character vectors: 
+\code{\link{as.numeric_safe}()},
+\code{\link{paste_quoted}()},
+\code{\link{reorder_cols}()},
+\code{\link{replace_vals}()},
+\code{\link{vect_to_char}()},
+\code{\link{wrap_text}()}
+}
+\concept{functions to handle paths and directories}
+\concept{functions to modify character vectors}

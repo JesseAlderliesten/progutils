@@ -82,15 +82,16 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
 
 }
 \seealso{
-\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern;
-\code{\link[=create_path]{create_path()}} to create a path, and references there about file paths;
-\code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function.
+\code{\link[=create_path]{create_path()}} to create a path, and references there about file paths,
+\code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function,
+\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern
 
 \code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths,
 looking for a wider range of invalid characters.
 
-Other functions to check paths and create directories: 
+Other functions to handle paths and directories: 
 \code{\link{create_path}()},
+\code{\link{file_path_sans_ext}()},
 \code{\link{get_filename}()}
 }
-\concept{functions to check paths and create directories}
+\concept{functions to handle paths and directories}

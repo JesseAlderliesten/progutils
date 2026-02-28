@@ -35,8 +35,10 @@
 #' of length larger than zero are converted to a vector of `NA_real_`, with a
 #' warning.
 #'
-#' @seealso [utils::type.convert()]; [formatC()] and [option][options()]
-#' `scipen` on formatting numbers.
+#' @seealso
+#' [formatC()] and [option][options()] `scipen` on formatting numbers,
+#' [utils::type.convert()]
+#'
 #' @family functions to modify character vectors
 #' @family functions to modify factors
 #'

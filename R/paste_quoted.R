@@ -18,8 +18,9 @@
 #' probably intended call is `paste_quoted(c("a", "b"))`, returning `"'a', 'b'"`.
 #'
 #' @seealso
-#' [sQuote()]; [toString()] which can be used instead of
-#' `paste(x, collapse = ", ")`; [paste0()].
+#' [toString()] which can be used instead of `paste(x, collapse = ", ")`
+#' [sQuote()] [paste0()]
+#'
 #' @family functions to modify character vectors
 #'
 #' @examples

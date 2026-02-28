@@ -57,10 +57,11 @@ orig
 
 }
 \seealso{
-\link{reorder_cols}; \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor.
+\link{reorder_cols} \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor
 
-Other functions for reordering: 
-\code{\link{reorder_cols}()}
+Other functions to modify factors: 
+\code{\link{as.numeric_safe}()},
+\code{\link{replace_vals}()},
+\code{\link{vect_to_char}()}
 }
-\concept{functions for reordering}
-\concept{functions to adjust factors}
+\concept{functions to modify factors}

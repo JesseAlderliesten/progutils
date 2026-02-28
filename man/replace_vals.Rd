@@ -98,6 +98,7 @@ replace_vals(x = as.factor(c("m", "l", "k", "M", "L", "K", "m")),
 \seealso{
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},
+\code{\link{file_path_sans_ext}()},
 \code{\link{paste_quoted}()},
 \code{\link{reorder_cols}()},
 \code{\link{vect_to_char}()},
@@ -105,8 +106,8 @@ Other functions to modify character vectors:
 
 Other functions to modify factors: 
 \code{\link{as.numeric_safe}()},
-\code{\link{reorder_levels}()}
+\code{\link{reorder_levels}()},
+\code{\link{vect_to_char}()}
 }
 \concept{functions to modify character vectors}
 \concept{functions to modify factors}
-\concept{functions to replace values}

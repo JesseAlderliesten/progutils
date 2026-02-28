@@ -32,14 +32,10 @@
 #' Reordering levels of factor `f` by replacing levels through code like
 #' `levels(f) <- levels(f)[<some order>]` does *not* work, see the last `Example`.
 #'
-#' @family
-#' functions to adjust factors
-#'
-#' @family
-#' functions for reordering
-#'
 #' @seealso
-#' [reorder_cols]; [stats::relevel()] to assign one reference level to a factor.
+#' [reorder_cols] [stats::relevel()] to assign one reference level to a factor
+#'
+#' @family functions to modify factors
 #'
 #' @examples
 #' orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])

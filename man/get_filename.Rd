@@ -61,14 +61,22 @@ unlink(x = my_tempfiles)
 
 }
 \seealso{
-\code{\link[=create_dir]{create_dir()}} to create a directory if does not yet exist; \code{\link[=file.exists]{file.exists()}}
-and \code{\link[=list.files]{list.files()}} to check for existence of files without checking they are
-a unique match to a pattern; \code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract
-information about files or directories; \code{\link[=file.path]{file.path()}} to construct file paths
-in a platform-independent way; \code{\link[=normalizePath]{normalizePath()}} to create absolute paths.
+\code{\link[=create_dir]{create_dir()}} to create a directory if does not yet exist,
+\code{\link[=file.exists]{file.exists()}} and \code{\link[=list.files]{list.files()}} to check for existence of files without
+checking they are a unique match to a pattern,
+\code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or
+directories;
+\code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
+\code{\link[=normalizePath]{normalizePath()}} to create absolute paths.
 
-Other functions to check paths and create directories: 
+Other functions to handle paths and directories: 
 \code{\link{create_dir}()},
-\code{\link{create_path}()}
+\code{\link{create_path}()},
+\code{\link{file_path_sans_ext}()}
+
+Other functions to check equality: 
+\code{\link{are_equal}()},
+\code{\link{not_in}()}
 }
-\concept{functions to check paths and create directories}
+\concept{functions to check equality}
+\concept{functions to handle paths and directories}

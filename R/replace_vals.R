@@ -39,7 +39,6 @@
 #' `f <- addNA(as.factor(c(letters[11:13], NA_character_)))`
 #' `levels(f) <- list(c = "k", b = "l", a = "m", h = NA_character_)`
 #'
-#' @family functions to replace values
 #' @family functions to modify character vectors
 #' @family functions to modify factors
 #'

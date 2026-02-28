@@ -16,9 +16,8 @@
 #' `x` with reordered columns.
 #'
 #' @seealso
-#' [order()] [sort()]
+#' [order()] [reorder_levels] [sort()]
 #'
-#' @family functions for reordering
 #' @family functions to modify character vectors
 #'
 #' @examples
