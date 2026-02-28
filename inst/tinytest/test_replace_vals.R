@@ -53,6 +53,37 @@ expect_silent(
     x)
 )
 
+# Not warning about absence of 'old' if 'new' is present in 'x', even if
+# 'warn_absent' is TRUE
+expect_silent(
+  expect_identical(
+    replace_vals(x = x, old = "v", new = "k",
+                 ignore_case = TRUE, allow_multiple = FALSE, warn_absent = TRUE,
+                 quiet = FALSE),
+    x)
+)
+
+# Warn about absence of 'old' if 'warn_absent' is TRUE, even if a
+# case-insensitive match (but not a case-sensitive match) of 'new' is present in
+# 'x' and 'ignore_case' is TRUE
+expect_warning(
+  expect_identical(
+    replace_vals(x = x, old = "v", new = "K", ignore_case = TRUE,
+                 allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
+    x),
+  pattern = paste0("Values in 'x' ('k', 'l', 'm'", warn_match_case_new,
+                   "'K'): 'k'"), strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_identical(
+    replace_vals(x = x, old = "v", new = "K", ignore_case = TRUE,
+                 allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
+    x),
+  pattern = paste0(warn_none_old, "('v') were found in 'x' ('k', 'l', 'm')"),
+  strict = TRUE, fixed = TRUE
+)
+
 # Found once
 expect_message(
   expect_identical(
@@ -60,6 +91,15 @@ expect_message(
                  ignore_case = TRUE, allow_multiple = FALSE, warn_absent = TRUE,
                  quiet = FALSE),
     letters[c(11, 2, 13)]),
+  pattern = msg_replace, strict = TRUE, fixed = TRUE
+)
+
+expect_message(
+  expect_identical(
+    replace_vals(x = c(x, new), old = old, new = new,
+                 ignore_case = TRUE, allow_multiple = FALSE, warn_absent = TRUE,
+                 quiet = FALSE),
+    letters[c(11, 2, 13, 2)]),
   pattern = msg_replace, strict = TRUE, fixed = TRUE
 )
 
@@ -306,6 +346,14 @@ expect_warning(
                    warn_match_case_old, "'M', 'k'): 'm', 'K', 'm'"),
   strict = TRUE, fixed = TRUE)
 
+# Also error for matches that differ in case if 'old' has length 1
+expect_error(
+  replace_vals(x = x_alt, old = "m", new = "x", ignore_case = TRUE,
+               allow_multiple = FALSE, warn_absent = TRUE,
+               warn_case_old = "never", quiet = FALSE),
+  pattern = paste0("Multiple matches to 'old' ('m') were found in 'x' (",
+                   x_alt_quoted, "): 'm', 'M'"), fixed = TRUE)
+
 expect_message(
   expect_identical(
     replace_vals(x = x_alt, old = c("M", "k"), new = "x", ignore_case = TRUE,
@@ -345,6 +393,16 @@ expect_message(
                  warn_case_old = "never", quiet = FALSE),
     c("m", "l", "x", "x", "L", "K", "m")),
   pattern = "Replaced values 'k', 'M' with 'x'", strict = TRUE, fixed = TRUE
+)
+
+# Values in 'old' that only differ in their case are fine
+expect_message(
+  expect_identical(
+    replace_vals(x = x_alt, old = c("M", "m"), new = "x", ignore_case = FALSE,
+                 allow_multiple = TRUE, warn_absent = TRUE,
+                 warn_case_old = "always", quiet = FALSE),
+    c("x", "l", "k", "x", "L", "K", "x")),
+  pattern = "Replaced values 'm', 'M' with 'x'", strict = TRUE, fixed = TRUE
 )
 
 # Catch false-positive matches if tolower(old) is equal to tolower(new)
