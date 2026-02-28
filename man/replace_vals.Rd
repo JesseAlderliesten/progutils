@@ -11,7 +11,8 @@ replace_vals(
   ignore_case = FALSE,
   allow_multiple = TRUE,
   warn_absent = TRUE,
-  warn_newcase = c("always", "ignore_case", "never"),
+  warn_case_new = c("always", "ignore_case", "case_sensitive", "never"),
+  warn_case_old = c("case_sensitive", "never", "always", "ignore_case"),
   quiet = FALSE
 )
 }
@@ -33,10 +34,12 @@ match \code{x}? If \code{FALSE}, an error is thrown if multiple values of \code{
 \code{x}? If \code{new} is found, it is silently assumed replacement is not necessary
 anymore.}
 
-\item{warn_newcase}{Character string indicating when a warning should be
-issued if values in \code{x} are a case-insensitive match but not a case-sensitive
-match to \code{new}. Possible values are \code{"always"} to always warn, \code{"ignore_case"}
-to only warn if \code{ignore_case} is \code{TRUE}, and \code{"never"} to never warn.}
+\item{warn_case_new, warn_case_old}{Character strings indicating when a warning
+should be issued if values in \code{x} are a case-insensitive match but not a
+case-sensitive match to \code{new} or \code{old}, respectively. Possible values are
+\code{"always"} to always warn, \code{"ignore_case"} to only warn if \code{ignore_case} is
+\code{TRUE}, \code{"case_sensitive"} to only warn if \code{ignore_case} is \code{FALSE} and
+\code{"never"} to never warn.}
 
 \item{quiet}{\code{TRUE} or \code{FALSE}: suppress printing a message with the values
 that have been replaced?}

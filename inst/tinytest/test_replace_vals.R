@@ -15,9 +15,16 @@ x_factor_NA <- addNA(as.factor(c("a", NA_character_, "c", "", "e")))
 
 error_mult_old <- "Multiple matches to 'old' were found: "
 msg_replace <- paste0("Replaced values '", old, "' with '", new, "'")
-msg_replace_mult <- paste0("Replaced values ", old_mult_quoted, " with '", new, "'")
-warn_input_new <- "checkinput::is_character(new, allow_empty = TRUE, allow_NA = TRUE) is not TRUE"
-warn_input_old <- "checkinput::all_characters(old, allow_empty = TRUE, allow_NA = TRUE) is not TRUE"
+msg_replace_mult <- paste0("Replaced values ", old_mult_quoted, " with '", new,
+                           "'")
+warn_input_new <- paste0("checkinput::is_character(new, allow_empty = TRUE,",
+                         " allow_NA = TRUE) is not TRUE")
+warn_input_old <- paste0("checkinput::all_characters(old, allow_empty = TRUE,",
+                         " allow_NA = TRUE) is not TRUE")
+warn_match_case <- paste0(") are a case-insensitive match but not a",
+                          " case-sensitive match to ")
+warn_match_case_new <- paste0(warn_match_case, "'new' (")
+warn_match_case_old <- paste0(warn_match_case, "'old' (")
 warn_none_old <- "None of the values of argument 'old' "
 
 
@@ -147,27 +154,44 @@ expect_message(
   expect_identical(
     replace_vals(x = letters[c(12:13, 13)], old = letters[13:11], new = new,
                  allow_multiple = TRUE, warn_absent = TRUE, quiet = FALSE),
-    letters[rep(2, 3)]), pattern = "Replaced values 'l', 'm' with 'b'",
-  strict = TRUE, fixed = TRUE)
+    letters[rep(2, 3)]),
+  pattern = "Replaced values 'l', 'm' with 'b'", strict = TRUE, fixed = TRUE)
 
 ##### Handling case #####
-for(warn_newcase in c("always", "ignore_case")) {
+for(warn_case_new in c("always", "ignore_case")) {
   expect_warning(
     expect_identical(
       replace_vals(x = "B", old = "a", new = "b", ignore_case = TRUE,
                    allow_multiple = FALSE, warn_absent = TRUE,
-                   warn_newcase = warn_newcase, quiet = FALSE),
+                   warn_case_new = warn_case_new, quiet = FALSE),
       "B"),
-    pattern = paste0("Values in 'x' ('B') are a case-insensitive match but not a",
-                     " case-sensitive match to 'new' ('b'): 'B'"),
+    pattern = paste0("Values in 'x' ('B'", warn_match_case_new, "'b'): 'B'"),
     strict = TRUE, fixed = TRUE)
 }
 
 expect_warning(
   expect_identical(
+    replace_vals(x = "B", old = "a", new = "b", ignore_case = FALSE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_new = "case_sensitive", quiet = FALSE),
+    "B"),
+  pattern = paste0("Values in 'x' ('B'", warn_match_case_new, "'b'): 'B'"),
+  strict = TRUE, fixed = TRUE)
+
+expect_warning(
+  expect_identical(
+    replace_vals(x = "B", old = "a", new = "b", ignore_case = FALSE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_new = "always", quiet = FALSE),
+    "B"),
+  pattern = paste0("Values in 'x' ('B'", warn_match_case_new, "'b'): 'B'"),
+  strict = TRUE, fixed = TRUE)
+
+expect_warning(
+  expect_identical(
     replace_vals(x = "B", old = "a", new = "b", ignore_case = TRUE,
                  allow_multiple = FALSE, warn_absent = TRUE,
-                 warn_newcase = "never", quiet = FALSE),
+                 warn_case_new = "never", quiet = FALSE),
     "B"),
   pattern = paste0(warn_none_old, "('a') were found in 'x' ('B')"),
   strict = TRUE, fixed = TRUE)
@@ -183,9 +207,19 @@ expect_warning(
 expect_message(
   expect_identical(
     replace_vals(x = "A", old = "a", new = "b", ignore_case = TRUE,
-                 allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "case_sensitive", quiet = FALSE),
     "b"),
   pattern = "Replaced values 'A' with 'b'", strict = TRUE, fixed = TRUE)
+
+expect_warning(
+  expect_identical(
+    replace_vals(x = "A", old = "a", new = "b", ignore_case = TRUE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "ignore_case", quiet = FALSE),
+    "b"),
+  pattern = paste0("Values in 'x' ('A'", warn_match_case_old, "'a'): 'A'"),
+  strict = TRUE, fixed = TRUE)
 
 expect_warning(
   expect_identical(
@@ -200,46 +234,115 @@ for(ignore_case in c(TRUE, FALSE)) {
   expect_message(
     expect_identical(
       replace_vals(x = "a", old = "a", new = "b", ignore_case = ignore_case,
-                   allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
+                   allow_multiple = FALSE, warn_absent = TRUE,
+                   warn_case_new = "always", warn_case_old = "always",
+                   quiet = FALSE),
       "b"),
-    pattern = "Replaced values 'a' with 'b'",
-    strict = TRUE, fixed = TRUE)
+    pattern = "Replaced values 'a' with 'b'", strict = TRUE, fixed = TRUE)
+
+  expect_warning(
+    expect_identical(
+      replace_vals(x = "A", old = "a", new = "A", ignore_case = ignore_case,
+                   allow_multiple = FALSE, warn_absent = TRUE,
+                   warn_case_old = "always", quiet = FALSE),
+      "A"),
+    pattern = paste0("Values in 'x' ('A'", warn_match_case_old, "'a'): 'A'"),
+    strict = TRUE, fixed = TRUE
+  )
 
   expect_silent(
     expect_identical(
-      replace_vals(x = "A", old = "a", new = "A", ignore_case = TRUE,
-                   allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
+      replace_vals(x = "A", old = "a", new = "A", ignore_case = ignore_case,
+                   allow_multiple = FALSE, warn_absent = TRUE,
+                   warn_case_old = "never", quiet = FALSE),
       "A")
   )
 }
 
-expect_error(
-  replace_vals(x = x_alt, old = c("M", "k"), new = "x", ignore_case = TRUE,
-               allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
-  pattern = paste0("Multiple matches to 'old' ('M', 'k') were found in 'x' (",
-                   x_alt_quoted, "): ", match_mult_quoted), fixed = TRUE
+expect_warning(
+  expect_identical(
+    replace_vals(x = "A", old = "a", new = "A", ignore_case = TRUE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "ignore_case", quiet = FALSE),
+    "A"),
+  pattern = paste0("Values in 'x' ('A'", warn_match_case_old, "'a'): 'A'"),
+  strict = TRUE, fixed = TRUE
 )
+
+expect_silent(
+  expect_identical(
+    replace_vals(x = "A", old = "a", new = "A", ignore_case = FALSE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "ignore_case", quiet = FALSE),
+    "A")
+)
+
+expect_silent(
+  expect_identical(
+    replace_vals(x = "A", old = "a", new = "A", ignore_case = TRUE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "case_sensitive", quiet = FALSE),
+    "A")
+)
+
+expect_warning(
+  expect_identical(
+    replace_vals(x = "A", old = "a", new = "A", ignore_case = FALSE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "case_sensitive", quiet = FALSE),
+    "A"),
+  pattern = paste0("Values in 'x' ('A'", warn_match_case_old, "'a'): 'A'"),
+  strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_error(
+    replace_vals(x = x_alt, old = c("M", "k"), new = "x", ignore_case = TRUE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "ignore_case", quiet = FALSE),
+    pattern = paste0("Multiple matches to 'old' ('M', 'k') were found in 'x' (",
+                     x_alt_quoted, "): ", match_mult_quoted), fixed = TRUE),
+  pattern = paste0("Values in 'x' ('m', 'l', 'k', 'M', 'L', 'K', 'm'",
+                   warn_match_case_old, "'M', 'k'): 'm', 'K', 'm'"),
+  strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = x_alt, old = c("M", "k"), new = "x", ignore_case = TRUE,
-                 allow_multiple = TRUE, warn_absent = TRUE, quiet = FALSE),
+                 allow_multiple = TRUE, warn_absent = TRUE,
+                 warn_case_old = "never", quiet = FALSE),
     c("x", "l", "x", "x", "L", "x", "x")),
   pattern = paste0("Replaced values ", match_mult_quoted, " with 'x'"),
   strict = TRUE, fixed = TRUE
 )
 
-expect_error(
-  replace_vals(x = x_alt, old = c("M", "k"), new = "x", ignore_case = FALSE,
-               allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
-  pattern = paste0("Multiple matches to 'old' ('M', 'k') were found in 'x' (",
-                   x_alt_quoted, "): 'k', 'M'"), fixed = TRUE
+expect_warning(
+  expect_identical(
+    replace_vals(x = x_alt, old = c("M", "k"), new = "x", ignore_case = TRUE,
+                 allow_multiple = TRUE, warn_absent = TRUE,
+                 warn_case_old = "ignore_case", quiet = FALSE),
+    c("x", "l", "x", "x", "L", "x", "x")),
+  pattern = paste0("Values in 'x' ('m', 'l', 'k', 'M', 'L', 'K', 'm'",
+                   warn_match_case_old, "'M', 'k'): 'm', 'K', 'm'"),
+  strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_error(
+    replace_vals(x = x_alt, old = c("M", "k"), new = "x", ignore_case = FALSE,
+                 allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
+    pattern = paste0("Multiple matches to 'old' ('M', 'k') were found in 'x' (",
+                     x_alt_quoted, "): 'k', 'M'"), fixed = TRUE),
+  pattern = paste0("Values in 'x' ('m', 'l', 'k', 'M', 'L', 'K', 'm'",
+                   warn_match_case_old, "'M', 'k'): 'm', 'K', 'm'"),
+  strict = TRUE, fixed = TRUE
 )
 
 expect_message(
   expect_identical(
     replace_vals(x = x_alt, old = c("M", "k"), new = "x", ignore_case = FALSE,
-                 allow_multiple = TRUE, warn_absent = TRUE, quiet = FALSE),
+                 allow_multiple = TRUE, warn_absent = TRUE,
+                 warn_case_old = "never", quiet = FALSE),
     c("m", "l", "x", "x", "L", "K", "m")),
   pattern = "Replaced values 'k', 'M' with 'x'", strict = TRUE, fixed = TRUE
 )
@@ -247,7 +350,8 @@ expect_message(
 # Catch false-positive matches if tolower(old) is equal to tolower(new)
 expect_silent(
   expect_identical(
-    replace_vals(x = "A", old = "a", new = "A", ignore_case = TRUE),
+    replace_vals(x = "A", old = "a", new = "A", ignore_case = TRUE,
+                 warn_case_new = "always", warn_case_old = "case_sensitive"),
     "A"))
 
 ##### Factor input #####
@@ -285,9 +389,9 @@ expect_silent(
 )
 
 expect_error(
-  replace_vals(x = as.factor(letters[c(12:13, 13)]), old = letters[13:11], new = new,
-               ignore_case = TRUE, allow_multiple = FALSE, warn_absent = TRUE,
-               quiet = FALSE),
+  replace_vals(x = as.factor(letters[c(12:13, 13)]), old = letters[13:11],
+               new = new, ignore_case = TRUE, allow_multiple = FALSE,
+               warn_absent = TRUE, quiet = FALSE),
   pattern = paste0("Multiple matches to 'old' (", paste_quoted(letters[13:11]),
                    ") were found in 'x' (",
                    paste_quoted(levels(as.factor(letters[c(12:13, 13)]))),
@@ -296,33 +400,48 @@ expect_error(
 
 expect_message(
   expect_identical(
-    replace_vals(x = as.factor(letters[c(12:13, 13)]), old = letters[13:11], new = new,
-                 ignore_case = TRUE, allow_multiple = TRUE, warn_absent = TRUE,
-                 quiet = FALSE),
+    replace_vals(x = as.factor(letters[c(12:13, 13)]), old = letters[13:11],
+                 new = new, ignore_case = TRUE, allow_multiple = TRUE,
+                 warn_absent = TRUE, quiet = FALSE),
     as.factor(letters[rep(2, 3)])),
   pattern = "Replaced values 'l', 'm' with 'b'", strict = TRUE, fixed = TRUE)
 
 expect_silent(
   expect_identical(
     replace_vals(x = as.factor("A"), old = "a", new = "A", ignore_case = FALSE,
-                 allow_multiple = FALSE, warn_absent = TRUE, quiet = FALSE),
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "ignore_case", quiet = FALSE),
     as.factor("A"))
 )
 
-expect_error(
-  replace_vals(x = as.factor(x_alt), old = c("M", "k"), new = "x",
-               ignore_case = TRUE, allow_multiple = FALSE, warn_absent = TRUE,
-               quiet = FALSE),
-  pattern = paste0("Multiple matches to 'old' (", paste_quoted(c("M", "k")),
-                   ") were found in 'x' (", paste_quoted(levels(as.factor(x_alt))),
-                   "): ", match_mult_quoted), fixed = TRUE
+expect_warning(
+  expect_identical(
+    replace_vals(x = as.factor("A"), old = "a", new = "A", ignore_case = FALSE,
+                 allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "case_sensitive", quiet = FALSE),
+    as.factor("A")),
+  pattern = paste0("Values in 'x' ('A'", warn_match_case_old, "'a'): 'A'"),
+  strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_error(
+    replace_vals(x = as.factor(x_alt), old = c("M", "k"), new = "x",
+                 ignore_case = TRUE, allow_multiple = FALSE, warn_absent = TRUE,
+                 warn_case_old = "ignore_case", quiet = FALSE),
+    pattern = paste0("Multiple matches to 'old' (", paste_quoted(c("M", "k")),
+                     ") were found in 'x' (", paste_quoted(levels(as.factor(x_alt))),
+                     "): ", match_mult_quoted), fixed = TRUE),
+  pattern = paste0("Values in 'x' ('k', 'K', 'l', 'L', 'm', 'M'",
+                   warn_match_case_old, "'M', 'k'): 'K', 'm'"),
+  strict = TRUE, fixed = TRUE
 )
 
 expect_message(
   expect_identical(
     replace_vals(x = as.factor(x_alt), old = c("M", "k"), new = "x",
                  ignore_case = TRUE, allow_multiple = TRUE, warn_absent = TRUE,
-                 quiet = FALSE),
+                 warn_case_old = "case_sensitive", quiet = FALSE),
     factor(x = c("x", "l", "x", "x", "L", "x", "x"), levels = c("x", "l", "L"))),
   pattern = paste0("Replaced values ", match_mult_quoted, " with 'x'"),
   strict = TRUE, fixed = TRUE
@@ -331,20 +450,22 @@ expect_message(
 expect_error(
   replace_vals(x = as.factor(x_alt), old = c("M", "k"), new = "x",
                ignore_case = FALSE, allow_multiple = FALSE, warn_absent = TRUE,
-               quiet = FALSE),
+               warn_case_old = "ignore_case", quiet = FALSE),
   pattern = paste0("Multiple matches to 'old' (", paste_quoted(c("M", "k")),
                    ") were found in 'x' (", paste_quoted(levels(as.factor(x_alt))),
                    "): 'k', 'M'"), fixed = TRUE
 )
 
-expect_message(
+expect_warning(
   expect_identical(
     replace_vals(x = as.factor(x_alt), old = c("M", "k"), new = "x",
                  ignore_case = FALSE, allow_multiple = TRUE, warn_absent = TRUE,
                  quiet = FALSE),
     factor(x = c("m", "l", "x", "x", "L", "K", "m"),
            levels = c("x", "K", "l", "L", "m"))),
-  pattern = "Replaced values 'k', 'M' with 'x'", strict = TRUE, fixed = TRUE
+  pattern = paste0("Values in 'x' ('k', 'K', 'l', 'L', 'm', 'M'",
+                   warn_match_case_old, "'M', 'k'): 'K', 'm'"),
+  strict = TRUE, fixed = TRUE
 )
 
 ##### NA and "": character input #####
@@ -353,8 +474,7 @@ expect_message(
     replace_vals(x = c("a", NA_character_, "c", "", "e"),
                  old = NA_character_, new = "x"),
     c("a", "x", "c", "", "e")),
-  pattern = "Replaced values 'NA' with 'x'",
-  strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values 'NA' with 'x'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
@@ -367,8 +487,7 @@ expect_message(
     replace_vals(x = c("a", NA_character_, "c", "", "e"),
                  old = "", new = NA_character_),
     c("a", NA_character_, "c", NA_character_, "e")),
-  pattern = "Replaced values '' with 'NA'",
-  strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
@@ -381,8 +500,7 @@ expect_message(
   expect_identical(
     replace_vals(x = x_factor_NA, old = NA_character_, new = "x"),
     factor(c("a", "x", "c", "", "e"), levels = c("", "a", "c", "e", "x"))),
-  pattern = "Replaced values 'NA' with 'x'",
-  strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values 'NA' with 'x'", strict = TRUE, fixed = TRUE)
 
 # No need to warn about adding level 'NA' if it already was the last level.
 expect_message(
@@ -396,8 +514,7 @@ expect_message(
   expect_identical(
     replace_vals(x = x_factor_NA, old = "", new = NA_character_),
     addNA(as.factor(c("a", NA_character_, "c", NA_character_, "e")))),
-  pattern = "Replaced values '' with 'NA'",
-  strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
 
 expect_warning(
   expect_identical(
@@ -411,8 +528,7 @@ expect_message(
   expect_identical(
     replace_vals(x = x_factor, old = "", new = NA_character_),
     addNA(as.factor(c("a", "c", NA_character_, "e")))),
-  pattern = "Replaced values '' with 'NA'",
-  strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
@@ -515,14 +631,14 @@ expect_error(
 # match.arg() uses partial matching (!)
 expect_message(
   replace_vals(x = x, old = old, new = new, ignore_case = FALSE,
-               allow_multiple = FALSE, warn_absent = TRUE, warn_newcase = "a",
+               allow_multiple = FALSE, warn_absent = TRUE, warn_case_new = "a",
                quiet = FALSE),
   pattern = msg_replace, fixed = TRUE)
 
 # match.arg() warns not to check the warning message.
 expect_error(
   replace_vals(x = x, old = old, new = new, ignore_case = FALSE,
-               allow_multiple = FALSE, warn_absent = TRUE, warn_newcase = "q",
+               allow_multiple = FALSE, warn_absent = TRUE, warn_case_new = "q",
                quiet = FALSE),
   pattern = "always.+never", fixed = FALSE, ignore.case = FALSE)
 

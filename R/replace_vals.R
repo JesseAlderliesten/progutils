@@ -11,10 +11,12 @@
 #' @param warn_absent `TRUE` or `FALSE`: warn if `old` nor `new` are found in
 #' `x`? If `new` is found, it is silently assumed replacement is not necessary
 #' anymore.
-#' @param warn_newcase Character string indicating when a warning should be
-#' issued if values in `x` are a case-insensitive match but not a case-sensitive
-#' match to `new`. Possible values are `"always"` to always warn, `"ignore_case"`
-#' to only warn if `ignore_case` is `TRUE`, and `"never"` to never warn.
+#' @param warn_case_new,warn_case_old Character strings indicating when a warning
+#' should be issued if values in `x` are a case-insensitive match but not a
+#' case-sensitive match to `new` or `old`, respectively. Possible values are
+#' `"always"` to always warn, `"ignore_case"` to only warn if `ignore_case` is
+#' `TRUE`, `"case_sensitive"` to only warn if `ignore_case` is `FALSE` and
+#' `"never"` to never warn.
 #' @param quiet `TRUE` or `FALSE`: suppress printing a message with the values
 #' that have been replaced?
 #'
@@ -68,11 +70,15 @@
 #'              allow_multiple = TRUE)
 #'
 #' @export
-replace_vals <- function(x, old, new, ignore_case = FALSE, allow_multiple = TRUE,
-                         warn_absent = TRUE,
-                         warn_newcase = c("always", "ignore_case", "never"),
+replace_vals <- function(x, old, new, ignore_case = FALSE,
+                         allow_multiple = TRUE, warn_absent = TRUE,
+                         warn_case_new = c("always", "ignore_case",
+                                           "case_sensitive", "never"),
+                         warn_case_old = c("case_sensitive", "never",
+                                           "always", "ignore_case"),
                          quiet = FALSE) {
-  warn_newcase <- match.arg(warn_newcase, several.ok = FALSE)
+  warn_case_new <- match.arg(warn_case_new, several.ok = FALSE)
+  warn_case_old <- match.arg(warn_case_old, several.ok = FALSE)
   stopifnot(is.null(dim(x)), is.character(x) || is.factor(x), length(x) > 0L,
             checkinput::all_characters(old, allow_empty = TRUE, allow_NA = TRUE),
             "values in 'old' should be unique" = anyDuplicated(old) == 0L,
@@ -87,20 +93,13 @@ replace_vals <- function(x, old, new, ignore_case = FALSE, allow_multiple = TRUE
          paste_quoted(old), ")")
   }
 
-  if(warn_newcase == "always" || (warn_newcase == "ignore_case" && ignore_case)) {
-    bool_warn_case <- tolower(x) %in% tolower(new) & !(x %in% new)
-    if(any(bool_warn_case)) {
-      warning(paste0("Values in 'x' (", paste_quoted(x), ") are a case-insensitive",
-                     " match but not a case-sensitive match to 'new' (",
-                     paste_quoted(new), "): ", paste_quoted(x[bool_warn_case])))
-    }
-  }
-
   if(is.factor(x)) {
     x_orig <- x
     levels(x) <- replace_vals(
       x = levels(x), old = old, new = new, ignore_case = ignore_case,
-      allow_multiple = allow_multiple, warn_absent = warn_absent, quiet = quiet)
+      allow_multiple = allow_multiple, warn_absent = warn_absent,
+      warn_case_new = warn_case_new, warn_case_old = warn_case_old,
+      quiet = quiet)
     if(anyNA(x)) {
       # No need to warn about adding level 'NA' if it already was the last level.
       if(anyNA(rev(levels(x_orig))[-1])) {
@@ -110,6 +109,26 @@ replace_vals <- function(x, old, new, ignore_case = FALSE, allow_multiple = TRUE
       x <- addNA(x)
     }
     return(x)
+  }
+
+  if(warn_case_new == "always" || (ignore_case && warn_case_new == "ignore_case") ||
+     (!ignore_case && warn_case_new == "case_sensitive")) {
+    bool_warn_case <- tolower(x) %in% tolower(new) & !(x %in% new)
+    if(any(bool_warn_case)) {
+      warning(paste0("Values in 'x' (", paste_quoted(x), ") are a case-insensitive",
+                     " match but not a case-sensitive match to 'new' (",
+                     paste_quoted(new), "): ", paste_quoted(x[bool_warn_case])))
+    }
+  }
+
+  if(warn_case_old == "always" || (ignore_case && warn_case_old == "ignore_case") ||
+     (!ignore_case && warn_case_old == "case_sensitive")) {
+    bool_warn_case <- tolower(x) %in% tolower(old) & !(x %in% old)
+    if(any(bool_warn_case)) {
+      warning(paste0("Values in 'x' (", paste_quoted(x), ") are a case-insensitive",
+                     " match but not a case-sensitive match to 'old' (",
+                     paste_quoted(old), "): ", paste_quoted(x[bool_warn_case])))
+    }
   }
 
   if(!ignore_case) {
