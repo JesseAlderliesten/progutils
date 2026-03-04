@@ -47,7 +47,17 @@ expect_silent(expect_identical(vect_to_char(x = unname(x_in)),
 expect_silent(expect_identical(vect_to_char(x = x_in_char), x_out_char))
 expect_silent(expect_identical(vect_to_char(x = unname(x_in_char)),
                                "abc, def, this is text"))
-
+x_char_newlines <- paste0(x_in_char[1], ", ", x_in_char[2], "\n", x_in_char[3])
+expect_silent(
+  expect_identical(
+    vect_to_char(x = x_char_newlines, ignore_newlines = FALSE),
+    x_char_newlines)
+)
+expect_silent(
+  expect_identical(
+    vect_to_char(x = x_char_newlines, ignore_newlines = TRUE),
+    "abc, def this is text")
+)
 expect_silent(expect_identical(
   vect_to_char(x = x_in / 8, signif = 2L),
   paste(names(x_in), signif(x = x_in / 8, digits = 2L), sep = ": ",
