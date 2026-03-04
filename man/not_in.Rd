@@ -82,6 +82,8 @@ is based.
 
 Other functions to check equality: 
 \code{\link{are_equal}()},
-\code{\link{get_filename}()}
+\code{\link{check_case}()},
+\code{\link{get_filename}()},
+\code{\link{replace_vals}()}
 }
 \concept{functions to check equality}

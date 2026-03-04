@@ -4,7 +4,14 @@
 \alias{vect_to_char}
 \title{Convert a vector to a character string}
 \usage{
-vect_to_char(x, signif = 3L, width = Inf, sep = ": ", collapse = ", ")
+vect_to_char(
+  x,
+  signif = 3L,
+  width = Inf,
+  sep = ": ",
+  collapse = ", ",
+  ignore_newlines = TRUE
+)
 }
 \arguments{
 \item{x}{A vector, \link{factor}, non-dataframe \link{list}, or \code{NULL}.}
@@ -21,6 +28,9 @@ values. Ignored if \code{x} does not have names.}
 \item{collapse}{Character string of length one to collapse values into a
 single character string, or \code{NULL} to return each value as an element of a
 character vector.}
+
+\item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
+by a blank character? Newlines at the end of \code{x} are always removed.}
 }
 \value{
 The names and values in \code{x}, with values of numeric \code{x} rounded to \code{signif}
@@ -79,6 +89,7 @@ Other functions to modify character vectors:
 \code{\link{paste_quoted}()},
 \code{\link{reorder_cols}()},
 \code{\link{replace_vals}()},
+\code{\link{unpaste_unquote}()},
 \code{\link{wrap_text}()}
 
 Other functions to modify factors: 

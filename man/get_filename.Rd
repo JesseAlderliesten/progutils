@@ -76,7 +76,9 @@ Other functions to handle paths and directories:
 
 Other functions to check equality: 
 \code{\link{are_equal}()},
-\code{\link{not_in}()}
+\code{\link{check_case}()},
+\code{\link{not_in}()},
+\code{\link{replace_vals}()}
 }
 \concept{functions to check equality}
 \concept{functions to handle paths and directories}

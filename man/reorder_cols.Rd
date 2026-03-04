@@ -44,6 +44,7 @@ Other functions to modify character vectors:
 \code{\link{file_path_sans_ext}()},
 \code{\link{paste_quoted}()},
 \code{\link{replace_vals}()},
+\code{\link{unpaste_unquote}()},
 \code{\link{vect_to_char}()},
 \code{\link{wrap_text}()}
 }

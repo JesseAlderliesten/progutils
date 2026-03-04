@@ -48,7 +48,9 @@ for background on numerical equality;
 the vignette about type coercion: \code{vignette("Type_Coercion", package = "checkinput")}.
 
 Other functions to check equality: 
+\code{\link{check_case}()},
 \code{\link{get_filename}()},
-\code{\link{not_in}()}
+\code{\link{not_in}()},
+\code{\link{replace_vals}()}
 }
 \concept{functions to check equality}
