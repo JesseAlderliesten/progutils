@@ -32,6 +32,10 @@
 #' Reordering levels of factor `f` by replacing levels through code like
 #' `levels(f) <- levels(f)[<some order>]` does *not* work, see the last `Example`.
 #'
+#' @section Programming notes:
+#' Could also use an approach like (see [levels()]):
+#' `levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))`
+#'
 #' @seealso
 #' [reorder_cols] [stats::relevel()] to assign one reference level to a factor
 #'

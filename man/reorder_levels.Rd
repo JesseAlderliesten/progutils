@@ -46,6 +46,12 @@ Reordering levels of factor \code{f} by replacing levels through code like
 \verb{levels(f) <- levels(f)[<some order>]} does \emph{not} work, see the last \code{Example}.
 }
 
+\section{Programming notes}{
+
+Could also use an approach like (see \code{\link[=levels]{levels()}}):
+\code{levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))}
+}
+
 \examples{
 orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
 orig
