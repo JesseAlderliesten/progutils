@@ -38,19 +38,17 @@ check_case <- function(x, signal = c("error", "warning", "message", "quiet")) {
     x <- x[!bool_NA]
   }
 
-  bool_lower <- x == tolower(x)
-  bool_upper <- x == toupper(x)
-  bool_both <- bool_lower & bool_upper
-  bool_lower <- bool_lower & !bool_both
-  bool_upper <- bool_upper & !bool_both
+  bool_anylower <- x == tolower(x)
+  bool_anyupper <- x == toupper(x)
 
-  x_lower <- x[bool_lower]
-  x_upper <- x[bool_upper]
-  x_mixed <- x[!bool_lower & !bool_upper & !bool_both]
+  # The combination x[bool_anylower & bool_anyupper] would identify values that
+  # cannot occur in different case, so does not have to be used.
+  x_lower <- x[bool_anylower & !bool_anyupper]
+  x_upper <- x[bool_anyupper & !bool_anylower]
+  x_mixed <- x[!bool_anylower & !bool_anyupper]
 
-  bool_lower_other <- x_lower %in% tolower(c(x_upper, x_mixed))
-  x_lower_other <- x_lower[bool_lower_other]
-  if(any(bool_lower_other)) {
+  x_lower_other <- x_lower[x_lower %in% tolower(c(x_upper, x_mixed))]
+  if(length(x_lower_other) > 0L) {
     bool_upper_in_lower <- tolower(x_upper) %in% x_lower_other
     bool_mixed_in_lower <- tolower(x_mixed) %in% x_lower_other
     x_lower_other <- c(x_lower_other, x_upper[bool_upper_in_lower],
@@ -59,9 +57,8 @@ check_case <- function(x, signal = c("error", "warning", "message", "quiet")) {
     x_mixed <- x_mixed[!bool_mixed_in_lower]
   }
 
-  bool_upper_other <- x_upper %in% toupper(x_mixed)
-  x_upper_other <- x_upper[bool_upper_other]
-  if(any(bool_upper_other)) {
+  x_upper_other <- x_upper[x_upper %in% toupper(x_mixed)]
+  if(length(x_upper_other) > 0L) {
     bool_mixed_in_upper <- toupper(x_mixed) %in% x_upper_other
     x_upper_other <- c(x_upper_other, x_mixed[bool_mixed_in_upper])
     x_mixed <- x_mixed[!bool_mixed_in_upper]
@@ -69,11 +66,10 @@ check_case <- function(x, signal = c("error", "warning", "message", "quiet")) {
 
   # Duplicated values have been removed from 'x' so any duplicate found is
   # caused by a difference in case
-  bool_mixed_diff <- duplicated(tolower(x_mixed))
-  x_mixed_diff <- x_mixed[bool_mixed_diff]
-  if(any(bool_mixed_diff)) {
-    x_mixed_diff <- c(x_mixed_diff, x_mixed[duplicated(tolower(x_mixed),
-                                                       fromLast = TRUE)])
+  x_mixed_diff <- x_mixed[duplicated(tolower(x_mixed))]
+  if(length(x_mixed_diff) > 0L) {
+    x_mixed_diff <- c(x_mixed_diff,
+                      x_mixed[duplicated(tolower(x_mixed), fromLast = TRUE)])
   }
 
   vals <- c(x_lower_other, x_upper_other, x_mixed_diff)
