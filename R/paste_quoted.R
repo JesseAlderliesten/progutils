@@ -19,7 +19,7 @@
 #'
 #' @seealso
 #' [toString()] which can be used instead of `paste(x, collapse = ", ")`
-#' [sQuote()] [paste0()]
+#' [sQuote()] [paste0()] [unpaste_unquote()] for the opposite of `paste_quoted()`
 #'
 #' @family functions to modify character vectors
 #'
