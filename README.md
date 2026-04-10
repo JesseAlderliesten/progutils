@@ -1,5 +1,9 @@
 
+<!-- badges: start -->
+
 ![](https://img.shields.io/github/r-package/v/JesseAlderliesten/progutils?color=blue)
+[![R-CMD-check](https://github.com/JesseAlderliesten/progutils/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JesseAlderliesten/progutils/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 # progutils
 
@@ -22,15 +26,15 @@ remotes::install_github(repo = "JesseAlderliesten/progutils", dependencies = TRU
 ```
 
 For information about installing and configuring R and RStudio, see my
-[repository
-‘checkrpkgs’](https://github.com/JesseAlderliesten/checkrpkgs).
+repository
+[checkrpkgs](https://github.com/JesseAlderliesten/checkrpkgs).
 
 ## Examples
 
 Every once in a while, reading data into R results in a factor that
 should be converted to a numeric vector. The code below illustrates that
 using `as.numeric(x)` does *not* work to achieve this while
-`as.numeric_safe()` *does*.
+`as.numeric_safe()` *does* work.
 
 ``` r
 library(progutils)

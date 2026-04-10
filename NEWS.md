@@ -1,3 +1,10 @@
+# devel
+
+### Miscellaneous ###
+- `progutils` now uses GitHub action `check-standard` on all branches (see
+  `?usethis::use_github_action()`).
+
+
 # progutils 0.0.3
 
 ### Breaking changes
@@ -7,7 +14,7 @@
   normalise paths.
 - `get_filename()` now uses `winslash = "/"` instead of `winslash = "\\"` to
   normalise paths.
-- Deleted `get_paths()`: use `.libPaths()` instead.
+- `get_paths()`: deleted. Use `.libPaths()` instead.
 
 ### Added functions
 - `create_path()` to create file paths.
