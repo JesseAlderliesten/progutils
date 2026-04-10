@@ -16,10 +16,9 @@
 #' `x` with reordered columns.
 #'
 #' @seealso
-#' [order()] [sort()]
+#' [order()] [reorder_levels] [sort()]
 #'
-#' @family
-#' functions for reordering
+#' @family functions to modify character vectors
 #'
 #' @examples
 #' test_df <- data.frame(a = 1:2, b = 11:12, c = 21:22)

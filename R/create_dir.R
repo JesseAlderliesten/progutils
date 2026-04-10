@@ -40,15 +40,14 @@
 #' The requested directory is created if does not yet exist.
 #'
 #' @seealso
-#' [get_filename()] to check if a file exists and is a unique match to a pattern;
-#' [create_path()] to create a path, and references there about file paths;
-#' [dir.exists()] and [dir.create()] used by this function.
+#' [create_path()] to create a path, and references there about file paths,
+#' [dir.exists()] and [dir.create()] used by this function,
+#' [get_filename()] to check if a file exists and is a unique match to a pattern
 #'
 #' `fs::path_sanitize()` to *remove* invalid characters from potential paths,
 #' looking for a wider range of invalid characters.
 #'
-#' @family
-#' functions to check paths and create directories
+#' @family functions to handle paths and directories
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory

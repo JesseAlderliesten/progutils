@@ -37,9 +37,15 @@ reorder_cols(x = test_df, new_order = c("b", "a", "d"))
 
 }
 \seealso{
-\code{\link[=order]{order()}} \code{\link[=sort]{sort()}}
+\code{\link[=order]{order()}} \link{reorder_levels} \code{\link[=sort]{sort()}}
 
-Other functions for reordering: 
-\code{\link{reorder_levels}()}
+Other functions to modify character vectors: 
+\code{\link{as.numeric_safe}()},
+\code{\link{file_path_sans_ext}()},
+\code{\link{paste_quoted}()},
+\code{\link{replace_vals}()},
+\code{\link{unpaste_unquote}()},
+\code{\link{vect_to_char}()},
+\code{\link{wrap_text}()}
 }
-\concept{functions for reordering}
+\concept{functions to modify character vectors}

@@ -104,13 +104,14 @@ rm(my_tempdir)
 
 }
 \seealso{
-\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern;
-\code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
-\code{\link[=normalizePath]{normalizePath()}} to create absolute normalised paths; \code{\link[=create_dir]{create_dir()}} to
-create a directory if it does not yet exists.
+\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern,
+\code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way,
+\code{\link[=normalizePath]{normalizePath()}} to create absolute normalised paths,
+\code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist
 
-Other functions to check paths and create directories: 
+Other functions to handle paths and directories: 
 \code{\link{create_dir}()},
+\code{\link{file_path_sans_ext}()},
 \code{\link{get_filename}()}
 }
-\concept{functions to check paths and create directories}
+\concept{functions to handle paths and directories}

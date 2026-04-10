@@ -83,13 +83,22 @@ str_as_num_base(x_fact) # num [1:3] 1 2 3 # wrong!
 
 }
 \seealso{
-\code{\link[utils:type.convert]{utils::type.convert()}}; \code{\link[=formatC]{formatC()}} and \link[=options]{option}
-\code{scipen} on formatting numbers.
+\code{\link[=formatC]{formatC()}} and \link[=options]{option} \code{scipen} on formatting numbers,
+\code{\link[utils:type.convert]{utils::type.convert()}}
 
 Other functions to modify character vectors: 
+\code{\link{file_path_sans_ext}()},
 \code{\link{paste_quoted}()},
+\code{\link{reorder_cols}()},
+\code{\link{replace_vals}()},
+\code{\link{unpaste_unquote}()},
 \code{\link{vect_to_char}()},
 \code{\link{wrap_text}()}
+
+Other functions to modify factors: 
+\code{\link{reorder_levels}()},
+\code{\link{replace_vals}()},
+\code{\link{vect_to_char}()}
 }
 \concept{functions to modify character vectors}
 \concept{functions to modify factors}

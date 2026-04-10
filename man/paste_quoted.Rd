@@ -34,11 +34,15 @@ paste_quoted(c(a = 3, b = 4)) # "'3', '4'" # Warns about dropping names.
 
 }
 \seealso{
-\code{\link[=sQuote]{sQuote()}}; \code{\link[=toString]{toString()}} which can be used instead of
-\code{paste(x, collapse = ", ")}; \code{\link[=paste0]{paste0()}}.
+\code{\link[=toString]{toString()}} which can be used instead of \code{paste(x, collapse = ", ")}
+\code{\link[=sQuote]{sQuote()}} \code{\link[=paste0]{paste0()}} \code{\link[=unpaste_unquote]{unpaste_unquote()}} for the opposite of \code{paste_quoted()}
 
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},
+\code{\link{file_path_sans_ext}()},
+\code{\link{reorder_cols}()},
+\code{\link{replace_vals}()},
+\code{\link{unpaste_unquote}()},
 \code{\link{vect_to_char}()},
 \code{\link{wrap_text}()}
 }

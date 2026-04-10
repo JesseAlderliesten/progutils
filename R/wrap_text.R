@@ -38,7 +38,8 @@
 #' argument `width` in [strwrap()] indicates the width *at* which text should be
 #' wrapped.
 #'
-#' @seealso [cat()]; [paste()]; [strwrap()]; `bbmle:::strwrapx()`.
+#' @seealso [cat()] [paste()] [strwrap()] `bbmle:::strwrapx()`
+#'
 #' @family functions to modify character vectors
 #'
 #' @examples

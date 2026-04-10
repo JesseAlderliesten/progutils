@@ -46,6 +46,12 @@ Reordering levels of factor \code{f} by replacing levels through code like
 \verb{levels(f) <- levels(f)[<some order>]} does \emph{not} work, see the last \code{Example}.
 }
 
+\section{Programming notes}{
+
+Could also use an approach like (see \code{\link[=levels]{levels()}}):
+\code{levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))}
+}
+
 \examples{
 orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
 orig
@@ -57,10 +63,11 @@ orig
 
 }
 \seealso{
-\link{reorder_cols}; \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor.
+\link{reorder_cols} \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor
 
-Other functions for reordering: 
-\code{\link{reorder_cols}()}
+Other functions to modify factors: 
+\code{\link{as.numeric_safe}()},
+\code{\link{replace_vals}()},
+\code{\link{vect_to_char}()}
 }
-\concept{functions for reordering}
-\concept{functions to adjust factors}
+\concept{functions to modify factors}

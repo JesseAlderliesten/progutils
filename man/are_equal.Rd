@@ -39,9 +39,18 @@ are_equal(x = 3, y = c(2, 3, 3 + 1e-8, NA, Inf))
 
 }
 \seealso{
-\code{\link[=all.equal]{all.equal()}} to check more generally for near-equality; \code{\link[=identical]{identical()}} to
-check for exact equality; \link{Comparison} to compare two vectors using binary
-operators; \code{\link[=match]{match()}} to compare non-numeric vectors; \href{https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f}{\R FAQ 7.31}
-for background on numerical equality; the vignette about type coercion:
-\code{vignette("Type_Coercion", package = "checkinput")}.
+\code{\link[=all.equal]{all.equal()}} to check more generally for near-equality,
+\code{\link[=identical]{identical()}} to check for exact equality,
+\link{Comparison} and \code{\link[=match]{match()}} to use binary operators to check (in)equality
+
+\href{https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f}{\R FAQ 7.31}
+for background on numerical equality;
+the vignette about type coercion: \code{vignette("Type_Coercion", package = "checkinput")}.
+
+Other functions to check equality: 
+\code{\link{check_case}()},
+\code{\link{get_filename}()},
+\code{\link{not_in}()},
+\code{\link{replace_vals}()}
 }
+\concept{functions to check equality}

@@ -18,6 +18,9 @@
 #' ending in `"ab..txt"` instead of the nonsense result ending in `"ab..txt.txt"`,
 #' see the `Examples`.
 #'
+#' @family functions to handle paths and directories
+#' @family functions to modify character vectors
+#'
 #' @examples
 #' filename <- "ab..txt"
 #' tools::file_path_sans_ext(filename) # "ab..txt"

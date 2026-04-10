@@ -54,13 +54,12 @@
 #' [progutils::file_path_sans_ext()] from `progutils`.
 #'
 #' @seealso
-#' [get_filename()] to check if a file exists and is a unique match to a pattern;
-#' [file.path()] to construct file paths in a platform-independent way;
-#' [normalizePath()] to create absolute normalised paths; [create_dir()] to
-#' create a directory if it does not yet exists.
+#' [get_filename()] to check if a file exists and is a unique match to a pattern,
+#' [file.path()] to construct file paths in a platform-independent way,
+#' [normalizePath()] to create absolute normalised paths,
+#' [create_dir()] to create a directory if it does not yet exist
 #'
-#' @family
-#' functions to check paths and create directories
+#' @family functions to handle paths and directories
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory

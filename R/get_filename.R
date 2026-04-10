@@ -29,14 +29,16 @@
 #' one such file in directory `dir`. Otherwise an error is thrown.
 #'
 #' @seealso
-#' [create_dir()] to create a directory if does not yet exist; [file.exists()]
-#' and [list.files()] to check for existence of files without checking they are
-#' a unique match to a pattern; [file.info()] and [file.access()] to extract
-#' information about files or directories; [file.path()] to construct file paths
-#' in a platform-independent way; [normalizePath()] to create absolute paths.
+#' [create_dir()] to create a directory if does not yet exist,
+#' [file.exists()] and [list.files()] to check for existence of files without
+#' checking they are a unique match to a pattern,
+#' [file.info()] and [file.access()] to extract information about files or
+#' directories;
+#' [file.path()] to construct file paths in a platform-independent way;
+#' [normalizePath()] to create absolute paths.
 #'
-#' @family
-#' functions to check paths and create directories
+#' @family functions to handle paths and directories
+#' @family functions to check equality
 #'
 #' @examples
 #' # Create files in a temporary directory so we know what is present.

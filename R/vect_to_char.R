@@ -32,7 +32,9 @@
 #' see the last `Example`.
 #'
 #' @seealso [toString()] which can be used if names of `x` can be removed.
+#'
 #' @family functions to modify character vectors
+#' @family functions to modify factors
 #'
 #' @examples
 #' x <- 1:3
@@ -59,7 +61,7 @@
 #'
 #' @export
 vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
-                         collapse = ", ") {
+                         collapse = ", ", ignore_newlines = TRUE) {
   stopifnot(checkinput::is_positive(signif), checkinput::is_positive(width),
             checkinput::is_character(sep),
             is.null(collapse) || checkinput::is_character(collapse))
@@ -92,5 +94,5 @@ vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
   # Not calling wrap_text() directly because it would paste the character vector
   # obtained for 'collapse = NULL' into a single string.
   vapply(X = x, FUN = wrap_text, FUN.VALUE = character(1L), width = width,
-         USE.NAMES = FALSE)
+         ignore_newlines = ignore_newlines, USE.NAMES = FALSE)
 }

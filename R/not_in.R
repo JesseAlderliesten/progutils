@@ -47,9 +47,12 @@
 #' before that was present as unexported function `tools:::'%notin%'`.
 #'
 #' @seealso
-#' [setdiff()] for a similar function which removes duplicates; [are_equal()] to
-#' match numeric input using a tolerance; [match()], and, from \R `4.6.0`
-#' onwards, `'%notin%'`, on which this function is based.
+#' [setdiff()] for a similar function which removes duplicates,
+#' [are_equal()] to match numeric input using a tolerance,
+#' [match()], and, from \R `4.6.0` onwards, `'%notin%'`, on which this function
+#' is based.
+#'
+#' @family functions to check equality
 #'
 #' @examples
 #' x <- letters[1:4]
