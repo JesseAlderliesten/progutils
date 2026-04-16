@@ -15,7 +15,7 @@ expect_silent(
     "txt")
 )
 
-# Nonsense-result
+# Nonsense-result: the correct result would give 'filename', i.e., "ab..txt"
 expect_silent(
   expect_identical(
     paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename)),
