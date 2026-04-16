@@ -26,8 +26,8 @@ warn_match_case <- paste0("Values in 'x' are a case-insensitive match but not",
 warn_mult_old <- "Multiple values of 'old' ("
 warn_none_old <- "None of the values of argument 'old' "
 
-#### Test the examples ####
 
+#### Test the examples ####
 # All values in 'x' that match any value of 'old' are replaced by 'new'.
 expect_message(
   expect_identical(
@@ -72,6 +72,7 @@ expect_error(
                allow_multiple = FALSE),
   pattern = paste0(warn_mult_old, "'m', 'l') matched 'x' (", x_quoted,
                    "): 'l', 'm'"), fixed = TRUE)
+
 
 #### Tests ####
 ##### ignore_case #####
@@ -304,42 +305,45 @@ expect_message(
     c("b", "L", "M")),
   pattern = "Replaced values 'K' with 'b'", strict = TRUE, fixed = TRUE)
 
-# Handle false-positive matches if tolower(old) is equal to tolower(new)
+# Handle false-positive matches if a value in tolower(old) is equal to
+# tolower(new)
 expect_silent(
   expect_identical(
-    replace_vals(x = "A", old = "a", new = "A",
+    replace_vals(x = c("d", "A", "b", "c"), old = "a", new = "A",
                  ignore_case = TRUE, signal_case_old = "quiet", quiet = FALSE),
-    "A"))
+    c("d", "A", "b", "c")))
 
 expect_warning(
   expect_identical(
-    replace_vals(x = "A", old = "a", new = "A",
+    replace_vals(x = c("d", "A", "b", "c"), old = "a", new = "A",
                  ignore_case = TRUE, signal_case_old = "warning"),
-    "A"),
+    c("d", "A", "b", "c")),
   pattern = paste0(warn_match_case, "'old' ('a'): 'A'"),
   strict = TRUE, fixed = TRUE)
 
 expect_warning(
   expect_identical(
-    replace_vals(x = "A", old = "a", new = "A",
-                 ignore_case = FALSE, signal_case_old = "warning"),
-    "A"),
-  pattern = paste0(warn_match_case, "'old' ('a'): 'A'"),
-  strict = TRUE, fixed = TRUE)
-
-expect_warning(
-  expect_identical(
-    replace_vals(x = "A", old = "a", new = new,
-                 ignore_case = TRUE, signal_case_old = "warning"),
-    "b"),
+    replace_vals(x = c("d", "A", "b", "c"), old = "a", new = new,
+                 ignore_case = TRUE, signal_case_old = "warning",
+                 signal_old_ignore_case = TRUE),
+    c("d", "b", "b", "c")),
   pattern = paste0(warn_match_case, "'old' ('a'): 'A'"),
   strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
-    replace_vals(x = "A", old = "A", new = "a",
+    replace_vals(x = c("d", "A", "b", "c"), old = "a", new = new,
+                 ignore_case = TRUE, signal_case_old = "warning",
+                 signal_old_ignore_case = FALSE),
+    c("d", "b", "b", "c")),
+  pattern = "Replaced values 'A' with 'b'", strict = TRUE, fixed = TRUE)
+
+expect_message(
+  expect_identical(
+    replace_vals(x = c("d", "A", "b", "c"), old = "A", new = "a",
                  ignore_case = TRUE, signal_case_new = "quiet"),
-    "a"), pattern = "Replaced values 'A' with 'a'", strict = TRUE, fixed = TRUE)
+    c("d", "a", "b", "c")),
+  pattern = "Replaced values 'A' with 'a'", strict = TRUE, fixed = TRUE)
 
 ##### signal_case_new #####
 for(ignore_case in c(TRUE, FALSE)) {
@@ -360,7 +364,17 @@ for(ignore_case in c(TRUE, FALSE)) {
   expect_warning(
     expect_identical(
       replace_vals(x = as.factor(c("a", "B")), old = "a", new = new,
-                   ignore_case = ignore_case, signal_case_new = "warning"),
+                   ignore_case = ignore_case, signal_case_new = "warning",
+                   signal_old_ignore_case = TRUE),
+      as.factor(c("b", "B"))),
+    pattern = paste0(warn_match_case, "'new' ('b'): 'B'"),
+    strict = TRUE, fixed = TRUE)
+
+  expect_warning(
+    expect_identical(
+      replace_vals(x = as.factor(c("a", "B")), old = "a", new = new,
+                   ignore_case = ignore_case, signal_case_new = "warning",
+                   signal_old_ignore_case = FALSE),
       as.factor(c("b", "B"))),
     pattern = paste0(warn_match_case, "'new' ('b'): 'B'"),
     strict = TRUE, fixed = TRUE)
@@ -587,7 +601,8 @@ expect_message(
 expect_message(
   expect_identical(
     replace_vals(x = x_NA_factor, old = "", new = NA_character_),
-    addNA(as.factor(c(NA_character_, NA_character_, x)))),
+    factor(x = c(NA_character_, NA_character_, x), levels = c(NA_character_, x),
+           exclude = NULL)),
   pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
 
 expect_message(
@@ -607,19 +622,6 @@ expect_message(
     replace_vals(x = c("", x), old = "", new = NA_character_),
     c(NA_character_, x)),
   pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
-
-expect_message(
-  expect_identical(
-    replace_vals(x = x_NA_factor, old = "", new = NA_character_),
-    addNA(as.factor(c(NA_character_, NA_character_, x)))),
-  pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
-
-expect_warning(
-  expect_identical(
-    replace_vals(x = factor(x_NA, levels = x_NA, exclude = NULL),
-                 old = "", new = NA_character_),
-    addNA(as.factor(c(NA_character_, NA_character_, x)))),
-  pattern = "'NA' will become the last level", strict = TRUE, fixed = TRUE)
 
 ##### Erroneous input #####
 expect_error(
@@ -652,7 +654,7 @@ expect_error(
 
 expect_error(
   replace_vals(x = x, old = c(old, old), new = new),
-  pattern = paste0("values in 'old' (", paste_quoted(c(old, old)),
+  pattern = paste0("Values in 'old' (", paste_quoted(c(old, old)),
                    ") should be unique"), fixed = TRUE)
 
 expect_error(
