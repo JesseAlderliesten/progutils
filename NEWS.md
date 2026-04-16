@@ -1,8 +1,31 @@
 # devel
+- Nothing yet.
 
-### Miscellaneous ###
-- `progutils` now uses GitHub action `check-standard` on all branches (see
-  `?usethis::use_github_action()`).
+
+# progutils 0.0.5
+
+### Breaking changes
+- `replace_vals()`: gained argument `signal_old_ignore_case`. Bugfix for, and
+  more consistent handling of, `NA`s in factors. Values in messages are no
+  longer sorted alphabetically.
+
+### Miscellaneous
+- No need to import `osVersion` from `utils` because `utils` itself is imported.
+
+
+# progutils 0.0.4
+
+### Breaking changes
+- `vect_to_char()` gained argument `ignore_newlines` to pass to `wrap_text()`.
+
+### Added functions
+- `check_case`: check for values that differ only in their case.
+- `replace_vals`: to replace character values or factor levels.
+- `signal_text`: to signal text to a user through an error, warning, or message.
+- `unpaste_unquote`: the opposite of `paste_quoted()`.
+
+### Miscellaneous
+- `progutils` now uses GitHub action `check-standard` on all branches.
 
 
 # progutils 0.0.3
@@ -31,6 +54,10 @@
   (created through @section Notes). Idem for 'Programming note'.
 - `create_dir()`: move some documentation to `create_path()`; document format of
   date-time stamp with same case as `strftime()`.
+
+### Miscellaneous ###
+- `progutils` now uses GitHub action `check-standard` on all branches (see
+  `?usethis::use_github_action()`).
 
 
 # progutils 0.0.2

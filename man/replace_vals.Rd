@@ -2,7 +2,7 @@
 % Please edit documentation in R/replace_vals.R
 \name{replace_vals}
 \alias{replace_vals}
-\title{Replace character values or factor levels.}
+\title{Replace character values or factor levels}
 \usage{
 replace_vals(
   x,
@@ -11,57 +11,68 @@ replace_vals(
   ignore_case = FALSE,
   allow_multiple = TRUE,
   warn_absent = TRUE,
-  warn_case_new = c("always", "ignore_case", "case_sensitive", "never"),
-  warn_case_old = c("case_sensitive", "never", "always", "ignore_case"),
+  signal_case_old = c("warning", "error", "message", "quiet"),
+  signal_case_new = c("warning", "error", "message", "quiet"),
+  signal_old_ignore_case = TRUE,
   quiet = FALSE
 )
 }
 \arguments{
-\item{x}{Character vector with values to be replaced, or factor with levels
-to be replaced.}
+\item{x}{\link[=character]{Character} vector with values to be replaced, or
+\link{factor} with \link{levels} to be replaced.}
 
-\item{old}{Character vector with values to be replaced. Should be unique and
-not contain the value in \code{new}.}
+\item{old}{Character vector with values to be replaced. Should be \link{unique}
+and not contain the value \code{new}, otherwise an error is thrown.}
 
 \item{new}{Character string of length one with the new value.}
 
-\item{ignore_case}{\code{TRUE} or \code{FALSE}: ignore case when looking for \code{old}?}
+\item{ignore_case}{\code{TRUE} or \code{FALSE}: ignore \link[=tolower]{case} when looking for
+\code{old}? See \code{Details}.}
 
 \item{allow_multiple}{\code{TRUE} or \code{FALSE}: allow multiple values of \code{old} to
-match \code{x}? If \code{FALSE}, an error is thrown if multiple values of \code{old} match \code{x}.}
+match \code{x}? See \code{Details}.}
 
 \item{warn_absent}{\code{TRUE} or \code{FALSE}: warn if \code{old} nor \code{new} are found in
-\code{x}? If \code{new} is found, it is silently assumed replacement is not necessary
-anymore.}
+\code{x}? It is silently assumed replacement is not necessary anymore if \code{new} is
+found.}
 
-\item{warn_case_new, warn_case_old}{Character strings indicating when a warning
-should be issued if values in \code{x} are a case-insensitive match but not a
-case-sensitive match to \code{new} or \code{old}, respectively. Possible values are
-\code{"always"} to always warn, \code{"ignore_case"} to only warn if \code{ignore_case} is
-\code{TRUE}, \code{"case_sensitive"} to only warn if \code{ignore_case} is \code{FALSE} and
-\code{"never"} to never warn.}
+\item{signal_case_old, signal_case_new}{\code{"error"}, \code{"warning"}, \code{"message"},
+or \code{"quiet"}: character string indicating the type of \link[=signal_text]{signal}
+if values in \code{x} are a case-insensitive match but not a case-sensitive match
+to \code{old} or \code{new}, respectively. For \code{signal_case_old}, this is also
+influenced by argument \code{signal_old_ignore_case}.}
 
-\item{quiet}{\code{TRUE} or \code{FALSE}: suppress printing a message with the values
+\item{signal_old_ignore_case}{\code{TRUE} or \code{FALSE}: use \code{signal_case_old} if
+\code{ignore_case} is \code{TRUE}? If \code{FALSE}, no signal is emitted if \code{ignore_case} is
+\code{TRUE}.}
+
+\item{quiet}{\code{TRUE} or \code{FALSE}: suppress printing the message with the values
 that have been replaced?}
 }
 \value{
-\code{x} with the requested replacements.
+\code{x} with the requested replacements. Factor levels are \emph{not} reordered after
+the replacement.
 }
 \description{
-Replace character values or factor levels.
+Replace character values or factor levels
 }
 \details{
-\code{ignore_case} does not affect \code{new}, e.g.,
-\code{replace_vals(x = c("a", "B"), old = "a", new = "b", ignore_case = TRUE)}
-returns \code{c("b", "B")}, \emph{not} \code{c("b", "b")}. Could add an argument to add
-\code{tolower(new)} to \code{old} if \code{ignore_case} is \code{TRUE}?
+Values in \code{x} that only differ from \code{new} in their case are not adjusted, but
+lead to a \link[=signal_text]{signal} as indicated by argument \code{signal_case_new}.
 
-If \code{allow_multiple} is \code{FALSE}, an error is thrown if multiple values in \code{old}
-match \code{x}. This is useful if \code{old} should only be replaced with \code{new} if a
-single value in \code{old} occurs in \code{x}, but not if multiple values of \code{old}
-occur in \code{x}.
+An error is thrown if \code{allow_multiple} is \code{FALSE} and multiple values of
+\code{old} match \code{x}, unless those values of \code{old} only differ in their case and
+\code{ignore_case} is \code{TRUE}. An example of such an exception is
+\code{replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)}.
+
+If \code{quiet} is \code{FALSE}, a message indicates which values have been replaced.
+The order of the factor \emph{levels} determines the order used in the message.
 }
 \section{Programming notes}{
+
+Rewrite to perform all checks using \link{check_case}, then defer the actual
+replacement to \code{\link[=gsub]{gsub()}}, and then use \code{which(x_orig != x)} to find and report
+on replacements?
 
 Factor levels can be replaced through a named list:
 \code{f <- addNA(as.factor(c(letters[11:13], NA_character_)))}
@@ -69,38 +80,46 @@ Factor levels can be replaced through a named list:
 }
 
 \examples{
+x <- c("k", "l", "m")
+
 # All values in 'x' that match any value of 'old' are replaced by 'new'.
-replace_vals(x = letters[c(12:13, 13)], old = letters[13:11], new = "b",
-             allow_multiple = TRUE)
+replace_vals(x = rep(x, 2), old = x[3:2], new = "b", allow_multiple = TRUE)
 
-# If 'allow_multiple' is FALSE, an error is thrown if multiple values of
-# 'old' match 'x'.
-try(replace_vals(x = letters[c(12:13, 13)], old = letters[13:11], new = "b",
-             allow_multiple = FALSE))
+# Factor input to 'x' is handled by replacing the values and levels. The
+# levels are not reordered
+replace_vals(x = as.factor(x), old = x[3:2], new = "b", allow_multiple = TRUE)
 
-# Case-insensitive matching is used if 'ignore_case' is TRUE
-replace_vals(x = "A", old = "a", new = "b", ignore_case = TRUE)
+# Case-insensitive matching is used if 'ignore_case' is TRUE, with a warning
+# if 'signal_case_old' is '"warning"'
+replace_vals(x = "A", old = "a", new = "b", ignore_case = TRUE,
+             signal_case_old = "warning")
 
-# Case-sensitive matching is used if 'ignore_case' is FALSE
-# warn_absent = TRUE: warn if no match is found
+# Case-sensitive matching is used if 'ignore_case' is FALSE. A warning is
+# issued if no match is found and 'warn_absent' is 'TRUE'
 replace_vals(x = "A", old = "a", new = "b", ignore_case = FALSE,
              warn_absent = TRUE)
 
-# Factor input to 'x'
-replace_vals(x = as.factor(c("k", "l", "m")), old = c("k", "l"), new = "b",
-             ignore_case = TRUE, allow_multiple = TRUE, warn_absent = TRUE)
-
-replace_vals(x = as.factor(c("m", "l", "k", "M", "L", "K", "m")),
-             old = c("M", "k"), new = "x", ignore_case = FALSE,
-             allow_multiple = TRUE)
+# If 'allow_multiple' is FALSE, an error is thrown if multiple values of
+# 'old' match 'x'.
+try(replace_vals(x = x, old = letters[13:12], new = "b",
+                 allow_multiple = FALSE))
 
 }
 \seealso{
+\code{\link[=gsub]{gsub()}} \code{\link[=replace]{replace()}}
+
+Other functions to check equality: 
+\code{\link{are_equal}()},
+\code{\link{check_case}()},
+\code{\link{get_filename}()},
+\code{\link{not_in}()}
+
 Other functions to modify character vectors: 
 \code{\link{as.numeric_safe}()},
 \code{\link{file_path_sans_ext}()},
 \code{\link{paste_quoted}()},
 \code{\link{reorder_cols}()},
+\code{\link{unpaste_unquote}()},
 \code{\link{vect_to_char}()},
 \code{\link{wrap_text}()}
 
@@ -109,5 +128,6 @@ Other functions to modify factors:
 \code{\link{reorder_levels}()},
 \code{\link{vect_to_char}()}
 }
+\concept{functions to check equality}
 \concept{functions to modify character vectors}
 \concept{functions to modify factors}

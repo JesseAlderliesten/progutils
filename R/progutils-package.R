@@ -2,6 +2,5 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom utils osVersion
 ## usethis namespace: end
 NULL
