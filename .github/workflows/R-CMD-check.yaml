@@ -1,5 +1,13 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Modifications:
+# - added 'workflow_dispatch: ' at 'on:' to be able to manually trigger the workflow (see
+#   https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch)
+#   and https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow
+# - added {os: ubuntu-latest,   r: '4.0.0'} to run for R 4.0.0 as example of a
+#   specific R version.
+
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+
 on:
   push:
     branches: [main, master]
@@ -25,6 +33,7 @@ jobs:
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
           - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - {os: ubuntu-latest,   r: '4.0.0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
