@@ -1,7 +1,3 @@
-# devel
-- Nothing yet.
-
-
 # progutils 0.0.5
 
 ### Breaking changes
@@ -11,9 +7,9 @@
 
 ### Miscellaneous
 - No need to import `osVersion` from `utils` because `utils` itself is imported.
-- GitHub action `check-standard` is now also triggered every Saturday on 04:23
-  (UTC) and can be triggered manually (trigger it once manually on the main
-  branch to be able to trigger it manually on other branches).
+- GitHub action `check-standard` now also runs on R 3.0.0, is triggered every
+  Saturday on 04:23 UTC, and can be triggered manually (trigger it once manually
+  on the main branch to be able to trigger it manually on other branches).
 
 # progutils 0.0.4
 

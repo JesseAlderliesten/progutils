@@ -1,20 +1,20 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Modifications:
-# - added 'schedule: - cron: "23 4 * * 6"' to run every Saturday on 04:23 (UTC)
+# - removed 'branches: [main, master]' below 'push: ' to run GHA on all branches.
+# - added 'schedule: - cron: "23 4 * * 6"' to run every Saturday on 04:23 UTC
 # - added 'workflow_dispatch: ' at 'on:' to be able to manually trigger GHA (see
 #   https://docs.github.com/en/actions/reference/workflows-and-actions and
 #   https://docs.github.com/en/actions/how-tos/manage-workflow-runs).
-# - added {os: ubuntu-latest,   r: '4.0.0'} to run GHA for R version 4.0.0.
+# - added {os: ubuntu-latest,   r: '3.0.0'} to run GHA for R version 3.0.0.
 
 # Need help debugging build failures? Start at
 # https://github.com/r-lib/actions#where-to-find-help
 
 on:
   push:
-    branches: [main, master]
   pull_request:
   schedule:
-      - cron: "23 4 * * 6" # run GHA every Saturday on 04:23 (UTC)
+      - cron: "23 4 * * 6" # run GHA every Saturday on 04:23 UTC
   workflow_dispatch: # to be able to manually trigger GHA
 
 name: R-CMD-check.yaml
@@ -36,7 +36,7 @@ jobs:
           - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,  r: 'release'}
           - {os: ubuntu-latest,  r: 'oldrel-1'}
-          - {os: ubuntu-latest,  r: '4.0.0'}
+          - {os: ubuntu-latest,  r: '3.0.0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
