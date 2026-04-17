@@ -11,7 +11,9 @@
 
 ### Miscellaneous
 - No need to import `osVersion` from `utils` because `utils` itself is imported.
-
+- GitHub action `check-standard` is now also triggered every Saturday on 04:23
+  (UTC) and can be triggered manually (trigger it once manually on the main
+  branch to be able to trigger it manually on other branches).
 
 # progutils 0.0.4
 
