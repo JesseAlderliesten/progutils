@@ -32,7 +32,7 @@ jobs:
       matrix:
         config:
           - {os: macos-latest,   r: 'release'}
-          - {os: macos-latest,   r: '4.3.0'}
+          - {os: macos-latest,   r: '4.1.0'}
           - {os: windows-latest, r: 'release'}
           - {os: windows-latest, r: '4.0.0'}
           - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
