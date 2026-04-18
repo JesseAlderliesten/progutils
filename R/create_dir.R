@@ -88,7 +88,7 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
             "'dir' should not end with '\\'" =
               substring(text = dir, first = nchar(dir)) != "\\",
             "'dir' should not end with '.'" =
-              basename(dir) == "." ||
+              dir == "." || # "." as 'dir' denotes the working directory
               substring(text = dir, first = nchar(dir)) != ".",
             "'dir' should not end with ' ' (i.e., a space)" =
               substring(text = dir, first = nchar(dir)) != " ",
