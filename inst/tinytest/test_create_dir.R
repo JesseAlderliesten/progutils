@@ -111,22 +111,8 @@ if(expect_true(dir.exists(expected_path))) {
     0, info = "Check if removing temporary directories was successful")
 }
 
-# 4 "." should create the subfolder with the current date in the working directory
-dir <- file.path(my_tempdir, ".")
-expected_path <- paste0(dir, .Platform$file.sep,
-                        format(Sys.time(), format = "%Y_%m_%d"))
-
-if(file.exists(expected_path)) {
-  unlink(expected_path, recursive = TRUE)
-}
-expect_silent(
-  expect_identical(
-    create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
-if(expect_true(dir.exists(file.path(expected_path)))) {
-  expect_equal(unlink(x = expected_path, recursive = TRUE), 0,
-               info = "Check if removing temporary directories was successful")
-}
+# 4 NB. Removed nonfunctional test if "." as 'dir' with 'add_date' being 'TRUE'
+# created the subfolder with the current date in the working directory.
 
 # 5 Checks on input to 'dir'
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
@@ -147,6 +133,7 @@ for(dir in list(paste0(my_tempdir, ".\\"), paste0(my_tempdir, "temp_p1\\"))) {
     pattern = "'dir' should not end with '\\'", fixed = TRUE)
 }
 
+# NB. 'dir' equal to '.' can be used to denotes the current working directory.
 for(dir in list(paste0(my_tempdir, ".."), paste0(my_tempdir, "temp_p1."))) {
   expect_error(
     create_dir(dir = dir),
