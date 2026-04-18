@@ -140,16 +140,6 @@ expect_silent(
 )
 
 ##### dir #####
-# "." is the working directory
-expect_silent(
-  expect_identical(
-    create_path(filename = "abc.txt", format_stamp = "",
-                dir = file.path(my_tempdir, "."), add_date = FALSE),
-    normalizePath(file.path(my_tempdir, ".", "abc.txt"), winslash = "/",
-                  mustWork = FALSE)
-  )
-)
-
 # 'directories' that are only working directory followed by a file extension
 # are accepted!
 expect_silent(
@@ -271,7 +261,8 @@ for(dir in list(paste0(my_tempdir, ".\\"), paste0(my_tempdir, "temp_p1\\"))) {
     pattern = "'dir' should not end with '\\'", fixed = TRUE)
 }
 
-for(dir in list(paste0(my_tempdir, ".."), paste0(my_tempdir, "temp_p1."))) {
+for(dir in list(paste0(my_tempdir, ".."), paste0(my_tempdir, "temp_p1."),
+                paste0(my_tempdir, "."), file.path(my_tempdir, "."))) {
   expect_error(
     create_path(filename = "abc.txt", dir = dir),
     pattern = "'dir' should not end with '.'", fixed = TRUE)
