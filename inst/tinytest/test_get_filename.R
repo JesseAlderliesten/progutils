@@ -20,7 +20,7 @@ expect_message(
 
 expect_error(
   get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE),
-  pattern = "However, a case-insensitive\nmatch to 'pattern' is present"
+  pattern = basename(my_tempfiles[1])
 )
 
 expect_error(
