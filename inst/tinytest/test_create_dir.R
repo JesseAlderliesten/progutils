@@ -10,18 +10,6 @@
 #   expect_true(dir.exists(expected_path)).
 
 
-#### Wishlist ####
-# - tinytest supports tracking of side-effects, but I'm not yet sure how to
-#   properly use it. E.g.,
-#   m <- tinytest::run_test_file(file = "inst/tinytest/test_create_dir.R",
-#                                side_effects = TRUE)
-#   tinytest::run_test_file(file = "inst/tinytest/test_create_dir.R",
-#                           side_effects = report_side_effects(
-#                             report = FALSE, envvar = FALSE, pwd = TRUE,
-#                             files = TRUE, locale = FALSE))
-#   tinytest::report_side_effects(report = FALSE)
-
-
 #### Test the examples ####
 my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
 expect_silent(res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
@@ -197,7 +185,7 @@ expect_true(grepl(pattern = '[<>"|?*]', x = "ab*c"))
 expect_warning(
   expect_equal(create_dir(dir = my_tempfile, add_date = FALSE),
                normalizePath(getwd(), winslash = "/", mustWork = FALSE)),
-  pattern = paste0("failed! Returning\nthe working directory"))
+  pattern = paste0("Returning the working directory instead:\n", getwd()))
 
 # 6 Checks on input to 'add_date'
 for(add_date in list(3, NA)) {
