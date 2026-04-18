@@ -20,6 +20,16 @@ knitr::opts_chunk$set(
 `progutils` contains utility functions, for example to reorder values, check
 equality, construct messages, or handle files and directories.
 
+## Folder structure
+```
+├── .github
+│   └── workflows: workflows to run tests with GitHub Actions
+├── R: functions
+├── inst
+│   └── tinytest: tests
+├── man: help-files
+└── tests: setup to use 'tinytest' for testing
+```
 
 ## Installation
 You can install `progutils` from 
