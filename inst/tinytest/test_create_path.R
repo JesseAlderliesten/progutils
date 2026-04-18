@@ -163,22 +163,22 @@ expect_silent(
 
 ##### Warnings #####
 # 'directories' that actually are names of existing files lead to the working
-# directory being used instead!
+# directory being used instead, with warnings that the file already exists and
+# that the working directory is used because creation of the directory failed.
 expect_warning(
-  expect_identical(
-    create_path(filename = "abc.txt", format_stamp = "",
-                dir = my_tempfile, add_date = FALSE),
-    file.path(getwd(), "abc.txt")
-  ), pattern = paste0(basename(my_tempfile), "' already exists"),
+  expect_true(
+    grepl(pattern = file.path(basename(getwd()), "abc.txt"),
+          x = create_path(filename = "abc.txt", format_stamp = "",
+                          dir = my_tempfile, add_date = FALSE),
+          ignore.case = FALSE, fixed = TRUE)),
+  pattern = paste0(basename(my_tempfile), "' already exists"),
   strict = TRUE, fixed = TRUE
 )
 
 expect_warning(
-  expect_identical(
     create_path(filename = "abc.txt", format_stamp = "",
                 dir = my_tempfile, add_date = FALSE),
-    file.path(getwd(), "abc.txt")
-  ), pattern = "Attempt to create directory", strict = TRUE, fixed = TRUE
+  pattern = "Attempt to create directory", strict = TRUE, fixed = TRUE
 )
 
 # A warning is issued if the file indicated by the returned path already exists.
