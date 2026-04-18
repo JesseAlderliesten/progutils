@@ -115,9 +115,8 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
     #   not-yet existing directory (e.g., creating './output/<date>' if
     #   './output' does not yet exist).
     if(!dir.create(path = dir, recursive = TRUE, showWarnings = TRUE)) {
-      warning(wrap_text(paste0(
-        "Attempt to create directory '", dir, "' failed",
-        "!\nReturning the working directory ('", getwd(), "') instead.")))
+      warning("Attempt to create directory failed: ", dir,
+              "\nReturning the working directory instead:\n", getwd())
       dir <- normalizePath(getwd(), winslash = "/", mustWork = NA)
     }
   }
