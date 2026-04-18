@@ -1,3 +1,10 @@
+# devel
+- Run tests when checking the package.
+- `create_dir()`: hardcode newlines instead of using `wrap_text()` makes it
+  easier to test warnings.
+- `check_case()` and `replace_vals()`: outcomment failing tests for  that seem
+  to fail on sort order for uppercase vs. lowercase.
+
 # progutils 0.0.5
 
 ### Breaking changes
