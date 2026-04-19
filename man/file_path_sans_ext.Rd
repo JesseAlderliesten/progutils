@@ -18,9 +18,9 @@ the file path without the extensions (and the leading dot). Only purely
 alphanumeric extensions are recognized.
 }
 \details{
-\code{\link[tools:fileutils]{tools::file_path_sans_ext()}} does \emph{not} recognise the extension of file names
-that end in a dot, whereas \code{\link[tools:fileutils]{tools::file_ext()}} \emph{does} recognise such
-extensions.
+\code{\link[tools:fileutils]{tools::file_path_sans_ext()}} did \emph{not} recognise the extension of file names
+that end in a dot prior to \R 4.6.0, whereas \code{\link[tools:fileutils]{tools::file_ext()}} \emph{did}
+recognise such extensions.
 
 Using \code{\link[=file_path_sans_ext]{file_path_sans_ext()}} from \code{progutils} ensures that
 \code{filename} is recreated by
@@ -31,7 +31,8 @@ see the \code{Examples}.
 }
 \examples{
 filename <- "ab..txt"
-tools::file_path_sans_ext(filename) # "ab..txt"
+# Should be "ab." but was "ab..txt" prior to R 4.6.0.
+tools::file_path_sans_ext(filename)
 tools::file_ext(filename) # "txt"
 # So the next line produces the nonsense-result "ab..txt.txt"
 paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))
