@@ -212,7 +212,7 @@ expect_error(create_path(filename = "", dir = my_tempdir),
 for(filenm_in in c("abcd", "abc.", "ab.c#", ".", ".txt", ".html")) {
   expect_error(create_path(filename = filenm_in, dir = my_tempdir),
                pattern = paste0("'filename' should include the name and the",
-                                " file extension: ", filenm_in),
+                                " file extension:\n", filenm_in),
                fixed = FALSE)
 }
 

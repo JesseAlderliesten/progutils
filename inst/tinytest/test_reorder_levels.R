@@ -21,9 +21,9 @@ factor_order <- factor(x = new_order, levels = new_order[3:1])
 vals_NA <- c(vals[1:3], NA, vals[2:1])
 
 warn_append_levels <- paste0("Appended levels of 'x' that were not present in",
-                             " 'new_order' to 'new_order': ")
-warn_drop_levels <- "Dropped levels of 'x' that are not present in its values: "
-warn_drop_order <- "Dropped values of 'new_order' that are not present in 'x': "
+                             " 'new_order' to 'new_order':\n")
+warn_drop_levels <- "Dropped levels of 'x' that are not present in its values:\n"
+warn_drop_order <- "Dropped values of 'new_order' that are not present in 'x':\n"
 warn_missing_levels <- "Levels of 'x' are not present in 'new_order': "
 warn_new_order_nonchar <- paste0("checkinput::all_characters(new_order,",
                                  " allow_empty = TRUE, allow_NA = TRUE) is not TRUE")
@@ -75,8 +75,7 @@ expect_warning(
   expect_identical(
     reorder_levels(x = input_missing_levels, new_order = new_order),
     output_missing_levels),
-  pattern = paste0("Added values of 'x' that were not present in its levels to",
-                   " its levels: 'NA'"),
+  pattern = "Added missing levels for values of 'x':\n'NA'",
   strict = TRUE, fixed = TRUE)
 
 expect_warning(
@@ -124,7 +123,7 @@ expect_silent(
 # all values of 'new_order' missing from 'x'
 expect_warning(
   expect_identical(reorder_levels(x = input, new_order = letters[4:6]), input),
-  pattern = paste0(warn_append_levels, "'a',\n", paste_quoted(letters[2:3])),
+  pattern = paste0(warn_append_levels, "'a', ", paste_quoted(letters[2:3])),
   strict = TRUE, fixed = TRUE)
 
 expect_error(reorder_levels(x = 1:3, new_order = new_order),

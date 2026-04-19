@@ -1,3 +1,10 @@
+# devel
+
+### Miscellaneous
+- Make the location of newlines more predictable by hardcoding newlines using
+ `\n` instead of using `wrap_text()` in warnings.
+
+
 # progutils 0.0.6
 
 ### Breaking changes

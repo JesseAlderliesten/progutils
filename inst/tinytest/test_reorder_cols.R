@@ -33,7 +33,7 @@ expect_warning(
   expect_identical(reorder_cols(x = test_df, new_order = c("b", "a", "d")),
                    output_df),
   pattern = paste0("Dropped values of 'new_order' that are not present in",
-                   " column names of 'x': 'd'"),
+                   " column names of 'x':\n'd'"),
   strict = TRUE, fixed = TRUE)
 
 
@@ -98,7 +98,7 @@ expect_warning(
   expect_identical(reorder_cols(x = test_df, new_order = new_order_weird),
                    output_df),
   pattern = paste0("Dropped values of 'new_order' that are not present in",
-                   " column names of 'x': '',\n'NA', 'd'"),
+                   " column names of 'x':\n'', 'NA', 'd'"),
   strict = TRUE, fixed = TRUE)
 
 # Weird input to 'new_order', matrix input to 'x'.
@@ -113,7 +113,7 @@ expect_warning(
   expect_identical(reorder_cols(x = test_mat, new_order = new_order_weird),
                    output_mat),
   pattern = paste0("Dropped values of 'new_order' that are not present in",
-                   " column names of 'x': '',\n'NA', 'd'"),
+                   " column names of 'x':\n'', 'NA', 'd'"),
   strict = TRUE, fixed = TRUE)
 
 # Factor input to 'new_order'
