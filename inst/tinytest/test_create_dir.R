@@ -20,9 +20,11 @@ expect_silent(res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"
                              add_date = FALSE))
 expect_identical(res_dir_one, res_dir_one_v2)
 
-expect_silent(res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
+# On case-insensitive file systems such as Windows and macOS, the created
+# directory is the same as 'res_dir_one'. On case-sensitive file systems such as
+# Ubuntu, it differs in case from 'res_dir_one'.
+expect_silent(create_dir(dir = file.path(my_tempdir, "dir_ONE"),
                             add_date = FALSE))
-expect_identical(res_dir_one, res_dir_one_v3)
 
 expect_silent(res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
                           add_date = TRUE))
@@ -30,7 +32,7 @@ expect_true(dir.exists(res_dir_two))
 
 # Cleaning up
 unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
+rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 
 
 #### Tests ####
