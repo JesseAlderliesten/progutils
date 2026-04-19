@@ -3,11 +3,17 @@ filename <- "ab..txt"
 
 
 #### Test the examples ####
-expect_silent(
-  expect_identical(
-    tools::file_path_sans_ext(filename),
-    "ab..txt")
-)
+if(getRversion() < "4.6.0") {
+  expect_silent(
+    expect_identical(
+      tools::file_path_sans_ext(filename),
+      filename))
+} else {
+  expect_silent(
+    expect_identical(
+      tools::file_path_sans_ext(filename),
+      "ab."))
+}
 
 expect_silent(
   expect_identical(
