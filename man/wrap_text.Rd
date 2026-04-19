@@ -39,6 +39,13 @@ except for double spaces after periods, question marks and exclamation marks
 The call \code{wrap_text(x, width)} can be replaced by
 \code{paste0(strwrap(x, width + 1L), collapse = "\\n")} if \code{x} has length one and
 \code{ignore_newlines} is \code{TRUE}.
+
+
+Using \code{wrap_text()} on \code{x} of variable length, e.g., in the text of warnings
+that report a file path or a user-provided variable name, makes the location
+of newlines unpredictable and thus difficult to test reliably. To circumvent
+this, put the constant part in the front of the message and hardcode newlines
+using \verb{\\n}.
 }
 
 \section{Notes}{
