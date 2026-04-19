@@ -19,16 +19,20 @@
 #' Windows, see [dir.create()]: `dir` should not end in a slash, backslash, or
 #' space because those characters would be removed when the directory is created,
 #' leading to a mismatch between the created directory and the returned path.
-#' `dir` should also not end in a dot. Finally, `dir` should not contain the
+#' `dir` should also not end in a dot, with the exception of `dir = "."` which
+#' indicates the working directory. Finally, `dir` should not contain the
 #' characters `"`, `*`, `?`, `|`, `<`, or `>`.
 #'
 #' If creating the directory fails, the working directory is returned instead.
 #' This happens if `dir` points to an existing file instead of an directory.
 #'
 #' The absolute [normalised][normalizePath()] path is returned such that the
-#' returned path still works if the [working directory][getwd()] changes. `"/"`
-#' instead of `"\\"` is used as [winslash][normalizePath()] during normalisation,
-#' such that the returned path can be used in Windows' file system.
+#' returned path still works if the [working directory][getwd()] changes. On
+#' case-insensitive file systems (e.g., Windows and macOS), normalization
+#' adjusts the case to match case-insensitive names of directories that are
+#' already present (see the `Examples`). `"/"` instead of `"\\"` is used as
+#' [winslash][normalizePath()] during normalisation, such that the returned path
+#' can be used in Windows' file system.
 #'
 #' @returns
 #' A character string with the absolute [normalized][normalizePath()] path to
@@ -64,11 +68,13 @@
 #'                              add_date = FALSE)
 #' identical(res_dir_one, res_dir_one_v2) # TRUE
 #'
-#' # Directories are case-insensitive, so adding 'dir_ONE' gives the same result
-#' # as above:
+#' # On case-insensitive file systems such as Windows and macOS, adding
+#' # 'dir_ONE' to the directory gives the same result as adding 'dir_one' as
+#' # done above for 'res_dir_one'
 #' res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
 #'                              add_date = FALSE)
-#' identical(res_dir_one, res_dir_one_v3) # TRUE
+#' # TRUE on Windows and macOS, FALSE on Ubuntu
+#' identical(res_dir_one, res_dir_one_v3)
 #'
 #' # Create directory 'dir_two' with a subdirectory containing the current date
 #' res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
@@ -77,7 +83,7 @@
 #'
 #' # Cleaning up
 #' unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
-#' rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
+#' rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 #'
 #' @export
 create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
@@ -88,7 +94,7 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
             "'dir' should not end with '\\'" =
               substring(text = dir, first = nchar(dir)) != "\\",
             "'dir' should not end with '.'" =
-              basename(dir) == "." ||
+              dir == "." || # "." as 'dir' denotes the working directory
               substring(text = dir, first = nchar(dir)) != ".",
             "'dir' should not end with ' ' (i.e., a space)" =
               substring(text = dir, first = nchar(dir)) != " ",
@@ -107,17 +113,16 @@ create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
     # Notes:
     # - This branch is only used if the directory did not yet exist as directory,
     #   so it is not a problem that dir.create() returns FALSE if a directory
-    #   already exists. However, the path can already exist as a file: then
-    #   creating the attempt to create it as a directory will fail (indicated by
-    #   a warning) and the working directory will be used instead (indicated by
-    #   an additional warning).
+    #   already exists. However, the path can already exist as a file: then the
+    #   attempt to create it as a directory will fail (indicated by a warning)
+    #   and the working directory will be used instead (indicated by an
+    #   additional warning).
     # - Using 'recursive = TRUE' to allow creation of subdirectories inside a
     #   not-yet existing directory (e.g., creating './output/<date>' if
     #   './output' does not yet exist).
     if(!dir.create(path = dir, recursive = TRUE, showWarnings = TRUE)) {
-      warning(wrap_text(paste0(
-        "Attempt to create directory '", dir, "' failed",
-        "!\nReturning the working directory ('", getwd(), "') instead.")))
+      warning("Attempt to create directory failed: ", dir,
+              "\nReturning the working directory instead:\n", getwd())
       dir <- normalizePath(getwd(), winslash = "/", mustWork = NA)
     }
   }

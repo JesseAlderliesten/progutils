@@ -7,9 +7,9 @@
 #' @inheritParams tools::file_path_sans_ext
 #'
 #' @details
-#' [tools::file_path_sans_ext()] does *not* recognise the extension of file names
-#' that end in a dot, whereas [tools::file_ext()] *does* recognise such
-#' extensions.
+#' [tools::file_path_sans_ext()] did *not* recognise the extension of file names
+#' that end in a dot prior to \R 4.6.0, whereas [tools::file_ext()] *did*
+#' recognise such extensions.
 #'
 #' Using [progutils::file_path_sans_ext()] from `progutils` ensures that
 #' `filename` is recreated by
@@ -23,7 +23,8 @@
 #'
 #' @examples
 #' filename <- "ab..txt"
-#' tools::file_path_sans_ext(filename) # "ab..txt"
+#' # Should be "ab." but was "ab..txt" prior to R 4.6.0.
+#' tools::file_path_sans_ext(filename)
 #' tools::file_ext(filename) # "txt"
 #' # So the next line produces the nonsense-result "ab..txt.txt"
 #' paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))

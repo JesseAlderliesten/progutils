@@ -34,16 +34,20 @@ Several limitations are imposed on \code{dir} to facilitate handling of paths by
 Windows, see \code{\link[=dir.create]{dir.create()}}: \code{dir} should not end in a slash, backslash, or
 space because those characters would be removed when the directory is created,
 leading to a mismatch between the created directory and the returned path.
-\code{dir} should also not end in a dot. Finally, \code{dir} should not contain the
+\code{dir} should also not end in a dot, with the exception of \code{dir = "."} which
+indicates the working directory. Finally, \code{dir} should not contain the
 characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, or \code{>}.
 
 If creating the directory fails, the working directory is returned instead.
 This happens if \code{dir} points to an existing file instead of an directory.
 
 The absolute \link[=normalizePath]{normalised} path is returned such that the
-returned path still works if the \link[=getwd]{working directory} changes. \code{"/"}
-instead of \code{"\\\\"} is used as \link[=normalizePath]{winslash} during normalisation,
-such that the returned path can be used in Windows' file system.
+returned path still works if the \link[=getwd]{working directory} changes. On
+case-insensitive file systems (e.g., Windows and macOS), normalization
+adjusts the case to match case-insensitive names of directories that are
+already present (see the \code{Examples}). \code{"/"} instead of \code{"\\\\"} is used as
+\link[=normalizePath]{winslash} during normalisation, such that the returned path
+can be used in Windows' file system.
 }
 \section{Side effects}{
 
@@ -65,11 +69,13 @@ res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
                              add_date = FALSE)
 identical(res_dir_one, res_dir_one_v2) # TRUE
 
-# Directories are case-insensitive, so adding 'dir_ONE' gives the same result
-# as above:
+# On case-insensitive file systems such as Windows and macOS, adding
+# 'dir_ONE' to the directory gives the same result as adding 'dir_one' as
+# done above for 'res_dir_one'
 res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
                              add_date = FALSE)
-identical(res_dir_one, res_dir_one_v3) # TRUE
+# TRUE on Windows and macOS, FALSE on Ubuntu
+identical(res_dir_one, res_dir_one_v3)
 
 # Create directory 'dir_two' with a subdirectory containing the current date
 res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
@@ -78,7 +84,7 @@ dir.exists(res_dir_two) # TRUE
 
 # Cleaning up
 unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
+rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 
 }
 \seealso{

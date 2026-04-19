@@ -1,3 +1,18 @@
+# progutils 0.0.6
+
+### Breaking changes
+- `create_dir()`: `dir` ending in `\.` now is, as was documented, an error
+  instead of silently denoting the working directory. Hardcoding newlines instead of
+  using `wrap_text()` makes it easier to test warnings.
+
+### Miscellaneous
+- Run tests when checking the package. Adjusted tests and example to accommodate
+  bugfix to tools::file_path_sans_ext() in R 4.6.0.
+- `check_case()` and `replace_vals()`: outcomment failing tests that seem to
+  fail on sort order for uppercase vs. lowercase characters (differences caused
+  by locale settings (see `Sys.getlocale()`)?
+
+
 # progutils 0.0.5
 
 ### Breaking changes
@@ -11,6 +26,7 @@
   is triggered every Saturday on 04:23 UTC, and can be triggered manually
   (trigger it once manually on the main branch to be able to trigger it manually
   on other branches).
+
 
 # progutils 0.0.4
 

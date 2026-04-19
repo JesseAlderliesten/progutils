@@ -10,18 +10,6 @@
 #   expect_true(dir.exists(expected_path)).
 
 
-#### Wishlist ####
-# - tinytest supports tracking of side-effects, but I'm not yet sure how to
-#   properly use it. E.g.,
-#   m <- tinytest::run_test_file(file = "inst/tinytest/test_create_dir.R",
-#                                side_effects = TRUE)
-#   tinytest::run_test_file(file = "inst/tinytest/test_create_dir.R",
-#                           side_effects = report_side_effects(
-#                             report = FALSE, envvar = FALSE, pwd = TRUE,
-#                             files = TRUE, locale = FALSE))
-#   tinytest::report_side_effects(report = FALSE)
-
-
 #### Test the examples ####
 my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
 expect_silent(res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
@@ -32,9 +20,11 @@ expect_silent(res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"
                              add_date = FALSE))
 expect_identical(res_dir_one, res_dir_one_v2)
 
-expect_silent(res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
+# On case-insensitive file systems such as Windows and macOS, the created
+# directory is the same as 'res_dir_one'. On case-sensitive file systems such as
+# Ubuntu, it differs in case from 'res_dir_one'.
+expect_silent(create_dir(dir = file.path(my_tempdir, "dir_ONE"),
                             add_date = FALSE))
-expect_identical(res_dir_one, res_dir_one_v3)
 
 expect_silent(res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
                           add_date = TRUE))
@@ -42,7 +32,7 @@ expect_true(dir.exists(res_dir_two))
 
 # Cleaning up
 unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_one_v3, res_dir_two)
+rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 
 
 #### Tests ####
@@ -123,22 +113,8 @@ if(expect_true(dir.exists(expected_path))) {
     0, info = "Check if removing temporary directories was successful")
 }
 
-# 4 "." should create the subfolder with the current date in the working directory
-dir <- file.path(my_tempdir, ".")
-expected_path <- paste0(dir, .Platform$file.sep,
-                        format(Sys.time(), format = "%Y_%m_%d"))
-
-if(file.exists(expected_path)) {
-  unlink(expected_path, recursive = TRUE)
-}
-expect_silent(
-  expect_identical(
-    create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
-if(expect_true(dir.exists(file.path(expected_path)))) {
-  expect_equal(unlink(x = expected_path, recursive = TRUE), 0,
-               info = "Check if removing temporary directories was successful")
-}
+# 4 NB. Removed nonfunctional test if "." as 'dir' with 'add_date' being 'TRUE'
+# created the subfolder with the current date in the working directory.
 
 # 5 Checks on input to 'dir'
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
@@ -159,6 +135,7 @@ for(dir in list(paste0(my_tempdir, ".\\"), paste0(my_tempdir, "temp_p1\\"))) {
     pattern = "'dir' should not end with '\\'", fixed = TRUE)
 }
 
+# NB. 'dir' equal to '.' can be used to denotes the current working directory.
 for(dir in list(paste0(my_tempdir, ".."), paste0(my_tempdir, "temp_p1."))) {
   expect_error(
     create_dir(dir = dir),
@@ -197,7 +174,7 @@ expect_true(grepl(pattern = '[<>"|?*]', x = "ab*c"))
 expect_warning(
   expect_equal(create_dir(dir = my_tempfile, add_date = FALSE),
                normalizePath(getwd(), winslash = "/", mustWork = FALSE)),
-  pattern = paste0("failed! Returning\nthe working directory"))
+  pattern = paste0("Returning the working directory instead:\n", getwd()))
 
 # 6 Checks on input to 'add_date'
 for(add_date in list(3, NA)) {
