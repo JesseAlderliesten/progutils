@@ -15,12 +15,18 @@ expect_silent(
     "txt")
 )
 
-# Nonsense-result: the correct result would give 'filename', i.e., "ab..txt"
-expect_silent(
+# Prior to R 4.6.0, this produced the nonsense-result "ab..txt.txt" instead of
+# re-creating 'filename' because tools::file_path_sans_ext() did not remove the
+# extension if the filename ended in a dot.
+if(getRversion() < "4.6.0") {
   expect_identical(
     paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename)),
     "ab..txt.txt")
-)
+} else {
+  expect_identical(
+    paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename)),
+    filename)
+}
 
 # Correct result
 expect_silent(
