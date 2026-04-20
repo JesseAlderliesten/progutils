@@ -1,13 +1,3 @@
-# devel
-
-### Miscellaneous
-- Make the location of newlines more predictable by hardcoding newlines using
- `\n` instead of using `wrap_text()` in warnings.
-- Combine elements of workflows check-standard.yaml and check-no-suggests.yaml to
-  check if the package functions correctly without the dependencies listed in
-  'Suggests' which I use for documentation.
-
-
 # progutils 0.0.6
 
 ### Breaking changes
@@ -21,6 +11,11 @@
 - `check_case()` and `replace_vals()`: outcomment failing tests that seem to
   fail on sort order for uppercase vs. lowercase characters (differences caused
   by locale settings (see `Sys.getlocale()`)?
+- Make the location of newlines more predictable by hardcoding newlines using
+ `\n` instead of using `wrap_text()` in warnings.
+- Combine elements of workflows `check-standard.yaml` and `check-no-suggests.yaml`
+  to check if the package functions correctly without the dependencies listed in
+  'Suggests' which I use for documentation.
 
 
 # progutils 0.0.5
