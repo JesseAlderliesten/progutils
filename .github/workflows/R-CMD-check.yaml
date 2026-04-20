@@ -1,4 +1,15 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+
+# This workflow combines elements of check-standard.yaml and
+# check-no-suggests.yaml to check if the package functions correctly without the
+# dependencies listed in 'Suggests' which I use for documentation.
+
+# NOTE: This workflow only directly installs "hard" dependencies, i.e. Depends,
+# Imports, and LinkingTo dependencies. Notably, Suggests dependencies are never
+# installed, with the exception of testthat, knitr, and rmarkdown. The cache is
+# never used to avoid accidentally restoring a cache containing a suggested
+# dependency.
+
 # Modifications:
 # - not run GHA on 'push': it should be sufficient to run R CMD check locally
 #   before pushing and run GHA on pull requests.
@@ -6,8 +17,11 @@
 # - enable manually triggering GHA: added 'workflow_dispatch:' at 'on:' (see
 #   https://docs.github.com/en/actions/reference/workflows-and-actions and
 #   https://docs.github.com/en/actions/how-tos/manage-workflow-runs).
-# - run GHA with R version 4.1.0 (miniimum version required by dependency
-#   checkinput) for macos, windows, and ubuntu.
+# - run GHA with the currently released version of R and R version 4.1.0 (the
+#   minimum R version required by dependency checkinput) on macOS, Windows, and
+#   Ubuntu. In addition, run GHA with the devel-version of R on Ubuntu.
+# - allow 'tinytest' instead of 'testthat' because that is the package I use for
+#   the tests.
 
 # Need help debugging build failures? Start at
 # https://github.com/r-lib/actions#where-to-find-help
@@ -57,7 +71,13 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
+          dependencies: '"hard"'
+          cache: false
+          extra-packages: |
+            any::rcmdcheck
+            any::tinytest
+            any::knitr
+            any::rmarkdown
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
