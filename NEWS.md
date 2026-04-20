@@ -1,6 +1,9 @@
 # progutils 0.0.6
 
 ### Breaking changes
+- Dependency `checkinput`: increase minimum version from `0.1.0` to `0.5.0`.
+  This increases the minimum version of `R` to `4.1.0` but removes the
+  dependency on `vctrs`.
 - `create_dir()`: `dir` ending in `\.` now is, as was documented, an error
   instead of silently denoting the working directory. Hardcoding newlines instead of
   using `wrap_text()` makes it easier to test warnings.
