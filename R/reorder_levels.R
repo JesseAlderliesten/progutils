@@ -69,16 +69,12 @@ reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
     # present in its levels
     x <- x_dropped
     if(length(dropped_levels) > 0L) {
-      warning(wrap_text(x = paste0(
-        "Dropped levels of 'x' that are not present in its values: ",
-        paste_quoted(dropped_levels)
-      )))
+      warning("Dropped levels of 'x' that are not present in its values:\n",
+              paste_quoted(dropped_levels))
     }
     if(length(added_levels) > 0L) {
-      warning(wrap_text(x = paste0(
-        "Added values of 'x' that were not present in its levels to its levels: ",
-        paste_quoted(added_levels)
-      )))
+      warning("Added missing levels for values of 'x':\n",
+              paste_quoted(added_levels))
     }
   }
 
@@ -86,16 +82,14 @@ reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
   if(any(!bool_levels_in_new_order)) {
     levels_appended <- levels(x)[!bool_levels_in_new_order]
     new_order <- c(new_order, levels_appended)
-    warning(wrap_text(paste0(
-      "Appended levels of 'x' that were not present in 'new_order' to 'new_order': ",
-      paste_quoted(levels_appended))))
+    warning("Appended levels of 'x' that were not present in 'new_order' to",
+            " 'new_order':\n", paste_quoted(levels_appended))
   }
 
   bool_order_in_levels <- new_order %in% levels(x)
   if(warn_drop_order && any(!bool_order_in_levels)) {
-    warning(wrap_text(paste0(
-      "Dropped values of 'new_order' that are not present in 'x': ",
-      paste_quoted(new_order[!bool_order_in_levels]))))
+    warning("Dropped values of 'new_order' that are not present in 'x':\n",
+            paste_quoted(new_order[!bool_order_in_levels]))
   }
   factor(x, levels = new_order[bool_order_in_levels], exclude = NULL)
 }

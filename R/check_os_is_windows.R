@@ -15,10 +15,9 @@ check_os_is_windows <- function(action = c("warn", "message", "quiet")) {
     OS_is_Windows <- TRUE
   } else {
     OS_is_Windows <- FALSE
-    text_msg <- wrap_text(paste0(
-      "This function might fail because it is meant to be used on Windows,",
-      " whereas you are using ", .Platform$OS.type, ": ", utils::osVersion, "."))
-
+    text_msg <- paste0("This function might fail because it is meant to be",
+                       " used on Windows, whereas you\nare using ",
+                       .Platform$OS.type, ": ", utils::osVersion, ".")
     signal_text(text = text_msg, signal = action)
   }
   invisible(OS_is_Windows)

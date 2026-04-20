@@ -57,9 +57,8 @@ reorder_cols <- function(x, new_order) {
 
   bool_order_in_names <- new_order %in% colnames(x)
   if(any(!bool_order_in_names)) {
-    warning(wrap_text(paste0(
-      "Dropped values of 'new_order' that are not present in column names of 'x': ",
-      paste_quoted(new_order[!bool_order_in_names]))))
+    warning("Dropped values of 'new_order' that are not present in column",
+            " names of 'x':\n", paste_quoted(new_order[!bool_order_in_names]))
   }
 
   x[, new_order[bool_order_in_names], drop = FALSE]

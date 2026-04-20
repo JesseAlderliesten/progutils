@@ -88,12 +88,10 @@ get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE
 
   msg_match <- paste0(
     "case-", if(ignore_case) {"in"}, "sensitive matches to pattern '",
-    pattern, "' are present in directory '", dir, "'")
+    pattern, "' are present in directory\n'", dir, "'")
 
   if(length(files_present) > 1L) {
-    stop(wrap_text(x = paste0(
-      "Multiple ", msg_match, ": ", paste_quoted(files_present), "!"
-    )))
+    stop(paste0("Multiple ", msg_match, ": ", paste_quoted(files_present), "!"))
   }
 
   if(length(files_present) == 0L) {
@@ -104,22 +102,22 @@ get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE
 
       if(length(match_case_insensitive) == 0L) {
         msg_match <- paste0(
-          msg_match, ". No case-insensitive match is present either")
+          msg_match, ".\nNo case-insensitive match is present either")
       } else {
         if(length(match_case_insensitive) == 1L) {
           msg_match <- paste0(
             msg_match,
-            ". However, a case-insensitive match to 'pattern' is present: ",
+            ".\nHowever, a case-insensitive match to 'pattern' is present: ",
             paste_quoted(match_case_insensitive))
         } else {
           msg_match <- paste0(
             msg_match,
-            ". However, case-insensitive matches to 'pattern' are present: ",
+            ".\nHowever, case-insensitive matches to 'pattern' are present: ",
             paste_quoted(match_case_insensitive))
         }
       }
     }
-    stop(wrap_text(x = paste0("No ", msg_match, ".")))
+    stop("No ", msg_match, ".")
   }
 
   if(!quietly) {

@@ -84,8 +84,7 @@ vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
     x <- paste0(class(x), "(0)")
   }
 
-  if(checkinput::all_characters(x = names(x), allow_empty = TRUE,
-                                allow_zero = TRUE, allow_NA = TRUE)) {
+  if(!is.null(names(x))) {
     x <- paste(names(x), x, sep = sep, collapse = collapse)
   } else {
     x <- paste(x, collapse = collapse)

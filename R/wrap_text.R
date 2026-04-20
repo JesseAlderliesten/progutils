@@ -38,6 +38,13 @@
 #' argument `width` in [strwrap()] indicates the width *at* which text should be
 #' wrapped.
 #'
+#' @section Programming notes:
+#' Using `wrap_text()` on `x` of variable length, e.g., in the text of warnings
+#' that report a file path or a user-provided variable name, makes the location
+#' of newlines unpredictable and thus difficult to test reliably. To circumvent
+#' this, put the constant part in the front of the message and hardcode newlines
+#' using `\n`.
+#'
 #' @seealso [cat()] [paste()] [strwrap()] `bbmle:::strwrapx()`
 #'
 #' @family functions to modify character vectors
