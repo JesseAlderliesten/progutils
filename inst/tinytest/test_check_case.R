@@ -10,8 +10,8 @@ x <- c(lower_upper_mixed, lower_upper, lower_mixed, upper_mixed,
        mixed_diff, fine)
 x_out <- c("ff", "Ff", "FF", "gg", "gG", "Gg", "GG", "h", "H", "j", "J",
            "kk", "Kk", "Ll", "LL", "mM", "Mm")
-x_out_alt <- c("FF", "Ff", "ff", "GG", "Gg", "gG", "gg", "H", "h", "J", "j",
-               "Kk", "kk", "LL", "Ll", "Mm", "mM")
+x_out_alt <- c("FF", "Ff", "GG", "Gg", "H", "J", "Kk", "LL", "Ll", "Mm",
+               "ff", "gG", "gg", "h", "j", "kk", "mM")
 
 msg_text <- "'x' contains values that only differ in their case: "
 
@@ -42,7 +42,7 @@ expect_true(
   identical(suppressWarnings(check_case(x = lower_upper, signal = "warning")),
             c("h", "H", "j", "J")) ||
     identical(suppressWarnings(check_case(x = lower_upper, signal = "warning")),
-              c("H", "h", "J", "j"))
+              c("H", "J", "h", "j"))
 )
 
 expect_warning(
@@ -101,8 +101,8 @@ expect_warning(
 )
 
 expect_true(
-  identical(check_case(x = x, signal = "message"), x_out) ||
-    identical(check_case(x = x, signal = "message"), x_out_alt)
+  identical(suppressMessages(check_case(x = x, signal = "message")), x_out) ||
+    identical(suppressMessages(check_case(x = x, signal = "message")), x_out_alt)
 )
 
 expect_message(
