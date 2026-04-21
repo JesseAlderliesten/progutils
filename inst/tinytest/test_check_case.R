@@ -111,8 +111,10 @@ expect_message(
 )
 
 expect_silent(
-  expect_identical(check_case(x = x, signal = "quiet"), x_out) ||
-    identical(check_case(x = x, signal = "quiet"), x_out_alt)
+  expect_true(
+    identical(check_case(x = x, signal = "quiet"), x_out) ||
+      identical(check_case(x = x, signal = "quiet"), x_out_alt)
+  )
 )
 
 
