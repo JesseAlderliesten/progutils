@@ -15,7 +15,7 @@ Imports:
 Remotes: github::JesseAlderliesten/checkinput
 Suggests:
     stats,
-    tinytest,
+    tinytest (>= 1.4.1),
     tools
 URL: https://github.com/JesseAlderliesten/progutils
 BugReports: https://github.com/JesseAlderliesten/progutils/issues
