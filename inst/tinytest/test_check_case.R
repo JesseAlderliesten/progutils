@@ -25,52 +25,52 @@ expect_silent(expect_identical(check_case(x = c("aB", "aba")), character(0)))
 expect_silent(expect_identical(check_case(x = fine), character(0)))
 
 ##### Values with a single problem #####
-# expect_warning(
-#   expect_identical(check_case(x = lower_upper_mixed, signal = "warning"),
-#                    c("ff", "Ff", "FF", "gg", "gG", "Gg", "GG")),
-#   pattern = paste0(msg_text, "'ff', 'Ff', 'FF', 'gg', 'gG', 'Gg', 'GG'"),
-#   strict = TRUE, fixed = TRUE
-# )
-#
-# expect_warning(
-#   expect_identical(check_case(x = lower_upper, signal = "warning"),
-#                    c("h", "H", "j", "J")),
-#   pattern = paste0(msg_text, "'h', 'H', 'j', 'J'"), strict = TRUE, fixed = TRUE
-# )
-#
-# expect_warning(
-#   expect_identical(check_case(x = lower_mixed, signal = "warning"), c("kk", "Kk")),
-#   pattern = paste0(msg_text, "'kk', 'Kk'"), strict = TRUE, fixed = TRUE
-# )
-#
-# expect_warning(
-#   expect_identical(check_case(x = upper_mixed, signal = "warning"), c("Ll", "LL")),
-#   pattern = paste0(msg_text, "'Ll', 'LL'"), strict = TRUE, fixed = TRUE
-# )
-#
-# expect_warning(
-#   expect_identical(check_case(x = mixed_diff, signal = "warning"), c("mM", "Mm")),
-#   pattern = paste0(msg_text, "'mM', 'Mm'"), strict = TRUE, fixed = TRUE
-# )
-#
-# ##### Values with multiple problems #####
-# expect_error(
-#   check_case(x = x, signal = "error"), pattern = msg_text_x, fixed = TRUE
-# )
-#
-# expect_warning(
-#   expect_identical(check_case(x = x, signal = "warning"), x_out),
-#   pattern = msg_text_x, strict = TRUE, fixed = TRUE
-# )
-#
-# expect_message(
-#   expect_identical(check_case(x = x, signal = "message"), x_out),
-#   pattern = msg_text_x, strict = TRUE, fixed = TRUE
-# )
-#
-# expect_silent(
-#   expect_identical(check_case(x = x, signal = "quiet"), x_out)
-# )
+expect_warning(
+  expect_identical(check_case(x = lower_upper_mixed, signal = "warning"),
+                   c("ff", "Ff", "FF", "gg", "gG", "Gg", "GG")),
+  pattern = paste0(msg_text, "'ff', 'Ff', 'FF', 'gg', 'gG', 'Gg', 'GG'"),
+  strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_identical(check_case(x = lower_upper, signal = "warning"),
+                   c("h", "H", "j", "J")),
+  pattern = paste0(msg_text, "'h', 'H', 'j', 'J'"), strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_identical(check_case(x = lower_mixed, signal = "warning"), c("kk", "Kk")),
+  pattern = paste0(msg_text, "'kk', 'Kk'"), strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_identical(check_case(x = upper_mixed, signal = "warning"), c("Ll", "LL")),
+  pattern = paste0(msg_text, "'Ll', 'LL'"), strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_identical(check_case(x = mixed_diff, signal = "warning"), c("mM", "Mm")),
+  pattern = paste0(msg_text, "'mM', 'Mm'"), strict = TRUE, fixed = TRUE
+)
+
+##### Values with multiple problems #####
+expect_error(
+  check_case(x = x, signal = "error"), pattern = msg_text_x, fixed = TRUE
+)
+
+expect_warning(
+  expect_identical(check_case(x = x, signal = "warning"), x_out),
+  pattern = msg_text_x, strict = TRUE, fixed = TRUE
+)
+
+expect_message(
+  expect_identical(check_case(x = x, signal = "message"), x_out),
+  pattern = msg_text_x, strict = TRUE, fixed = TRUE
+)
+
+expect_silent(
+  expect_identical(check_case(x = x, signal = "quiet"), x_out)
+)
 
 
 #### Remove objects used in tests ####
