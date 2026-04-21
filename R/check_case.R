@@ -13,6 +13,11 @@
 #' [error][stop], [warning], or [message] if `signal` is `error`, `warning`, or
 #' `message`, respectively. Values are silently returned if `signal` is `quiet`.
 #'
+#' @section Notes:
+#' Sort order depends on the used [locale][locales] (see also the section
+#' `Details` of [Comparison]), which also affects if uppercase characters are
+#' sorted before or after lowercase characters.
+#'
 #' @family functions to check equality
 #'
 #' @examples

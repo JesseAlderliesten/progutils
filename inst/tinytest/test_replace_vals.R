@@ -12,6 +12,8 @@ x_upper <- toupper(x)
 x_upper_out <- x_upper
 x_upper_out[2] <- new
 x_mixed <- c(x, x_upper)
+x_mixed_factor <- factor(x = c("k", "l", "m", "K", "L", "M"),
+                         levels = c("k", "K", "l", "L", "m", "M"))
 x_mixed_out <- c(x_out, x_upper_out)
 x_NA_factor <- addNA(as.factor(x_NA))
 
@@ -101,13 +103,13 @@ for(allow_multiple in c(TRUE, FALSE)) {
       x_mixed_out),
     pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
 
-  # expect_message(
-  #   expect_identical(
-  #     replace_vals(x = as.factor(x_mixed), old = old, new = new,
-  #                  ignore_case = TRUE, allow_multiple = allow_multiple,
-  #                  signal_case_old = "quiet"),
-  #     factor(x_mixed_out, levels = c("k", "K", "b", "m", "M"))),
-  #   pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
+  expect_message(
+    expect_identical(
+      replace_vals(x = x_mixed_factor, old = old, new = new,
+                   ignore_case = TRUE, allow_multiple = allow_multiple,
+                   signal_case_old = "quiet"),
+      factor(x_mixed_out, levels = c("k", "K", "b", "m", "M"))),
+    pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
 }
 
 # Multiple case-insensitive matches to a single 'old' that are not
@@ -456,15 +458,16 @@ expect_warning(
     fixed = TRUE),
   pattern = paste0(warn_match_case, "'old' ('p', 'v', 'y'): 'V'"), fixed = TRUE)
 
-# expect_warning(
-#   expect_error(
-#     replace_vals(x = as.factor(c("p", "V", "z")), old = c("p", "v", "y"), new = new,
-#                  ignore_case = TRUE, allow_multiple = FALSE,
-#                  signal_case_old = "warning"),
-#     pattern = paste0(warn_mult_old, "'p', 'v', 'y') matched 'x'",
-#                      " ('p', 'V', 'z'): 'p', 'V'"),
-#     fixed = TRUE),
-#   pattern = paste0(warn_match_case, "'old' ('p', 'v', 'y'): 'V'"), fixed = TRUE)
+expect_warning(
+  expect_error(
+    replace_vals(x = factor(x = c("p", "V", "z"), levels = c("p", "V", "z")),
+                 old = c("p", "v", "y"), new = new,
+                 ignore_case = TRUE, allow_multiple = FALSE,
+                 signal_case_old = "warning"),
+    pattern = paste0(warn_mult_old, "'p', 'v', 'y') matched 'x'",
+                     " ('p', 'V', 'z'): 'p', 'V'"),
+    fixed = TRUE),
+  pattern = paste0(warn_match_case, "'old' ('p', 'v', 'y'): 'V'"), fixed = TRUE)
 
 expect_warning(
   expect_identical(
@@ -511,13 +514,13 @@ expect_message(
     x_mixed_out),
   pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
 
-# expect_message(
-#   expect_identical(
-#     replace_vals(x = as.factor(x_mixed), old = c("l", "L"), new = new,
-#                  ignore_case = TRUE, allow_multiple = FALSE,
-#                  signal_case_old = "error"),
-#     factor(x = x_mixed_out, levels = c("k", "K", "b", "m", "M"))),
-#   pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
+expect_message(
+  expect_identical(
+    replace_vals(x = x_mixed_factor, old = c("l", "L"), new = new,
+                 ignore_case = TRUE, allow_multiple = FALSE,
+                 signal_case_old = "error"),
+    factor(x = x_mixed_out, levels = c("k", "K", "b", "m", "M"))),
+  pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
 
 # If 'ignore_case' is 'FALSE', values in 'old' that differ in their case lead to
 # to an error if they both match to 'x' and 'allow_multiple' is FALSE
@@ -529,13 +532,13 @@ expect_error(
                    x_quoted, ", 'K', 'L', 'M'): 'l', 'L'"),
   fixed = TRUE)
 
-# expect_error(
-#   replace_vals(x = as.factor(x_mixed), old = c("l", "L"), new = new,
-#                ignore_case = FALSE, allow_multiple = FALSE,
-#                signal_case_old = "warning"),
-#   pattern = paste0(warn_mult_old, "'l', 'L') matched 'x'",
-#                    " ('k', 'K', 'l', 'L', 'm', 'M'): 'l', 'L'"),
-#   fixed = TRUE)
+expect_error(
+  replace_vals(x = x_mixed_factor, old = c("l", "L"), new = new,
+               ignore_case = FALSE, allow_multiple = FALSE,
+               signal_case_old = "warning"),
+  pattern = paste0(warn_mult_old, "'l', 'L') matched 'x'",
+                   " ('k', 'K', 'l', 'L', 'm', 'M'): 'l', 'L'"),
+  fixed = TRUE)
 
 # If 'ignore_case' is 'FALSE', values in 'old' that differ in their case are
 # fine if they both match to 'x' and 'allow_multiple' is TRUE
@@ -547,13 +550,13 @@ expect_message(
     x_mixed_out),
   pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
 
-# expect_message(
-#   expect_identical(
-#     replace_vals(x = as.factor(x_mixed), old = c("l", "L"), new = new,
-#                  ignore_case = FALSE, allow_multiple = TRUE,
-#                  signal_case_old = "warning"),
-#     factor(x = x_mixed_out, levels = c("k", "K", "b", "m", "M"))),
-#   pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
+expect_message(
+  expect_identical(
+    replace_vals(x = x_mixed_factor, old = c("l", "L"), new = new,
+                 ignore_case = FALSE, allow_multiple = TRUE,
+                 signal_case_old = "warning"),
+    factor(x = x_mixed_out, levels = c("k", "K", "b", "m", "M"))),
+  pattern = msg_replace_mult, strict = TRUE, fixed = TRUE)
 
 ##### NA and "" #####
 expect_message(
