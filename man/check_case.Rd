@@ -28,6 +28,13 @@ Values in \code{x} that only differ from each other in their case generate an
 \code{message}, respectively. Values are silently returned if \code{signal} is \code{quiet}.
 }
 
+\section{Notes}{
+
+Sort order depends on the used \link[=locales]{locale} (see also the section
+\code{Details} of \link{Comparison}), which also affects if uppercase characters are
+sorted before or after lowercase characters.
+}
+
 \examples{
 x <- c("Ee", "Ee", "LL", "Ll")
 try(check_case(x = x, signal = "error"))
