@@ -13,11 +13,10 @@
 ### Miscellaneous
 - Run tests when checking the package. Adjusted tests and example to accommodate
   bugfix to `tools::file_path_sans_ext()` in `R 4.6.0`.
-- `replace_vals()`: updated tests that failed because of different sort order for 
-  uppercase vs. lowercase characters caused by locale settings (see
-  `Sys.getlocale()`). Solved a similar problem for `check_input()` by hardcoding
-  factor instead of using `as.factor()` when they involve the same uppercase and
-  lowercase letters.
+- `check_input()` and `replace_vals()`: updated tests that failed because of
+  different sort order for uppercase vs. lowercase characters caused by locale
+  settings (see `Sys.getlocale()`). This also affects the order of factor levels
+  and thus the output of `as.factor()`.
 - Make the location of newlines more predictable by hardcoding newlines using
  `\n` instead of using `wrap_text()` in warnings.
 - Combine elements of workflows `check-standard.yaml` and `check-no-suggests.yaml`
