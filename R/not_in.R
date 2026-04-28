@@ -21,6 +21,9 @@
 #' present in `table`. `NA`s of different types in `x` and `table` match each
 #' other.
 #'
+#' Names are *not* considered when matching but are retained in the output,
+#' similar to `%in%`.
+#'
 #' @returns
 #' If `value` is `TRUE`: the values in `x` that are absent from `table` or, if
 #' none of the values in `x` are absent from `table` (i.e., all are present in
@@ -68,6 +71,9 @@
 #' setdiff(x_dupl, table_dupl) # c("a", "b")
 #' not_in(x_dupl, table_dupl, value = FALSE)
 #' # c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)
+#'
+#' # Names are not considered when matching but are retained in the output
+#' not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 #'
 #' @export
 not_in <- function(x, table, value = TRUE) {

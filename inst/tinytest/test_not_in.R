@@ -39,6 +39,12 @@ expect_silent(expect_identical(
   c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)))
 
 
+# Names are not considered when matching but are retained in the output
+expect_silent(expect_identical(
+  not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b")),
+  c(x = "c")))
+
+
 #### Tests ####
 # 1a (unique and duplicated values present zero to two times in table, return boolean)
 expect_silent(expect_identical(
@@ -165,6 +171,11 @@ expect_silent(expect_identical(
 expect_silent(expect_identical(
   not_in(x = letters[1:2], table = factor(letters[2:3]), value = FALSE),
   c(TRUE, FALSE)))
+
+# Check that %in% also does not considers names
+expect_silent(expect_identical(
+  c(x = "c", y = "b", z = "a") %in% c(a = "a", b = "b"),
+  c(FALSE, TRUE, TRUE)))
 
 
 #### Remove objects used in tests ####

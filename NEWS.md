@@ -22,6 +22,7 @@
 - Combine elements of workflows `check-standard.yaml` and `check-no-suggests.yaml`
   to check if the package functions correctly without the dependencies listed in
   `Suggests` which I use for documentation.
+- Note that `not_in()` does not consider names when matching.
 
 
 # progutils 0.0.5
