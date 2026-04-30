@@ -1,3 +1,6 @@
+tinytest::report_side_effects()
+
+
 #### Test the examples ####
 my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
 # Create the files
