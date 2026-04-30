@@ -1,6 +1,8 @@
 #### Test the examples ####
 # Examples are tested in section 'Correct combinations' below
 
+tinytest::report_side_effects()
+
 
 #### Tests ####
 ##### Preparations #####

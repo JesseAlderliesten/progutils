@@ -9,6 +9,8 @@
 #   Checking the path is thus left to expect_identical() and
 #   expect_true(dir.exists(expected_path)).
 
+tinytest::report_side_effects()
+
 
 #### Test the examples ####
 my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
