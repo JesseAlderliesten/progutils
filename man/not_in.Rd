@@ -37,6 +37,9 @@ returned \code{NA}s (if \code{value} is \code{TRUE}) and the returned zero-lengt
 \code{value} is \code{FALSE}) have the same type as the \code{NA}s in \code{x} if no \code{NA}s are
 present in \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
 other.
+
+Names are \emph{not} considered when matching but are retained in the output,
+similar to \code{\%in\%}.
 }
 \section{Programming notes}{
 
@@ -72,6 +75,9 @@ not_in(x_dupl, table_dupl) # c("a", "b", "b")
 setdiff(x_dupl, table_dupl) # c("a", "b")
 not_in(x_dupl, table_dupl, value = FALSE)
 # c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)
+
+# Names are not considered when matching but are retained in the output
+not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 
 }
 \seealso{
