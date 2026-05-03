@@ -14,7 +14,8 @@ vect_to_char(
 )
 }
 \arguments{
-\item{x}{A vector, \link{factor}, non-dataframe \link{list}, or \code{NULL}.}
+\item{x}{A vector, \link{factor}, \code{NULL}, or a non-dataframe \link{list} (unlisted
+through \code{unlist(x, use.names = TRUE)}, with a warning).}
 
 \item{signif}{Positive number of length one, rounded to the nearest positive
 integer indicating the number of significant digits to round numeric \code{x} to.}
@@ -41,13 +42,17 @@ is returned, wrapping on a per-element basis. If \code{collapse} is not \code{NU
 the name-value pairs are separated by \code{collapse}, thus returning a character
 \emph{string}.
 
-\code{NULL} is returned as \code{"'NULL'"}, other zero-length objects are returned as
-\code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
+See \code{details} on handling of some special values.
 }
 \description{
 Convert a vector to a character string, preserving names, rounding numeric
-values, returning \code{NULL} as \code{"'NULL'"} and other zero-length objects as
-\code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
+values.
+}
+\details{
+\code{vect_to_char()} returns \code{NULL} as \code{"NULL"}, other zero-length objects as
+\code{"<class>(0)"} (e.g., \code{"logical(0)"}), \code{""} as \code{'""'}, and non-logical \code{NA}s
+as \code{"NA_<class>_"} (e.g., \code{"NA_real_"}; for \link[=factor]{factors} this is
+\code{"NA_character_"}).
 }
 \section{Programming notes}{
 

@@ -40,6 +40,16 @@ expect_identical(
 
 
 #### Tests ####
+expect_silent(expect_identical(vect_to_char(NULL), "NULL"))
+expect_silent(expect_identical(vect_to_char(numeric(0)), "numeric(0)"))
+expect_silent(expect_identical(vect_to_char(c("a", "", "c", NA_character_)),
+                               "a, \"\", c, NA_character_"))
+
+expect_silent(expect_identical(vect_to_char(as.factor(NULL)), "character(0)"))
+expect_silent(expect_identical(vect_to_char(as.factor(numeric(0))), "character(0)"))
+expect_silent(expect_identical(vect_to_char(as.factor(c("a", "", "c", NA_character_))),
+                               "a, \"\", c, NA_character_"))
+
 expect_silent(expect_identical(vect_to_char(x = x_in), x_out_named))
 expect_silent(expect_identical(vect_to_char(x = unname(x_in)),
                                paste(x_in, collapse = ", ")))
@@ -84,8 +94,13 @@ expect_silent(expect_identical(
        x = gsub(pattern = ": ", replacement = "=", x = x_out_char, fixed = TRUE),
        fixed = TRUE)))
 
-expect_silent(expect_identical(vect_to_char(x = x_in_InfNa),
-                 paste(names(x_in_InfNa), x_in_InfNa, sep = ": ", collapse = ", ")))
+expect_silent(
+  expect_identical(
+    vect_to_char(x = x_in_InfNa),
+    paste0("am: -1, bm: -2, i: 9, l: NA_numeric_, m: NaN,",
+           " n: Inf, o: -Inf, j: 10, z: 26, a: 1, b: 2, c: 3")
+  )
+)
 
 # If the use of 'signif_custom()' is implemented, the next test should change to:
 # expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14286")
@@ -98,7 +113,7 @@ expect_silent(expect_identical(vect_to_char(x = x_fact_num),
 
 expect_warning(expect_identical(
   vect_to_char(x = list(x_in_InfNa, b, unname(b)), signif = 2),
-  paste0("am: -1, bm: -2, i: 9, l: NA, m: NaN, n: Inf, o: -Inf, j: 10, z: 26,",
+  paste0("am: -1, bm: -2, i: 9, l: NA_numeric_, m: NaN, n: Inf, o: -Inf, j: 10, z: 26,",
          " a: 1, b: 2, c: 3, a: 0.14, b: 0.29, c: 0.43, : 0.14, : 0.29, : 0.43")),
   pattern = "Unlisted 'x' to obtain a vector!", strict = TRUE)
 
