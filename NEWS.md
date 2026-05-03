@@ -1,3 +1,16 @@
+# progutils 0.0.7
+
+### Breaking changes
+- `paste_quoted()`: return `""` as `'\"\"'` instead of `''`. Indicate the class
+  of non-logical `NA`s. Do not allow list-type `x`. These changes also affect
+  warnings and messages in other functions.
+- `replace_vals()`: `new` is also processed through `paste_quoted()` in the
+  message indicating the replacement.
+- `vect_to_char()`: return `""` as `\"\"` instead of ` `. Indicate the class of
+  non-logical `NA`s. This change also affects warnings and messages in other
+  functions.
+
+
 # progutils 0.0.6
 
 ### Breaking changes
