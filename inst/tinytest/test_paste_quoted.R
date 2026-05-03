@@ -5,14 +5,11 @@
 
 
 #### Create objects to use in tests ####
-list_input <-  list("a", c("a", "b"), c("a", "b", "a"),
-                    c(3, 4), NULL, NA, NA_character_)
-list_output <- list("'a'", "'a', 'b'", "'a', 'b', 'a'",
-                    "'3', '4'", "'NULL'", "'NA'", "'NA'")
-list_input_zerolength <- list(NULL, character(0), numeric(0), logical(0),
-                              vector(mode = "list"), "")
+list_input <-  list("a", c("a", "b"), c("a", "b", "a"), c(3, 4))
+list_output <- list("'a'", "'a', 'b'", "'a', 'b', 'a'", "'3', '4'")
+list_input_zerolength <- list(NULL, character(0), numeric(0), logical(0), "")
 list_output_zerolength <- list("'NULL'", "'character(0)'", "'numeric(0)'",
-                               "'logical(0)'", "'list(0)'", "''")
+                               "'logical(0)'", "'\"\"'")
 x_fact_ind <- c(4:6, 5L)
 x_fact <- as.factor(letters[x_fact_ind])
 x_fact_int <- as.factor(x_fact_ind)
@@ -38,7 +35,19 @@ expect_identical(toString(c("a", "b")), paste(c("a", "b"), collapse = ", "))
 #### Tests ####
 for(index in seq_along(list_input)) {
   expect_identical(paste_quoted(x = list_input[[index]]), list_output[[index]])
+  expect_identical(paste_quoted(x = factor(list_input[[index]], exclude = NULL)),
+                   list_output[[index]])
 }
+expect_identical(paste_quoted(x = NA), "'NA'")
+expect_identical(paste_quoted(x = NA_character_), "'NA_character_'")
+expect_identical(paste_quoted(x = factor(NA, exclude = NULL)), "'NA_character_'")
+expect_identical(paste_quoted(x = factor(NA_character_, exclude = NULL)),
+                 "'NA_character_'")
+
+expect_identical(paste_quoted(x = NULL), "'NULL'")
+expect_identical(paste_quoted(x = as.factor(NULL)), "'character(0)'")
+expect_silent(expect_identical(paste_quoted(c("a", "", "c", NA_character_)),
+                               "'a', '\"\"', 'c', 'NA_character_'"))
 
 expect_silent(expect_identical(paste_quoted(x = x_fact), "'d', 'e', 'f', 'e'"))
 expect_silent(expect_identical(paste_quoted(x = x_fact_int), "'4', '5', '6', '5'"))
@@ -71,6 +80,12 @@ for(x in list(data.frame(a = 314), as.matrix(data.frame(a = 314)))) {
   expect_error(
     paste_quoted(x),
     pattern = "is.vector(x) || is.factor(x) || is.null(x) is not TRUE", fixed = TRUE)
+}
+
+for(x in list(list(a = 314), vector(mode = "list"))) {
+  expect_error(
+    paste_quoted(x),
+    pattern = "!is.list(x) is not TRUE", fixed = TRUE)
 }
 
 
