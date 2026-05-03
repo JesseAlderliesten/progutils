@@ -23,7 +23,8 @@
 #' [\R FAQ 7.31](
 #' https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
 #' for background on numerical equality;
-#' the vignette about type coercion: `vignette("Type_Coercion", package = "checkinput")`.
+#' the vignette about type coercion in package `checkinput`:
+#' `vignette("Type_Coercion", package = "checkinput")`.
 #'
 #' @family functions to check equality
 #'

@@ -575,56 +575,59 @@ expect_message(
   expect_identical(
     replace_vals(x = x_NA, old = NA_character_, new = new),
     c("", "b", x)),
-  pattern = "Replaced values 'NA' with 'b'", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values 'NA_character_' with 'b'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = x_NA_factor, old = NA_character_, new = new),
     factor(c("", "b", x), levels = c("", x, "b"))),
-  pattern = "Replaced values 'NA' with 'b'", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values 'NA_character_' with 'b'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = x_NA, old = "", new = new),
     c("b", NA_character_, x)),
-  pattern = "Replaced values '' with 'b'", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values '\"\"' with 'b'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = x_NA_factor, old = "", new = new),
     addNA(factor(c("b", NA_character_, x), levels = c("b", x)))),
-  pattern = "Replaced values '' with 'b'", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values '\"\"' with 'b'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = x_NA, old = "", new = NA_character_),
     c(NA_character_, NA_character_, x)),
-  pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values '\"\"' with 'NA_character_'",
+  strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = x_NA_factor, old = "", new = NA_character_),
     factor(x = c(NA_character_, NA_character_, x), levels = c(NA_character_, x),
            exclude = NULL)),
-  pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values '\"\"' with 'NA_character_'",
+  strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = x, old = old, new = ""),
     c("k", "", "m")),
-  pattern = "Replaced values 'l' with ''", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values 'l' with '\"\"'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = x_NA_factor, old = old, new = ""),
     addNA(as.factor(c("", NA, "k", "", "m")))),
-  pattern = "Replaced values 'l' with ''", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values 'l' with '\"\"'", strict = TRUE, fixed = TRUE)
 
 expect_message(
   expect_identical(
     replace_vals(x = c("", x), old = "", new = NA_character_),
     c(NA_character_, x)),
-  pattern = "Replaced values '' with 'NA'", strict = TRUE, fixed = TRUE)
+  pattern = "Replaced values '\"\"' with 'NA_character_'",
+  strict = TRUE, fixed = TRUE)
 
 ##### Erroneous input #####
 expect_error(

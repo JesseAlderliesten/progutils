@@ -7,17 +7,20 @@
 paste_quoted(x)
 }
 \arguments{
-\item{x}{Vector to be converted to a character string.}
+\item{x}{Vector or factor to be converted to a character string.}
 }
 \value{
 A character string consisting of the elements of \code{x} surrounded by single
-quotes, separated by commas. \code{NULL} is returned as \code{"'NULL'"}, other
-zero-length objects are returned as \code{"'<class>(0)'"}, e.g., \code{"'logical(0)'"}.
+quotes, separated by commas. See \code{details} on handling of some special values.
 }
 \description{
-Concatenate a vector to a string with quoted elements, returning \code{NULL} as
-\code{"'NULL'"} and other zero-length objects as \code{"'<class>(0)'"}, e.g.,
-\code{"'logical(0)'"}.
+Concatenate a vector or factor to a string with quoted elements.
+}
+\details{
+\code{paste_quoted()} returns \code{NULL} as \code{"'NULL'"}, other zero-length objects as
+\code{"'<class>(0)'"} (e.g., \code{"'logical(0)'"}), \code{""} as \code{'""'}, and non-logical
+\code{NA}s as \code{"'NA_<class>_'"} (e.g., \code{"'NA_real_'"}; for \link[=factor]{factors} this
+is \code{"'NA_character_'"}).
 }
 \section{Notes}{
 

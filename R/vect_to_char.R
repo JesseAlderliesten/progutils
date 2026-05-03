@@ -1,10 +1,16 @@
 #' Convert a vector to a character string
 #'
 #' Convert a vector to a character string, preserving names, rounding numeric
-#' values, returning `NULL` as `"'NULL'"` and other zero-length objects as
-#' `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
+#' values.
 #'
-#' @param x A vector, [factor], non-dataframe [list], or `NULL`.
+#' @details
+#' `vect_to_char()` returns `NULL` as `"NULL"`, other zero-length objects as
+#' `"<class>(0)"` (e.g., `"logical(0)"`), `""` as `'""'`, and non-logical `NA`s
+#' as `"NA_<class>_"` (e.g., `"NA_real_"`; for [factors][factor] this is
+#' `"NA_character_"`).
+#'
+#' @param x A vector, [factor], `NULL`, or a non-dataframe [list] (unlisted
+#' through `unlist(x, use.names = TRUE)`, with a warning).
 #' @param signif Positive number of length one, rounded to the nearest positive
 #' integer indicating the number of significant digits to round numeric `x` to.
 #' @param sep Character string of length one used to separate the names and the
@@ -23,8 +29,7 @@
 #' the name-value pairs are separated by `collapse`, thus returning a character
 #' *string*.
 #'
-#' `NULL` is returned as `"'NULL'"`, other zero-length objects are returned as
-#' `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
+#' See `details` on handling of some special values.
 #'
 #' @section Programming notes:
 #' To get a cross-tabulation of `x` into a character string, one can use
@@ -76,12 +81,37 @@ vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
     x <- signif(x = x, digits = signif)
   }
 
-  if(is.null(x)) {
-    x <- "NULL"
+  if(is.factor(x)) {
+    x <- as.character(x)
   }
 
   if(length(x) == 0L) {
-    x <- paste0(class(x), "(0)")
+    if(is.null(x)) {
+      x <- "NULL"
+    } else {
+      x <- paste0(class(x), "(0)")
+    }
+  }
+
+  bool_NA <- is.na(x) & !is.nan(x)
+  if(any(bool_NA)) {
+    if(!is.list(x)) {
+      if(!is.logical(x)) {
+        x[bool_NA] <- paste0("NA_", class(x), "_")
+      }
+    } else {
+      NA_new <- paste0("NA_",
+                       vapply(X = x[bool_NA], FUN = class,
+                              FUN.VALUE = character(1), USE.NAMES = FALSE),
+                       "_")
+      NA_new[NA_new == "NA_logical_"] <- "NA"
+      x[bool_NA] <- NA_new
+    }
+  }
+
+  bool_zchar <- !nzchar(x)
+  if(any(bool_zchar)) {
+    x[bool_zchar] <- "\"\""
   }
 
   if(!is.null(names(x))) {

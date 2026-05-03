@@ -67,7 +67,7 @@ expect_warning(
   expect_identical(
     reorder_levels(x = vals_NA, new_order = new_order),
     factor(x = vals_NA, levels = c(new_order, NA), exclude = NULL)),
-  pattern = paste0(warn_append_levels, "'NA'"),
+  pattern = paste0(warn_append_levels, "'NA_character_'"),
   strict = TRUE, fixed = TRUE)
 
 # Factor with NA missing from its levels. Testing the warnings separately.
@@ -75,14 +75,15 @@ expect_warning(
   expect_identical(
     reorder_levels(x = input_missing_levels, new_order = new_order),
     output_missing_levels),
-  pattern = "Added missing levels for values of 'x':\n'NA'",
+  pattern = "Added missing levels for values of 'x':\n'NA_character_'",
   strict = TRUE, fixed = TRUE)
 
 expect_warning(
   expect_identical(
     reorder_levels(x = input_missing_levels, new_order = new_order),
     output_missing_levels),
-  pattern = paste0(warn_append_levels, "'NA'"), strict = TRUE, fixed = TRUE)
+  pattern = paste0(warn_append_levels, "'NA_character_'"),
+  strict = TRUE, fixed = TRUE)
 
 # factor with unused levels
 expect_warning(
@@ -96,14 +97,16 @@ expect_warning(
   expect_identical(
     reorder_levels(x = input_NA_levels, new_order = new_order),
     factor(x = input_unused_levels, levels = new_order)),
-  pattern = paste0(warn_drop_levels, "'NA'"), strict = TRUE, fixed = TRUE)
+  pattern = paste0(warn_drop_levels, "'NA_character_'"),
+  strict = TRUE, fixed = TRUE)
 
 # factor with NA in its values and its levels, NA missing from 'new_order'
 expect_warning(
   expect_identical(
     reorder_levels(x = input_NA_levels_val, new_order = new_order),
     factor(input_NA_levels_val, levels = c(new_order[1:2], NA), exclude = NULL)),
-  pattern = paste0(warn_append_levels, "'NA'"), strict = TRUE, fixed = TRUE)
+  pattern = paste0(warn_append_levels, "'NA_character_'"),
+  strict = TRUE, fixed = TRUE)
 
 # some values of 'new_order' missing from 'x'
 expect_warning(

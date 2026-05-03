@@ -1,15 +1,18 @@
 #' Concatenate x to a string with quoted elements.
 #'
-#' Concatenate a vector to a string with quoted elements, returning `NULL` as
-#' `"'NULL'"` and other zero-length objects as `"'<class>(0)'"`, e.g.,
-#' `"'logical(0)'"`.
+#' Concatenate a vector or factor to a string with quoted elements.
 #'
-#' @param x Vector to be converted to a character string.
+#' @details
+#' `paste_quoted()` returns `NULL` as `"'NULL'"`, other zero-length objects as
+#' `"'<class>(0)'"` (e.g., `"'logical(0)'"`), `""` as `'""'`, and non-logical
+#' `NA`s as `"'NA_<class>_'"` (e.g., `"'NA_real_'"`; for [factors][factor] this
+#' is `"'NA_character_'"`).
+#'
+#' @param x Vector or factor to be converted to a character string.
 #'
 #' @returns
 #' A character string consisting of the elements of `x` surrounded by single
-#' quotes, separated by commas. `NULL` is returned as `"'NULL'"`, other
-#' zero-length objects are returned as `"'<class>(0)'"`, e.g., `"'logical(0)'"`.
+#' quotes, separated by commas. See `details` on handling of some special values.
 #'
 #' @section Notes:
 #' An error occurs if multiple arguments are provided because then `x` probably
@@ -30,7 +33,7 @@
 #'
 #' @export
 paste_quoted <- function(x) {
-  stopifnot(is.vector(x) || is.factor(x) || is.null(x))
+  stopifnot(is.vector(x) || is.factor(x) || is.null(x), !is.list(x))
 
   if(!is.null(names(x))) {
     warning_text <- "'x' has names, these will be discarded."
@@ -41,12 +44,28 @@ paste_quoted <- function(x) {
     warning(wrap_text(warning_text))
   }
 
-  if(is.null(x)) {
-    x <- "NULL"
+  if(is.factor(x)) {
+    x <- as.character(x)
   }
 
   if(length(x) == 0L) {
-    x <- paste0(class(x), "(0)")
+    if(is.null(x)) {
+      x <- "NULL"
+    } else {
+      x <- paste0(class(x), "(0)")
+    }
+  }
+
+  bool_NA <- is.na(x) & !is.nan(x)
+  if(any(bool_NA)) {
+    if(!is.logical(x)) {
+      x[bool_NA] <- paste0("NA_", class(x), "_")
+    }
+  }
+
+  bool_zchar <- !nzchar(x)
+  if(any(bool_zchar)) {
+    x[bool_zchar] <- "\"\""
   }
 
   # Same as paste0(sQuote(x, q = FALSE), collapse = ", ") but much faster

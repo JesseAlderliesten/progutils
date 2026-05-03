@@ -175,7 +175,7 @@ replace_vals <- function(
            ") matched 'x' (", paste_quoted(x), "): ", old_detected_quoted)
     }
     if(!quiet) {
-      message("Replaced values ", old_detected_quoted, " with '", new, "'")
+      message("Replaced values ", old_detected_quoted, " with ", paste_quoted(new))
     }
     x[ind_replace] <- new
   } else {
