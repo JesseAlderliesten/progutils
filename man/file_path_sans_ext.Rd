@@ -18,8 +18,8 @@ the file path without the extensions (and the leading dot). Only purely
 alphanumeric extensions are recognized.
 }
 \details{
-\code{\link[tools:fileutils]{tools::file_path_sans_ext()}} did \emph{not} recognise the extension of file names
-that end in a dot prior to \R 4.6.0, whereas \code{\link[tools:fileutils]{tools::file_ext()}} \emph{did}
+\code{\link[tools:file_path_sans_ext]{tools::file_path_sans_ext()}} did \emph{not} recognise the extension of file names
+that end in a dot prior to \R 4.6.0, whereas \code{\link[tools:file_ext]{tools::file_ext()}} \emph{did}
 recognise such extensions.
 
 Using \code{\link[=file_path_sans_ext]{file_path_sans_ext()}} from \code{progutils} ensures that
@@ -42,19 +42,19 @@ paste0(progutils::file_path_sans_ext(filename), ".", tools::file_ext(filename))
 
 }
 \seealso{
-Other functions to handle paths and directories: 
-\code{\link{create_dir}()},
-\code{\link{create_path}()},
-\code{\link{get_filename}()}
+Other functions to handle paths and directories:
+\code{\link[=create_dir]{create_dir()}},
+\code{\link[=create_path]{create_path()}},
+\code{\link[=get_filename]{get_filename()}}
 
-Other functions to modify character vectors: 
-\code{\link{as.numeric_safe}()},
-\code{\link{paste_quoted}()},
-\code{\link{reorder_cols}()},
-\code{\link{replace_vals}()},
-\code{\link{unpaste_unquote}()},
-\code{\link{vect_to_char}()},
-\code{\link{wrap_text}()}
+Other functions to modify character vectors:
+\code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link[=paste_quoted]{paste_quoted()}},
+\code{\link[=reorder_cols]{reorder_cols()}},
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=unpaste_unquote]{unpaste_unquote()}},
+\code{\link[=vect_to_char]{vect_to_char()}},
+\code{\link[=wrap_text]{wrap_text()}}
 }
 \concept{functions to handle paths and directories}
 \concept{functions to modify character vectors}

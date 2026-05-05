@@ -108,25 +108,25 @@ try(replace_vals(x = x, old = letters[13:12], new = "b",
 \seealso{
 \code{\link[=gsub]{gsub()}} \code{\link[=replace]{replace()}}
 
-Other functions to check equality: 
-\code{\link{are_equal}()},
-\code{\link{check_case}()},
-\code{\link{get_filename}()},
-\code{\link{not_in}()}
+Other functions to check equality:
+\code{\link[=are_equal]{are_equal()}},
+\code{\link[=check_case]{check_case()}},
+\code{\link[=get_filename]{get_filename()}},
+\code{\link[=not_in]{not_in()}}
 
-Other functions to modify character vectors: 
-\code{\link{as.numeric_safe}()},
-\code{\link{file_path_sans_ext}()},
-\code{\link{paste_quoted}()},
-\code{\link{reorder_cols}()},
-\code{\link{unpaste_unquote}()},
-\code{\link{vect_to_char}()},
-\code{\link{wrap_text}()}
+Other functions to modify character vectors:
+\code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
+\code{\link[=paste_quoted]{paste_quoted()}},
+\code{\link[=reorder_cols]{reorder_cols()}},
+\code{\link[=unpaste_unquote]{unpaste_unquote()}},
+\code{\link[=vect_to_char]{vect_to_char()}},
+\code{\link[=wrap_text]{wrap_text()}}
 
-Other functions to modify factors: 
-\code{\link{as.numeric_safe}()},
-\code{\link{reorder_levels}()},
-\code{\link{vect_to_char}()}
+Other functions to modify factors:
+\code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link[=reorder_levels]{reorder_levels()}},
+\code{\link[=vect_to_char]{vect_to_char()}}
 }
 \concept{functions to check equality}
 \concept{functions to modify character vectors}

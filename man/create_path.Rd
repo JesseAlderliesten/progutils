@@ -68,8 +68,8 @@ yet exist.
 
 \section{Programming notes}{
 
-\code{\link[tools:fileutils]{tools::file_path_sans_ext()}} does \emph{not} recognise the extension of file names
-that end in a dot, whereas \code{\link[tools:fileutils]{tools::file_ext()}} \emph{does} recognise such
+\code{\link[tools:file_path_sans_ext]{tools::file_path_sans_ext()}} does \emph{not} recognise the extension of file names
+that end in a dot, whereas \code{\link[tools:file_ext]{tools::file_ext()}} \emph{does} recognise such
 extensions. Using \code{\link[=file_path_sans_ext]{file_path_sans_ext()}} from \code{progutils} prevents
 problems caused by this discrepancy, see the \code{Examples} of
 \code{\link[=file_path_sans_ext]{file_path_sans_ext()}} from \code{progutils}.
@@ -109,9 +109,9 @@ rm(my_tempdir)
 \code{\link[=normalizePath]{normalizePath()}} to create absolute normalised paths,
 \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist
 
-Other functions to handle paths and directories: 
-\code{\link{create_dir}()},
-\code{\link{file_path_sans_ext}()},
-\code{\link{get_filename}()}
+Other functions to handle paths and directories:
+\code{\link[=create_dir]{create_dir()}},
+\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
+\code{\link[=get_filename]{get_filename()}}
 }
 \concept{functions to handle paths and directories}

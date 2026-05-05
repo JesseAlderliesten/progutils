@@ -42,10 +42,10 @@ check_case(x = x, signal = "warning")
 
 }
 \seealso{
-Other functions to check equality: 
-\code{\link{are_equal}()},
-\code{\link{get_filename}()},
-\code{\link{not_in}()},
-\code{\link{replace_vals}()}
+Other functions to check equality:
+\code{\link[=are_equal]{are_equal()}},
+\code{\link[=get_filename]{get_filename()}},
+\code{\link[=not_in]{not_in()}},
+\code{\link[=replace_vals]{replace_vals()}}
 }
 \concept{functions to check equality}

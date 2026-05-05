@@ -95,9 +95,9 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 \code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths,
 looking for a wider range of invalid characters.
 
-Other functions to handle paths and directories: 
-\code{\link{create_path}()},
-\code{\link{file_path_sans_ext}()},
-\code{\link{get_filename}()}
+Other functions to handle paths and directories:
+\code{\link[=create_path]{create_path()}},
+\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
+\code{\link[=get_filename]{get_filename()}}
 }
 \concept{functions to handle paths and directories}
