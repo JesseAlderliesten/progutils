@@ -74,8 +74,8 @@ expect_error(
   not_in(x = c(10, 11, 12, 13), table = c(12, 13, 14, 15), value = FALSE),
   pattern = "Use are_equal() to match input of type 'double'", fixed = TRUE)
 
+##### Behaviour of NAs #####
 for(value in c(TRUE, FALSE)) {
-  ##### Behaviour of NAs #####
   # 3a (NA_real_ is not allowed in 'table' because it is of type 'double')
   expect_error(
     not_in(x = c("a", "b"), table = NA_real_, value = value),
@@ -145,7 +145,7 @@ for(value in c(TRUE, FALSE)) {
     if(value) {character(0)} else {FALSE})
 }
 
-##### Factor input to 'x' or 'table' ####
+##### Factor input to 'x' or 'table' #####
 # Factor input to 'x' is converted to character, factor input to 'table' behaves
 # as if it were character input.
 expect_silent(expect_identical(
@@ -172,10 +172,27 @@ expect_silent(expect_identical(
   not_in(x = letters[1:2], table = factor(letters[2:3]), value = FALSE),
   c(TRUE, FALSE)))
 
-# Check that %in% also does not considers names
+# Check that %in% also does not consider names
 expect_silent(expect_identical(
   c(x = "c", y = "b", z = "a") %in% c(a = "a", b = "b"),
   c(FALSE, TRUE, TRUE)))
+
+##### Erroneous input #####
+expect_error(
+  not_in(x = list("a"), table = "b", value = TRUE),
+  pattern = "is.atomic(x) is not TRUE", fixed = TRUE)
+
+expect_error(
+  not_in(x = "a", table = list("b")),
+  pattern = "is.atomic(table) is not TRUE", fixed = TRUE)
+
+expect_error(
+  not_in(x = list("a"), table = list("b"), value = FALSE),
+  pattern = "is.atomic(x) is not TRUE", fixed = TRUE)
+
+expect_error(
+  not_in(x = "a", table = "b", value = NA),
+  pattern = "is_logical(value) is not TRUE", fixed = TRUE)
 
 
 #### Remove objects used in tests ####
