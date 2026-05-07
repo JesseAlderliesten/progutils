@@ -99,7 +99,9 @@ create_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
   # See the 'Programming note' why not using tools::file_path_sans_ext()
   file_sans_ext <- progutils::file_path_sans_ext(filename)
   if(file_ext == "" || file_sans_ext == "" || filename == file_sans_ext) {
-    stop("'filename' should include the name and the file extension:\n", filename)
+    stop("'filename' should include the name and the file extension\n(or use",
+         " 'progutils::create_dir()' instead of 'progutils::create_path()'):\n",
+         filename)
   }
 
   if(format_stamp != "") {

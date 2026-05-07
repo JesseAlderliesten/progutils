@@ -213,9 +213,11 @@ expect_error(create_path(filename = "", dir = my_tempdir),
 
 for(filenm_in in c("abcd", "abc.", "ab.c#", ".", ".txt", ".html")) {
   expect_error(create_path(filename = filenm_in, dir = my_tempdir),
-               pattern = paste0("'filename' should include the name and the",
-                                " file extension:\n", filenm_in),
-               fixed = FALSE)
+               pattern = paste0(
+                 "'filename' should include the name and the file extension\n",
+                 "(or use 'progutils::create_dir()' instead of",
+                 " 'progutils::create_path()'):\n", filenm_in),
+               fixed = TRUE)
 }
 
 filenm_in <- c("a/a.txt", "b\\b.txt")
