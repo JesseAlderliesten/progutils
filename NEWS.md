@@ -1,3 +1,13 @@
+# progutils 0.0.8
+
+### Breaking changes
+- Removed unused `check_os_is_windows()`.
+- Added `head_tail()` to show the `head` and `tail` of an object.
+- Use `roxygen2` version 8.0.0.
+- `not_in()`: `x` and `table` have to be a vector or factor (as was always
+  documented) to prevent returning `x` if `x` or `table` is a list.
+
+
 # progutils 0.0.7
 
 ### Breaking changes
