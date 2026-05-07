@@ -86,10 +86,10 @@ not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 \code{\link[=match]{match()}}, and, from \R \verb{4.6.0} onwards, \code{'\%notin\%'}, on which this function
 is based.
 
-Other functions to check equality: 
-\code{\link{are_equal}()},
-\code{\link{check_case}()},
-\code{\link{get_filename}()},
-\code{\link{replace_vals}()}
+Other functions to check equality:
+\code{\link[=are_equal]{are_equal()}},
+\code{\link[=check_case]{check_case()}},
+\code{\link[=get_filename]{get_filename()}},
+\code{\link[=replace_vals]{replace_vals()}}
 }
 \concept{functions to check equality}

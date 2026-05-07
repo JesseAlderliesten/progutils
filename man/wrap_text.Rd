@@ -70,13 +70,13 @@ cat(wrap_text(example_text,
 \seealso{
 \code{\link[=cat]{cat()}} \code{\link[=paste]{paste()}} \code{\link[=strwrap]{strwrap()}} \code{bbmle:::strwrapx()}
 
-Other functions to modify character vectors: 
-\code{\link{as.numeric_safe}()},
-\code{\link{file_path_sans_ext}()},
-\code{\link{paste_quoted}()},
-\code{\link{reorder_cols}()},
-\code{\link{replace_vals}()},
-\code{\link{unpaste_unquote}()},
-\code{\link{vect_to_char}()}
+Other functions to modify character vectors:
+\code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
+\code{\link[=paste_quoted]{paste_quoted()}},
+\code{\link[=reorder_cols]{reorder_cols()}},
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=unpaste_unquote]{unpaste_unquote()}},
+\code{\link[=vect_to_char]{vect_to_char()}}
 }
 \concept{functions to modify character vectors}

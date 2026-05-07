@@ -65,9 +65,9 @@ orig
 \seealso{
 \link{reorder_cols} \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor
 
-Other functions to modify factors: 
-\code{\link{as.numeric_safe}()},
-\code{\link{replace_vals}()},
-\code{\link{vect_to_char}()}
+Other functions to modify factors:
+\code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=vect_to_char]{vect_to_char()}}
 }
 \concept{functions to modify factors}

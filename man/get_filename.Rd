@@ -69,16 +69,16 @@ directories;
 \code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
 \code{\link[=normalizePath]{normalizePath()}} to create absolute paths.
 
-Other functions to handle paths and directories: 
-\code{\link{create_dir}()},
-\code{\link{create_path}()},
-\code{\link{file_path_sans_ext}()}
+Other functions to handle paths and directories:
+\code{\link[=create_dir]{create_dir()}},
+\code{\link[=create_path]{create_path()}},
+\code{\link[=file_path_sans_ext]{file_path_sans_ext()}}
 
-Other functions to check equality: 
-\code{\link{are_equal}()},
-\code{\link{check_case}()},
-\code{\link{not_in}()},
-\code{\link{replace_vals}()}
+Other functions to check equality:
+\code{\link[=are_equal]{are_equal()}},
+\code{\link[=check_case]{check_case()}},
+\code{\link[=not_in]{not_in()}},
+\code{\link[=replace_vals]{replace_vals()}}
 }
 \concept{functions to check equality}
 \concept{functions to handle paths and directories}

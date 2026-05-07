@@ -9,7 +9,7 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 \arguments{
 \item{x, y}{Numeric vectors to compare for equality.}
 
-\item{tol}{A small \link[checkinput:is_number]{positive} number. Numbers that
+\item{tol}{A small \link[checkinput:is_positive]{positive} number. Numbers that
 differ less in value than \code{tol} are considered to be equal.}
 }
 \value{
@@ -48,10 +48,10 @@ for background on numerical equality;
 the vignette about type coercion in package \code{checkinput}:
 \code{vignette("Type_Coercion", package = "checkinput")}.
 
-Other functions to check equality: 
-\code{\link{check_case}()},
-\code{\link{get_filename}()},
-\code{\link{not_in}()},
-\code{\link{replace_vals}()}
+Other functions to check equality:
+\code{\link[=check_case]{check_case()}},
+\code{\link[=get_filename]{get_filename()}},
+\code{\link[=not_in]{not_in()}},
+\code{\link[=replace_vals]{replace_vals()}}
 }
 \concept{functions to check equality}

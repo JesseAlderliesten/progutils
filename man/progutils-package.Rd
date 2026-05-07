@@ -19,5 +19,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Jesse Alderliesten \email{jessealderliesten@hotmail.com} (\href{https://orcid.org/0000-0003-1132-4310}{ORCID})
 
+Authors:
+\itemize{
+  \item Jesse Alderliesten \email{jessealderliesten@hotmail.com} (\href{https://orcid.org/0000-0003-1132-4310}{ORCID})
+}
+
 }
 \keyword{internal}
