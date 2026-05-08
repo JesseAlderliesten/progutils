@@ -72,6 +72,7 @@ directories;
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_path]{create_path()}},
+\code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_sans_ext]{file_path_sans_ext()}}
 
 Other functions to check equality:

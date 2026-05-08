@@ -16,7 +16,7 @@
 #' `x` without the quotation marks and split into a vector.
 #'
 #' @seealso
-#' [paste_quoted()] for the opposite of `unpaste_unquote()`
+#' [paste_quoted()] for the approximate opposite of `unpaste_unquote()`.
 #'
 #' @family functions to modify character vectors
 #'

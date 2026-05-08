@@ -45,6 +45,7 @@
 #'
 #' @seealso
 #' [create_path()] to create a path, and references there about file paths,
+#' [create_tempdir()] for a safe way to create temporary directories,
 #' [dir.exists()] and [dir.create()] used by this function,
 #' [get_filename()] to check if a file exists and is a unique match to a pattern
 #'

@@ -45,11 +45,11 @@ paste0(progutils::file_path_sans_ext(filename), ".", tools::file_ext(filename))
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_path]{create_path()}},
+\code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=get_filename]{get_filename()}}
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
-\code{\link[=paste_quoted]{paste_quoted()}},
 \code{\link[=reorder_cols]{reorder_cols()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},
