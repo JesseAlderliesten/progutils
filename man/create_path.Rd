@@ -111,6 +111,7 @@ rm(my_tempdir)
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
+\code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
 \code{\link[=get_filename]{get_filename()}}
 }

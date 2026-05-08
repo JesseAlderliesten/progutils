@@ -42,7 +42,6 @@ reorder_cols(x = test_df, new_order = c("b", "a", "d"))
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
-\code{\link[=paste_quoted]{paste_quoted()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},
 \code{\link[=vect_to_char]{vect_to_char()}},

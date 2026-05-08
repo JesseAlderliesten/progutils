@@ -73,7 +73,6 @@ cat(wrap_text(example_text,
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
-\code{\link[=paste_quoted]{paste_quoted()}},
 \code{\link[=reorder_cols]{reorder_cols()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},

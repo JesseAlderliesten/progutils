@@ -89,6 +89,7 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 }
 \seealso{
 \code{\link[=create_path]{create_path()}} to create a path, and references there about file paths,
+\code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create temporary directories,
 \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function,
 \code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern
 
@@ -97,6 +98,7 @@ looking for a wider range of invalid characters.
 
 Other functions to handle paths and directories:
 \code{\link[=create_path]{create_path()}},
+\code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
 \code{\link[=get_filename]{get_filename()}}
 }

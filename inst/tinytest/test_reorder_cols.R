@@ -47,8 +47,10 @@ expect_silent(
 expect_warning(
   expect_error(
     reorder_cols(x = test_df_weird, new_order = new_order),
-    pattern = "Column names of 'x' should be unique and syntactically valid", fixed = TRUE),
-  pattern = "Names are syntactically invalid: 'NA', '\"\"'", strict = TRUE, fixed = TRUE)
+    pattern = "Column names of 'x' should be unique and syntactically valid",
+    fixed = TRUE),
+  pattern = "Names are syntactically invalid: 'NA_character_', '\"\"'",
+  strict = TRUE, fixed = TRUE)
 
 # data.frame input without column names
 expect_error(reorder_cols(x = unname(test_df), new_order = new_order),
@@ -63,8 +65,10 @@ expect_silent(
 expect_warning(
   expect_error(
     reorder_cols(x = test_mat_weird, new_order = new_order),
-    pattern = "Column names of 'x' should be unique and syntactically valid", fixed = TRUE),
-  pattern = "Names are syntactically invalid: 'NA', '\"\"'", strict = TRUE, fixed = TRUE)
+    pattern = "Column names of 'x' should be unique and syntactically valid",
+    fixed = TRUE),
+  pattern = "Names are syntactically invalid: 'NA_character_', '\"\"'",
+  strict = TRUE, fixed = TRUE)
 
 # matrix input without column names
 expect_error(reorder_cols(x = unname(test_mat), new_order = new_order),
