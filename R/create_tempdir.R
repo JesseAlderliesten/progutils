@@ -3,16 +3,16 @@
 #' Create a temporary directory that can safely be removed.
 #'
 #' @param subdir A [character string][checkinput::is_character()] with the
-#' subdirectory to create inside [tempdir()].
-#' @param error_if_exists `TRUE` or `FALSE`: throw an error if the temporary
-#' directory already exists? The default `TRUE` prevents deleting files if the
-#' created temporary directory is programmatically deleted later on.
+#' subdirectory to create inside [tempdir()]. This subdirectory should not yet
+#' exist, see `Details`.
 #'
 #' @details
-#' The temporary directory is created as a subdirectory inside `tempdir()` to
-#' ensure that [removing][unlink()] the created directory does not give problems:
-#' removing the directory returned by `tempdir()` can give problems, for example
-#' because `RStudio` also uses that directory.
+#' The temporary directory is created as subdirectory `subdir` inside
+#' `tempdir()` and an error is thrown if it already exists. This ensures that
+#' programmatically [removing][unlink()] the created directory later on does not
+#' remove files that are still needed by other processes (which would happen
+#' when removing the directory returned by `tempdir()` because `RStudio` also
+#' uses that directory).
 #'
 #' It is possible to create subdirectories inside a not-yet existing directory
 #' (e.g., to create `<tempdir>/output/<date>` if `<tempdir>/output` does not yet
@@ -23,7 +23,8 @@
 #' returned [invisibly][invisible].
 #'
 #' @section Side effects:
-#' The requested temporary directory is created if does not yet exist.
+#' The requested temporary directory is created if does not yet exist. An error
+#' is thrown if the directory already exists or creating the directory failed.
 #'
 #' @seealso
 #' [create_dir()] to create (non-temporary) directories.
@@ -33,16 +34,17 @@
 #' @examples
 #' tempdir()
 #' # Create a directory inside the directory returned by 'tempdir()'
-#' (create_tempdir())
+#' (create_tempdir(subdir = "subdir"))
 #'
-#' # Error if the directory already exists and 'error_if_exists' is 'TRUE'
-#' try(create_tempdir(error_if_exists = TRUE))
-#' (create_tempdir(error_if_exists = FALSE))
+#' # Error if the directory already exists
+#' try(create_tempdir(subdir = "subdir"))
+#'
+#' # It is possible to create recursive directories
+#' (create_tempdir(subdir = "abc/def"))
 #'
 #' @export
-create_tempdir <- function(subdir = "subdir", error_if_exists = TRUE) {
-  stopifnot(checkinput::is_character(subdir),
-            checkinput::is_logical(error_if_exists))
+create_tempdir <- function(subdir = "subdir") {
+  stopifnot(checkinput::is_character(subdir))
   dir <- normalizePath(path = file.path(tempdir(), subdir),
                        winslash = "/",
                        mustWork = FALSE)
@@ -61,11 +63,9 @@ create_tempdir <- function(subdir = "subdir", error_if_exists = TRUE) {
       stop("Attempt to create a subdirectory in the temporary directory failed: ",
            dir)
     }
-  } else (
-    if(error_if_exists) {
-      stop("Temporary directory ", dir, " already exists!\nAdjust 'subdir', or",
-           " set 'error_if_exists' to 'FALSE' if you know that is safe.")
-    }
-  )
+  } else {
+    stop("You need to change 'subdir' ('", subdir,
+         "'): temporary directory already exists: ", dir)
+  }
   invisible(dir)
 }
