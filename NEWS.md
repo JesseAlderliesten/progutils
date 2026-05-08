@@ -1,3 +1,14 @@
+# progutils 0.0.9
+
+### Breaking changes
+- Dependency `checkinput`: increase minimum version from `0.5.0` to `0.6.0`,
+  needed to use re-exported `paste_quoted()`.
+- `progutils::paste_quoted()`: move it to `checkinput` and re-export it to
+  `progutils`.
+- Add function `create_tempdir()` to create a temporary directory that can
+  safely be removed.
+
+
 # progutils 0.0.8
 
 ### Breaking changes
