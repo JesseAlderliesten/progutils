@@ -4,15 +4,12 @@
 \alias{create_tempdir}
 \title{Create a temporary directory}
 \usage{
-create_tempdir(subdir = "subdir", error_if_exists = TRUE)
+create_tempdir(subdir = "subdir")
 }
 \arguments{
 \item{subdir}{A \link[checkinput:is_character]{character string} with the
-subdirectory to create inside \code{\link[=tempdir]{tempdir()}}.}
-
-\item{error_if_exists}{\code{TRUE} or \code{FALSE}: throw an error if the temporary
-directory already exists? The default \code{TRUE} prevents deleting files if the
-created temporary directory is programmatically deleted later on.}
+subdirectory to create inside \code{\link[=tempdir]{tempdir()}}. This subdirectory should not yet
+exist, see \code{Details}.}
 }
 \value{
 The \link[=normalizePath]{normalized} path to the created temporary directory,
@@ -22,10 +19,12 @@ returned \link[=invisible]{invisibly}.
 Create a temporary directory that can safely be removed.
 }
 \details{
-The temporary directory is created as a subdirectory inside \code{tempdir()} to
-ensure that \link[=unlink]{removing} the created directory does not give problems:
-removing the directory returned by \code{tempdir()} can give problems, for example
-because \code{RStudio} also uses that directory.
+The temporary directory is created as subdirectory \code{subdir} inside
+\code{tempdir()} and an error is thrown if it already exists. This ensures that
+programmatically \link[=unlink]{removing} the created directory later on does not
+remove files that are still needed by other processes (which would happen
+when removing the directory returned by \code{tempdir()} because \code{RStudio} also
+uses that directory).
 
 It is possible to create subdirectories inside a not-yet existing directory
 (e.g., to create \verb{<tempdir>/output/<date>} if \verb{<tempdir>/output} does not yet
@@ -33,17 +32,20 @@ exist.
 }
 \section{Side effects}{
 
-The requested temporary directory is created if does not yet exist.
+The requested temporary directory is created if does not yet exist. An error
+is thrown if the directory already exists or creating the directory failed.
 }
 
 \examples{
 tempdir()
 # Create a directory inside the directory returned by 'tempdir()'
-(create_tempdir())
+(create_tempdir(subdir = "subdir"))
 
-# Error if the directory already exists and 'error_if_exists' is 'TRUE'
-try(create_tempdir(error_if_exists = TRUE))
-(create_tempdir(error_if_exists = FALSE))
+# Error if the directory already exists
+try(create_tempdir(subdir = "subdir"))
+
+# It is possible to create recursive directories
+(create_tempdir(subdir = "abc/def"))
 
 }
 \seealso{
