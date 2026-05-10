@@ -27,7 +27,8 @@
 #' is thrown if the directory already exists or creating the directory failed.
 #'
 #' @seealso
-#' [create_dir()] to create (non-temporary) directories.
+#' [create_dir()] to create (non-temporary) directories and the notes in its
+#' test-file `progutils\inst\tinytest\test_create_dir.R`.
 #'
 #' @family functions to handle paths and directories
 #'

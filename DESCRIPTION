@@ -16,6 +16,6 @@ Suggests:
     stats,
     tinytest (>= 1.4.1),
     tools
-URL: https://github.com/JesseAlderliesten/progutils
+URL: https://github.com/JesseAlderliesten/progutils, https://jessealderliesten.github.io/progutils/
 BugReports: https://github.com/JesseAlderliesten/progutils/issues
 Config/roxygen2/version: 8.0.0

@@ -49,7 +49,8 @@ try(create_tempdir(subdir = "subdir"))
 
 }
 \seealso{
-\code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories.
+\code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories and the notes in its
+test-file \verb{progutils\\inst\\tinytest\\test_create_dir.R}.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},

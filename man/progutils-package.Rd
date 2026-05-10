@@ -12,6 +12,7 @@ Programming Utilities of Jesse Alderliesten.
 Useful links:
 \itemize{
   \item \url{https://github.com/JesseAlderliesten/progutils}
+  \item \url{https://jessealderliesten.github.io/progutils/}
   \item Report bugs at \url{https://github.com/JesseAlderliesten/progutils/issues}
 }
 
