@@ -22,29 +22,32 @@ check equality, construct messages, or handle files and directories.
 
 ## Installation
 
-You can install `progutils` from
-[GitHub](https://github.com/JesseAlderliesten/progutils) with:
+You can visit the [progutils
+website](https://jessealderliesten.github.io/progutils/) to explore the
+package. To use `progutils`, you have to install it from
+[GitHub](https://github.com/JesseAlderliesten/progutils) using the
+following code in R (you need to run R as administrator):
 
 ``` r
 if(!requireNamespace("remotes", quietly = TRUE)) {
   install.packages(pkgs = "remotes", quiet = FALSE)
 }
-remotes::install_github(repo = "JesseAlderliesten/progutils", dependencies = TRUE,
-                        upgrade = FALSE, force = FALSE, quiet = FALSE,
-                        build_vignettes = TRUE, lib = NULL,
+remotes::install_github(repo = "JesseAlderliesten/progutils",
+                        dependencies = NA, upgrade = FALSE, force = FALSE,
+                        quiet = FALSE, build_vignettes = TRUE, lib = NULL,
                         verbose = getOption("verbose"))
 ```
 
-For information about installing and configuring R and RStudio, see my
-repository
-[checkrpkgs](https://github.com/JesseAlderliesten/checkrpkgs).
+For more information about installing and configuring R and RStudio, see
+my package
+[checkrpkgs](https://jessealderliesten.github.io/checkrpkgs/).
 
 ## Examples
 
 Every once in a while, reading data into R results in a factor that
 should be converted to a numeric vector. The code below illustrates that
-using `as.numeric(x)` does *not* work to achieve this while
-`as.numeric_safe()` *does* work.
+using `as.numeric(x)` from base R does **not** work to achieve this
+while using `as.numeric_safe()` from `progutils` **does** work.
 
 ``` r
 library(progutils)
@@ -58,8 +61,9 @@ as.numeric_safe(x) # Returns the values.
 #> [1] 11 12 13
 ```
 
-Using `relevel` or `levels()` to reorder factor levels does *not* work,
-whereas function `reorder_levels()` *does*:
+Similarly, using `relevel` or `levels()` from base R to reorder factor
+levels does **not** work, whereas using `reorder_levels()` from
+`progutils` **does**:
 
 ``` r
 library(progutils)
@@ -78,10 +82,10 @@ reorder_levels(x = f_orig, new_order = letters[11:13]) # Only changes the levels
 #> Levels: k l m
 ```
 
-Using a named numeric vector in the subtitle of a plot requires
-converting it a to a character string wrapped to an appropriate length,
-to prevent text from running of the plot. Combining `vect_to_char()` and
-`wrap_text()` provides a way to achieve that:
+To use a named numeric vector in the subtitle of a plot, it should be
+converted to a character string wrapped to an appropriate length, to
+prevent text from running off the plot. `progutils` provides a way to
+achieve that by combining `vect_to_char()` and `wrap_text()`:
 
 ``` r
 library(progutils)
@@ -102,7 +106,7 @@ cat(wrap_text(paste(msg_part_one, vect_to_char(num_vect)), width = 20,
 #> 11, l: 12
 ```
 
-# Alternatives
+## Similar packages
 
 Many packages with miscellaneous functions exist on
 [GitHub](https://github.com/) and
