@@ -2,3 +2,10 @@ url: https://jessealderliesten.github.io/progutils/
 template:
   bootstrap: 5
   light-switch: true
+
+home:
+  sidebar:
+  structure: [toc, links, license, community, citation, authors]
+
+toc:
+  depth: 3
