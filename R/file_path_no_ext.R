@@ -1,19 +1,21 @@
 #' Remove extension from file paths
 #'
-#' A drop-in replacement for tools::file_path_sans_ext, see `Details`. Returns
-#' the file path without the extensions (and the leading dot). Only purely
-#' alphanumeric extensions are recognized.
+#' A drop-in replacement for [tools::file_path_sans_ext()], see `Details`.
+#' Returns the file path without the extensions (and the leading dot). Only
+#' purely alphanumeric extensions are recognized.
 #'
 #' @inheritParams tools::file_path_sans_ext
 #'
 #' @details
-#' [tools::file_path_sans_ext()] did *not* recognise the extension of file names
-#' that end in a dot prior to \R 4.6.0, whereas [tools::file_ext()] *did*
-#' recognise such extensions.
+#' [tools::file_path_sans_ext()] did **not** recognise the extension of file
+#' names that end in a dot prior to \R 4.6.0, whereas [tools::file_ext()]
+#' **did** recognise such extensions. This discrepancy led to `filename` not
+#' being re-created by
+#' `paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))`
+#' if `filename` ended in a dot.
 #'
-#' Using [progutils::file_path_sans_ext()] from `progutils` ensures that
-#' `filename` is recreated by
-#' `paste0(progutils::file_path_sans_ext(filename), ".", tools::file_ext(filename))`,
+#' Using [progutils::file_path_no_ext()] ensures that `filename` is recreated by
+#' `paste0(progutils::file_path_no_ext(filename), ".", tools::file_ext(filename))`,
 #' such that, e.g., [create_path]`("ab..txt")` produces the correct result
 #' ending in `"ab..txt"` instead of the nonsense result ending in `"ab..txt.txt"`,
 #' see the `Examples`.
@@ -30,10 +32,10 @@
 #' paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))
 #'
 #' # The updated version recreates filename 'ab..txt':
-#' paste0(progutils::file_path_sans_ext(filename), ".", tools::file_ext(filename))
+#' paste0(progutils::file_path_no_ext(filename), ".", tools::file_ext(filename))
 #'
 #' @export
-file_path_sans_ext <- function (x, compression = FALSE) {
+file_path_no_ext <- function (x, compression = FALSE) {
   if (compression)
     x <- sub("[.](gz|bz2|xz)$", "", x)
   sub("\\.[[:alnum:]]+$", "\\1", x)

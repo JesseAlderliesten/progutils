@@ -37,7 +37,7 @@ if(getRversion() < "4.6.0") {
 # Correct result
 expect_silent(
   expect_identical(
-    paste0(progutils::file_path_sans_ext(filename), ".", tools::file_ext(filename)),
+    paste0(progutils::file_path_no_ext(filename), ".", tools::file_ext(filename)),
     filename)
 )
 
