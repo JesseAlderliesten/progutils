@@ -7,7 +7,7 @@ x_NA <- c("", NA_character_, x)
 x_out <- x
 x_out[2] <- new
 x_quoted <- paste_quoted(x)
-x_rep <- rep(x, 2)
+x_rep <- rep.int(x, 2L)
 x_upper <- toupper(x)
 x_upper_out <- x_upper
 x_upper_out[2] <- new
@@ -33,7 +33,7 @@ warn_none_old <- "None of the values of argument 'old' "
 # All values in 'x' that match any value of 'old' are replaced by 'new'.
 expect_message(
   expect_identical(
-    replace_vals(x = rep(x, 2), old = x[3:2], new = new,
+    replace_vals(x = rep.int(x, 2L), old = x[3:2], new = new,
                  allow_multiple = TRUE),
     c("k", "b", "b", "k", "b", "b")),
   pattern = "Replaced values 'l', 'm' with 'b'", strict = TRUE, fixed = TRUE)
@@ -89,7 +89,7 @@ expect_message(
 expect_message(
   expect_identical(
     replace_vals(x = x_rep, old = old, new = new, quiet = FALSE),
-    rep(x_out, 2)),
+    rep.int(x_out, 2L)),
   pattern = msg_replace, strict = TRUE, fixed = TRUE)
 
 # A case-sensitive match and a case-insensitive match to a single 'old' (be
@@ -118,14 +118,14 @@ expect_message(
   expect_identical(
     replace_vals(x = toupper(x_rep), old = old, new = new,
                  ignore_case = TRUE, allow_multiple = FALSE),
-    rep(x_upper_out, 2)),
+    rep.int(x_upper_out, 2L)),
   pattern = paste0("Replaced values '", toupper(old), "' with '", new, "'"))
 
 expect_message(
   expect_identical(
     replace_vals(x = x_rep, old = old_upper, new = new,
                  ignore_case = TRUE, allow_multiple = FALSE),
-    rep(x_out, 2)),
+    rep.int(x_out, 2L)),
   pattern = paste0("Replaced values '", old, "' with '", new, "'"))
 
 ##### warn_absent #####
@@ -405,7 +405,7 @@ for(allow_multiple in c(TRUE, FALSE)) {
     expect_identical(
       replace_vals(x = x_rep, old = c(old, "v"), new = new,
                    ignore_case = ignore_case, allow_multiple = allow_multiple),
-      rep(x_out, 2)),
+      rep.int(x_out, 2L)),
     pattern = msg_replace, strict = TRUE, fixed = TRUE)
 }
 

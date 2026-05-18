@@ -10,7 +10,7 @@ expect_silent(
   expect_identical(
     are_equal(x = c(2, 3,        3, NA, Inf),
               y = c(2, 3, 3 + 1e-8, NA, Inf)),
-    c(rep(TRUE, 3L), rep(NA, 2L))))
+    c(rep.int(TRUE, 3L), rep.int(NA, 2L))))
 
 expect_silent(
   expect_identical(
@@ -19,15 +19,15 @@ expect_silent(
 
 
 #### Tests ####
-out_temp <- c(NA, NA, rep(FALSE, 3L), TRUE, TRUE)
-out <- c(NA, rep(FALSE, 8L),
-         rep(c(NA, NA, FALSE, TRUE, TRUE, rep(FALSE, 6L)), 2L),
-         out_temp, rep(FALSE, 4L), out_temp, TRUE, rep(FALSE, 3L), NA, NA,
-         rep(FALSE, 4L), TRUE, TRUE, rep(FALSE, 3L),
-         rep(c(NA, NA, rep(FALSE, 6L), TRUE, TRUE, FALSE), 2L), NA, NA,
-         rep(FALSE, 8L), rep(NA, 25L))
+out_temp <- c(NA, NA, rep.int(FALSE, 3L), TRUE, TRUE)
+out <- c(NA, rep.int(FALSE, 8L),
+         rep.int(c(NA, NA, FALSE, TRUE, TRUE, rep.int(FALSE, 6L)), 2L),
+         out_temp, rep.int(FALSE, 4L), out_temp, TRUE, rep.int(FALSE, 3L), NA, NA,
+         rep.int(FALSE, 4L), TRUE, TRUE, rep.int(FALSE, 3L),
+         rep.int(c(NA, NA, rep.int(FALSE, 6L), TRUE, TRUE, FALSE), 2L), NA, NA,
+         rep.int(FALSE, 8L), rep.int(NA, 25L))
 expect_silent(expect_identical(
-  are_equal(x = rep(z, length(z)), y = rep(z, each = length(z))), out))
+  are_equal(x = rep.int(z, length(z)), y = rep(z, each = length(z))), out))
 
 # Recycle scalar input
 expect_silent(expect_identical(
@@ -35,7 +35,7 @@ expect_silent(expect_identical(
   c(FALSE, FALSE, TRUE, FALSE)))
 
 # Error on non-compatible vector lengths
-expect_error(are_equal(x = rep(3, 4L), y = c(3, 4)),
+expect_error(are_equal(x = rep.int(3, 4L), y = c(3, 4)),
              pattern = "Lengths of 'x' (4) and 'y' (2) are not compatible",
              fixed = TRUE)
 

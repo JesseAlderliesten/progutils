@@ -3,7 +3,7 @@ int_example <- 5:7
 char_example <- as.character(int_example)
 fact_example <- as.factor(int_example)
 num_example <- as.numeric(int_example)
-out_NA_example <- rep(NA_real_, 3L)
+out_NA_example <- rep.int(NA_real_, 3L)
 
 x_char_mix <- c("1.0", "-3", "NA", "Inf", "5.0", "1.3", "-1.3", "13.4", "0.013")
 x_num <- c(1, 20, 20, 5, 5)
@@ -61,11 +61,11 @@ expect_silent(expect_equal(
 
 expect_warning(expect_equal(
   as.numeric_safe(c(1:3, letters[1:3])),
-  c(1:3, rep(NA_real_, 3L))),
+  c(1:3, rep.int(NA_real_, 3L))),
   pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
 expect_warning(expect_equal(
   as.numeric_safe(as.factor(c(1:3, letters[1:3]))),
-  c(1:3, rep(NA_real_, 3L))),
+  c(1:3, rep.int(NA_real_, 3L))),
   pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
 
 expect_silent(expect_equal(as.numeric_safe(NULL), numeric(0)))

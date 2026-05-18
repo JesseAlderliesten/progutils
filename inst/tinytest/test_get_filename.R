@@ -5,7 +5,7 @@ tinytest::report_side_effects()
 my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
 # Create the files
 expect_silent(
-  expect_equal(file.create(my_tempfiles), rep(TRUE, length(my_tempfiles)))
+  expect_equal(file.create(my_tempfiles), rep.int(TRUE, length(my_tempfiles)))
 )
 
 expect_message(
