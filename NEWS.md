@@ -1,3 +1,19 @@
+# progutils devel
+
+### Breaking changes
+
+- Add functions `file_path_ext()`, `is_filename()` and `is_path()`.
+- `create_tempdir()` can now only write in subdirectories of `tempdir()`.
+- `file_path_sans_ext()`: rename to `file_path_no_ext()` to distinguish it from
+  `tools::file_path_sans_ext()` when linking to documentation; add argument
+  `compression`.
+
+### Miscellaneous
+- `create_dir()` now uses `is_filename()` to check if `filename` is valid.
+- `README`: refer to website when appropriate. Stylistic update.
+- `NEWS`: stylistic update.
+
+
 # progutils 0.0.10
 
 ### Miscellaneous
