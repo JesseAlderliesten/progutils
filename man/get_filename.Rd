@@ -32,7 +32,7 @@ If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, the 
 message indicates if any case-insensitive match is present.
 
 In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_filename()} also finds
-'hidden' files, i.e., files which names start with a dot.
+'hidden' files, i.e., files with names that start with a dot.
 
 Paths will be \link[=normalizePath]{normalized} before use, to ensure they still
 work if the \link[=getwd]{working directory} changes. \code{"/"} instead of \code{"\\\\"} is
@@ -73,7 +73,9 @@ Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_path]{create_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}}
+\code{\link[=file_path_no_ext]{file_path_no_ext()}},
+\code{\link[=is_filename]{is_filename()}},
+\code{\link[=is_path]{is_path()}}
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

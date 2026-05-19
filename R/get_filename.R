@@ -17,7 +17,7 @@
 #' message indicates if any case-insensitive match is present.
 #'
 #' In contrast to the default of [list.files()], `get_filename()` also finds
-#' 'hidden' files, i.e., files which names start with a dot.
+#' 'hidden' files, i.e., files with names that start with a dot.
 #'
 #' Paths will be [normalized][normalizePath()] before use, to ensure they still
 #' work if the [working directory][getwd()] changes. `"/"` instead of `"\\"` is
