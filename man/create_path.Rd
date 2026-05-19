@@ -54,8 +54,8 @@ returned path still works if the \link[=getwd]{working directory} changes. \code
 instead of \code{"\\\\"} is used as argument \link[=normalizePath]{winslash} such that
 the returned path can be used in Windows' file system.
 
-The \emph{directory} for the returned path is \link[=create_dir]{created} if it does
-not yet exist. A warning is issued if the \emph{file} indicated by the returned
+The \strong{directory} for the returned path is \link[=create_dir]{created} if it does
+not yet exist. A warning is issued if the \strong{file} indicated by the returned
 path already exists. Use \code{"\%OSn"} as part of \code{format_stamp} to create precise
 stamps by truncating seconds to \verb{0 <= n <= 6} decimal places to prevent this,
 see \code{\link[=strftime]{strftime()}} for details.
@@ -64,15 +64,6 @@ see \code{\link[=strftime]{strftime()}} for details.
 
 The directory indicated by the returned file path is created if it does not
 yet exist.
-}
-
-\section{Programming notes}{
-
-\code{\link[tools:file_path_sans_ext]{tools::file_path_sans_ext()}} does \emph{not} recognise the extension of file names
-that end in a dot, whereas \code{\link[tools:file_ext]{tools::file_ext()}} \emph{does} recognise such
-extensions. Using \code{\link[=file_path_sans_ext]{file_path_sans_ext()}} from \code{progutils} prevents
-problems caused by this discrepancy, see the \code{Examples} of
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}} from \code{progutils}.
 }
 
 \examples{
@@ -112,7 +103,9 @@ rm(my_tempdir)
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
-\code{\link[=get_filename]{get_filename()}}
+\code{\link[=file_path_no_ext]{file_path_no_ext()}},
+\code{\link[=get_filename]{get_filename()}},
+\code{\link[=is_filename]{is_filename()}},
+\code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}

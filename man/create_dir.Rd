@@ -30,13 +30,7 @@ directory. \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Pl
 file separator is used to indicate subdirectories, and \code{"."} indicates the
 \link[=getwd]{working directory}.
 
-Several limitations are imposed on \code{dir} to facilitate handling of paths by
-Windows, see \code{\link[=dir.create]{dir.create()}}: \code{dir} should not end in a slash, backslash, or
-space because those characters would be removed when the directory is created,
-leading to a mismatch between the created directory and the returned path.
-\code{dir} should also not end in a dot, with the exception of \code{dir = "."} which
-indicates the working directory. Finally, \code{dir} should not contain the
-characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, or \code{>}.
+Several limitations are imposed on \code{dir}, see \code{\link[=is_path]{is_path()}}.
 
 If creating the directory fails, the working directory is returned instead.
 This happens if \code{dir} points to an existing file instead of an directory.
@@ -84,22 +78,21 @@ dir.exists(res_dir_two) # TRUE
 
 # Cleaning up
 unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
+rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 
 }
 \seealso{
-\code{\link[=create_path]{create_path()}} to create a path, and references there about file paths,
-\code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create temporary directories,
-\code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function,
+\code{\link[=create_path]{create_path()}} to create a path, \code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create
+temporary directories, \code{\link[=is_path]{is_path()}} and references there about file paths and
+directories, \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function,
 \code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern
-
-\code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths,
-looking for a wider range of invalid characters.
 
 Other functions to handle paths and directories:
 \code{\link[=create_path]{create_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
-\code{\link[=get_filename]{get_filename()}}
+\code{\link[=file_path_no_ext]{file_path_no_ext()}},
+\code{\link[=get_filename]{get_filename()}},
+\code{\link[=is_filename]{is_filename()}},
+\code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}

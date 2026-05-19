@@ -11,8 +11,6 @@
 #' treated as part of the filename, such that the same restrictions apply, see
 #' `Details`.
 #'
-#' @inherit create_dir details
-#'
 #' @returns
 #' The created file path, returned [invisibly][invisible()].
 #'
@@ -36,8 +34,8 @@
 #' instead of `"\\"` is used as argument [winslash][normalizePath()] such that
 #' the returned path can be used in Windows' file system.
 #'
-#' The *directory* for the returned path is [created][create_dir()] if it does
-#' not yet exist. A warning is issued if the *file* indicated by the returned
+#' The **directory** for the returned path is [created][create_dir()] if it does
+#' not yet exist. A warning is issued if the **file** indicated by the returned
 #' path already exists. Use `"%OSn"` as part of `format_stamp` to create precise
 #' stamps by truncating seconds to `0 <= n <= 6` decimal places to prevent this,
 #' see [strftime()] for details.
@@ -45,13 +43,6 @@
 #' @section Side effects:
 #' The directory indicated by the returned file path is created if it does not
 #' yet exist.
-#'
-#' @section Programming notes:
-#' [tools::file_path_sans_ext()] does *not* recognise the extension of file names
-#' that end in a dot, whereas [tools::file_ext()] *does* recognise such
-#' extensions. Using [progutils::file_path_sans_ext()] from `progutils` prevents
-#' problems caused by this discrepancy, see the `Examples` of
-#' [progutils::file_path_sans_ext()] from `progutils`.
 #'
 #' @seealso
 #' [get_filename()] to check if a file exists and is a unique match to a pattern,
@@ -95,37 +86,42 @@ create_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_character(dir))
 
-  file_ext <- tools::file_ext(filename)
-  # See the 'Programming note' why not using tools::file_path_sans_ext()
-  file_sans_ext <- progutils::file_path_sans_ext(filename)
-  if(file_ext == "" || file_sans_ext == "" || filename == file_sans_ext) {
-    stop("'filename' should include the name and the file extension\n(or use",
-         " 'progutils::create_dir()' instead of 'progutils::create_path()'):\n",
-         filename)
+  if(grepl(pattern = "/|\\\\", x = filename)) {
+    stop("No path created because 'filename' contains slashes or backslashes:",
+         " use argument\n'dir' to indicate the directory: ", filename)
   }
 
-  if(format_stamp != "") {
-    file_stamp <- paste0(format(Sys.time(), format = format_stamp), "_")
-    filename <- paste0(file_stamp, filename)
-    file_sans_ext <- paste0(file_stamp, file_sans_ext)
+  is_valid_filename <- try(expr = is_filename(filename = filename), silent = TRUE)
+  if(inherits(x = is_valid_filename, what = "try-error")) {
+    stop("No path created: ", attr(is_valid_filename, "condition")$message)
   }
 
-  if(grepl(pattern = "/|\\\\", x = file_sans_ext)) {
-    stop("Filename '", filename, "' contains (back)slashes: use argument 'dir'",
-         " to indicate the directory!")
+  if(nzchar(format_stamp)) {
+    filename <- paste0(format(Sys.time(), format = format_stamp), "_", filename)
   }
 
   # Replace non-alphanumeric characters other than underscores with dots.
-  file_sans_ext_vld <- gsub(pattern = "[^[:alnum:]_]", replacement = ".",
-                            x = file_sans_ext)
-  filename_vld <- paste0(file_sans_ext_vld, ".", file_ext)
-  if(file_sans_ext != file_sans_ext_vld) {
+  file_no_ext <- file_path_no_ext(x = filename)
+  file_no_ext_gsub <- gsub(pattern = "[^[:alnum:]_]", replacement = ".",
+                           x = file_no_ext)
+  # is_filename(filename = filename) above ensures that a file extension is
+  # present, such that this way or re-creating the filename works
+  filename_gsub <- paste0(file_no_ext_gsub, ".", file_path_ext(x = filename))
+  if(file_no_ext != file_no_ext_gsub) {
     warning("Replaced non-alphanumeric characters other than underscores in",
-            " filename\n'", filename, "' with dots: ", filename_vld)
+            " filename\n'", filename, "' with dots: ", filename_gsub)
+    # To do:
+    # - This is probably unwanted?
+    is_valid_filename_gsub <- try(expr = is_filename(filename_gsub), silent = TRUE)
+    if(inherits(x = is_valid_filename_gsub, what = "try-error")) {
+      stop("No path created because 'filename' is not valid after replacing",
+           " non-alphanumeric\ncharacters: ",
+           attr(is_valid_filename_gsub, "condition")$message)
+    }
   }
 
-  file_path <- file.path(progutils::create_dir(dir = dir, add_date = add_date),
-                         filename_vld)
+  file_path <- file.path(create_dir(dir = dir, add_date = add_date),
+                         filename_gsub)
   file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)
 
   if(file.exists(file_path)) {
