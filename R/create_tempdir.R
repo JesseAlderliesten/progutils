@@ -35,23 +35,39 @@
 #' @examples
 #' tempdir()
 #' # Create a directory inside the directory returned by 'tempdir()'
-#' (create_tempdir(subdir = "subdir"))
+#' (tempdir_std <- create_tempdir(subdir = "subdir"))
 #'
 #' # Error if the directory already exists
 #' try(create_tempdir(subdir = "subdir"))
 #'
 #' # It is possible to create recursive directories
-#' (create_tempdir(subdir = "abc/def"))
+#' (tempdir_recursive <- create_tempdir(subdir = "abc/def"))
+#'
+#' # Clean up
+#' unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
 #'
 #' @export
 create_tempdir <- function(subdir = "subdir") {
   stopifnot(checkinput::is_character(subdir))
-  dir <- normalizePath(path = file.path(tempdir(), subdir),
-                       winslash = "/",
-                       mustWork = FALSE)
+  subdir_target <- normalizePath(path = file.path(tempdir(), subdir),
+                                 winslash = "/",
+                                 mustWork = FALSE)
 
-  # dir.exists() returns FALSE if 'dir' is a file instead of a directory.
-  if(!dir.exists(dir)) {
+  tempdir_normalised <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
+  if(!startsWith(subdir_target, prefix = tempdir_normalised)) {
+    stop("Using ", paste_quoted(subdir),
+         " as 'subdir' would write above 'tempdir()' which is not safe: ",
+         subdir_target)
+  }
+
+  if(subdir_target == tempdir_normalised) {
+    stop("Using ", paste_quoted(subdir),
+         " as 'subdir' would write to 'tempdir()' which is not safe: ",
+         tempdir_normalised)
+  }
+
+  # dir.exists() returns FALSE if 'subdir_target' is a file instead of a directory.
+  if(!dir.exists(subdir_target)) {
     # Notes:
     # - This branch is only used if the directory did not yet exist as directory,
     #   so it is not a problem that dir.create() returns FALSE if a directory
@@ -60,13 +76,13 @@ create_tempdir <- function(subdir = "subdir") {
     # - Using 'recursive = TRUE' to allow creation of subdirectories inside a
     #   not-yet existing directory (e.g., creating '<tempdir>/output/<date>' if
     #   '<tempdir>/output' does not yet exist).
-    if(!dir.create(path = dir, recursive = TRUE, showWarnings = TRUE)) {
+    if(!dir.create(path = subdir_target, recursive = TRUE, showWarnings = TRUE)) {
       stop("Attempt to create a subdirectory in the temporary directory failed: ",
-           dir)
+           subdir_target)
     }
   } else {
     stop("You need to change 'subdir' ('", subdir,
-         "'): temporary directory already exists: ", dir)
+         "'): temporary directory already exists: ", subdir_target)
   }
-  invisible(dir)
+  invisible(subdir_target)
 }

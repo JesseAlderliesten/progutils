@@ -39,13 +39,16 @@ is thrown if the directory already exists or creating the directory failed.
 \examples{
 tempdir()
 # Create a directory inside the directory returned by 'tempdir()'
-(create_tempdir(subdir = "subdir"))
+(tempdir_std <- create_tempdir(subdir = "subdir"))
 
 # Error if the directory already exists
 try(create_tempdir(subdir = "subdir"))
 
 # It is possible to create recursive directories
-(create_tempdir(subdir = "abc/def"))
+(tempdir_recursive <- create_tempdir(subdir = "abc/def"))
+
+# Clean up
+unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
 
 }
 \seealso{
@@ -55,7 +58,9 @@ test-file \verb{progutils\\inst\\tinytest\\test_create_dir.R}.
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_path]{create_path()}},
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
-\code{\link[=get_filename]{get_filename()}}
+\code{\link[=file_path_no_ext]{file_path_no_ext()}},
+\code{\link[=get_filename]{get_filename()}},
+\code{\link[=is_filename]{is_filename()}},
+\code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}
