@@ -85,10 +85,7 @@ expect_silent(
 )
 
 ##### filename #####
-# File names that end in a dot are handled incorrectly by
-# tools::file_path_sans_ext(), so progutils::file_path_sans_ext() is used, see
-# the 'Programming note' in create_path().
-for(filenm in c("a.txt", "e3f.txt", "ff..txt", "g_g.txt")) {
+for(filenm in c("a.txt", "e3f.txt", "g_g.txt")) {
   expect_silent(
     expect_identical(
       create_path(filename = filenm, format_stamp = "",
@@ -98,6 +95,11 @@ for(filenm in c("a.txt", "e3f.txt", "ff..txt", "g_g.txt")) {
     )
   )
 }
+
+expect_error(
+  create_path(filename = "ff..txt", format_stamp = "",
+              dir = my_tempdir, add_date = FALSE),
+  pattern = "'filename' should not end with '.'", fixed = TRUE)
 
 ##### format_stamp #####
 # Characters in 'format_stamp' not part of a conversion specification in
@@ -213,10 +215,7 @@ expect_error(create_path(filename = "", dir = my_tempdir),
 
 for(filenm_in in c("abcd", "abc.", "ab.c#", ".", ".txt", ".html")) {
   expect_error(create_path(filename = filenm_in, dir = my_tempdir),
-               pattern = paste0(
-                 "'filename' should include the name and the file extension\n",
-                 "(or use 'progutils::create_dir()' instead of",
-                 " 'progutils::create_path()'):\n", filenm_in),
+               pattern = "No path created: Empty filename or missing extension",
                fixed = TRUE)
 }
 
@@ -225,10 +224,15 @@ for(ind_filenm in seq_along(filenm_in)) {
   expect_error(
     create_path(filename = filenm_in[ind_filenm], format_stamp = "",
                 dir = my_tempdir, add_date = FALSE),
-    pattern = paste0("Filename '",
-                     filenm_in[ind_filenm], "' contains (back)slashes"),
+    pattern = paste0("'filename' contains slashes or backslashes"),
     fixed = TRUE)
 }
+
+paste0(
+  "'filename' should include the name and the file extension\n",
+  "(or use 'progutils::create_dir()' instead of",
+  " 'progutils::create_path()'):\n", filenm_in)
+
 
 ##### Check 'format_stamp' #####
 expect_error(
@@ -253,29 +257,24 @@ for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
     pattern = "checkinput::is_character(dir) is not TRUE", fixed = TRUE)
 }
 
-for(dir in list(paste0(my_tempdir, "./"), paste0(my_tempdir, "temp_p1/"))) {
+for(dir in list(paste0(my_tempdir, "./"),
+                paste0(my_tempdir, "temp_p1/"),
+                paste0(my_tempdir, ".\\"),
+                paste0(my_tempdir, "temp_p1\\"))) {
   expect_error(
     create_path(filename = "abc.txt", dir = dir),
-    pattern = "'dir' should not end with '/'", fixed = TRUE)
+    pattern = "should not end in '/' or '\\'", fixed = TRUE)
 }
 
-for(dir in list(paste0(my_tempdir, ".\\"), paste0(my_tempdir, "temp_p1\\"))) {
+for(dir in list(paste0(my_tempdir, ".."),
+                paste0(my_tempdir, "temp_p1."),
+                paste0(my_tempdir, "."),
+                file.path(my_tempdir, "."),
+                paste0(my_tempdir, ". "),
+                paste0(my_tempdir, "temp_p1 "))) {
   expect_error(
     create_path(filename = "abc.txt", dir = dir),
-    pattern = "'dir' should not end with '\\'", fixed = TRUE)
-}
-
-for(dir in list(paste0(my_tempdir, ".."), paste0(my_tempdir, "temp_p1."),
-                paste0(my_tempdir, "."), file.path(my_tempdir, "."))) {
-  expect_error(
-    create_path(filename = "abc.txt", dir = dir),
-    pattern = "'dir' should not end with '.'", fixed = TRUE)
-}
-
-for(dir in list(paste0(my_tempdir, ". "), paste0(my_tempdir, "temp_p1 "))) {
-  expect_error(
-    create_path(filename = "abc.txt", dir = dir),
-    pattern = "'dir' should not end with ' ' (i.e., a space)", fixed = TRUE)
+    pattern = "should not end with ' ' or '.'", fixed = TRUE)
 }
 
 ##### Check 'add_date' #####
