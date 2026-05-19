@@ -2,9 +2,12 @@
 % Please edit documentation in R/file_path_no_ext.R
 \name{file_path_no_ext}
 \alias{file_path_no_ext}
-\title{Remove extension from file paths}
+\alias{file_path_ext}
+\title{Distinguish filenames and extensions}
 \usage{
 file_path_no_ext(x, compression = FALSE)
+
+file_path_ext(x, compression = FALSE)
 }
 \arguments{
 \item{x}{character vector giving file paths.}
@@ -13,34 +16,35 @@ file_path_no_ext(x, compression = FALSE)
     \file{.bz2} or \file{.xz} be removed first?}
 }
 \description{
-A drop-in replacement for \code{\link[tools:file_path_sans_ext]{tools::file_path_sans_ext()}}, see \code{Details}.
-Returns the file path without the extensions (and the leading dot). Only
-purely alphanumeric extensions are recognized.
+Distinguish filenames and extensions, correctly handling filenames that end
+in a dot.
 }
 \details{
-\code{\link[tools:file_path_sans_ext]{tools::file_path_sans_ext()}} did \strong{not} recognise the extension of file
-names that end in a dot prior to \R 4.6.0, whereas \code{\link[tools:file_ext]{tools::file_ext()}}
-\strong{did} recognise such extensions. This discrepancy led to \code{filename} not
-being re-created by
-\code{paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))}
-if \code{filename} ended in a dot.
+\code{file_path_no_ext()} returns the file paths without extensions and leading
+dot; \code{file_path_ext()} returns the file extensions without compression
+extension and leading dot. Only purely alphanumeric extensions are recognized.
 
-Using \code{\link[=file_path_no_ext]{file_path_no_ext()}} ensures that \code{filename} is recreated by
-\code{paste0(progutils::file_path_no_ext(filename), ".", tools::file_ext(filename))},
-such that, e.g., \link{create_path}\code{("ab..txt")} produces the correct result
-ending in \code{"ab..txt"} instead of the nonsense result ending in \code{"ab..txt.txt"},
-see the \code{Examples}.
+\code{file_path_no_ext()} replaces \code{\link[tools:file_path_sans_ext]{tools::file_path_sans_ext()}} because prior to
+\R 4.6.0 the latter did \strong{not} recognise the extension of file names ending
+in a dot, whereas \code{\link[tools:file_ext]{tools::file_ext()}} \strong{did} recognise such extensions. This
+discrepancy led to \code{filename} \strong{not} being re-created by
+\code{paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))}
+for filenames like \code{"ab..txt"}, instead producing the nonsense result
+\code{"ab..txt.txt"}, see the \code{Examples}.
+
+\code{file_path_ext()} replaces \code{\link[tools:file_ext]{tools::file_ext()}} because the latter does not
+have argument \code{compression}.
 }
 \examples{
 filename <- "ab..txt"
 # Should be "ab." but was "ab..txt" prior to R 4.6.0.
 tools::file_path_sans_ext(filename)
 tools::file_ext(filename) # "txt"
-# So the next line produces the nonsense-result "ab..txt.txt"
+# The next line produced the nonsense-result "ab..txt.txt" prior to R 4.6.0.
 paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))
 
 # The updated version recreates filename 'ab..txt':
-paste0(progutils::file_path_no_ext(filename), ".", tools::file_ext(filename))
+paste0(file_path_no_ext(filename), ".", file_path_ext(filename))
 
 }
 \seealso{

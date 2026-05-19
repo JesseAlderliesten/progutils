@@ -1,24 +1,25 @@
-#' Remove extension from file paths
+#' Distinguish filenames and extensions
 #'
-#' A drop-in replacement for [tools::file_path_sans_ext()], see `Details`.
-#' Returns the file path without the extensions (and the leading dot). Only
-#' purely alphanumeric extensions are recognized.
+#' Distinguish filenames and extensions, correctly handling filenames that end
+#' in a dot.
 #'
 #' @inheritParams tools::file_path_sans_ext
 #'
 #' @details
-#' [tools::file_path_sans_ext()] did **not** recognise the extension of file
-#' names that end in a dot prior to \R 4.6.0, whereas [tools::file_ext()]
-#' **did** recognise such extensions. This discrepancy led to `filename` not
-#' being re-created by
-#' `paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))`
-#' if `filename` ended in a dot.
+#' `file_path_no_ext()` returns the file paths without extensions and leading
+#' dot; `file_path_ext()` returns the file extensions without compression
+#' extension and leading dot. Only purely alphanumeric extensions are recognized.
 #'
-#' Using [progutils::file_path_no_ext()] ensures that `filename` is recreated by
-#' `paste0(progutils::file_path_no_ext(filename), ".", tools::file_ext(filename))`,
-#' such that, e.g., [create_path]`("ab..txt")` produces the correct result
-#' ending in `"ab..txt"` instead of the nonsense result ending in `"ab..txt.txt"`,
-#' see the `Examples`.
+#' `file_path_no_ext()` replaces [tools::file_path_sans_ext()] because prior to
+#' \R 4.6.0 the latter did **not** recognise the extension of file names ending
+#' in a dot, whereas [tools::file_ext()] **did** recognise such extensions. This
+#' discrepancy led to `filename` **not** being re-created by
+#' `paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))`
+#' for filenames like `"ab..txt"`, instead producing the nonsense result
+#' `"ab..txt.txt"`, see the `Examples`.
+#'
+#' `file_path_ext()` replaces [tools::file_ext()] because the latter does not
+#' have argument `compression`.
 #'
 #' @family functions to handle paths and directories
 #' @family functions to modify character vectors
@@ -28,15 +29,34 @@
 #' # Should be "ab." but was "ab..txt" prior to R 4.6.0.
 #' tools::file_path_sans_ext(filename)
 #' tools::file_ext(filename) # "txt"
-#' # So the next line produces the nonsense-result "ab..txt.txt"
+#' # The next line produced the nonsense-result "ab..txt.txt" prior to R 4.6.0.
 #' paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))
 #'
 #' # The updated version recreates filename 'ab..txt':
-#' paste0(progutils::file_path_no_ext(filename), ".", tools::file_ext(filename))
+#' paste0(file_path_no_ext(filename), ".", file_path_ext(filename))
 #'
 #' @export
 file_path_no_ext <- function (x, compression = FALSE) {
-  if (compression)
-    x <- sub("[.](gz|bz2|xz)$", "", x)
-  sub("\\.[[:alnum:]]+$", "\\1", x)
+  x <- as.character(x)
+  if(!length(x))
+    return(character(0))
+  if(compression) {
+    x <- sub(pattern = "[.](gz|bz2|xz)$", replacement = "", x = x)
+  }
+  sub(pattern = "\\.[[:alnum:]]+$", replacement = "", x = x)
+}
+
+#' @rdname file_path_no_ext
+#' @export
+file_path_ext <- function (x, compression = FALSE) {
+  x <- as.character(x)
+  if(!length(x))
+    return(character(0))
+  if(compression)
+    x <- sub(pattern = "[.](gz|bz2|xz)$", replacement = "", x = x)
+  if(grepl("^(.*[^.]+.*)[.]([[:alnum:]]+)$", basename(x))) {
+    sub(pattern = ".*[.]([[:alnum:]]+)$", replacement = "\\1", x = x)
+  } else {
+    ""
+  }
 }
