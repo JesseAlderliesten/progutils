@@ -13,7 +13,7 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE)
 after wrapping. Can be \code{Inf} to not wrap text.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
-by a blank character? Newlines at the end of \code{x} are always removed.}
+by a blank character?}
 }
 \value{
 A string containing \code{x} wrapped to a maximum of \code{width} characters, with
@@ -28,11 +28,12 @@ Wrap text at blank characters to achieve a maximum line width.
 \code{x} of length larger than one is pasted into a single string, separating the
 parts by blank characters.
 
-Leading white space in \code{x} is completely removed.
+Consecutive white space is collapsed into a single blank character, except
+for double spaces after periods, question marks and exclamation marks (as
+documented in the section \code{Details} of \code{\link[=strwrap]{strwrap()}}).
 
-Consecutive white space in \code{x} is collapsed into a single blank character,
-except for double spaces after periods, question marks and exclamation marks
-(as documented in the section \code{Details} of \code{\link[=strwrap]{strwrap()}}).
+Leading and trailing newlines are collapsed into a single blank character if
+\code{ignore_newlines} is \code{TRUE} and are retained if \code{ignore_newlines} is \code{FALSE}.
 }
 \section{Programming notes}{
 
@@ -54,9 +55,9 @@ The output is printed as a string with newlines represented as \verb{\\n}. Use
 \code{\link[=cat]{cat()}} on the output to print it in the way it is formatted in messages.
 
 Argument \code{width} in \code{wrap_text()} indicates the maximum width of text after
-wrapping, i.e., the width \emph{after} which text should be wrapped. In contrast,
-argument \code{width} in \code{\link[=strwrap]{strwrap()}} indicates the width \emph{at} which text should be
-wrapped.
+wrapping, i.e., the width \strong{after} which text should be wrapped. In
+contrast, argument \code{width} in \code{\link[=strwrap]{strwrap()}} indicates the width \strong{at} which
+text should be wrapped.
 }
 
 \examples{

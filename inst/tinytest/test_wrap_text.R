@@ -87,11 +87,58 @@ expect_identical(
   wrap_text(x = x_single, width = nchar_x - 8L, ignore_newlines = FALSE),
   x_single)
 
-##### 'x' ends in a newline #####
-# A newline at the end of 'x' is removed even if 'ignore_newlines' is FALSE
+##### 'x' ends with newline or blank #####
 expect_identical(
-  wrap_text(x = paste0(x, "\n"), width = nchar_x + 99L, ignore_newlines = FALSE),
-  x)
+  wrap_text(x = paste0(x, "\n"), width = 12L, ignore_newlines = FALSE),
+  paste0(x_multiple, "\n"))
+expect_identical(
+  wrap_text(x = paste0(x, "\n"), width = 12L, ignore_newlines = TRUE),
+  paste0(x_multiple, " "))
+expect_identical(
+  wrap_text(x = paste0(x, "\n"), width = 99L, ignore_newlines = FALSE),
+  paste0(x, "\n"))
+expect_identical(
+  wrap_text(x = paste0(x, "\n"), width = 99L, ignore_newlines = TRUE),
+  paste0(x, " "))
+
+expect_identical(
+  wrap_text(x = paste0(x, " "), width = 12L, ignore_newlines = FALSE),
+  paste0(x_multiple, " "))
+expect_identical(
+  wrap_text(x = paste0(x, " "), width = 12L, ignore_newlines = TRUE),
+  paste0(x_multiple, " "))
+expect_identical(
+  wrap_text(x = paste0(x, " "), width = 99L, ignore_newlines = FALSE),
+  paste0(x, " "))
+expect_identical(
+  wrap_text(x = paste0(x, " "), width = 99L, ignore_newlines = TRUE),
+  paste0(x, " "))
+
+expect_identical(
+  wrap_text(x = paste0(x, "\n\n\n"), width = 12L, ignore_newlines = FALSE),
+  paste0(x_multiple, "\n\n\n"))
+expect_identical(
+  wrap_text(x = paste0(x, "\n\n\n"), width = 12L, ignore_newlines = TRUE),
+  paste0(x_multiple, " "))
+expect_identical(
+  wrap_text(x = paste0(x, "\n\n\n"), width = 99L, ignore_newlines = FALSE),
+  paste0(x, "\n\n\n"))
+expect_identical(
+  wrap_text(x = paste0(x, "\n\n\n"), width = 99L, ignore_newlines = TRUE),
+  paste0(x, " "))
+
+expect_identical(
+  wrap_text(x = paste0(x, "   "), width = 12L, ignore_newlines = FALSE),
+  paste0(x_multiple, " "))
+expect_identical(
+  wrap_text(x = paste0(x, "   "), width = 12L, ignore_newlines = TRUE),
+  paste0(x_multiple, " "))
+expect_identical(
+  wrap_text(x = paste0(x, "   "), width = 99L, ignore_newlines = FALSE),
+  paste0(x, " "))
+expect_identical(
+  wrap_text(x = paste0(x, "   "), width = 99L, ignore_newlines = TRUE),
+  paste0(x, " "))
 
 ##### x wrapped multiple times #####
 expect_identical(wrap_text(x = x, width = 12L), x_multiple)
@@ -100,16 +147,47 @@ expect_identical(wrap_text(x = x_multiple_early, width = 12L,
                            ignore_newlines = FALSE),
                  expect_x_early)
 
-##### Start with blank character #####
-# wrap_text() removes leading whitespace
-expect_identical(wrap_text(x = paste0(" \t ", x), width = nchar_x + 1L), x)
+##### Start with blank characters #####
+expect_identical(
+  wrap_text(x = paste0(" \t ", x), width = 80L, ignore_newlines = TRUE),
+  paste0(" ", x))
+expect_identical(
+  wrap_text(x = x_single_blank, width = 80L, ignore_newlines = TRUE),
+  paste0(" ", x))
+expect_identical(
+  wrap_text(x = paste0(" \t ", x), width = 80L, ignore_newlines = FALSE),
+  paste0(" ", x))
+expect_identical(
+  wrap_text(x = x_single_blank, width = 80L, ignore_newlines = FALSE),
+  paste0(" ", x_single))
 
-expect_identical(wrap_text(x = x_single_blank, width = nchar_x + 1L), x)
+expect_identical(
+  wrap_text(x = paste0(" \t ", x), width = 12L, ignore_newlines = TRUE),
+  paste0(" ", x_multiple))
+expect_identical(
+  wrap_text(x = x_single_blank, width = 12L, ignore_newlines = TRUE),
+  paste0(" ", x_multiple))
+expect_identical(
+  wrap_text(x = paste0(" \t ", x), width = 12L, ignore_newlines = FALSE),
+  paste0(" ", x_multiple))
+expect_identical(
+  wrap_text(x = x_single_blank, width = 12L, ignore_newlines = FALSE),
+  " 123 567\n911 141 719\n123 262 931")
 
-expect_identical(wrap_text(x = x_single_blank, width = nchar_x + 1L,
-                           ignore_newlines = FALSE), x_single)
-expect_identical(wrap_text(x = x_single_blank, width = nchar_x - 8L,
-                           ignore_newlines = FALSE), x_single)
+##### Start with newlines #####
+expect_identical(
+  wrap_text(x = paste0("\n", x), width = nchar_x + 1L, ignore_newlines = TRUE),
+  paste0(" ", x))
+expect_identical(
+  wrap_text(x = paste0("\n\n\n", x), width = nchar_x + 1L, ignore_newlines = TRUE),
+  paste0(" ", x))
+
+expect_identical(
+  wrap_text(x = paste0("\n", x), width = nchar_x + 1L, ignore_newlines = FALSE),
+  paste0("\n", x))
+expect_identical(
+  wrap_text(x = paste0("\n\n\n", x), width = nchar_x + 1L, ignore_newlines = FALSE),
+  paste0("\n\n\n", x))
 
 ##### Fragments longer than width #####
 expect_warning(expect_identical(
