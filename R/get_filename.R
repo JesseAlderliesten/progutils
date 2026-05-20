@@ -42,23 +42,31 @@
 #'
 #' @examples
 #' # Create files in a temporary directory so we know what is present.
-#' my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
+#' my_tempfiles <- tempfile(pattern = c("some_filename", "another_filename"),
+#'                          fileext = ".txt")
 #' # Create the files
 #' file.create(my_tempfiles)
 #'
-#' get_filename(dir = tempdir(), pattern = "First")
-#' # The same file is found if case-insensitive matching is used:
-#' get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE)
-#' # Error reporting presence of case-insensitive match.
-#' try(get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
-#' # Error reporting no match found.
-#' try(get_filename(dir = tempdir(), pattern = "abcde", ignore_case = TRUE))
-#' try(get_filename(dir = tempdir(), pattern = "abcde", ignore_case = FALSE))
-#' # Error because multiple matches are present.
-#' try(get_filename(dir = tempdir(), pattern = "File"))
+#' get_filename(dir = tempdir(), pattern = "some_file")
 #'
-#' # Deleting the created temporary files
+#' # The same file is found if case-insensitive matching is used:
+#' get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
+#'
+#' # Error reporting presence of case-insensitive match.
+#' try(get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
+#'
+#' # Error reporting no match found.
+#' try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+#'                  ignore_case = TRUE))
+#' try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+#'                  ignore_case = FALSE))
+#'
+#' # Error if multiple matches are present.
+#' try(get_filename(dir = tempdir(), pattern = "_filename"))
+#'
+#' # Clean up
 #' unlink(x = my_tempfiles)
+#' rm(my_tempfiles)
 #'
 #' @export
 get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
