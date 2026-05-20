@@ -43,11 +43,17 @@
 #' directories, [dir.exists()] and [dir.create()] used by this function,
 #' [get_filename()] to check if a file exists and is a unique match to a pattern
 #'
+#' @section Programming notes:
+#' See also:
+#' - `utils::file_test()`
+#' - `fs::is_dir()`
+#' - `fs::is_dir_empty()`.
+#'
 #' @family functions to handle paths and directories
 #'
 #' @examples
-#' # Use a temporary directory to not write in the user's directory
-#' my_tempdir <- tempdir()
+#' # Use a temporary subdirectory to not write in the user's directory
+#' my_tempdir <- file.path(tempdir(), "testcreatedir")
 #'
 #' # Create directory 'dir_one' inside this temporary directory
 #' res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),

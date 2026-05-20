@@ -48,9 +48,19 @@ can be used in Windows' file system.
 The requested directory is created if does not yet exist.
 }
 
+\section{Programming notes}{
+
+See also:
+\itemize{
+\item \code{utils::file_test()}
+\item \code{fs::is_dir()}
+\item \code{fs::is_dir_empty()}.
+}
+}
+
 \examples{
-# Use a temporary directory to not write in the user's directory
-my_tempdir <- tempdir()
+# Use a temporary subdirectory to not write in the user's directory
+my_tempdir <- file.path(tempdir(), "testcreatedir")
 
 # Create directory 'dir_one' inside this temporary directory
 res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),

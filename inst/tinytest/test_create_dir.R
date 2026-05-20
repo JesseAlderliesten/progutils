@@ -13,7 +13,8 @@ tinytest::report_side_effects()
 
 
 #### Test the examples ####
-my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
+my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatedir"),
+                            winslash = "/", mustWork = FALSE)
 expect_silent(res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
                                         add_date = FALSE))
 expect_true(dir.exists(res_dir_one))
@@ -38,7 +39,8 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 
 
 #### Tests ####
-my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
+my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatedir"),
+                            winslash = "/", mustWork = FALSE)
 my_tempfile <- file.path(tempdir(), "test_df.csv")
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
@@ -138,7 +140,7 @@ for(dir in list(paste0(file.path(my_tempdir, "temp"), "//"),
                 file.path(my_tempdir, "temp\\", "subtemp"))) {
   expect_error(
     create_dir(dir = dir),
-    pattern = "'dir' should not end in '/' or '\\'", fixed = TRUE)
+    pattern = "'dir' should not end with '/' or '\\'", fixed = TRUE)
 }
 
 # NB. 'dir' equal to '.' can be used to denote the current working directory.
