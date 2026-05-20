@@ -31,7 +31,7 @@ single character string, or \code{NULL} to return each value as an element of a
 character vector.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
-by a blank character? Newlines at the end of \code{x} are always removed.}
+by a blank character?}
 }
 \value{
 The names and values in \code{x}, with values of numeric \code{x} rounded to \code{signif}
