@@ -35,13 +35,13 @@
 #' @examples
 #' tempdir()
 #' # Create a directory inside the directory returned by 'tempdir()'
-#' (tempdir_std <- create_tempdir(subdir = "subdir"))
+#' (tempdir_std <- create_tempdir(subdir = "examplesubtempdir"))
 #'
 #' # Error if the directory already exists
-#' try(create_tempdir(subdir = "subdir"))
+#' try(create_tempdir(subdir = "examplesubtempdir"))
 #'
 #' # It is possible to create recursive directories
-#' (tempdir_recursive <- create_tempdir(subdir = "abc/def"))
+#' (tempdir_recursive <- create_tempdir(subdir = file.path("abc", "def")))
 #'
 #' # Clean up
 #' unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
