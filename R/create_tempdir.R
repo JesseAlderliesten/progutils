@@ -2,21 +2,21 @@
 #'
 #' Create a temporary directory that can safely be removed.
 #'
-#' @param subdir A [character string][checkinput::is_character()] with the
-#' subdirectory to create inside [tempdir()]. This subdirectory should not yet
-#' exist, see `Details`.
+#' @param subdir A [character string][checkinput::is_character()] with the name
+#' of the temporary subdirectory to be created inside [tempdir()]. `subdir`
+#' should be a valid [path][is_path] pointing to a directory that **not yet**
+#' exists, see `Details`.
 #'
 #' @details
-#' The temporary directory is created as subdirectory `subdir` inside
-#' `tempdir()` and an error is thrown if it already exists. This ensures that
-#' programmatically [removing][unlink()] the created directory later on does not
-#' remove files that are still needed by other processes (which would happen
-#' when removing the directory returned by `tempdir()` because `RStudio` also
-#' uses that directory).
+#' `subdir` is created inside [tempdir()] and an error is thrown if it already
+#' exists. This ensures that programmatically [removing][unlink()] the created
+#' directory later on does not remove files that are still needed by other
+#' processes (which could happen when removing the directory returned by
+#' `tempdir()`, for example because `RStudio` also uses that directory).
 #'
 #' It is possible to create subdirectories inside a not-yet existing directory
-#' (e.g., to create `<tempdir>/output/<date>` if `<tempdir>/output` does not yet
-#' exist.
+#' (e.g., to create `<tempdir>/output/outputsub` if `<tempdir>/output` does not
+#' yet exist.
 #'
 #' @returns
 #' The [normalized][normalizePath()] path to the created temporary directory,
@@ -49,6 +49,7 @@
 #' @export
 create_tempdir <- function(subdir = "subdir") {
   stopifnot(checkinput::is_character(subdir))
+  is_path(subdir)
   subdir_target <- normalizePath(path = file.path(tempdir(), subdir),
                                  winslash = "/",
                                  mustWork = FALSE)
@@ -81,8 +82,8 @@ create_tempdir <- function(subdir = "subdir") {
            subdir_target)
     }
   } else {
-    stop("You need to change 'subdir' ('", subdir,
-         "'): temporary directory already exists: ", subdir_target)
+    stop("Temporary directory already exists: change 'subdir' ('", subdir,
+         "'): ", subdir_target)
   }
   invisible(subdir_target)
 }

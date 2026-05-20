@@ -16,13 +16,14 @@ tinytest::report_side_effects()
 my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
 
 # Possible to create a temporary subdirectory
-expect_false(dir.exists(file.path(my_tempdir, "subdir")))
-expect_silent(res_subdir <- create_tempdir(subdir = "subdir"))
+expect_false(dir.exists(file.path(my_tempdir, "createtempdir")))
+expect_silent(res_subdir <- create_tempdir(subdir = "createtempdir"))
 expect_true(dir.exists(res_subdir))
 
 # Error if temporary subdirectory already exists
-expect_error(create_tempdir(subdir = "subdir"),
-             pattern = "You need to change 'subdir' ('subdir')", fixed = TRUE)
+expect_error(create_tempdir(subdir = "createtempdir"),
+             pattern = paste0("Temporary directory already exists: change",
+                              " 'subdir' ('createtempdir')"), fixed = TRUE)
 
 # Temporary subdirectory is writeable
 my_tempfile <- file.path(res_subdir, "test_df.csv")
@@ -42,55 +43,41 @@ expect_warning(
 
 # Also recognise that a directory already exists if it has subdirectories
 expect_false(dir.exists(file.path(my_tempdir, "subdir", "abc")))
-expect_silent(res_subdir_recursive <- create_tempdir(subdir = file.path("subdir", "abc")))
+res_subdir_recursive <- create_tempdir(subdir = file.path("subdir", "abc"))
 expect_true(dir.exists(res_subdir_recursive))
 
-# 5 Checks on input to 'dir'
+# Checks on input to 'dir'
 for(subdir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
   expect_error(
     create_tempdir(subdir = subdir),
     pattern = "is_character(subdir) is not TRUE", fixed = TRUE)
 }
 
-for(subdir in list(".", "./", ".\\")) {
+for(subdir in list("temp_p3/", "temp_p3/", "temp_p4\\")) {
   expect_error(
     create_tempdir(subdir = subdir),
-    pattern = "would write to 'tempdir()' which is not safe", fixed = TRUE)
+    # NB. need to use '\\' instead of '\' which would test for ''.
+    pattern = "should not end with '/' or '\\'",
+    fixed = TRUE)
 }
 
-# for(subdir in list("temp_p3/")) {
-#   # Currently failing: no error
-#   expect_error(
-#     create_tempdir(subdir = subdir),
-#     pattern = "'subdir' should not end with '/'", fixed = TRUE)
-# }
-
-# for(subdir in list("temp_p4\\")) {
-#   # Currently failing: no error
-#   expect_error(
-#     create_tempdir(subdir = subdir),
-#     pattern = "'subdir' should not end with '\\'", fixed = TRUE)
-# }
+for(subdir in list(".")) {
+  expect_error(
+    create_tempdir(subdir = subdir),
+    pattern = "would write to 'tempdir()'", fixed = TRUE)
+}
 
 for(subdir in list("..")) {
   expect_error(
     create_tempdir(subdir = subdir),
-    pattern = "would write above 'tempdir()' which is not safe", fixed = TRUE)
+    pattern = "would write above 'tempdir()'", fixed = TRUE)
 }
 
-# for(subdir in list("temp_p5.")) {
-#   # Currently failing: no error
-#   expect_error(
-#     create_tempdir(subdir = subdir),
-#     pattern = "'subdir' should not end with '.'", fixed = TRUE)
-# }
-
-# for(subdir in list(". ", "temp_p6 ")) {
-#   # Currently failing: the first with the wrong error, the second with no error
-#   expect_error(
-#     create_tempdir(subdir = subdir),
-#     pattern = "'subdir' should not end with ' ' (i.e., a space)", fixed = TRUE)
-# }
+for(subdir in list("temp_p5.", "temp_p6 ")) {
+  expect_error(
+    create_tempdir(subdir = subdir),
+    pattern = "should not end with ' ' or '.'", fixed = TRUE)
+}
 
 
 #### Delete the created temporary files ####

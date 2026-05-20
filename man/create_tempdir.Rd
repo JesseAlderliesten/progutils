@@ -7,9 +7,10 @@
 create_tempdir(subdir = "subdir")
 }
 \arguments{
-\item{subdir}{A \link[checkinput:is_character]{character string} with the
-subdirectory to create inside \code{\link[=tempdir]{tempdir()}}. This subdirectory should not yet
-exist, see \code{Details}.}
+\item{subdir}{A \link[checkinput:is_character]{character string} with the name
+of the temporary subdirectory to be created inside \code{\link[=tempdir]{tempdir()}}. \code{subdir}
+should be a valid \link[=is_path]{path} pointing to a directory that \strong{not yet}
+exists, see \code{Details}.}
 }
 \value{
 The \link[=normalizePath]{normalized} path to the created temporary directory,
@@ -19,16 +20,15 @@ returned \link[=invisible]{invisibly}.
 Create a temporary directory that can safely be removed.
 }
 \details{
-The temporary directory is created as subdirectory \code{subdir} inside
-\code{tempdir()} and an error is thrown if it already exists. This ensures that
-programmatically \link[=unlink]{removing} the created directory later on does not
-remove files that are still needed by other processes (which would happen
-when removing the directory returned by \code{tempdir()} because \code{RStudio} also
-uses that directory).
+\code{subdir} is created inside \code{\link[=tempdir]{tempdir()}} and an error is thrown if it already
+exists. This ensures that programmatically \link[=unlink]{removing} the created
+directory later on does not remove files that are still needed by other
+processes (which could happen when removing the directory returned by
+\code{tempdir()}, for example because \code{RStudio} also uses that directory).
 
 It is possible to create subdirectories inside a not-yet existing directory
-(e.g., to create \verb{<tempdir>/output/<date>} if \verb{<tempdir>/output} does not yet
-exist.
+(e.g., to create \verb{<tempdir>/output/outputsub} if \verb{<tempdir>/output} does not
+yet exist.
 }
 \section{Side effects}{
 
