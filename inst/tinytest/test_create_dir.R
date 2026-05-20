@@ -34,14 +34,15 @@ expect_silent(res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
 expect_true(dir.exists(res_dir_two))
 
 # Cleaning up
-unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
+unlink(dirname(res_dir_one), recursive = TRUE)
 rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
 
 
 #### Tests ####
 my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatedir"),
                             winslash = "/", mustWork = FALSE)
-my_tempfile <- file.path(tempdir(), "test_df.csv")
+dir.create(my_tempdir)
+my_tempfile <- file.path(my_tempdir, "test_df.csv")
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 
@@ -170,7 +171,7 @@ for(add_date in list(3, NA)) {
 
 
 #### Delete the created temporary files ####
-unlink(my_tempfile, recursive = TRUE)
+unlink(my_tempdir, recursive = TRUE)
 
 
 #### Remove objects used in tests ####

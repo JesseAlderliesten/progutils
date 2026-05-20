@@ -81,8 +81,7 @@ for(subdir in list("temp_p5.", "temp_p6 ")) {
 
 
 #### Delete the created temporary files ####
-unlink(c(res_subdir, paste0(file.path(my_tempdir, "temp_p"), 3:6)),
-       recursive = TRUE)
+unlink(c(res_subdir, dirname(res_subdir_recursive)), recursive = TRUE)
 
 
 #### Remove objects used in tests ####

@@ -282,13 +282,7 @@ for(add_date in list(3, NA)) {
 
 #### Cleaning up ####
 ##### Delete the created temporary files #####
-unlink(
-  x = file.path(my_tempdir,
-                c(".txt",
-                  format(Sys.time(), format = "%Y_%m_%d"),
-                  "subdir",
-                  "test_df.csv")),
-  recursive = TRUE)
+unlink(x = my_tempdir, recursive = TRUE)
 
 
 ##### Remove objects used in tests #####

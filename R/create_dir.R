@@ -80,7 +80,7 @@
 #' dir.exists(res_dir_two) # TRUE
 #'
 #' # Cleaning up
-#' unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
+#' unlink(dirname(res_dir_one), recursive = TRUE)
 #' rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 #'
 #' @export

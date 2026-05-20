@@ -45,6 +45,7 @@
 #'
 #' # Clean up
 #' unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
+#' rm(tempdir_recursive, tempdir_std)
 #'
 #' @export
 create_tempdir <- function(subdir = "subdir") {

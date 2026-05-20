@@ -69,7 +69,7 @@ yet exist.
 \examples{
 # Use a temporary directory to not write in the user's directory
 my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
-                            winslash = "/", mustWork = NA)
+                            winslash = "/", mustWork = FALSE)
 
 (create_path(filename = "abc.txt", format_stamp = "",
             dir = my_tempdir, add_date = TRUE))
@@ -89,9 +89,7 @@ my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
 
 # Cleaning up
-unlink(x = file.path(my_tempdir,
-                     c(format(Sys.time(), format = "\%Y_\%m_\%d"), "subdir")),
-       recursive = TRUE)
+unlink(x = my_tempdir, recursive = TRUE)
 rm(my_tempdir)
 
 }
