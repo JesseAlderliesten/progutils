@@ -7,20 +7,25 @@
 #' instead of to a folder?
 #'
 #' @details
-#' `is_path()` puts some restrictions on paths because it is used to check for
+#' `is_path()` puts some restrictions on paths so it can be used to check for
 #' valid paths before creating a directory:
 #'
 #' - `path` should **not** contain the characters `"`, `*`, `?`, `|`, `<`, `>`,
 #'   nor any of the control characters (`ASCII` octal codes 000 through 037 and
 #'   177, see `help("regex")`).
-#' - `path` components should **not** end in a slash, backslash, space or dot
-#'   (with the exception of `path` being `"."` to indicate the working
-#'   directory): those characters would be removed if the directory to which
-#'   `path` points is created, leading to a mismatch between the created
-#'   directory and the returned path.
-#' - `path` components should **not** be case-insensitive variants of `CON`,
-#'   `PRN`, `AUX`, `NUL`, `COM<non-zero digit>`, `LPT<non-zero digit>`, nor
-#'   these names followed by an extension: these are reserved names in Windows.
+#' - `path` components should **not** end with a slash, backslash, space or dot
+#'   (`"."` and `".."` are allowed as first component to indicate the working
+#'   directory and the parent directory, respectively).
+#' - `path` components should **not** be `CON`, `PRN`, `AUX`, `NUL`,
+#'   `COM<non-zero digit>`, `LPT<non-zero digit>`, case-insensitive variants of
+#'   these names, and these names followed by an extension.
+#' - `path` should not point to `tempdir()`: a temporary subdirectory should be
+#'   used instead.
+#'
+#' These restrictions consider characters that would lead to an error in Windows
+#' because they are not allowed; characters that  would lead to a mismatch
+#' between the created directory and the returned path because they are silently
+#' removed in Windows; and words that are reserved names in Windows.
 #'
 #' In contrast to functions from `checkinput`, `is_path` will produce an error
 #' if `path` is not a valid path.
@@ -29,29 +34,20 @@
 #' `TRUE`: an error occurs if `path` is not a valid path.
 #'
 #' @section Programming notes:
-#' Ways to make `is_path()` even stricter:
-#'
-#' - Do **not** allow `.` or `..` except as complete directory component at the
-#'   beginning?
-#' - Check that the normalized path is not equal to normalized `tempdir()`: a
-#'   temporary subdirectory should be used?
 #'
 #' See also
 #' - https://github.com/r-lib/usethis/blob/main/R/directory.R
 #' - https://github.com/r-lib/usethis/blob/main/tests/testthat/test-directory.R
 #' - https://docs.racket-lang.org/reference/windowspaths.html
 #' - function `progutils::create_path()`
-#' - packages `fs` and `usethis`.
-#'
-#' On existence and permissions, see `utils::file_test()` and references there.
+#' - packages `fs`.
 #'
 #' @seealso
-#' [create_path()] to create a path, and references there about file paths,
+#' [create_path()] to create a path (with references there about file paths),
 #' [create_dir()] to create a directory if it does not yet exist,
 #' [get_filename()] to check if a file exists and is a unique match to a pattern
 #'
-#' `fs::path_sanitize()` to *remove* invalid characters from potential paths,
-#' looking for a wider range of invalid characters.
+#' `fs::path_sanitize()` to *remove* invalid characters from potential paths.
 #'
 #' @family functions to handle paths and directories
 #'
@@ -70,27 +66,27 @@ is_path <- function(path, as_file = FALSE) {
 
   if(grepl(pattern = '["*?|<>]', x = path)) {
     stop(paste_quoted(deparse(substitute(path))),
-         " should not contain any of \" * ? | < >:\n", path)
+         " should not contain '\"', '*', '?', '|', '<' or '>':\n", path)
   }
 
   # "[[:cntrl:]]" matches the control characters, see help("regex")
   if(grepl(pattern = "[[:cntrl:]]", x = path)) {
-    stop("'path' should not contain any control character:\n", path)
+    stop("'path' should not contain control characters:\n", path)
   }
 
   if(any(!nzchar(path_comp)) ||
      any(endsWith(x = c(path, path_comp), suffix = "/") |
          endsWith(x = c(path, path_comp), suffix = "\\"))) {
     stop("Path components in ", paste_quoted(deparse(substitute(path))),
-         " should not end in '/' or '\\':\n", path)
+         " should not end with '/' or '\\':\n", path)
   }
 
   bool_invalid_dot <- endsWith(x = path_comp, suffix = ".")
-  # allow "." as first path component denoting the working directory
-  if(bool_invalid_dot[1] && path_comp[1] == ".") {
+  # "." and ".." are allowed as first path component to denote the working
+  # directory and the parent directory, respectively
+  if(bool_invalid_dot[1] && path_comp[1] %in% c(".", "..")) {
     bool_invalid_dot[1] <- FALSE
   }
-
   if(any(bool_invalid_dot | endsWith(x = path_comp, suffix = " "))) {
     stop("Path components in ", paste_quoted(deparse(substitute(path))),
          " should not end with ' ' or '.' (i.e., a space or a dot):\n",
@@ -103,6 +99,14 @@ is_path <- function(path, as_file = FALSE) {
     reserved_comp <- path_comp[tolower(path_comp) %in% Windows_reserved]
     stop("'path' components should not contain Windows-reserved names (",
          paste_quoted(reserved_comp), "):\n", path)
+  }
+
+  if(normalizePath(path, winslash = "/", mustWork = FALSE) ==
+     normalizePath(tempdir(), winslash = "/", mustWork = FALSE)) {
+    stop(wrap_text(paste0(
+      "'path' should not point to 'tempdir()': instead, point to a subdirectory",
+      " in tempdir() through 'file.path(tempdir(), \"subdir\")', or create such",
+      " a subdirectory through 'create_tempdir(subdir = \"subdir\")':\n", path)))
   }
 
   TRUE

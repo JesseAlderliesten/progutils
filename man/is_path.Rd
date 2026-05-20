@@ -19,34 +19,32 @@ instead of to a folder?}
 Check that \code{x} is a path that s likely to be a valid path.
 }
 \details{
-\code{is_path()} puts some restrictions on paths because it is used to check for
+\code{is_path()} puts some restrictions on paths so it can be used to check for
 valid paths before creating a directory:
 \itemize{
 \item \code{path} should \strong{not} contain the characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, \code{>},
 nor any of the control characters (\code{ASCII} octal codes 000 through 037 and
 177, see \code{help("regex")}).
-\item \code{path} components should \strong{not} end in a slash, backslash, space or dot
-(with the exception of \code{path} being \code{"."} to indicate the working
-directory): those characters would be removed if the directory to which
-\code{path} points is created, leading to a mismatch between the created
-directory and the returned path.
-\item \code{path} components should \strong{not} be case-insensitive variants of \code{CON},
-\code{PRN}, \code{AUX}, \code{NUL}, \verb{COM<non-zero digit>}, \verb{LPT<non-zero digit>}, nor
-these names followed by an extension: these are reserved names in Windows.
+\item \code{path} components should \strong{not} end with a slash, backslash, space or dot
+(\code{"."} and \code{".."} are allowed as first component to indicate the working
+directory and the parent directory, respectively).
+\item \code{path} components should \strong{not} be \code{CON}, \code{PRN}, \code{AUX}, \code{NUL},
+\verb{COM<non-zero digit>}, \verb{LPT<non-zero digit>}, case-insensitive variants of
+these names, and these names followed by an extension.
+\item \code{path} should not point to \code{tempdir()}: a temporary subdirectory should be
+used instead.
 }
+
+These restrictions consider characters that would lead to an error in Windows
+because they are not allowed; characters that  would lead to a mismatch
+between the created directory and the returned path because they are silently
+removed in Windows; and words that are reserved names in Windows.
 
 In contrast to functions from \code{checkinput}, \code{is_path} will produce an error
 if \code{path} is not a valid path.
 }
 \section{Programming notes}{
 
-Ways to make \code{is_path()} even stricter:
-\itemize{
-\item Do \strong{not} allow \code{.} or \code{..} except as complete directory component at the
-beginning?
-\item Check that the normalized path is not equal to normalized \code{tempdir()}: a
-temporary subdirectory should be used?
-}
 
 See also
 \itemize{
@@ -54,10 +52,8 @@ See also
 \item https://github.com/r-lib/usethis/blob/main/tests/testthat/test-directory.R
 \item https://docs.racket-lang.org/reference/windowspaths.html
 \item function \code{progutils::create_path()}
-\item packages \code{fs} and \code{usethis}.
+\item packages \code{fs}.
 }
-
-On existence and permissions, see \code{utils::file_test()} and references there.
 }
 
 \section{References}{
@@ -74,12 +70,11 @@ try(is_path(file.path(getwd(), "ab|cd")))
 
 }
 \seealso{
-\code{\link[=create_path]{create_path()}} to create a path, and references there about file paths,
+\code{\link[=create_path]{create_path()}} to create a path (with references there about file paths),
 \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist,
 \code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern
 
-\code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths,
-looking for a wider range of invalid characters.
+\code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},

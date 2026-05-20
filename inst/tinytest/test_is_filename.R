@@ -24,14 +24,14 @@ expect_true(is_filename("abcd.txt"))
 expect_true(is_filename(".abcd.txt"))
 expect_true(is_filename("ab.cd.txt"))
 expect_error(is_filename("abcd..txt"),
-             pattern = "should not end with '.'", fixed = TRUE)
+             pattern = "should not end with ' ' or '.'", fixed = TRUE)
 expect_error(is_filename("..txt"), pattern = warn_invalid, fixed = TRUE)
 expect_error(is_filename("...txt"), pattern = warn_invalid, fixed = TRUE)
 
 expect_error(is_filename(" abcd.txt"),
              pattern = "should not start with ' ' (i.e., a space)", fixed = TRUE)
 expect_error(is_filename("abcd .txt"),
-             pattern = "should not end with ' ' (i.e., a space)", fixed = TRUE)
+             pattern = "should not end with ' ' or '.'", fixed = TRUE)
 
 ##### Containing directories #####
 expect_error(is_filename("somedir/a.txt"), pattern = warn_slash, fixed = TRUE)
@@ -61,7 +61,13 @@ expect_error(is_filename(".gz"), pattern = warn_invalid, fixed = TRUE)
 ##### Illegal characters #####
 for(illegal_char in c('"', "*", ":", "?", "|", "<", ">")) {
   expect_error(is_filename(paste0("ab", illegal_char, "cd.txt")),
-               pattern = "should not contain any of", fixed = TRUE)
+               pattern = "should not contain '\"', '*'", fixed = TRUE)
+}
+
+# Filenames containing some of the control characters
+for(control_char in paste0("\005", "\025", "\035", "\177")) {
+  expect_error(is_filename(paste0("ab", control_char, "cd.txt")),
+               pattern = "should not contain control characters", fixed = TRUE)
 }
 
 ##### Invalid input #####
