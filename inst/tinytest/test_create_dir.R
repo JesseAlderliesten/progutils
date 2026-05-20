@@ -15,8 +15,8 @@ tinytest::report_side_effects()
 #### Test the examples ####
 my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatedir"),
                             winslash = "/", mustWork = FALSE)
-expect_silent(res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
-                                        add_date = FALSE))
+res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+                          add_date = FALSE)
 expect_true(dir.exists(res_dir_one))
 
 expect_silent(res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),

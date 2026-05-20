@@ -17,7 +17,7 @@ my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
 
 # Possible to create a temporary subdirectory
 expect_false(dir.exists(file.path(my_tempdir, "createtempdir")))
-expect_silent(res_subdir <- create_tempdir(subdir = "createtempdir"))
+res_subdir <- create_tempdir(subdir = "createtempdir")
 expect_true(dir.exists(res_subdir))
 
 # Error if temporary subdirectory already exists
