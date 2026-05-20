@@ -1,13 +1,11 @@
-#### Test the examples ####
-# Examples are tested in section 'Correct combinations' below
-
 tinytest::report_side_effects()
-
 
 #### Tests ####
 ##### Preparations #####
 # Create temporary directory and temporary file to use in tests.
-my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
+my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatepath"),
+                            winslash = "/", mustWork = FALSE)
+dir.create(path = my_tempdir, showWarnings = FALSE, recursive = TRUE)
 my_tempfile <- normalizePath(path = file.path(my_tempdir, "test_df.csv"),
                              winslash = "/", mustWork = FALSE)
 # Write csv-file, modified from example in help(write.table)
@@ -99,7 +97,7 @@ for(filenm in c("a.txt", "e3f.txt", "g_g.txt")) {
 expect_error(
   create_path(filename = "ff..txt", format_stamp = "",
               dir = my_tempdir, add_date = FALSE),
-  pattern = "'filename' should not end with '.'", fixed = TRUE)
+  pattern = "'filename' should not end with ' ' or '.'", fixed = TRUE)
 
 ##### format_stamp #####
 # Characters in 'format_stamp' not part of a conversion specification in
@@ -228,27 +226,24 @@ for(ind_filenm in seq_along(filenm_in)) {
     fixed = TRUE)
 }
 
-paste0(
-  "'filename' should include the name and the file extension\n",
-  "(or use 'progutils::create_dir()' instead of",
-  " 'progutils::create_path()'):\n", filenm_in)
-
-
 ##### Check 'format_stamp' #####
 expect_error(
   create_path(filename = "abc.txt", format_stamp = character(0),
               dir = my_tempdir, add_date = TRUE),
-  pattern = "checkinput::is_character(format_stamp, allow_empty = TRUE) is not TRUE", fixed = TRUE)
+  pattern = paste0("checkinput::is_character(format_stamp, allow_empty = TRUE)",
+                   " is not TRUE"), fixed = TRUE)
 
 expect_error(
   create_path(filename = "abc.txt", format_stamp = NA_character_,
               dir = my_tempdir, add_date = TRUE),
-  pattern = "checkinput::is_character(format_stamp, allow_empty = TRUE) is not TRUE", fixed = TRUE)
+  pattern = paste0("checkinput::is_character(format_stamp, allow_empty = TRUE)",
+                   " is not TRUE"), fixed = TRUE)
 
 expect_error(
   create_path(filename = "abc.txt", format_stamp = c("", "%d_%m_%Y"),
               dir = my_tempdir, add_date = TRUE),
-  pattern = "checkinput::is_character(format_stamp, allow_empty = TRUE) is not TRUE", fixed = TRUE)
+  pattern = paste0("checkinput::is_character(format_stamp, allow_empty = TRUE)",
+                   " is not TRUE"), fixed = TRUE)
 
 ##### Check 'dir' #####
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
@@ -263,7 +258,7 @@ for(dir in list(paste0(my_tempdir, "./"),
                 paste0(my_tempdir, "temp_p1\\"))) {
   expect_error(
     create_path(filename = "abc.txt", dir = dir),
-    pattern = "should not end in '/' or '\\'", fixed = TRUE)
+    pattern = "should not end with '/' or '\\'", fixed = TRUE)
 }
 
 for(dir in list(paste0(my_tempdir, ".."),

@@ -68,7 +68,8 @@ yet exist.
 
 \examples{
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = NA)
+my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
+                            winslash = "/", mustWork = NA)
 
 (create_path(filename = "abc.txt", format_stamp = "",
             dir = my_tempdir, add_date = TRUE))
