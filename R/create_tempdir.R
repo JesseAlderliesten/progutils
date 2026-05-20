@@ -56,7 +56,9 @@ create_tempdir <- function(subdir = "subdir") {
                                  mustWork = FALSE)
 
   tempdir_normalised <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
-  if(!startsWith(subdir_target, prefix = tempdir_normalised)) {
+  if(!grepl(pattern = basename(tempdir()), x = subdir_target, fixed = TRUE)
+      # startsWith(subdir_target, prefix = tempdir_normalised)
+     ) {
     stop("Using ", paste_quoted(subdir),
          " as 'subdir' would write above 'tempdir()' which is not safe: ",
          subdir_target)
