@@ -19,8 +19,8 @@ res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 expect_true(dir.exists(res_dir_one))
 
-expect_silent(res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
-                                           add_date = FALSE))
+res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+                             add_date = FALSE)
 expect_identical(res_dir_one, res_dir_one_v2)
 
 # On case-insensitive file systems such as Windows and macOS, the created
@@ -29,8 +29,8 @@ expect_identical(res_dir_one, res_dir_one_v2)
 expect_silent(create_dir(dir = file.path(my_tempdir, "dir_ONE"),
                          add_date = FALSE))
 
-expect_silent(res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
-                                        add_date = TRUE))
+res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
+                          add_date = TRUE)
 expect_true(dir.exists(res_dir_two))
 
 # Cleaning up
