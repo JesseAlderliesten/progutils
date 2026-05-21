@@ -113,28 +113,28 @@ my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
 
 (create_path(filename = "abc.txt", format_stamp = "",
             dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpGarcGN/subdir/2026_05_21/abc.txt"
+#> [1] "/tmp/RtmpVewme3/subdir/2026_05_21/abc.txt"
 (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
             dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpGarcGN/subdir/2026_05_21/21_05_2026_abc.txt"
+#> [1] "/tmp/RtmpVewme3/subdir/2026_05_21/21_05_2026_abc.txt"
 (create_path(filename = "def.html", format_stamp = "",
             dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpGarcGN/subdir/def.html"
+#> [1] "/tmp/RtmpVewme3/subdir/def.html"
 (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
             dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpGarcGN/subdir/21_05_2026_def.html"
+#> [1] "/tmp/RtmpVewme3/subdir/21_05_2026_def.html"
 (create_path(filename = "abc.txt", format_stamp = "",
             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpGarcGN/subdir/subdir/2026_05_21/abc.txt"
+#> [1] "/tmp/RtmpVewme3/subdir/subdir/2026_05_21/abc.txt"
 (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpGarcGN/subdir/subdir/2026_05_21/21_05_2026_abc.txt"
+#> [1] "/tmp/RtmpVewme3/subdir/subdir/2026_05_21/21_05_2026_abc.txt"
 (create_path(filename = "def.html", format_stamp = "",
             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpGarcGN/subdir/subdir/def.html"
+#> [1] "/tmp/RtmpVewme3/subdir/subdir/def.html"
 (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpGarcGN/subdir/subdir/21_05_2026_def.html"
+#> [1] "/tmp/RtmpVewme3/subdir/subdir/21_05_2026_def.html"
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

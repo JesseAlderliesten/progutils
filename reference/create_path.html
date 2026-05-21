@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.10.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.10.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -138,28 +138,28 @@ yet exist.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>            dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGarcGN/subdir/2026_05_21/abc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVewme3/subdir/2026_05_21/abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>            dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGarcGN/subdir/2026_05_21/21_05_2026_abc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVewme3/subdir/2026_05_21/21_05_2026_abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>            dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGarcGN/subdir/def.html"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVewme3/subdir/def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>            dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGarcGN/subdir/21_05_2026_def.html"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVewme3/subdir/21_05_2026_def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>            dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGarcGN/subdir/subdir/2026_05_21/abc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVewme3/subdir/subdir/2026_05_21/abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>            dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGarcGN/subdir/subdir/2026_05_21/21_05_2026_abc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVewme3/subdir/subdir/2026_05_21/21_05_2026_abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>            dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGarcGN/subdir/subdir/def.html"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVewme3/subdir/subdir/def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>            dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpGarcGN/subdir/subdir/21_05_2026_def.html"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVewme3/subdir/subdir/21_05_2026_def.html"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cleaning up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">my_tempdir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

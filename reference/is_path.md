@@ -58,6 +58,10 @@ error if `path` is not a valid path.
 
 ## Programming notes
 
+To do:
+
+- Also disallow path components to **start** with a dot?
+
 See also
 
 - https://github.com/r-lib/usethis/blob/main/R/directory.R

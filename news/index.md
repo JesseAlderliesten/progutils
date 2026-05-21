@@ -1,5 +1,20 @@
 # Changelog
 
+## progutils 0.0.10.9001
+
+#### Work in progress
+
+Work on test files that need to be updated (see `NEWS` for
+`progutils 0.0.10.9000`):
+
+- `test_create_path.R`: uses `expect_true(endsWith(...))` instead of
+  [`regexec()`](https://rdrr.io/r/base/grep.html) proposed in version
+  `0.0.10.9000`. Has some out-commented `expect_silent()` to get rid of
+  spurious errors on MacOS because there the part before the output of
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html) contains repeated
+  slashes leading to a spurious warning from
+  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
+
 ## progutils 0.0.10.9000
 
 #### Work in progress

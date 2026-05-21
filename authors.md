@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/JesseAlderliesten/progutils/blob/master/DESCRIPTION)
 
 Alderliesten J (2026). *progutils: Programming Utilities*. R package
-version 0.0.10.9000, <https://github.com/JesseAlderliesten/progutils>.
+version 0.0.10.9001, <https://github.com/JesseAlderliesten/progutils>.
 
     @Manual{,
       title = {progutils: Programming Utilities},
       author = {Jesse Alderliesten},
       year = {2026},
-      note = {R package version 0.0.10.9000},
+      note = {R package version 0.0.10.9001},
       url = {https://github.com/JesseAlderliesten/progutils},
     }

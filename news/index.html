@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.10.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.10.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,15 @@
       <small>Source: <a href="https://github.com/JesseAlderliesten/progutils/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.10.9001" id="progutils-00109001">progutils 0.0.10.9001<a class="anchor" aria-label="anchor" href="#progutils-00109001"></a></h2>
+<div class="section level4">
+<h4 id="work-in-progress-0-0-10-9001">Work in progress<a class="anchor" aria-label="anchor" href="#work-in-progress-0-0-10-9001"></a></h4>
+<p>Work on test files that need to be updated (see <code>NEWS</code> for <code>progutils 0.0.10.9000</code>):</p>
+<ul><li>
+<code>test_create_path.R</code>: uses <code>expect_true(endsWith(...))</code> instead of <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">regexec()</a></code> proposed in version <code>0.0.10.9000</code>. Has some out-commented <code>expect_silent()</code> to get rid of spurious errors on MacOS because there the part before the output of <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> contains repeated slashes leading to a spurious warning from <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.10.9000" id="progutils-00109000">progutils 0.0.10.9000<a class="anchor" aria-label="anchor" href="#progutils-00109000"></a></h2>
 <div class="section level4">
