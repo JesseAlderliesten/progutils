@@ -133,59 +133,64 @@ expect_warning(
 ##### dir #####
 # 'directories' that are only working directory followed by a file extension
 # are accepted!
-# expect_silent(
-#   expect_identical(
-#     create_path(filename = "abc.txt", format_stamp = "",
-#                 dir = file.path(my_tempdir, ".txt"), add_date = FALSE),
-#     normalizePath(file.path(my_tempdir, ".txt", "abc.txt"),
-#                   winslash = "/", mustWork = FALSE)
-#   )
-# )
+expect_true(endsWith(
+  create_path(filename = "abc.txt", format_stamp = "",
+              dir = file.path(my_tempdir, ".txt"), add_date = FALSE),
+  suffix = file.path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
+))
+
 
 ##### Warnings #####
 # 'directories' that actually are names of existing files lead to the working
 # directory being used instead, with warnings that the file already exists and
 # that the working directory is used because creation of the directory failed.
-# expect_warning(
-#   expect_true(
-#     grepl(
-#       pattern = file.path(basename(getwd()), "abc.txt", fsep = "/"),
-#       x = create_path(filename = "abc.txt", format_stamp = "",
-#                       dir = my_tempfile, add_date = FALSE),
-#       ignore.case = FALSE, fixed = TRUE)),
-#   pattern = paste0(basename(my_tempfile), "' already exists"),
-#   strict = TRUE, fixed = TRUE
-# )
-#
-# expect_warning(
-#     create_path(filename = "abc.txt", format_stamp = "",
-#                 dir = my_tempfile, add_date = FALSE),
-#   pattern = "Attempt to create directory", strict = TRUE, fixed = TRUE
-# )
-#
-# # A warning is issued if the file indicated by the returned path already exists.
-# expect_warning(
-#   expect_identical(
-#     create_path(filename = basename(my_tempfile), format_stamp = "",
-#                 dir = my_tempdir, add_date = FALSE),
-#     my_tempfile),
-#   pattern = "File already exists:", strict = TRUE, fixed = TRUE)
-#
-# filenm_in <- c("c#c.txt", "d d.txt")
-# filenm_out <- c("c.c.txt", "d.d.txt")
-# for(ind_filenm in seq_along(filenm_in)) {
-#   expect_warning(
-#     expect_identical(
-#       create_path(filename = filenm_in[ind_filenm], format_stamp = "",
-#                   dir = my_tempdir, add_date = FALSE),
-#       normalizePath(file.path(my_tempdir, filenm_out[ind_filenm]),
-#                     winslash = "/", mustWork = FALSE)
-#     ),
-#     pattern = paste0("Replaced non-alphanumeric characters other than",
-#                      " underscores in filename\n'", filenm_in[ind_filenm],
-#                      "' with dots: ", filenm_out[ind_filenm]),
-#     strict = TRUE, fixed = TRUE)
-# }
+my_tempdir <- file.path(tempdir(), "testcreatepath")
+dir.create(my_tempdir)
+my_tempfile <- file.path(my_tempdir, "testfile.csv")
+write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
+
+expect_warning(
+  expect_true(endsWith(
+    create_path(filename = "testfile.csv", format_stamp = "",
+                dir = my_tempfile, add_date = FALSE),
+    suffix = file.path(getwd(), "testfile.csv")
+  )),
+  pattern = paste0(basename(my_tempfile), "' already exists"),
+  strict = TRUE, fixed = TRUE
+)
+
+expect_warning(
+  expect_true(endsWith(
+    create_path(filename = "testfile.csv", format_stamp = "",
+                dir = my_tempfile, add_date = FALSE),
+    suffix = file.path(getwd(), "testfile.csv")
+  )),
+  pattern = "Attempt to create directory",
+  strict = TRUE, fixed = TRUE
+)
+
+# A warning is issued if the file indicated by the returned path already exists.
+expect_warning(
+  expect_true(endsWith(
+    create_path(filename = basename(my_tempfile), format_stamp = "",
+                dir = my_tempdir, add_date = FALSE),
+    suffix = file.path(tempdir_basename, "testcreatepath", basename(my_tempfile)))),
+  pattern = "File already exists:", strict = TRUE, fixed = TRUE)
+
+filenm_in <- c("c#c.txt", "d d.txt")
+filenm_out <- c("c.c.txt", "d.d.txt")
+for(ind_filenm in seq_along(filenm_in)) {
+  expect_warning(
+    expect_true(endsWith(
+      create_path(filename = filenm_in[ind_filenm], format_stamp = "",
+                  dir = my_tempdir, add_date = FALSE),
+      suffix = file.path(tempdir_basename, "testcreatepath", filenm_out[ind_filenm])
+      )),
+    pattern = paste0("Replaced non-alphanumeric characters other than",
+                     " underscores in filename\n'", filenm_in[ind_filenm],
+                     "' with dots: ", filenm_out[ind_filenm]),
+    strict = TRUE, fixed = TRUE)
+}
 
 ##### Check 'filename' #####
 expect_error(create_path(dir = my_tempdir),
