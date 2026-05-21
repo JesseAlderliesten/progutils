@@ -2,9 +2,10 @@
 #'
 #' Create a directory if it does not yet exist.
 #'
-#' @param dir Non-empty character string containing the path to a directory that
-#' should be created if it does not yet exist. A dot (i.e., ".") indicates the
-#' current working directory.
+#' @param dir Non-empty [character string][checkinput::is_character()]
+#' containing a [valid path][is_path()] to a directory that should be created if
+#' it does not yet exist. A dot (i.e., `"."`) indicates the current working
+#' directory.
 #' @param add_date `TRUE` or `FALSE`: create a subdirectory with the current
 #' date in the [format][strftime()] `YYYY_mm_dd`?
 #'
