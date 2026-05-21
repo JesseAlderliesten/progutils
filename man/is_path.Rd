@@ -43,24 +43,6 @@ removed in Windows; and words that are reserved names in Windows.
 In contrast to functions from \code{checkinput}, \code{is_path} will produce an error
 if \code{path} is not a valid path.
 }
-\section{Programming notes}{
-
-
-To do:
-\itemize{
-\item Also disallow path components to \strong{start} with a dot?
-}
-
-See also
-\itemize{
-\item https://github.com/r-lib/usethis/blob/main/R/directory.R
-\item https://github.com/r-lib/usethis/blob/main/tests/testthat/test-directory.R
-\item https://docs.racket-lang.org/reference/windowspaths.html
-\item function \code{progutils::create_path()}
-\item packages \code{fs}.
-}
-}
-
 \section{References}{
 
 \itemize{

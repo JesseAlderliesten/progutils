@@ -33,18 +33,6 @@
 #' @returns
 #' `TRUE`: an error occurs if `path` is not a valid path.
 #'
-#' @section Programming notes:
-#'
-#' To do:
-#' - Also disallow path components to **start** with a dot?
-#'
-#' See also
-#' - https://github.com/r-lib/usethis/blob/main/R/directory.R
-#' - https://github.com/r-lib/usethis/blob/main/tests/testthat/test-directory.R
-#' - https://docs.racket-lang.org/reference/windowspaths.html
-#' - function `progutils::create_path()`
-#' - packages `fs`.
-#'
 #' @seealso
 #' [create_path()] to create a path (with references there about file paths),
 #' [create_dir()] to create a directory if it does not yet exist,

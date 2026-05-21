@@ -7,9 +7,10 @@
 create_dir(dir = file.path(".", "output"), add_date = TRUE)
 }
 \arguments{
-\item{dir}{Non-empty character string containing the path to a directory that
-should be created if it does not yet exist. A dot (i.e., ".") indicates the
-current working directory.}
+\item{dir}{Non-empty \link[checkinput:is_character]{character string}
+containing a \link[=is_path]{valid path} to a directory that should be created if
+it does not yet exist. A dot (i.e., \code{"."}) indicates the current working
+directory.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
 date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}

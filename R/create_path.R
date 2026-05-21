@@ -119,6 +119,8 @@ create_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
     }
   }
 
+  is_path(dir)
+
   file_path <- file.path(create_dir(dir = dir, add_date = add_date),
                          filename_gsub)
   file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)

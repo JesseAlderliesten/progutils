@@ -1,31 +1,29 @@
-#### Notes ####
-# - A temporary directory is used to write the added directories to. The files
-#   written to that directory by this script are deleted when they are not
-#   needed anymore. Deleting the entire temporary directory would lead to
-#   problems because other R-processes write to the same temporary directory.
-# - The returned message is only checked for containing 'Created directory' or
-#   'already exists' because getting the correct type and number of slashes in
-#   the string to compare with the path recorded in the message is brittle.
-#   Checking the path is thus left to expect_identical() and
-#   expect_true(dir.exists(expected_path)).
-
 tinytest::report_side_effects()
 
 
 #### Test the examples ####
 my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatedir"),
                             winslash = "/", mustWork = FALSE)
+tempdir_basename <- basename(tempdir())
+
 res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 expect_true(dir.exists(res_dir_one))
 
 res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
                              add_date = FALSE)
-# expect_identical(res_dir_one, res_dir_one_v2)
+expect_true(endsWith(
+  res_dir_one,
+  suffix = file.path(tempdir_basename, "testcreatedir", "dir_one")
+))
+expect_true(endsWith(
+  res_dir_one_v2,
+  suffix = file.path(tempdir_basename, "testcreatedir", "dir_one")
+))
 
-# On case-insensitive file systems such as Windows and macOS, the created
-# directory is the same as 'res_dir_one'. On case-sensitive file systems such as
-# Ubuntu, it differs in case from 'res_dir_one'.
+# On case-insensitive file systems such as Windows and macOS, the directory
+# created below is the same as 'res_dir_one'. On case-sensitive file systems
+# such as Ubuntu, it differs in case from 'res_dir_one'.
 # To do:
 # - Issues a spurious warning on MacOS because there the part before the output
 #   of 'tempdir()' contains repeated slashes. Can re-wrap in 'expect_silent()'
@@ -39,90 +37,62 @@ expect_true(dir.exists(res_dir_two))
 
 # Cleaning up
 unlink(dirname(res_dir_one), recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
+rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, tempdir_basename)
 
 
 #### Tests ####
 my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatedir"),
                             winslash = "/", mustWork = FALSE)
 dir.create(my_tempdir)
+tempdir_basename <- basename(tempdir())
 my_tempfile <- file.path(my_tempdir, "test_df.csv")
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
-
 
 # without date directory
 dir <- file.path(my_tempdir, "temp_subdirF_dateF")
 expected_path <- dir
 
-expect_silent(expect_false(dir.exists(expected_path)))
-# expect_silent(
-#   expect_identical(
-    create_dir(dir = dir, add_date = FALSE) # ,
-    # normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
+expect_false(dir.exists(expected_path))
+dir_no_date <- create_dir(dir = dir, add_date = FALSE)
 expect_true(dir.exists(expected_path))
+expect_true(endsWith(
+  dir_no_date,
+  suffix = file.path(tempdir_basename, "testcreatedir", "temp_subdirF_dateF")
+))
 
 # without date directory, directory already exists
-expect_identical(
-  create_dir(dir = dir, add_date = FALSE),
-  normalizePath(expected_path, winslash = "/", mustWork = FALSE))
-if(expect_true(dir.exists(expected_path))) {
-  expect_equal(unlink(x = expected_path, recursive = TRUE), 0,
-               info = "Check if removing temporary directories was successful")
-}
+dir_no_date_v2 <- create_dir(dir = dir, add_date = FALSE)
+expect_true(endsWith(
+  dir_no_date_v2,
+  suffix = file.path(tempdir_basename, "testcreatedir", "temp_subdirF_dateF")
+))
 
 # with date directory
 dir <- file.path(my_tempdir, "temp_subdirF_dateT")
 expected_path <- file.path(dir, format(Sys.time(), format = "%Y_%m_%d"))
 
-# expect_false(dir.exists(expected_path))
-# expect_silent(
-#   expect_identical(
-     create_dir(dir = dir, add_date = TRUE)
-#     ,
-#     normalizePath(expected_path, winslash = "/", mustWork = FALSE))
-#     )
-# expect_true(dir.exists(expected_path))
-
-# with date directory, directory already exists
-# expect_silent(
-  expect_identical(
-    create_dir(dir = dir, add_date = TRUE),
-    normalizePath(expected_path, winslash = "/", mustWork = FALSE))# )
-
-# Also recognise that a directory already exists if it has subdirectories
-# expect_silent(
-  expect_identical(
-    create_dir(dir = dir),
-    normalizePath(expected_path, winslash = "/", mustWork = FALSE))# )
-if(expect_true(dir.exists(expected_path))) {
-  expect_equal(
-    unlink(x = dirname(expected_path), recursive = TRUE), 0,
-    info = "Check if removing temporary directories was successful")
-}
+expect_false(dir.exists(expected_path))
+dir_date <- create_dir(dir = dir, add_date = TRUE)
+expect_true(dir.exists(expected_path))
+expect_true(endsWith(
+  dir_date,
+  suffix = file.path(tempdir_basename, "testcreatedir", "temp_subdirF_dateT",
+                     format(Sys.time(), format = "%Y_%m_%d"))
+))
 
 # with subdirectories, with date directory
 dir <- file.path(my_tempdir, "temp_subdirT_dateT")
 expected_path <- file.path(dir, "subdir", format(Sys.time(), format = "%Y_%m_%d"))
 
-# expect_false(dir.exists(expected_path))
-# expect_silent(
-#   expect_identical(
-     create_dir(dir = file.path(dir, "subdir"), add_date = TRUE)
-#     ,
-#     normalizePath(expected_path, winslash = "/", mustWork = FALSE)))
-# expect_true(dir.exists(expected_path))
-
-# with subdirectories, with date directory, directory already exists
-# expect_silent(
-  expect_identical(
-    create_dir(dir = file.path(dir, "subdir"), add_date = TRUE),
-    normalizePath(expected_path, winslash = "/", mustWork = FALSE))# )
-if(expect_true(dir.exists(expected_path))) {
-  expect_equal(
-    unlink(x = dirname(dirname(expected_path)), recursive = TRUE),
-    0, info = "Check if removing temporary directories was successful")
-}
+expect_false(dir.exists(expected_path))
+dir_subdir_date <- create_dir(dir = file.path(dir, "subdir"), add_date = TRUE)
+expect_true(dir.exists(expected_path))
+expect_true(endsWith(
+  dir_subdir_date,
+  suffix = file.path(tempdir_basename, "testcreatedir", "temp_subdirT_dateT", "subdir",
+                     format(Sys.time(), format = "%Y_%m_%d"))
+))
 
 # Checks on input to 'dir'
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
@@ -151,11 +121,15 @@ for(dir in list(paste0(file.path(my_tempdir, "temp"), "//"),
     pattern = "Repeated '/' or '\\'", fixed = TRUE)
 }
 
-# NB. 'dir' equal to '.' can be used to denote the current working directory.
+# NB. 'dir' equal to '.' or '..' can be used to denote the current working
+# directory and its parent directory, respectively. By default, this will add
+# the folder with the current date to those directories. This is not tested
+# here to prevent writing in the working directory.
 for(dir in list(file.path(my_tempdir, " "),
                 file.path(my_tempdir, "temp "),
                 file.path(my_tempdir, "temp ", "subtemp"),
                 file.path(my_tempdir, "."),
+                file.path(my_tempdir, ".."),
                 file.path(my_tempdir, "temp."),
                 file.path(my_tempdir, "temp.", "subtemp"))) {
   expect_error(
@@ -182,4 +156,5 @@ unlink(my_tempdir, recursive = TRUE)
 
 
 #### Remove objects used in tests ####
-rm(add_date, dir, expected_path, my_tempdir, my_tempfile)
+rm(add_date, dir, dir_no_date, dir_no_date_v2, dir_date, dir_subdir_date,
+   expected_path, my_tempdir, my_tempfile, tempdir_basename)
