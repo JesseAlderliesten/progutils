@@ -15,13 +15,7 @@
 #' file separator is used to indicate subdirectories, and `"."` indicates the
 #' [working directory][getwd()].
 #'
-#' Several limitations are imposed on `dir` to facilitate handling of paths by
-#' Windows, see [dir.create()]: `dir` should not end in a slash, backslash, or
-#' space because those characters would be removed when the directory is created,
-#' leading to a mismatch between the created directory and the returned path.
-#' `dir` should also not end in a dot, with the exception of `dir = "."` which
-#' indicates the working directory. Finally, `dir` should not contain the
-#' characters `"`, `*`, `?`, `|`, `<`, or `>`.
+#' Several limitations are imposed on `dir`, see [is_path()].
 #'
 #' If creating the directory fails, the working directory is returned instead.
 #' This happens if `dir` points to an existing file instead of an directory.
@@ -44,19 +38,22 @@
 #' The requested directory is created if does not yet exist.
 #'
 #' @seealso
-#' [create_path()] to create a path, and references there about file paths,
-#' [create_tempdir()] for a safe way to create temporary directories,
-#' [dir.exists()] and [dir.create()] used by this function,
+#' [create_path()] to create a path, [create_tempdir()] for a safe way to create
+#' temporary directories, [is_path()] and references there about file paths and
+#' directories, [dir.exists()] and [dir.create()] used by this function,
 #' [get_filename()] to check if a file exists and is a unique match to a pattern
 #'
-#' `fs::path_sanitize()` to *remove* invalid characters from potential paths,
-#' looking for a wider range of invalid characters.
+#' @section Programming notes:
+#' See also:
+#' - `utils::file_test()`
+#' - `fs::is_dir()`
+#' - `fs::is_dir_empty()`.
 #'
 #' @family functions to handle paths and directories
 #'
 #' @examples
-#' # Use a temporary directory to not write in the user's directory
-#' my_tempdir <- tempdir()
+#' # Use a temporary subdirectory to not write in the user's directory
+#' my_tempdir <- file.path(tempdir(), "testcreatedir")
 #'
 #' # Create directory 'dir_one' inside this temporary directory
 #' res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
@@ -83,25 +80,13 @@
 #' dir.exists(res_dir_two) # TRUE
 #'
 #' # Cleaning up
-#' unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
-#' rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
+#' unlink(dirname(res_dir_one), recursive = TRUE)
+#' rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 #'
 #' @export
 create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
-  # See 'Details' about the restrictions imposed on 'dir'.
-  stopifnot(checkinput::is_character(dir),
-            "'dir' should not end with '/'" =
-              substring(text = dir, first = nchar(dir)) != "/",
-            "'dir' should not end with '\\'" =
-              substring(text = dir, first = nchar(dir)) != "\\",
-            "'dir' should not end with '.'" =
-              dir == "." || # "." as 'dir' denotes the working directory
-              substring(text = dir, first = nchar(dir)) != ".",
-            "'dir' should not end with ' ' (i.e., a space)" =
-              substring(text = dir, first = nchar(dir)) != " ",
-            "'dir' should not contain any of the following characters: \" * ? | < >" =
-              !grepl(pattern = '[<>"|?*]', x = dir),
-            checkinput::is_logical(add_date))
+  # See 'Details' in is_path() about the restrictions imposed on 'dir'.
+  stopifnot(is_path(dir, as_file = FALSE), checkinput::is_logical(add_date))
 
   if(add_date) {
     dir <- file.path(dir, format(Sys.time(), format = "%Y_%m_%d"))

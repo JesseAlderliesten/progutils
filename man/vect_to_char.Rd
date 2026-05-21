@@ -31,7 +31,7 @@ single character string, or \code{NULL} to return each value as an element of a
 character vector.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
-by a blank character? Newlines at the end of \code{x} are always removed.}
+by a blank character?}
 }
 \value{
 The names and values in \code{x}, with values of numeric \code{x} rounded to \code{signif}
@@ -90,7 +90,7 @@ paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
+\code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=reorder_cols]{reorder_cols()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},

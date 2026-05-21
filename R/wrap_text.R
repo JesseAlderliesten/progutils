@@ -6,17 +6,18 @@
 #' @param width A positive number giving the maximum line width (in characters)
 #' after wrapping. Can be `Inf` to not wrap text.
 #' @param ignore_newlines `TRUE` or `FALSE`: should newlines in `x` be replaced
-#' by a blank character? Newlines at the end of `x` are always removed.
+#' by a blank character?
 #'
 #' @details
 #' `x` of length larger than one is pasted into a single string, separating the
 #' parts by blank characters.
 #'
-#' Leading white space in `x` is completely removed.
+#' Consecutive white space is collapsed into a single blank character, except
+#' for double spaces after periods, question marks and exclamation marks (as
+#' documented in the section `Details` of [strwrap()]).
 #'
-#' Consecutive white space in `x` is collapsed into a single blank character,
-#' except for double spaces after periods, question marks and exclamation marks
-#' (as documented in the section `Details` of [strwrap()]).
+#' Leading and trailing newlines are collapsed into a single blank character if
+#' `ignore_newlines` is `TRUE` and are retained if `ignore_newlines` is `FALSE`.
 #'
 #' @returns
 #' A string containing `x` wrapped to a maximum of `width` characters, with
@@ -34,9 +35,9 @@
 #' [cat()] on the output to print it in the way it is formatted in messages.
 #'
 #' Argument `width` in `wrap_text()` indicates the maximum width of text after
-#' wrapping, i.e., the width *after* which text should be wrapped. In contrast,
-#' argument `width` in [strwrap()] indicates the width *at* which text should be
-#' wrapped.
+#' wrapping, i.e., the width **after** which text should be wrapped. In
+#' contrast, argument `width` in [strwrap()] indicates the width **at** which
+#' text should be wrapped.
 #'
 #' @section Programming notes:
 #' Using `wrap_text()` on `x` of variable length, e.g., in the text of warnings
@@ -64,13 +65,46 @@ wrap_text <- function(x, width = 80L, ignore_newlines = TRUE) {
   if(length(x) > 1L) {
     x <- paste0(x, collapse = " ")
   }
-  # floor(Inf) is Inf, whereas as.integer(Inf) is NA.
-  width <- floor(x = width)
+
+  bool_start_blank <- grepl(pattern = "^[[:blank:]]", x = x)
+  bool_start_newline <- grepl(pattern = "^\n", x = x)
+  bool_end_blank <- grepl(pattern = "[[:blank:]]$", x = x)
+  bool_end_newline <- grepl(pattern = "\n$", x = x)
+
+  n_discard <- 0L
   if(!ignore_newlines) {
     x <- strsplit(x = x, split = "\n")[[1]]
+  } else {
+    if(bool_start_newline) {
+      n_discard <- attr(regexpr("^\n+", x), "match.length") - 1L
+    }
   }
-  # Using width + 1L to have a more intuitive meaning for argument 'width'.
+
+  # Notes:
+  # - strwrap() removes leading white space, trailing white space, and trailing
+  #   newlines; and converts each leading newline to an element with an empty
+  #   character string. See 'Details' about their handling in 'wrap_text()'.
+  # - Using floor(x = width) because floor(Inf) is Inf, whereas as.integer(Inf)
+  #   is NA. Using 'width = width + 1L' to have a more intuitive meaning for
+  #   argument 'width', see 'Notes'.
+  width <- floor(x = width)
   x <- strwrap(x, width = width + 1L)
+  if(n_discard > 0L) {
+    x <- x[-(1:n_discard)]
+  }
+
+  if(bool_start_blank || (ignore_newlines && bool_start_newline)) {
+    x[1L] <- paste0(" ", x[1L])
+  }
+
+  n_el <- length(x)
+  if(bool_end_newline && !ignore_newlines) {
+    x[n_el] <- paste0(x[n_el], "\n")
+  }
+  if(bool_end_blank || (ignore_newlines && bool_end_newline)) {
+    x[n_el] <- paste0(x[n_el], " ")
+  }
+
   bool_too_long <- nchar(x) > width
   if(any(bool_too_long)) {
     warning("Width of ", length(which(bool_too_long)), " text fragments (",

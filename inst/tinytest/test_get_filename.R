@@ -2,48 +2,52 @@ tinytest::report_side_effects()
 
 
 #### Test the examples ####
-my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
+my_tempfiles <- tempfile(pattern = c("some_filename", "another_filename"),
+                         fileext = ".txt")
 # Create the files
 expect_silent(
-  expect_equal(file.create(my_tempfiles), rep(TRUE, length(my_tempfiles)))
+  expect_equal(file.create(my_tempfiles), rep.int(TRUE, length(my_tempfiles)))
 )
 
 expect_message(
-  expect_equal(get_filename(dir = tempdir(), pattern = "First"),
-               grep(pattern = "First", x = basename(my_tempfiles), value = TRUE,
-                    fixed = TRUE)),
+  expect_equal(get_filename(dir = tempdir(), pattern = "some_filename"),
+               grep(pattern = "some_filename", x = basename(my_tempfiles),
+                    value = TRUE, fixed = TRUE)),
   pattern = "Using file", strict = TRUE, fixed = TRUE)
 
 # The same file is found if case-insensitive matching is used:
 expect_message(
-  expect_equal(get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE),
-               grep(pattern = "First", x = basename(my_tempfiles), value = TRUE,
-                    fixed = TRUE)),
+  expect_equal(get_filename(dir = tempdir(), pattern = "SOME_FILE",
+                            ignore_case = TRUE),
+               grep(pattern = "some_file", x = basename(my_tempfiles),
+                    value = TRUE, fixed = TRUE)),
   pattern = "Using file", strict = TRUE, fixed = TRUE)
 
 expect_error(
-  get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE),
+  get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE),
   pattern = basename(my_tempfiles[1])
 )
 
 expect_error(
-  get_filename(dir = tempdir(), pattern = "abcde", ignore_case = TRUE),
-  pattern = "No case-insensitive matches to pattern 'abcde' are present"
+  get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+               ignore_case = TRUE),
+  pattern = "No case-insensitive matches to pattern 'missing_filename_abcde' are present"
 )
 
 expect_error(
-  get_filename(dir = tempdir(), pattern = "abcde", ignore_case = FALSE),
-  pattern = "No case-sensitive matches to pattern 'abcde' are present"
+  get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+               ignore_case = FALSE),
+  pattern = "No case-sensitive matches to pattern 'missing_filename_abcde' are present"
 )
 
 expect_error(
-  get_filename(dir = tempdir(), pattern = "abcde", ignore_case = FALSE),
-  pattern = "No case-sensitive matches to pattern 'abcde' are present"
+  get_filename(dir = tempdir(), pattern = "missing_filename_abcde", ignore_case = FALSE),
+  pattern = "No case-sensitive matches to pattern 'missing_filename_abcde' are present"
 )
 
 expect_error(
-  get_filename(dir = tempdir(), pattern = "File"),
-  pattern = "Multiple case-insensitive matches to pattern 'File' are present"
+  get_filename(dir = tempdir(), pattern = "_filename"),
+  pattern = "Multiple case-insensitive matches to pattern '_filename' are present"
 )
 
 # Deleting the created temporary files
@@ -53,8 +57,10 @@ rm(my_tempfiles)
 
 #### Tests ####
 # Create files in a temporary directory so we know what is present.
-my_tempdir <- tempdir()
+my_tempdir <- file.path(tempdir(), "testgetfilename")
+dir.create(my_tempdir)
 my_tempfile <- file.path(my_tempdir, "test_df.csv")
+
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 
@@ -76,7 +82,7 @@ expect_error(get_filename(dir = my_tempdir, pattern = "test_dir"),
 
 
 #### Delete the created temporary files ####
-unlink(x = c(my_tempfile, file.path(tempdir(), "test_dir")), recursive = TRUE)
+unlink(x = c(dirname(my_tempfile), file.path(tempdir(), "test_dir")), recursive = TRUE)
 
 
 #### Remove objects used in tests ####

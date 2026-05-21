@@ -32,7 +32,7 @@ If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, the 
 message indicates if any case-insensitive match is present.
 
 In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_filename()} also finds
-'hidden' files, i.e., files which names start with a dot.
+'hidden' files, i.e., files with names that start with a dot.
 
 Paths will be \link[=normalizePath]{normalized} before use, to ensure they still
 work if the \link[=getwd]{working directory} changes. \code{"/"} instead of \code{"\\\\"} is
@@ -41,23 +41,31 @@ be used in Windows' file system.
 }
 \examples{
 # Create files in a temporary directory so we know what is present.
-my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
+my_tempfiles <- tempfile(pattern = c("some_filename", "another_filename"),
+                         fileext = ".txt")
 # Create the files
 file.create(my_tempfiles)
 
-get_filename(dir = tempdir(), pattern = "First")
-# The same file is found if case-insensitive matching is used:
-get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE)
-# Error reporting presence of case-insensitive match.
-try(get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
-# Error reporting no match found.
-try(get_filename(dir = tempdir(), pattern = "abcde", ignore_case = TRUE))
-try(get_filename(dir = tempdir(), pattern = "abcde", ignore_case = FALSE))
-# Error because multiple matches are present.
-try(get_filename(dir = tempdir(), pattern = "File"))
+get_filename(dir = tempdir(), pattern = "some_file")
 
-# Deleting the created temporary files
+# The same file is found if case-insensitive matching is used:
+get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
+
+# Error reporting presence of case-insensitive match.
+try(get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
+
+# Error reporting no match found.
+try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+                 ignore_case = TRUE))
+try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+                 ignore_case = FALSE))
+
+# Error if multiple matches are present.
+try(get_filename(dir = tempdir(), pattern = "_filename"))
+
+# Clean up
 unlink(x = my_tempfiles)
+rm(my_tempfiles)
 
 }
 \seealso{
@@ -73,7 +81,9 @@ Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_path]{create_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}}
+\code{\link[=file_path_no_ext]{file_path_no_ext()}},
+\code{\link[=is_filename]{is_filename()}},
+\code{\link[=is_path]{is_path()}}
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

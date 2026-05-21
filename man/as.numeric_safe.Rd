@@ -87,7 +87,7 @@ str_as_num_base(x_fact) # num [1:3] 1 2 3 # wrong!
 \code{\link[utils:type.convert]{utils::type.convert()}}
 
 Other functions to modify character vectors:
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
+\code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=reorder_cols]{reorder_cols()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},

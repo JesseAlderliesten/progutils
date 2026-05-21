@@ -7,9 +7,10 @@
 create_tempdir(subdir = "subdir")
 }
 \arguments{
-\item{subdir}{A \link[checkinput:is_character]{character string} with the
-subdirectory to create inside \code{\link[=tempdir]{tempdir()}}. This subdirectory should not yet
-exist, see \code{Details}.}
+\item{subdir}{A \link[checkinput:is_character]{character string} with the name
+of the temporary subdirectory to be created inside \code{\link[=tempdir]{tempdir()}}. \code{subdir}
+should be a valid \link[=is_path]{path} pointing to a directory that \strong{not yet}
+exists, see \code{Details}.}
 }
 \value{
 The \link[=normalizePath]{normalized} path to the created temporary directory,
@@ -19,16 +20,15 @@ returned \link[=invisible]{invisibly}.
 Create a temporary directory that can safely be removed.
 }
 \details{
-The temporary directory is created as subdirectory \code{subdir} inside
-\code{tempdir()} and an error is thrown if it already exists. This ensures that
-programmatically \link[=unlink]{removing} the created directory later on does not
-remove files that are still needed by other processes (which would happen
-when removing the directory returned by \code{tempdir()} because \code{RStudio} also
-uses that directory).
+\code{subdir} is created inside \code{\link[=tempdir]{tempdir()}} and an error is thrown if it already
+exists. This ensures that programmatically \link[=unlink]{removing} the created
+directory later on does not remove files that are still needed by other
+processes (which could happen when removing the directory returned by
+\code{tempdir()}, for example because \code{RStudio} also uses that directory).
 
 It is possible to create subdirectories inside a not-yet existing directory
-(e.g., to create \verb{<tempdir>/output/<date>} if \verb{<tempdir>/output} does not yet
-exist.
+(e.g., to create \verb{<tempdir>/output/outputsub} if \verb{<tempdir>/output} does not
+yet exist.
 }
 \section{Side effects}{
 
@@ -39,13 +39,17 @@ is thrown if the directory already exists or creating the directory failed.
 \examples{
 tempdir()
 # Create a directory inside the directory returned by 'tempdir()'
-(create_tempdir(subdir = "subdir"))
+(tempdir_std <- create_tempdir(subdir = "examplesubtempdir"))
 
 # Error if the directory already exists
-try(create_tempdir(subdir = "subdir"))
+try(create_tempdir(subdir = "examplesubtempdir"))
 
 # It is possible to create recursive directories
-(create_tempdir(subdir = "abc/def"))
+(tempdir_recursive <- create_tempdir(subdir = file.path("abc", "def")))
+
+# Clean up
+unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
+rm(tempdir_recursive, tempdir_std)
 
 }
 \seealso{
@@ -55,7 +59,9 @@ test-file \verb{progutils\\inst\\tinytest\\test_create_dir.R}.
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_path]{create_path()}},
-\code{\link[=file_path_sans_ext]{file_path_sans_ext()}},
-\code{\link[=get_filename]{get_filename()}}
+\code{\link[=file_path_no_ext]{file_path_no_ext()}},
+\code{\link[=get_filename]{get_filename()}},
+\code{\link[=is_filename]{is_filename()}},
+\code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}
