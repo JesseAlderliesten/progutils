@@ -46,6 +46,11 @@ if \code{path} is not a valid path.
 \section{Programming notes}{
 
 
+To do:
+\itemize{
+\item Also disallow path components to \strong{start} with a dot?
+}
+
 See also
 \itemize{
 \item https://github.com/r-lib/usethis/blob/main/R/directory.R

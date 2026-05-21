@@ -35,6 +35,9 @@
 #'
 #' @section Programming notes:
 #'
+#' To do:
+#' - Also disallow path components to **start** with a dot?
+#'
 #' See also
 #' - https://github.com/r-lib/usethis/blob/main/R/directory.R
 #' - https://github.com/r-lib/usethis/blob/main/tests/testthat/test-directory.R
