@@ -144,8 +144,6 @@ expect_true(endsWith(
 # 'directories' that actually are names of existing files lead to the working
 # directory being used instead, with warnings that the file already exists and
 # that the working directory is used because creation of the directory failed.
-my_tempdir <- file.path(tempdir(), "testcreatepath")
-dir.create(my_tempdir)
 my_tempfile <- file.path(my_tempdir, "testfile.csv")
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 
@@ -153,7 +151,7 @@ expect_warning(
   expect_true(endsWith(
     create_path(filename = "testfile.csv", format_stamp = "",
                 dir = my_tempfile, add_date = FALSE),
-    suffix = file.path(getwd(), "testfile.csv")
+    suffix = file.path(basename(getwd()), "testfile.csv", fsep = "/")
   )),
   pattern = paste0(basename(my_tempfile), "' already exists"),
   strict = TRUE, fixed = TRUE
@@ -163,7 +161,7 @@ expect_warning(
   expect_true(endsWith(
     create_path(filename = "testfile.csv", format_stamp = "",
                 dir = my_tempfile, add_date = FALSE),
-    suffix = file.path(getwd(), "testfile.csv")
+    suffix = file.path(basename(getwd()), "testfile.csv", fsep = "/")
   )),
   pattern = "Attempt to create directory",
   strict = TRUE, fixed = TRUE
