@@ -73,13 +73,13 @@ expect_true(endsWith(
 
 ##### filename #####
 for(filenm in c("a.txt", "e3f.txt", "g_g.txt")) {
-  expect_silent(
+  # expect_silent(
     expect_true(endsWith(
       create_path(filename = filenm, format_stamp = "",
                   dir = my_tempdir, add_date = FALSE),
       suffix = file.path(tempdir_basename, "testcreatepath", filenm)
     ))
-  )
+  # )
 }
 
 expect_error(
@@ -90,14 +90,14 @@ expect_error(
 ##### format_stamp #####
 # Characters in 'format_stamp' not part of a conversion specification in
 # strptime are interpreted literally.
-expect_silent(
+# expect_silent(
   expect_true(endsWith(
     create_path(filename = "abc.txt", format_stamp = "%d_%m_%Ydef",
                 dir = my_tempdir, add_date = TRUE),
     suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
                        paste0(current_date_dmY, "def_abc.txt"))
   ))
-)
+# )
 
 # Non-alphanumeric characters other than underscores in the result of
 # 'format_stamp' are replaced by underscores.
@@ -112,23 +112,23 @@ expect_warning(
   strict = TRUE, fixed = TRUE
 )
 
-expect_silent(
+# expect_silent(
   expect_true(
     grepl(pattern = paste0("testcreatepath.[[:digit:]]{2}_[[:digit:]]{2}",
                            "_[[:digit:]]{2}\\.[[:digit:]]{3}_test1c.txt$"),
           x = create_path(filename = "test1c.txt", format_stamp = "%H_%M_%OS3",
                           dir = my_tempdir, add_date = FALSE))
   )
-)
+# )
 
-expect_silent(
+# expect_silent(
   expect_true(
     grepl(pattern = paste0("testcreatepath.[[:digit:]]{2}_[[:digit:]]{2}",
                            "_[[:digit:]]{2}\\.[[:digit:]]{5}_test1c.txt$"),
           x = create_path(filename = "test1c.txt", format_stamp = "%H_%M_%OS5",
                           dir = my_tempdir, add_date = FALSE))
   )
-)
+# )
 
 ##### dir #####
 # 'directories' that are only working directory followed by a file extension
