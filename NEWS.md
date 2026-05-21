@@ -1,21 +1,8 @@
-# progutils 0.0.10.9002
-
-### Work in progress
-Removed or out-commented various tests to be able to have a pass-all-checks
-baseline after introducing the breaking changes detailed below.
-
-Work on test files that need to be updated:
-
-- `test_create_dir.R`: re-inserted updated versions of out-commented tests.
-- `test_create_path.R`: uses `expect_true(endsWith(...))` instead of
-  `expect_identical(...)`. Still has some out-commented `expect_silent()` to get
-  rid of spurious errors on MacOS because there the part before the output of
-  `tempdir()` contains repeated slashes leading to a spurious warning from
-  `is_path()`.
-- `test_is_path.R`: testing is incomplete.
+# progutils 0.0.11
 
 ### Breaking changes
 - `create_dir()` now uses `is_filename()` to check if `filename` is valid.
+- `create_path` now uses `is_path()` to check that `dir` is a valid path.
 - `create_tempdir()` now only writes in subdirectories of `tempdir()` and uses
   `is_path()` to check that `subdir` is valid.
 - `file_path_sans_ext()`: rename to `file_path_no_ext()` to distinguish it from
