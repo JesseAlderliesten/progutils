@@ -1,30 +1,17 @@
-# progutils 0.0.10.9001
+# progutils 0.0.10.9002
 
 ### Work in progress
-Work on test files that need to be updated (see `NEWS` for `progutils 0.0.10.9000`):
-
-- `test_create_path.R`: uses `expect_true(endsWith(...))` instead of `regexec()`
-  proposed in version `0.0.10.9000`. Has some out-commented `expect_silent()` to
-  get rid of spurious errors on MacOS because there the part before the output
-  of `tempdir()` contains repeated slashes leading to a spurious warning from
-  `is_path()`.
-
-
-# progutils 0.0.10.9000
-
-### Work in progress
-
 Removed or out-commented various tests to be able to have a pass-all-checks
 baseline after introducing the breaking changes detailed below.
 
-Test files that need to be updated:
+Work on test files that need to be updated:
 
-- `test_create_dir.R`: removed and out-commented various `expect_silent()`
-  statements to get rid of spurious errors on MacOS because there the part
-  before the output of `tempdir()` contains repeated slashes leading to a
-  spurious warning from `is_path()`.
-- `test_create_path.R`: out-commented most tests that use `expect_identical()`.
-  These need to use `regexec()` like the first test to work.
+- `test_create_dir.R`: re-inserted updated versions of out-commented tests.
+- `test_create_path.R`: uses `expect_true(endsWith(...))` instead of
+  `expect_identical(...)`. Still has some out-commented `expect_silent()` to get
+  rid of spurious errors on MacOS because there the part before the output of
+  `tempdir()` contains repeated slashes leading to a spurious warning from
+  `is_path()`.
 - `test_is_path.R`: testing is incomplete.
 
 ### Breaking changes
