@@ -74,7 +74,8 @@ is_path <- function(path, as_file = FALSE) {
     stop("'path' should not contain control characters:\n", path)
   }
 
-  if(any(!nzchar(path_comp)) ||
+  # '[-1]' allows path to start with '/', needed on MacOS and Ubuntu.
+  if(any(!nzchar(path_comp[-1])) ||
      any(endsWith(x = c(path, path_comp), suffix = "/") |
          endsWith(x = c(path, path_comp), suffix = "\\"))) {
     warning("Repeated '/' or '\\' in ", paste_quoted(deparse(substitute(path))),
