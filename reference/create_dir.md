@@ -40,14 +40,8 @@ correct ([platform](https://rdrr.io/r/base/Platform.html)-dependent)
 file separator is used to indicate subdirectories, and `"."` indicates
 the [working directory](https://rdrr.io/r/base/getwd.html).
 
-Several limitations are imposed on `dir` to facilitate handling of paths
-by Windows, see [`dir.create()`](https://rdrr.io/r/base/files2.html):
-`dir` should not end in a slash, backslash, or space because those
-characters would be removed when the directory is created, leading to a
-mismatch between the created directory and the returned path. `dir`
-should also not end in a dot, with the exception of `dir = "."` which
-indicates the working directory. Finally, `dir` should not contain the
-characters `"`, `*`, `?`, `|`, `<`, or `>`.
+Several limitations are imposed on `dir`, see
+[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
 
 If creating the directory fails, the working directory is returned
 instead. This happens if `dir` points to an existing file instead of an
@@ -67,33 +61,43 @@ system.
 
 The requested directory is created if does not yet exist.
 
+## Programming notes
+
+See also:
+
+- [`utils::file_test()`](https://rdrr.io/r/utils/filetest.html)
+
+- [`fs::is_dir()`](https://fs.r-lib.org/reference/is_file.html)
+
+- [`fs::is_dir_empty()`](https://fs.r-lib.org/reference/is_dir_empty.html).
+
 ## See also
 
 [`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md)
-to create a path, and references there about file paths,
+to create a path,
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
 for a safe way to create temporary directories,
+[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+and references there about file paths and directories,
 [`dir.exists()`](https://rdrr.io/r/base/files2.html) and
 [`dir.create()`](https://rdrr.io/r/base/files2.html) used by this
 function,
 [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
 to check if a file exists and is a unique match to a pattern
 
-[`fs::path_sanitize()`](https://fs.r-lib.org/reference/path_sanitize.html)
-to *remove* invalid characters from potential paths, looking for a wider
-range of invalid characters.
-
 Other functions to handle paths and directories:
 [`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
-[`file_path_sans_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_sans_ext.md),
-[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
+[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
+[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
+[`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md),
+[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
 
 ## Examples
 
 ``` r
-# Use a temporary directory to not write in the user's directory
-my_tempdir <- tempdir()
+# Use a temporary subdirectory to not write in the user's directory
+my_tempdir <- file.path(tempdir(), "testcreatedir")
 
 # Create directory 'dir_one' inside this temporary directory
 res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
@@ -124,6 +128,6 @@ dir.exists(res_dir_two) # TRUE
 #> [1] TRUE
 
 # Cleaning up
-unlink(c(res_dir_one, dirname(res_dir_two)), recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two)
+unlink(dirname(res_dir_one), recursive = TRUE)
+rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 ```

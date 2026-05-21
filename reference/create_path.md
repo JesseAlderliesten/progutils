@@ -72,30 +72,18 @@ directory](https://rdrr.io/r/base/getwd.html) changes. `"/"` instead of
 [winslash](https://rdrr.io/r/base/normalizePath.html) such that the
 returned path can be used in Windows' file system.
 
-The *directory* for the returned path is
+The **directory** for the returned path is
 [created](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
-if it does not yet exist. A warning is issued if the *file* indicated by
-the returned path already exists. Use `"%OSn"` as part of `format_stamp`
-to create precise stamps by truncating seconds to `0 <= n <= 6` decimal
-places to prevent this, see
+if it does not yet exist. A warning is issued if the **file** indicated
+by the returned path already exists. Use `"%OSn"` as part of
+`format_stamp` to create precise stamps by truncating seconds to
+`0 <= n <= 6` decimal places to prevent this, see
 [`strftime()`](https://rdrr.io/r/base/strptime.html) for details.
 
 ## Side effects
 
 The directory indicated by the returned file path is created if it does
 not yet exist.
-
-## Programming notes
-
-[`tools::file_path_sans_ext()`](https://rdrr.io/r/tools/fileutils.html)
-does *not* recognise the extension of file names that end in a dot,
-whereas [`tools::file_ext()`](https://rdrr.io/r/tools/fileutils.html)
-*does* recognise such extensions. Using
-[`file_path_sans_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_sans_ext.md)
-from `progutils` prevents problems caused by this discrepancy, see the
-`Examples` of
-[`file_path_sans_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_sans_ext.md)
-from `progutils`.
 
 ## See also
 
@@ -111,43 +99,44 @@ to create a directory if it does not yet exist
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
-[`file_path_sans_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_sans_ext.md),
-[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
+[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
+[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
+[`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md),
+[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
 
 ## Examples
 
 ``` r
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = NA)
+my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
+                            winslash = "/", mustWork = FALSE)
 
 (create_path(filename = "abc.txt", format_stamp = "",
             dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpU9aiax/2026_05_10/abc.txt"
+#> [1] "/tmp/RtmpGarcGN/subdir/2026_05_21/abc.txt"
 (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
             dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpU9aiax/2026_05_10/10_05_2026_abc.txt"
+#> [1] "/tmp/RtmpGarcGN/subdir/2026_05_21/21_05_2026_abc.txt"
 (create_path(filename = "def.html", format_stamp = "",
             dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpU9aiax/def.html"
+#> [1] "/tmp/RtmpGarcGN/subdir/def.html"
 (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
             dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpU9aiax/10_05_2026_def.html"
+#> [1] "/tmp/RtmpGarcGN/subdir/21_05_2026_def.html"
 (create_path(filename = "abc.txt", format_stamp = "",
             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpU9aiax/subdir/2026_05_10/abc.txt"
+#> [1] "/tmp/RtmpGarcGN/subdir/subdir/2026_05_21/abc.txt"
 (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpU9aiax/subdir/2026_05_10/10_05_2026_abc.txt"
+#> [1] "/tmp/RtmpGarcGN/subdir/subdir/2026_05_21/21_05_2026_abc.txt"
 (create_path(filename = "def.html", format_stamp = "",
             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpU9aiax/subdir/def.html"
+#> [1] "/tmp/RtmpGarcGN/subdir/subdir/def.html"
 (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpU9aiax/subdir/10_05_2026_def.html"
+#> [1] "/tmp/RtmpGarcGN/subdir/subdir/21_05_2026_def.html"
 
 # Cleaning up
-unlink(x = file.path(my_tempdir,
-                     c(format(Sys.time(), format = "%Y_%m_%d"), "subdir")),
-       recursive = TRUE)
+unlink(x = my_tempdir, recursive = TRUE)
 rm(my_tempdir)
 ```

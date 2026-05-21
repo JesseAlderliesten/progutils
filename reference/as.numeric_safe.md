@@ -67,7 +67,7 @@ numbers,
 [`utils::type.convert()`](https://rdrr.io/r/utils/type.convert.html)
 
 Other functions to modify character vectors:
-[`file_path_sans_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_sans_ext.md),
+[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
 [`reorder_cols()`](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),

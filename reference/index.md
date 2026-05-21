@@ -20,14 +20,25 @@
 - [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
   : Create a temporary directory
 
-- [`file_path_sans_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_sans_ext.md)
-  : Remove extension from file paths
+- [`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md)
+  [`file_path_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md)
+  : Distinguish filenames and extensions
 
 - [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
   : Check if only a single matching file is present
 
 - [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md)
   : Show head and tail of object
+
+- [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
+  :
+
+  Check that `x` is a valid filename
+
+- [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+  :
+
+  Check that `x` is a valid path
 
 - [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
   :

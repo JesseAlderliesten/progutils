@@ -46,7 +46,7 @@ error message indicates if any case-insensitive match is present.
 
 In contrast to the default of
 [`list.files()`](https://rdrr.io/r/base/list.files.html),
-`get_filename()` also finds 'hidden' files, i.e., files which names
+`get_filename()` also finds 'hidden' files, i.e., files with names that
 start with a dot.
 
 Paths will be [normalized](https://rdrr.io/r/base/normalizePath.html)
@@ -75,7 +75,9 @@ Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
 [`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
-[`file_path_sans_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_sans_ext.md)
+[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
+[`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md),
+[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),
@@ -87,40 +89,48 @@ Other functions to check equality:
 
 ``` r
 # Create files in a temporary directory so we know what is present.
-my_tempfiles <- tempfile(pattern = c("FirstFile", "SecondFile"), fileext = ".txt")
+my_tempfiles <- tempfile(pattern = c("some_filename", "another_filename"),
+                         fileext = ".txt")
 # Create the files
 file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
-get_filename(dir = tempdir(), pattern = "First")
-#> Using file 'FirstFile1a794db8866b.txt'
-#> [1] "FirstFile1a794db8866b.txt"
-# The same file is found if case-insensitive matching is used:
-get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = TRUE)
-#> Using file 'FirstFile1a794db8866b.txt'
-#> [1] "FirstFile1a794db8866b.txt"
-# Error reporting presence of case-insensitive match.
-try(get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE))
-#> Error in get_filename(dir = tempdir(), pattern = "FIRST", ignore_case = FALSE) : 
-#>   No case-sensitive matches to pattern 'FIRST' are present in directory
-#> '/tmp/RtmpU9aiax'.
-#> However, a case-insensitive match to 'pattern' is present: 'FirstFile1a794db8866b.txt'.
-# Error reporting no match found.
-try(get_filename(dir = tempdir(), pattern = "abcde", ignore_case = TRUE))
-#> Error in get_filename(dir = tempdir(), pattern = "abcde", ignore_case = TRUE) : 
-#>   No case-insensitive matches to pattern 'abcde' are present in directory
-#> '/tmp/RtmpU9aiax'.
-try(get_filename(dir = tempdir(), pattern = "abcde", ignore_case = FALSE))
-#> Error in get_filename(dir = tempdir(), pattern = "abcde", ignore_case = FALSE) : 
-#>   No case-sensitive matches to pattern 'abcde' are present in directory
-#> '/tmp/RtmpU9aiax'.
-#> No case-insensitive match is present either.
-# Error because multiple matches are present.
-try(get_filename(dir = tempdir(), pattern = "File"))
-#> Error in get_filename(dir = tempdir(), pattern = "File") : 
-#>   Multiple case-insensitive matches to pattern 'File' are present in directory
-#> '/tmp/RtmpU9aiax': 'FirstFile1a794db8866b.txt', 'SecondFile1a79668c4408.txt', 'file1a796ef39a0d', 'file1a7977af8022'!
+get_filename(dir = tempdir(), pattern = "some_file")
+#> Using file 'some_filename19f01c3a676.txt'
+#> [1] "some_filename19f01c3a676.txt"
 
-# Deleting the created temporary files
+# The same file is found if case-insensitive matching is used:
+get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
+#> Using file 'some_filename19f01c3a676.txt'
+#> [1] "some_filename19f01c3a676.txt"
+
+# Error reporting presence of case-insensitive match.
+try(get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
+#> Error in get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE) : 
+#>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
+#> '/tmp/RtmpGarcGN'.
+#> However, a case-insensitive match to 'pattern' is present: 'some_filename19f01c3a676.txt'.
+
+# Error reporting no match found.
+try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+                 ignore_case = TRUE))
+#> Error in get_filename(dir = tempdir(), pattern = "missing_filename_abcde",  : 
+#>   No case-insensitive matches to pattern 'missing_filename_abcde' are present in directory
+#> '/tmp/RtmpGarcGN'.
+try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+                 ignore_case = FALSE))
+#> Error in get_filename(dir = tempdir(), pattern = "missing_filename_abcde",  : 
+#>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
+#> '/tmp/RtmpGarcGN'.
+#> No case-insensitive match is present either.
+
+# Error if multiple matches are present.
+try(get_filename(dir = tempdir(), pattern = "_filename"))
+#> Error in get_filename(dir = tempdir(), pattern = "_filename") : 
+#>   Multiple case-insensitive matches to pattern '_filename' are present in directory
+#> '/tmp/RtmpGarcGN': 'another_filename19f0312d8bba.txt', 'some_filename19f01c3a676.txt'!
+
+# Clean up
 unlink(x = my_tempfiles)
+rm(my_tempfiles)
 ```

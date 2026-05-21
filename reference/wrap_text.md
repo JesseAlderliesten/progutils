@@ -22,7 +22,7 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE)
 - ignore_newlines:
 
   `TRUE` or `FALSE`: should newlines in `x` be replaced by a blank
-  character? Newlines at the end of `x` are always removed.
+  character?
 
 ## Value
 
@@ -37,12 +37,14 @@ at.
 `x` of length larger than one is pasted into a single string, separating
 the parts by blank characters.
 
-Leading white space in `x` is completely removed.
-
-Consecutive white space in `x` is collapsed into a single blank
-character, except for double spaces after periods, question marks and
-exclamation marks (as documented in the section `Details` of
+Consecutive white space is collapsed into a single blank character,
+except for double spaces after periods, question marks and exclamation
+marks (as documented in the section `Details` of
 [`strwrap()`](https://rdrr.io/r/base/strwrap.html)).
+
+Leading and trailing newlines are collapsed into a single blank
+character if `ignore_newlines` is `TRUE` and are retained if
+`ignore_newlines` is `FALSE`.
 
 ## Programming notes
 
@@ -63,10 +65,10 @@ The output is printed as a string with newlines represented as `\n`. Use
 the way it is formatted in messages.
 
 Argument `width` in `wrap_text()` indicates the maximum width of text
-after wrapping, i.e., the width *after* which text should be wrapped. In
-contrast, argument `width` in
+after wrapping, i.e., the width **after** which text should be wrapped.
+In contrast, argument `width` in
 [`strwrap()`](https://rdrr.io/r/base/strwrap.html) indicates the width
-*at* which text should be wrapped.
+**at** which text should be wrapped.
 
 ## See also
 
@@ -76,7 +78,7 @@ contrast, argument `width` in
 
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
-[`file_path_sans_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_sans_ext.md),
+[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
 [`reorder_cols()`](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
