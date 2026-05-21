@@ -12,9 +12,12 @@ create_dir(dir = file.path(".", "output"), add_date = TRUE)
 
 - dir:
 
-  Non-empty character string containing the path to a directory that
-  should be created if it does not yet exist. A dot (i.e., ".")
-  indicates the current working directory.
+  Non-empty [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  containing a [valid
+  path](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+  to a directory that should be created if it does not yet exist. A dot
+  (i.e., `"."`) indicates the current working directory.
 
 - add_date:
 

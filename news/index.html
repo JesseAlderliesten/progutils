@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.10.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.11</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,31 +39,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.10.9001" id="progutils-00109001">progutils 0.0.10.9001<a class="anchor" aria-label="anchor" href="#progutils-00109001"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.0.11" id="progutils-0011">progutils 0.0.11<a class="anchor" aria-label="anchor" href="#progutils-0011"></a></h2>
 <div class="section level4">
-<h4 id="work-in-progress-0-0-10-9001">Work in progress<a class="anchor" aria-label="anchor" href="#work-in-progress-0-0-10-9001"></a></h4>
-<p>Work on test files that need to be updated (see <code>NEWS</code> for <code>progutils 0.0.10.9000</code>):</p>
-<ul><li>
-<code>test_create_path.R</code>: uses <code>expect_true(endsWith(...))</code> instead of <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">regexec()</a></code> proposed in version <code>0.0.10.9000</code>. Has some out-commented <code>expect_silent()</code> to get rid of spurious errors on MacOS because there the part before the output of <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> contains repeated slashes leading to a spurious warning from <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.10.9000" id="progutils-00109000">progutils 0.0.10.9000<a class="anchor" aria-label="anchor" href="#progutils-00109000"></a></h2>
-<div class="section level4">
-<h4 id="work-in-progress-0-0-10-9000">Work in progress<a class="anchor" aria-label="anchor" href="#work-in-progress-0-0-10-9000"></a></h4>
-<p>Removed or out-commented various tests to be able to have a pass-all-checks baseline after introducing the breaking changes detailed below.</p>
-<p>Test files that need to be updated:</p>
-<ul><li>
-<code>test_create_dir.R</code>: removed and out-commented various <code>expect_silent()</code> statements to get rid of spurious errors on MacOS because there the part before the output of <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> contains repeated slashes leading to a spurious warning from <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
-<li>
-<code>test_create_path.R</code>: out-commented most tests that use <code>expect_identical()</code>. These need to use <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">regexec()</a></code> like the first test to work.</li>
-<li>
-<code>test_is_path.R</code>: testing is incomplete.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="breaking-changes-0-0-10-9000">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-10-9000"></a></h4>
+<h4 id="breaking-changes-0-0-11">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-11"></a></h4>
 <ul><li>
 <code><a href="../reference/create_dir.html">create_dir()</a></code> now uses <code><a href="../reference/is_filename.html">is_filename()</a></code> to check if <code>filename</code> is valid.</li>
+<li>
+<code>create_path</code> now uses <code><a href="../reference/is_path.html">is_path()</a></code> to check that <code>dir</code> is a valid path.</li>
 <li>
 <code><a href="../reference/create_tempdir.html">create_tempdir()</a></code> now only writes in subdirectories of <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> and uses <code><a href="../reference/is_path.html">is_path()</a></code> to check that <code>subdir</code> is valid.</li>
 <li>
@@ -73,7 +55,7 @@
 <li>Add functions <code><a href="../reference/file_path_no_ext.html">file_path_ext()</a></code>, <code><a href="../reference/is_filename.html">is_filename()</a></code> and <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="miscellaneous-0-0-10-9000">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-10-9000"></a></h4>
+<h4 id="miscellaneous-0-0-11">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-11"></a></h4>
 <ul><li>
 <code>NEWS</code>: stylistic update.</li>
 <li>

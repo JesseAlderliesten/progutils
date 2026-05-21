@@ -1,41 +1,6 @@
 # Changelog
 
-## progutils 0.0.10.9001
-
-#### Work in progress
-
-Work on test files that need to be updated (see `NEWS` for
-`progutils 0.0.10.9000`):
-
-- `test_create_path.R`: uses `expect_true(endsWith(...))` instead of
-  [`regexec()`](https://rdrr.io/r/base/grep.html) proposed in version
-  `0.0.10.9000`. Has some out-commented `expect_silent()` to get rid of
-  spurious errors on MacOS because there the part before the output of
-  [`tempdir()`](https://rdrr.io/r/base/tempfile.html) contains repeated
-  slashes leading to a spurious warning from
-  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
-
-## progutils 0.0.10.9000
-
-#### Work in progress
-
-Removed or out-commented various tests to be able to have a
-pass-all-checks baseline after introducing the breaking changes detailed
-below.
-
-Test files that need to be updated:
-
-- `test_create_dir.R`: removed and out-commented various
-  `expect_silent()` statements to get rid of spurious errors on MacOS
-  because there the part before the output of
-  [`tempdir()`](https://rdrr.io/r/base/tempfile.html) contains repeated
-  slashes leading to a spurious warning from
-  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
-- `test_create_path.R`: out-commented most tests that use
-  `expect_identical()`. These need to use
-  [`regexec()`](https://rdrr.io/r/base/grep.html) like the first test to
-  work.
-- `test_is_path.R`: testing is incomplete.
+## progutils 0.0.11
 
 #### Breaking changes
 
@@ -43,6 +8,9 @@ Test files that need to be updated:
   now uses
   [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
   to check if `filename` is valid.
+- `create_path` now uses
+  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+  to check that `dir` is a valid path.
 - [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
   now only writes in subdirectories of
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html) and uses

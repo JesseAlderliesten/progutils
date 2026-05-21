@@ -32,9 +32,12 @@ create_path(
 
 - dir:
 
-  Non-empty character string containing the path to a directory that
-  should be created if it does not yet exist. A dot (i.e., ".")
-  indicates the current working directory.
+  Non-empty [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  containing a [valid
+  path](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+  to a directory that should be created if it does not yet exist. A dot
+  (i.e., `"."`) indicates the current working directory.
 
 - add_date:
 
@@ -113,28 +116,28 @@ my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
 
 (create_path(filename = "abc.txt", format_stamp = "",
             dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpVewme3/subdir/2026_05_21/abc.txt"
+#> [1] "/tmp/RtmpdBl9ox/subdir/2026_05_21/abc.txt"
 (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
             dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpVewme3/subdir/2026_05_21/21_05_2026_abc.txt"
+#> [1] "/tmp/RtmpdBl9ox/subdir/2026_05_21/21_05_2026_abc.txt"
 (create_path(filename = "def.html", format_stamp = "",
             dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpVewme3/subdir/def.html"
+#> [1] "/tmp/RtmpdBl9ox/subdir/def.html"
 (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
             dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpVewme3/subdir/21_05_2026_def.html"
+#> [1] "/tmp/RtmpdBl9ox/subdir/21_05_2026_def.html"
 (create_path(filename = "abc.txt", format_stamp = "",
             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpVewme3/subdir/subdir/2026_05_21/abc.txt"
+#> [1] "/tmp/RtmpdBl9ox/subdir/subdir/2026_05_21/abc.txt"
 (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpVewme3/subdir/subdir/2026_05_21/21_05_2026_abc.txt"
+#> [1] "/tmp/RtmpdBl9ox/subdir/subdir/2026_05_21/21_05_2026_abc.txt"
 (create_path(filename = "def.html", format_stamp = "",
             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpVewme3/subdir/subdir/def.html"
+#> [1] "/tmp/RtmpdBl9ox/subdir/subdir/def.html"
 (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpVewme3/subdir/subdir/21_05_2026_def.html"
+#> [1] "/tmp/RtmpdBl9ox/subdir/subdir/21_05_2026_def.html"
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

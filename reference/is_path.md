@@ -56,25 +56,6 @@ in Windows.
 In contrast to functions from `checkinput`, `is_path` will produce an
 error if `path` is not a valid path.
 
-## Programming notes
-
-To do:
-
-- Also disallow path components to **start** with a dot?
-
-See also
-
-- https://github.com/r-lib/usethis/blob/main/R/directory.R
-
-- https://github.com/r-lib/usethis/blob/main/tests/testthat/test-directory.R
-
-- https://docs.racket-lang.org/reference/windowspaths.html
-
-- function
-  [`progutils::create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md)
-
-- packages `fs`.
-
 ## References
 
 - https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file

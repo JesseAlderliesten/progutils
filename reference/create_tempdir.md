@@ -65,19 +65,19 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir()
-#> [1] "/tmp/RtmpVewme3"
+#> [1] "/tmp/RtmpdBl9ox"
 # Create a directory inside the directory returned by 'tempdir()'
 (tempdir_std <- create_tempdir(subdir = "examplesubtempdir"))
-#> [1] "/tmp/RtmpVewme3/examplesubtempdir"
+#> [1] "/tmp/RtmpdBl9ox/examplesubtempdir"
 
 # Error if the directory already exists
 try(create_tempdir(subdir = "examplesubtempdir"))
 #> Error in create_tempdir(subdir = "examplesubtempdir") : 
-#>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'): /tmp/RtmpVewme3/examplesubtempdir
+#>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'): /tmp/RtmpdBl9ox/examplesubtempdir
 
 # It is possible to create recursive directories
 (tempdir_recursive <- create_tempdir(subdir = file.path("abc", "def")))
-#> [1] "/tmp/RtmpVewme3/abc/def"
+#> [1] "/tmp/RtmpdBl9ox/abc/def"
 
 # Clean up
 unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
