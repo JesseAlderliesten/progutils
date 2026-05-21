@@ -18,7 +18,9 @@ expect_silent(
   expect_identical(
     create_path(filename = "abc.txt", format_stamp = "",
                 dir = my_tempdir, add_date = TRUE),
-    file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"), "abc.txt")
+    normalizePath(
+      file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"), "abc.txt"),
+      winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -26,8 +28,10 @@ expect_silent(
   expect_identical(
     create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                 dir = my_tempdir, add_date = TRUE),
-    file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
-              paste0(format(Sys.time(), format = "%d_%m_%Y"), "_abc.txt"))
+    normalizePath(
+      file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
+                paste0(format(Sys.time(), format = "%d_%m_%Y"), "_abc.txt")),
+      winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -35,7 +39,8 @@ expect_silent(
   expect_identical(
     create_path(filename = "def.html", format_stamp = "",
                 dir = my_tempdir, add_date = FALSE),
-    file.path(my_tempdir, "def.html")
+    normalizePath(file.path(my_tempdir, "def.html"),
+                  winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -43,8 +48,9 @@ expect_silent(
   expect_identical(
     create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                 dir = my_tempdir, add_date = FALSE),
-    file.path(my_tempdir,
-              paste0(format(Sys.time(), format = "%d_%m_%Y"), "_def.html"))
+    normalizePath(
+      file.path(my_tempdir, paste0(format(Sys.time(), format = "%d_%m_%Y"), "_def.html")),
+      winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -52,7 +58,9 @@ expect_silent(
   expect_identical(
     create_path(filename = "abc.txt", format_stamp = "",
                 dir = file.path(my_tempdir, "subdir"), add_date = TRUE),
-    file.path(my_tempdir, "subdir", format(Sys.time(), format = "%Y_%m_%d"), "abc.txt")
+    normalizePath(
+      file.path(my_tempdir, "subdir", format(Sys.time(), format = "%Y_%m_%d"), "abc.txt"),
+      winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -60,8 +68,10 @@ expect_silent(
   expect_identical(
     create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                 dir = file.path(my_tempdir, "subdir"), add_date = TRUE),
-    file.path(my_tempdir, "subdir", format(Sys.time(), format = "%Y_%m_%d"),
-              paste0(format(Sys.time(), format = "%d_%m_%Y"), "_abc.txt"))
+    normalizePath(
+      file.path(my_tempdir, "subdir", format(Sys.time(), format = "%Y_%m_%d"),
+                paste0(format(Sys.time(), format = "%d_%m_%Y"), "_abc.txt")),
+      winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -69,7 +79,9 @@ expect_silent(
   expect_identical(
     create_path(filename = "def.html", format_stamp = "",
                 dir = file.path(my_tempdir, "subdir"), add_date = FALSE),
-    file.path(my_tempdir, "subdir", "def.html")
+    normalizePath(
+      file.path(my_tempdir, "subdir", "def.html"),
+      winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -77,8 +89,10 @@ expect_silent(
   expect_identical(
     create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                 dir = file.path(my_tempdir, "subdir"), add_date = FALSE),
-    file.path(my_tempdir, "subdir",
-              paste0(format(Sys.time(), format = "%d_%m_%Y"), "_def.html"))
+    normalizePath(
+      file.path(my_tempdir, "subdir",
+                paste0(format(Sys.time(), format = "%d_%m_%Y"), "_def.html")),
+      winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -106,8 +120,10 @@ expect_silent(
   expect_identical(
     create_path(filename = "abc.txt", format_stamp = "%d_%m_%Ydef",
                 dir = my_tempdir, add_date = TRUE),
-    file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
-              paste0(format(Sys.time(), format = "%d_%m_%Y"), "def_abc.txt"))
+    normalizePath(
+      file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
+                paste0(format(Sys.time(), format = "%d_%m_%Y"), "def_abc.txt")),
+      winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -117,9 +133,12 @@ expect_warning(
   expect_identical(
     create_path(filename = "abc.txt", format_stamp = "%d#%m_%Ydef",
                 dir = my_tempdir, add_date = TRUE),
-    file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
-              paste0(format(Sys.time(), format = "%d.%m_%Y"), "def_abc.txt"))
-  ), pattern = "Replaced non-alphanumeric characters other than underscores",
+    normalizePath(
+      file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
+              paste0(format(Sys.time(), format = "%d.%m_%Y"), "def_abc.txt")),
+      winslash = "/", mustWork = FALSE)
+    ),
+  pattern = "Replaced non-alphanumeric characters other than underscores",
   strict = TRUE, fixed = TRUE
 )
 
@@ -148,8 +167,8 @@ expect_silent(
   expect_identical(
     create_path(filename = "abc.txt", format_stamp = "",
                 dir = file.path(my_tempdir, ".txt"), add_date = FALSE),
-    normalizePath(file.path(my_tempdir, ".txt", "abc.txt"), winslash = "/",
-                  mustWork = FALSE)
+    normalizePath(file.path(my_tempdir, ".txt", "abc.txt"),
+                  winslash = "/", mustWork = FALSE)
   )
 )
 
@@ -159,10 +178,13 @@ expect_silent(
 # that the working directory is used because creation of the directory failed.
 expect_warning(
   expect_true(
-    grepl(pattern = file.path(basename(getwd()), "abc.txt"),
-          x = create_path(filename = "abc.txt", format_stamp = "",
-                          dir = my_tempfile, add_date = FALSE),
-          ignore.case = FALSE, fixed = TRUE)),
+    grepl(
+      pattern = normalizePath(
+        file.path(basename(getwd()), "abc.txt"),
+        winslash = "/", mustWork = FALSE),
+      x = create_path(filename = "abc.txt", format_stamp = "",
+                      dir = my_tempfile, add_date = FALSE),
+      ignore.case = FALSE, fixed = TRUE)),
   pattern = paste0(basename(my_tempfile), "' already exists"),
   strict = TRUE, fixed = TRUE
 )
