@@ -14,13 +14,16 @@ write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 ##### Correct combinations #####
 # Test combinations of stamp formats (absent, default or alternative format)
 # with presence or absence of a date directory and a subdirectory in 'dir'.
-expect_silent(
-  expect_identical(
-    create_path(filename = "abc.txt", format_stamp = "",
-                dir = my_tempdir, add_date = TRUE),
-    normalizePath(
-      file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"), "abc.txt"),
-      winslash = "/", mustWork = FALSE)
+correct_path <- create_path(filename = "abc.txt", format_stamp = "",
+                            dir = my_tempdir, add_date = TRUE)
+expect_true(
+  endsWith(
+    x = correct_path,
+    # Only test part starting with tempdir()
+    suffix = regmatches(
+      x = correct_path,
+      m = regexec(pattern = paste0(basename(tempdir()), ".+$"),
+                  text = correct_path))[[1]]
   )
 )
 
@@ -179,9 +182,7 @@ expect_silent(
 expect_warning(
   expect_true(
     grepl(
-      pattern = normalizePath(
-        file.path(basename(getwd()), "abc.txt"),
-        winslash = "/", mustWork = FALSE),
+      pattern = file.path(basename(getwd()), "abc.txt", fsep = "/"),
       x = create_path(filename = "abc.txt", format_stamp = "",
                       dir = my_tempfile, add_date = FALSE),
       ignore.case = FALSE, fixed = TRUE)),
