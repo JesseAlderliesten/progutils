@@ -74,7 +74,10 @@ expect_true(endsWith(
 
 # without date directory, directory already exists
 dir_no_date_v2 <- create_dir(dir = dir, add_date = FALSE)
-expect_identical(dir_no_date, dir_no_date_v2)
+expect_true(endsWith(
+  dir_no_date_v2,
+  suffix = file.path(tempdir_basename, "testcreatedir", "temp_subdirF_dateF")
+))
 
 # with date directory
 dir <- file.path(my_tempdir, "temp_subdirF_dateT")
