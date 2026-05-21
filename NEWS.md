@@ -1,3 +1,15 @@
+# progutils 0.0.10.9001
+
+### Work in progress
+Work on test files that need to be updated (see `NEWS` for `progutils 0.0.10.9000`):
+
+- `test_create_path.R`: uses `expect_true(endsWith(...))` instead of `regexec()`
+  proposed in version `0.0.10.9000`. Has some out-commented `expect_silent()` to
+  get rid of spurious errors on MacOS because there the part before the output
+  of `tempdir()` contains repeated slashes leading to a spurious warning from
+  `is_path()`.
+
+
 # progutils 0.0.10.9000
 
 ### Work in progress
