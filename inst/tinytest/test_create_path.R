@@ -5,7 +5,11 @@ tinytest::report_side_effects()
 # Create temporary directory and temporary file to use in tests.
 my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatepath"),
                             winslash = "/", mustWork = FALSE)
-pattern_tempdir <- paste0(basename(tempdir()), ".+$")
+tempdir_pattern <- paste0(basename(tempdir()), ".+$")
+tempdir_basename <- basename(tempdir())
+current_date_Ymd <- format(Sys.time(), format = "%Y_%m_%d")
+current_date_dmY <- format(Sys.time(), format = "%d_%m_%Y")
+
 dir.create(path = my_tempdir, showWarnings = FALSE, recursive = TRUE)
 my_tempfile <- normalizePath(path = file.path(my_tempdir, "test_df.csv"),
                              winslash = "/", mustWork = FALSE)
@@ -21,33 +25,31 @@ expect_true(
   endsWith(
     x = path_no_stamp,
     # Only test part starting with tempdir()
-    suffix = regmatches(
-      x = path_no_stamp,
-      m = regexec(pattern = pattern_tempdir,
-                  text = path_no_stamp))[[1]]
+    suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd, "abc.txt")
   )
 )
 
-# expect_silent(
-#   expect_identical(
-#     create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#                 dir = my_tempdir, add_date = TRUE),
-#     normalizePath(
-#       file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
-#                 paste0(format(Sys.time(), format = "%d_%m_%Y"), "_abc.txt")),
-#       winslash = "/", mustWork = FALSE)
-#   )
-# )
-#
-# expect_silent(
-#   expect_identical(
-#     create_path(filename = "def.html", format_stamp = "",
-#                 dir = my_tempdir, add_date = FALSE),
-#     normalizePath(file.path(my_tempdir, "def.html"),
-#                   winslash = "/", mustWork = FALSE)
-#   )
-# )
-#
+path_stamp <- create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
+                          dir = my_tempdir, add_date = TRUE)
+expect_true(
+  endsWith(
+    x = path_stamp,
+    # Only test part starting with tempdir()
+    suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+                       paste0(current_date_dmY, "_abc.txt"))
+  )
+)
+
+path_no_date <- create_path(filename = "def.html", format_stamp = "",
+                            dir = my_tempdir, add_date = FALSE)
+expect_true(
+  endsWith(
+    x = path_no_date,
+    # Only test part starting with tempdir()
+    suffix = file.path(tempdir_basename, "testcreatepath", "def.html")
+  )
+)
+
 # expect_silent(
 #   expect_identical(
 #     create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
