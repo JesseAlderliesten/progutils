@@ -54,10 +54,10 @@ for(subdir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
 }
 
 for(subdir in list("temp_p3/", "temp_p3/", "temp_p4\\")) {
-  expect_error(
+  expect_warning(
     create_tempdir(subdir = subdir),
-    # NB. need to use '\\' instead of '\' which would test for ''.
-    pattern = "should not end with '/' or '\\'",
+    # Need to use '\\': '\' would test for ''.
+    pattern = "Repeated '/' or '\\'",
     fixed = TRUE)
 }
 

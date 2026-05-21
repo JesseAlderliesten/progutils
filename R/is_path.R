@@ -77,8 +77,8 @@ is_path <- function(path, as_file = FALSE) {
   if(any(!nzchar(path_comp)) ||
      any(endsWith(x = c(path, path_comp), suffix = "/") |
          endsWith(x = c(path, path_comp), suffix = "\\"))) {
-    stop("Path components in ", paste_quoted(deparse(substitute(path))),
-         " should not end with '/' or '\\':\n", path)
+    warning("Repeated '/' or '\\' in ", paste_quoted(deparse(substitute(path))),
+            " will be ignored:\n", path)
   }
 
   bool_invalid_dot <- endsWith(x = path_comp, suffix = ".")

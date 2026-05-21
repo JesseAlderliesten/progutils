@@ -280,9 +280,9 @@ for(dir in list(paste0(my_tempdir, "./"),
                 paste0(my_tempdir, "temp_p1/"),
                 paste0(my_tempdir, ".\\"),
                 paste0(my_tempdir, "temp_p1\\"))) {
-  expect_error(
+  expect_warning(
     create_path(filename = "abc.txt", dir = dir),
-    pattern = "should not end with '/' or '\\'", fixed = TRUE)
+    pattern = "Repeated '/' or '\\'", fixed = TRUE)
 }
 
 for(dir in list(paste0(my_tempdir, ".."),

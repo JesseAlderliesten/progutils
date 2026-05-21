@@ -142,9 +142,10 @@ for(dir in list(paste0(file.path(my_tempdir, "temp"), "//"),
                 file.path(my_tempdir, "\\"),
                 file.path(my_tempdir, "temp\\"),
                 file.path(my_tempdir, "temp\\", "subtemp"))) {
-  expect_error(
+  expect_warning(
     create_dir(dir = dir),
-    pattern = "'dir' should not end with '/' or '\\'", fixed = TRUE)
+    # Need to use '\\': '\' would test for ''.
+    pattern = "Repeated '/' or '\\'", fixed = TRUE)
 }
 
 # NB. 'dir' equal to '.' can be used to denote the current working directory.
