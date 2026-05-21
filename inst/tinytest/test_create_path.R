@@ -19,100 +19,68 @@ write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 ##### Correct combinations #####
 # Test combinations of stamp formats (absent, default or alternative format)
 # with presence or absence of a date directory and a subdirectory in 'dir'.
-path_no_stamp <- create_path(filename = "abc.txt", format_stamp = "",
-                             dir = my_tempdir, add_date = TRUE)
-expect_true(
-  endsWith(
-    x = path_no_stamp,
-    # Only test part starting with tempdir()
-    suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd, "abc.txt")
-  )
-)
+expect_true(endsWith(
+  create_path(filename = "abc.txt", format_stamp = "",
+                  dir = my_tempdir, add_date = TRUE),
+  suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+                     "abc.txt")
+))
 
-path_stamp <- create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-                          dir = my_tempdir, add_date = TRUE)
-expect_true(
-  endsWith(
-    x = path_stamp,
-    # Only test part starting with tempdir()
-    suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
-                       paste0(current_date_dmY, "_abc.txt"))
-  )
-)
+expect_true(endsWith(
+  create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
+                  dir = my_tempdir, add_date = TRUE),
+  suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+                     paste0(current_date_dmY, "_abc.txt"))
+))
 
-path_no_date <- create_path(filename = "def.html", format_stamp = "",
-                            dir = my_tempdir, add_date = FALSE)
-expect_true(
-  endsWith(
-    x = path_no_date,
-    # Only test part starting with tempdir()
-    suffix = file.path(tempdir_basename, "testcreatepath", "def.html")
-  )
-)
+expect_true(endsWith(
+  create_path(filename = "def.html", format_stamp = "",
+                  dir = my_tempdir, add_date = FALSE),
+  suffix = file.path(tempdir_basename, "testcreatepath", "def.html")
+))
 
-# expect_silent(
-#   expect_identical(
-#     create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#                 dir = my_tempdir, add_date = FALSE),
-#     normalizePath(
-#       file.path(my_tempdir, paste0(format(Sys.time(), format = "%d_%m_%Y"), "_def.html")),
-#       winslash = "/", mustWork = FALSE)
-#   )
-# )
-#
-# expect_silent(
-#   expect_identical(
-#     create_path(filename = "abc.txt", format_stamp = "",
-#                 dir = file.path(my_tempdir, "subdir"), add_date = TRUE),
-#     normalizePath(
-#       file.path(my_tempdir, "subdir", format(Sys.time(), format = "%Y_%m_%d"), "abc.txt"),
-#       winslash = "/", mustWork = FALSE)
-#   )
-# )
-#
-# expect_silent(
-#   expect_identical(
-#     create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#                 dir = file.path(my_tempdir, "subdir"), add_date = TRUE),
-#     normalizePath(
-#       file.path(my_tempdir, "subdir", format(Sys.time(), format = "%Y_%m_%d"),
-#                 paste0(format(Sys.time(), format = "%d_%m_%Y"), "_abc.txt")),
-#       winslash = "/", mustWork = FALSE)
-#   )
-# )
-#
-# expect_silent(
-#   expect_identical(
-#     create_path(filename = "def.html", format_stamp = "",
-#                 dir = file.path(my_tempdir, "subdir"), add_date = FALSE),
-#     normalizePath(
-#       file.path(my_tempdir, "subdir", "def.html"),
-#       winslash = "/", mustWork = FALSE)
-#   )
-# )
-#
-# expect_silent(
-#   expect_identical(
-#     create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#                 dir = file.path(my_tempdir, "subdir"), add_date = FALSE),
-#     normalizePath(
-#       file.path(my_tempdir, "subdir",
-#                 paste0(format(Sys.time(), format = "%d_%m_%Y"), "_def.html")),
-#       winslash = "/", mustWork = FALSE)
-#   )
-# )
+expect_true(endsWith(
+  create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
+              dir = my_tempdir, add_date = FALSE),
+  suffix = file.path(tempdir_basename, "testcreatepath", paste0(current_date_dmY, "_def.html"))
+))
+
+expect_true(endsWith(
+  create_path(filename = "abc.txt", format_stamp = "",
+              dir = file.path(my_tempdir, "subdir"), add_date = TRUE),
+  suffix = file.path(tempdir_basename, "testcreatepath", "subdir", current_date_Ymd, "abc.txt")
+))
+
+expect_true(endsWith(
+  create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
+              dir = file.path(my_tempdir, "subdir"), add_date = TRUE),
+  suffix = file.path(tempdir_basename, "testcreatepath", "subdir",
+                     current_date_Ymd, paste0(current_date_dmY, "_abc.txt"))
+))
+
+expect_true(endsWith(
+  create_path(filename = "def.html", format_stamp = "",
+              dir = file.path(my_tempdir, "subdir"), add_date = FALSE),
+  suffix = file.path(tempdir_basename, "testcreatepath", "subdir", "def.html")
+))
+
+expect_true(endsWith(
+  create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
+              dir = file.path(my_tempdir, "subdir"), add_date = FALSE),
+  suffix = file.path(tempdir_basename, "testcreatepath", "subdir",
+                     paste0(current_date_dmY, "_def.html"))
+))
 
 ##### filename #####
-# for(filenm in c("a.txt", "e3f.txt", "g_g.txt")) {
-#   expect_silent(
-#     expect_identical(
-#       create_path(filename = filenm, format_stamp = "",
-#                   dir = my_tempdir, add_date = FALSE),
-#       normalizePath(file.path(my_tempdir, filenm),
-#                     winslash = "/", mustWork = FALSE)
-#     )
-#   )
-# }
+for(filenm in c("a.txt", "e3f.txt", "g_g.txt")) {
+  # expect_silent(
+    expect_true(endsWith(
+      create_path(filename = filenm, format_stamp = "",
+                  dir = my_tempdir, add_date = FALSE),
+      suffix = file.path(tempdir_basename, "testcreatepath", filenm)
+    ))
+  # )
+}
 
 expect_error(
   create_path(filename = "ff..txt", format_stamp = "",
@@ -120,50 +88,46 @@ expect_error(
   pattern = "'filename' should not end with ' ' or '.'", fixed = TRUE)
 
 ##### format_stamp #####
-# # Characters in 'format_stamp' not part of a conversion specification in
-# # strptime are interpreted literally.
+# Characters in 'format_stamp' not part of a conversion specification in
+# strptime are interpreted literally.
 # expect_silent(
-#   expect_identical(
-#     create_path(filename = "abc.txt", format_stamp = "%d_%m_%Ydef",
-#                 dir = my_tempdir, add_date = TRUE),
-#     normalizePath(
-#       file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
-#                 paste0(format(Sys.time(), format = "%d_%m_%Y"), "def_abc.txt")),
-#       winslash = "/", mustWork = FALSE)
-#   )
+  expect_true(endsWith(
+    create_path(filename = "abc.txt", format_stamp = "%d_%m_%Ydef",
+                dir = my_tempdir, add_date = TRUE),
+    suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+                       paste0(current_date_dmY, "def_abc.txt"))
+  ))
 # )
 
 # Non-alphanumeric characters other than underscores in the result of
 # 'format_stamp' are replaced by underscores.
-# expect_warning(
-#   expect_identical(
-#     create_path(filename = "abc.txt", format_stamp = "%d#%m_%Ydef",
-#                 dir = my_tempdir, add_date = TRUE),
-#     normalizePath(
-#       file.path(my_tempdir, format(Sys.time(), format = "%Y_%m_%d"),
-#               paste0(format(Sys.time(), format = "%d.%m_%Y"), "def_abc.txt")),
-#       winslash = "/", mustWork = FALSE)
-#     ),
-#   pattern = "Replaced non-alphanumeric characters other than underscores",
-#   strict = TRUE, fixed = TRUE
-# )
-#
+expect_warning(
+  expect_true(endsWith(
+    create_path(filename = "abc.txt", format_stamp = "%d#%m_%Ydef",
+                dir = my_tempdir, add_date = TRUE),
+    suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+                       paste0(format(Sys.time(), format = "%d.%m_%Y"), "def_abc.txt"))
+  )),
+  pattern = "Replaced non-alphanumeric characters other than underscores",
+  strict = TRUE, fixed = TRUE
+)
+
 # expect_silent(
-#   expect_equal(
-#     nchar(basename(
-#       create_path(filename = "test1c.txt", format_stamp = "%H_%M_%OS3",
-#                   dir = my_tempdir, add_date = FALSE))),
-#     23L
-#   )
+  expect_true(
+    grepl(pattern = paste0("testcreatepath.[[:digit:]]{2}_[[:digit:]]{2}",
+                           "_[[:digit:]]{2}\\.[[:digit:]]{3}_test1c.txt$"),
+          x = create_path(filename = "test1c.txt", format_stamp = "%H_%M_%OS3",
+                          dir = my_tempdir, add_date = FALSE))
+  )
 # )
-#
+
 # expect_silent(
-#   expect_equal(
-#     nchar(basename(
-#       create_path(filename = "test1c.txt", format_stamp = "%H_%M_%OS5",
-#                   dir = my_tempdir, add_date = FALSE))),
-#     25L
-#   )
+  expect_true(
+    grepl(pattern = paste0("testcreatepath.[[:digit:]]{2}_[[:digit:]]{2}",
+                           "_[[:digit:]]{2}\\.[[:digit:]]{5}_test1c.txt$"),
+          x = create_path(filename = "test1c.txt", format_stamp = "%H_%M_%OS5",
+                          dir = my_tempdir, add_date = FALSE))
+  )
 # )
 
 ##### dir #####
