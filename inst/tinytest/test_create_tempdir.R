@@ -1,14 +1,3 @@
-#### Notes ####
-# - A temporary directory is used to write the added directories to. The files
-#   written to that directory by this script are deleted when they are not
-#   needed anymore. Deleting the entire temporary directory would lead to
-#   problems because other R-processes write to the same temporary directory.
-# - The returned message is only checked for containing 'Created directory' or
-#   'already exists' because getting the correct type and number of slashes in
-#   the string to compare with the path recorded in the message is brittle.
-#   Checking the path is thus left to expect_identical() and
-#   expect_true(dir.exists(expected_path)).
-
 tinytest::report_side_effects()
 
 
