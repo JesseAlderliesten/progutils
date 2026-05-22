@@ -6,8 +6,8 @@
 #' containing a [valid path][is_path()] to a directory that should be created if
 #' it does not yet exist. A dot (i.e., `"."`) indicates the current working
 #' directory.
-#' @param add_date `TRUE` or `FALSE`: create a subdirectory with the current
-#' date in the [format][strftime()] `YYYY_mm_dd`?
+#' @param add_date `TRUE` or `FALSE`: create a subdirectory in `dir` with the
+#' current date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
 #' The default `dir` is a subdirectory with the current date in the

@@ -4,9 +4,9 @@
 #' @param x Character vector to check.
 #'
 #' @returns
-#' Character vector with [unique()] [sorted][sort()] values in `x` that only
-#' differ from each other in their case, or `character(0)` if no such values are
-#' present. The return is [invisible].
+#' Character vector with [unique][unique()], [sorted][sort()] values in `x` that
+#' only differ from each other in their case, or `character(0)` if no such
+#' values are present. The return is [invisible].
 #'
 #' @section Side effects:
 #' Values in `x` that only differ from each other in their case generate an
@@ -14,9 +14,9 @@
 #' `message`, respectively. Values are silently returned if `signal` is `quiet`.
 #'
 #' @section Notes:
-#' Sort order depends on the used [locale][locales] (see also the section
-#' `Details` of [Comparison]), which also affects if uppercase characters are
-#' sorted before or after lowercase characters.
+#' The sorting order in the result depends on the used [locale][locales] (see
+#' also the section `Details` of [Comparison]), which also affects if uppercase
+#' characters are sorted before or after lowercase characters.
 #'
 #' @family functions to check equality
 #'

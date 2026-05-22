@@ -10,7 +10,7 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 \item{x, y}{Numeric vectors to compare for equality.}
 
 \item{tol}{A small \link[checkinput:is_positive]{positive} number. Numbers that
-differ less in value than \code{tol} are considered to be equal.}
+differ less than \code{tol} are considered to be equal.}
 }
 \value{
 A vector with logical values (\code{TRUE}, \code{FALSE} or \code{NA}) indicating if
@@ -33,7 +33,7 @@ x == 2 # FALSE
 x - 2 # about 4.44e-16
 are_equal(x = x, y = 2) # TRUE
 
-are_equal(x = c(2, 3, 3,         NA, Inf),
+are_equal(x = c(2, 3, 3,        NA, Inf),
           y = c(2, 3, 3 + 1e-8, NA, Inf))
 are_equal(x = 3, y = c(2, 3, 3 + 1e-8, NA, Inf))
 
