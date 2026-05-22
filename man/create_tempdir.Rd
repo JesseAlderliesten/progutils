@@ -34,7 +34,7 @@ The requested temporary directory is created if does not yet exist. An error
 is thrown if the directory already exists or creating the directory fails.
 }
 
-\section{Usage}{
+\section{Usage in practice}{
 
 Examples and tests should \strong{not} write to the \link[=getwd]{working directory}
 but to a temporary directory that is cleaned up afterwards. Although
