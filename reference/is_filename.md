@@ -1,7 +1,7 @@
 # Check that `x` is a valid filename
 
 Check that `x` is a filename that includes an extension and is likely to
-be a valid filename.
+be valid.
 
 ## Usage
 
@@ -15,7 +15,7 @@ is_filename(filename)
 
   [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
-  with the filename, including the file extension.
+  with the filename including the file extension.
 
 ## Value
 
@@ -43,7 +43,7 @@ check for valid filenames before creating a file:
 These restrictions consider characters that would lead to an error in
 Windows because they are not allowed; characters that would lead to a
 mismatch between the created directory and the returned path because
-they are silently removed in Windows; and words that are reserved names
+they are silently removed on Windows; and words that are reserved names
 in Windows.
 
 In contrast to functions from `checkinput`, `is_filename` will produce
@@ -52,9 +52,8 @@ an error if `filename` is not a valid filename.
 ## Programming notes
 
 Although not enforced by `is_filename()`, it is good practice to also
-avoid the characters `+`, `,`, `;`, `=`, `[`, `]`, `!`, `$`, `#`, `@`
-
-Also avoid the characters `{`, `}`, `(`, `)`, `'`, `%`, `&`, , `^`, `~`.
+avoid the characters `+`, `,`, `;`, `=`, `[`, `]`, `!`, `$`, `#`, `@`,
+and possibly `{`, `}`, `(`, `)`, `'`, `%`, `&`, , `^`, `~`.
 
 Ways to make `is_filename()` even stricter:
 
@@ -65,14 +64,16 @@ Ways to make `is_filename()` even stricter:
 - case-insensitive matching to `filename` to determine if it exists?
   `filename` should **not** point to a directory (see
   [`utils::file_test()`](https://rdrr.io/r/utils/filetest.html),
-  `get_filename.R`, `create_tempdir.R`, `create_path.R`).
+  [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
+  [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
+  [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)).
 
 - Impose a limit on the length:
   https://blog.r-project.org/2023/03/07/path-length-limit-on-windows/
 
-- See also function
-  [`progutils::create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md),
-  `usethis:::make_filename()` and
+- See also functions
+  [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
+  `make_filename()` and
   [`fs::path_real()`](https://fs.r-lib.org/reference/path_math.html).
 
 ## References
@@ -90,7 +91,7 @@ references there and
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
-[`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md),
+[`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
 [`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
 [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,9 +54,9 @@
 
 <dl><dt id="arg-subdir">subdir<a class="anchor" aria-label="anchor" href="#arg-subdir"></a></dt>
 <dd><p>A <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> with the name
-of the temporary subdirectory to be created inside <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. <code>subdir</code>
-should be a valid <a href="is_path.html">path</a> pointing to a directory that <strong>not yet</strong>
-exists, see <code>Details</code>.</p></dd>
+of a <strong>not-yet</strong> existing temporary subdirectory to be created inside
+<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. <code>subdir</code> should meet the requirements for a valid
+<a href="is_path.html">path</a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -67,10 +67,8 @@ returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">i
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>subdir</code> is created inside <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> and an error is thrown if it already
-exists. This ensures that programmatically <a href="https://rdrr.io/r/base/unlink.html" class="external-link">removing</a> the created
-directory later on does not remove files that are still needed by other
-processes (which could happen when removing the directory returned by
-<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>, for example because <code>RStudio</code> also uses that directory).</p>
+exists. This ensures that <a href="https://rdrr.io/r/base/unlink.html" class="external-link">removing</a> the created directory does not
+remove files that are still needed by other processes (see <code>Usage</code> below).</p>
 <p>It is possible to create subdirectories inside a not-yet existing directory
 (e.g., to create <code>&lt;tempdir&gt;/output/outputsub</code> if <code>&lt;tempdir&gt;/output</code> does not
 yet exist.</p>
@@ -80,15 +78,27 @@ yet exist.</p>
 
 
 <p>The requested temporary directory is created if does not yet exist. An error
-is thrown if the directory already exists or creating the directory failed.</p>
+is thrown if the directory already exists or creating the directory fails.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="usage-in-practice">Usage in practice<a class="anchor" aria-label="anchor" href="#usage-in-practice"></a></h2>
+
+
+<p>Examples and tests should <strong>not</strong> write to the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>
+but to a temporary directory that is cleaned up afterwards. Although
+<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> points to a temporary directory, that directory should <strong>not</strong> be
+removed because <a href="https://posit.co/products/open-source/rstudio" class="external-link">RStudio</a> also
+uses it. Instead, store the paths to temporary files written to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>
+and <a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a> those paths when cleaning up, or create a temporary
+subdirectory in <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> which can be completely be removed when cleaning
+up. <code>use_tempdir()</code> follows the latter approach.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="create_dir.html">create_dir()</a></code> to create (non-temporary) directories and the notes in its
-test-file <code>progutils\inst\tinytest\test_create_dir.R</code>.</p>
+    <div class="dont-index"><p><code><a href="create_dir.html">create_dir()</a></code> to create (non-temporary) directories.</p>
 <p>Other functions to handle paths and directories:
 <code><a href="create_dir.html">create_dir()</a></code>,
-<code><a href="create_path.html">create_path()</a></code>,
+<code><a href="create_file_path.html">create_file_path()</a></code>,
 <code><a href="file_path_no_ext.html">file_path_no_ext()</a></code>,
 <code><a href="get_filename.html">get_filename()</a></code>,
 <code><a href="is_filename.html">is_filename()</a></code>,
@@ -98,19 +108,19 @@ test-file <code>progutils\inst\tinytest\test_create_dir.R</code>.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdBl9ox"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp42QfmW"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_std</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"examplesubtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdBl9ox/examplesubtempdir"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp42QfmW/examplesubtempdir"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error if the directory already exists</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"examplesubtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in create_tempdir(subdir = "examplesubtempdir") : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'): /tmp/RtmpdBl9ox/examplesubtempdir</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'): /tmp/Rtmp42QfmW/examplesubtempdir</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is possible to create recursive directories</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_recursive</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"abc"</span>, <span class="st">"def"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdBl9ox/abc/def"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp42QfmW/abc/def"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tempdir_std</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">dirname</a></span><span class="op">(</span><span class="va">tempdir_recursive</span><span class="op">)</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

@@ -40,12 +40,13 @@ signal_text(
 
 `text` is coerced to a character vector using
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md),
-which treats input with length larger than one better than
-[message](https://rdrr.io/r/base/message.html) etc. that use
+which treats zero-length input and input with length larger than one
+better than [message](https://rdrr.io/r/base/message.html) etc. that use
 [`paste0()`](https://rdrr.io/r/base/paste.html), see the `Examples`.
 Call
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
-beforehand on `text` to control rounding and wrapping.
+beforehand on `text` to control rounding and wrapping, see the last
+example.
 
 ## Side effects
 

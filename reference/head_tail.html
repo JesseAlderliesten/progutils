@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,15 +57,13 @@
 
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
-<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/is_natural.html" class="external-link">make_natural</a> number (default <code>3L</code>)
-indicating the number of elements or rows to return as <code>head</code> and <code>tail</code>.</p></dd>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/is_natural.html" class="external-link">natural</a> number (default <code>3L</code>) indicating
+the number of elements or rows to return as <code>head</code> and <code>tail</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The <code>n</code> first and <code>n</code> last elements or rows of <code>x</code>. <code>x</code> is returned
-completely if <code>n</code> is not less than half the number of elements or rows of <code>x</code>.
-Using <code>n = 0</code> results in a zero-length or zero-row object.</p>
+    <p>The <code>n</code> first and last elements or rows of <code>x</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -74,19 +72,20 @@ Using <code>n = 0</code> results in a zero-length or zero-row object.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">letters</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">LETTERS</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">x</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   A   B   C   D   E   F   G   H   I   J </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" </span>
 <span class="r-in"><span><span class="fu">head_tail</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   A   B   C   X   Y   Z </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> "a" "b" "c" "x" "y" "z" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   A   B   C   H   I   J </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "a" "b" "c" "h" "i" "j" </span>
 <span class="r-in"><span><span class="fu">head_tail</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   A   B   C   D   W   X   Y   Z </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> "a" "b" "c" "d" "w" "x" "y" "z" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   A   B   C   D   G   H   I   J </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "a" "b" "c" "d" "g" "h" "i" "j" </span>
 <span class="r-in"><span><span class="fu">head_tail</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   U   V   W   X   Y   Z </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> "u" "v" "w" "x" "y" "z" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   A   B   C   D   E   F   G   H   I   J </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" </span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">head_tail</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in checkinput::make_natural(n, strict = TRUE) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   checkinput::all_natural(n) is not TRUE</span>
@@ -94,17 +93,9 @@ Using <code>n = 0</code> results in a zero-length or zero-row object.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in checkinput::make_natural(n, strict = TRUE) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   checkinput::all_natural(n) is not TRUE</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">head_tail</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">40</span>, ncol <span class="op">=</span> <span class="fl">4</span>,</span></span>
-<span class="r-in"><span>                      dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">head_tail</span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    a  b  c  d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A  1 11 21 31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> B  2 12 22 32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> C  3 13 23 33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> H  8 18 28 38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> I  9 19 29 39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> J 10 20 30 40</span>
-<span class="r-in"><span><span class="fu">head_tail</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">head_tail</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">40</span>, ncol <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>                       dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">head_tail</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    a  b  c  d</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A  1 11 21 31</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> B  2 12 22 32</span>

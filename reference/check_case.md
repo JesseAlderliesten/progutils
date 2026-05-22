@@ -24,7 +24,7 @@ check_case(x, signal = c("error", "warning", "message", "quiet"))
 
 ## Value
 
-Character vector with [`unique()`](https://rdrr.io/r/base/unique.html)
+Character vector with [unique](https://rdrr.io/r/base/unique.html),
 [sorted](https://rdrr.io/r/base/sort.html) values in `x` that only
 differ from each other in their case, or `character(0)` if no such
 values are present. The return is
@@ -41,7 +41,7 @@ Values in `x` that only differ from each other in their case generate an
 
 ## Notes
 
-Sort order depends on the used
+The sorting order in the result depends on the used
 [locale](https://rdrr.io/r/base/locales.html) (see also the section
 `Details` of [Comparison](https://rdrr.io/r/base/Comparison.html)),
 which also affects if uppercase characters are sorted before or after

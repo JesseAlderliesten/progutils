@@ -74,7 +74,7 @@ replace_vals(
 
 ## Value
 
-`x` with the requested replacements. Factor levels are *not* reordered
+`x` with the requested replacements. Factor levels are **not** reordered
 after the replacement.
 
 ## Details
@@ -92,18 +92,6 @@ and `ignore_case` is `TRUE`. An example of such an exception is
 If `quiet` is `FALSE`, a message indicates which values have been
 replaced. The order of the factor *levels* determines the order used in
 the message.
-
-## Programming notes
-
-Rewrite to perform all checks using
-[check_case](https://jessealderliesten.github.io/progutils/reference/check_case.md),
-then defer the actual replacement to
-[`gsub()`](https://rdrr.io/r/base/grep.html), and then use
-`which(x_orig != x)` to find and report on replacements?
-
-Factor levels can be replaced through a named list:
-`f <- addNA(as.factor(c(letters[11:13], NA_character_)))`
-`levels(f) <- list(c = "k", b = "l", a = "m", h = NA_character_)`
 
 ## See also
 

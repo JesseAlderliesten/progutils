@@ -48,7 +48,7 @@ the latter does not have argument `compression`.
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
-[`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md),
+[`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
 [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
 [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md),

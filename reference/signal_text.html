@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,9 +79,9 @@ message. Ignored if it is <code>character(0)</code>.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>text</code> is coerced to a character vector using <code><a href="vect_to_char.html">vect_to_char()</a></code>, which treats
-input with length larger than one better than <a href="https://rdrr.io/r/base/message.html" class="external-link">message</a> etc. that use
-<code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>, see the <code>Examples</code>. Call <code><a href="vect_to_char.html">vect_to_char()</a></code> beforehand on <code>text</code> to
-control rounding and wrapping.</p>
+zero-length input and input with length larger than one better than <a href="https://rdrr.io/r/base/message.html" class="external-link">message</a>
+etc. that use <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>, see the <code>Examples</code>. Call <code><a href="vect_to_char.html">vect_to_char()</a></code>
+beforehand on <code>text</code> to control rounding and wrapping, see the last example.</p>
     </div>
     <div class="section level2">
     <h2 id="side-effects">Side effects<a class="anchor" aria-label="anchor" href="#side-effects"></a></h2>

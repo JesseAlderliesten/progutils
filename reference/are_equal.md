@@ -20,8 +20,8 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 
   A small
   [positive](https://jessealderliesten.github.io/checkinput/reference/is_number.html)
-  number. Numbers that differ less in value than `tol` are considered to
-  be equal.
+  number. Numbers that differ less than `tol` are considered to be
+  equal.
 
 ## Value
 
@@ -68,7 +68,7 @@ x - 2 # about 4.44e-16
 are_equal(x = x, y = 2) # TRUE
 #> [1] TRUE
 
-are_equal(x = c(2, 3, 3,         NA, Inf),
+are_equal(x = c(2, 3, 3,        NA, Inf),
           y = c(2, 3, 3 + 1e-8, NA, Inf))
 #> [1] TRUE TRUE TRUE   NA   NA
 are_equal(x = 3, y = c(2, 3, 3 + 1e-8, NA, Inf))

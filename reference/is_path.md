@@ -1,6 +1,6 @@
 # Check that `x` is a valid path
 
-Check that `x` is a path that s likely to be a valid path.
+Check that `x` is a path that is likely to be valid.
 
 ## Usage
 
@@ -45,7 +45,8 @@ for valid paths before creating a directory:
 
 - `path` should not point to
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html): a temporary
-  subdirectory should be used instead.
+  subdirectory should be used instead (see
+  [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)).
 
 These restrictions consider characters that would lead to an error in
 Windows because they are not allowed; characters that would lead to a
@@ -56,6 +57,31 @@ in Windows.
 In contrast to functions from `checkinput`, `is_path` will produce an
 error if `path` is not a valid path.
 
+## Programming notes
+
+On MacOS, the output of
+[`tempdir()`](https://rdrr.io/r/base/tempfile.html) is preceded by
+duplicated forward slashes in R cmd checks (e.g.,
+`/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR`), leading to a
+spurious warning from `is_path()`.
+
+The file separator is a backslash (`\`) on Windows but a forward slash
+(`/`) on other operating systems
+([.Platform\$file.sep](https://rdrr.io/r/base/Platform.html) gives the
+file separator used on the current platform). Furthermore, the backslash
+is used as [escape character](https://rdrr.io/r/base/regex.html) in R,
+such that backslashes need to be escaped in R code. Thus, to warn if a
+[string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+contains a file separator, one should write the warning message as
+`warning("Repeated '/' or '\\'")` which will be printed as
+`Repeated '/' or '\'`. Checks on the presence of slashes and backslashes
+should use `grepl(pattern = "/", x = string)` and
+`grepl(pattern = "\\\\", x = string)` (!). This makes it cumbersome to
+get the correct type and number of slashes to compare with the path
+recorded in a warning message, such that it is more robust to check only
+for fixed parts of the message (e.g., `"Repeated"`), possibly followed
+by a check like `tinytest::expect_true(dir.exists(string))`.
+
 ## References
 
 - https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
@@ -64,7 +90,7 @@ error if `path` is not a valid path.
 
 ## See also
 
-[`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md)
+[`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
 to create a path (with references there about file paths),
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
 to create a directory if it does not yet exist,
@@ -76,7 +102,7 @@ to *remove* invalid characters from potential paths.
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
-[`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md),
+[`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
 [`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
 [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),

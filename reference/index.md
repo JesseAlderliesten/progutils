@@ -14,7 +14,7 @@
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
   : Create a directory
 
-- [`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md)
+- [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
   : Create a file path
 
 - [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
@@ -41,9 +41,7 @@
   Check that `x` is a valid path
 
 - [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
-  :
-
-  Are values not present in `table`
+  : Are values absent
 
 - [`reorder_cols()`](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md)
   : Reorder columns

@@ -21,8 +21,9 @@ create_dir(dir = file.path(".", "output"), add_date = TRUE)
 
 - add_date:
 
-  `TRUE` or `FALSE`: create a subdirectory with the current date in the
-  [format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd`?
+  `TRUE` or `FALSE`: create a subdirectory in `dir` with the current
+  date in the [format](https://rdrr.io/r/base/strptime.html)
+  `YYYY_mm_dd`?
 
 ## Value
 
@@ -76,8 +77,8 @@ See also:
 
 ## See also
 
-[`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md)
-to create a path,
+[`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
+to create a file path,
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
 for a safe way to create temporary directories,
 [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
@@ -86,10 +87,10 @@ and references there about file paths and directories,
 [`dir.create()`](https://rdrr.io/r/base/files2.html) used by this
 function,
 [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
-to check if a file exists and is a unique match to a pattern
+to check if a file exists and is a unique match to a pattern.
 
 Other functions to handle paths and directories:
-[`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md),
+[`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
 [`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
 [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),

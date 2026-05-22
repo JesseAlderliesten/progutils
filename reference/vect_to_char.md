@@ -1,7 +1,7 @@
 # Convert a vector to a character string
 
-Convert a vector to a character string, preserving names, rounding
-numeric values.
+Convert a vector to a character string while preserving names and
+rounding numeric values.
 
 ## Usage
 
@@ -56,12 +56,12 @@ The names and values in `x`, with values of numeric `x` rounded to
 `signif` [significant](https://rdrr.io/r/base/Round.html) digits,
 wrapped to `width` characters.
 
-If `collapse` is `NULL`, a character *vector* with the same elements as
-`x` is returned, wrapping on a per-element basis. If `collapse` is not
-`NULL`, the name-value pairs are separated by `collapse`, thus returning
-a character *string*.
+If `collapse` is `NULL`, a character **vector** with the same elements
+as `x` is returned, wrapping on a per-element basis. If `collapse` is
+not `NULL`, the name-value pairs are separated by `collapse`, thus
+returning a character **string**.
 
-See `details` on handling of some special values.
+See `Details` on handling of some special values.
 
 ## Details
 

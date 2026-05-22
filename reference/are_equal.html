@@ -9,7 +9,7 @@ numeric errors to make are_equal() safer than ==."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@ numeric errors to make <code>are_equal()</code> safer than <a href="https://rdrr
 
 <dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>
 <dd><p>A small <a href="https://jessealderliesten.github.io/checkinput/reference/is_number.html" class="external-link">positive</a> number. Numbers that
-differ less in value than <code>tol</code> are considered to be equal.</p></dd>
+differ less than <code>tol</code> are considered to be equal.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -103,7 +103,7 @@ the vignette about type coercion in package <code>checkinput</code>:
 <span class="r-in"><span><span class="fu">are_equal</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">are_equal</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>,         <span class="cn">NA</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="fu">are_equal</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>,        <span class="cn">NA</span>, <span class="cn">Inf</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>          y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span> <span class="op">+</span> <span class="fl">1e-8</span>, <span class="cn">NA</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE TRUE TRUE   NA   NA</span>
 <span class="r-in"><span><span class="fu">are_equal</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">3</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span> <span class="op">+</span> <span class="fl">1e-8</span>, <span class="cn">NA</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span></span>

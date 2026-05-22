@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,8 +60,8 @@ directory.</p></dd>
 
 
 <dt id="arg-add-date">add_date<a class="anchor" aria-label="anchor" href="#arg-add-date"></a></dt>
-<dd><p><code>TRUE</code> or <code>FALSE</code>: create a subdirectory with the current
-date in the <a href="https://rdrr.io/r/base/strptime.html" class="external-link">format</a> <code>YYYY_mm_dd</code>?</p></dd>
+<dd><p><code>TRUE</code> or <code>FALSE</code>: create a subdirectory in <code>dir</code> with the
+current date in the <a href="https://rdrr.io/r/base/strptime.html" class="external-link">format</a> <code>YYYY_mm_dd</code>?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -105,12 +105,13 @@ can be used in Windows' file system.</p>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="create_path.html">create_path()</a></code> to create a path, <code><a href="create_tempdir.html">create_tempdir()</a></code> for a safe way to create
-temporary directories, <code><a href="is_path.html">is_path()</a></code> and references there about file paths and
-directories, <code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists()</a></code> and <code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create()</a></code> used by this function,
-<code><a href="get_filename.html">get_filename()</a></code> to check if a file exists and is a unique match to a pattern</p>
+    <div class="dont-index"><p><code><a href="create_file_path.html">create_file_path()</a></code> to create a file path, <code><a href="create_tempdir.html">create_tempdir()</a></code> for a safe way
+to create temporary directories, <code><a href="is_path.html">is_path()</a></code> and references there about file
+paths and directories, <code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists()</a></code> and <code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create()</a></code> used by this
+function, <code><a href="get_filename.html">get_filename()</a></code> to check if a file exists and is a unique match to
+a pattern.</p>
 <p>Other functions to handle paths and directories:
-<code><a href="create_path.html">create_path()</a></code>,
+<code><a href="create_file_path.html">create_file_path()</a></code>,
 <code><a href="create_tempdir.html">create_tempdir()</a></code>,
 <code><a href="file_path_no_ext.html">file_path_no_ext()</a></code>,
 <code><a href="get_filename.html">get_filename()</a></code>,

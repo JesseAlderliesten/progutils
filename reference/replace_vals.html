@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.11</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.12</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,7 +114,7 @@ that have been replaced?</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>x</code> with the requested replacements. Factor levels are <em>not</em> reordered after
+    <p><code>x</code> with the requested replacements. Factor levels are <strong>not</strong> reordered after
 the replacement.</p>
     </div>
     <div class="section level2">
@@ -127,17 +127,6 @@ lead to a <a href="signal_text.html">signal</a> as indicated by argument <code>s
 <code>replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)</code>.</p>
 <p>If <code>quiet</code> is <code>FALSE</code>, a message indicates which values have been replaced.
 The order of the factor <em>levels</em> determines the order used in the message.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
-
-
-<p>Rewrite to perform all checks using <a href="check_case.html">check_case</a>, then defer the actual
-replacement to <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub()</a></code>, and then use <code>which(x_orig != x)</code> to find and report
-on replacements?</p>
-<p>Factor levels can be replaced through a named list:
-<code>f &lt;- addNA(as.factor(c(letters[11:13], NA_character_)))</code>
-<code>levels(f) &lt;- list(c = "k", b = "l", a = "m", h = NA_character_)</code></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

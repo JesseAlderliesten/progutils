@@ -58,13 +58,13 @@ Reordering levels of factor `f` by replacing levels through code like
 
 ## Programming notes
 
-Could also use an approach like (see
-[`levels()`](https://rdrr.io/r/base/levels.html)):
-`levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))`
+Could also use an approach like
+`levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))`, see
+[`levels()`](https://rdrr.io/r/base/levels.html).
 
 ## See also
 
-[reorder_cols](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md)
+[reorder_cols](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md),
 [`stats::relevel()`](https://rdrr.io/r/stats/relevel.html) to assign one
 reference level to a factor
 

@@ -1,19 +1,49 @@
 # Changelog
 
+## progutils 0.0.12
+
+#### Breaking changes
+
+- `create_path`: rename to `create_file_path`. Replace non-alphanumeric
+  characters other than dots and underscores by underscores instead of
+  replacing non-alphanumeric characters other than underscores by dots.
+
+#### Miscellaneous
+
+- [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md):
+  moved `Note` to `Details`. Condensed example section.
+- [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md):
+  add section `Usage in practice` which explains why using
+  [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
+  is preferable over using
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html).
+- [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md):
+  no longer erroneously document that `n` can be zero. Removed
+  uninformative example.
+- [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md):
+  updated warning if `filename` contains slashes, so it is possible to
+  call
+  [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
+  from
+  [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md).
+- [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md):
+  add section `Programming notes` about file separators.
+- Stylistic updates to function documentation.
+
 ## progutils 0.0.11
 
 #### Breaking changes
 
-- [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
-  now uses
+- [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
+  use
   [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
   to check if `filename` is valid.
-- `create_path` now uses
+- `create_path`: use
   [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
   to check that `dir` is a valid path.
-- [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
-  now only writes in subdirectories of
-  [`tempdir()`](https://rdrr.io/r/base/tempfile.html) and uses
+- [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md):
+  only write in subdirectories of
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html) and use
   [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
   to check that `subdir` is valid.
 - `file_path_sans_ext()`: rename to
@@ -21,10 +51,10 @@
   to distinguish it from
   [`tools::file_path_sans_ext()`](https://rdrr.io/r/tools/fileutils.html)
   when linking to documentation; add argument `compression`.
-- [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
-  collapses leading and trailing whitespace and, if `ignore_newlines` is
+- [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md):
+  collapse leading and trailing whitespace and, if `ignore_newlines` is
   `TRUE`, leading and trailing newlines into a single blank character
-  instead of removing them; and retains leading and trailing newlines if
+  instead of removing them. Retains leading and trailing newlines if
   `ignore_newlines` is `FALSE`.
 - Add functions
   [`file_path_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
@@ -182,8 +212,7 @@
 
 #### Added functions
 
-- [`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md):
-  create file paths.
+- `create_path()`: create file paths.
 - `file_path_sans_ext()`: replacing
   [`tools::file_path_sans_ext()`](https://rdrr.io/r/tools/fileutils.html),
   to also recognise the extension of file names that end in a dot.
@@ -202,9 +231,8 @@
   title `Notes` (created through `@section Notes`). Idem for
   `Programming note`.
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
-  move some documentation to
-  [`create_path()`](https://jessealderliesten.github.io/progutils/reference/create_path.md);
-  document format of date-time stamp with same case as
+  move some documentation to `create_path()`; document format of
+  date-time stamp with same case as
   [`strftime()`](https://rdrr.io/r/base/strptime.html).
 
 #### Miscellaneous
