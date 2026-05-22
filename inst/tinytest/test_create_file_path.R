@@ -72,7 +72,7 @@ expect_true(endsWith(
 ))
 
 ##### filename #####
-for(filenm in c("a.txt", "e3f.txt", "g_g.txt")) {
+for(filenm in c("a.txt", "e3f.txt", "g_g.g.txt")) {
   # expect_silent(
     expect_true(endsWith(
       create_file_path(filename = filenm, format_stamp = "",
@@ -103,10 +103,10 @@ expect_error(
 # 'format_stamp' are replaced by underscores.
 expect_warning(
   expect_true(endsWith(
-    create_file_path(filename = "abc.txt", format_stamp = "%d#%m_%Ydef",
+    create_file_path(filename = "abc.txt", format_stamp = "%d#.%m_%Ydef",
                 dir = my_tempdir, add_date = TRUE),
     suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
-                       paste0(format(Sys.time(), format = "%d.%m_%Y"), "def_abc.txt"))
+                       paste0(format(Sys.time(), format = "%d_.%m_%Y"), "def_abc.txt"))
   )),
   pattern = "Replaced non-alphanumeric characters other than underscores",
   strict = TRUE, fixed = TRUE
@@ -176,7 +176,7 @@ expect_warning(
   pattern = "File already exists:", strict = TRUE, fixed = TRUE)
 
 filenm_in <- c("c#c.txt", "d d.txt")
-filenm_out <- c("c.c.txt", "d.d.txt")
+filenm_out <- c("c_c.txt", "d_d.txt")
 for(ind_filenm in seq_along(filenm_in)) {
   expect_warning(
     expect_true(endsWith(
@@ -186,7 +186,7 @@ for(ind_filenm in seq_along(filenm_in)) {
       )),
     pattern = paste0("Replaced non-alphanumeric characters other than",
                      " underscores in filename\n'", filenm_in[ind_filenm],
-                     "' with dots: ", filenm_out[ind_filenm]),
+                     "' with underscores: ", filenm_out[ind_filenm]),
     strict = TRUE, fixed = TRUE)
 }
 
@@ -215,7 +215,7 @@ for(ind_filenm in seq_along(filenm_in)) {
   expect_error(
     create_file_path(filename = filenm_in[ind_filenm], format_stamp = "",
                 dir = my_tempdir, add_date = FALSE),
-    pattern = paste0("'filename' contains slashes or backslashes"),
+    pattern = paste0("'filename' should not contain '/' or '\\'"),
     fixed = TRUE)
 }
 

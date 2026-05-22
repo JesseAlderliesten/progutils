@@ -39,8 +39,8 @@ Create a file path, creating the indicated directory if it does not yet exist.
 \code{filename} should contain a file extension (i.e., a dot followed by
 alphanumeric characters until the end of the file name). It should not
 contain slashes or backslashes: use \code{dir} to indicate (sub)directories.
-Non-alphanumeric characters other than underscores before the file extension
-are replaced by dots, with a warning.
+Non-alphanumeric characters other than dots and underscores before the file
+extension are replaced by underscores, with a warning.
 
 The default \code{dir} is a subdirectory with the current date in the
 \link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working

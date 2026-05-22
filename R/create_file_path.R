@@ -18,8 +18,8 @@
 #' `filename` should contain a file extension (i.e., a dot followed by
 #' alphanumeric characters until the end of the file name). It should not
 #' contain slashes or backslashes: use `dir` to indicate (sub)directories.
-#' Non-alphanumeric characters other than underscores before the file extension
-#' are replaced by dots, with a warning.
+#' Non-alphanumeric characters other than dots and underscores before the file
+#' extension are replaced by underscores, with a warning.
 #'
 #' The default `dir` is a subdirectory with the current date in the
 #' [format][strftime()] `YYYY_mm_dd` in directory `output` below the working
@@ -94,16 +94,17 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
     filename <- paste0(format(Sys.time(), format = format_stamp), "_", filename)
   }
 
-  # Replace non-alphanumeric characters other than underscores with dots.
+  # Replace non-alphanumeric characters other than dots and underscores by
+  # underscores.
   file_no_ext <- file_path_no_ext(x = filename)
-  file_no_ext_gsub <- gsub(pattern = "[^[:alnum:]_]", replacement = ".",
+  file_no_ext_gsub <- gsub(pattern = "[^[:alnum:]_.]", replacement = "_",
                            x = file_no_ext)
   # is_filename(filename = filename) above ensures that a file extension is
   # present, such that this way or re-creating the filename works
   filename_gsub <- paste0(file_no_ext_gsub, ".", file_path_ext(x = filename))
   if(file_no_ext != file_no_ext_gsub) {
     warning("Replaced non-alphanumeric characters other than underscores in",
-            " filename\n'", filename, "' with dots: ", filename_gsub)
+            " filename\n'", filename, "' with underscores: ", filename_gsub)
     # To do:
     # - This is probably unwanted?
     is_valid_filename_gsub <- try(expr = is_filename(filename_gsub), silent = TRUE)
