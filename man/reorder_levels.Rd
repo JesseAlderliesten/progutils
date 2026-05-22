@@ -48,8 +48,9 @@ Reordering levels of factor \code{f} by replacing levels through code like
 
 \section{Programming notes}{
 
-Could also use an approach like (see \code{\link[=levels]{levels()}}):
-\code{levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))}
+Could also use an approach like
+\code{levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))}, see
+\code{\link[=levels]{levels()}}.
 }
 
 \examples{
@@ -63,7 +64,7 @@ orig
 
 }
 \seealso{
-\link{reorder_cols} \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor
+\link{reorder_cols}, \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor
 
 Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},

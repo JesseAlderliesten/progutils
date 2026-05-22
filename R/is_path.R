@@ -1,6 +1,6 @@
 #' Check that `x` is a valid path
 #'
-#' Check that `x` is a path that s likely to be a valid path.
+#' Check that `x` is a path that is likely to be valid.
 #'
 #' @param path [character string][is_character()] with the path.
 #' @param as_file `TRUE` or `FALSE`: is `path` intended to point to a file
@@ -20,7 +20,7 @@
 #'   `COM<non-zero digit>`, `LPT<non-zero digit>`, case-insensitive variants of
 #'   these names, and these names followed by an extension.
 #' - `path` should not point to `tempdir()`: a temporary subdirectory should be
-#'   used instead.
+#'   used instead (see [create_tempdir()]).
 #'
 #' These restrictions consider characters that would lead to an error in Windows
 #' because they are not allowed; characters that  would lead to a mismatch

@@ -37,16 +37,16 @@ by a blank character?}
 The names and values in \code{x}, with values of numeric \code{x} rounded to \code{signif}
 \link[=signif]{significant} digits, wrapped to \code{width} characters.
 
-If \code{collapse} is \code{NULL}, a character \emph{vector} with the same elements as \code{x}
+If \code{collapse} is \code{NULL}, a character \strong{vector} with the same elements as \code{x}
 is returned, wrapping on a per-element basis. If \code{collapse} is not \code{NULL},
 the name-value pairs are separated by \code{collapse}, thus returning a character
-\emph{string}.
+\strong{string}.
 
-See \code{details} on handling of some special values.
+See \code{Details} on handling of some special values.
 }
 \description{
-Convert a vector to a character string, preserving names, rounding numeric
-values.
+Convert a vector to a character string while preserving names and rounding
+numeric values.
 }
 \details{
 \code{vect_to_char()} returns \code{NULL} as \code{"NULL"}, other zero-length objects as

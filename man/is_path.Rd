@@ -16,7 +16,7 @@ instead of to a folder?}
 \code{TRUE}: an error occurs if \code{path} is not a valid path.
 }
 \description{
-Check that \code{x} is a path that s likely to be a valid path.
+Check that \code{x} is a path that is likely to be valid.
 }
 \details{
 \code{is_path()} puts some restrictions on paths so it can be used to check for
@@ -32,7 +32,7 @@ directory and the parent directory, respectively).
 \verb{COM<non-zero digit>}, \verb{LPT<non-zero digit>}, case-insensitive variants of
 these names, and these names followed by an extension.
 \item \code{path} should not point to \code{tempdir()}: a temporary subdirectory should be
-used instead.
+used instead (see \code{\link[=create_tempdir]{create_tempdir()}}).
 }
 
 These restrictions consider characters that would lead to an error in Windows
