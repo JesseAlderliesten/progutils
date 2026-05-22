@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/JesseAlderliesten/progutils/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/JesseAlderliesten/progutils/blob/main/DESCRIPTION)
 
 Alderliesten J (2026). *progutils: Programming Utilities*. R package
 version 0.0.12, <https://github.com/JesseAlderliesten/progutils>.
