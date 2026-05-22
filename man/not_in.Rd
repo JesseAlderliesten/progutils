@@ -2,7 +2,7 @@
 % Please edit documentation in R/not_in.R
 \name{not_in}
 \alias{not_in}
-\title{Are values not present in \code{table}}
+\title{Are values absent}
 \usage{
 not_in(x, table, value = TRUE)
 }
@@ -17,14 +17,14 @@ should have a length larger than zero and not be of \code{type} \code{double}.}
 instead of a boolean vector?}
 }
 \value{
-If \code{value} is \code{TRUE}: the values in \code{x} that are absent from \code{table} or, if
-none of the values in \code{x} are absent from \code{table} (i.e., all are present in
-\code{table}), a zero-length object of the same type as \code{x}, e.g., \code{character(0)}
-or \code{logical(0)}. If \code{value} is \code{FALSE}: a boolean vector indicating for each
-element in \code{x} if it is absent from \code{table}.
+If \code{value} is \code{TRUE}: the values in \code{x} that are absent from \code{table}, with a
+zero-length object of the same type as \code{x}, e.g., \code{character(0)} or
+\code{logical(0)} if none of the values in \code{x} are absent from \code{table} (i.e., all
+are present in \code{table}). If \code{value} is \code{FALSE}: a boolean vector indicating
+for each element in \code{x} if it is absent from \code{table}.
 }
 \description{
-Check if values from one vector are not present in another vector
+Check that values from one vector are absent from another vector
 }
 \details{
 Duplicates in \code{x} are kept, in contrast to \code{\link[=setdiff]{setdiff()}}, see the \code{Examples}.
@@ -34,8 +34,8 @@ returning a factor with all values of \code{x} as \link{levels}.
 
 \link{NA}s are allowed in \code{x} and \code{table} and behave the same as other values: the
 returned \code{NA}s (if \code{value} is \code{TRUE}) and the returned zero-length value (if
-\code{value} is \code{FALSE}) have the same type as the \code{NA}s in \code{x} if no \code{NA}s are
-present in \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
+\code{value} is \code{FALSE}) have the same type as the \code{NA}s in \code{x} if \code{NA}s are
+absent from \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
 other.
 
 Names are \emph{not} considered when matching but are retained in the output,

@@ -1,6 +1,6 @@
-#' Are values not present in `table`
+#' Are values absent
 #'
-#' Check if values from one vector are not present in another vector
+#' Check that values from one vector are absent from another vector
 #'
 #' @param x Vector or factor with values to test absence from `table`. `x`
 #' should have a length larger than zero and not be of [type][typeof] `double`.
@@ -17,19 +17,19 @@
 #'
 #' [NA]s are allowed in `x` and `table` and behave the same as other values: the
 #' returned `NA`s (if `value` is `TRUE`) and the returned zero-length value (if
-#' `value` is `FALSE`) have the same type as the `NA`s in `x` if no `NA`s are
-#' present in `table`. `NA`s of different types in `x` and `table` match each
+#' `value` is `FALSE`) have the same type as the `NA`s in `x` if `NA`s are
+#' absent from `table`. `NA`s of different types in `x` and `table` match each
 #' other.
 #'
 #' Names are *not* considered when matching but are retained in the output,
 #' similar to `%in%`.
 #'
 #' @returns
-#' If `value` is `TRUE`: the values in `x` that are absent from `table` or, if
-#' none of the values in `x` are absent from `table` (i.e., all are present in
-#' `table`), a zero-length object of the same type as `x`, e.g., `character(0)`
-#' or `logical(0)`. If `value` is `FALSE`: a boolean vector indicating for each
-#' element in `x` if it is absent from `table`.
+#' If `value` is `TRUE`: the values in `x` that are absent from `table`, with a
+#' zero-length object of the same type as `x`, e.g., `character(0)` or
+#' `logical(0)` if none of the values in `x` are absent from `table` (i.e., all
+#' are present in `table`). If `value` is `FALSE`: a boolean vector indicating
+#' for each element in `x` if it is absent from `table`.
 #'
 #' @section Programming notes:
 #' `not_in()` does not allow input of [type][typeof] `double` because matching
