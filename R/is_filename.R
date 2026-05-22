@@ -84,8 +84,9 @@ is_filename <- function(filename) {
   }
 
   if(grepl(pattern = '[/\\]', x = filename_no_ext)) {
-    stop("'filename' should not contain '/' or '\\' (use 'is_path()' to allow",
-         " for directories):\n", filename)
+    stop("'filename' should not contain '/' or '\\' (use 'is_path()' or",
+         " argument 'dir' in 'create_file_path()' to allow for directories):\n",
+         filename)
   }
 
   # Slashes and backslashes will have been catched above.

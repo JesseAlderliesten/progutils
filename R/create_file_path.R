@@ -85,11 +85,6 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_character(dir))
 
-  if(grepl(pattern = "/|\\\\", x = filename)) {
-    stop("No path created because 'filename' contains slashes or backslashes:",
-         " use argument\n'dir' to indicate the directory: ", filename)
-  }
-
   is_valid_filename <- try(expr = is_filename(filename = filename), silent = TRUE)
   if(inherits(x = is_valid_filename, what = "try-error")) {
     stop("No path created: ", attr(is_valid_filename, "condition")$message)
