@@ -8,9 +8,9 @@ create_tempdir(subdir = "subdir")
 }
 \arguments{
 \item{subdir}{A \link[checkinput:is_character]{character string} with the name
-of the temporary subdirectory to be created inside \code{\link[=tempdir]{tempdir()}}. \code{subdir}
-should be a valid \link[=is_path]{path} pointing to a directory that \strong{not yet}
-exists, see \code{Details}.}
+of a \strong{not-yet} existing temporary subdirectory to be created inside
+\code{\link[=tempdir]{tempdir()}}. \code{subdir} should meet the requirements for a valid
+\link[=is_path]{path}.}
 }
 \value{
 The \link[=normalizePath]{normalized} path to the created temporary directory,
@@ -21,10 +21,8 @@ Create a temporary directory that can safely be removed.
 }
 \details{
 \code{subdir} is created inside \code{\link[=tempdir]{tempdir()}} and an error is thrown if it already
-exists. This ensures that programmatically \link[=unlink]{removing} the created
-directory later on does not remove files that are still needed by other
-processes (which could happen when removing the directory returned by
-\code{tempdir()}, for example because \code{RStudio} also uses that directory).
+exists. This ensures that \link[=unlink]{removing} the created directory does not
+remove files that are still needed by other processes (see \code{Usage} below).
 
 It is possible to create subdirectories inside a not-yet existing directory
 (e.g., to create \verb{<tempdir>/output/outputsub} if \verb{<tempdir>/output} does not
@@ -33,7 +31,19 @@ yet exist.
 \section{Side effects}{
 
 The requested temporary directory is created if does not yet exist. An error
-is thrown if the directory already exists or creating the directory failed.
+is thrown if the directory already exists or creating the directory fails.
+}
+
+\section{Usage}{
+
+Examples and tests should \strong{not} write to the \link[=getwd]{working directory}
+but to a temporary directory that is cleaned up afterwards. Although
+\code{\link[=tempdir]{tempdir()}} points to a temporary directory, that directory should \strong{not} be
+removed because \href{https://posit.co/products/open-source/rstudio}{RStudio} also
+uses it. Instead, store the paths to temporary files written to \code{\link[=tempdir]{tempdir()}}
+and \link{unlink} those paths when cleaning up, or create a temporary
+subdirectory in \code{tempdir()} which can be completely be removed when cleaning
+up. \code{use_tempdir()} follows the latter approach.
 }
 
 \examples{
@@ -53,8 +63,7 @@ rm(tempdir_recursive, tempdir_std)
 
 }
 \seealso{
-\code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories and the notes in its
-test-file \verb{progutils\\inst\\tinytest\\test_create_dir.R}.
+\code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
