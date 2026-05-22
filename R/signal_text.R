@@ -12,9 +12,9 @@
 #'
 #' @details
 #' `text` is coerced to a character vector using [vect_to_char()], which treats
-#' input with length larger than one better than [message] etc. that use
-#' [paste0()], see the `Examples`. Call [vect_to_char()] beforehand on `text` to
-#' control rounding and wrapping.
+#' zero-length input and input with length larger than one better than [message]
+#' etc. that use [paste0()], see the `Examples`. Call [vect_to_char()]
+#' beforehand on `text` to control rounding and wrapping, see the last example.
 #'
 #' @returns
 #' `text`, returned [invisibly][invisible].
