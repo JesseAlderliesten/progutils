@@ -50,7 +50,7 @@ paste0(file_path_no_ext(filename), ".", file_path_ext(filename))
 \seealso{
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
-\code{\link[=create_path]{create_path()}},
+\code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=get_filename]{get_filename()}},
 \code{\link[=is_filename]{is_filename()}},

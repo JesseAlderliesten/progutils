@@ -67,7 +67,7 @@ rm(tempdir_recursive, tempdir_std)
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
-\code{\link[=create_path]{create_path()}},
+\code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=get_filename]{get_filename()}},
 \code{\link[=is_filename]{is_filename()}},

@@ -39,10 +39,11 @@
 #' The requested directory is created if does not yet exist.
 #'
 #' @seealso
-#' [create_path()] to create a path, [create_tempdir()] for a safe way to create
-#' temporary directories, [is_path()] and references there about file paths and
-#' directories, [dir.exists()] and [dir.create()] used by this function,
-#' [get_filename()] to check if a file exists and is a unique match to a pattern
+#' [create_file_path()] to create a file path, [create_tempdir()] for a safe way
+#' to create temporary directories, [is_path()] and references there about file
+#' paths and directories, [dir.exists()] and [dir.create()] used by this
+#' function, [get_filename()] to check if a file exists and is a unique match to
+#' a pattern.
 #'
 #' @section Programming notes:
 #' See also:

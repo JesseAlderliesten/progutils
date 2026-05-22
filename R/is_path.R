@@ -54,8 +54,8 @@
 #' `tinytest::expect_true(dir.exists(string))`.
 #'
 #' @seealso
-#' [create_path()] to create a path (with references there about file paths),
-#' [create_dir()] to create a directory if it does not yet exist,
+#' [create_file_path()] to create a path (with references there about file
+#' paths), [create_dir()] to create a directory if it does not yet exist,
 #' [get_filename()] to check if a file exists and is a unique match to a pattern
 #'
 #' `fs::path_sanitize()` to *remove* invalid characters from potential paths.

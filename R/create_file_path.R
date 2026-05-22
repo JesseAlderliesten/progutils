@@ -57,30 +57,30 @@
 #' my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
 #'                             winslash = "/", mustWork = FALSE)
 #'
-#' (create_path(filename = "abc.txt", format_stamp = "",
-#'             dir = my_tempdir, add_date = TRUE))
-#' (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#'             dir = my_tempdir, add_date = TRUE))
-#' (create_path(filename = "def.html", format_stamp = "",
-#'             dir = my_tempdir, add_date = FALSE))
-#' (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#'             dir = my_tempdir, add_date = FALSE))
-#' (create_path(filename = "abc.txt", format_stamp = "",
-#'             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#' (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#'             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#' (create_path(filename = "def.html", format_stamp = "",
-#'             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#' (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#'             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+#' (create_file_path(filename = "abc.txt", format_stamp = "",
+#'                   dir = my_tempdir, add_date = TRUE))
+#' (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
+#'                   dir = my_tempdir, add_date = TRUE))
+#' (create_file_path(filename = "def.html", format_stamp = "",
+#'                   dir = my_tempdir, add_date = FALSE))
+#' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
+#'                   dir = my_tempdir, add_date = FALSE))
+#' (create_file_path(filename = "abc.txt", format_stamp = "",
+#'                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+#' (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
+#'                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+#' (create_file_path(filename = "def.html", format_stamp = "",
+#'                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+#' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
+#'                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
 #'
 #' # Cleaning up
 #' unlink(x = my_tempdir, recursive = TRUE)
 #' rm(my_tempdir)
 #'
 #' @export
-create_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
-                        dir = file.path(".", "output"), add_date = TRUE) {
+create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
+                             dir = file.path(".", "output"), add_date = TRUE) {
   stopifnot(checkinput::is_character(filename),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_character(dir))
