@@ -27,18 +27,18 @@
 #' file separator is used to indicate subdirectories, and `"."` indicates the
 #' [working directory][getwd()].
 #'
-#' Various restrictions are imposed on `dir`, see [create_dir()].
+#' `dir` should point to a [valid path][is_path()]. The directory for the
+#' returned path is [created][create_dir()] if it does not yet exist.
 #'
 #' The absolute [normalised][normalizePath()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes. `"/"`
 #' instead of `"\\"` is used as argument [winslash][normalizePath()] such that
 #' the returned path can be used in Windows' file system.
 #'
-#' The **directory** for the returned path is [created][create_dir()] if it does
-#' not yet exist. A warning is issued if the **file** indicated by the returned
-#' path already exists. Use `"%OSn"` as part of `format_stamp` to create precise
-#' stamps by truncating seconds to `0 <= n <= 6` decimal places to prevent this,
-#' see [strftime()] for details.
+#' A warning is issued if the **file** indicated by the returned
+#' path already exists. To prevent this when creating files in quick succession,
+#' use `"%OSn"` as part of `format_stamp` to create precise stamps by truncating
+#' seconds to `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
 #' @section Side effects:
 #' The directory indicated by the returned file path is created if it does not

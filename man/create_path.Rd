@@ -26,8 +26,8 @@ containing a \link[=is_path]{valid path} to a directory that should be created i
 it does not yet exist. A dot (i.e., \code{"."}) indicates the current working
 directory.}
 
-\item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
-date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
+\item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
+current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
 The created file path, returned \link[=invisible]{invisibly}.
@@ -48,18 +48,18 @@ directory. \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Pl
 file separator is used to indicate subdirectories, and \code{"."} indicates the
 \link[=getwd]{working directory}.
 
-Various restrictions are imposed on \code{dir}, see \code{\link[=create_dir]{create_dir()}}.
+\code{dir} should point to a \link[=is_path]{valid path}. The directory for the
+returned path is \link[=create_dir]{created} if it does not yet exist.
 
 The absolute \link[=normalizePath]{normalised} path is returned such that the
 returned path still works if the \link[=getwd]{working directory} changes. \code{"/"}
 instead of \code{"\\\\"} is used as argument \link[=normalizePath]{winslash} such that
 the returned path can be used in Windows' file system.
 
-The \strong{directory} for the returned path is \link[=create_dir]{created} if it does
-not yet exist. A warning is issued if the \strong{file} indicated by the returned
-path already exists. Use \code{"\%OSn"} as part of \code{format_stamp} to create precise
-stamps by truncating seconds to \verb{0 <= n <= 6} decimal places to prevent this,
-see \code{\link[=strftime]{strftime()}} for details.
+A warning is issued if the \strong{file} indicated by the returned
+path already exists. To prevent this when creating files in quick succession,
+use \code{"\%OSn"} as part of \code{format_stamp} to create precise stamps by truncating
+seconds to \verb{0 <= n <= 6} decimal places, see \code{\link[=strftime]{strftime()}} for details.
 }
 \section{Side effects}{
 
