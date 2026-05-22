@@ -5,7 +5,7 @@
 #'
 #' @param x,y Numeric vectors to compare for equality.
 #' @param tol A small [positive][checkinput::is_positive()] number. Numbers that
-#' differ less in value than `tol` are considered to be equal.
+#' differ less than `tol` are considered to be equal.
 #'
 #' @returns A vector with logical values (`TRUE`, `FALSE` or `NA`) indicating if
 #' elements in `x` and `y` are equal to each other. [NA] is returned for
@@ -34,7 +34,7 @@
 #' x - 2 # about 4.44e-16
 #' are_equal(x = x, y = 2) # TRUE
 #'
-#' are_equal(x = c(2, 3, 3,         NA, Inf),
+#' are_equal(x = c(2, 3, 3,        NA, Inf),
 #'           y = c(2, 3, 3 + 1e-8, NA, Inf))
 #' are_equal(x = 3, y = c(2, 3, 3 + 1e-8, NA, Inf))
 #'

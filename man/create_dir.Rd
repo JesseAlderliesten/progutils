@@ -12,8 +12,8 @@ containing a \link[=is_path]{valid path} to a directory that should be created i
 it does not yet exist. A dot (i.e., \code{"."}) indicates the current working
 directory.}
 
-\item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory with the current
-date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
+\item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
+current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
 A character string with the absolute \link[=normalizePath]{normalized} path to
@@ -93,13 +93,14 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 
 }
 \seealso{
-\code{\link[=create_path]{create_path()}} to create a path, \code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create
-temporary directories, \code{\link[=is_path]{is_path()}} and references there about file paths and
-directories, \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this function,
-\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern
+\code{\link[=create_file_path]{create_file_path()}} to create a file path, \code{\link[=create_tempdir]{create_tempdir()}} for a safe way
+to create temporary directories, \code{\link[=is_path]{is_path()}} and references there about file
+paths and directories, \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this
+function, \code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to
+a pattern.
 
 Other functions to handle paths and directories:
-\code{\link[=create_path]{create_path()}},
+\code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=get_filename]{get_filename()}},

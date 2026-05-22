@@ -1,6 +1,6 @@
 #' Check that `x` is a valid path
 #'
-#' Check that `x` is a path that s likely to be a valid path.
+#' Check that `x` is a path that is likely to be valid.
 #'
 #' @param path [character string][is_character()] with the path.
 #' @param as_file `TRUE` or `FALSE`: is `path` intended to point to a file
@@ -20,7 +20,7 @@
 #'   `COM<non-zero digit>`, `LPT<non-zero digit>`, case-insensitive variants of
 #'   these names, and these names followed by an extension.
 #' - `path` should not point to `tempdir()`: a temporary subdirectory should be
-#'   used instead.
+#'   used instead (see [create_tempdir()]).
 #'
 #' These restrictions consider characters that would lead to an error in Windows
 #' because they are not allowed; characters that  would lead to a mismatch
@@ -33,9 +33,29 @@
 #' @returns
 #' `TRUE`: an error occurs if `path` is not a valid path.
 #'
+#' @section Programming notes:
+#' On MacOS, the output of `tempdir()` is preceded by duplicated forward slashes
+#' in R cmd checks (e.g., `/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR`),
+#' leading to a spurious warning from `is_path()`.
+#'
+#' The file separator is a backslash (`\`) on Windows but a forward slash (`/`)
+#' on other operating systems ([.Platform$file.sep][.Platform] gives the file
+#' separator used on the current platform). Furthermore, the backslash is used
+#' as [escape character][regex] in \R, such that backslashes need to be escaped
+#' in \R code. Thus, to warn if a [string][checkinput::is_character()] contains
+#' a file separator, one should write the warning message as
+#' `warning("Repeated '/' or '\\'")` which will be printed as
+#' `Repeated '/' or '\'`. Checks on the presence of slashes and backslashes
+#' should use `grepl(pattern = "/", x = string)` and
+#' `grepl(pattern = "\\\\", x = string)` (!). This makes it cumbersome to get
+#' the correct type and number of slashes to compare with the path recorded in a
+#' warning message, such that it is more robust to check only for fixed parts of
+#' the message (e.g., `"Repeated"`), possibly followed by a check like
+#' `tinytest::expect_true(dir.exists(string))`.
+#'
 #' @seealso
-#' [create_path()] to create a path (with references there about file paths),
-#' [create_dir()] to create a directory if it does not yet exist,
+#' [create_file_path()] to create a path (with references there about file
+#' paths), [create_dir()] to create a directory if it does not yet exist,
 #' [get_filename()] to check if a file exists and is a unique match to a pattern
 #'
 #' `fs::path_sanitize()` to *remove* invalid characters from potential paths.

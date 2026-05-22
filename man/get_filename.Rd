@@ -7,7 +7,7 @@
 get_filename(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{Character string giving the \link[=file.path]{path} to a directory.}
+\item{dir}{Character string with the \link[=file.path]{path} to a directory.}
 
 \item{pattern}{Character string containing a \link[base:regex]{regular expression}
 used to select file names in \code{dir}.}
@@ -79,7 +79,7 @@ directories;
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
-\code{\link[=create_path]{create_path()}},
+\code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=is_filename]{is_filename()}},

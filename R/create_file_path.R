@@ -18,8 +18,8 @@
 #' `filename` should contain a file extension (i.e., a dot followed by
 #' alphanumeric characters until the end of the file name). It should not
 #' contain slashes or backslashes: use `dir` to indicate (sub)directories.
-#' Non-alphanumeric characters other than underscores before the file extension
-#' are replaced by dots, with a warning.
+#' Non-alphanumeric characters other than dots and underscores before the file
+#' extension are replaced by underscores, with a warning.
 #'
 #' The default `dir` is a subdirectory with the current date in the
 #' [format][strftime()] `YYYY_mm_dd` in directory `output` below the working
@@ -27,18 +27,18 @@
 #' file separator is used to indicate subdirectories, and `"."` indicates the
 #' [working directory][getwd()].
 #'
-#' Various restrictions are imposed on `dir`, see [create_dir()].
+#' `dir` should point to a [valid path][is_path()]. The directory for the
+#' returned path is [created][create_dir()] if it does not yet exist.
 #'
 #' The absolute [normalised][normalizePath()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes. `"/"`
 #' instead of `"\\"` is used as argument [winslash][normalizePath()] such that
 #' the returned path can be used in Windows' file system.
 #'
-#' The **directory** for the returned path is [created][create_dir()] if it does
-#' not yet exist. A warning is issued if the **file** indicated by the returned
-#' path already exists. Use `"%OSn"` as part of `format_stamp` to create precise
-#' stamps by truncating seconds to `0 <= n <= 6` decimal places to prevent this,
-#' see [strftime()] for details.
+#' A warning is issued if the **file** indicated by the returned
+#' path already exists. To prevent this when creating files in quick succession,
+#' use `"%OSn"` as part of `format_stamp` to create precise stamps by truncating
+#' seconds to `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
 #' @section Side effects:
 #' The directory indicated by the returned file path is created if it does not
@@ -57,38 +57,33 @@
 #' my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
 #'                             winslash = "/", mustWork = FALSE)
 #'
-#' (create_path(filename = "abc.txt", format_stamp = "",
-#'             dir = my_tempdir, add_date = TRUE))
-#' (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#'             dir = my_tempdir, add_date = TRUE))
-#' (create_path(filename = "def.html", format_stamp = "",
-#'             dir = my_tempdir, add_date = FALSE))
-#' (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#'             dir = my_tempdir, add_date = FALSE))
-#' (create_path(filename = "abc.txt", format_stamp = "",
-#'             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#' (create_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#'             dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#' (create_path(filename = "def.html", format_stamp = "",
-#'             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#' (create_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#'             dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+#' (create_file_path(filename = "abc.txt", format_stamp = "",
+#'                   dir = my_tempdir, add_date = TRUE))
+#' (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
+#'                   dir = my_tempdir, add_date = TRUE))
+#' (create_file_path(filename = "def.html", format_stamp = "",
+#'                   dir = my_tempdir, add_date = FALSE))
+#' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
+#'                   dir = my_tempdir, add_date = FALSE))
+#' (create_file_path(filename = "abc.txt", format_stamp = "",
+#'                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+#' (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
+#'                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+#' (create_file_path(filename = "def.html", format_stamp = "",
+#'                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+#' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
+#'                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
 #'
 #' # Cleaning up
 #' unlink(x = my_tempdir, recursive = TRUE)
 #' rm(my_tempdir)
 #'
 #' @export
-create_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
-                        dir = file.path(".", "output"), add_date = TRUE) {
+create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
+                             dir = file.path(".", "output"), add_date = TRUE) {
   stopifnot(checkinput::is_character(filename),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_character(dir))
-
-  if(grepl(pattern = "/|\\\\", x = filename)) {
-    stop("No path created because 'filename' contains slashes or backslashes:",
-         " use argument\n'dir' to indicate the directory: ", filename)
-  }
 
   is_valid_filename <- try(expr = is_filename(filename = filename), silent = TRUE)
   if(inherits(x = is_valid_filename, what = "try-error")) {
@@ -99,16 +94,17 @@ create_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
     filename <- paste0(format(Sys.time(), format = format_stamp), "_", filename)
   }
 
-  # Replace non-alphanumeric characters other than underscores with dots.
+  # Replace non-alphanumeric characters other than dots and underscores by
+  # underscores.
   file_no_ext <- file_path_no_ext(x = filename)
-  file_no_ext_gsub <- gsub(pattern = "[^[:alnum:]_]", replacement = ".",
+  file_no_ext_gsub <- gsub(pattern = "[^[:alnum:]_.]", replacement = "_",
                            x = file_no_ext)
   # is_filename(filename = filename) above ensures that a file extension is
   # present, such that this way or re-creating the filename works
   filename_gsub <- paste0(file_no_ext_gsub, ".", file_path_ext(x = filename))
   if(file_no_ext != file_no_ext_gsub) {
     warning("Replaced non-alphanumeric characters other than underscores in",
-            " filename\n'", filename, "' with dots: ", filename_gsub)
+            " filename\n'", filename, "' with underscores: ", filename_gsub)
     # To do:
     # - This is probably unwanted?
     is_valid_filename_gsub <- try(expr = is_filename(filename_gsub), silent = TRUE)

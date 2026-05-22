@@ -3,16 +3,14 @@
 #' Create a temporary directory that can safely be removed.
 #'
 #' @param subdir A [character string][checkinput::is_character()] with the name
-#' of the temporary subdirectory to be created inside [tempdir()]. `subdir`
-#' should be a valid [path][is_path] pointing to a directory that **not yet**
-#' exists, see `Details`.
+#' of a **not-yet** existing temporary subdirectory to be created inside
+#' [tempdir()]. `subdir` should meet the requirements for a valid
+#' [path][is_path()].
 #'
 #' @details
 #' `subdir` is created inside [tempdir()] and an error is thrown if it already
-#' exists. This ensures that programmatically [removing][unlink()] the created
-#' directory later on does not remove files that are still needed by other
-#' processes (which could happen when removing the directory returned by
-#' `tempdir()`, for example because `RStudio` also uses that directory).
+#' exists. This ensures that [removing][unlink()] the created directory does not
+#' remove files that are still needed by other processes (see `Usage` below).
 #'
 #' It is possible to create subdirectories inside a not-yet existing directory
 #' (e.g., to create `<tempdir>/output/outputsub` if `<tempdir>/output` does not
@@ -24,11 +22,20 @@
 #'
 #' @section Side effects:
 #' The requested temporary directory is created if does not yet exist. An error
-#' is thrown if the directory already exists or creating the directory failed.
+#' is thrown if the directory already exists or creating the directory fails.
+#'
+#' @section Usage in practice:
+#' Examples and tests should **not** write to the [working directory][getwd()]
+#' but to a temporary directory that is cleaned up afterwards. Although
+#' [tempdir()] points to a temporary directory, that directory should **not** be
+#' removed because [RStudio](https://posit.co/products/open-source/rstudio) also
+#' uses it. Instead, store the paths to temporary files written to [tempdir()]
+#' and [unlink][unlink()] those paths when cleaning up, or create a temporary
+#' subdirectory in `tempdir()` which can be completely be removed when cleaning
+#' up. `use_tempdir()` follows the latter approach.
 #'
 #' @seealso
-#' [create_dir()] to create (non-temporary) directories and the notes in its
-#' test-file `progutils\inst\tinytest\test_create_dir.R`.
+#' [create_dir()] to create (non-temporary) directories.
 #'
 #' @family functions to handle paths and directories
 #'

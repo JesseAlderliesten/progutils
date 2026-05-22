@@ -9,30 +9,28 @@ head_tail(x, n = 3L)
 \arguments{
 \item{x}{object of which the first and last part should be returned.}
 
-\item{n}{\link[checkinput:make_natural]{make_natural} number (default \code{3L})
-indicating the number of elements or rows to return as \code{head} and \code{tail}.}
+\item{n}{\link[checkinput:make_natural]{natural} number (default \code{3L}) indicating
+the number of elements or rows to return as \code{head} and \code{tail}.}
 }
 \value{
-The \code{n} first and \code{n} last elements or rows of \code{x}. \code{x} is returned
-completely if \code{n} is not less than half the number of elements or rows of \code{x}.
-Using \code{n = 0} results in a zero-length or zero-row object.
+The \code{n} first and last elements or rows of \code{x}.
 }
 \description{
 Show head and tail of object
 }
 \examples{
-x <- letters
-names(x) <- LETTERS
+x <- letters[1:10]
+names(x) <- LETTERS[1:10]
+x
 head_tail(x)
 head_tail(x, n = 4)
 head_tail(x, n = 40)
 try(head_tail(x, n = 0))
 try(head_tail(x, n = 4.1))
 
-m <- head_tail(matrix(data = 1:40, ncol = 4,
-                      dimnames = list(LETTERS[1:10], letters[1:4])))
-head_tail(m)
-head_tail(as.data.frame(m))
+df <- head_tail(matrix(data = 1:40, ncol = 4,
+                       dimnames = list(LETTERS[1:10], letters[1:4])))
+head_tail(df)
 
 }
 \seealso{

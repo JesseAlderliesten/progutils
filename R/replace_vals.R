@@ -36,17 +36,8 @@
 #' The order of the factor *levels* determines the order used in the message.
 #'
 #' @returns
-#' `x` with the requested replacements. Factor levels are *not* reordered after
+#' `x` with the requested replacements. Factor levels are **not** reordered after
 #' the replacement.
-#'
-#' @section Programming notes:
-#' Rewrite to perform all checks using [check_case], then defer the actual
-#' replacement to [gsub()], and then use `which(x_orig != x)` to find and report
-#' on replacements?
-#'
-#' Factor levels can be replaced through a named list:
-#' `f <- addNA(as.factor(c(letters[11:13], NA_character_)))`
-#' `levels(f) <- list(c = "k", b = "l", a = "m", h = NA_character_)`
 #'
 #' @family functions to check equality
 #' @family functions to modify character vectors

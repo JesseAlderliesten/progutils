@@ -1,17 +1,36 @@
+# progutils 0.0.12
+
+### Breaking changes
+- `create_path`: rename to `create_file_path`. Replace non-alphanumeric
+  characters other than dots and underscores by underscores instead of replacing
+  non-alphanumeric characters other than underscores by dots.
+
+### Miscellaneous
+- `as.numeric_safe()`: moved `Note` to `Details`. Condensed example section.
+- `create_tempdir()`: add section `Usage in practice` which explains why using
+  `create_tempdir()` is preferable over using `tempdir()`.
+- `head_tail()`: no longer erroneously document that `n` can be zero. Removed
+  uninformative example.
+- `is_filename()`: updated warning if `filename` contains slashes, so it is
+  possible to call `is_filename()` from `create_file_path()`.
+- `is_path()`: add section `Programming notes` about file separators.
+- Stylistic updates to function documentation.
+
+
 # progutils 0.0.11
 
 ### Breaking changes
-- `create_dir()` now uses `is_filename()` to check if `filename` is valid.
-- `create_path` now uses `is_path()` to check that `dir` is a valid path.
-- `create_tempdir()` now only writes in subdirectories of `tempdir()` and uses
+- `create_dir()`: use `is_filename()` to check if `filename` is valid.
+- `create_path`: use `is_path()` to check that `dir` is a valid path.
+- `create_tempdir()`: only write in subdirectories of `tempdir()` and use
   `is_path()` to check that `subdir` is valid.
 - `file_path_sans_ext()`: rename to `file_path_no_ext()` to distinguish it from
   `tools::file_path_sans_ext()` when linking to documentation; add argument
   `compression`.
-- `wrap_text()` collapses leading and trailing whitespace and, if
+- `wrap_text()`: collapse leading and trailing whitespace and, if
   `ignore_newlines` is `TRUE`, leading and trailing newlines into a single blank
-  character instead of removing them; and retains leading and trailing newlines
-  if `ignore_newlines` is `FALSE`.
+  character instead of removing them. Retains leading and trailing newlines if
+  `ignore_newlines` is `FALSE`.
 - Add functions `file_path_ext()`, `is_filename()` and `is_path()`.
 
 ### Miscellaneous

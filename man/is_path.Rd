@@ -16,7 +16,7 @@ instead of to a folder?}
 \code{TRUE}: an error occurs if \code{path} is not a valid path.
 }
 \description{
-Check that \code{x} is a path that s likely to be a valid path.
+Check that \code{x} is a path that is likely to be valid.
 }
 \details{
 \code{is_path()} puts some restrictions on paths so it can be used to check for
@@ -32,7 +32,7 @@ directory and the parent directory, respectively).
 \verb{COM<non-zero digit>}, \verb{LPT<non-zero digit>}, case-insensitive variants of
 these names, and these names followed by an extension.
 \item \code{path} should not point to \code{tempdir()}: a temporary subdirectory should be
-used instead.
+used instead (see \code{\link[=create_tempdir]{create_tempdir()}}).
 }
 
 These restrictions consider characters that would lead to an error in Windows
@@ -43,6 +43,28 @@ removed in Windows; and words that are reserved names in Windows.
 In contrast to functions from \code{checkinput}, \code{is_path} will produce an error
 if \code{path} is not a valid path.
 }
+\section{Programming notes}{
+
+On MacOS, the output of \code{tempdir()} is preceded by duplicated forward slashes
+in R cmd checks (e.g., \verb{/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR}),
+leading to a spurious warning from \code{is_path()}.
+
+The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
+on other operating systems (\link[=.Platform]{.Platform$file.sep} gives the file
+separator used on the current platform). Furthermore, the backslash is used
+as \link[=regex]{escape character} in \R, such that backslashes need to be escaped
+in \R code. Thus, to warn if a \link[checkinput:is_character]{string} contains
+a file separator, one should write the warning message as
+\code{warning("Repeated '/' or '\\\\'")} which will be printed as
+\verb{Repeated '/' or '\\'}. Checks on the presence of slashes and backslashes
+should use \code{grepl(pattern = "/", x = string)} and
+\code{grepl(pattern = "\\\\\\\\", x = string)} (!). This makes it cumbersome to get
+the correct type and number of slashes to compare with the path recorded in a
+warning message, such that it is more robust to check only for fixed parts of
+the message (e.g., \code{"Repeated"}), possibly followed by a check like
+\code{tinytest::expect_true(dir.exists(string))}.
+}
+
 \section{References}{
 
 \itemize{
@@ -57,15 +79,15 @@ try(is_path(file.path(getwd(), "ab|cd")))
 
 }
 \seealso{
-\code{\link[=create_path]{create_path()}} to create a path (with references there about file paths),
-\code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist,
+\code{\link[=create_file_path]{create_file_path()}} to create a path (with references there about file
+paths), \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist,
 \code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern
 
 \code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
-\code{\link[=create_path]{create_path()}},
+\code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=get_filename]{get_filename()}},

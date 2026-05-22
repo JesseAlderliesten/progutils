@@ -6,8 +6,8 @@
 #' containing a [valid path][is_path()] to a directory that should be created if
 #' it does not yet exist. A dot (i.e., `"."`) indicates the current working
 #' directory.
-#' @param add_date `TRUE` or `FALSE`: create a subdirectory with the current
-#' date in the [format][strftime()] `YYYY_mm_dd`?
+#' @param add_date `TRUE` or `FALSE`: create a subdirectory in `dir` with the
+#' current date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
 #' The default `dir` is a subdirectory with the current date in the
@@ -39,10 +39,11 @@
 #' The requested directory is created if does not yet exist.
 #'
 #' @seealso
-#' [create_path()] to create a path, [create_tempdir()] for a safe way to create
-#' temporary directories, [is_path()] and references there about file paths and
-#' directories, [dir.exists()] and [dir.create()] used by this function,
-#' [get_filename()] to check if a file exists and is a unique match to a pattern
+#' [create_file_path()] to create a file path, [create_tempdir()] for a safe way
+#' to create temporary directories, [is_path()] and references there about file
+#' paths and directories, [dir.exists()] and [dir.create()] used by this
+#' function, [get_filename()] to check if a file exists and is a unique match to
+#' a pattern.
 #'
 #' @section Programming notes:
 #' See also:
