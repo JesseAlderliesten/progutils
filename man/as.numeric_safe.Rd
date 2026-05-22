@@ -15,37 +15,33 @@ A numeric vector, possibly \code{numeric(0)} or containing \code{NA_real_}.
 }
 \description{
 Convert \code{x} to a vector with \link[=as.numeric]{numeric} \link{mode} in a way that
-works irrespective if \code{x} is a \link{factor}, a character vector, or already a
-numeric vector.
+works if \code{x} is a \link{factor}, a character vector, or already a numeric vector.
 }
 \details{
-\code{as.numeric_safe()} uses a suggestion from \code{\link[=factor]{factor()}} and
-\href{https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f}{\R FAQ 7.10}
-that not only works if \code{x} is a factor but also if \code{x} is a character vector
-or already is a numeric vector (even though though the last example of
-\code{as.numeric} comments that this approach is less efficient for long vectors).
-
-In contrast, the alternative conversions \code{as.numeric(levels(x))[x]} (suggested
-in the \code{Warning} of \code{\link[=factor]{factor()}}) and \code{as.numeric(levels(x))[as.integer(x)]}
-(suggested in \R \verb{FAQ 7.10} linked to above) \emph{only} work if \code{x} is factor,
-see the \code{Examples}.
-
-Furthermore, \code{as.numeric()} \emph{cannot} be used to convert a factor to numeric,
-because it returns their underlying numeric integer representation (i.e., the
-indices of the factor levels), see the \code{Warnings} in \code{\link[=as.numeric]{as.numeric()}} and
-\code{\link[=factor]{factor()}}.
-
 \code{as.numeric_safe()} changes the \link[=typeof]{type} of \link[=integer]{integers} from
 \code{integer} to \code{double}, even though integers already have \link{mode}
 \link[=as.numeric]{numeric}.
-}
-\section{Notes}{
 
 \code{NULL} and zero-length vectors are converted to \code{numeric(0)}. Logical vectors
 of length larger than zero are converted to a vector of \code{NA_real_}, with a
 warning.
-}
 
+\code{as.numeric_safe()} uses a suggestion from \code{\link[=factor]{factor()}} and
+\href{https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f}{\R FAQ 7.10}
+that works if \code{x} is a factor, a character vector or already is a numeric
+vector (even though the last example of \code{as.numeric()} comments that this
+approach is less efficient for long vectors).
+
+In contrast, the alternative conversions \code{as.numeric(levels(x))[x]} (suggested
+in the \code{Warning} of \code{\link[=factor]{factor()}}) and \code{as.numeric(levels(x))[as.integer(x)]}
+(suggested in \R \verb{FAQ 7.10} linked to above) \strong{only} work if \code{x} is factor,
+see the \code{Examples}.
+
+Furthermore, \code{as.numeric()} \strong{cannot} be used to convert a factor to numeric,
+because it returns their underlying numeric integer representation (i.e., the
+indices of the factor levels), see the \code{Warnings} in \code{\link[=as.numeric]{as.numeric()}} and
+\code{\link[=factor]{factor()}}.
+}
 \examples{
 x_int <- 5:7
 x_num <- as.numeric(x_int)
@@ -58,28 +54,28 @@ str_as_num_7.10 <- function(x) {str(as.numeric(levels(x))[as.integer(x)])}
 str_as_num_base <- function(x) {str(as.numeric(x))}
 
 # as.numeric_safe() works irrespective the type of x
-str_as_num_safe(x_int)  # num [1:3] 5 6 7 # fine
-str_as_num_safe(x_num)  # num [1:3] 5 6 7 # fine
-str_as_num_safe(x_char) # num [1:3] 5 6 7 # fine
-str_as_num_safe(x_fact) # num [1:3] 5 6 7 # fine
+str_as_num_safe(x_int)  # correct
+str_as_num_safe(x_num)  # correct
+str_as_num_safe(x_char) # correct
+str_as_num_safe(x_fact) # correct
 
-# The 'more efficient' suggestion in help(factor) *only* works for factors.
-str_as_num_fact(x_int)  # num [1:3] NA NA NA # wrong, but clearly so.
-str_as_num_fact(x_num)  # num [1:3] NA NA NA # wrong, but clearly so.
-str_as_num_fact(x_char) # num [1:3] NA NA NA # wrong, but clearly so.
-str_as_num_fact(x_fact) # num [1:3] 5 6 7 # fine
+# The 'more efficient' suggestions in `help(factor)` and
+# R FAQ 7.10 *only* work for factors.
+str_as_num_fact(x_int)  # clearly wrong
+str_as_num_7.10(x_int)  # clearly wrong
+str_as_num_fact(x_num)  # clearly wrong
+str_as_num_7.10(x_num)  # clearly wrong
+str_as_num_fact(x_char) # clearly wrong
+str_as_num_7.10(x_char) # clearly wrong
+str_as_num_fact(x_fact) # correct
+str_as_num_7.10(x_fact) # correct
 
-# The 'more efficient' suggestion in R FAQ 7.10 *only* works for factors.
-str_as_num_7.10(x_int)  # num [1:3] NA NA NA # wrong, but clearly so.
-str_as_num_7.10(x_num)  # num [1:3] NA NA NA # wrong, but clearly so.
-str_as_num_7.10(x_char) # num [1:3] NA NA NA # wrong, but clearly so.
-str_as_num_7.10(x_fact) # num [1:3] 5 6 7 # fine
-
-# as.numeric() gives the *indices* of the factor levels for factors
-str_as_num_base(x_int)  # num [1:3] 5 6 7 # fine
-str_as_num_base(x_num)  # num [1:3] 5 6 7 # fine
-str_as_num_base(x_char) # num [1:3] 5 6 7 # fine
-str_as_num_base(x_fact) # num [1:3] 1 2 3 # wrong!
+# as.numeric() gives the *indices* of the factor levels
+# for factors
+str_as_num_base(x_int)  # correct
+str_as_num_base(x_num)  # correct
+str_as_num_base(x_char) # correct
+str_as_num_base(x_fact) # wrong
 
 }
 \seealso{
