@@ -8,14 +8,14 @@ is_filename(filename)
 }
 \arguments{
 \item{filename}{\link[checkinput:is_character]{character string} with the
-filename, including the file extension.}
+filename including the file extension.}
 }
 \value{
 \code{TRUE}: an error occurs if \code{filename} is not a valid filename.
 }
 \description{
-Check that \code{x} is a filename that includes an extension and is likely to be a
-valid filename.
+Check that \code{x} is a filename that includes an extension and is likely to be
+valid.
 }
 \details{
 \code{is_filename()} puts some restrictions on filenames so it can be used to
@@ -35,7 +35,7 @@ nor with a period.
 These restrictions consider characters that would lead to an error in Windows
 because they are not allowed; characters that  would lead to a mismatch
 between the created directory and the returned path because they are silently
-removed in Windows; and words that are reserved names in Windows.
+removed on Windows; and words that are reserved names in Windows.
 
 In contrast to functions from \code{checkinput}, \code{is_filename} will produce an
 error if \code{filename} is not a valid filename.
@@ -43,9 +43,8 @@ error if \code{filename} is not a valid filename.
 \section{Programming notes}{
 
 Although not enforced by \code{is_filename()}, it is good practice to also avoid
-the characters \code{+}, \verb{,}, \verb{;}, \code{=}, \code{[}, \verb{]}, \code{!}, \code{$}, \verb{#}, \code{@}
-
-Also avoid the characters \verb{\{}, \verb{\}}, \code{(}, \verb{)}, \verb{'}, \verb{\%}, \code{&}, \if{html}{\out{<backtick>}}, \code{^}, \code{~}.
+the characters \code{+}, \verb{,}, \verb{;}, \code{=}, \code{[}, \verb{]}, \code{!}, \code{$}, \verb{#}, \code{@}, and possibly
+\verb{\{}, \verb{\}}, \code{(}, \verb{)}, \verb{'}, \verb{\%}, \code{&}, \if{html}{\out{<backtick>}}, \code{^}, \code{~}.
 
 Ways to make \code{is_filename()} even stricter:
 \itemize{
@@ -53,7 +52,7 @@ Ways to make \code{is_filename()} even stricter:
 \item do not allow filenames to end with a hyphen or underline
 \item case-insensitive matching to \code{filename} to determine if it exists?
 \code{filename} should \strong{not} point to a directory (see \code{utils::file_test()},
-\code{get_filename.R}, \code{create_tempdir.R}, \code{create_file_path.R}).
+\code{\link[=get_filename]{get_filename()}}, \code{\link[=create_tempdir]{create_tempdir()}}, \code{\link[=create_file_path]{create_file_path()}}).
 \item Impose a limit on the length:
 https://blog.r-project.org/2023/03/07/path-length-limit-on-windows/
 \item See also functions \code{create_file_path()}, \code{make_filename()} and

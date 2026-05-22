@@ -1,10 +1,10 @@
 #' Check that `x` is a valid filename
 #'
-#' Check that `x` is a filename that includes an extension and is likely to be a
-#' valid filename.
+#' Check that `x` is a filename that includes an extension and is likely to be
+#' valid.
 #'
 #' @param filename [character string][checkinput::is_character()] with the
-#' filename, including the file extension.
+#' filename including the file extension.
 #'
 #' @details
 #' `is_filename()` puts some restrictions on filenames so it can be used to
@@ -23,7 +23,7 @@
 #' These restrictions consider characters that would lead to an error in Windows
 #' because they are not allowed; characters that  would lead to a mismatch
 #' between the created directory and the returned path because they are silently
-#' removed in Windows; and words that are reserved names in Windows.
+#' removed on Windows; and words that are reserved names in Windows.
 #'
 #' In contrast to functions from `checkinput`, `is_filename` will produce an
 #' error if `filename` is not a valid filename.
@@ -33,9 +33,8 @@
 #'
 #' @section Programming notes:
 #' Although not enforced by `is_filename()`, it is good practice to also avoid
-#' the characters `+`, `,`, `;`, `=`, `[`, `]`, `!`, `$`, `#`, `@`
-#'
-#' Also avoid the characters `{`, `}`, `(`, `)`, `'`, `%`, `&`, <backtick>, `^`, `~`.
+#' the characters `+`, `,`, `;`, `=`, `[`, `]`, `!`, `$`, `#`, `@`, and possibly
+#' `{`, `}`, `(`, `)`, `'`, `%`, `&`, <backtick>, `^`, `~`.
 #'
 #' Ways to make `is_filename()` even stricter:
 #'
@@ -43,7 +42,7 @@
 #' - do not allow filenames to end with a hyphen or underline
 #' - case-insensitive matching to `filename` to determine if it exists?
 #'   `filename` should **not** point to a directory (see `utils::file_test()`,
-#'   `get_filename.R`, `create_tempdir.R`, `create_file_path.R`).
+#'   [get_filename()], [create_tempdir()], [create_file_path()]).
 #' - Impose a limit on the length:
 #'   https://blog.r-project.org/2023/03/07/path-length-limit-on-windows/
 #' - See also functions `create_file_path()`, `make_filename()` and
