@@ -43,6 +43,28 @@ removed in Windows; and words that are reserved names in Windows.
 In contrast to functions from \code{checkinput}, \code{is_path} will produce an error
 if \code{path} is not a valid path.
 }
+\section{Programming notes}{
+
+On MacOS, the output of \code{tempdir()} is preceded by duplicated forward slashes
+in R cmd checks (e.g., \verb{/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR}),
+leading to a spurious warning from \code{is_path()}.
+
+The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
+on other operating systems (\link[=.Platform]{.Platform$file.sep} gives the file
+separator used on the current platform). Furthermore, the backslash is used
+as \link[=regex]{escape character} in \R, such that backslashes need to be escaped
+in \R code. Thus, to warn if a \link[checkinput:is_character]{string} contains
+a file separator, one should write the warning message as
+\code{warning("Repeated '/' or '\\\\'")} which will be printed as
+\verb{Repeated '/' or '\\'}. Checks on the presence of slashes and backslashes
+should use \code{grepl(pattern = "/", x = string)} and
+\code{grepl(pattern = "\\\\\\\\", x = string)} (!). This makes it cumbersome to get
+the correct type and number of slashes to compare with the path recorded in a
+warning message, such that it is more robust to check only for fixed parts of
+the message (e.g., \code{"Repeated"}), possibly followed by a check like
+\code{tinytest::expect_true(dir.exists(string))}.
+}
+
 \section{References}{
 
 \itemize{
