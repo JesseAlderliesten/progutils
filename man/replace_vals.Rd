@@ -50,7 +50,7 @@ influenced by argument \code{signal_old_ignore_case}.}
 that have been replaced?}
 }
 \value{
-\code{x} with the requested replacements. Factor levels are \emph{not} reordered after
+\code{x} with the requested replacements. Factor levels are \strong{not} reordered after
 the replacement.
 }
 \description{
@@ -68,17 +68,6 @@ An error is thrown if \code{allow_multiple} is \code{FALSE} and multiple values 
 If \code{quiet} is \code{FALSE}, a message indicates which values have been replaced.
 The order of the factor \emph{levels} determines the order used in the message.
 }
-\section{Programming notes}{
-
-Rewrite to perform all checks using \link{check_case}, then defer the actual
-replacement to \code{\link[=gsub]{gsub()}}, and then use \code{which(x_orig != x)} to find and report
-on replacements?
-
-Factor levels can be replaced through a named list:
-\code{f <- addNA(as.factor(c(letters[11:13], NA_character_)))}
-\code{levels(f) <- list(c = "k", b = "l", a = "m", h = NA_character_)}
-}
-
 \examples{
 x <- c("k", "l", "m")
 
