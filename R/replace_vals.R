@@ -24,8 +24,9 @@
 #' that have been replaced?
 #'
 #' @details
-#' Values in `x` that only differ from `new` in their case are not adjusted, but
-#' lead to a [signal][signal_text()] as indicated by argument `signal_case_new`.
+#' Values in `x` that [only differ][check_case()] from `new` in their case are
+#' **not** adjusted, but lead to a [signal][signal_text()] as indicated by
+#' argument `signal_case_new`.
 #'
 #' An error is thrown if `allow_multiple` is `FALSE` and multiple values of
 #' `old` match `x`, unless those values of `old` only differ in their case and
@@ -33,7 +34,7 @@
 #' `replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)`.
 #'
 #' If `quiet` is `FALSE`, a message indicates which values have been replaced.
-#' The order of the factor *levels* determines the order used in the message.
+#' The order of the factor **levels** determines the order used in the message.
 #'
 #' @returns
 #' `x` with the requested replacements. Factor levels are **not** reordered after

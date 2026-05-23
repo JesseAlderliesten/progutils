@@ -57,8 +57,9 @@ the replacement.
 Replace character values or factor levels
 }
 \details{
-Values in \code{x} that only differ from \code{new} in their case are not adjusted, but
-lead to a \link[=signal_text]{signal} as indicated by argument \code{signal_case_new}.
+Values in \code{x} that \link[=check_case]{only differ} from \code{new} in their case are
+\strong{not} adjusted, but lead to a \link[=signal_text]{signal} as indicated by
+argument \code{signal_case_new}.
 
 An error is thrown if \code{allow_multiple} is \code{FALSE} and multiple values of
 \code{old} match \code{x}, unless those values of \code{old} only differ in their case and
@@ -66,7 +67,7 @@ An error is thrown if \code{allow_multiple} is \code{FALSE} and multiple values 
 \code{replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)}.
 
 If \code{quiet} is \code{FALSE}, a message indicates which values have been replaced.
-The order of the factor \emph{levels} determines the order used in the message.
+The order of the factor \strong{levels} determines the order used in the message.
 }
 \examples{
 x <- c("k", "l", "m")

@@ -49,8 +49,10 @@
 #'   `fs::path_real()`.
 #'
 #' @section References:
-#' - https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
-#' - https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits
+#' - Naming files, paths, and namespaces from
+#'   [Microsoft](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file)
+#' - Comparison of file systems from
+#'   [Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits)
 #'
 #' @seealso
 #' On file existence and permissions, see `utils::file_test()` and references

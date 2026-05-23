@@ -63,8 +63,10 @@ https://blog.r-project.org/2023/03/07/path-length-limit-on-windows/
 \section{References}{
 
 \itemize{
-\item https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
-\item https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits
+\item Naming files, paths, and namespaces from
+\href{https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file}{Microsoft}
+\item Comparison of file systems from
+\href{https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits}{Wikipedia}
 }
 }
 
