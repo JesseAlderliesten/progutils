@@ -19,9 +19,9 @@
 #' try(head_tail(x, n = 0))
 #' try(head_tail(x, n = 4.1))
 #'
-#' df <- head_tail(matrix(data = 1:40, ncol = 4,
+#' mat <- head_tail(matrix(data = 1:40, ncol = 4,
 #'                        dimnames = list(LETTERS[1:10], letters[1:4])))
-#' head_tail(df)
+#' head_tail(mat)
 #'
 #' @export
 head_tail <- function(x, n = 3L) {

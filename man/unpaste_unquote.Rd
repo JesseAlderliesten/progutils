@@ -28,7 +28,8 @@ Create a character vector from a string with quotation marks
 to \code{NULL}, or \code{"'character(0)'"} to \code{character(0)}.
 }
 \examples{
-x <- "'ff', 'gG', 'HH'"
+x <- paste_quoted(c("ff", "gG", "HH"))
+x
 unpaste_unquote(x = x, collapse = ", ", quotemarks = "'")
 unpaste_unquote(x = x, collapse = ", ", quotemarks = "\"")
 unpaste_unquote(x = x, collapse = character(0), quotemarks = c("'", "\""))
