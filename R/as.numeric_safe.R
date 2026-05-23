@@ -5,13 +5,15 @@
 #'
 #' @param x A factor, or a character or numeric vector to be converted to a
 #' numeric vector.
+#' @param keep_integer `TRUE` or `FALSE`: return input of [type][typeof] integer
+#' without converting it to double.
 #'
 #' @returns A numeric vector, possibly `numeric(0)` or containing `NA_real_`.
 #'
 #' @details
-#' `as.numeric_safe()` changes the [type][typeof] of [integers][integer()] from
-#' `integer` to `double`, even though integers already have [mode]
-#' [numeric][as.numeric()].
+#' The [type][typeof] of [integers][integer()] is kept `integer` if
+#' `keep_integer` is `TRUE` and is changed to `double` if `keep_integer` is
+#' `FALSE`.
 #'
 #' `NULL` and zero-length vectors are converted to `numeric(0)`. Logical vectors
 #' of length larger than zero are converted to a vector of `NA_real_`, with a
@@ -46,6 +48,9 @@
 #' x_char <- as.character(x_int)
 #' x_fact <- as.factor(x_int)
 #'
+#' str(as.numeric_safe(x_int, keep_integer = TRUE))
+#' str(as.numeric_safe(x_int, keep_integer = FALSE))
+#'
 #' str_as_num_safe <- function(x) {str(as.numeric_safe(x))}
 #' str_as_num_fact <- function(x) {str(as.numeric(levels(x))[x])}
 #' str_as_num_7.10 <- function(x) {str(as.numeric(levels(x))[as.integer(x)])}
@@ -76,8 +81,12 @@
 #' str_as_num_base(x_fact) # wrong
 #'
 #' @export
-as.numeric_safe <- function(x) {
+as.numeric_safe <- function(x, keep_integer = TRUE) {
   # Prevent coercion leading to output with NAs
   stopifnot(is.null(x) || is.factor(x) || is.vector(x), !is.list(x))
-  as.numeric(as.character(x))
+  if(keep_integer && is.integer(x)) {
+    x
+  } else {
+    as.numeric(as.character(x))
+  }
 }

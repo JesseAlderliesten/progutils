@@ -39,8 +39,8 @@ Create a file path, creating the indicated directory if it does not yet exist.
 \code{filename} should contain a file extension (i.e., a dot followed by
 alphanumeric characters until the end of the file name). It should not
 contain slashes or backslashes: use \code{dir} to indicate (sub)directories.
-Non-alphanumeric characters other than dots and underscores before the file
-extension are replaced by underscores, with a warning.
+Non-alphanumeric characters other than dots and underscores preceding the
+file extension are replaced by underscores, with a warning.
 
 The default \code{dir} is a subdirectory with the current date in the
 \link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
@@ -56,10 +56,10 @@ returned path still works if the \link[=getwd]{working directory} changes. \code
 instead of \code{"\\\\"} is used as argument \link[=normalizePath]{winslash} such that
 the returned path can be used in Windows' file system.
 
-A warning is issued if the \strong{file} indicated by the returned
-path already exists. To prevent this when creating files in quick succession,
-use \code{"\%OSn"} as part of \code{format_stamp} to create precise stamps by truncating
-seconds to \verb{0 <= n <= 6} decimal places, see \code{\link[=strftime]{strftime()}} for details.
+A warning is issued if the \strong{file} indicated by the returned path already
+exists. To prevent this when creating files in quick succession, use \code{"\%OSn"}
+as part of \code{format_stamp} to create precise stamps by truncating seconds to
+\verb{0 <= n <= 6} decimal places, see \code{\link[=strftime]{strftime()}} for details.
 }
 \section{Side effects}{
 

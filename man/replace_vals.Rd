@@ -105,8 +105,6 @@ Other functions to check equality:
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
-\code{\link[=reorder_cols]{reorder_cols()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},
 \code{\link[=vect_to_char]{vect_to_char()}},
 \code{\link[=wrap_text]{wrap_text()}}

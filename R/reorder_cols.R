@@ -18,7 +18,7 @@
 #' @seealso
 #' [order()], [reorder_levels], [sort()]
 #'
-#' @family functions to modify character vectors
+#' @family functions to modify sorting order
 #'
 #' @examples
 #' test_df <- data.frame(a = 1:2, b = 11:12, c = 21:22)

@@ -4,11 +4,14 @@
 \alias{as.numeric_safe}
 \title{Convert x to numeric}
 \usage{
-as.numeric_safe(x)
+as.numeric_safe(x, keep_integer = TRUE)
 }
 \arguments{
 \item{x}{A factor, or a character or numeric vector to be converted to a
 numeric vector.}
+
+\item{keep_integer}{\code{TRUE} or \code{FALSE}: return input of \link[=typeof]{type} integer
+without converting it to double.}
 }
 \value{
 A numeric vector, possibly \code{numeric(0)} or containing \code{NA_real_}.
@@ -18,9 +21,9 @@ Convert \code{x} to a vector with \link[=as.numeric]{numeric} \link{mode} in a w
 works if \code{x} is a \link{factor}, a character vector, or already a numeric vector.
 }
 \details{
-\code{as.numeric_safe()} changes the \link[=typeof]{type} of \link[=integer]{integers} from
-\code{integer} to \code{double}, even though integers already have \link{mode}
-\link[=as.numeric]{numeric}.
+The \link[=typeof]{type} of \link[=integer]{integers} is kept \code{integer} if
+\code{keep_integer} is \code{TRUE} and is changed to \code{double} if \code{keep_integer} is
+\code{FALSE}.
 
 \code{NULL} and zero-length vectors are converted to \code{numeric(0)}. Logical vectors
 of length larger than zero are converted to a vector of \code{NA_real_}, with a
@@ -47,6 +50,9 @@ x_int <- 5:7
 x_num <- as.numeric(x_int)
 x_char <- as.character(x_int)
 x_fact <- as.factor(x_int)
+
+str(as.numeric_safe(x_int, keep_integer = TRUE))
+str(as.numeric_safe(x_int, keep_integer = FALSE))
 
 str_as_num_safe <- function(x) {str(as.numeric_safe(x))}
 str_as_num_fact <- function(x) {str(as.numeric(levels(x))[x])}
@@ -83,8 +89,6 @@ str_as_num_base(x_fact) # wrong
 \code{\link[utils:type.convert]{utils::type.convert()}}
 
 Other functions to modify character vectors:
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
-\code{\link[=reorder_cols]{reorder_cols()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},
 \code{\link[=vect_to_char]{vect_to_char()}},

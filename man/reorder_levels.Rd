@@ -70,5 +70,9 @@ Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=vect_to_char]{vect_to_char()}}
+
+Other functions to modify sorting order:
+\code{\link[=reorder_cols]{reorder_cols()}}
 }
 \concept{functions to modify factors}
+\concept{functions to modify sorting order}

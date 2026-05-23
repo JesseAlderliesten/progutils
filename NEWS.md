@@ -1,3 +1,15 @@
+# progutils 0.0.13
+
+### Breaking changes
+- `as.numeric_safe()` gains argument `keep_integer` (default `TRUE`, in contrast
+  to the implicit prior default `FALSE`), fixing issue #1.
+
+
+### Miscellaneous
+- Update families and function titles to have a better package index.
+- Use a custom package index for the website.
+
+
 # progutils 0.0.12
 
 ### Breaking changes

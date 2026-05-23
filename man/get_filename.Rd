@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_filename.R
 \name{get_filename}
 \alias{get_filename}
-\title{Check if only a single matching file is present}
+\title{Check that only a single matching file is present}
 \usage{
 get_filename(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
@@ -22,8 +22,8 @@ A character string with the file name matching \code{pattern} if there is exactl
 one such file in directory \code{dir}. Otherwise an error is thrown.
 }
 \description{
-Check if only one file in directory \code{dir} has a name matching \code{pattern}, for
-example before attempting to \link[utils:read.table]{read a file}.
+Check that only one file in directory \code{dir} has a name matching \code{pattern},
+for example before attempting to \link[utils:read.table]{read a file}.
 }
 \details{
 The default \code{"."} for \code{dir} indicates the \link[=getwd]{working directory}.

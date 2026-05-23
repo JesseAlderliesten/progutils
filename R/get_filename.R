@@ -1,7 +1,7 @@
-#' Check if only a single matching file is present
+#' Check that only a single matching file is present
 #'
-#' Check if only one file in directory `dir` has a name matching `pattern`, for
-#' example before attempting to [read a file][utils::read.table()].
+#' Check that only one file in directory `dir` has a name matching `pattern`,
+#' for example before attempting to [read a file][utils::read.table()].
 #'
 #' @param dir Character string with the [path][file.path()] to a directory.
 #' @param pattern Character string containing a [regular expression][base::regex]

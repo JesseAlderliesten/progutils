@@ -48,8 +48,8 @@ the characters \code{+}, \verb{,}, \verb{;}, \code{=}, \code{[}, \verb{]}, \code
 
 Ways to make \code{is_filename()} even stricter:
 \itemize{
-\item do not allow filenames to start with a hyphen or underline
-\item do not allow filenames to end with a hyphen or underline
+\item do not allow filenames to start with a hyphen
+\item do not allow filenames to end with a hyphen
 \item case-insensitive matching to \code{filename} to determine if it exists?
 \code{filename} should \strong{not} point to a directory (see \code{utils::file_test()},
 \code{\link[=get_filename]{get_filename()}}, \code{\link[=create_tempdir]{create_tempdir()}}, \code{\link[=create_file_path]{create_file_path()}}).
