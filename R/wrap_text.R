@@ -46,7 +46,7 @@
 #' this, put the constant part in the front of the message and hardcode newlines
 #' using `\n`.
 #'
-#' @seealso [cat()] [paste()] [strwrap()] `bbmle:::strwrapx()`
+#' @seealso [cat()] [paste()] [strwrap()]
 #'
 #' @family functions to modify character vectors
 #'
