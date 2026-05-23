@@ -80,8 +80,8 @@ try(is_filename("ab|cd.txt"))
 
 }
 \seealso{
-On file existence and permissions, see \code{utils::file_test()} and references
-there and \code{fs::path_real()}.
+\code{utils::file_test()} and references there on file existence and permissions,
+\code{fs::path_real()}.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},

@@ -7,7 +7,7 @@
 #' @returns The `n` first and last elements or rows of `x`.
 #'
 #' @seealso
-#' [utils::head()] [utils::tail()]
+#' [utils::head()] and [utils::tail()] used by this function.
 #'
 #' @examples
 #' x <- letters[1:10]

@@ -37,7 +37,7 @@ reorder_cols(x = test_df, new_order = c("b", "a", "d"))
 
 }
 \seealso{
-\code{\link[=order]{order()}}, \link{reorder_levels}, \code{\link[=sort]{sort()}}
+\code{\link[=order]{order()}}, \code{\link[=sort]{sort()}}
 
 Other functions to modify sorting order:
 \code{\link[=reorder_levels]{reorder_levels()}}

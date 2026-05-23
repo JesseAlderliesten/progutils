@@ -78,10 +78,10 @@ not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 
 }
 \seealso{
-\code{\link[=setdiff]{setdiff()}} for a similar function which removes duplicates,
-\code{\link[=are_equal]{are_equal()}} to match numeric input using a tolerance,
-\code{\link[=match]{match()}}, and, from \R \verb{4.6.0} onwards, \code{'\%notin\%'}, on which this function
-is based.
+\code{\link[=setdiff]{setdiff()}} for a similar function which removes duplicates;
+\code{\link[=are_equal]{are_equal()}} to match numeric input using a tolerance;
+\code{\link[=match]{match()}} containing \code{\%in\%}, and, from \R \verb{4.6.0} onwards, \code{'\%notin\%'}, on
+which this function is based.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

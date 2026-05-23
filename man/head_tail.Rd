@@ -34,5 +34,5 @@ head_tail(df)
 
 }
 \seealso{
-\code{\link[utils:head]{utils::head()}} \code{\link[utils:tail]{utils::tail()}}
+\code{\link[utils:head]{utils::head()}} and \code{\link[utils:tail]{utils::tail()}} used by this function.
 }
