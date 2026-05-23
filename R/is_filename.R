@@ -38,8 +38,8 @@
 #'
 #' Ways to make `is_filename()` even stricter:
 #'
-#' - do not allow filenames to start with a hyphen or underline
-#' - do not allow filenames to end with a hyphen or underline
+#' - do not allow filenames to start with a hyphen
+#' - do not allow filenames to end with a hyphen
 #' - case-insensitive matching to `filename` to determine if it exists?
 #'   `filename` should **not** point to a directory (see `utils::file_test()`,
 #'   [get_filename()], [create_tempdir()], [create_file_path()]).
@@ -74,11 +74,8 @@ is_filename <- function(filename) {
   # tools::file_path_sans_ext() nor tools::file_ext().
   filename_no_ext <- file_path_no_ext(x = filename, compression = TRUE)
   file_ext <- file_path_ext(x = filename, compression = TRUE)
-  # To do:
-  # - Remove redundant conditions
   if(!nzchar(filename_no_ext) || !nzchar(file_ext) ||
-     filename == filename_no_ext || length(filename_no_ext) == 0L ||
-     length(file_ext) == 0L) {
+     length(filename_no_ext) == 0L || length(file_ext) == 0L) {
     stop("Empty filename or missing extension:\n", filename)
   }
 
