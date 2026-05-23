@@ -3,7 +3,7 @@
 \name{file_path_no_ext}
 \alias{file_path_no_ext}
 \alias{file_path_ext}
-\title{Distinguish filenames and extensions}
+\title{Extract filenames or extensions}
 \usage{
 file_path_no_ext(x, compression = FALSE)
 
@@ -55,14 +55,5 @@ Other functions to handle paths and directories:
 \code{\link[=get_filename]{get_filename()}},
 \code{\link[=is_filename]{is_filename()}},
 \code{\link[=is_path]{is_path()}}
-
-Other functions to modify character vectors:
-\code{\link[=as.numeric_safe]{as.numeric_safe()}},
-\code{\link[=reorder_cols]{reorder_cols()}},
-\code{\link[=replace_vals]{replace_vals()}},
-\code{\link[=unpaste_unquote]{unpaste_unquote()}},
-\code{\link[=vect_to_char]{vect_to_char()}},
-\code{\link[=wrap_text]{wrap_text()}}
 }
 \concept{functions to handle paths and directories}
-\concept{functions to modify character vectors}

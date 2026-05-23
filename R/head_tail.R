@@ -1,4 +1,4 @@
-#' Show head and tail of object
+#' Show first and last part of an object
 #'
 #' @param x object of which the first and last part should be returned.
 #' @param n [natural][checkinput::make_natural] number (default `3L`) indicating

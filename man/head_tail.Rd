@@ -2,7 +2,7 @@
 % Please edit documentation in R/head_tail.R
 \name{head_tail}
 \alias{head_tail}
-\title{Show head and tail of object}
+\title{Show first and last part of an object}
 \usage{
 head_tail(x, n = 3L)
 }
@@ -16,7 +16,7 @@ the number of elements or rows to return as \code{head} and \code{tail}.}
 The \code{n} first and last elements or rows of \code{x}.
 }
 \description{
-Show head and tail of object
+Show first and last part of an object
 }
 \examples{
 x <- letters[1:10]

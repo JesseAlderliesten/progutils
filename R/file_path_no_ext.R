@@ -1,4 +1,4 @@
-#' Distinguish filenames and extensions
+#' Extract filenames or extensions
 #'
 #' Distinguish filenames and extensions, correctly handling filenames that end
 #' in a dot.
@@ -22,7 +22,6 @@
 #' have argument `compression`.
 #'
 #' @family functions to handle paths and directories
-#' @family functions to modify character vectors
 #'
 #' @examples
 #' filename <- "ab..txt"

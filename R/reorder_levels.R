@@ -41,6 +41,7 @@
 #' [reorder_cols], [stats::relevel()] to assign one reference level to a factor
 #'
 #' @family functions to modify factors
+#' @family functions to modify sorting order
 #'
 #' @examples
 #' orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
