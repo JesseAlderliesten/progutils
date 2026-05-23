@@ -122,7 +122,7 @@ replace_vals <- function(
     if(any(bool_case_new, na.rm = TRUE)) {
       msg_text_new <- paste0(
         "Values in 'x' are a case-insensitive match but not a case-sensitive",
-        " match to 'new' (", paste_quoted(new), "): ",
+        " match to\n'new' (", paste_quoted(new), "): ",
         paste_quoted(x[bool_case_new]))
       signal_text(text = msg_text_new, signal = signal_case_new)
     }
@@ -133,7 +133,7 @@ replace_vals <- function(
     if(any(bool_case_old, na.rm = TRUE)) {
       msg_text_old <- paste0(
         "Values in 'x' are a case-insensitive match but not a case-sensitive",
-        " match to 'old' (", paste_quoted(old), "): ",
+        " match to\n'old' (", paste_quoted(old), "): ",
         paste_quoted(x[bool_case_old]))
       signal_text(text = msg_text_old, signal = signal_case_old)
     }
