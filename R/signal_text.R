@@ -5,22 +5,22 @@
 #' @param text Vector with text to be signalled, coerced to character by
 #' [vect_to_char()].
 #' @param signal Character string indicating the type of signal to be used:
-#' `"error"` to throw an [error][stop], `"warning"` to issue a [warning],
+#' `"error"` to throw an [error][stop()], `"warning"` to issue a [warning],
 #' `"message"` to show a [message], or `"quiet"` to be quiet.
 #' @param origin Character string pasted behind `text` giving the origin of the
 #' message. Ignored if it is `character(0)`.
 #'
 #' @details
 #' `text` is coerced to a character vector using [vect_to_char()], which treats
-#' zero-length input and input with length larger than one better than [message]
-#' etc. that use [paste0()], see the `Examples`. Call [vect_to_char()]
+#' zero-length input and input with length larger than one better than
+#' [message()] etc. that use [paste0()], see the `Examples`. Call [vect_to_char()]
 #' beforehand on `text` to control rounding and wrapping, see the last example.
 #'
 #' @returns
-#' `text`, returned [invisibly][invisible].
+#' `text`, returned [invisibly][invisible()].
 #'
 #' @section Side effects:
-#' `text` is signalled through an [error][stop], [warning], [message], or
+#' `text` is signalled through an [error][stop()], [warning], [message], or
 #' quietly, depending on argument `signal`.
 #'
 #' @seealso

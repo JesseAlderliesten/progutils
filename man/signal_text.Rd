@@ -29,8 +29,8 @@ Signal a text to the user through an error, warning, or message.
 }
 \details{
 \code{text} is coerced to a character vector using \code{\link[=vect_to_char]{vect_to_char()}}, which treats
-zero-length input and input with length larger than one better than \link{message}
-etc. that use \code{\link[=paste0]{paste0()}}, see the \code{Examples}. Call \code{\link[=vect_to_char]{vect_to_char()}}
+zero-length input and input with length larger than one better than
+\code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}, see the \code{Examples}. Call \code{\link[=vect_to_char]{vect_to_char()}}
 beforehand on \code{text} to control rounding and wrapping, see the last example.
 }
 \section{Side effects}{
