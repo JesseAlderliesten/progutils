@@ -15,22 +15,28 @@ as_num_base <- function(x) {as.numeric(x)}
 
 
 #### Test the examples ####
+expect_silent(expect_identical(
+  as.numeric_safe(11:13, keep_integer = TRUE), 11:13
+))
+expect_silent(expect_identical(
+  as.numeric_safe(11:13, keep_integer = FALSE), as.numeric(11:13)
+))
+
 # as.numeric_safe() works irrespective the type of x
-expect_identical(as.numeric_safe(int_example), num_example)
-expect_identical(as.numeric_safe(num_example), num_example)
-expect_identical(as.numeric_safe(char_example), num_example)
-expect_identical(as.numeric_safe(fact_example), num_example)
+expect_identical(as.numeric_safe(int_example, keep_integer = TRUE), int_example)
+expect_identical(as.numeric_safe(num_example, keep_integer = TRUE), num_example)
+expect_identical(as.numeric_safe(char_example, keep_integer = TRUE), num_example)
+expect_identical(as.numeric_safe(fact_example, keep_integer = TRUE), num_example)
 
-# The 'more efficient' suggestion in help(factor) *only* works for factors.
+# The 'more efficient' suggestions in help(factor) and R
+# FAQ 7.10 *only* works for factors.
 expect_identical(as_num_fact(int_example), out_NA_example)
-expect_identical(as_num_fact(num_example), out_NA_example)
-expect_identical(as_num_fact(char_example), out_NA_example)
-expect_identical(as_num_fact(fact_example), num_example)
-
-# The 'more efficient' suggestion in R FAQ 7.10 *only* works for factors.
 expect_identical(as_num_7.10(int_example), out_NA_example)
+expect_identical(as_num_fact(num_example), out_NA_example)
 expect_identical(as_num_7.10(num_example), out_NA_example)
+expect_identical(as_num_fact(char_example), out_NA_example)
 expect_identical(as_num_7.10(char_example), out_NA_example)
+expect_identical(as_num_fact(fact_example), num_example)
 expect_identical(as_num_7.10(fact_example), num_example)
 
 # as.numeric() gives the *indices* of the factor levels for factors
@@ -44,6 +50,11 @@ expect_identical(as_num_base(fact_example), c(1, 2, 3))
 expect_silent(expect_equal(as.numeric_safe(as.character(x_num)), x_num))
 expect_silent(expect_equal(as.numeric_safe(as.factor(as.character(x_num))), x_num))
 expect_silent(expect_equal(as.numeric_safe(x_num), x_num))
+
+expect_identical(as.numeric_safe(int_example, keep_integer = FALSE), num_example)
+expect_identical(as.numeric_safe(num_example, keep_integer = FALSE), num_example)
+expect_identical(as.numeric_safe(char_example, keep_integer = FALSE), num_example)
+expect_identical(as.numeric_safe(fact_example, keep_integer = FALSE), num_example)
 
 expect_warning(expect_equal(as.numeric_safe(x_char_mix), out_num_mix),
                pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
