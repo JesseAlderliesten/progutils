@@ -18,8 +18,8 @@
 #' `filename` should contain a file extension (i.e., a dot followed by
 #' alphanumeric characters until the end of the file name). It should not
 #' contain slashes or backslashes: use `dir` to indicate (sub)directories.
-#' Non-alphanumeric characters other than dots and underscores before the file
-#' extension are replaced by underscores, with a warning.
+#' Non-alphanumeric characters other than dots and underscores preceding the
+#' file extension are replaced by underscores, with a warning.
 #'
 #' The default `dir` is a subdirectory with the current date in the
 #' [format][strftime()] `YYYY_mm_dd` in directory `output` below the working
@@ -35,10 +35,10 @@
 #' instead of `"\\"` is used as argument [winslash][normalizePath()] such that
 #' the returned path can be used in Windows' file system.
 #'
-#' A warning is issued if the **file** indicated by the returned
-#' path already exists. To prevent this when creating files in quick succession,
-#' use `"%OSn"` as part of `format_stamp` to create precise stamps by truncating
-#' seconds to `0 <= n <= 6` decimal places, see [strftime()] for details.
+#' A warning is issued if the **file** indicated by the returned path already
+#' exists. To prevent this when creating files in quick succession, use `"%OSn"`
+#' as part of `format_stamp` to create precise stamps by truncating seconds to
+#' `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
 #' @section Side effects:
 #' The directory indicated by the returned file path is created if it does not
@@ -99,24 +99,16 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
   file_no_ext <- file_path_no_ext(x = filename)
   file_no_ext_gsub <- gsub(pattern = "[^[:alnum:]_.]", replacement = "_",
                            x = file_no_ext)
+
   # is_filename(filename = filename) above ensures that a file extension is
   # present, such that this way or re-creating the filename works
   filename_gsub <- paste0(file_no_ext_gsub, ".", file_path_ext(x = filename))
   if(file_no_ext != file_no_ext_gsub) {
     warning("Replaced non-alphanumeric characters other than underscores in",
             " filename\n'", filename, "' with underscores: ", filename_gsub)
-    # To do:
-    # - This is probably unwanted?
-    is_valid_filename_gsub <- try(expr = is_filename(filename_gsub), silent = TRUE)
-    if(inherits(x = is_valid_filename_gsub, what = "try-error")) {
-      stop("No path created because 'filename' is not valid after replacing",
-           " non-alphanumeric\ncharacters: ",
-           attr(is_valid_filename_gsub, "condition")$message)
-    }
   }
 
   is_path(dir)
-
   file_path <- file.path(create_dir(dir = dir, add_date = add_date),
                          filename_gsub)
   file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)
