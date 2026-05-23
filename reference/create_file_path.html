@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.12</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.13</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,8 +91,8 @@ current date in the <a href="https://rdrr.io/r/base/strptime.html" class="extern
     <p><code>filename</code> should contain a file extension (i.e., a dot followed by
 alphanumeric characters until the end of the file name). It should not
 contain slashes or backslashes: use <code>dir</code> to indicate (sub)directories.
-Non-alphanumeric characters other than dots and underscores before the file
-extension are replaced by underscores, with a warning.</p>
+Non-alphanumeric characters other than dots and underscores preceding the
+file extension are replaced by underscores, with a warning.</p>
 <p>The default <code>dir</code> is a subdirectory with the current date in the
 <a href="https://rdrr.io/r/base/strptime.html" class="external-link">format</a> <code>YYYY_mm_dd</code> in directory <code>output</code> below the working
 directory. <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> ensures the correct (<a href="https://rdrr.io/r/base/Platform.html" class="external-link">platform</a>-dependent)
@@ -104,10 +104,10 @@ returned path is <a href="create_dir.html">created</a> if it does not yet exist.
 returned path still works if the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> changes. <code>"/"</code>
 instead of <code>"\\"</code> is used as argument <a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">winslash</a> such that
 the returned path can be used in Windows' file system.</p>
-<p>A warning is issued if the <strong>file</strong> indicated by the returned
-path already exists. To prevent this when creating files in quick succession,
-use <code>"%OSn"</code> as part of <code>format_stamp</code> to create precise stamps by truncating
-seconds to <code>0 &lt;= n &lt;= 6</code> decimal places, see <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strftime()</a></code> for details.</p>
+<p>A warning is issued if the <strong>file</strong> indicated by the returned path already
+exists. To prevent this when creating files in quick succession, use <code>"%OSn"</code>
+as part of <code>format_stamp</code> to create precise stamps by truncating seconds to
+<code>0 &lt;= n &lt;= 6</code> decimal places, see <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strftime()</a></code> for details.</p>
     </div>
     <div class="section level2">
     <h2 id="side-effects">Side effects<a class="anchor" aria-label="anchor" href="#side-effects"></a></h2>
@@ -139,28 +139,28 @@ yet exist.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpoAfuMi/subdir/2026_05_22/abc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpWuZmM3/subdir/2026_05_23/abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpoAfuMi/subdir/2026_05_22/22_05_2026_abc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpWuZmM3/subdir/2026_05_23/23_05_2026_abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpoAfuMi/subdir/def.html"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpWuZmM3/subdir/def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpoAfuMi/subdir/22_05_2026_def.html"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpWuZmM3/subdir/23_05_2026_def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpoAfuMi/subdir/subdir/2026_05_22/abc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpWuZmM3/subdir/subdir/2026_05_23/abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpoAfuMi/subdir/subdir/2026_05_22/22_05_2026_abc.txt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpWuZmM3/subdir/subdir/2026_05_23/23_05_2026_abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpoAfuMi/subdir/subdir/def.html"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpWuZmM3/subdir/subdir/def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpoAfuMi/subdir/subdir/22_05_2026_def.html"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpWuZmM3/subdir/subdir/23_05_2026_def.html"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cleaning up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">my_tempdir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

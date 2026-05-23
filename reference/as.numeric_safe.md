@@ -9,7 +9,7 @@ already a numeric vector.
 ## Usage
 
 ``` r
-as.numeric_safe(x)
+as.numeric_safe(x, keep_integer = TRUE)
 ```
 
 ## Arguments
@@ -19,18 +19,22 @@ as.numeric_safe(x)
   A factor, or a character or numeric vector to be converted to a
   numeric vector.
 
+- keep_integer:
+
+  `TRUE` or `FALSE`: return input of
+  [type](https://rdrr.io/r/base/typeof.html) integer without converting
+  it to double.
+
 ## Value
 
 A numeric vector, possibly `numeric(0)` or containing `NA_real_`.
 
 ## Details
 
-`as.numeric_safe()` changes the
-[type](https://rdrr.io/r/base/typeof.html) of
-[integers](https://rdrr.io/r/base/integer.html) from `integer` to
-`double`, even though integers already have
-[mode](https://rdrr.io/r/base/mode.html)
-[numeric](https://rdrr.io/r/base/numeric.html).
+The [type](https://rdrr.io/r/base/typeof.html) of
+[integers](https://rdrr.io/r/base/integer.html) is kept `integer` if
+`keep_integer` is `TRUE` and is changed to `double` if `keep_integer` is
+`FALSE`.
 
 `NULL` and zero-length vectors are converted to `numeric(0)`. Logical
 vectors of length larger than zero are converted to a vector of
@@ -65,8 +69,6 @@ numbers,
 [`utils::type.convert()`](https://rdrr.io/r/utils/type.convert.html)
 
 Other functions to modify character vectors:
-[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
-[`reorder_cols()`](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md),
@@ -85,6 +87,11 @@ x_num <- as.numeric(x_int)
 x_char <- as.character(x_int)
 x_fact <- as.factor(x_int)
 
+str(as.numeric_safe(x_int, keep_integer = TRUE))
+#>  int [1:3] 5 6 7
+str(as.numeric_safe(x_int, keep_integer = FALSE))
+#>  num [1:3] 5 6 7
+
 str_as_num_safe <- function(x) {str(as.numeric_safe(x))}
 str_as_num_fact <- function(x) {str(as.numeric(levels(x))[x])}
 str_as_num_7.10 <- function(x) {str(as.numeric(levels(x))[as.integer(x)])}
@@ -92,7 +99,7 @@ str_as_num_base <- function(x) {str(as.numeric(x))}
 
 # as.numeric_safe() works irrespective the type of x
 str_as_num_safe(x_int)  # correct
-#>  num [1:3] 5 6 7
+#>  int [1:3] 5 6 7
 str_as_num_safe(x_num)  # correct
 #>  num [1:3] 5 6 7
 str_as_num_safe(x_char) # correct

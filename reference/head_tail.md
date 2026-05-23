@@ -1,6 +1,6 @@
-# Show head and tail of object
+# Show first and last part of an object
 
-Show head and tail of object
+Show first and last part of an object
 
 ## Usage
 

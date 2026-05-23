@@ -1,5 +1,19 @@
 # Changelog
 
+## progutils 0.0.13
+
+#### Breaking changes
+
+- [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md)
+  gains argument `keep_integer` (default `TRUE`, in contrast to the
+  implicit prior default `FALSE`), fixing issue
+  [\#1](https://github.com/JesseAlderliesten/progutils/issues/1).
+
+#### Miscellaneous
+
+- Update families and function titles to have a better package index.
+- Use a custom package index for the website.
+
 ## progutils 0.0.12
 
 #### Breaking changes

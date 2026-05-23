@@ -1,4 +1,4 @@
-# Distinguish filenames and extensions
+# Extract filenames or extensions
 
 Distinguish filenames and extensions, correctly handling filenames that
 end in a dot.
@@ -53,14 +53,6 @@ Other functions to handle paths and directories:
 [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
 [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md),
 [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
-
-Other functions to modify character vectors:
-[`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
-[`reorder_cols()`](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md),
-[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
-[`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
-[`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md),
-[`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
 
 ## Examples
 

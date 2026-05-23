@@ -39,13 +39,8 @@ dropped, with a warning.
 [reorder_levels](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md),
 [`sort()`](https://rdrr.io/r/base/sort.html)
 
-Other functions to modify character vectors:
-[`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
-[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
-[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
-[`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
-[`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md),
-[`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
+Other functions to modify sorting order:
+[`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md)
 
 ## Examples
 

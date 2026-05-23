@@ -84,8 +84,6 @@ if names of `x` can be removed.
 
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
-[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
-[`reorder_cols()`](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
 [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)

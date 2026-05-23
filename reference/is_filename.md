@@ -57,9 +57,9 @@ and possibly `{`, `}`, `(`, `)`, `'`, `%`, `&`, , `^`, `~`.
 
 Ways to make `is_filename()` even stricter:
 
-- do not allow filenames to start with a hyphen or underline
+- do not allow filenames to start with a hyphen
 
-- do not allow filenames to end with a hyphen or underline
+- do not allow filenames to end with a hyphen
 
 - case-insensitive matching to `filename` to determine if it exists?
   `filename` should **not** point to a directory (see

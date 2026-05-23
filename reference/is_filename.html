@@ -9,7 +9,7 @@ valid."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.12</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.13</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,8 +90,8 @@ error if <code>filename</code> is not a valid filename.</p>
 <p>Although not enforced by <code>is_filename()</code>, it is good practice to also avoid
 the characters <code>+</code>, <code>,</code>, <code>;</code>, <code>=</code>, <code>[</code>, <code>]</code>, <code>!</code>, <code>$</code>, <code>#</code>, <code>@</code>, and possibly
 <code>{</code>, <code>}</code>, <code>(</code>, <code>)</code>, <code>'</code>, <code>%</code>, <code>&amp;</code>, <backtick>, <code>^</code>, <code>~</code>.</backtick></p>
-<p>Ways to make <code>is_filename()</code> even stricter:</p><ul><li><p>do not allow filenames to start with a hyphen or underline</p></li>
-<li><p>do not allow filenames to end with a hyphen or underline</p></li>
+<p>Ways to make <code>is_filename()</code> even stricter:</p><ul><li><p>do not allow filenames to start with a hyphen</p></li>
+<li><p>do not allow filenames to end with a hyphen</p></li>
 <li><p>case-insensitive matching to <code>filename</code> to determine if it exists?
 <code>filename</code> should <strong>not</strong> point to a directory (see <code><a href="https://rdrr.io/r/utils/filetest.html" class="external-link">utils::file_test()</a></code>,
 <code><a href="get_filename.html">get_filename()</a></code>, <code><a href="create_tempdir.html">create_tempdir()</a></code>, <code><a href="create_file_path.html">create_file_path()</a></code>).</p></li>

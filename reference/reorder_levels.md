@@ -73,6 +73,9 @@ Other functions to modify factors:
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
 
+Other functions to modify sorting order:
+[`reorder_cols()`](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md)
+
 ## Examples
 
 ``` r

@@ -55,8 +55,8 @@ The created file path, returned
 `filename` should contain a file extension (i.e., a dot followed by
 alphanumeric characters until the end of the file name). It should not
 contain slashes or backslashes: use `dir` to indicate (sub)directories.
-Non-alphanumeric characters other than dots and underscores before the
-file extension are replaced by underscores, with a warning.
+Non-alphanumeric characters other than dots and underscores preceding
+the file extension are replaced by underscores, with a warning.
 
 The default `dir` is a subdirectory with the current date in the
 [format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` in directory
@@ -118,28 +118,28 @@ my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpoAfuMi/subdir/2026_05_22/abc.txt"
+#> [1] "/tmp/RtmpWuZmM3/subdir/2026_05_23/abc.txt"
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpoAfuMi/subdir/2026_05_22/22_05_2026_abc.txt"
+#> [1] "/tmp/RtmpWuZmM3/subdir/2026_05_23/23_05_2026_abc.txt"
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpoAfuMi/subdir/def.html"
+#> [1] "/tmp/RtmpWuZmM3/subdir/def.html"
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpoAfuMi/subdir/22_05_2026_def.html"
+#> [1] "/tmp/RtmpWuZmM3/subdir/23_05_2026_def.html"
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpoAfuMi/subdir/subdir/2026_05_22/abc.txt"
+#> [1] "/tmp/RtmpWuZmM3/subdir/subdir/2026_05_23/abc.txt"
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpoAfuMi/subdir/subdir/2026_05_22/22_05_2026_abc.txt"
+#> [1] "/tmp/RtmpWuZmM3/subdir/subdir/2026_05_23/23_05_2026_abc.txt"
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpoAfuMi/subdir/subdir/def.html"
+#> [1] "/tmp/RtmpWuZmM3/subdir/subdir/def.html"
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpoAfuMi/subdir/subdir/22_05_2026_def.html"
+#> [1] "/tmp/RtmpWuZmM3/subdir/subdir/23_05_2026_def.html"
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)
