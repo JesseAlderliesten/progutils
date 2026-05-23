@@ -7,6 +7,18 @@ sep_quotes <- c("'ff'", "'gG'", "'HH'")
 #### Tests ####
 expect_silent(
   expect_identical(
+    paste_quoted(x = c("ff", "gG", "HH")),
+    x)
+)
+
+expect_silent(
+  expect_identical(
+    paste_quoted(x = unpaste_unquote(x)),
+    x)
+)
+
+expect_silent(
+  expect_identical(
     unpaste_unquote(x = x, collapse = ", ", quotemarks = "'"),
     c("ff", "gG", "HH"))
 )
