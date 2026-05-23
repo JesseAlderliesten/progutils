@@ -9,3 +9,49 @@ home:
 
 toc:
   depth: 3
+
+reference:
+- title: Files and folders
+- contents:
+  - create_dir
+  - create_file_path
+  - create_tempdir
+  - file_path_no_ext
+  - get_filename
+  - is_filename
+  - is_path
+
+- title: Text
+- contents:
+  - check_case
+  - paste_quoted
+  - replace_vals
+  - unpaste_unquote
+  - vect_to_char
+  - wrap_text
+
+- title: Equality
+- contents:
+  - are_equal
+  - check_case
+  - get_filename
+  - not_in
+  - replace_vals
+
+- title: Order
+- contents:
+  - head_tail
+  - reorder_cols
+  - reorder_levels
+
+- title: Type conversion
+- contents:
+  - as.numeric_safe
+  - paste_quoted
+  - reorder_levels
+  - vect_to_char
+  - wrap_text
+
+- title: Miscellaneous
+- contents:
+  - signal_text
