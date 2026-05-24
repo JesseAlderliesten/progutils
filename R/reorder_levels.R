@@ -30,7 +30,8 @@
 #'
 #' @section Notes:
 #' Reordering levels of factor `f` by replacing levels through code like
-#' `levels(f) <- levels(f)[<some order>]` does *not* work, see the last `Example`.
+#' `levels(f) <- levels(f)[<some order>]` does **not** work, see the last
+#' `Example`.
 #'
 #' @section Programming notes:
 #' Could also use an approach like
@@ -38,7 +39,7 @@
 #' [levels()].
 #'
 #' @seealso
-#' [reorder_cols], [stats::relevel()] to assign one reference level to a factor
+#' [stats::relevel()] to assign one reference level to a factor
 #'
 #' @family functions to modify factors
 #' @family functions to modify sorting order

@@ -53,12 +53,9 @@ absent from \code{table}, \code{not_in()} would return \code{logical(0)} if \cod
 \code{FALSE}. If \code{value} is \code{TRUE}, the behaviour would be normal: returning
 \code{character(0)}.
 
-Apart from not allowing numeric or zero-length input,
-\code{not_in(x, table, value = TRUE)} is equivalent to \code{x \%w/o\% table}, where
-\verb{\%w/o\%} is an unexported function from \code{tools}: \code{tools:::'\%w/o\%'}. Similarly,
+Apart from \strong{not} allowing numeric or zero-length input,
 \code{not_in(x, table, value = FALSE)} is equivalent to \code{x \%notin\% table}, where
-\verb{\%notin\%} is an exported function from \verb{base-}\R since version \verb{4.6.0} which
-before that was present as unexported function \code{tools:::'\%notin\%'}.
+\verb{\%notin\%} is a function in base \R since version \verb{4.6.0}.
 }
 
 \examples{
@@ -81,10 +78,10 @@ not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 
 }
 \seealso{
-\code{\link[=setdiff]{setdiff()}} for a similar function which removes duplicates,
-\code{\link[=are_equal]{are_equal()}} to match numeric input using a tolerance,
-\code{\link[=match]{match()}}, and, from \R \verb{4.6.0} onwards, \code{'\%notin\%'}, on which this function
-is based.
+\code{\link[=setdiff]{setdiff()}} for a similar function which removes duplicates;
+\code{\link[=are_equal]{are_equal()}} to match numeric input using a tolerance;
+\code{\link[=match]{match()}} containing \code{\%in\%}, and, from \R \verb{4.6.0} onwards, \code{'\%notin\%'}, on
+which this function is based.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

@@ -43,7 +43,8 @@ warning if \code{warn_drop_order} is \code{TRUE}.
 \section{Notes}{
 
 Reordering levels of factor \code{f} by replacing levels through code like
-\verb{levels(f) <- levels(f)[<some order>]} does \emph{not} work, see the last \code{Example}.
+\verb{levels(f) <- levels(f)[<some order>]} does \strong{not} work, see the last
+\code{Example}.
 }
 
 \section{Programming notes}{
@@ -64,7 +65,7 @@ orig
 
 }
 \seealso{
-\link{reorder_cols}, \code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor
+\code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor
 
 Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},

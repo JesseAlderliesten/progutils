@@ -42,18 +42,15 @@
 #' `FALSE`. If `value` is `TRUE`, the behaviour would be normal: returning
 #' `character(0)`.
 #'
-#' Apart from not allowing numeric or zero-length input,
-#' `not_in(x, table, value = TRUE)` is equivalent to `x %w/o% table`, where
-#' `%w/o%` is an unexported function from `tools`: `tools:::'%w/o%'`. Similarly,
+#' Apart from **not** allowing numeric or zero-length input,
 #' `not_in(x, table, value = FALSE)` is equivalent to `x %notin% table`, where
-#' `%notin%` is an exported function from `base-`\R since version `4.6.0` which
-#' before that was present as unexported function `tools:::'%notin%'`.
+#' `%notin%` is a function in base \R since version `4.6.0`.
 #'
 #' @seealso
-#' [setdiff()] for a similar function which removes duplicates,
-#' [are_equal()] to match numeric input using a tolerance,
-#' [match()], and, from \R `4.6.0` onwards, `'%notin%'`, on which this function
-#' is based.
+#' [setdiff()] for a similar function which removes duplicates;
+#' [are_equal()] to match numeric input using a tolerance;
+#' [match()] containing `%in%`, and, from \R `4.6.0` onwards, `'%notin%'`, on
+#' which this function is based.
 #'
 #' @family functions to check equality
 #'

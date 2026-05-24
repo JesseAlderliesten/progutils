@@ -91,7 +91,7 @@ create_tempdir <- function(subdir = "subdir") {
     }
   } else {
     stop("Temporary directory already exists: change 'subdir' ('", subdir,
-         "'): ", subdir_target)
+         "'):\n", subdir_target)
   }
   invisible(subdir_target)
 }

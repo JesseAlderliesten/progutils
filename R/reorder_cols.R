@@ -16,7 +16,7 @@
 #' `x` with reordered columns.
 #'
 #' @seealso
-#' [order()], [reorder_levels], [sort()]
+#' [order()], [sort()]
 #'
 #' @family functions to modify sorting order
 #'

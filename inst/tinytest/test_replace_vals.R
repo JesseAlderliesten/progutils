@@ -24,7 +24,7 @@ warn_input_new <- paste0("checkinput::is_character(new, allow_empty = TRUE,",
 warn_input_old <- paste0("checkinput::all_characters(old, allow_empty = TRUE,",
                          " allow_NA = TRUE) is not TRUE")
 warn_match_case <- paste0("Values in 'x' are a case-insensitive match but not",
-                          " a case-sensitive match to ")
+                          " a case-sensitive match to\n")
 warn_mult_old <- "Multiple values of 'old' ("
 warn_none_old <- "None of the values of argument 'old' "
 

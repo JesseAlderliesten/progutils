@@ -3,7 +3,7 @@
 #' Check that only one file in directory `dir` has a name matching `pattern`,
 #' for example before attempting to [read a file][utils::read.table()].
 #'
-#' @param dir Character string with the [path][file.path()] to a directory.
+#' @param dir Character string with the [path][is_path()] to a directory.
 #' @param pattern Character string containing a [regular expression][base::regex]
 #' used to select file names in `dir`.
 #' @param ignore_case `TRUE` or `FALSE`: use case-insensitive pattern matching?

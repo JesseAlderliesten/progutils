@@ -21,7 +21,8 @@
 #' @family functions to modify character vectors
 #'
 #' @examples
-#' x <- "'ff', 'gG', 'HH'"
+#' x <- paste_quoted(c("ff", "gG", "HH"))
+#' x
 #' unpaste_unquote(x = x, collapse = ", ", quotemarks = "'")
 #' unpaste_unquote(x = x, collapse = ", ", quotemarks = "\"")
 #' unpaste_unquote(x = x, collapse = character(0), quotemarks = c("'", "\""))

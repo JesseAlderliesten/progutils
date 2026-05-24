@@ -7,7 +7,7 @@
 get_filename(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{Character string with the \link[=file.path]{path} to a directory.}
+\item{dir}{Character string with the \link[=is_path]{path} to a directory.}
 
 \item{pattern}{Character string containing a \link[base:regex]{regular expression}
 used to select file names in \code{dir}.}
