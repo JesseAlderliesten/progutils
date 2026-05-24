@@ -53,7 +53,7 @@ with a warning if `warn_drop_order` is `TRUE`.
 ## Notes
 
 Reordering levels of factor `f` by replacing levels through code like
-`levels(f) <- levels(f)[<some order>]` does *not* work, see the last
+`levels(f) <- levels(f)[<some order>]` does **not** work, see the last
 `Example`.
 
 ## Programming notes
@@ -64,7 +64,6 @@ Could also use an approach like
 
 ## See also
 
-[reorder_cols](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md),
 [`stats::relevel()`](https://rdrr.io/r/stats/relevel.html) to assign one
 reference level to a factor
 

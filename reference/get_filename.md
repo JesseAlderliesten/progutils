@@ -15,7 +15,8 @@ get_filename(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 - dir:
 
   Character string with the
-  [path](https://rdrr.io/r/base/file.path.html) to a directory.
+  [path](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+  to a directory.
 
 - pattern:
 
@@ -96,39 +97,39 @@ file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
 get_filename(dir = tempdir(), pattern = "some_file")
-#> Using file 'some_filename18a1c3e1bb.txt'
-#> [1] "some_filename18a1c3e1bb.txt"
+#> Using file 'some_filename19dc37700d3.txt'
+#> [1] "some_filename19dc37700d3.txt"
 
 # The same file is found if case-insensitive matching is used:
 get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
-#> Using file 'some_filename18a1c3e1bb.txt'
-#> [1] "some_filename18a1c3e1bb.txt"
+#> Using file 'some_filename19dc37700d3.txt'
+#> [1] "some_filename19dc37700d3.txt"
 
 # Error reporting presence of case-insensitive match.
 try(get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 #> Error in get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/RtmpWuZmM3'.
-#> However, a case-insensitive match to 'pattern' is present: 'some_filename18a1c3e1bb.txt'.
+#> '/tmp/Rtmp88MqqQ'.
+#> However, a case-insensitive match to 'pattern' is present: 'some_filename19dc37700d3.txt'.
 
 # Error reporting no match found.
 try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
 #> Error in get_filename(dir = tempdir(), pattern = "missing_filename_abcde",  : 
 #>   No case-insensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpWuZmM3'.
+#> '/tmp/Rtmp88MqqQ'.
 try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 #> Error in get_filename(dir = tempdir(), pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpWuZmM3'.
+#> '/tmp/Rtmp88MqqQ'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
 try(get_filename(dir = tempdir(), pattern = "_filename"))
 #> Error in get_filename(dir = tempdir(), pattern = "_filename") : 
 #>   Multiple case-insensitive matches to pattern '_filename' are present in directory
-#> '/tmp/RtmpWuZmM3': 'another_filename18a145a50a9c.txt', 'some_filename18a1c3e1bb.txt'!
+#> '/tmp/Rtmp88MqqQ': 'another_filename19dc5c9e6e4f.txt', 'some_filename19dc37700d3.txt'!
 
 # Clean up
 unlink(x = my_tempfiles)

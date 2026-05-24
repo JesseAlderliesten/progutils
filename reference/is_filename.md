@@ -78,15 +78,16 @@ Ways to make `is_filename()` even stricter:
 
 ## References
 
-- https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+- Naming files, paths, and namespaces from
+  [Microsoft](https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file)
 
-- https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits
+- Comparison of file systems from
+  [Wikipedia](https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits)
 
 ## See also
 
-On file existence and permissions, see
 [`utils::file_test()`](https://rdrr.io/r/utils/filetest.html) and
-references there and
+references there on file existence and permissions,
 [`fs::path_real()`](https://fs.r-lib.org/reference/path_math.html).
 
 Other functions to handle paths and directories:

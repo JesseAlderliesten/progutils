@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.14</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,19 +100,16 @@ slightly different from other values: if <code>character(0)</code> is present in
 absent from <code>table</code>, <code>not_in()</code> would return <code>logical(0)</code> if <code>value</code> is
 <code>FALSE</code>. If <code>value</code> is <code>TRUE</code>, the behaviour would be normal: returning
 <code>character(0)</code>.</p>
-<p>Apart from not allowing numeric or zero-length input,
-<code>not_in(x, table, value = TRUE)</code> is equivalent to <code>x %w/o% table</code>, where
-<code>%w/o%</code> is an unexported function from <code>tools</code>: <code>tools:::'%w/o%'</code>. Similarly,
+<p>Apart from <strong>not</strong> allowing numeric or zero-length input,
 <code>not_in(x, table, value = FALSE)</code> is equivalent to <code>x %notin% table</code>, where
-<code>%notin%</code> is an exported function from <code>base-</code><span style="R">R</span> since version <code>4.6.0</code> which
-before that was present as unexported function <code>tools:::'%notin%'</code>.</p>
+<code>%notin%</code> is a function in base <span style="R">R</span> since version <code>4.6.0</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff()</a></code> for a similar function which removes duplicates,
-<code><a href="are_equal.html">are_equal()</a></code> to match numeric input using a tolerance,
-<code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code>, and, from <span style="R">R</span> <code>4.6.0</code> onwards, <code>'%notin%'</code>, on which this function
-is based.</p>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff()</a></code> for a similar function which removes duplicates;
+<code><a href="are_equal.html">are_equal()</a></code> to match numeric input using a tolerance;
+<code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code> containing <code>%in%</code>, and, from <span style="R">R</span> <code>4.6.0</code> onwards, <code>'%notin%'</code>, on
+which this function is based.</p>
 <p>Other functions to check equality:
 <code><a href="are_equal.html">are_equal()</a></code>,
 <code><a href="check_case.html">check_case()</a></code>,

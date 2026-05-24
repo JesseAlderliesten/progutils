@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.14</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,14 +119,15 @@ the replacement.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Values in <code>x</code> that only differ from <code>new</code> in their case are not adjusted, but
-lead to a <a href="signal_text.html">signal</a> as indicated by argument <code>signal_case_new</code>.</p>
+    <p>Values in <code>x</code> that <a href="check_case.html">only differ</a> from <code>new</code> in their case are
+<strong>not</strong> adjusted, but lead to a <a href="signal_text.html">signal</a> as indicated by
+argument <code>signal_case_new</code>.</p>
 <p>An error is thrown if <code>allow_multiple</code> is <code>FALSE</code> and multiple values of
 <code>old</code> match <code>x</code>, unless those values of <code>old</code> only differ in their case and
 <code>ignore_case</code> is <code>TRUE</code>. An example of such an exception is
 <code>replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)</code>.</p>
 <p>If <code>quiet</code> is <code>FALSE</code>, a message indicates which values have been replaced.
-The order of the factor <em>levels</em> determines the order used in the message.</p>
+The order of the factor <strong>levels</strong> determines the order used in the message.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -167,7 +168,8 @@ The order of the factor <em>levels</em> determines the order used in the message
 <span class="r-in"><span><span class="co"># if 'signal_case_old' is '"warning"'</span></span></span>
 <span class="r-in"><span><span class="fu">replace_vals</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"A"</span>, old <span class="op">=</span> <span class="st">"a"</span>, new <span class="op">=</span> <span class="st">"b"</span>, ignore_case <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>             signal_case_old <span class="op">=</span> <span class="st">"warning"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Values in 'x' are a case-insensitive match but not a case-sensitive match to 'old' ('a'): 'A'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Values in 'x' are a case-insensitive match but not a case-sensitive match to</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> 'old' ('a'): 'A'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Replaced values 'A' with 'b'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "b"</span>
 <span class="r-in"><span></span></span>
@@ -175,7 +177,8 @@ The order of the factor <em>levels</em> determines the order used in the message
 <span class="r-in"><span><span class="co"># issued if no match is found and 'warn_absent' is 'TRUE'</span></span></span>
 <span class="r-in"><span><span class="fu">replace_vals</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"A"</span>, old <span class="op">=</span> <span class="st">"a"</span>, new <span class="op">=</span> <span class="st">"b"</span>, ignore_case <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>             warn_absent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Values in 'x' are a case-insensitive match but not a case-sensitive match to 'old' ('a'): 'A'</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Values in 'x' are a case-insensitive match but not a case-sensitive match to</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> 'old' ('a'): 'A'</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>None of the values of argument 'old' ('a') were found in 'x' ('A')!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A"</span>
 <span class="r-in"><span></span></span>

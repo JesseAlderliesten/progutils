@@ -36,7 +36,6 @@ dropped, with a warning.
 ## See also
 
 [`order()`](https://rdrr.io/r/base/order.html),
-[reorder_levels](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md),
 [`sort()`](https://rdrr.io/r/base/sort.html)
 
 Other functions to modify sorting order:

@@ -74,7 +74,7 @@ In contrast, argument `width` in
 
 [`cat()`](https://rdrr.io/r/base/cat.html)
 [`paste()`](https://rdrr.io/r/base/paste.html)
-[`strwrap()`](https://rdrr.io/r/base/strwrap.html) `bbmle:::strwrapx()`
+[`strwrap()`](https://rdrr.io/r/base/strwrap.html)
 
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),

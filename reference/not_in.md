@@ -66,22 +66,18 @@ present in `x` but absent from `table`, `not_in()` would return
 `logical(0)` if `value` is `FALSE`. If `value` is `TRUE`, the behaviour
 would be normal: returning `character(0)`.
 
-Apart from not allowing numeric or zero-length input,
-`not_in(x, table, value = TRUE)` is equivalent to `x %w/o% table`, where
-`%w/o%` is an unexported function from `tools`: `tools:::'%w/o%'`.
-Similarly, `not_in(x, table, value = FALSE)` is equivalent to
-`x %notin% table`, where `%notin%` is an exported function from `base-`R
-since version `4.6.0` which before that was present as unexported
-function `tools:::'%notin%'`.
+Apart from **not** allowing numeric or zero-length input,
+`not_in(x, table, value = FALSE)` is equivalent to `x %notin% table`,
+where `%notin%` is a function in base R since version `4.6.0`.
 
 ## See also
 
 [`setdiff()`](https://rdrr.io/r/base/sets.html) for a similar function
-which removes duplicates,
+which removes duplicates;
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md)
-to match numeric input using a tolerance,
-[`match()`](https://rdrr.io/r/base/match.html), and, from R `4.6.0`
-onwards, `'%notin%'`, on which this function is based.
+to match numeric input using a tolerance;
+[`match()`](https://rdrr.io/r/base/match.html) containing `%in%`, and,
+from R `4.6.0` onwards, `'%notin%'`, on which this function is based.
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),

@@ -118,28 +118,28 @@ my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpWuZmM3/subdir/2026_05_23/abc.txt"
+#> [1] "/tmp/Rtmp88MqqQ/subdir/2026_05_24/abc.txt"
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpWuZmM3/subdir/2026_05_23/23_05_2026_abc.txt"
+#> [1] "/tmp/Rtmp88MqqQ/subdir/2026_05_24/24_05_2026_abc.txt"
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpWuZmM3/subdir/def.html"
+#> [1] "/tmp/Rtmp88MqqQ/subdir/def.html"
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpWuZmM3/subdir/23_05_2026_def.html"
+#> [1] "/tmp/Rtmp88MqqQ/subdir/24_05_2026_def.html"
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpWuZmM3/subdir/subdir/2026_05_23/abc.txt"
+#> [1] "/tmp/Rtmp88MqqQ/subdir/subdir/2026_05_24/abc.txt"
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpWuZmM3/subdir/subdir/2026_05_23/23_05_2026_abc.txt"
+#> [1] "/tmp/Rtmp88MqqQ/subdir/subdir/2026_05_24/24_05_2026_abc.txt"
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpWuZmM3/subdir/subdir/def.html"
+#> [1] "/tmp/Rtmp88MqqQ/subdir/subdir/def.html"
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpWuZmM3/subdir/subdir/23_05_2026_def.html"
+#> [1] "/tmp/Rtmp88MqqQ/subdir/subdir/24_05_2026_def.html"
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

@@ -58,16 +58,18 @@ Other functions to handle paths and directories:
 
 ``` r
 filename <- "ab..txt"
+
 # Should be "ab." but was "ab..txt" prior to R 4.6.0.
 tools::file_path_sans_ext(filename)
 #> [1] "ab."
 tools::file_ext(filename) # "txt"
 #> [1] "txt"
+
 # The next line produced the nonsense-result "ab..txt.txt" prior to R 4.6.0.
 paste0(tools::file_path_sans_ext(filename), ".", tools::file_ext(filename))
 #> [1] "ab..txt"
 
-# The updated version recreates filename 'ab..txt':
+# Using functions from `progutils` recreates filename 'ab..txt':
 paste0(file_path_no_ext(filename), ".", file_path_ext(filename))
 #> [1] "ab..txt"
 ```

@@ -51,7 +51,9 @@ Other functions to modify character vectors:
 ## Examples
 
 ``` r
-x <- "'ff', 'gG', 'HH'"
+x <- paste_quoted(c("ff", "gG", "HH"))
+x
+#> [1] "'ff', 'gG', 'HH'"
 unpaste_unquote(x = x, collapse = ", ", quotemarks = "'")
 #> [1] "ff" "gG" "HH"
 unpaste_unquote(x = x, collapse = ", ", quotemarks = "\"")

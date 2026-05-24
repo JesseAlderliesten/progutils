@@ -26,8 +26,9 @@ The `n` first and last elements or rows of `x`.
 
 ## See also
 
-[`utils::head()`](https://rdrr.io/r/utils/head.html)
-[`utils::tail()`](https://rdrr.io/r/utils/head.html)
+[`utils::head()`](https://rdrr.io/r/utils/head.html) and
+[`utils::tail()`](https://rdrr.io/r/utils/head.html) used by this
+function.
 
 ## Examples
 
@@ -53,9 +54,9 @@ try(head_tail(x, n = 4.1))
 #> Error in checkinput::make_natural(n, strict = TRUE) : 
 #>   checkinput::all_natural(n) is not TRUE
 
-df <- head_tail(matrix(data = 1:40, ncol = 4,
+mat <- head_tail(matrix(data = 1:40, ncol = 4,
                        dimnames = list(LETTERS[1:10], letters[1:4])))
-head_tail(df)
+head_tail(mat)
 #>    a  b  c  d
 #> A  1 11 21 31
 #> B  2 12 22 32

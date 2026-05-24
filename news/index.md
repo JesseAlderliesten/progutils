@@ -1,5 +1,12 @@
 # Changelog
 
+## progutils 0.0.14
+
+#### Miscellaneous
+
+- Remove references to non-exported functions.
+- Stylistic updates to `See also` section and `Examples`.
+
 ## progutils 0.0.13
 
 #### Breaking changes

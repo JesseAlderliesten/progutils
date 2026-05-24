@@ -79,8 +79,9 @@ after the replacement.
 
 ## Details
 
-Values in `x` that only differ from `new` in their case are not
-adjusted, but lead to a
+Values in `x` that [only
+differ](https://jessealderliesten.github.io/progutils/reference/check_case.md)
+from `new` in their case are **not** adjusted, but lead to a
 [signal](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
 as indicated by argument `signal_case_new`.
 
@@ -90,8 +91,8 @@ and `ignore_case` is `TRUE`. An example of such an exception is
 `replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)`.
 
 If `quiet` is `FALSE`, a message indicates which values have been
-replaced. The order of the factor *levels* determines the order used in
-the message.
+replaced. The order of the factor **levels** determines the order used
+in the message.
 
 ## See also
 
@@ -136,7 +137,8 @@ replace_vals(x = as.factor(x), old = x[3:2], new = "b", allow_multiple = TRUE)
 # if 'signal_case_old' is '"warning"'
 replace_vals(x = "A", old = "a", new = "b", ignore_case = TRUE,
              signal_case_old = "warning")
-#> Warning: Values in 'x' are a case-insensitive match but not a case-sensitive match to 'old' ('a'): 'A'
+#> Warning: Values in 'x' are a case-insensitive match but not a case-sensitive match to
+#> 'old' ('a'): 'A'
 #> Replaced values 'A' with 'b'
 #> [1] "b"
 
@@ -144,7 +146,8 @@ replace_vals(x = "A", old = "a", new = "b", ignore_case = TRUE,
 # issued if no match is found and 'warn_absent' is 'TRUE'
 replace_vals(x = "A", old = "a", new = "b", ignore_case = FALSE,
              warn_absent = TRUE)
-#> Warning: Values in 'x' are a case-insensitive match but not a case-sensitive match to 'old' ('a'): 'A'
+#> Warning: Values in 'x' are a case-insensitive match but not a case-sensitive match to
+#> 'old' ('a'): 'A'
 #> Warning: None of the values of argument 'old' ('a') were found in 'x' ('A')!
 #> [1] "A"
 
