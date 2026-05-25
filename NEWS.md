@@ -1,8 +1,11 @@
-# progutils 0.0.14
+# progutils 0.0.15
 
 ### Miscellaneous
-- Remove references to non-exported functions.
-- Stylistic updates to `See also` section and `Examples`.
+- ...
+
+
+# progutils 0.0.14
+- Stylistic updates.
 
 
 # progutils 0.0.13
@@ -12,11 +15,6 @@
   to the implicit prior default `FALSE`), fixing issue #1.
 
 
-### Miscellaneous
-- Update families and function titles to have a better package index.
-- Use a custom package index for the website.
-
-
 # progutils 0.0.12
 
 ### Breaking changes
@@ -24,16 +22,13 @@
   characters other than dots and underscores by underscores instead of replacing
   non-alphanumeric characters other than underscores by dots.
 
-### Miscellaneous
+### Documentation
 - `as.numeric_safe()`: moved `Note` to `Details`. Condensed example section.
 - `create_tempdir()`: add section `Usage in practice` which explains why using
   `create_tempdir()` is preferable over using `tempdir()`.
 - `head_tail()`: no longer erroneously document that `n` can be zero. Removed
   uninformative example.
-- `is_filename()`: updated warning if `filename` contains slashes, so it is
-  possible to call `is_filename()` from `create_file_path()`.
 - `is_path()`: add section `Programming notes` about file separators.
-- Stylistic updates to function documentation.
 
 
 # progutils 0.0.11
@@ -50,17 +45,9 @@
   `ignore_newlines` is `TRUE`, leading and trailing newlines into a single blank
   character instead of removing them. Retains leading and trailing newlines if
   `ignore_newlines` is `FALSE`.
+
+### Added functions
 - Add functions `file_path_ext()`, `is_filename()` and `is_path()`.
-
-### Miscellaneous
-- `NEWS`: stylistic update.
-- `README`: refer to website when appropriate. Stylistic update.
-
-
-# progutils 0.0.10
-
-### Miscellaneous
-- Add pkgdown website: `https://jessealderliesten.github.io/progutils/`.
 
 
 # progutils 0.0.9
@@ -70,6 +57,8 @@
   needed to use re-exported `paste_quoted()`.
 - `progutils::paste_quoted()`: move to `checkinput` and re-export it to
   `progutils`.
+
+### Added functions
 - Add function `create_tempdir()` to create a temporary directory that can
   safely be removed.
 
@@ -78,10 +67,12 @@
 
 ### Breaking changes
 - Removed unused `check_os_is_windows()`.
-- Added `head_tail()` to show the `head` and `tail` of an object.
 - Use `roxygen2` version 8.0.0.
 - `not_in()`: `x` and `table` have to be a vector or factor (as was always
   documented) to prevent returning `x` if `x` or `table` is a `list`.
+
+### Added functions
+- Add `head_tail()` to show the first and last part of an object.
 
 
 # progutils 0.0.7
@@ -109,20 +100,6 @@
   instead of silently denoting the working directory. Hardcode newlines instead
   of using `wrap_text()` makes it easier to test warnings.
 
-### Miscellaneous
-- Run tests when checking the package. Adjusted tests and example to accommodate
-  bugfix to `tools::file_path_sans_ext()` in `R 4.6.0`.
-- `check_input()` and `replace_vals()`: update tests that failed because of
-  different sort order for uppercase vs. lowercase characters caused by locale
-  settings (see `Sys.getlocale()`). This also affects the order of factor levels
-  and thus the output of `as.factor()`.
-- Make the location of newlines more predictable by hardcoding newlines using
- `\n` instead of using `wrap_text()` in warnings.
-- Combine elements of workflows `check-standard.yaml` and `check-no-suggests.yaml`
-  to check if the package functions correctly without the dependencies listed in
-  `Suggests` which I use for documentation.
-- Note that `not_in()` does not consider names when matching.
-
 
 # progutils 0.0.5
 
@@ -130,13 +107,6 @@
 - `replace_vals()`: gained argument `signal_old_ignore_case`. Bugfix for, and
   more consistent handling of, `NA` in factors. Values in messages are no longer
   sorted alphabetically.
-
-### Miscellaneous
-- No need to import `osVersion` from `utils` because `utils` itself is imported.
-- GitHub action `check-standard` now also runs on `R 4.1.0` on ubuntu and Windows,
-  is triggered every Saturday on 04:23 UTC, and can be triggered manually
-  (trigger it once manually on the main branch to be able to trigger it manually
-  on other branches).
 
 
 # progutils 0.0.4
@@ -150,14 +120,14 @@
 - `signal_text`: signal text to a user through an error, warning, or message.
 - `unpaste_unquote`: the opposite of `paste_quoted()`.
 
-### Miscellaneous
-- `progutils` now uses GitHub action `check-standard` on all branches.
-
 
 # progutils 0.0.3
 
 ### Breaking changes
 - `checkinput`: increased minimum version to `0.1.0`.
+- Add `stats` and `tools` as dependencies in the `Suggests` field because they
+  are linked to in help pages.
+- No longer import `methods::formalArgs()`.
 - `create_dir()`: show the warnings if creating a directory fails.
 - `create_dir()`: use `winslash = "/"` instead of `winslash = "\\"` to normalise
   paths.
@@ -172,18 +142,9 @@
 - `reorder_cols()`: reorder columns.
 - `reorder_levels()`: reorder factor levels.
 
-### Updated documentation
-- Add `stats` and `tools` as dependencies in the `Suggests` field because they
-  are linked to in help pages.
-- No longer import `methods::formalArgs()`.
-- Replace section title `Note` (created through `@Note`) by section title
-  `Notes` (created through `@section Notes`). Idem for `Programming note`.
+### Documentation
 - `create_dir()`: move some documentation to `create_path()`; document format of
   date-time stamp with same case as `strftime()`.
-
-### Miscellaneous ###
-- `progutils` now uses GitHub action `check-standard` on all branches (see
-  `?usethis::use_github_action()`).
 
 
 # progutils 0.0.2
