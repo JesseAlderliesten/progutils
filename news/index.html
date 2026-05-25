@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,24 +39,22 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.14" id="progutils-0014">progutils 0.0.14<a class="anchor" aria-label="anchor" href="#progutils-0014"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.0" id="progutils-010">progutils 0.1.0<a class="anchor" aria-label="anchor" href="#progutils-010"></a></h2>
 <div class="section level4">
-<h4 id="miscellaneous-0-0-14">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-14"></a></h4>
-<ul><li>Remove references to non-exported functions.</li>
-<li>Stylistic updates to <code>See also</code> section and <code>Examples</code>.</li>
+<h4 id="breaking-changes-0-1-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-1-0"></a></h4>
+<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.6.0</code> to <code>0.7.0</code> to have the new default <code>all = FALSE</code> instead of <code>all = TRUE</code> in <code>make_natural()</code>.</li>
 </ul></div>
 </div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.0.14" id="progutils-0014">progutils 0.0.14<a class="anchor" aria-label="anchor" href="#progutils-0014"></a></h2>
+<ul><li>Stylistic updates.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.13" id="progutils-0013">progutils 0.0.13<a class="anchor" aria-label="anchor" href="#progutils-0013"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-0-13">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-13"></a></h4>
 <ul><li>
 <code><a href="../reference/as.numeric_safe.html">as.numeric_safe()</a></code> gains argument <code>keep_integer</code> (default <code>TRUE</code>, in contrast to the implicit prior default <code>FALSE</code>), fixing issue <a href="https://github.com/JesseAlderliesten/progutils/issues/1" class="external-link">#1</a>.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="miscellaneous-0-0-13">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-13"></a></h4>
-<ul><li>Update families and function titles to have a better package index.</li>
-<li>Use a custom package index for the website.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -67,7 +65,7 @@
 <code>create_path</code>: rename to <code>create_file_path</code>. Replace non-alphanumeric characters other than dots and underscores by underscores instead of replacing non-alphanumeric characters other than underscores by dots.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="miscellaneous-0-0-12">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-12"></a></h4>
+<h4 id="documentation-0-0-12">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-0-12"></a></h4>
 <ul><li>
 <code><a href="../reference/as.numeric_safe.html">as.numeric_safe()</a></code>: moved <code>Note</code> to <code>Details</code>. Condensed example section.</li>
 <li>
@@ -75,10 +73,7 @@
 <li>
 <code><a href="../reference/head_tail.html">head_tail()</a></code>: no longer erroneously document that <code>n</code> can be zero. Removed uninformative example.</li>
 <li>
-<code><a href="../reference/is_filename.html">is_filename()</a></code>: updated warning if <code>filename</code> contains slashes, so it is possible to call <code><a href="../reference/is_filename.html">is_filename()</a></code> from <code><a href="../reference/create_file_path.html">create_file_path()</a></code>.</li>
-<li>
 <code><a href="../reference/is_path.html">is_path()</a></code>: add section <code>Programming notes</code> about file separators.</li>
-<li>Stylistic updates to function documentation.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -95,21 +90,10 @@
 <code>file_path_sans_ext()</code>: rename to <code><a href="../reference/file_path_no_ext.html">file_path_no_ext()</a></code> to distinguish it from <code><a href="https://rdrr.io/r/tools/fileutils.html" class="external-link">tools::file_path_sans_ext()</a></code> when linking to documentation; add argument <code>compression</code>.</li>
 <li>
 <code><a href="../reference/wrap_text.html">wrap_text()</a></code>: collapse leading and trailing whitespace and, if <code>ignore_newlines</code> is <code>TRUE</code>, leading and trailing newlines into a single blank character instead of removing them. Retains leading and trailing newlines if <code>ignore_newlines</code> is <code>FALSE</code>.</li>
-<li>Add functions <code><a href="../reference/file_path_no_ext.html">file_path_ext()</a></code>, <code><a href="../reference/is_filename.html">is_filename()</a></code> and <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="miscellaneous-0-0-11">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-11"></a></h4>
-<ul><li>
-<code>NEWS</code>: stylistic update.</li>
-<li>
-<code>README</code>: refer to website when appropriate. Stylistic update.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.10" id="progutils-0010">progutils 0.0.10<a class="anchor" aria-label="anchor" href="#progutils-0010"></a></h2>
-<div class="section level4">
-<h4 id="miscellaneous-0-0-10">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-10"></a></h4>
-<ul><li>Add pkgdown website: <code>https://jessealderliesten.github.io/progutils/</code>.</li>
+<h4 id="added-functions-0-0-11">Added functions<a class="anchor" aria-label="anchor" href="#added-functions-0-0-11"></a></h4>
+<ul><li>Add functions <code><a href="../reference/file_path_no_ext.html">file_path_ext()</a></code>, <code><a href="../reference/is_filename.html">is_filename()</a></code> and <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -119,7 +103,10 @@
 <ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.5.0</code> to <code>0.6.0</code>, needed to use re-exported <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>.</li>
 <li>
 <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">progutils::paste_quoted()</a></code>: move to <code>checkinput</code> and re-export it to <code>progutils</code>.</li>
-<li>Add function <code><a href="../reference/create_tempdir.html">create_tempdir()</a></code> to create a temporary directory that can safely be removed.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="added-functions-0-0-9">Added functions<a class="anchor" aria-label="anchor" href="#added-functions-0-0-9"></a></h4>
+<ul><li>Add function <code><a href="../reference/create_tempdir.html">create_tempdir()</a></code> to create a temporary directory that can safely be removed.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -127,10 +114,13 @@
 <div class="section level4">
 <h4 id="breaking-changes-0-0-8">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-8"></a></h4>
 <ul><li>Removed unused <code>check_os_is_windows()</code>.</li>
-<li>Added <code><a href="../reference/head_tail.html">head_tail()</a></code> to show the <code>head</code> and <code>tail</code> of an object.</li>
 <li>Use <code>roxygen2</code> version 8.0.0.</li>
 <li>
 <code><a href="../reference/not_in.html">not_in()</a></code>: <code>x</code> and <code>table</code> have to be a vector or factor (as was always documented) to prevent returning <code>x</code> if <code>x</code> or <code>table</code> is a <code>list</code>.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="added-functions-0-0-8">Added functions<a class="anchor" aria-label="anchor" href="#added-functions-0-0-8"></a></h4>
+<ul><li>Add <code><a href="../reference/head_tail.html">head_tail()</a></code> to show the first and last part of an object.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -154,15 +144,6 @@
 <li>
 <code><a href="../reference/create_dir.html">create_dir()</a></code>: <code>dir</code> ending in <code>\.</code> now is, as was documented, an error instead of silently denoting the working directory. Hardcode newlines instead of using <code><a href="../reference/wrap_text.html">wrap_text()</a></code> makes it easier to test warnings.</li>
 </ul></div>
-<div class="section level4">
-<h4 id="miscellaneous-0-0-6">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-6"></a></h4>
-<ul><li>Run tests when checking the package. Adjusted tests and example to accommodate bugfix to <code><a href="https://rdrr.io/r/tools/fileutils.html" class="external-link">tools::file_path_sans_ext()</a></code> in <code>R 4.6.0</code>.</li>
-<li>
-<code>check_input()</code> and <code><a href="../reference/replace_vals.html">replace_vals()</a></code>: update tests that failed because of different sort order for uppercase vs. lowercase characters caused by locale settings (see <code><a href="https://rdrr.io/r/base/locales.html" class="external-link">Sys.getlocale()</a></code>). This also affects the order of factor levels and thus the output of <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor()</a></code>.</li>
-<li>Make the location of newlines more predictable by hardcoding newlines using <code>\n</code> instead of using <code><a href="../reference/wrap_text.html">wrap_text()</a></code> in warnings.</li>
-<li>Combine elements of workflows <code>check-standard.yaml</code> and <code>check-no-suggests.yaml</code> to check if the package functions correctly without the dependencies listed in <code>Suggests</code> which I use for documentation.</li>
-<li>Note that <code><a href="../reference/not_in.html">not_in()</a></code> does not consider names when matching.</li>
-</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.5" id="progutils-005">progutils 0.0.5<a class="anchor" aria-label="anchor" href="#progutils-005"></a></h2>
@@ -170,11 +151,6 @@
 <h4 id="breaking-changes-0-0-5">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-5"></a></h4>
 <ul><li>
 <code><a href="../reference/replace_vals.html">replace_vals()</a></code>: gained argument <code>signal_old_ignore_case</code>. Bugfix for, and more consistent handling of, <code>NA</code> in factors. Values in messages are no longer sorted alphabetically.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="miscellaneous-0-0-5">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-5"></a></h4>
-<ul><li>No need to import <code>osVersion</code> from <code>utils</code> because <code>utils</code> itself is imported.</li>
-<li>GitHub action <code>check-standard</code> now also runs on <code>R 4.1.0</code> on ubuntu and Windows, is triggered every Saturday on 04:23 UTC, and can be triggered manually (trigger it once manually on the main branch to be able to trigger it manually on other branches).</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -195,11 +171,6 @@
 <li>
 <code>unpaste_unquote</code>: the opposite of <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>.</li>
 </ul></div>
-<div class="section level4">
-<h4 id="miscellaneous-0-0-4">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-4"></a></h4>
-<ul><li>
-<code>progutils</code> now uses GitHub action <code>check-standard</code> on all branches.</li>
-</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.3" id="progutils-003">progutils 0.0.3<a class="anchor" aria-label="anchor" href="#progutils-003"></a></h2>
@@ -207,6 +178,8 @@
 <h4 id="breaking-changes-0-0-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-3"></a></h4>
 <ul><li>
 <code>checkinput</code>: increased minimum version to <code>0.1.0</code>.</li>
+<li>Add <code>stats</code> and <code>tools</code> as dependencies in the <code>Suggests</code> field because they are linked to in help pages.</li>
+<li>No longer import <code><a href="https://rdrr.io/r/methods/methodUtilities.html" class="external-link">methods::formalArgs()</a></code>.</li>
 <li>
 <code><a href="../reference/create_dir.html">create_dir()</a></code>: show the warnings if creating a directory fails.</li>
 <li>
@@ -228,17 +201,9 @@
 <code><a href="../reference/reorder_levels.html">reorder_levels()</a></code>: reorder factor levels.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="updated-documentation-0-0-3">Updated documentation<a class="anchor" aria-label="anchor" href="#updated-documentation-0-0-3"></a></h4>
-<ul><li>Add <code>stats</code> and <code>tools</code> as dependencies in the <code>Suggests</code> field because they are linked to in help pages.</li>
-<li>No longer import <code><a href="https://rdrr.io/r/methods/methodUtilities.html" class="external-link">methods::formalArgs()</a></code>.</li>
-<li>Replace section title <code>Note</code> (created through <code>@Note</code>) by section title <code>Notes</code> (created through <code>@section Notes</code>). Idem for <code>Programming note</code>.</li>
-<li>
-<code><a href="../reference/create_dir.html">create_dir()</a></code>: move some documentation to <code>create_path()</code>; document format of date-time stamp with same case as <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strftime()</a></code>.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="miscellaneous-0-0-3">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-0-3"></a></h4>
+<h4 id="documentation-0-0-3">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-0-3"></a></h4>
 <ul><li>
-<code>progutils</code> now uses GitHub action <code>check-standard</code> on all branches (see <code>?usethis::use_github_action()</code>).</li>
+<code><a href="../reference/create_dir.html">create_dir()</a></code>: move some documentation to <code>create_path()</code>; document format of date-time stamp with same case as <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strftime()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">

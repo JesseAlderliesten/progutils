@@ -1,11 +1,16 @@
 # Changelog
 
+## progutils 0.1.0
+
+#### Breaking changes
+
+- Dependency `checkinput`: increase minimum version from `0.6.0` to
+  `0.7.0` to have the new default `all = FALSE` instead of `all = TRUE`
+  in `make_natural()`.
+
 ## progutils 0.0.14
 
-#### Miscellaneous
-
-- Remove references to non-exported functions.
-- Stylistic updates to `See also` section and `Examples`.
+- Stylistic updates.
 
 ## progutils 0.0.13
 
@@ -16,11 +21,6 @@
   implicit prior default `FALSE`), fixing issue
   [\#1](https://github.com/JesseAlderliesten/progutils/issues/1).
 
-#### Miscellaneous
-
-- Update families and function titles to have a better package index.
-- Use a custom package index for the website.
-
 ## progutils 0.0.12
 
 #### Breaking changes
@@ -29,7 +29,7 @@
   characters other than dots and underscores by underscores instead of
   replacing non-alphanumeric characters other than underscores by dots.
 
-#### Miscellaneous
+#### Documentation
 
 - [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md):
   moved `Note` to `Details`. Condensed example section.
@@ -41,15 +41,8 @@
 - [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md):
   no longer erroneously document that `n` can be zero. Removed
   uninformative example.
-- [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md):
-  updated warning if `filename` contains slashes, so it is possible to
-  call
-  [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
-  from
-  [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md).
 - [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md):
   add section `Programming notes` about file separators.
-- Stylistic updates to function documentation.
 
 ## progutils 0.0.11
 
@@ -77,22 +70,14 @@
   `TRUE`, leading and trailing newlines into a single blank character
   instead of removing them. Retains leading and trailing newlines if
   `ignore_newlines` is `FALSE`.
+
+#### Added functions
+
 - Add functions
   [`file_path_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
   [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
   and
   [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
-
-#### Miscellaneous
-
-- `NEWS`: stylistic update.
-- `README`: refer to website when appropriate. Stylistic update.
-
-## progutils 0.0.10
-
-#### Miscellaneous
-
-- Add pkgdown website: `https://jessealderliesten.github.io/progutils/`.
 
 ## progutils 0.0.9
 
@@ -103,6 +88,9 @@
   [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html).
 - [`progutils::paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html):
   move to `checkinput` and re-export it to `progutils`.
+
+#### Added functions
+
 - Add function
   [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
   to create a temporary directory that can safely be removed.
@@ -112,13 +100,16 @@
 #### Breaking changes
 
 - Removed unused `check_os_is_windows()`.
-- Added
-  [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md)
-  to show the `head` and `tail` of an object.
 - Use `roxygen2` version 8.0.0.
 - [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md):
   `x` and `table` have to be a vector or factor (as was always
   documented) to prevent returning `x` if `x` or `table` is a `list`.
+
+#### Added functions
+
+- Add
+  [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md)
+  to show the first and last part of an object.
 
 ## progutils 0.0.7
 
@@ -153,31 +144,6 @@
   [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
   makes it easier to test warnings.
 
-#### Miscellaneous
-
-- Run tests when checking the package. Adjusted tests and example to
-  accommodate bugfix to
-  [`tools::file_path_sans_ext()`](https://rdrr.io/r/tools/fileutils.html)
-  in `R 4.6.0`.
-- `check_input()` and
-  [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md):
-  update tests that failed because of different sort order for uppercase
-  vs. lowercase characters caused by locale settings (see
-  [`Sys.getlocale()`](https://rdrr.io/r/base/locales.html)). This also
-  affects the order of factor levels and thus the output of
-  [`as.factor()`](https://rdrr.io/r/base/factor.html).
-- Make the location of newlines more predictable by hardcoding newlines
-  using `\n` instead of using
-  [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
-  in warnings.
-- Combine elements of workflows `check-standard.yaml` and
-  `check-no-suggests.yaml` to check if the package functions correctly
-  without the dependencies listed in `Suggests` which I use for
-  documentation.
-- Note that
-  [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
-  does not consider names when matching.
-
 ## progutils 0.0.5
 
 #### Breaking changes
@@ -186,15 +152,6 @@
   gained argument `signal_old_ignore_case`. Bugfix for, and more
   consistent handling of, `NA` in factors. Values in messages are no
   longer sorted alphabetically.
-
-#### Miscellaneous
-
-- No need to import `osVersion` from `utils` because `utils` itself is
-  imported.
-- GitHub action `check-standard` now also runs on `R 4.1.0` on ubuntu
-  and Windows, is triggered every Saturday on 04:23 UTC, and can be
-  triggered manually (trigger it once manually on the main branch to be
-  able to trigger it manually on other branches).
 
 ## progutils 0.0.4
 
@@ -213,15 +170,15 @@
 - `unpaste_unquote`: the opposite of
   [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html).
 
-#### Miscellaneous
-
-- `progutils` now uses GitHub action `check-standard` on all branches.
-
 ## progutils 0.0.3
 
 #### Breaking changes
 
 - `checkinput`: increased minimum version to `0.1.0`.
+- Add `stats` and `tools` as dependencies in the `Suggests` field
+  because they are linked to in help pages.
+- No longer import
+  [`methods::formalArgs()`](https://rdrr.io/r/methods/methodUtilities.html).
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
   show the warnings if creating a directory fails.
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
@@ -242,24 +199,12 @@
 - [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md):
   reorder factor levels.
 
-#### Updated documentation
+#### Documentation
 
-- Add `stats` and `tools` as dependencies in the `Suggests` field
-  because they are linked to in help pages.
-- No longer import
-  [`methods::formalArgs()`](https://rdrr.io/r/methods/methodUtilities.html).
-- Replace section title `Note` (created through `@Note`) by section
-  title `Notes` (created through `@section Notes`). Idem for
-  `Programming note`.
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
   move some documentation to `create_path()`; document format of
   date-time stamp with same case as
   [`strftime()`](https://rdrr.io/r/base/strptime.html).
-
-#### Miscellaneous
-
-- `progutils` now uses GitHub action `check-standard` on all branches
-  (see `?usethis::use_github_action()`).
 
 ## progutils 0.0.2
 

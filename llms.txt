@@ -3,25 +3,13 @@
 `progutils` contains utility functions, for example to reorder values,
 check equality, construct messages, or handle files and directories.
 
-## Folder structure
-
-``` R
-├── .github
-│   └── workflows: workflows to run tests with GitHub Actions
-├── R: functions
-├── inst
-│   └── tinytest: tests
-├── man: help-files
-└── tests: setup to use 'tinytest' for testing
-```
-
 ## Installation
 
 You can visit the [progutils
 website](https://jessealderliesten.github.io/progutils/) to explore the
 package. To use `progutils`, you have to install it from
 [GitHub](https://github.com/JesseAlderliesten/progutils) using the
-following code in R (you need to run R as administrator):
+following R code (you need to run R as administrator):
 
 ``` r
 
