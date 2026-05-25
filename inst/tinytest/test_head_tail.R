@@ -44,15 +44,15 @@ expect_silent(expect_identical(head_tail(x = numeric(0L), n = 1), numeric(0L)))
 ##### Erroneous input #####
 expect_error(
   head_tail(x, n = 0),
-  pattern = "checkinput::all_natural(n) is not TRUE", fixed = TRUE)
+  pattern = "checkinput::is_natural(n) is not TRUE", fixed = TRUE)
 
 expect_error(
   head_tail(x, n = 4.1),
-  pattern = "checkinput::all_natural(n) is not TRUE", fixed = TRUE)
+  pattern = "checkinput::is_natural(n) is not TRUE", fixed = TRUE)
 
 expect_error(
   head_tail(x, n = "a"),
-  pattern = "checkinput::all_natural(n) is not TRUE", fixed = TRUE)
+  pattern = "checkinput::is_natural(n) is not TRUE", fixed = TRUE)
 
 
 #### Remove objects used in tests ####
