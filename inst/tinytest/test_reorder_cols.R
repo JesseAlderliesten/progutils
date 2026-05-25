@@ -38,12 +38,12 @@ expect_warning(
 
 
 #### Tests ####
-# Normal data.frame input
+# Normal data frame input
 expect_silent(
   expect_identical(reorder_cols(x = test_df, new_order = new_order), output_df)
 )
 
-# Weird data.frame input
+# Weird data frame input
 expect_warning(
   expect_error(
     reorder_cols(x = test_df_weird, new_order = new_order),
@@ -52,7 +52,7 @@ expect_warning(
   pattern = "Names are syntactically invalid: 'NA_character_', '\"\"'",
   strict = TRUE, fixed = TRUE)
 
-# data.frame input without column names
+# data frame input without column names
 expect_error(reorder_cols(x = unname(test_df), new_order = new_order),
              pattern = "'x' should have column names", fixed = TRUE)
 
@@ -78,7 +78,7 @@ expect_error(reorder_cols(x = unname(test_mat), new_order = new_order),
 expect_error(reorder_cols(x = test_df[, 1L, drop = TRUE], new_order = new_order),
              pattern = "'x' should have columns", fixed = TRUE)
 
-# data.frame with zero columns
+# data frame with zero columns
 expect_error(reorder_cols(x = test_df[, 0L, drop = TRUE], new_order = new_order),
              pattern = "'x' should have at least one column", fixed = TRUE)
 
@@ -90,7 +90,7 @@ expect_error(reorder_cols(x = test_mat[, 0L, drop = TRUE], new_order = new_order
 expect_error(reorder_cols(x = character(0), new_order = new_order),
              pattern = "'x' should have columns", fixed = TRUE)
 
-# Weird input to 'new_order', data.frame input to 'x'.
+# Weird input to 'new_order', data frame input to 'x'.
 expect_warning(
   expect_identical(reorder_cols(x = test_df, new_order = new_order_weird),
                    output_df),
