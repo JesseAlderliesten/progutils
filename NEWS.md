@@ -1,7 +1,8 @@
-# progutils 0.0.15
+# progutils 0.1.0
 
-### Miscellaneous
-- ...
+### Breaking changes
+- Dependency `checkinput`: increase minimum version from `0.6.0` to `0.7.0` to
+  have the new default `all = FALSE` instead of `all = TRUE` in `make_natural()`.
 
 
 # progutils 0.0.14
