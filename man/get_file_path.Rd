@@ -18,15 +18,17 @@ used to select file names in \code{dir}.}
 name?}
 }
 \value{
-A character string with the file name matching \code{pattern} if there is exactly
-one such file in directory \code{dir}. Otherwise an error is thrown.
+A character string with the \link[=normalizePath]{normalized} path to the file
+with a name matching \code{pattern} if there is exactly one such file in directory
+\code{dir}. Otherwise an error is thrown. Use \code{\link[=basename]{basename()}} on the result to obtain
+the filename itself.
 }
 \description{
 Check that only one file in directory \code{dir} has a name matching \code{pattern},
 for example before attempting to \link[utils:read.table]{read a file}.
 }
 \details{
-The default \code{"."} for \code{dir} indicates the \link[=getwd]{working directory}.
+The default \code{dir} (\code{"."}) indicates the \link[=getwd]{working directory}.
 
 If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, the error
 message indicates if any case-insensitive match is present.
@@ -34,8 +36,8 @@ message indicates if any case-insensitive match is present.
 In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_file_path()} also finds
 'hidden' files, i.e., files with names that start with a dot.
 
-Paths will be \link[=normalizePath]{normalized} before use, to ensure they still
-work if the \link[=getwd]{working directory} changes. \code{"/"} instead of \code{"\\\\"} is
+Paths will be \link[=normalizePath]{normalized} to ensure they still work if the
+\link[=getwd]{working directory} changes. \code{"/"} instead of \code{"\\\\"} is
 used as argument \link[=normalizePath]{winslash} such that the returned path can
 be used in Windows' file system.
 }
@@ -51,7 +53,7 @@ get_file_path(dir = tempdir(), pattern = "some_file")
 # The same file is found if case-insensitive matching is used:
 get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
 
-# Error reporting presence of case-insensitive match.
+# Error reporting the presence of a case-insensitive match.
 try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 
 # Error reporting no match found.

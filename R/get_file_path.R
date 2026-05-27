@@ -11,7 +11,7 @@
 #' name?
 #'
 #' @details
-#' The default `"."` for `dir` indicates the [working directory][getwd()].
+#' The default `dir` (`"."`) indicates the [working directory][getwd()].
 #'
 #' If `ignore_case` is `FALSE` and no case-sensitive match is found, the error
 #' message indicates if any case-insensitive match is present.
@@ -19,14 +19,16 @@
 #' In contrast to the default of [list.files()], `get_file_path()` also finds
 #' 'hidden' files, i.e., files with names that start with a dot.
 #'
-#' Paths will be [normalized][normalizePath()] before use, to ensure they still
-#' work if the [working directory][getwd()] changes. `"/"` instead of `"\\"` is
+#' Paths will be [normalized][normalizePath()] to ensure they still work if the
+#' [working directory][getwd()] changes. `"/"` instead of `"\\"` is
 #' used as argument [winslash][normalizePath()] such that the returned path can
 #' be used in Windows' file system.
 #'
 #' @returns
-#' A character string with the file name matching `pattern` if there is exactly
-#' one such file in directory `dir`. Otherwise an error is thrown.
+#' A character string with the [normalized][normalizePath()] path to the file
+#' with a name matching `pattern` if there is exactly one such file in directory
+#' `dir`. Otherwise an error is thrown. Use [basename()] on the result to obtain
+#' the filename itself.
 #'
 #' @seealso
 #' [create_dir()] to create a directory if does not yet exist,
@@ -52,7 +54,7 @@
 #' # The same file is found if case-insensitive matching is used:
 #' get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
 #'
-#' # Error reporting presence of case-insensitive match.
+#' # Error reporting the presence of a case-insensitive match.
 #' try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 #'
 #' # Error reporting no match found.
@@ -83,8 +85,10 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALS
     }
   }
 
-  files_present <- list.files(path = dir, pattern = pattern, all.files = TRUE,
-                              ignore.case = ignore_case)
+  files_present <- normalizePath(
+    list.files(path = dir, pattern = pattern, all.files = TRUE,
+               full.names = TRUE, ignore.case = ignore_case),
+    winslash = "/", mustWork = FALSE)
   # 'list.files()' also returns directories (even though 'include.dirs' is FALSE
   # by default) because 'recursive' is also FALSE.
   if(length(files_present) > 0L) {
@@ -95,11 +99,11 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALS
   }
 
   msg_match <- paste0(
-    "case-", if(ignore_case) {"in"}, "sensitive matches to pattern '",
+    if(!ignore_case) {"case-sensitive "}, "matches to pattern '",
     pattern, "' are present in directory\n'", dir, "'")
 
   if(length(files_present) > 1L) {
-    stop(paste0("Multiple ", msg_match, ": ", paste_quoted(files_present), "!"))
+    stop(paste0("Multiple ", msg_match, ": ", paste_quoted(basename(files_present)), "!"))
   }
 
   if(length(files_present) == 0L) {
@@ -116,12 +120,12 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALS
           msg_match <- paste0(
             msg_match,
             ".\nHowever, a case-insensitive match to 'pattern' is present: ",
-            paste_quoted(match_case_insensitive))
+            paste_quoted(basename(match_case_insensitive)))
         } else {
           msg_match <- paste0(
             msg_match,
             ".\nHowever, case-insensitive matches to 'pattern' are present: ",
-            paste_quoted(match_case_insensitive))
+            paste_quoted(basename(match_case_insensitive)))
         }
       }
     }
