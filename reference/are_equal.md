@@ -38,17 +38,19 @@ Code `abs(x - y) < tol` was taken from `dplyr::near()`.
 
 ## See also
 
+[`checkinput::is_natural()`](https://jessealderliesten.github.io/checkinput/reference/is_natural.html)
+to check for element-wise near-equality to natural numbers;
 [`all.equal()`](https://rdrr.io/r/base/all.equal.html) to check more
-generally for near-equality,
+generally for near-equality;
 [`identical()`](https://rdrr.io/r/base/identical.html) to check for
-exact equality, [Comparison](https://rdrr.io/r/base/Comparison.html) and
-[`match()`](https://rdrr.io/r/base/match.html) to use binary operators
-to check (in)equality
-
-[R FAQ
+exact equality and [Comparison](https://rdrr.io/r/base/Comparison.html)
+to do so using binary operators;
+[`match()`](https://rdrr.io/r/base/match.html) and
+[`progutils::not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
+to compare character vectors; [R FAQ
 7.31](https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
-for background on numerical equality; the vignette about type coercion
-in package `checkinput`:
+for background on numerical equality; the vignette *Type coercion in
+vectors* in package `checkinput`:
 `vignette("Type_Coercion", package = "checkinput")`.
 
 Other functions to check equality:

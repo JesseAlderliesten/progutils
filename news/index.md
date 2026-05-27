@@ -1,5 +1,12 @@
 # Changelog
 
+## progutils 0.2.0
+
+#### Breaking changes
+
+- Dependency `checkinput`: increase minimum version from `0.7.0` to
+  `0.8.0` to update argument name `allow_zero` to `allow_zero_length`.
+
 ## progutils 0.1.0
 
 #### Breaking changes
@@ -7,10 +14,6 @@
 - Dependency `checkinput`: increase minimum version from `0.6.0` to
   `0.7.0` to have the new default `all = FALSE` instead of `all = TRUE`
   in `make_natural()`.
-
-## progutils 0.0.14
-
-- Stylistic updates.
 
 ## progutils 0.0.13
 

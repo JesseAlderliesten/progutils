@@ -9,7 +9,7 @@ numeric errors to make are_equal() safer than ==."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,13 +79,13 @@ comparisons involving numeric <code>NA</code>s (i.e., <code>NA_integer_</code> a
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> to check more generally for near-equality,
-<code><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical()</a></code> to check for exact equality,
-<a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a> and <code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code> to use binary operators to check (in)equality</p>
-<p><a href="https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" class="external-link"><span style="R">R</span> FAQ 7.31</a>
-for background on numerical equality;
-the vignette about type coercion in package <code>checkinput</code>:
-<code>vignette("Type_Coercion", package = "checkinput")</code>.</p>
+    <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_natural.html" class="external-link">checkinput::is_natural()</a></code> to check for element-wise near-equality to natural
+numbers; <code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> to check more generally for near-equality;
+<code><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical()</a></code> to check for exact equality and <a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a> to do so using
+binary operators; <code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code> and <code><a href="not_in.html">progutils::not_in()</a></code> to compare character
+vectors; <a href="https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" class="external-link"><span style="R">R</span> FAQ 7.31</a>
+for background on numerical equality; the vignette <em>Type coercion in vectors</em>
+in package <code>checkinput</code>: <code>vignette("Type_Coercion", package = "checkinput")</code>.</p>
 <p>Other functions to check equality:
 <code><a href="check_case.html">check_case()</a></code>,
 <code><a href="get_filename.html">get_filename()</a></code>,
