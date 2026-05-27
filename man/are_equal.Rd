@@ -39,14 +39,13 @@ are_equal(x = 3, y = c(2, 3, 3 + 1e-8, NA, Inf))
 
 }
 \seealso{
-\code{\link[=all.equal]{all.equal()}} to check more generally for near-equality,
-\code{\link[=identical]{identical()}} to check for exact equality,
-\link{Comparison} and \code{\link[=match]{match()}} to use binary operators to check (in)equality
-
-\href{https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f}{\R FAQ 7.31}
-for background on numerical equality;
-the vignette about type coercion in package \code{checkinput}:
-\code{vignette("Type_Coercion", package = "checkinput")}.
+\code{\link[checkinput:is_natural]{checkinput::is_natural()}} to check for element-wise near-equality to natural
+numbers; \code{\link[=all.equal]{all.equal()}} to check more generally for near-equality;
+\code{\link[=identical]{identical()}} to check for exact equality and \link{Comparison} to do so using
+binary operators; \code{\link[=match]{match()}} and \code{progutils::not_in()} to compare character
+vectors; \href{https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f}{\R FAQ 7.31}
+for background on numerical equality; the vignette \emph{Type coercion in vectors}
+in package \code{checkinput}: \code{vignette("Type_Coercion", package = "checkinput")}.
 
 Other functions to check equality:
 \code{\link[=check_case]{check_case()}},

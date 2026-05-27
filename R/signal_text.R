@@ -50,7 +50,7 @@ signal_text <- function(text, signal = c("error", "warning", "message", "quiet")
                         origin = character(0)) {
   signal <- match.arg(signal)
   text <- vect_to_char(x = text, ignore_newlines = FALSE)
-  stopifnot(checkinput::is_character(origin, allow_zero = TRUE))
+  stopifnot(checkinput::is_character(origin, allow_zero_length = TRUE))
 
   if(length(origin) > 0L) {
     origin <- paste0("\n< This ", signal, " originated from: ", origin, ". >")

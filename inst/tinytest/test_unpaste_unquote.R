@@ -104,25 +104,25 @@ expect_silent(
 ##### Erroneous input #####
 expect_error(
   unpaste_unquote(x = x, collapse = "", quotemarks = c("'", "\"")),
-  pattern = "checkinput::all_characters(collapse, allow_zero = TRUE)",
+  pattern = "checkinput::all_characters(collapse, allow_zero_length = TRUE)",
   fixed = TRUE
 )
 
 expect_error(
   unpaste_unquote(x = x, collapse = NULL, quotemarks = c("'", "\"")),
-  pattern = "checkinput::all_characters(collapse, allow_zero = TRUE)",
+  pattern = "checkinput::all_characters(collapse, allow_zero_length = TRUE)",
   fixed = TRUE
 )
 
 expect_error(
   unpaste_unquote(x = x, collapse = ", ", quotemarks = ""),
-  pattern = "checkinput::all_characters(quotemarks, allow_zero = TRUE)",
+  pattern = "checkinput::all_characters(quotemarks, allow_zero_length = TRUE)",
   fixed = TRUE
 )
 
 expect_error(
   unpaste_unquote(x = x, collapse = ", ", quotemarks = NULL),
-  pattern = "checkinput::all_characters(quotemarks, allow_zero = TRUE)",
+  pattern = "checkinput::all_characters(quotemarks, allow_zero_length = TRUE)",
   fixed = TRUE
 )
 

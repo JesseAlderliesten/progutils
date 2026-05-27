@@ -21,9 +21,8 @@ knitr::opts_chunk$set(
 equality, construct messages, or handle files and directories.
 
 ## Installation
-You can visit the
-[progutils website](https://jessealderliesten.github.io/progutils/) to explore
-the package. To use `progutils`, you have to install it from
+Visit the [progutils website](https://jessealderliesten.github.io/progutils/) to
+explore the package, or install `progutils` from
 [GitHub](https://github.com/JesseAlderliesten/progutils) using the following
 R code (you need to run R as administrator):
 
