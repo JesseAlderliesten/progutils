@@ -32,8 +32,8 @@
 unpaste_unquote <- function(x, collapse = c(", ", "; "),
                             quotemarks = c("'", "\"")) {
   stopifnot(is.character(x),
-            checkinput::all_characters(collapse, allow_zero = TRUE),
-            checkinput::all_characters(quotemarks, allow_zero = TRUE))
+            checkinput::all_characters(collapse, allow_zero_length = TRUE),
+            checkinput::all_characters(quotemarks, allow_zero_length = TRUE))
 
   for(mark in quotemarks) {
     x <- gsub(pattern = mark, replacement = "", x = x, fixed = TRUE)
