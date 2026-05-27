@@ -101,7 +101,7 @@ try(replace_vals(x = x, old = letters[13:12], new = "b",
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
 \code{\link[=check_case]{check_case()}},
-\code{\link[=get_filename]{get_filename()}},
+\code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=not_in]{not_in()}}
 
 Other functions to modify character vectors:

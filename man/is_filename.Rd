@@ -52,7 +52,7 @@ Ways to make \code{is_filename()} even stricter:
 \item do not allow filenames to end with a hyphen
 \item case-insensitive matching to \code{filename} to determine if it exists?
 \code{filename} should \strong{not} point to a directory (see \code{utils::file_test()},
-\code{\link[=get_filename]{get_filename()}}, \code{\link[=create_tempdir]{create_tempdir()}}, \code{\link[=create_file_path]{create_file_path()}}).
+\code{\link[=get_file_path]{get_file_path()}}, \code{\link[=create_tempdir]{create_tempdir()}}, \code{\link[=create_file_path]{create_file_path()}}).
 \item Impose a limit on the length:
 https://blog.r-project.org/2023/03/07/path-length-limit-on-windows/
 \item See also functions \code{create_file_path()}, \code{make_filename()} and
@@ -88,7 +88,7 @@ Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
-\code{\link[=get_filename]{get_filename()}},
+\code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}

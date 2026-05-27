@@ -42,7 +42,7 @@
 #' - do not allow filenames to end with a hyphen
 #' - case-insensitive matching to `filename` to determine if it exists?
 #'   `filename` should **not** point to a directory (see `utils::file_test()`,
-#'   [get_filename()], [create_tempdir()], [create_file_path()]).
+#'   [get_file_path()], [create_tempdir()], [create_file_path()]).
 #' - Impose a limit on the length:
 #'   https://blog.r-project.org/2023/03/07/path-length-limit-on-windows/
 #' - See also functions `create_file_path()`, `make_filename()` and

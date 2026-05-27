@@ -54,7 +54,7 @@ Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=get_filename]{get_filename()}},
+\code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=is_filename]{is_filename()}},
 \code{\link[=is_path]{is_path()}}
 }

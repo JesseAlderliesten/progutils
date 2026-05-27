@@ -81,7 +81,7 @@ try(is_path(file.path(getwd(), "ab|cd")))
 \seealso{
 \code{\link[=create_file_path]{create_file_path()}} to create a path (with references there about file
 paths), \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist,
-\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern
+\code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern
 
 \code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths.
 
@@ -90,7 +90,7 @@ Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
-\code{\link[=get_filename]{get_filename()}},
+\code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=is_filename]{is_filename()}}
 }
 \concept{functions to handle paths and directories}

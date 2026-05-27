@@ -16,7 +16,7 @@
 #' If `ignore_case` is `FALSE` and no case-sensitive match is found, the error
 #' message indicates if any case-insensitive match is present.
 #'
-#' In contrast to the default of [list.files()], `get_filename()` also finds
+#' In contrast to the default of [list.files()], `get_file_path()` also finds
 #' 'hidden' files, i.e., files with names that start with a dot.
 #'
 #' Paths will be [normalized][normalizePath()] before use, to ensure they still
@@ -47,29 +47,29 @@
 #' # Create the files
 #' file.create(my_tempfiles)
 #'
-#' get_filename(dir = tempdir(), pattern = "some_file")
+#' get_file_path(dir = tempdir(), pattern = "some_file")
 #'
 #' # The same file is found if case-insensitive matching is used:
-#' get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
+#' get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
 #'
 #' # Error reporting presence of case-insensitive match.
-#' try(get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
+#' try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 #'
 #' # Error reporting no match found.
-#' try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+#' try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
 #'                  ignore_case = TRUE))
-#' try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+#' try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
 #'                  ignore_case = FALSE))
 #'
 #' # Error if multiple matches are present.
-#' try(get_filename(dir = tempdir(), pattern = "_filename"))
+#' try(get_file_path(dir = tempdir(), pattern = "_filename"))
 #'
 #' # Clean up
 #' unlink(x = my_tempfiles)
 #' rm(my_tempfiles)
 #'
 #' @export
-get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
+get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
   stopifnot(checkinput::is_character(dir), checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 

@@ -45,7 +45,7 @@
 #' yet exist.
 #'
 #' @seealso
-#' [get_filename()] to check if a file exists and is a unique match to a pattern,
+#' [get_file_path()] to check if a file exists and is a unique match to a pattern,
 #' [file.path()] to construct file paths in a platform-independent way,
 #' [normalizePath()] to create absolute normalised paths,
 #' [create_dir()] to create a directory if it does not yet exist
