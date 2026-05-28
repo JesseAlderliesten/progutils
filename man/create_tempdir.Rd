@@ -70,7 +70,6 @@ Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=get_file_path]{get_file_path()}},
-\code{\link[=is_filename]{is_filename()}},
 \code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}
