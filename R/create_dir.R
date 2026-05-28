@@ -88,7 +88,7 @@
 #' @export
 create_dir <- function(dir = file.path(".", "output"), add_date = TRUE) {
   # See 'Details' in is_path() about the restrictions imposed on 'dir'.
-  stopifnot(is_path(dir, as_file = FALSE), checkinput::is_logical(add_date))
+  stopifnot(is_path(dir, to_file = FALSE), checkinput::is_logical(add_date))
 
   if(add_date) {
     dir <- file.path(dir, format(Sys.time(), format = "%Y_%m_%d"))
