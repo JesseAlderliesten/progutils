@@ -39,8 +39,6 @@ Create a file path, creating the indicated directory if it does not yet exist.
 \code{filename} should contain a file extension (i.e., a dot followed by
 alphanumeric characters until the end of the file name). It should not
 contain slashes or backslashes: use \code{dir} to indicate (sub)directories.
-Non-alphanumeric characters other than dots and underscores preceding the
-file extension are replaced by underscores, with a warning.
 
 The default \code{dir} is a subdirectory with the current date in the
 \link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
@@ -105,7 +103,6 @@ Other functions to handle paths and directories:
 \code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=get_file_path]{get_file_path()}},
-\code{\link[=is_filename]{is_filename()}},
 \code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}
