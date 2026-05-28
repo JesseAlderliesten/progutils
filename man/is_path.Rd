@@ -4,23 +4,23 @@
 \alias{is_path}
 \title{Check that \code{x} is a valid path}
 \usage{
-is_path(path, as_file = FALSE)
+is_path(path, to_file = FALSE)
 }
 \arguments{
 \item{path}{\link[checkinput:is_character]{character string} with the path.}
 
-\item{as_file}{\code{TRUE} or \code{FALSE}: is \code{path} intended to point to a file
-instead of to a folder?}
+\item{to_file}{\code{TRUE} or \code{FALSE}: is \code{path} intended to point to a file?}
 }
 \value{
-\code{TRUE}: an error occurs if \code{path} is not a valid path.
+\code{TRUE}: an error occurs if \code{path} is not a valid path or, if \code{to_file} is
+\code{TRUE}, \code{basename(path)} is not a valid filename that includes an extension.
 }
 \description{
 Check that \code{x} is a path that is likely to be valid.
 }
 \details{
 \code{is_path()} puts some restrictions on paths so it can be used to check for
-valid paths before creating a directory:
+valid paths before creating a directory or a file:
 \itemize{
 \item \code{path} should \strong{not} contain the characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, \code{>},
 nor any of the control characters (\code{ASCII} octal codes 000 through 037 and
@@ -35,13 +35,27 @@ these names, and these names followed by an extension.
 used instead (see \code{\link[=create_tempdir]{create_tempdir()}}).
 }
 
-These restrictions consider characters that would lead to an error in Windows
-because they are not allowed; characters that  would lead to a mismatch
-between the created directory and the returned path because they are silently
-removed in Windows; and words that are reserved names in Windows.
+If \code{to_file} is \code{TRUE}, the part after the last slash is considered the
+filename. The filename should adhere to the same restrictions as the path.
+
+In addition:
+\itemize{
+\item the filename should include a file extension. The compression extensions
+\code{".gz"}, \code{".bz2"} or \code{".xz"} are \strong{not} considered file extensions but are
+allowed to be present.
+\item the filename should \strong{not} start with a space.
+\item the filename should \strong{not} contain \code{:}.
+}
+
+These restrictions on the path and the filename consider characters that
+would lead to an error in Windows because they are not allowed; characters
+that would lead to a mismatch between the created directory and the returned
+path because they are silently removed in Windows; and words that are
+reserved names in Windows.
 
 In contrast to functions from \code{checkinput}, \code{is_path} will produce an error
-if \code{path} is not a valid path.
+if \code{path} is not a valid path or, if \code{to_file} is \code{TRUE}, \code{basename(path)} is
+not a valid filename that includes an extension.
 }
 \section{Programming notes}{
 
@@ -68,8 +82,26 @@ the message (e.g., \code{"Repeated"}), possibly followed by a check like
 \section{References}{
 
 \itemize{
-\item https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
-\item https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits
+\item Naming files, paths, and namespaces from
+\href{https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file}{Microsoft}
+\item Comparison of file systems from
+\href{https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits}{Wikipedia}
+}
+
+Although not enforced by \code{is_path()}, it is good practice to also avoid
+the characters \code{+}, \verb{,}, \verb{;}, \code{=}, \code{[}, \verb{]}, \code{!}, \code{$}, \verb{#}, \code{@}, and possibly
+\verb{\{}, \verb{\}}, \code{(}, \verb{)}, \verb{'}, \verb{\%}, \code{&}, \if{html}{\out{<backtick>}}, \code{^}, \code{~}.
+
+Ways to make \code{is_path()} even stricter:
+\itemize{
+\item do not allow filenames to start with a hyphen
+\item do not allow filenames to end with a hyphen
+\item case-insensitive matching to \code{filename} to determine if it exists?
+\code{filename} should \strong{not} point to a directory (see \code{utils::file_test()},
+\code{\link[=get_file_path]{get_file_path()}}, \code{\link[=create_tempdir]{create_tempdir()}}, \code{\link[=create_file_path]{create_file_path()}}).
+\item Impose a limit on the length:
+https://blog.r-project.org/2023/03/07/path-length-limit-on-windows/
+\item See also functions \code{create_file_path()} and \code{fs::path_real()}.
 }
 }
 
@@ -77,8 +109,18 @@ the message (e.g., \code{"Repeated"}), possibly followed by a check like
 is_path(getwd())
 try(is_path(file.path(getwd(), "ab|cd")))
 
+is_path(file.path(getwd(), "abcd.txt"), to_file = TRUE)
+is_path(file.path(getwd(), "abcd.txt.gz"), to_file = TRUE)
+
+try(is_path(file.path(getwd(), "abcd"), to_file = TRUE))
+try(is_path(file.path(getwd(), "abcd.gz"), to_file = TRUE))
+try(is_path(file.path(getwd(), "ab:cd.txt"), to_file = TRUE))
+try(is_path(file.path(getwd(), "ab|cd.txt"), to_file = TRUE))
+
 }
 \seealso{
+\code{utils::file_test()} and references there on file existence and permissions,
+\code{fs::path_real()}.
 \code{\link[=create_file_path]{create_file_path()}} to create a path (with references there about file
 paths), \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist,
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern
@@ -90,7 +132,6 @@ Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
 \code{\link[=file_path_no_ext]{file_path_no_ext()}},
-\code{\link[=get_file_path]{get_file_path()}},
-\code{\link[=is_filename]{is_filename()}}
+\code{\link[=get_file_path]{get_file_path()}}
 }
 \concept{functions to handle paths and directories}
