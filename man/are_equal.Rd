@@ -49,7 +49,7 @@ in package \code{checkinput}: \code{vignette("Type_Coercion", package = "checkin
 
 Other functions to check equality:
 \code{\link[=check_case]{check_case()}},
-\code{\link[=get_filename]{get_filename()}},
+\code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=not_in]{not_in()}},
 \code{\link[=replace_vals]{replace_vals()}}
 }

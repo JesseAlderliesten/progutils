@@ -86,7 +86,7 @@ which this function is based.
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
 \code{\link[=check_case]{check_case()}},
-\code{\link[=get_filename]{get_filename()}},
+\code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=replace_vals]{replace_vals()}}
 }
 \concept{functions to check equality}

@@ -4,44 +4,51 @@
 \alias{is_path}
 \title{Check that \code{x} is a valid path}
 \usage{
-is_path(path, as_file = FALSE)
+is_path(path)
 }
 \arguments{
 \item{path}{\link[checkinput:is_character]{character string} with the path.}
-
-\item{as_file}{\code{TRUE} or \code{FALSE}: is \code{path} intended to point to a file
-instead of to a folder?}
 }
 \value{
-\code{TRUE}: an error occurs if \code{path} is not a valid path.
+\code{TRUE}: an error occurs if \code{path} is not a valid path or if \code{path} contains a
+file extension but the filename is not valid.
 }
 \description{
 Check that \code{x} is a path that is likely to be valid.
 }
 \details{
 \code{is_path()} puts some restrictions on paths so it can be used to check for
-valid paths before creating a directory:
+valid paths before creating a directory or a file:
 \itemize{
 \item \code{path} should \strong{not} contain the characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, \code{>},
 nor any of the control characters (\code{ASCII} octal codes 000 through 037 and
 177, see \code{help("regex")}).
-\item \code{path} components should \strong{not} end with a slash, backslash, space or dot
-(\code{"."} and \code{".."} are allowed as first component to indicate the working
-directory and the parent directory, respectively).
+\item \code{path} components (i.e., parts separated by file separators \code{/} or \verb{\\\\})
+should \strong{not} end with a space or dot (\code{"."} and \code{".."} are allowed as
+first component to indicate the working directory and the parent directory,
+respectively).
 \item \code{path} components should \strong{not} be \code{CON}, \code{PRN}, \code{AUX}, \code{NUL},
 \verb{COM<non-zero digit>}, \verb{LPT<non-zero digit>}, case-insensitive variants of
-these names, and these names followed by an extension.
+these names, or these names followed by an extension.
 \item \code{path} should not point to \code{tempdir()}: a temporary subdirectory should be
 used instead (see \code{\link[=create_tempdir]{create_tempdir()}}).
 }
 
-These restrictions consider characters that would lead to an error in Windows
-because they are not allowed; characters that  would lead to a mismatch
-between the created directory and the returned path because they are silently
-removed in Windows; and words that are reserved names in Windows.
+Furthermore, if \code{path} contains a file extension, the part after the last
+slash is considered the filename, which should adhere to the same
+restrictions as the path, and in addition should \strong{not} contain \code{:} nor
+start with a space.
 
-In contrast to functions from \code{checkinput}, \code{is_path} will produce an error
-if \code{path} is not a valid path.
+These restrictions on the path and the filename consider characters that
+would lead to an error in Windows because they are not allowed; characters
+that would lead to a mismatch between the created directory and the returned
+path because they are silently removed in Windows; and words that are
+reserved names in Windows.
+
+\code{path} \strong{not} necessarily has to contain a file separator (i.e., \code{/} or
+\verb{\\\\}), such that \code{is_path()} can be used to check that input to \code{\link[fs:path]{fs::path()}}
+only contains allowed characters. Repeated file separators (e.g., \verb{//} or
+\verb{\\\\\\\\}) are treated as single separators, with a warning.
 }
 \section{Programming notes}{
 
@@ -58,30 +65,45 @@ a file separator, one should write the warning message as
 \code{warning("Repeated '/' or '\\\\'")} which will be printed as
 \verb{Repeated '/' or '\\'}. Checks on the presence of slashes and backslashes
 should use \code{grepl(pattern = "/", x = string)} and
-\code{grepl(pattern = "\\\\\\\\", x = string)} (!). This makes it cumbersome to get
-the correct type and number of slashes to compare with the path recorded in a
+\code{grepl(pattern = "\\\\\\\\", x = string)}. This makes it cumbersome to get the
+correct type and number of slashes to compare with the path recorded in a
 warning message, such that it is more robust to check only for fixed parts of
 the message (e.g., \code{"Repeated"}), possibly followed by a check like
 \code{tinytest::expect_true(dir.exists(string))}.
+
+Trailing slashes or backslashes are allowed, even though these might be
+removed in some operations.
 }
 
 \section{References}{
 
 \itemize{
-\item https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
-\item https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits
+\item Naming files, paths, and namespaces from
+\href{https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file}{Microsoft}
+\item Comparison of file systems from
+\href{https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits}{Wikipedia}
 }
 }
 
 \examples{
 is_path(getwd())
-try(is_path(file.path(getwd(), "ab|cd")))
+try(is_path(fs::path_wd("ab|cd")))
+
+is_path(fs::path_wd("abcd.txt"))
+is_path(fs::path_wd("abcd.txt.gz"))
+
+try(is_path(fs::path_wd("abcd")))
+try(is_path(fs::path_wd("abcd.gz")))
+try(is_path(fs::path_wd("ab:cd.txt")))
+try(is_path(fs::path_wd("ab|cd.txt")))
 
 }
 \seealso{
+\code{utils::file_test()} and references there on file existence and permissions,
+\code{help(fs::path_math)} for various operations on paths,
 \code{\link[=create_file_path]{create_file_path()}} to create a path (with references there about file
 paths), \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist,
-\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern
+\code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern
 
 \code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths.
 
@@ -89,8 +111,6 @@ Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
-\code{\link[=get_filename]{get_filename()}},
-\code{\link[=is_filename]{is_filename()}}
+\code{\link[=get_file_path]{get_file_path()}}
 }
 \concept{functions to handle paths and directories}

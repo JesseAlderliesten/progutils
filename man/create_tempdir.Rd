@@ -9,8 +9,7 @@ create_tempdir(subdir = "subdir")
 \arguments{
 \item{subdir}{A \link[checkinput:is_character]{character string} with the name
 of a \strong{not-yet} existing temporary subdirectory to be created inside
-\code{\link[=tempdir]{tempdir()}}. \code{subdir} should meet the requirements for a valid
-\link[=is_path]{path}.}
+\code{\link[=tempdir]{tempdir()}}. \code{subdir} should be a \link[=is_path]{valid path}.}
 }
 \value{
 The \link[=normalizePath]{normalized} path to the created temporary directory,
@@ -22,7 +21,8 @@ Create a temporary directory that can safely be removed.
 \details{
 \code{subdir} is created inside \code{\link[=tempdir]{tempdir()}} and an error is thrown if it already
 exists. This ensures that \link[=unlink]{removing} the created directory does not
-remove files that are still needed by other processes (see \code{Usage} below).
+remove files that are still needed by other processes (see \verb{Usage in practice}
+below).
 
 It is possible to create subdirectories inside a not-yet existing directory
 (e.g., to create \verb{<tempdir>/output/outputsub} if \verb{<tempdir>/output} does not
@@ -30,8 +30,11 @@ yet exist.
 }
 \section{Side effects}{
 
-The requested temporary directory is created if does not yet exist. An error
-is thrown if the directory already exists or creating the directory fails.
+The requested temporary directory is [created][dir.create)()] if does not yet
+exist. An error is thrown if the directory already exists or creating the
+directory fails.
+
+[dir.create)()]: R:dir.create)()
 }
 
 \section{Usage in practice}{
@@ -55,7 +58,7 @@ tempdir()
 try(create_tempdir(subdir = "examplesubtempdir"))
 
 # It is possible to create recursive directories
-(tempdir_recursive <- create_tempdir(subdir = file.path("abc", "def")))
+(tempdir_recursive <- create_tempdir(subdir = fs::path("abc", "def")))
 
 # Clean up
 unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
@@ -68,9 +71,7 @@ rm(tempdir_recursive, tempdir_std)
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_file_path]{create_file_path()}},
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
-\code{\link[=get_filename]{get_filename()}},
-\code{\link[=is_filename]{is_filename()}},
+\code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}

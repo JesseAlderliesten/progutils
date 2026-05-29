@@ -1,3 +1,20 @@
+# progutils 0.3.0
+
+### Breaking changes
+- Added dependency `fs`.
+- `create_file_path()`: no longer replace non-alphanumeric characters in the
+  filename because reconstituting the filename is brittle.
+- Replace `file_path_no_ext()` by `fs::path_ext_remove()` and `file_path_ext()`  
+  by `fs::path_ext()`.
+- `get_filename()`: rename to `get_file_path()` and return the complete file
+  path instead of only the file name.
+- `is_filename()`: removed, use `is_path()`.
+- `is_path()`: drop argument `as_file`. Instead, check that the filename is
+  valid if a file extension is present.
+- Replace `file.path(".", ...)` and `file.path(getwd(), ...)` with
+  `fs::path_wd(...)`; replace other instances of `file.path()` with `fs::path()`.
+
+
 # progutils 0.2.0
 
 ### Breaking changes

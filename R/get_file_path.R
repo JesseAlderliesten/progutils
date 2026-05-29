@@ -1,40 +1,42 @@
 #' Check that only a single matching file is present
 #'
-#' Check that only one file in directory `dir` has a name matching `pattern`,
-#' for example before attempting to [read a file][utils::read.table()].
+#' Check that only one file in a directory has a name matching `pattern`, for
+#' example before attempting to [read a file][utils::read.table()].
 #'
 #' @param dir Character string with the [path][is_path()] to a directory.
 #' @param pattern Character string containing a [regular expression][base::regex]
-#' used to select file names in `dir`.
+#' used to select names of files that are present in `dir`.
 #' @param ignore_case `TRUE` or `FALSE`: use case-insensitive pattern matching?
 #' @param quietly `TRUE` or `FALSE`: suppress the message with the found file
 #' name?
 #'
 #' @details
-#' The default `"."` for `dir` indicates the [working directory][getwd()].
+#' The default `dir` (`"."`) indicates the [working directory][getwd()].
 #'
 #' If `ignore_case` is `FALSE` and no case-sensitive match is found, the error
 #' message indicates if any case-insensitive match is present.
 #'
-#' In contrast to the default of [list.files()], `get_filename()` also finds
+#' In contrast to the default of [list.files()], `get_file_path()` also finds
 #' 'hidden' files, i.e., files with names that start with a dot.
 #'
-#' Paths will be [normalized][normalizePath()] before use, to ensure they still
-#' work if the [working directory][getwd()] changes. `"/"` instead of `"\\"` is
+#' Paths will be [normalized][normalizePath()] to ensure they still work if the
+#' [working directory][getwd()] changes. `"/"` instead of `"\\"` is
 #' used as argument [winslash][normalizePath()] such that the returned path can
 #' be used in Windows' file system.
 #'
 #' @returns
-#' A character string with the file name matching `pattern` if there is exactly
-#' one such file in directory `dir`. Otherwise an error is thrown.
+#' A character string with the [normalized][normalizePath()] path to the file
+#' with a name matching `pattern` if there is exactly one such file in directory
+#' `dir`. Otherwise an error is thrown. Use [basename()] on the result to obtain
+#' the filename itself.
 #'
 #' @seealso
-#' [create_dir()] to create a directory if does not yet exist,
+#' [create_dir()] to create a directory if does not yet exist;
 #' [file.exists()] and [list.files()] to check for existence of files without
-#' checking they are a unique match to a pattern,
+#' checking they are a unique match to a pattern;
 #' [file.info()] and [file.access()] to extract information about files or
 #' directories;
-#' [file.path()] to construct file paths in a platform-independent way;
+#' [fs::path()] to construct file paths in a platform-independent way;
 #' [normalizePath()] to create absolute paths.
 #'
 #' @family functions to handle paths and directories
@@ -47,29 +49,29 @@
 #' # Create the files
 #' file.create(my_tempfiles)
 #'
-#' get_filename(dir = tempdir(), pattern = "some_file")
+#' get_file_path(dir = tempdir(), pattern = "some_file")
 #'
 #' # The same file is found if case-insensitive matching is used:
-#' get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
+#' get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
 #'
-#' # Error reporting presence of case-insensitive match.
-#' try(get_filename(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
+#' # Error reporting the presence of a case-insensitive match.
+#' try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 #'
 #' # Error reporting no match found.
-#' try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+#' try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
 #'                  ignore_case = TRUE))
-#' try(get_filename(dir = tempdir(), pattern = "missing_filename_abcde",
+#' try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
 #'                  ignore_case = FALSE))
 #'
 #' # Error if multiple matches are present.
-#' try(get_filename(dir = tempdir(), pattern = "_filename"))
+#' try(get_file_path(dir = tempdir(), pattern = "_filename"))
 #'
 #' # Clean up
 #' unlink(x = my_tempfiles)
 #' rm(my_tempfiles)
 #'
 #' @export
-get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
+get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
   stopifnot(checkinput::is_character(dir), checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 
@@ -83,8 +85,10 @@ get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE
     }
   }
 
-  files_present <- list.files(path = dir, pattern = pattern, all.files = TRUE,
-                              ignore.case = ignore_case)
+  files_present <- normalizePath(
+    list.files(path = dir, pattern = pattern, all.files = TRUE,
+               full.names = TRUE, ignore.case = ignore_case),
+    winslash = "/", mustWork = FALSE)
   # 'list.files()' also returns directories (even though 'include.dirs' is FALSE
   # by default) because 'recursive' is also FALSE.
   if(length(files_present) > 0L) {
@@ -95,11 +99,11 @@ get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE
   }
 
   msg_match <- paste0(
-    "case-", if(ignore_case) {"in"}, "sensitive matches to pattern '",
+    if(!ignore_case) {"case-sensitive "}, "matches to pattern '",
     pattern, "' are present in directory\n'", dir, "'")
 
   if(length(files_present) > 1L) {
-    stop(paste0("Multiple ", msg_match, ": ", paste_quoted(files_present), "!"))
+    stop(paste0("Multiple ", msg_match, ": ", paste_quoted(basename(files_present)), "!"))
   }
 
   if(length(files_present) == 0L) {
@@ -116,12 +120,12 @@ get_filename <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE
           msg_match <- paste0(
             msg_match,
             ".\nHowever, a case-insensitive match to 'pattern' is present: ",
-            paste_quoted(match_case_insensitive))
+            paste_quoted(basename(match_case_insensitive)))
         } else {
           msg_match <- paste0(
             msg_match,
             ".\nHowever, case-insensitive matches to 'pattern' are present: ",
-            paste_quoted(match_case_insensitive))
+            paste_quoted(basename(match_case_insensitive)))
         }
       }
     }

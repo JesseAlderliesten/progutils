@@ -15,20 +15,9 @@
 #' The created file path, returned [invisibly][invisible()].
 #'
 #' @details
-#' `filename` should contain a file extension (i.e., a dot followed by
-#' alphanumeric characters until the end of the file name). It should not
-#' contain slashes or backslashes: use `dir` to indicate (sub)directories.
-#' Non-alphanumeric characters other than dots and underscores preceding the
-#' file extension are replaced by underscores, with a warning.
-#'
-#' The default `dir` is a subdirectory with the current date in the
-#' [format][strftime()] `YYYY_mm_dd` in directory `output` below the working
-#' directory. [file.path()] ensures the correct ([platform][.Platform]-dependent)
-#' file separator is used to indicate subdirectories, and `"."` indicates the
-#' [working directory][getwd()].
-#'
-#' `dir` should point to a [valid path][is_path()]. The directory for the
-#' returned path is [created][create_dir()] if it does not yet exist.
+#' `filename` **should** contain a file extension (i.e., a dot followed by any
+#' character until the end of the file name) and should **not** contain slashes
+#' or backslashes: use `dir` to indicate subdirectories.
 #'
 #' The absolute [normalised][normalizePath()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes. `"/"`
@@ -41,12 +30,12 @@
 #' `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
 #' @section Side effects:
-#' The directory indicated by the returned file path is created if it does not
-#' yet exist.
+#' The directory indicated by the returned file path is [created][create_dir()]
+#' if it does not yet exist.
 #'
 #' @seealso
-#' [get_filename()] to check if a file exists and is a unique match to a pattern,
-#' [file.path()] to construct file paths in a platform-independent way,
+#' [get_file_path()] to check if a file exists and is a unique match to a pattern,
+#' [fs::path()] to construct file paths in a platform-independent way,
 #' [normalizePath()] to create absolute normalised paths,
 #' [create_dir()] to create a directory if it does not yet exist
 #'
@@ -54,7 +43,7 @@
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory
-#' my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
+#' my_tempdir <- normalizePath(path = fs::path(tempdir(), "subdir"),
 #'                             winslash = "/", mustWork = FALSE)
 #'
 #' (create_file_path(filename = "abc.txt", format_stamp = "",
@@ -66,13 +55,13 @@
 #' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
 #'                   dir = my_tempdir, add_date = FALSE))
 #' (create_file_path(filename = "abc.txt", format_stamp = "",
-#'                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+#'                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
 #' (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#'                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+#'                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
 #' (create_file_path(filename = "def.html", format_stamp = "",
-#'                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+#'                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 #' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#'                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+#'                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 #'
 #' # Cleaning up
 #' unlink(x = my_tempdir, recursive = TRUE)
@@ -80,38 +69,35 @@
 #'
 #' @export
 create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
-                             dir = file.path(".", "output"), add_date = TRUE) {
+                             dir = fs::path_wd("output"), add_date = TRUE) {
   stopifnot(checkinput::is_character(filename),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
-            checkinput::is_character(dir))
+            checkinput::is_logical(add_date))
+  is_path(path = dir)
 
-  is_valid_filename <- try(expr = is_filename(filename = filename), silent = TRUE)
-  if(inherits(x = is_valid_filename, what = "try-error")) {
-    stop("No path created: ", attr(is_valid_filename, "condition")$message)
+  filename_no_ext <- fs::path_ext_remove(path = filename)
+  file_ext <- fs::path_ext(path = filename)
+  if(!nzchar(filename_no_ext) || !nzchar(file_ext) ||
+     length(filename_no_ext) == 0L || length(file_ext) == 0L) {
+    stop("Empty filename or missing extension:\n", filename)
   }
 
   if(nzchar(format_stamp)) {
     filename <- paste0(format(Sys.time(), format = format_stamp), "_", filename)
   }
 
-  # Replace non-alphanumeric characters other than dots and underscores by
-  # underscores.
-  file_no_ext <- file_path_no_ext(x = filename)
-  file_no_ext_gsub <- gsub(pattern = "[^[:alnum:]_.]", replacement = "_",
-                           x = file_no_ext)
-
-  # is_filename(filename = filename) above ensures that a file extension is
-  # present, such that this way or re-creating the filename works
-  filename_gsub <- paste0(file_no_ext_gsub, ".", file_path_ext(x = filename))
-  if(file_no_ext != file_no_ext_gsub) {
-    warning("Replaced non-alphanumeric characters other than underscores in",
-            " filename\n'", filename, "' with underscores: ", filename_gsub)
+  if(grepl(pattern = "/", x = filename, fixed = TRUE) ||
+     grepl(pattern = "\\", x = filename, fixed = TRUE)) {
+    stop("'filename' (", paste_quoted(deparse(substitute(filename))),
+         ") should not contain '/' or '\\':\n", filename)
   }
 
-  is_path(dir)
-  file_path <- file.path(create_dir(dir = dir, add_date = add_date),
-                         filename_gsub)
+  file_path <- fs::path(create_dir(dir = dir, add_date = add_date), filename)
   file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)
+  is_valid_file_path <- try(expr = is_path(path = file_path), silent = TRUE)
+  if(inherits(x = is_valid_file_path, what = "try-error")) {
+    stop("No path created: ", attr(is_valid_file_path, "condition")$message)
+  }
 
   if(file.exists(file_path)) {
     if(dir.exists(file_path)) {

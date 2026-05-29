@@ -7,7 +7,7 @@
 create_file_path(
   filename,
   format_stamp = "\%Y_\%m_\%d_\%H_\%M_\%S",
-  dir = file.path(".", "output"),
+  dir = fs::path_wd("output"),
   add_date = TRUE
 )
 }
@@ -23,8 +23,12 @@ treated as part of the filename, such that the same restrictions apply, see
 
 \item{dir}{Non-empty \link[checkinput:is_character]{character string}
 containing a \link[=is_path]{valid path} to a directory that should be created if
-it does not yet exist. A dot (i.e., \code{"."}) indicates the current working
-directory.}
+it does not yet exist. \code{\link[fs:path]{fs::path()}} ensures the correct
+(\link[=.Platform]{platform}-dependent) file separator is used to indicate
+subdirectories and the dot (\code{"."}) indicates the \link[=getwd]{working directory},
+such that by default a subdirectory with the current date in the
+\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
+directory is created.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
@@ -36,20 +40,9 @@ The created file path, returned \link[=invisible]{invisibly}.
 Create a file path, creating the indicated directory if it does not yet exist.
 }
 \details{
-\code{filename} should contain a file extension (i.e., a dot followed by
-alphanumeric characters until the end of the file name). It should not
-contain slashes or backslashes: use \code{dir} to indicate (sub)directories.
-Non-alphanumeric characters other than dots and underscores preceding the
-file extension are replaced by underscores, with a warning.
-
-The default \code{dir} is a subdirectory with the current date in the
-\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
-directory. \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Platform]{platform}-dependent)
-file separator is used to indicate subdirectories, and \code{"."} indicates the
-\link[=getwd]{working directory}.
-
-\code{dir} should point to a \link[=is_path]{valid path}. The directory for the
-returned path is \link[=create_dir]{created} if it does not yet exist.
+\code{filename} \strong{should} contain a file extension (i.e., a dot followed by any
+character until the end of the file name) and should \strong{not} contain slashes
+or backslashes: use \code{dir} to indicate subdirectories.
 
 The absolute \link[=normalizePath]{normalised} path is returned such that the
 returned path still works if the \link[=getwd]{working directory} changes. \code{"/"}
@@ -63,13 +56,13 @@ as part of \code{format_stamp} to create precise stamps by truncating seconds to
 }
 \section{Side effects}{
 
-The directory indicated by the returned file path is created if it does not
-yet exist.
+The directory indicated by the returned file path is \link[=create_dir]{created}
+if it does not yet exist.
 }
 
 \examples{
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
+my_tempdir <- normalizePath(path = fs::path(tempdir(), "subdir"),
                             winslash = "/", mustWork = FALSE)
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
@@ -81,13 +74,13 @@ my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
 (create_file_path(filename = "def.html", format_stamp = "\%d_\%m_\%Y",
                   dir = my_tempdir, add_date = FALSE))
 (create_file_path(filename = "abc.txt", format_stamp = "",
-                  dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+                  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
 (create_file_path(filename = "abc.txt", format_stamp = "\%d_\%m_\%Y",
-                  dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+                  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
 (create_file_path(filename = "def.html", format_stamp = "",
-                  dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+                  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 (create_file_path(filename = "def.html", format_stamp = "\%d_\%m_\%Y",
-                  dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+                  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)
@@ -95,17 +88,15 @@ rm(my_tempdir)
 
 }
 \seealso{
-\code{\link[=get_filename]{get_filename()}} to check if a file exists and is a unique match to a pattern,
-\code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way,
+\code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern,
+\code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way,
 \code{\link[=normalizePath]{normalizePath()}} to create absolute normalised paths,
 \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
-\code{\link[=get_filename]{get_filename()}},
-\code{\link[=is_filename]{is_filename()}},
+\code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=is_path]{is_path()}}
 }
 \concept{functions to handle paths and directories}

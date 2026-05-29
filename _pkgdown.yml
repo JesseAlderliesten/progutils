@@ -16,9 +16,7 @@ reference:
   - create_dir
   - create_file_path
   - create_tempdir
-  - file_path_no_ext
-  - get_filename
-  - is_filename
+  - get_file_path
   - is_path
 
 - title: Text
@@ -34,7 +32,7 @@ reference:
 - contents:
   - are_equal
   - check_case
-  - get_filename
+  - get_file_path
   - not_in
   - replace_vals
 
