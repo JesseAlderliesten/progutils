@@ -9,8 +9,12 @@ create_dir(dir = file.path(".", "output"), add_date = TRUE)
 \arguments{
 \item{dir}{Non-empty \link[checkinput:is_character]{character string}
 containing a \link[=is_path]{valid path} to a directory that should be created if
-it does not yet exist. A dot (i.e., \code{"."}) indicates the current working
-directory.}
+it does not yet exist. \code{\link[=file.path]{file.path()}} ensures the correct
+(\link[=.Platform]{platform}-dependent) file separator is used to indicate
+subdirectories and the dot (\code{"."}) indicates the \link[=getwd]{working directory},
+such that by default a subdirectory with the current date in the
+\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
+directory is created.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
@@ -25,14 +29,6 @@ fails, with a warning.
 Create a directory if it does not yet exist.
 }
 \details{
-The default \code{dir} is a subdirectory with the current date in the
-\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
-directory. \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Platform]{platform}-dependent)
-file separator is used to indicate subdirectories, and \code{"."} indicates the
-\link[=getwd]{working directory}.
-
-Several limitations are imposed on \code{dir}, see \code{\link[=is_path]{is_path()}}.
-
 If creating the directory fails, the working directory is returned instead.
 This happens if \code{dir} points to an existing file instead of an directory.
 
@@ -42,21 +38,13 @@ case-insensitive file systems (e.g., Windows and macOS), normalization
 adjusts the case to match case-insensitive names of directories that are
 already present (see the \code{Examples}). \code{"/"} instead of \code{"\\\\"} is used as
 \link[=normalizePath]{winslash} during normalisation, such that the returned path
-can be used in Windows' file system.
+can be used in Windows' file system. Trailing \verb{\\\\} in the input is replaced
+by a trailing \code{/}, but a trailing \code{/} in the input is removed.
 }
 \section{Side effects}{
 
-The requested directory is created if does not yet exist.
-}
-
-\section{Programming notes}{
-
-See also:
-\itemize{
-\item \code{utils::file_test()}
-\item \code{fs::is_dir()}
-\item \code{fs::is_dir_empty()}.
-}
+The directory indicated by the returned path is \link[=create_dir]{created} if it
+does not yet exist.
 }
 
 \examples{
@@ -93,16 +81,16 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 
 }
 \seealso{
-\code{\link[=create_file_path]{create_file_path()}} to create a file path, \code{\link[=create_tempdir]{create_tempdir()}} for a safe way
-to create temporary directories, \code{\link[=is_path]{is_path()}} and references there about file
-paths and directories, \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this
-function, \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to
+\code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
+directory if it does not yet exist; \code{\link[=create_tempdir]{create_tempdir()}} for a safe way
+to create temporary directories; \code{\link[=is_path]{is_path()}} and references there about file
+paths and directories; \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this
+function; \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to
 a pattern.
 
 Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=is_path]{is_path()}}
 }

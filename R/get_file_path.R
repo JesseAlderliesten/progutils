@@ -1,11 +1,11 @@
 #' Check that only a single matching file is present
 #'
-#' Check that only one file in directory `dir` has a name matching `pattern`,
-#' for example before attempting to [read a file][utils::read.table()].
+#' Check that only one file in a directory has a name matching `pattern`, for
+#' example before attempting to [read a file][utils::read.table()].
 #'
 #' @param dir Character string with the [path][is_path()] to a directory.
 #' @param pattern Character string containing a [regular expression][base::regex]
-#' used to select file names in `dir`.
+#' used to select names of files that are present in `dir`.
 #' @param ignore_case `TRUE` or `FALSE`: use case-insensitive pattern matching?
 #' @param quietly `TRUE` or `FALSE`: suppress the message with the found file
 #' name?
@@ -31,9 +31,9 @@
 #' the filename itself.
 #'
 #' @seealso
-#' [create_dir()] to create a directory if does not yet exist,
+#' [create_dir()] to create a directory if does not yet exist;
 #' [file.exists()] and [list.files()] to check for existence of files without
-#' checking they are a unique match to a pattern,
+#' checking they are a unique match to a pattern;
 #' [file.info()] and [file.access()] to extract information about files or
 #' directories;
 #' [file.path()] to construct file paths in a platform-independent way;
