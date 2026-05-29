@@ -24,8 +24,7 @@
 #' adjusts the case to match case-insensitive names of directories that are
 #' already present (see the `Examples`). `"/"` instead of `"\\"` is used as
 #' [winslash][normalizePath()] during normalisation, such that the returned path
-#' can be used in Windows' file system. Trailing `\\` in the input is replaced
-#' by a trailing `/`, but a trailing `/` in the input is removed.
+#' can be used in Windows' file system.
 #'
 #' @returns
 #' A character string with the absolute [normalized][normalizePath()] path to

@@ -38,8 +38,7 @@ case-insensitive file systems (e.g., Windows and macOS), normalization
 adjusts the case to match case-insensitive names of directories that are
 already present (see the \code{Examples}). \code{"/"} instead of \code{"\\\\"} is used as
 \link[=normalizePath]{winslash} during normalisation, such that the returned path
-can be used in Windows' file system. Trailing \verb{\\\\} in the input is replaced
-by a trailing \code{/}, but a trailing \code{/} in the input is removed.
+can be used in Windows' file system.
 }
 \section{Side effects}{
 
