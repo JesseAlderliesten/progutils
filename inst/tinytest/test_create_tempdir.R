@@ -26,9 +26,9 @@ expect_warning(
   expect_error(
     create_tempdir(subdir = file.path(basename(dirname(my_tempfile)),
                                       basename(my_tempfile))),
-    pattern = "Attempt to create a subdirectory in the temporary directory failed"),
-  pattern = "already exists"
-)
+    pattern = "create a subdirectory in the temporary directory failed",
+    fixed = TRUE),
+  pattern = "already exists", fixed = TRUE, strict = TRUE)
 
 # Also recognise that a directory already exists if it has subdirectories
 expect_false(dir.exists(file.path(my_tempdir, "subdir", "abc")))
@@ -42,12 +42,27 @@ for(subdir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
     pattern = "is_character(subdir) is not TRUE", fixed = TRUE)
 }
 
-for(subdir in list("temp_p3/", "temp_p3/", "temp_p4\\")) {
+# Trailing '\\' is changed to '/' but trailing '/' is removed
+subdir_in <- c("tem\\p_p4", "temp_p5\\", "tem/p_p7", "temp_p8/")
+subdir_out <- c("tem/p_p4", "temp_p5/", "tem/p_p7", "temp_p8")
+for(ind_subdir in seq_along(subdir_in)) {
+  expect_true(endsWith(
+    create_tempdir(subdir = subdir_in[ind_subdir]),
+    # Need paste0() because file.path() removes trailing slashes
+    paste0(basename(my_tempdir), "/", subdir_out[ind_subdir])
+  ))
+}
+
+subdir_in <- c("\\temp_p3", "/temp_p6")
+subdir_out <- c("temp_p3", "temp_p6")
+for(ind_subdir in seq_along(subdir_in)) {
   expect_warning(
-    create_tempdir(subdir = subdir),
-    # Need to use '\\': '\' would test for ''.
-    pattern = "Repeated '/' or '\\'",
-    fixed = TRUE)
+    expect_true(endsWith(
+      create_tempdir(subdir = subdir_in[ind_subdir]),
+      file.path(basename(my_tempdir), subdir_out[ind_subdir])
+    )),
+    pattern = "Repeated '/' or '\\\\' in 'subdir' will be ignored",
+    strict = TRUE, fixed = TRUE)
 }
 
 for(subdir in list(".")) {
@@ -70,8 +85,12 @@ for(subdir in list("temp_p5.", "temp_p6 ")) {
 
 
 #### Delete the created temporary files ####
-unlink(c(res_subdir, dirname(res_subdir_recursive)), recursive = TRUE)
+unlink(c(res_subdir, dirname(res_subdir_recursive),
+         file.path(my_tempdir, subdir_out), file.path(my_tempdir, "temp_p5"),
+         file.path(my_tempdir, "temp_p8"), file.path(my_tempdir, "tem")),
+       recursive = TRUE)
 
 
 #### Remove objects used in tests ####
-rm(my_tempdir, my_tempfile, res_subdir, res_subdir_recursive, subdir)
+rm(ind_subdir, my_tempdir, my_tempfile, res_subdir, res_subdir_recursive,
+   subdir, subdir_in, subdir_out)
