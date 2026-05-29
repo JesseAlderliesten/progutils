@@ -87,10 +87,12 @@ expect_error(
                    dir = my_tempdir, add_date = FALSE),
   pattern = "'filename' should not end with ' ' or '.'", fixed = TRUE)
 
+# No error message specified: on Windows with R 4.6.0 the error message is
+# '"'filename' should not end with ' ' or '.'"', but on Windows with R 4.1.0 the
+# error message is "Empty filename or missing extension"
 expect_error(
   create_file_path(filename = "ff..txt", format_stamp = "",
-                   dir = my_tempdir, add_date = FALSE),
-  pattern = "'filename' should not end with ' ' or '.'", fixed = TRUE)
+                   dir = my_tempdir, add_date = FALSE))
 
 ##### format_stamp #####
 # Characters in 'format_stamp' not part of a conversion specification in
@@ -106,10 +108,13 @@ expect_error(
 
 # Non-alphanumeric characters are *not* replaced (they used to be replaced in
 # earlier versions.
+# On Ubuntu and MacOS led to warning ''Repeated '/' or '\\' in 'dir' will be
+# ignored: /tmp/RtmpaJfn0F/working_dir/RtmpLIBaPm/testcreatepath', so now try if
+# using normalizePath() on 'my_tempdir' solves that.
 expect_silent(
   expect_true(endsWith(
     create_file_path(filename = "abc.txt", format_stamp = "%d#.%m_%Ydef",
-                     dir = my_tempdir, add_date = TRUE),
+                     dir = normalizePath(my_tempdir), add_date = TRUE),
     suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
                        paste0(format(Sys.time(), format = "%d#.%m_%Y"), "def_abc.txt"))
   ))
