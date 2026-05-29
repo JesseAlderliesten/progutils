@@ -1,11 +1,12 @@
-#### To do ####
-# Test "" in values, levels, new_order
-
-
 #### Create objects to use in tests ####
 vals <- letters[c(1:3, 2:1)]
 input <- factor(x = vals)
 new_order <- c("b", "a", "c")
+
+vals_empty <- c(letters[12:13], "", letters[13:11])
+input_empty <- factor(vals_empty, levels = c(letters[13:11], ""))
+new_order_empty <- c(letters[11], "", letters[12:13])
+
 input_missing_levels <- factor(x = vals, levels = letters[1:2])
 output_missing_levels <- factor(input_missing_levels,
                                 levels = c(new_order[1:2], NA_character_),
@@ -100,6 +101,17 @@ expect_warning(
   pattern = paste0(warn_drop_levels, "'NA_character_'"),
   strict = TRUE, fixed = TRUE)
 
+expect_silent(
+  expect_identical(reorder_levels(x = input_empty, new_order = new_order_empty),
+                   factor(vals_empty, levels = new_order_empty))
+)
+
+expect_warning(
+  expect_identical(reorder_levels(x = input_empty, new_order = letters[11:13]),
+                   factor(vals_empty, levels = c(letters[11:13], ""))),
+  pattern = "Appended levels of 'x'", strict = TRUE, fixed = TRUE
+)
+
 # factor with NA in its values and its levels, NA missing from 'new_order'
 expect_warning(
   expect_identical(
@@ -176,8 +188,8 @@ expect_error(reorder_levels(x = input, new_order = new_order,
 
 
 #### Remove objects used in tests ####
-rm(factor_order, input, input_missing_levels, input_NA_levels,
-   input_NA_levels_val, input_unused_levels, new_order, orig, output,
-   output_missing_levels, output_NA_levels, vals, vals_example, vals_NA,
-   warn_append_levels, warn_drop_levels, warn_drop_order, warn_missing_levels,
-   warn_new_order_nonchar)
+rm(factor_order, input, input_empty, input_missing_levels, input_NA_levels,
+   input_NA_levels_val, input_unused_levels, new_order, new_order_empty, orig,
+   output, output_missing_levels, output_NA_levels, vals, vals_empty,
+   vals_example, vals_NA, warn_append_levels, warn_drop_levels, warn_drop_order,
+   warn_missing_levels, warn_new_order_nonchar)
