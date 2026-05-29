@@ -69,14 +69,12 @@ expect_warning(
   pattern = "Repeated '/' or '\\\\' in 'subdir' will be ignored",
   strict = TRUE, fixed = TRUE)
 
-for(subdir in list(".")) {
-  expect_error(
-    create_tempdir(subdir = subdir),
-    pattern = "would write to 'tempdir()'", fixed = TRUE)
-}
+expect_error(
+  create_tempdir(subdir = "."),
+  pattern = "would write to 'tempdir()'", fixed = TRUE)
 
 expect_error(
-  create_tempdir(subdir = list("..")),
+  create_tempdir(subdir = ".."),
   pattern = "would write above 'tempdir()'", fixed = TRUE)
 
 for(subdir in list("temp_p5.", "temp_p6 ")) {
