@@ -10,7 +10,7 @@ get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 \item{dir}{Character string with the \link[=is_path]{path} to a directory.}
 
 \item{pattern}{Character string containing a \link[base:regex]{regular expression}
-used to select file names in \code{dir}.}
+used to select names of files that are present in \code{dir}.}
 
 \item{ignore_case}{\code{TRUE} or \code{FALSE}: use case-insensitive pattern matching?}
 
@@ -24,8 +24,8 @@ with a name matching \code{pattern} if there is exactly one such file in directo
 the filename itself.
 }
 \description{
-Check that only one file in directory \code{dir} has a name matching \code{pattern},
-for example before attempting to \link[utils:read.table]{read a file}.
+Check that only one file in a directory has a name matching \code{pattern}, for
+example before attempting to \link[utils:read.table]{read a file}.
 }
 \details{
 The default \code{dir} (\code{"."}) indicates the \link[=getwd]{working directory}.
@@ -71,9 +71,9 @@ rm(my_tempfiles)
 
 }
 \seealso{
-\code{\link[=create_dir]{create_dir()}} to create a directory if does not yet exist,
+\code{\link[=create_dir]{create_dir()}} to create a directory if does not yet exist;
 \code{\link[=file.exists]{file.exists()}} and \code{\link[=list.files]{list.files()}} to check for existence of files without
-checking they are a unique match to a pattern,
+checking they are a unique match to a pattern;
 \code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or
 directories;
 \code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
@@ -83,7 +83,6 @@ Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=is_path]{is_path()}}
 
 Other functions to check equality:
