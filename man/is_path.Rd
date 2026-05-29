@@ -4,16 +4,14 @@
 \alias{is_path}
 \title{Check that \code{x} is a valid path}
 \usage{
-is_path(path, to_file = FALSE)
+is_path(path)
 }
 \arguments{
 \item{path}{\link[checkinput:is_character]{character string} with the path.}
-
-\item{to_file}{\code{TRUE} or \code{FALSE}: is \code{path} intended to point to a file?}
 }
 \value{
-\code{TRUE}: an error occurs if \code{path} is not a valid path or, if \code{to_file} is
-\code{TRUE}, \code{basename(path)} is not a valid filename that includes an extension.
+\code{TRUE}: an error occurs if \code{path} is not a valid path or if \code{path} contains a
+file extension but the filename is not valid.
 }
 \description{
 Check that \code{x} is a path that is likely to be valid.
@@ -25,27 +23,21 @@ valid paths before creating a directory or a file:
 \item \code{path} should \strong{not} contain the characters \verb{"}, \code{*}, \verb{?}, \code{|}, \code{<}, \code{>},
 nor any of the control characters (\code{ASCII} octal codes 000 through 037 and
 177, see \code{help("regex")}).
-\item \code{path} components should \strong{not} end with a slash, backslash, space or dot
-(\code{"."} and \code{".."} are allowed as first component to indicate the working
-directory and the parent directory, respectively).
+\item \code{path} components (i.e., parts separated by file separators \code{/} or \verb{\\\\})
+should \strong{not} end with a space or dot (\code{"."} and \code{".."} are allowed as
+first component to indicate the working directory and the parent directory,
+respectively).
 \item \code{path} components should \strong{not} be \code{CON}, \code{PRN}, \code{AUX}, \code{NUL},
 \verb{COM<non-zero digit>}, \verb{LPT<non-zero digit>}, case-insensitive variants of
-these names, and these names followed by an extension.
+these names, or these names followed by an extension.
 \item \code{path} should not point to \code{tempdir()}: a temporary subdirectory should be
 used instead (see \code{\link[=create_tempdir]{create_tempdir()}}).
 }
 
-If \code{to_file} is \code{TRUE}, the part after the last slash is considered the
-filename. The filename should adhere to the same restrictions as the path.
-
-In addition:
-\itemize{
-\item the filename should include a file extension. The compression extensions
-\code{".gz"}, \code{".bz2"} or \code{".xz"} are \strong{not} considered file extensions but are
-allowed to be present.
-\item the filename should \strong{not} start with a space.
-\item the filename should \strong{not} contain \code{:}.
-}
+Furthermore, if \code{path} contains a file extension, the part after the last
+slash is considered the filename, which should adhere to the same
+restrictions as the path, and in addition should \strong{not} contain \code{:} nor
+start with a space.
 
 These restrictions on the path and the filename consider characters that
 would lead to an error in Windows because they are not allowed; characters
@@ -53,9 +45,10 @@ that would lead to a mismatch between the created directory and the returned
 path because they are silently removed in Windows; and words that are
 reserved names in Windows.
 
-In contrast to functions from \code{checkinput}, \code{is_path} will produce an error
-if \code{path} is not a valid path or, if \code{to_file} is \code{TRUE}, \code{basename(path)} is
-not a valid filename that includes an extension.
+\code{path} \strong{not} necessarily has to contain a file separator (i.e., \code{/} or
+\verb{\\\\}), such that \code{is_path()} can be used to check that input to \code{\link[=file.path]{file.path()}}
+only contains allowed characters. Repeated file separators (e.g., \verb{//} or
+\verb{\\\\\\\\}) are treated as single separators, with a warning.
 }
 \section{Programming notes}{
 
@@ -72,11 +65,15 @@ a file separator, one should write the warning message as
 \code{warning("Repeated '/' or '\\\\'")} which will be printed as
 \verb{Repeated '/' or '\\'}. Checks on the presence of slashes and backslashes
 should use \code{grepl(pattern = "/", x = string)} and
-\code{grepl(pattern = "\\\\\\\\", x = string)} (!). This makes it cumbersome to get
-the correct type and number of slashes to compare with the path recorded in a
+\code{grepl(pattern = "\\\\\\\\", x = string)}. This makes it cumbersome to get the
+correct type and number of slashes to compare with the path recorded in a
 warning message, such that it is more robust to check only for fixed parts of
 the message (e.g., \code{"Repeated"}), possibly followed by a check like
 \code{tinytest::expect_true(dir.exists(string))}.
+
+Trailing slashes or backslashes are allowed, even though these might be
+removed in some operations (e.g., trailing \verb{\\\\} in the input to \code{\link[=file.path]{file.path()}}
+is replaced by a trailing \code{/}, but a trailing \code{/} in the input is removed).
 }
 
 \section{References}{
@@ -87,35 +84,19 @@ the message (e.g., \code{"Repeated"}), possibly followed by a check like
 \item Comparison of file systems from
 \href{https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits}{Wikipedia}
 }
-
-Although not enforced by \code{is_path()}, it is good practice to also avoid
-the characters \code{+}, \verb{,}, \verb{;}, \code{=}, \code{[}, \verb{]}, \code{!}, \code{$}, \verb{#}, \code{@}, and possibly
-\verb{\{}, \verb{\}}, \code{(}, \verb{)}, \verb{'}, \verb{\%}, \code{&}, \if{html}{\out{<backtick>}}, \code{^}, \code{~}.
-
-Ways to make \code{is_path()} even stricter:
-\itemize{
-\item do not allow filenames to start with a hyphen
-\item do not allow filenames to end with a hyphen
-\item case-insensitive matching to \code{filename} to determine if it exists?
-\code{filename} should \strong{not} point to a directory (see \code{utils::file_test()},
-\code{\link[=get_file_path]{get_file_path()}}, \code{\link[=create_tempdir]{create_tempdir()}}, \code{\link[=create_file_path]{create_file_path()}}).
-\item Impose a limit on the length:
-https://blog.r-project.org/2023/03/07/path-length-limit-on-windows/
-\item See also functions \code{create_file_path()} and \code{fs::path_real()}.
-}
 }
 
 \examples{
 is_path(getwd())
 try(is_path(file.path(getwd(), "ab|cd")))
 
-is_path(file.path(getwd(), "abcd.txt"), to_file = TRUE)
-is_path(file.path(getwd(), "abcd.txt.gz"), to_file = TRUE)
+is_path(file.path(getwd(), "abcd.txt"))
+is_path(file.path(getwd(), "abcd.txt.gz"))
 
-try(is_path(file.path(getwd(), "abcd"), to_file = TRUE))
-try(is_path(file.path(getwd(), "abcd.gz"), to_file = TRUE))
-try(is_path(file.path(getwd(), "ab:cd.txt"), to_file = TRUE))
-try(is_path(file.path(getwd(), "ab|cd.txt"), to_file = TRUE))
+try(is_path(file.path(getwd(), "abcd")))
+try(is_path(file.path(getwd(), "abcd.gz")))
+try(is_path(file.path(getwd(), "ab:cd.txt")))
+try(is_path(file.path(getwd(), "ab|cd.txt")))
 
 }
 \seealso{
@@ -131,7 +112,6 @@ Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=get_file_path]{get_file_path()}}
 }
 \concept{functions to handle paths and directories}
