@@ -53,17 +53,21 @@ for(ind_subdir in seq_along(subdir_in)) {
   ))
 }
 
-subdir_in <- c("\\temp_p3", "/temp_p6")
-subdir_out <- c("temp_p3", "temp_p6")
-for(ind_subdir in seq_along(subdir_in)) {
-  expect_warning(
-    expect_true(endsWith(
-      create_tempdir(subdir = subdir_in[ind_subdir]),
-      file.path(basename(my_tempdir), subdir_out[ind_subdir])
-    )),
-    pattern = "Repeated '/' or '\\\\' in 'subdir' will be ignored",
-    strict = TRUE, fixed = TRUE)
-}
+expect_warning(
+  expect_true(endsWith(
+    create_tempdir(subdir = "\\temp_p3"),
+    suffix = file.path(basename(my_tempdir), "temp_p3")
+  )),
+  pattern = "Repeated '/' or '\\\\' in 'subdir' will be ignored",
+  strict = TRUE, fixed = TRUE)
+
+expect_warning(
+  expect_true(endsWith(
+    create_tempdir(subdir = "/temp_p6"),
+    suffix = file.path(basename(my_tempdir), "temp_p6")
+  )),
+  pattern = "Repeated '/' or '\\\\' in 'subdir' will be ignored",
+  strict = TRUE, fixed = TRUE)
 
 for(subdir in list(".")) {
   expect_error(
@@ -71,11 +75,9 @@ for(subdir in list(".")) {
     pattern = "would write to 'tempdir()'", fixed = TRUE)
 }
 
-for(subdir in list("..")) {
-  expect_error(
-    create_tempdir(subdir = subdir),
-    pattern = "would write above 'tempdir()'", fixed = TRUE)
-}
+expect_error(
+  create_tempdir(subdir = list("..")),
+  pattern = "would write above 'tempdir()'", fixed = TRUE)
 
 for(subdir in list("temp_p5.", "temp_p6 ")) {
   expect_error(
