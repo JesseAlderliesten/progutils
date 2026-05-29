@@ -55,7 +55,7 @@ vectors* in package `checkinput`:
 
 Other functions to check equality:
 [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md),
-[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
+[`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md),
 [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
 

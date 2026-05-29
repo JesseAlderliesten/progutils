@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_path</span><span class="op">(</span><span class="va">path</span>, as_file <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_path</span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -55,36 +55,40 @@
 <dl><dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
 <dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> with the path.</p></dd>
 
-
-<dt id="arg-as-file">as_file<a class="anchor" aria-label="anchor" href="#arg-as-file"></a></dt>
-<dd><p><code>TRUE</code> or <code>FALSE</code>: is <code>path</code> intended to point to a file
-instead of to a folder?</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>TRUE</code>: an error occurs if <code>path</code> is not a valid path.</p>
+    <p><code>TRUE</code>: an error occurs if <code>path</code> is not a valid path or if <code>path</code> contains a
+file extension but the filename is not valid.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>is_path()</code> puts some restrictions on paths so it can be used to check for
-valid paths before creating a directory:</p><ul><li><p><code>path</code> should <strong>not</strong> contain the characters <code>"</code>, <code>*</code>, <code>?</code>, <code>|</code>, <code>&lt;</code>, <code>&gt;</code>,
+valid paths before creating a directory or a file:</p><ul><li><p><code>path</code> should <strong>not</strong> contain the characters <code>"</code>, <code>*</code>, <code>?</code>, <code>|</code>, <code>&lt;</code>, <code>&gt;</code>,
 nor any of the control characters (<code>ASCII</code> octal codes 000 through 037 and
 177, see <code><a href="https://rdrr.io/r/base/regex.html" class="external-link">help("regex")</a></code>).</p></li>
-<li><p><code>path</code> components should <strong>not</strong> end with a slash, backslash, space or dot
-(<code>"."</code> and <code>".."</code> are allowed as first component to indicate the working
-directory and the parent directory, respectively).</p></li>
+<li><p><code>path</code> components (i.e., parts separated by file separators <code>/</code> or <code>\\</code>)
+should <strong>not</strong> end with a space or dot (<code>"."</code> and <code>".."</code> are allowed as
+first component to indicate the working directory and the parent directory,
+respectively).</p></li>
 <li><p><code>path</code> components should <strong>not</strong> be <code>CON</code>, <code>PRN</code>, <code>AUX</code>, <code>NUL</code>,
 <code>COM&lt;non-zero digit&gt;</code>, <code>LPT&lt;non-zero digit&gt;</code>, case-insensitive variants of
-these names, and these names followed by an extension.</p></li>
+these names, or these names followed by an extension.</p></li>
 <li><p><code>path</code> should not point to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>: a temporary subdirectory should be
 used instead (see <code><a href="create_tempdir.html">create_tempdir()</a></code>).</p></li>
-</ul><p>These restrictions consider characters that would lead to an error in Windows
-because they are not allowed; characters that  would lead to a mismatch
-between the created directory and the returned path because they are silently
-removed in Windows; and words that are reserved names in Windows.</p>
-<p>In contrast to functions from <code>checkinput</code>, <code>is_path</code> will produce an error
-if <code>path</code> is not a valid path.</p>
+</ul><p>Furthermore, if <code>path</code> contains a file extension, the part after the last
+slash is considered the filename, which should adhere to the same
+restrictions as the path, and in addition should <strong>not</strong> contain <code>:</code> nor
+start with a space.</p>
+<p>These restrictions on the path and the filename consider characters that
+would lead to an error in Windows because they are not allowed; characters
+that would lead to a mismatch between the created directory and the returned
+path because they are silently removed in Windows; and words that are
+reserved names in Windows.</p>
+<p><code>path</code> <strong>not</strong> necessarily has to contain a file separator (i.e., <code>/</code> or
+<code>\\</code>), such that <code>is_path()</code> can be used to check that input to <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code>
+only contains allowed characters. Repeated file separators (e.g., <code>//</code> or
+<code>\\\\</code>) are treated as single separators, with a warning.</p>
     </div>
     <div class="section level2">
     <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
@@ -102,42 +106,80 @@ a file separator, one should write the warning message as
 <code>warning("Repeated '/' or '\\'")</code> which will be printed as
 <code>Repeated '/' or '\'</code>. Checks on the presence of slashes and backslashes
 should use <code>grepl(pattern = "/", x = string)</code> and
-<code>grepl(pattern = "\\\\", x = string)</code> (!). This makes it cumbersome to get
-the correct type and number of slashes to compare with the path recorded in a
+<code>grepl(pattern = "\\\\", x = string)</code>. This makes it cumbersome to get the
+correct type and number of slashes to compare with the path recorded in a
 warning message, such that it is more robust to check only for fixed parts of
 the message (e.g., <code>"Repeated"</code>), possibly followed by a check like
 <code>tinytest::expect_true(dir.exists(string))</code>.</p>
+<p>Trailing slashes or backslashes are allowed, even though these might be
+removed in some operations.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
 
-<ul><li><p>https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file</p></li>
-<li><p>https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits</p></li>
+<ul><li><p>Naming files, paths, and namespaces from
+<a href="https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file" class="external-link">Microsoft</a></p></li>
+<li><p>Comparison of file systems from
+<a href="https://en.wikipedia.org/wiki/Comparison_of_file_systems#Limits" class="external-link">Wikipedia</a></p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="create_file_path.html">create_file_path()</a></code> to create a path (with references there about file
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/utils/filetest.html" class="external-link">utils::file_test()</a></code> and references there on file existence and permissions,
+<code>help(fs::path_math)</code> for various operations on paths,
+<code><a href="create_file_path.html">create_file_path()</a></code> to create a path (with references there about file
 paths), <code><a href="create_dir.html">create_dir()</a></code> to create a directory if it does not yet exist,
-<code><a href="get_filename.html">get_filename()</a></code> to check if a file exists and is a unique match to a pattern</p>
+<code><a href="get_file_path.html">get_file_path()</a></code> to check if a file exists and is a unique match to a pattern</p>
 <p><code><a href="https://fs.r-lib.org/reference/path_sanitize.html" class="external-link">fs::path_sanitize()</a></code> to <em>remove</em> invalid characters from potential paths.</p>
 <p>Other functions to handle paths and directories:
 <code><a href="create_dir.html">create_dir()</a></code>,
 <code><a href="create_file_path.html">create_file_path()</a></code>,
 <code><a href="create_tempdir.html">create_tempdir()</a></code>,
-<code><a href="file_path_no_ext.html">file_path_no_ext()</a></code>,
-<code><a href="get_filename.html">get_filename()</a></code>,
-<code><a href="is_filename.html">is_filename()</a></code></p></div>
+<code><a href="get_file_path.html">get_file_path()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">is_path</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'getwd()' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"ab|cd"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in is_path(file.path(getwd(), "ab|cd")) : </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   'file.path(getwd(), "ab|cd")' should not contain '"', '*', '?', '|', '&lt;' or '&gt;':</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"ab|cd"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("ab|cd")' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/ab|cd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in is_path(fs::path_wd("ab|cd")) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   'fs::path_wd("ab|cd")' should not contain '"', '*', '?', '|', '&lt;' or '&gt;':</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/ab|cd</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"abcd.txt"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("abcd.txt")' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/abcd.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"abcd.txt.gz"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("abcd.txt.gz")' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/abcd.txt.gz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"abcd"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("abcd")' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/abcd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"abcd.gz"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("abcd.gz")' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/abcd.gz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"ab:cd.txt"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("ab:cd.txt")' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/ab:cd.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in is_path(fs::path_wd("ab:cd.txt")) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   'filename' should not contain ':':</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ab:cd.txt</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"ab|cd.txt"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("ab|cd.txt")' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/ab|cd.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in is_path(fs::path_wd("ab|cd.txt")) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   'fs::path_wd("ab|cd.txt")' should not contain '"', '*', '?', '|', '&lt;' or '&gt;':</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/ab|cd.txt</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -5,7 +5,7 @@ Create a directory if it does not yet exist.
 ## Usage
 
 ``` r
-create_dir(dir = file.path(".", "output"), add_date = TRUE)
+create_dir(dir = fs::path_wd("output"), add_date = TRUE)
 ```
 
 ## Arguments
@@ -16,8 +16,14 @@ create_dir(dir = file.path(".", "output"), add_date = TRUE)
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
   path](https://jessealderliesten.github.io/progutils/reference/is_path.md)
-  to a directory that should be created if it does not yet exist. A dot
-  (i.e., `"."`) indicates the current working directory.
+  to a directory that should be created if it does not yet exist.
+  [`fs::path()`](https://fs.r-lib.org/reference/path.html) ensures the
+  correct ([platform](https://rdrr.io/r/base/Platform.html)-dependent)
+  file separator is used to indicate subdirectories and the dot (`"."`)
+  indicates the [working directory](https://rdrr.io/r/base/getwd.html),
+  such that by default a subdirectory with the current date in the
+  [format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` in
+  directory `output` below the working directory is created.
 
 - add_date:
 
@@ -36,17 +42,6 @@ to create a directory fails, with a warning.
 
 ## Details
 
-The default `dir` is a subdirectory with the current date in the
-[format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` in directory
-`output` below the working directory.
-[`file.path()`](https://rdrr.io/r/base/file.path.html) ensures the
-correct ([platform](https://rdrr.io/r/base/Platform.html)-dependent)
-file separator is used to indicate subdirectories, and `"."` indicates
-the [working directory](https://rdrr.io/r/base/getwd.html).
-
-Several limitations are imposed on `dir`, see
-[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
-
 If creating the directory fails, the working directory is returned
 instead. This happens if `dir` points to an existing file instead of an
 directory.
@@ -63,71 +58,69 @@ system.
 
 ## Side effects
 
-The requested directory is created if does not yet exist.
-
-## Programming notes
-
-See also:
-
-- [`utils::file_test()`](https://rdrr.io/r/utils/filetest.html)
-
-- [`fs::is_dir()`](https://fs.r-lib.org/reference/is_file.html)
-
-- [`fs::is_dir_empty()`](https://fs.r-lib.org/reference/is_dir_empty.html).
+The directory indicated by the returned path is created if it does not
+yet exist.
 
 ## See also
 
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
-to create a file path,
+to create a file path and creating the indicated directory if it does
+not yet exist;
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
-for a safe way to create temporary directories,
+for a safe way to create temporary directories;
 [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
-and references there about file paths and directories,
+and references there about file paths and directories;
 [`dir.exists()`](https://rdrr.io/r/base/files2.html) and
 [`dir.create()`](https://rdrr.io/r/base/files2.html) used by this
-function,
-[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
+function;
+[`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
 to check if a file exists and is a unique match to a pattern.
 
 Other functions to handle paths and directories:
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
-[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
-[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
-[`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md),
+[`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md),
 [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
 
 ## Examples
 
 ``` r
 # Use a temporary subdirectory to not write in the user's directory
-my_tempdir <- file.path(tempdir(), "testcreatedir")
+my_tempdir <- fs::path(tempdir(), "testcreatedir")
 
 # Create directory 'dir_one' inside this temporary directory
-res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/testcreatedir/dir_one
 dir.exists(res_dir_one) # TRUE
 #> [1] TRUE
 
 # An attempt to create a directory that already exists does not change any
 # directory and the same directory is returned.
-res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                              add_date = FALSE)
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/testcreatedir/dir_one
 identical(res_dir_one, res_dir_one_v2) # TRUE
 #> [1] TRUE
 
 # On case-insensitive file systems such as Windows and macOS, adding
 # 'dir_ONE' to the directory gives the same result as adding 'dir_one' as
 # done above for 'res_dir_one'
-res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
+res_dir_one_v3 <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                              add_date = FALSE)
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/testcreatedir/dir_ONE
 # TRUE on Windows and macOS, FALSE on Ubuntu
 identical(res_dir_one, res_dir_one_v3)
 #> [1] FALSE
 
 # Create directory 'dir_two' with a subdirectory containing the current date
-res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
+res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/testcreatedir/dir_two
 dir.exists(res_dir_two) # TRUE
 #> [1] TRUE
 

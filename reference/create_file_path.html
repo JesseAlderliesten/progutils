@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_file_path</span><span class="op">(</span></span>
 <span>  <span class="va">filename</span>,</span>
 <span>  format_stamp <span class="op">=</span> <span class="st">"%Y_%m_%d_%H_%M_%S"</span>,</span>
-<span>  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"output"</span><span class="op">)</span>,</span>
+<span>  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"output"</span><span class="op">)</span>,</span>
 <span>  add_date <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -73,8 +73,12 @@ treated as part of the filename, such that the same restrictions apply, see
 <dt id="arg-dir">dir<a class="anchor" aria-label="anchor" href="#arg-dir"></a></dt>
 <dd><p>Non-empty <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a>
 containing a <a href="is_path.html">valid path</a> to a directory that should be created if
-it does not yet exist. A dot (i.e., <code>"."</code>) indicates the current working
-directory.</p></dd>
+it does not yet exist. <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code> ensures the correct
+(<a href="https://rdrr.io/r/base/Platform.html" class="external-link">platform</a>-dependent) file separator is used to indicate
+subdirectories and the dot (<code>"."</code>) indicates the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>,
+such that by default a subdirectory with the current date in the
+<a href="https://rdrr.io/r/base/strptime.html" class="external-link">format</a> <code>YYYY_mm_dd</code> in directory <code>output</code> below the working
+directory is created.</p></dd>
 
 
 <dt id="arg-add-date">add_date<a class="anchor" aria-label="anchor" href="#arg-add-date"></a></dt>
@@ -88,18 +92,9 @@ current date in the <a href="https://rdrr.io/r/base/strptime.html" class="extern
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>filename</code> should contain a file extension (i.e., a dot followed by
-alphanumeric characters until the end of the file name). It should not
-contain slashes or backslashes: use <code>dir</code> to indicate (sub)directories.
-Non-alphanumeric characters other than dots and underscores preceding the
-file extension are replaced by underscores, with a warning.</p>
-<p>The default <code>dir</code> is a subdirectory with the current date in the
-<a href="https://rdrr.io/r/base/strptime.html" class="external-link">format</a> <code>YYYY_mm_dd</code> in directory <code>output</code> below the working
-directory. <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> ensures the correct (<a href="https://rdrr.io/r/base/Platform.html" class="external-link">platform</a>-dependent)
-file separator is used to indicate subdirectories, and <code>"."</code> indicates the
-<a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>.</p>
-<p><code>dir</code> should point to a <a href="is_path.html">valid path</a>. The directory for the
-returned path is <a href="create_dir.html">created</a> if it does not yet exist.</p>
+    <p><code>filename</code> <strong>should</strong> contain a file extension (i.e., a dot followed by any
+character until the end of the file name) and should <strong>not</strong> contain slashes
+or backslashes: use <code>dir</code> to indicate subdirectories.</p>
 <p>The absolute <a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalised</a> path is returned such that the
 returned path still works if the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> changes. <code>"/"</code>
 instead of <code>"\\"</code> is used as argument <a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">winslash</a> such that
@@ -113,54 +108,100 @@ as part of <code>format_stamp</code> to create precise stamps by truncating seco
     <h2 id="side-effects">Side effects<a class="anchor" aria-label="anchor" href="#side-effects"></a></h2>
 
 
-<p>The directory indicated by the returned file path is created if it does not
-yet exist.</p>
+<p>The directory indicated by the returned file path is <a href="create_dir.html">created</a>
+if it does not yet exist.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="get_filename.html">get_filename()</a></code> to check if a file exists and is a unique match to a pattern,
-<code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> to construct file paths in a platform-independent way,
+    <div class="dont-index"><p><code><a href="get_file_path.html">get_file_path()</a></code> to check if a file exists and is a unique match to a pattern,
+<code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code> to construct file paths in a platform-independent way,
 <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code> to create absolute normalised paths,
 <code><a href="create_dir.html">create_dir()</a></code> to create a directory if it does not yet exist</p>
 <p>Other functions to handle paths and directories:
 <code><a href="create_dir.html">create_dir()</a></code>,
 <code><a href="create_tempdir.html">create_tempdir()</a></code>,
-<code><a href="file_path_no_ext.html">file_path_no_ext()</a></code>,
-<code><a href="get_filename.html">get_filename()</a></code>,
-<code><a href="is_filename.html">is_filename()</a></code>,
+<code><a href="get_file_path.html">get_file_path()</a></code>,
 <code><a href="is_path.html">is_path()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Use a temporary directory to not write in the user's directory</span></span></span>
-<span class="r-in"><span><span class="va">my_tempdir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"subdir"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="va">my_tempdir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"subdir"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                            winslash <span class="op">=</span> <span class="st">"/"</span>, mustWork <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpNk8v6u/subdir/2026_05_27/abc.txt"</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'file_path' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/2026_05_29/abc.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpR0HFYq/subdir/2026_05_29/abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpNk8v6u/subdir/2026_05_27/27_05_2026_abc.txt"</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'file_path' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/2026_05_29/29_05_2026_abc.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpR0HFYq/subdir/2026_05_29/29_05_2026_abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpNk8v6u/subdir/def.html"</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'file_path' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/def.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpR0HFYq/subdir/def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpNk8v6u/subdir/27_05_2026_def.html"</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'file_path' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/29_05_2026_def.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpR0HFYq/subdir/29_05_2026_def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
-<span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpNk8v6u/subdir/subdir/2026_05_27/abc.txt"</span>
+<span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'file_path' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir/2026_05_29/abc.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpR0HFYq/subdir/subdir/2026_05_29/abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
-<span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpNk8v6u/subdir/subdir/2026_05_27/27_05_2026_abc.txt"</span>
+<span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'file_path' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir/2026_05_29/29_05_2026_abc.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpR0HFYq/subdir/subdir/2026_05_29/29_05_2026_abc.txt"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
-<span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpNk8v6u/subdir/subdir/def.html"</span>
+<span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'file_path' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir/def.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpR0HFYq/subdir/subdir/def.html"</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
-<span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpNk8v6u/subdir/subdir/27_05_2026_def.html"</span>
+<span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'file_path' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpR0HFYq/subdir/subdir/29_05_2026_def.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpR0HFYq/subdir/subdir/29_05_2026_def.html"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cleaning up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">my_tempdir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

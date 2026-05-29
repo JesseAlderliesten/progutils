@@ -11,17 +11,8 @@
 - [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
   : Create a temporary directory
 
-- [`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md)
-  [`file_path_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md)
-  : Extract filenames or extensions
-
-- [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
+- [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
   : Check that only a single matching file is present
-
-- [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
-  :
-
-  Check that `x` is a valid filename
 
 - [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
   :
@@ -50,7 +41,7 @@
   : Are numeric values nearly equal
 - [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md)
   : Check for values that differ only in their case
-- [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
+- [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
   : Check that only a single matching file is present
 - [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
   : Are values absent

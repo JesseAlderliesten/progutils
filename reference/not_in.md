@@ -82,7 +82,7 @@ from R `4.6.0` onwards, `'%notin%'`, on which this function is based.
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),
 [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md),
-[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
+[`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
 
 ## Examples

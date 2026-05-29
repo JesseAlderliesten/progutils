@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,24 @@
       <small>Source: <a href="https://github.com/JesseAlderliesten/progutils/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.3.0" id="progutils-030">progutils 0.3.0<a class="anchor" aria-label="anchor" href="#progutils-030"></a></h2>
+<div class="section level4">
+<h4 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h4>
+<ul><li>Added dependency <code>fs</code>.</li>
+<li>
+<code><a href="../reference/create_file_path.html">create_file_path()</a></code>: no longer replace non-alphanumeric characters in the filename because reconstituting the filename is brittle.</li>
+<li>Replace <code>file_path_no_ext()</code> by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">fs::path_ext_remove()</a></code> and <code>file_path_ext()</code><br>
+by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">fs::path_ext()</a></code>.</li>
+<li>
+<code>get_filename()</code>: rename to <code><a href="../reference/get_file_path.html">get_file_path()</a></code> and return the complete file path instead of only the file name.</li>
+<li>
+<code>is_filename()</code>: removed, use <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
+<li>
+<code><a href="../reference/is_path.html">is_path()</a></code>: drop argument <code>as_file</code>. Instead, check that the filename is valid if a file extension is present.</li>
+<li>Replace <code>file.path(".", ...)</code> and <code>file.path(getwd(), ...)</code> with <code>fs::path_wd(...)</code>; replace other instances of <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> with <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="progutils-020">progutils 0.2.0<a class="anchor" aria-label="anchor" href="#progutils-020"></a></h2>
 <div class="section level4">
@@ -84,19 +102,19 @@
 <div class="section level4">
 <h4 id="breaking-changes-0-0-11">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-11"></a></h4>
 <ul><li>
-<code><a href="../reference/create_dir.html">create_dir()</a></code>: use <code><a href="../reference/is_filename.html">is_filename()</a></code> to check if <code>filename</code> is valid.</li>
+<code><a href="../reference/create_dir.html">create_dir()</a></code>: use <code>is_filename()</code> to check if <code>filename</code> is valid.</li>
 <li>
 <code>create_path</code>: use <code><a href="../reference/is_path.html">is_path()</a></code> to check that <code>dir</code> is a valid path.</li>
 <li>
 <code><a href="../reference/create_tempdir.html">create_tempdir()</a></code>: only write in subdirectories of <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> and use <code><a href="../reference/is_path.html">is_path()</a></code> to check that <code>subdir</code> is valid.</li>
 <li>
-<code>file_path_sans_ext()</code>: rename to <code><a href="../reference/file_path_no_ext.html">file_path_no_ext()</a></code> to distinguish it from <code><a href="https://rdrr.io/r/tools/fileutils.html" class="external-link">tools::file_path_sans_ext()</a></code> when linking to documentation; add argument <code>compression</code>.</li>
+<code>file_path_sans_ext()</code>: rename to <code>file_path_no_ext()</code> to distinguish it from <code><a href="https://rdrr.io/r/tools/fileutils.html" class="external-link">tools::file_path_sans_ext()</a></code> when linking to documentation; add argument <code>compression</code>.</li>
 <li>
 <code><a href="../reference/wrap_text.html">wrap_text()</a></code>: collapse leading and trailing whitespace and, if <code>ignore_newlines</code> is <code>TRUE</code>, leading and trailing newlines into a single blank character instead of removing them. Retains leading and trailing newlines if <code>ignore_newlines</code> is <code>FALSE</code>.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="added-functions-0-0-11">Added functions<a class="anchor" aria-label="anchor" href="#added-functions-0-0-11"></a></h4>
-<ul><li>Add functions <code><a href="../reference/file_path_no_ext.html">file_path_ext()</a></code>, <code><a href="../reference/is_filename.html">is_filename()</a></code> and <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
+<ul><li>Add functions <code>file_path_ext()</code>, <code>is_filename()</code> and <code><a href="../reference/is_path.html">is_path()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -188,7 +206,7 @@
 <li>
 <code><a href="../reference/create_dir.html">create_dir()</a></code>: use <code>winslash = "/"</code> instead of <code>winslash = "\\"</code> to normalise paths.</li>
 <li>
-<code><a href="../reference/get_filename.html">get_filename()</a></code>: use <code>winslash = "/"</code> instead of <code>winslash = "\\"</code> to normalise paths.</li>
+<code>get_filename()</code>: use <code>winslash = "/"</code> instead of <code>winslash = "\\"</code> to normalise paths.</li>
 <li>
 <code>get_paths()</code>: removed. Use <code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code> instead.</li>
 </ul></div>

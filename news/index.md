@@ -1,5 +1,30 @@
 # Changelog
 
+## progutils 0.3.0
+
+#### Breaking changes
+
+- Added dependency `fs`.
+- [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md):
+  no longer replace non-alphanumeric characters in the filename because
+  reconstituting the filename is brittle.
+- Replace `file_path_no_ext()` by
+  [`fs::path_ext_remove()`](https://fs.r-lib.org/reference/path_file.html)
+  and `file_path_ext()`  
+  by [`fs::path_ext()`](https://fs.r-lib.org/reference/path_file.html).
+- `get_filename()`: rename to
+  [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
+  and return the complete file path instead of only the file name.
+- `is_filename()`: removed, use
+  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
+- [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md):
+  drop argument `as_file`. Instead, check that the filename is valid if
+  a file extension is present.
+- Replace `file.path(".", ...)` and `file.path(getwd(), ...)` with
+  `fs::path_wd(...)`; replace other instances of
+  [`file.path()`](https://rdrr.io/r/base/file.path.html) with
+  [`fs::path()`](https://fs.r-lib.org/reference/path.html).
+
 ## progutils 0.2.0
 
 #### Breaking changes
@@ -52,9 +77,7 @@
 #### Breaking changes
 
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
-  use
-  [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
-  to check if `filename` is valid.
+  use `is_filename()` to check if `filename` is valid.
 - `create_path`: use
   [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
   to check that `dir` is a valid path.
@@ -63,9 +86,8 @@
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html) and use
   [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
   to check that `subdir` is valid.
-- `file_path_sans_ext()`: rename to
-  [`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md)
-  to distinguish it from
+- `file_path_sans_ext()`: rename to `file_path_no_ext()` to distinguish
+  it from
   [`tools::file_path_sans_ext()`](https://rdrr.io/r/tools/fileutils.html)
   when linking to documentation; add argument `compression`.
 - [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md):
@@ -76,10 +98,7 @@
 
 #### Added functions
 
-- Add functions
-  [`file_path_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
-  [`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md)
-  and
+- Add functions `file_path_ext()`, `is_filename()` and
   [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
 
 ## progutils 0.0.9
@@ -186,8 +205,8 @@
   show the warnings if creating a directory fails.
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
   use `winslash = "/"` instead of `winslash = "\\"` to normalise paths.
-- [`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md):
-  use `winslash = "/"` instead of `winslash = "\\"` to normalise paths.
+- `get_filename()`: use `winslash = "/"` instead of `winslash = "\\"` to
+  normalise paths.
 - `get_paths()`: removed. Use
   [`.libPaths()`](https://rdrr.io/r/base/libPaths.html) instead.
 

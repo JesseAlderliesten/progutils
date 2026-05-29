@@ -9,7 +9,7 @@ exist.
 create_file_path(
   filename,
   format_stamp = "%Y_%m_%d_%H_%M_%S",
-  dir = file.path(".", "output"),
+  dir = fs::path_wd("output"),
   add_date = TRUE
 )
 ```
@@ -36,8 +36,14 @@ create_file_path(
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
   path](https://jessealderliesten.github.io/progutils/reference/is_path.md)
-  to a directory that should be created if it does not yet exist. A dot
-  (i.e., `"."`) indicates the current working directory.
+  to a directory that should be created if it does not yet exist.
+  [`fs::path()`](https://fs.r-lib.org/reference/path.html) ensures the
+  correct ([platform](https://rdrr.io/r/base/Platform.html)-dependent)
+  file separator is used to indicate subdirectories and the dot (`"."`)
+  indicates the [working directory](https://rdrr.io/r/base/getwd.html),
+  such that by default a subdirectory with the current date in the
+  [format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` in
+  directory `output` below the working directory is created.
 
 - add_date:
 
@@ -52,25 +58,9 @@ The created file path, returned
 
 ## Details
 
-`filename` should contain a file extension (i.e., a dot followed by
-alphanumeric characters until the end of the file name). It should not
-contain slashes or backslashes: use `dir` to indicate (sub)directories.
-Non-alphanumeric characters other than dots and underscores preceding
-the file extension are replaced by underscores, with a warning.
-
-The default `dir` is a subdirectory with the current date in the
-[format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` in directory
-`output` below the working directory.
-[`file.path()`](https://rdrr.io/r/base/file.path.html) ensures the
-correct ([platform](https://rdrr.io/r/base/Platform.html)-dependent)
-file separator is used to indicate subdirectories, and `"."` indicates
-the [working directory](https://rdrr.io/r/base/getwd.html).
-
-`dir` should point to a [valid
-path](https://jessealderliesten.github.io/progutils/reference/is_path.md).
-The directory for the returned path is
-[created](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
-if it does not yet exist.
+`filename` **should** contain a file extension (i.e., a dot followed by
+any character until the end of the file name) and should **not** contain
+slashes or backslashes: use `dir` to indicate subdirectories.
 
 The absolute [normalised](https://rdrr.io/r/base/normalizePath.html)
 path is returned such that the returned path still works if the [working
@@ -87,15 +77,16 @@ truncating seconds to `0 <= n <= 6` decimal places, see
 
 ## Side effects
 
-The directory indicated by the returned file path is created if it does
-not yet exist.
+The directory indicated by the returned file path is
+[created](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
+if it does not yet exist.
 
 ## See also
 
-[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md)
+[`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
 to check if a file exists and is a unique match to a pattern,
-[`file.path()`](https://rdrr.io/r/base/file.path.html) to construct file
-paths in a platform-independent way,
+[`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
+file paths in a platform-independent way,
 [`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) to create
 absolute normalised paths,
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
@@ -104,42 +95,88 @@ to create a directory if it does not yet exist
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
-[`file_path_no_ext()`](https://jessealderliesten.github.io/progutils/reference/file_path_no_ext.md),
-[`get_filename()`](https://jessealderliesten.github.io/progutils/reference/get_filename.md),
-[`is_filename()`](https://jessealderliesten.github.io/progutils/reference/is_filename.md),
+[`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md),
 [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
 
 ## Examples
 
 ``` r
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
+my_tempdir <- normalizePath(path = fs::path(tempdir(), "subdir"),
                             winslash = "/", mustWork = FALSE)
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpNk8v6u/subdir/2026_05_27/abc.txt"
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir
+#> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/2026_05_29/abc.txt
+#> [1] "/tmp/RtmpR0HFYq/subdir/2026_05_29/abc.txt"
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpNk8v6u/subdir/2026_05_27/27_05_2026_abc.txt"
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir
+#> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/2026_05_29/29_05_2026_abc.txt
+#> [1] "/tmp/RtmpR0HFYq/subdir/2026_05_29/29_05_2026_abc.txt"
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpNk8v6u/subdir/def.html"
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir
+#> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/def.html
+#> [1] "/tmp/RtmpR0HFYq/subdir/def.html"
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpNk8v6u/subdir/27_05_2026_def.html"
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir
+#> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/29_05_2026_def.html
+#> [1] "/tmp/RtmpR0HFYq/subdir/29_05_2026_def.html"
 (create_file_path(filename = "abc.txt", format_stamp = "",
-                  dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpNk8v6u/subdir/subdir/2026_05_27/abc.txt"
+                  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir
+#> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir/2026_05_29/abc.txt
+#> [1] "/tmp/RtmpR0HFYq/subdir/subdir/2026_05_29/abc.txt"
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-                  dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpNk8v6u/subdir/subdir/2026_05_27/27_05_2026_abc.txt"
+                  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir
+#> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir/2026_05_29/29_05_2026_abc.txt
+#> [1] "/tmp/RtmpR0HFYq/subdir/subdir/2026_05_29/29_05_2026_abc.txt"
 (create_file_path(filename = "def.html", format_stamp = "",
-                  dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpNk8v6u/subdir/subdir/def.html"
+                  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir
+#> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir/def.html
+#> [1] "/tmp/RtmpR0HFYq/subdir/subdir/def.html"
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-                  dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpNk8v6u/subdir/subdir/27_05_2026_def.html"
+                  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir
+#> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir
+#> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
+#> /tmp/RtmpR0HFYq/subdir/subdir/29_05_2026_def.html
+#> [1] "/tmp/RtmpR0HFYq/subdir/subdir/29_05_2026_def.html"
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)
