@@ -15,18 +15,9 @@
 #' The created file path, returned [invisibly][invisible()].
 #'
 #' @details
-#' `filename` should contain a file extension (i.e., a dot followed by
-#' alphanumeric characters until the end of the file name). It should not
-#' contain slashes or backslashes: use `dir` to indicate (sub)directories.
-#'
-#' The default `dir` is a subdirectory with the current date in the
-#' [format][strftime()] `YYYY_mm_dd` in directory `output` below the working
-#' directory. [file.path()] ensures the correct ([platform][.Platform]-dependent)
-#' file separator is used to indicate subdirectories, and `"."` indicates the
-#' [working directory][getwd()].
-#'
-#' `dir` should point to a [valid path][is_path()]. The directory for the
-#' returned path is [created][create_dir()] if it does not yet exist.
+#' `filename` **should** contain a file extension (i.e., a dot followed by any
+#' character until the end of the file name) and should **not** contain slashes
+#' or backslashes: use `dir` to indicate subdirectories.
 #'
 #' The absolute [normalised][normalizePath()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes. `"/"`
@@ -39,8 +30,8 @@
 #' `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
 #' @section Side effects:
-#' The directory indicated by the returned file path is created if it does not
-#' yet exist.
+#' The directory indicated by the returned file path is [created][create_dir()]
+#' if it does not yet exist.
 #'
 #' @seealso
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern,
@@ -82,16 +73,28 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
   stopifnot(checkinput::is_character(filename),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_logical(add_date))
-  is_path(dir)
+  is_path(path = dir)
+
+  filename_no_ext <- fs::path_ext_remove(path = filename)
+  file_ext <- fs::path_ext(path = filename)
+  if(!nzchar(filename_no_ext) || !nzchar(file_ext) ||
+     length(filename_no_ext) == 0L || length(file_ext) == 0L) {
+    stop("Empty filename or missing extension:\n", filename)
+  }
 
   if(nzchar(format_stamp)) {
     filename <- paste0(format(Sys.time(), format = format_stamp), "_", filename)
   }
 
+  if(grepl(pattern = "/", x = filename, fixed = TRUE) ||
+     grepl(pattern = "\\", x = filename, fixed = TRUE)) {
+    stop("'filename' (", paste_quoted(deparse(substitute(filename))),
+         ") should not contain '/' or '\\':\n", filename)
+  }
+
   file_path <- file.path(create_dir(dir = dir, add_date = add_date), filename)
   file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)
-  is_valid_file_path <- try(expr = is_path(path = file_path, to_file = TRUE),
-                            silent = TRUE)
+  is_valid_file_path <- try(expr = is_path(path = file_path), silent = TRUE)
   if(inherits(x = is_valid_file_path, what = "try-error")) {
     stop("No path created: ", attr(is_valid_file_path, "condition")$message)
   }

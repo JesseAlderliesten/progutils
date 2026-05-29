@@ -23,8 +23,12 @@ treated as part of the filename, such that the same restrictions apply, see
 
 \item{dir}{Non-empty \link[checkinput:is_character]{character string}
 containing a \link[=is_path]{valid path} to a directory that should be created if
-it does not yet exist. A dot (i.e., \code{"."}) indicates the current working
-directory.}
+it does not yet exist. \code{\link[=file.path]{file.path()}} ensures the correct
+(\link[=.Platform]{platform}-dependent) file separator is used to indicate
+subdirectories and the dot (\code{"."}) indicates the \link[=getwd]{working directory},
+such that by default a subdirectory with the current date in the
+\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
+directory is created.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
@@ -36,18 +40,9 @@ The created file path, returned \link[=invisible]{invisibly}.
 Create a file path, creating the indicated directory if it does not yet exist.
 }
 \details{
-\code{filename} should contain a file extension (i.e., a dot followed by
-alphanumeric characters until the end of the file name). It should not
-contain slashes or backslashes: use \code{dir} to indicate (sub)directories.
-
-The default \code{dir} is a subdirectory with the current date in the
-\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
-directory. \code{\link[=file.path]{file.path()}} ensures the correct (\link[=.Platform]{platform}-dependent)
-file separator is used to indicate subdirectories, and \code{"."} indicates the
-\link[=getwd]{working directory}.
-
-\code{dir} should point to a \link[=is_path]{valid path}. The directory for the
-returned path is \link[=create_dir]{created} if it does not yet exist.
+\code{filename} \strong{should} contain a file extension (i.e., a dot followed by any
+character until the end of the file name) and should \strong{not} contain slashes
+or backslashes: use \code{dir} to indicate subdirectories.
 
 The absolute \link[=normalizePath]{normalised} path is returned such that the
 returned path still works if the \link[=getwd]{working directory} changes. \code{"/"}
@@ -61,8 +56,8 @@ as part of \code{format_stamp} to create precise stamps by truncating seconds to
 }
 \section{Side effects}{
 
-The directory indicated by the returned file path is created if it does not
-yet exist.
+The directory indicated by the returned file path is \link[=create_dir]{created}
+if it does not yet exist.
 }
 
 \examples{
@@ -101,7 +96,6 @@ rm(my_tempdir)
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=file_path_no_ext]{file_path_no_ext()}},
 \code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=is_path]{is_path()}}
 }

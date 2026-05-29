@@ -21,14 +21,14 @@ write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 # with presence or absence of a date directory and a subdirectory in 'dir'.
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "",
-                  dir = my_tempdir, add_date = TRUE),
+                   dir = my_tempdir, add_date = TRUE),
   suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
                      "abc.txt")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-                  dir = my_tempdir, add_date = TRUE),
+                   dir = my_tempdir, add_date = TRUE),
   suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
                      paste0(current_date_dmY, "_abc.txt"))
 ))
@@ -72,7 +72,7 @@ expect_true(endsWith(
 ))
 
 ##### filename #####
-for(filenm in c("a.txt", "e3f.txt", "g_g.g.txt")) {
+for(filenm in c("a.txt", "c#c.txt", "d d.txt", "e3f.txt", "g_g.g.txt", "ab.c#")) {
   # expect_silent(
     expect_true(endsWith(
       create_file_path(filename = filenm, format_stamp = "",
@@ -83,8 +83,13 @@ for(filenm in c("a.txt", "e3f.txt", "g_g.g.txt")) {
 }
 
 expect_error(
+  create_file_path(filename = "ff .txt", format_stamp = "",
+                   dir = my_tempdir, add_date = FALSE),
+  pattern = "'filename' should not end with ' ' or '.'", fixed = TRUE)
+
+expect_error(
   create_file_path(filename = "ff..txt", format_stamp = "",
-              dir = my_tempdir, add_date = FALSE),
+                   dir = my_tempdir, add_date = FALSE),
   pattern = "'filename' should not end with ' ' or '.'", fixed = TRUE)
 
 ##### format_stamp #####
@@ -99,17 +104,15 @@ expect_error(
   ))
 # )
 
-# Non-alphanumeric characters other than underscores in the result of
-# 'format_stamp' are replaced by underscores.
-expect_warning(
+# Non-alphanumeric characters are *not* replaced (they used to be replaced in
+# earlier versions.
+expect_silent(
   expect_true(endsWith(
     create_file_path(filename = "abc.txt", format_stamp = "%d#.%m_%Ydef",
-                dir = my_tempdir, add_date = TRUE),
+                     dir = my_tempdir, add_date = TRUE),
     suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
-                       paste0(format(Sys.time(), format = "%d_.%m_%Y"), "def_abc.txt"))
-  )),
-  pattern = "Replaced non-alphanumeric characters other than underscores",
-  strict = TRUE, fixed = TRUE
+                       paste0(format(Sys.time(), format = "%d#.%m_%Y"), "def_abc.txt"))
+  ))
 )
 
 # expect_silent(
@@ -131,64 +134,33 @@ expect_warning(
 # )
 
 ##### dir #####
-# 'directories' that are only working directory followed by a file extension
-# are accepted!
-expect_true(endsWith(
-  create_file_path(filename = "abc.txt", format_stamp = "",
-              dir = file.path(my_tempdir, ".txt"), add_date = FALSE),
-  suffix = file.path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
-))
+# 'directories' might contain a file extension
+expect_silent(
+  expect_true(endsWith(
+    create_file_path(filename = "abc.txt", format_stamp = "",
+                     dir = file.path(my_tempdir, ".txt"), add_date = FALSE),
+    file.path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
+  ))
+)
 
+expect_warning(
+  expect_true(endsWith(
+  create_file_path(filename = "testfile123.csv", format_stamp = "",
+                   dir = my_tempfile, add_date = FALSE),
+  suffix = file.path(basename(getwd()), "testfile123.csv"))),
+  pattern = "already exists", fixed = TRUE
+)
 
 ##### Warnings #####
-# 'directories' that actually are names of existing files lead to the working
-# directory being used instead, with warnings that the file already exists and
-# that the working directory is used because creation of the directory failed.
+# A warning is issued if the file indicated by the returned path already exists.
 my_tempfile <- file.path(my_tempdir, "testfile.csv")
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
-
-expect_warning(
-  expect_true(endsWith(
-    create_file_path(filename = "testfile.csv", format_stamp = "",
-                dir = my_tempfile, add_date = FALSE),
-    suffix = file.path(basename(getwd()), "testfile.csv", fsep = "/")
-  )),
-  pattern = paste0(basename(my_tempfile), "' already exists"),
-  strict = TRUE, fixed = TRUE
-)
-
-expect_warning(
-  expect_true(endsWith(
-    create_file_path(filename = "testfile.csv", format_stamp = "",
-                dir = my_tempfile, add_date = FALSE),
-    suffix = file.path(basename(getwd()), "testfile.csv", fsep = "/")
-  )),
-  pattern = "Attempt to create directory",
-  strict = TRUE, fixed = TRUE
-)
-
-# A warning is issued if the file indicated by the returned path already exists.
 expect_warning(
   expect_true(endsWith(
     create_file_path(filename = basename(my_tempfile), format_stamp = "",
                 dir = my_tempdir, add_date = FALSE),
     suffix = file.path(tempdir_basename, "testcreatepath", basename(my_tempfile)))),
   pattern = "File already exists:", strict = TRUE, fixed = TRUE)
-
-filenm_in <- c("c#c.txt", "d d.txt")
-filenm_out <- c("c_c.txt", "d_d.txt")
-for(ind_filenm in seq_along(filenm_in)) {
-  expect_warning(
-    expect_true(endsWith(
-      create_file_path(filename = filenm_in[ind_filenm], format_stamp = "",
-                  dir = my_tempdir, add_date = FALSE),
-      suffix = file.path(tempdir_basename, "testcreatepath", filenm_out[ind_filenm])
-      )),
-    pattern = paste0("Replaced non-alphanumeric characters other than",
-                     " underscores in filename\n'", filenm_in[ind_filenm],
-                     "' with underscores: ", filenm_out[ind_filenm]),
-    strict = TRUE, fixed = TRUE)
-}
 
 ##### Check 'filename' #####
 expect_error(create_file_path(dir = my_tempdir),
@@ -204,9 +176,10 @@ expect_error(create_file_path(filename = "", dir = my_tempdir),
              pattern = "checkinput::is_character(filename) is not TRUE",
              fixed = TRUE)
 
-for(filenm_in in c("abcd", "abc.", "ab.c#", ".", ".txt", ".html")) {
-  expect_error(create_file_path(filename = filenm_in, dir = my_tempdir),
-               pattern = "No path created: Empty filename or missing extension",
+for(filenm_in in c("abcd", "abc.", ".", ".txt", ".html")) {
+  expect_error(create_file_path(filename = filenm_in, dir = my_tempdir,
+                                format_stamp = ""),
+               pattern = "Empty filename or missing extension",
                fixed = TRUE)
 }
 
@@ -214,8 +187,8 @@ filenm_in <- c("a/a.txt", "b\\b.txt")
 for(ind_filenm in seq_along(filenm_in)) {
   expect_error(
     create_file_path(filename = filenm_in[ind_filenm], format_stamp = "",
-                dir = my_tempdir, add_date = FALSE),
-    pattern = paste0("'filename' should not contain '/' or '\\'"),
+                     dir = my_tempdir, add_date = FALSE),
+    pattern = paste0("should not contain '/' or '\\'"),
     fixed = TRUE)
 }
 
@@ -242,16 +215,14 @@ expect_error(
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
   expect_error(
     create_file_path(filename = "abc.txt", dir = dir),
-    pattern = "checkinput::is_character(dir) is not TRUE", fixed = TRUE)
+    pattern = "checkinput::is_character(path) is not TRUE", fixed = TRUE)
 }
 
-for(dir in list(paste0(my_tempdir, "./"),
-                paste0(my_tempdir, "temp_p1/"),
-                paste0(my_tempdir, ".\\"),
-                paste0(my_tempdir, "temp_p1\\"))) {
+for(dir in list(paste0(my_tempdir, "//"),
+                paste0(my_tempdir, "//temp_p1"))) {
   expect_warning(
     create_file_path(filename = "abc.txt", dir = dir),
-    pattern = "Repeated '/' or '\\'", fixed = TRUE)
+    pattern = "Repeated '/' or '\\\\'", fixed = TRUE)
 }
 
 for(dir in list(paste0(my_tempdir, ".."),
@@ -266,7 +237,7 @@ for(dir in list(paste0(my_tempdir, ".."),
 }
 
 ##### Check 'add_date' #####
-for(add_date in list(3, NA)) {
+for(add_date in list(1, NA)) {
   expect_error(
     create_file_path(filename = "abc.txt", dir = my_tempdir, add_date = add_date),
     pattern = "checkinput::is_logical(add_date) is not TRUE", fixed = TRUE)
