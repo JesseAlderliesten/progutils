@@ -58,7 +58,7 @@ tempdir()
 try(create_tempdir(subdir = "examplesubtempdir"))
 
 # It is possible to create recursive directories
-(tempdir_recursive <- create_tempdir(subdir = file.path("abc", "def")))
+(tempdir_recursive <- create_tempdir(subdir = fs::path("abc", "def")))
 
 # Clean up
 unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)

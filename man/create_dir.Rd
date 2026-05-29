@@ -4,12 +4,12 @@
 \alias{create_dir}
 \title{Create a directory}
 \usage{
-create_dir(dir = file.path(".", "output"), add_date = TRUE)
+create_dir(dir = fs::path_wd("output"), add_date = TRUE)
 }
 \arguments{
 \item{dir}{Non-empty \link[checkinput:is_character]{character string}
 containing a \link[=is_path]{valid path} to a directory that should be created if
-it does not yet exist. \code{\link[=file.path]{file.path()}} ensures the correct
+it does not yet exist. \code{\link[fs:path]{fs::path()}} ensures the correct
 (\link[=.Platform]{platform}-dependent) file separator is used to indicate
 subdirectories and the dot (\code{"."}) indicates the \link[=getwd]{working directory},
 such that by default a subdirectory with the current date in the
@@ -48,29 +48,29 @@ does not yet exist.
 
 \examples{
 # Use a temporary subdirectory to not write in the user's directory
-my_tempdir <- file.path(tempdir(), "testcreatedir")
+my_tempdir <- fs::path(tempdir(), "testcreatedir")
 
 # Create directory 'dir_one' inside this temporary directory
-res_dir_one <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 dir.exists(res_dir_one) # TRUE
 
 # An attempt to create a directory that already exists does not change any
 # directory and the same directory is returned.
-res_dir_one_v2 <- create_dir(dir = file.path(my_tempdir, "dir_one"),
+res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                              add_date = FALSE)
 identical(res_dir_one, res_dir_one_v2) # TRUE
 
 # On case-insensitive file systems such as Windows and macOS, adding
 # 'dir_ONE' to the directory gives the same result as adding 'dir_one' as
 # done above for 'res_dir_one'
-res_dir_one_v3 <- create_dir(dir = file.path(my_tempdir, "dir_ONE"),
+res_dir_one_v3 <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                              add_date = FALSE)
 # TRUE on Windows and macOS, FALSE on Ubuntu
 identical(res_dir_one, res_dir_one_v3)
 
 # Create directory 'dir_two' with a subdirectory containing the current date
-res_dir_two <- create_dir(dir = file.path(my_tempdir, "dir_two"),
+res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
 dir.exists(res_dir_two) # TRUE
 

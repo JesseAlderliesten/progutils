@@ -46,7 +46,7 @@ path because they are silently removed in Windows; and words that are
 reserved names in Windows.
 
 \code{path} \strong{not} necessarily has to contain a file separator (i.e., \code{/} or
-\verb{\\\\}), such that \code{is_path()} can be used to check that input to \code{\link[=file.path]{file.path()}}
+\verb{\\\\}), such that \code{is_path()} can be used to check that input to \code{\link[fs:path]{fs::path()}}
 only contains allowed characters. Repeated file separators (e.g., \verb{//} or
 \verb{\\\\\\\\}) are treated as single separators, with a warning.
 }
@@ -72,8 +72,7 @@ the message (e.g., \code{"Repeated"}), possibly followed by a check like
 \code{tinytest::expect_true(dir.exists(string))}.
 
 Trailing slashes or backslashes are allowed, even though these might be
-removed in some operations (e.g., trailing \verb{\\\\} in the input to \code{\link[=file.path]{file.path()}}
-is replaced by a trailing \code{/}, but a trailing \code{/} in the input is removed).
+removed in some operations.
 }
 
 \section{References}{
@@ -88,20 +87,20 @@ is replaced by a trailing \code{/}, but a trailing \code{/} in the input is remo
 
 \examples{
 is_path(getwd())
-try(is_path(file.path(getwd(), "ab|cd")))
+try(is_path(fs::path_wd("ab|cd")))
 
-is_path(file.path(getwd(), "abcd.txt"))
-is_path(file.path(getwd(), "abcd.txt.gz"))
+is_path(fs::path_wd("abcd.txt"))
+is_path(fs::path_wd("abcd.txt.gz"))
 
-try(is_path(file.path(getwd(), "abcd")))
-try(is_path(file.path(getwd(), "abcd.gz")))
-try(is_path(file.path(getwd(), "ab:cd.txt")))
-try(is_path(file.path(getwd(), "ab|cd.txt")))
+try(is_path(fs::path_wd("abcd")))
+try(is_path(fs::path_wd("abcd.gz")))
+try(is_path(fs::path_wd("ab:cd.txt")))
+try(is_path(fs::path_wd("ab|cd.txt")))
 
 }
 \seealso{
 \code{utils::file_test()} and references there on file existence and permissions,
-\code{fs::path_real()}.
+\code{help(fs::path_math)} for various operations on paths,
 \code{\link[=create_file_path]{create_file_path()}} to create a path (with references there about file
 paths), \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist,
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern

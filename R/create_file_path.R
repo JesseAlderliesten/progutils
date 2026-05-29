@@ -35,7 +35,7 @@
 #'
 #' @seealso
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern,
-#' [file.path()] to construct file paths in a platform-independent way,
+#' [fs::path()] to construct file paths in a platform-independent way,
 #' [normalizePath()] to create absolute normalised paths,
 #' [create_dir()] to create a directory if it does not yet exist
 #'
@@ -43,7 +43,7 @@
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory
-#' my_tempdir <- normalizePath(path = file.path(tempdir(), "subdir"),
+#' my_tempdir <- normalizePath(path = fs::path(tempdir(), "subdir"),
 #'                             winslash = "/", mustWork = FALSE)
 #'
 #' (create_file_path(filename = "abc.txt", format_stamp = "",
@@ -55,13 +55,13 @@
 #' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
 #'                   dir = my_tempdir, add_date = FALSE))
 #' (create_file_path(filename = "abc.txt", format_stamp = "",
-#'                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+#'                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
 #' (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#'                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE))
+#'                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
 #' (create_file_path(filename = "def.html", format_stamp = "",
-#'                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+#'                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 #' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#'                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE))
+#'                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 #'
 #' # Cleaning up
 #' unlink(x = my_tempdir, recursive = TRUE)
@@ -69,7 +69,7 @@
 #'
 #' @export
 create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
-                             dir = file.path(".", "output"), add_date = TRUE) {
+                             dir = fs::path_wd("output"), add_date = TRUE) {
   stopifnot(checkinput::is_character(filename),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_logical(add_date))
@@ -92,7 +92,7 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
          ") should not contain '/' or '\\':\n", filename)
   }
 
-  file_path <- file.path(create_dir(dir = dir, add_date = add_date), filename)
+  file_path <- fs::path(create_dir(dir = dir, add_date = add_date), filename)
   file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)
   is_valid_file_path <- try(expr = is_path(path = file_path), silent = TRUE)
   if(inherits(x = is_valid_file_path, what = "try-error")) {

@@ -64,9 +64,9 @@ rm(my_tempfiles)
 
 #### Tests ####
 # Create files in a temporary directory so we know what is present.
-my_tempdir <- file.path(tempdir(), "testgetfilename")
+my_tempdir <- fs::path(tempdir(), "testgetfilename")
 dir.create(my_tempdir)
-my_tempfile <- file.path(my_tempdir, "test_df.csv")
+my_tempfile <- fs::path(my_tempdir, "test_df.csv")
 
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
@@ -76,19 +76,19 @@ expect_error(get_file_path(dir = my_tempfile, pattern = "test_"),
              pattern = "points to a file but should point to a directory")
 
 # 'dir' points to a non-existing directory
-expect_error(get_file_path(dir = file.path(my_tempdir, "abc"), pattern = "test_"),
-             pattern = paste0(basename(path = file.path(my_tempdir, "abc")),
+expect_error(get_file_path(dir = fs::path(my_tempdir, "abc"), pattern = "test_"),
+             pattern = paste0(basename(path = fs::path(my_tempdir, "abc")),
                               "' does not exist"))
 
 # 'pattern' points to an existing directory instead of to an existing file
-dir.create(path = file.path(tempdir(), "test_dir"), recursive = TRUE)
+dir.create(path = fs::path(tempdir(), "test_dir"), recursive = TRUE)
 expect_error(get_file_path(dir = my_tempdir, pattern = "test_dir"),
              pattern = "No matches to pattern 'test_dir' are present",
              fixed = TRUE)
 
 
 #### Delete the created temporary files ####
-unlink(x = c(dirname(my_tempfile), file.path(tempdir(), "test_dir")), recursive = TRUE)
+unlink(x = c(dirname(my_tempfile), fs::path(tempdir(), "test_dir")), recursive = TRUE)
 
 
 #### Remove objects used in tests ####

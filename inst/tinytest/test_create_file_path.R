@@ -3,7 +3,7 @@ tinytest::report_side_effects()
 #### Tests ####
 ##### Preparations #####
 # Create temporary directory and temporary file to use in tests.
-my_tempdir <- normalizePath(path = file.path(tempdir(), "testcreatepath"),
+my_tempdir <- normalizePath(path = fs::path(tempdir(), "testcreatepath"),
                             winslash = "/", mustWork = FALSE)
 tempdir_pattern <- paste0(basename(tempdir()), ".+$")
 tempdir_basename <- basename(tempdir())
@@ -11,7 +11,7 @@ current_date_Ymd <- format(Sys.time(), format = "%Y_%m_%d")
 current_date_dmY <- format(Sys.time(), format = "%d_%m_%Y")
 
 dir.create(path = my_tempdir, showWarnings = FALSE, recursive = TRUE)
-my_tempfile <- normalizePath(path = file.path(my_tempdir, "test_df.csv"),
+my_tempfile <- normalizePath(path = fs::path(my_tempdir, "test_df.csv"),
                              winslash = "/", mustWork = FALSE)
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
@@ -22,52 +22,52 @@ write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "",
                    dir = my_tempdir, add_date = TRUE),
-  suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+  suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
                      "abc.txt")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                    dir = my_tempdir, add_date = TRUE),
-  suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+  suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
                      paste0(current_date_dmY, "_abc.txt"))
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "",
                    dir = my_tempdir, add_date = FALSE),
-  suffix = file.path(tempdir_basename, "testcreatepath", "def.html")
+  suffix = fs::path(tempdir_basename, "testcreatepath", "def.html")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                    dir = my_tempdir, add_date = FALSE),
-  suffix = file.path(tempdir_basename, "testcreatepath", paste0(current_date_dmY, "_def.html"))
+  suffix = fs::path(tempdir_basename, "testcreatepath", paste0(current_date_dmY, "_def.html"))
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "",
-                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE),
-  suffix = file.path(tempdir_basename, "testcreatepath", "subdir", current_date_Ymd, "abc.txt")
+                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE),
+  suffix = fs::path(tempdir_basename, "testcreatepath", "subdir", current_date_Ymd, "abc.txt")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-                   dir = file.path(my_tempdir, "subdir"), add_date = TRUE),
-  suffix = file.path(tempdir_basename, "testcreatepath", "subdir",
+                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE),
+  suffix = fs::path(tempdir_basename, "testcreatepath", "subdir",
                      current_date_Ymd, paste0(current_date_dmY, "_abc.txt"))
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "",
-                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE),
-  suffix = file.path(tempdir_basename, "testcreatepath", "subdir", "def.html")
+                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE),
+  suffix = fs::path(tempdir_basename, "testcreatepath", "subdir", "def.html")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-                   dir = file.path(my_tempdir, "subdir"), add_date = FALSE),
-  suffix = file.path(tempdir_basename, "testcreatepath", "subdir",
+                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE),
+  suffix = fs::path(tempdir_basename, "testcreatepath", "subdir",
                      paste0(current_date_dmY, "_def.html"))
 ))
 
@@ -76,7 +76,7 @@ for(filenm in c("a.txt", "c#c.txt", "d d.txt", "e3f.txt", "g_g.g.txt", "ab.c#"))
   expect_true(endsWith(
     create_file_path(filename = filenm, format_stamp = "",
                      dir = my_tempdir, add_date = FALSE),
-    suffix = file.path(tempdir_basename, "testcreatepath", filenm)
+    suffix = fs::path(tempdir_basename, "testcreatepath", filenm)
   ))
 }
 
@@ -98,7 +98,7 @@ expect_error(
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Ydef",
                    dir = my_tempdir, add_date = TRUE),
-  suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+  suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
                      paste0(current_date_dmY, "def_abc.txt"))
 ))
 
@@ -110,7 +110,7 @@ expect_true(endsWith(
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d#.%m_%Ydef",
                    dir = normalizePath(my_tempdir), add_date = TRUE),
-  suffix = file.path(tempdir_basename, "testcreatepath", current_date_Ymd,
+  suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
                      paste0(format(Sys.time(), format = "%d#.%m_%Y"), "def_abc.txt"))
 ))
 
@@ -132,27 +132,27 @@ expect_true(
 # 'directories' might contain a file extension
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "",
-                   dir = file.path(my_tempdir, ".txt"), add_date = FALSE),
-  file.path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
+                   dir = fs::path(my_tempdir, ".txt"), add_date = FALSE),
+  fs::path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
 ))
 
 expect_warning(
   expect_true(endsWith(
     create_file_path(filename = "testfile123.csv", format_stamp = "",
                      dir = my_tempfile, add_date = FALSE),
-    suffix = file.path(basename(getwd()), "testfile123.csv"))),
+    suffix = fs::path(basename(getwd()), "testfile123.csv"))),
   pattern = "already exists", fixed = TRUE
 )
 
 ##### Warnings #####
 # A warning is issued if the file indicated by the returned path already exists.
-my_tempfile <- file.path(my_tempdir, "testfile.csv")
+my_tempfile <- fs::path(my_tempdir, "testfile.csv")
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 expect_warning(
   expect_true(endsWith(
     create_file_path(filename = basename(my_tempfile), format_stamp = "",
                      dir = my_tempdir, add_date = FALSE),
-    suffix = file.path(tempdir_basename, "testcreatepath", basename(my_tempfile)))),
+    suffix = fs::path(tempdir_basename, "testcreatepath", basename(my_tempfile)))),
   pattern = "File already exists:", strict = TRUE, fixed = TRUE)
 
 ##### Check 'filename' #####
@@ -221,7 +221,7 @@ for(dir in list(paste0(my_tempdir, "//"),
 for(dir in list(paste0(my_tempdir, ".."),
                 paste0(my_tempdir, "temp_p1."),
                 paste0(my_tempdir, "."),
-                file.path(my_tempdir, "."),
+                fs::path(my_tempdir, "."),
                 paste0(my_tempdir, ". "),
                 paste0(my_tempdir, "temp_p1 "))) {
   expect_error(

@@ -36,7 +36,7 @@
 #' checking they are a unique match to a pattern;
 #' [file.info()] and [file.access()] to extract information about files or
 #' directories;
-#' [file.path()] to construct file paths in a platform-independent way;
+#' [fs::path()] to construct file paths in a platform-independent way;
 #' [normalizePath()] to create absolute paths.
 #'
 #' @family functions to handle paths and directories

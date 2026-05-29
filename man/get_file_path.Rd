@@ -76,7 +76,7 @@ rm(my_tempfiles)
 checking they are a unique match to a pattern;
 \code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or
 directories;
-\code{\link[=file.path]{file.path()}} to construct file paths in a platform-independent way;
+\code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way;
 \code{\link[=normalizePath]{normalizePath()}} to create absolute paths.
 
 Other functions to handle paths and directories:

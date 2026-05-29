@@ -33,7 +33,7 @@
 #' reserved names in Windows.
 #'
 #' `path` **not** necessarily has to contain a file separator (i.e., `/` or
-#' `\\`), such that `is_path()` can be used to check that input to [file.path()]
+#' `\\`), such that `is_path()` can be used to check that input to [fs::path()]
 #' only contains allowed characters. Repeated file separators (e.g., `//` or
 #' `\\\\`) are treated as single separators, with a warning.
 #'
@@ -62,8 +62,7 @@
 #' `tinytest::expect_true(dir.exists(string))`.
 #'
 #' Trailing slashes or backslashes are allowed, even though these might be
-#' removed in some operations (e.g., trailing `\\` in the input to [file.path()]
-#' is replaced by a trailing `/`, but a trailing `/` in the input is removed).
+#' removed in some operations.
 #'
 #' @section References:
 #' - Naming files, paths, and namespaces from
@@ -73,7 +72,7 @@
 #'
 #' @seealso
 #' `utils::file_test()` and references there on file existence and permissions,
-#' `fs::path_real()`.
+#' `help(fs::path_math)` for various operations on paths,
 #' [create_file_path()] to create a path (with references there about file
 #' paths), [create_dir()] to create a directory if it does not yet exist,
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern
@@ -84,15 +83,15 @@
 #'
 #' @examples
 #' is_path(getwd())
-#' try(is_path(file.path(getwd(), "ab|cd")))
+#' try(is_path(fs::path_wd("ab|cd")))
 #'
-#' is_path(file.path(getwd(), "abcd.txt"))
-#' is_path(file.path(getwd(), "abcd.txt.gz"))
+#' is_path(fs::path_wd("abcd.txt"))
+#' is_path(fs::path_wd("abcd.txt.gz"))
 #'
-#' try(is_path(file.path(getwd(), "abcd")))
-#' try(is_path(file.path(getwd(), "abcd.gz")))
-#' try(is_path(file.path(getwd(), "ab:cd.txt")))
-#' try(is_path(file.path(getwd(), "ab|cd.txt")))
+#' try(is_path(fs::path_wd("abcd")))
+#' try(is_path(fs::path_wd("abcd.gz")))
+#' try(is_path(fs::path_wd("ab:cd.txt")))
+#' try(is_path(fs::path_wd("ab|cd.txt")))
 #'
 #' @export
 is_path <- function(path) {
@@ -187,7 +186,7 @@ is_path <- function(path) {
   if(to_tempdir) {
     stop(wrap_text(paste0(
       "'path' should not point to 'tempdir()': instead, point to a subdirectory",
-      " in tempdir() through 'file.path(tempdir(), \"subdir\")', or create such",
+      " in tempdir() through 'fs::path(tempdir(), \"subdir\")', or create such",
       " a subdirectory through 'create_tempdir(subdir = \"subdir\")':\n", path)))
   }
 
