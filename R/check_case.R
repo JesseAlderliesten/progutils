@@ -3,15 +3,15 @@
 #' @inheritParams signal_text
 #' @param x Character vector to check.
 #'
+#' @details
+#' Values in `x` that only differ from each other in their case generate an
+#' [error][stop], [warning], or [message] if `signal` is `error`, `warning`, or
+#' `message`, respectively. Values are silently returned if `signal` is `quiet`.
+#'
 #' @returns
 #' Character vector with [unique][unique()], [sorted][sort()] values in `x` that
 #' only differ from each other in their case, or `character(0)` if no such
 #' values are present. The return is [invisible].
-#'
-#' @section Side effects:
-#' Values in `x` that only differ from each other in their case generate an
-#' [error][stop], [warning], or [message] if `signal` is `error`, `warning`, or
-#' `message`, respectively. Values are silently returned if `signal` is `quiet`.
 #'
 #' @section Notes:
 #' The sorting order in the result depends on the used [locale][locales] (see

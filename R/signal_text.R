@@ -16,12 +16,11 @@
 #' [message()] etc. that use [paste0()], see the `Examples`. Call [vect_to_char()]
 #' beforehand on `text` to control rounding and wrapping, see the last example.
 #'
-#' @returns
-#' `text`, returned [invisibly][invisible()].
-#'
-#' @section Side effects:
 #' `text` is signalled through an [error][stop()], [warning], [message], or
 #' quietly, depending on argument `signal`.
+#'
+#' @returns
+#' `text`, returned [invisibly][invisible()].
 #'
 #' @seealso
 #' [wrap_text()]

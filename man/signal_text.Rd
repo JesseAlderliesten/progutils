@@ -32,13 +32,10 @@ Signal a text to the user through an error, warning, or message.
 zero-length input and input with length larger than one better than
 \code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}, see the \code{Examples}. Call \code{\link[=vect_to_char]{vect_to_char()}}
 beforehand on \code{text} to control rounding and wrapping, see the last example.
-}
-\section{Side effects}{
 
 \code{text} is signalled through an \link[=stop]{error}, \link{warning}, \link{message}, or
 quietly, depending on argument \code{signal}.
 }
-
 \examples{
 test_text <- c("Some text", "Some other text")
 try(signal_text(text = test_text, signal = "error"))
