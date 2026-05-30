@@ -244,6 +244,5 @@ unlink(x = my_tempdir, recursive = TRUE)
 
 
 ##### Remove objects used in tests #####
-rm(add_date, dir, filenm, filenm_in, # filenm_out,
-   ind_filenm, my_tempdir,
-   my_tempfile)
+rm(add_date, current_date_dmY, current_date_Ymd, dir, filenm, filenm_in,
+   ind_filenm, my_tempdir, my_tempfile, tempdir_basename, tempdir_pattern)
