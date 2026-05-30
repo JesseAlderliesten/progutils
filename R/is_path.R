@@ -21,7 +21,8 @@
 #' - `path` should not point to `tempdir()`: a temporary subdirectory should be
 #'   used instead (see [create_tempdir()]).
 #'
-#' Furthermore, if `path` contains a file extension, the part after the last
+#' Furthermore, if `path` contains a file extension or compression extension,
+#' the part after the last
 #' slash is considered the filename, which should adhere to the same
 #' restrictions as the path, and in addition should **not** contain `:` nor
 #' start with a space.
@@ -32,7 +33,7 @@
 #' path because they are silently removed in Windows; and words that are
 #' reserved names in Windows.
 #'
-#' `path` **not** necessarily has to contain a file separator (i.e., `/` or
+#' `path` does **not** have to contain a file separator (i.e., `/` or
 #' `\\`), such that `is_path()` can be used to check that input to [fs::path()]
 #' only contains allowed characters. Repeated file separators (e.g., `//` or
 #' `\\\\`) are treated as single separators, with a warning.
@@ -77,7 +78,7 @@
 #' paths), [create_dir()] to create a directory if it does not yet exist,
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern
 #'
-#' `fs::path_sanitize()` to *remove* invalid characters from potential paths.
+#' `fs::path_sanitize()` to **remove** invalid characters from potential paths.
 #'
 #' @family functions to handle paths and directories
 #'

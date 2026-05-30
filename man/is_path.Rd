@@ -34,7 +34,8 @@ these names, or these names followed by an extension.
 used instead (see \code{\link[=create_tempdir]{create_tempdir()}}).
 }
 
-Furthermore, if \code{path} contains a file extension, the part after the last
+Furthermore, if \code{path} contains a file extension or compression extension,
+the part after the last
 slash is considered the filename, which should adhere to the same
 restrictions as the path, and in addition should \strong{not} contain \code{:} nor
 start with a space.
@@ -45,7 +46,7 @@ that would lead to a mismatch between the created directory and the returned
 path because they are silently removed in Windows; and words that are
 reserved names in Windows.
 
-\code{path} \strong{not} necessarily has to contain a file separator (i.e., \code{/} or
+\code{path} does \strong{not} have to contain a file separator (i.e., \code{/} or
 \verb{\\\\}), such that \code{is_path()} can be used to check that input to \code{\link[fs:path]{fs::path()}}
 only contains allowed characters. Repeated file separators (e.g., \verb{//} or
 \verb{\\\\\\\\}) are treated as single separators, with a warning.
@@ -105,7 +106,7 @@ try(is_path(fs::path_wd("ab|cd.txt")))
 paths), \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist,
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern
 
-\code{fs::path_sanitize()} to \emph{remove} invalid characters from potential paths.
+\code{fs::path_sanitize()} to \strong{remove} invalid characters from potential paths.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
