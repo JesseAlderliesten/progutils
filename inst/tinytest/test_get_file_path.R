@@ -71,6 +71,22 @@ my_tempfile <- fs::path(my_tempdir, "test_df.csv")
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 
+expect_message(
+  expect_true(endsWith(
+    get_file_path(dir = dirname(my_tempfile), pattern = "test_df",
+                  quietly = FALSE),
+    suffix = fs::path("testgetfilename", "test_df.csv")
+    )),
+  pattern = "Using file", strict = TRUE, fixed = TRUE)
+
+expect_silent(
+  expect_true(endsWith(
+    get_file_path(dir = dirname(my_tempfile), pattern = "test_df",
+                  quietly = TRUE),
+    suffix = fs::path("testgetfilename", "test_df.csv")
+  ))
+)
+
 # 'dir' points to a file instead of a directory
 expect_error(get_file_path(dir = my_tempfile, pattern = "test_"),
              pattern = "points to a file but should point to a directory")
@@ -86,9 +102,23 @@ expect_error(get_file_path(dir = my_tempdir, pattern = "test_dir"),
              pattern = "No matches to pattern 'test_dir' are present",
              fixed = TRUE)
 
+##### Invalid input #####
+expect_error(get_file_path(dir = "", pattern = "test_dir"),
+             pattern = "checkinput::is_character(dir) is not TRUE",
+             fixed = TRUE)
+
+expect_error(get_file_path(dir = my_tempdir, pattern = ""),
+             pattern = "checkinput::is_character(pattern) is not TRUE",
+             fixed = TRUE)
+
+expect_error(get_file_path(dir = my_tempdir, pattern = "test_dir", quietly = 1),
+             pattern = "checkinput::is_logical(quietly) is not TRUE",
+             fixed = TRUE)
+
 
 #### Delete the created temporary files ####
-unlink(x = c(dirname(my_tempfile), fs::path(tempdir(), "test_dir")), recursive = TRUE)
+unlink(x = c(dirname(my_tempfile), fs::path(tempdir(), "test_dir")),
+       recursive = TRUE)
 
 
 #### Remove objects used in tests ####
