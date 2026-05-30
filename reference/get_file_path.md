@@ -99,39 +99,39 @@ file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
 get_file_path(dir = tempdir(), pattern = "some_file")
-#> Using file '/tmp/RtmpR0HFYq/some_filename19647125db0a.txt'
-#> [1] "/tmp/RtmpR0HFYq/some_filename19647125db0a.txt"
+#> Using file '/tmp/Rtmp7Uw4Nz/some_filename1965571f2d2e.txt'
+#> [1] "/tmp/Rtmp7Uw4Nz/some_filename1965571f2d2e.txt"
 
 # The same file is found if case-insensitive matching is used:
 get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
-#> Using file '/tmp/RtmpR0HFYq/some_filename19647125db0a.txt'
-#> [1] "/tmp/RtmpR0HFYq/some_filename19647125db0a.txt"
+#> Using file '/tmp/Rtmp7Uw4Nz/some_filename1965571f2d2e.txt'
+#> [1] "/tmp/Rtmp7Uw4Nz/some_filename1965571f2d2e.txt"
 
 # Error reporting the presence of a case-insensitive match.
 try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 #> Error in get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/RtmpR0HFYq'.
-#> However, a case-insensitive match to 'pattern' is present: 'some_filename19647125db0a.txt'.
+#> '/tmp/Rtmp7Uw4Nz'.
+#> However, a case-insensitive match to 'pattern' is present: 'some_filename1965571f2d2e.txt'.
 
 # Error reporting no match found.
 try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
 #> Error in get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",  : 
 #>   No matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpR0HFYq'.
+#> '/tmp/Rtmp7Uw4Nz'.
 try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 #> Error in get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpR0HFYq'.
+#> '/tmp/Rtmp7Uw4Nz'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
 try(get_file_path(dir = tempdir(), pattern = "_filename"))
 #> Error in get_file_path(dir = tempdir(), pattern = "_filename") : 
 #>   Multiple matches to pattern '_filename' are present in directory
-#> '/tmp/RtmpR0HFYq': 'another_filename1964327e8506.txt', 'some_filename19647125db0a.txt'!
+#> '/tmp/Rtmp7Uw4Nz': 'another_filename19652e94a911.txt', 'some_filename1965571f2d2e.txt'!
 
 # Clean up
 unlink(x = my_tempfiles)

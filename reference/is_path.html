@@ -76,7 +76,8 @@ respectively).</p></li>
 these names, or these names followed by an extension.</p></li>
 <li><p><code>path</code> should not point to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>: a temporary subdirectory should be
 used instead (see <code><a href="create_tempdir.html">create_tempdir()</a></code>).</p></li>
-</ul><p>Furthermore, if <code>path</code> contains a file extension, the part after the last
+</ul><p>Furthermore, if <code>path</code> contains a file extension or compression extension,
+the part after the last
 slash is considered the filename, which should adhere to the same
 restrictions as the path, and in addition should <strong>not</strong> contain <code>:</code> nor
 start with a space.</p>
@@ -85,7 +86,7 @@ would lead to an error in Windows because they are not allowed; characters
 that would lead to a mismatch between the created directory and the returned
 path because they are silently removed in Windows; and words that are
 reserved names in Windows.</p>
-<p><code>path</code> <strong>not</strong> necessarily has to contain a file separator (i.e., <code>/</code> or
+<p><code>path</code> does <strong>not</strong> have to contain a file separator (i.e., <code>/</code> or
 <code>\\</code>), such that <code>is_path()</code> can be used to check that input to <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code>
 only contains allowed characters. Repeated file separators (e.g., <code>//</code> or
 <code>\\\\</code>) are treated as single separators, with a warning.</p>
@@ -130,7 +131,7 @@ removed in some operations.</p>
 <code><a href="create_file_path.html">create_file_path()</a></code> to create a path (with references there about file
 paths), <code><a href="create_dir.html">create_dir()</a></code> to create a directory if it does not yet exist,
 <code><a href="get_file_path.html">get_file_path()</a></code> to check if a file exists and is a unique match to a pattern</p>
-<p><code><a href="https://fs.r-lib.org/reference/path_sanitize.html" class="external-link">fs::path_sanitize()</a></code> to <em>remove</em> invalid characters from potential paths.</p>
+<p><code><a href="https://fs.r-lib.org/reference/path_sanitize.html" class="external-link">fs::path_sanitize()</a></code> to <strong>remove</strong> invalid characters from potential paths.</p>
 <p>Other functions to handle paths and directories:
 <code><a href="create_dir.html">create_dir()</a></code>,
 <code><a href="create_file_path.html">create_file_path()</a></code>,

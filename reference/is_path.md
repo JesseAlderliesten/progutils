@@ -45,10 +45,10 @@ for valid paths before creating a directory or a file:
   subdirectory should be used instead (see
   [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)).
 
-Furthermore, if `path` contains a file extension, the part after the
-last slash is considered the filename, which should adhere to the same
-restrictions as the path, and in addition should **not** contain `:` nor
-start with a space.
+Furthermore, if `path` contains a file extension or compression
+extension, the part after the last slash is considered the filename,
+which should adhere to the same restrictions as the path, and in
+addition should **not** contain `:` nor start with a space.
 
 These restrictions on the path and the filename consider characters that
 would lead to an error in Windows because they are not allowed;
@@ -56,7 +56,7 @@ characters that would lead to a mismatch between the created directory
 and the returned path because they are silently removed in Windows; and
 words that are reserved names in Windows.
 
-`path` **not** necessarily has to contain a file separator (i.e., `/` or
+`path` does **not** have to contain a file separator (i.e., `/` or
 `\\`), such that `is_path()` can be used to check that input to
 [`fs::path()`](https://fs.r-lib.org/reference/path.html) only contains
 allowed characters. Repeated file separators (e.g., `//` or `\\\\`) are
@@ -111,7 +111,7 @@ to create a directory if it does not yet exist,
 to check if a file exists and is a unique match to a pattern
 
 [`fs::path_sanitize()`](https://fs.r-lib.org/reference/path_sanitize.html)
-to *remove* invalid characters from potential paths.
+to **remove** invalid characters from potential paths.
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),

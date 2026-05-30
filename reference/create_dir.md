@@ -5,23 +5,22 @@ Create a directory if it does not yet exist.
 ## Usage
 
 ``` r
-create_dir(dir = fs::path_wd("output"), add_date = TRUE)
+create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 ```
 
 ## Arguments
 
 - dir:
 
-  Non-empty [character
+  [Character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
   path](https://jessealderliesten.github.io/progutils/reference/is_path.md)
   to a directory that should be created if it does not yet exist.
-  [`fs::path()`](https://fs.r-lib.org/reference/path.html) ensures the
-  correct ([platform](https://rdrr.io/r/base/Platform.html)-dependent)
-  file separator is used to indicate subdirectories and the dot (`"."`)
-  indicates the [working directory](https://rdrr.io/r/base/getwd.html),
-  such that by default a subdirectory with the current date in the
+  [`fs::path()`](https://fs.r-lib.org/reference/path.html) adds file
+  separators and the dot (`"."`) indicates the [working
+  directory](https://rdrr.io/r/base/getwd.html), such that by default a
+  subdirectory with the current date in the
   [format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` in
   directory `output` below the working directory is created.
 
@@ -38,13 +37,10 @@ A character string with the absolute
 requested directory, returned
 [invisibly](https://rdrr.io/r/base/invisible.html). The [working
 directory](https://rdrr.io/r/base/getwd.html) is returned if an attempt
-to create a directory fails, with a warning.
+to create a directory fails, with a warning. This happens if `dir`
+points to an existing file instead of an directory.
 
 ## Details
-
-If creating the directory fails, the working directory is returned
-instead. This happens if `dir` points to an existing file instead of an
-directory.
 
 The absolute [normalised](https://rdrr.io/r/base/normalizePath.html)
 path is returned such that the returned path still works if the [working
@@ -92,7 +88,7 @@ my_tempdir <- fs::path(tempdir(), "testcreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/RtmpR0HFYq/testcreatedir/dir_one
+#> /tmp/Rtmp7Uw4Nz/testcreatedir/dir_one
 dir.exists(res_dir_one) # TRUE
 #> [1] TRUE
 
@@ -101,7 +97,7 @@ dir.exists(res_dir_one) # TRUE
 res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                              add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/RtmpR0HFYq/testcreatedir/dir_one
+#> /tmp/Rtmp7Uw4Nz/testcreatedir/dir_one
 identical(res_dir_one, res_dir_one_v2) # TRUE
 #> [1] TRUE
 
@@ -111,7 +107,7 @@ identical(res_dir_one, res_dir_one_v2) # TRUE
 res_dir_one_v3 <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                              add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/RtmpR0HFYq/testcreatedir/dir_ONE
+#> /tmp/Rtmp7Uw4Nz/testcreatedir/dir_ONE
 # TRUE on Windows and macOS, FALSE on Ubuntu
 identical(res_dir_one, res_dir_one_v3)
 #> [1] FALSE
@@ -120,7 +116,7 @@ identical(res_dir_one, res_dir_one_v3)
 res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/RtmpR0HFYq/testcreatedir/dir_two
+#> /tmp/Rtmp7Uw4Nz/testcreatedir/dir_two
 dir.exists(res_dir_two) # TRUE
 #> [1] TRUE
 

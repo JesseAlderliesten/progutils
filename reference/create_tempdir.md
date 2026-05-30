@@ -29,10 +29,10 @@ created temporary directory, returned
 
 `subdir` is created inside
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html) and an error is
-thrown if it already exists. This ensures that
-[removing](https://rdrr.io/r/base/unlink.html) the created directory
-does not remove files that are still needed by other processes (see
-`Usage in practice` below).
+thrown if it already exists or creating the directory fails. This
+ensures that [removing](https://rdrr.io/r/base/unlink.html) the created
+directory does not remove files that are still needed by other processes
+(see `Usage in practice` below).
 
 It is possible to create subdirectories inside a not-yet existing
 directory (e.g., to create `<tempdir>/output/outputsub` if
@@ -40,11 +40,8 @@ directory (e.g., to create `<tempdir>/output/outputsub` if
 
 ## Side effects
 
-The requested temporary directory is \[created\]\[dir.create)()\] if
-does not yet exist. An error is thrown if the directory already exists
-or creating the directory fails.
-
-\[dir.create)()\]: R:dir.create)()
+The temporary directory indicated by the returned path is
+[created](https://rdrr.io/r/base/files2.html) if does not yet exist.
 
 ## Usage in practice
 
@@ -77,20 +74,20 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir()
-#> [1] "/tmp/RtmpR0HFYq"
+#> [1] "/tmp/Rtmp7Uw4Nz"
 # Create a directory inside the directory returned by 'tempdir()'
 (tempdir_std <- create_tempdir(subdir = "examplesubtempdir"))
-#> [1] "/tmp/RtmpR0HFYq/examplesubtempdir"
+#> [1] "/tmp/Rtmp7Uw4Nz/examplesubtempdir"
 
 # Error if the directory already exists
 try(create_tempdir(subdir = "examplesubtempdir"))
 #> Error in create_tempdir(subdir = "examplesubtempdir") : 
 #>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'):
-#> /tmp/RtmpR0HFYq/examplesubtempdir
+#> /tmp/Rtmp7Uw4Nz/examplesubtempdir
 
 # It is possible to create recursive directories
 (tempdir_recursive <- create_tempdir(subdir = fs::path("abc", "def")))
-#> [1] "/tmp/RtmpR0HFYq/abc/def"
+#> [1] "/tmp/Rtmp7Uw4Nz/abc/def"
 
 # Clean up
 unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)

@@ -30,7 +30,7 @@ differ from each other in their case, or `character(0)` if no such
 values are present. The return is
 [invisible](https://rdrr.io/r/base/invisible.html).
 
-## Side effects
+## Details
 
 Values in `x` that only differ from each other in their case generate an
 [error](https://rdrr.io/r/base/stop.html),

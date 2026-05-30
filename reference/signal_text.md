@@ -48,8 +48,6 @@ Call
 beforehand on `text` to control rounding and wrapping, see the last
 example.
 
-## Side effects
-
 `text` is signalled through an
 [error](https://rdrr.io/r/base/stop.html),
 [warning](https://rdrr.io/r/base/warning.html),
