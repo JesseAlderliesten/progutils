@@ -8,9 +8,9 @@
 #'
 #' @details
 #' `subdir` is created inside [tempdir()] and an error is thrown if it already
-#' exists. This ensures that [removing][unlink()] the created directory does not
-#' remove files that are still needed by other processes (see `Usage in practice`
-#' below).
+#' exists or creating the directory fails. This ensures that [removing][unlink()]
+#' the created directory does not remove files that are still needed by other
+#' processes (see `Usage in practice` below).
 #'
 #' It is possible to create subdirectories inside a not-yet existing directory
 #' (e.g., to create `<tempdir>/output/outputsub` if `<tempdir>/output` does not
@@ -21,9 +21,8 @@
 #' returned [invisibly][invisible].
 #'
 #' @section Side effects:
-#' The requested temporary directory is [created][dir.create)()] if does not yet
-#' exist. An error is thrown if the directory already exists or creating the
-#' directory fails.
+#' The temporary directory indicated by the returned path is
+#' [created][dir.create()] if does not yet exist.
 #'
 #' @section Usage in practice:
 #' Examples and tests should **not** write to the [working directory][getwd()]

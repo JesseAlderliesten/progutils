@@ -80,6 +80,22 @@ for(filenm in c("a.txt", "c#c.txt", "d d.txt", "e3f.txt", "g_g.g.txt", "ab.c#"))
   ))
 }
 
+for(filenm_in in c("abcd", "abc.", ".", ".txt", ".html")) {
+  expect_error(create_file_path(filename = filenm_in, dir = my_tempdir,
+                                format_stamp = ""),
+               pattern = "Empty filename or missing extension",
+               fixed = TRUE)
+}
+
+filenm_in <- c("a/a.txt", "b\\b.txt")
+for(ind_filenm in seq_along(filenm_in)) {
+  expect_error(
+    create_file_path(filename = filenm_in[ind_filenm], format_stamp = "",
+                     dir = my_tempdir, add_date = FALSE),
+    pattern = paste0("should not contain '/' or '\\'"),
+    fixed = TRUE)
+}
+
 expect_error(
   create_file_path(filename = "ff .txt", format_stamp = "",
                    dir = my_tempdir, add_date = FALSE),
@@ -128,64 +144,6 @@ expect_true(
                              dir = my_tempdir, add_date = FALSE))
 )
 
-##### dir #####
-# 'directories' might contain a file extension
-expect_true(endsWith(
-  create_file_path(filename = "abc.txt", format_stamp = "",
-                   dir = fs::path(my_tempdir, ".txt"), add_date = FALSE),
-  fs::path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
-))
-
-expect_warning(
-  expect_true(endsWith(
-    create_file_path(filename = "testfile123.csv", format_stamp = "",
-                     dir = my_tempfile, add_date = FALSE),
-    suffix = fs::path(basename(getwd()), "testfile123.csv"))),
-  pattern = "already exists", fixed = TRUE
-)
-
-##### Warnings #####
-# A warning is issued if the file indicated by the returned path already exists.
-my_tempfile <- fs::path(my_tempdir, "testfile.csv")
-write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
-expect_warning(
-  expect_true(endsWith(
-    create_file_path(filename = basename(my_tempfile), format_stamp = "",
-                     dir = my_tempdir, add_date = FALSE),
-    suffix = fs::path(tempdir_basename, "testcreatepath", basename(my_tempfile)))),
-  pattern = "File already exists:", strict = TRUE, fixed = TRUE)
-
-##### Check 'filename' #####
-expect_error(create_file_path(dir = my_tempdir),
-             pattern = "argument \"filename\" is missing, with no default",
-             fixed = TRUE)
-expect_error(create_file_path(filename = 123, dir = my_tempdir),
-             pattern = "checkinput::is_character(filename) is not TRUE",
-             fixed = TRUE)
-expect_error(create_file_path(filename = c("abc.txt", "def.txt"), dir = my_tempdir),
-             pattern = "checkinput::is_character(filename) is not TRUE",
-             fixed = TRUE)
-expect_error(create_file_path(filename = "", dir = my_tempdir),
-             pattern = "checkinput::is_character(filename) is not TRUE",
-             fixed = TRUE)
-
-for(filenm_in in c("abcd", "abc.", ".", ".txt", ".html")) {
-  expect_error(create_file_path(filename = filenm_in, dir = my_tempdir,
-                                format_stamp = ""),
-               pattern = "Empty filename or missing extension",
-               fixed = TRUE)
-}
-
-filenm_in <- c("a/a.txt", "b\\b.txt")
-for(ind_filenm in seq_along(filenm_in)) {
-  expect_error(
-    create_file_path(filename = filenm_in[ind_filenm], format_stamp = "",
-                     dir = my_tempdir, add_date = FALSE),
-    pattern = paste0("should not contain '/' or '\\'"),
-    fixed = TRUE)
-}
-
-##### Check 'format_stamp' #####
 expect_error(
   create_file_path(filename = "abc.txt", format_stamp = character(0),
                    dir = my_tempdir, add_date = TRUE),
@@ -204,7 +162,22 @@ expect_error(
   pattern = paste0("checkinput::is_character(format_stamp, allow_empty = TRUE)",
                    " is not TRUE"), fixed = TRUE)
 
-##### Check 'dir' #####
+##### dir #####
+# 'directories' might contain a file extension
+expect_true(endsWith(
+  create_file_path(filename = "abc.txt", format_stamp = "",
+                   dir = fs::path(my_tempdir, ".txt"), add_date = FALSE),
+  fs::path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
+))
+
+expect_warning(
+  expect_true(endsWith(
+    create_file_path(filename = "testfile123.csv", format_stamp = "",
+                     dir = my_tempfile, add_date = FALSE),
+    suffix = fs::path(basename(getwd()), "testfile123.csv"))),
+  pattern = "already exists", fixed = TRUE
+)
+
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
   expect_error(
     create_file_path(filename = "abc.txt", dir = dir),
@@ -229,7 +202,35 @@ for(dir in list(paste0(my_tempdir, ".."),
     pattern = "should not end with ' ' or '.'", fixed = TRUE)
 }
 
-##### Check 'add_date' #####
+##### Warnings #####
+# A warning is issued if the file indicated by the returned path already exists.
+my_tempfile <- fs::path(my_tempdir, "testfile.csv")
+write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
+expect_warning(
+  expect_true(endsWith(
+    create_file_path(filename = basename(my_tempfile), format_stamp = "",
+                     dir = my_tempdir, add_date = FALSE),
+    suffix = fs::path(tempdir_basename, "testcreatepath", basename(my_tempfile)))),
+  pattern = "File already exists:", strict = TRUE, fixed = TRUE)
+
+
+#### Invalid input ####
+
+##### filename #####
+expect_error(create_file_path(dir = my_tempdir),
+             pattern = "argument \"filename\" is missing, with no default",
+             fixed = TRUE)
+expect_error(create_file_path(filename = 123, dir = my_tempdir),
+             pattern = "checkinput::is_character(filename) is not TRUE",
+             fixed = TRUE)
+expect_error(create_file_path(filename = c("abc.txt", "def.txt"), dir = my_tempdir),
+             pattern = "checkinput::is_character(filename) is not TRUE",
+             fixed = TRUE)
+expect_error(create_file_path(filename = "", dir = my_tempdir),
+             pattern = "checkinput::is_character(filename) is not TRUE",
+             fixed = TRUE)
+
+##### add_date #####
 for(add_date in list(1, NA)) {
   expect_error(
     create_file_path(filename = "abc.txt", dir = my_tempdir, add_date = add_date),
@@ -243,6 +244,5 @@ unlink(x = my_tempdir, recursive = TRUE)
 
 
 ##### Remove objects used in tests #####
-rm(add_date, dir, filenm, filenm_in, # filenm_out,
-   ind_filenm, my_tempdir,
-   my_tempfile)
+rm(add_date, current_date_dmY, current_date_Ymd, dir, filenm, filenm_in,
+   ind_filenm, my_tempdir, my_tempfile, tempdir_basename, tempdir_pattern)

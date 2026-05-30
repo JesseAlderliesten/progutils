@@ -21,11 +21,10 @@ the stamp to be added in front of the file name. No stamp is added if
 treated as part of the filename, such that the same restrictions apply, see
 \code{Details}.}
 
-\item{dir}{Non-empty \link[checkinput:is_character]{character string}
+\item{dir}{\link[checkinput:is_character]{Character string}
 containing a \link[=is_path]{valid path} to a directory that should be created if
-it does not yet exist. \code{\link[fs:path]{fs::path()}} ensures the correct
-(\link[=.Platform]{platform}-dependent) file separator is used to indicate
-subdirectories and the dot (\code{"."}) indicates the \link[=getwd]{working directory},
+it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and the dot (\code{"."})
+indicates the \link[=getwd]{working directory},
 such that by default a subdirectory with the current date in the
 \link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
 directory is created.}

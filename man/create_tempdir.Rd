@@ -20,9 +20,9 @@ Create a temporary directory that can safely be removed.
 }
 \details{
 \code{subdir} is created inside \code{\link[=tempdir]{tempdir()}} and an error is thrown if it already
-exists. This ensures that \link[=unlink]{removing} the created directory does not
-remove files that are still needed by other processes (see \verb{Usage in practice}
-below).
+exists or creating the directory fails. This ensures that \link[=unlink]{removing}
+the created directory does not remove files that are still needed by other
+processes (see \verb{Usage in practice} below).
 
 It is possible to create subdirectories inside a not-yet existing directory
 (e.g., to create \verb{<tempdir>/output/outputsub} if \verb{<tempdir>/output} does not
@@ -30,11 +30,8 @@ yet exist.
 }
 \section{Side effects}{
 
-The requested temporary directory is [created][dir.create)()] if does not yet
-exist. An error is thrown if the directory already exists or creating the
-directory fails.
-
-[dir.create)()]: R:dir.create)()
+The temporary directory indicated by the returned path is
+\link[=dir.create]{created} if does not yet exist.
 }
 
 \section{Usage in practice}{
