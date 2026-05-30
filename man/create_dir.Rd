@@ -4,14 +4,13 @@
 \alias{create_dir}
 \title{Create a directory}
 \usage{
-create_dir(dir = fs::path_wd("output"), add_date = TRUE)
+create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 }
 \arguments{
-\item{dir}{Non-empty \link[checkinput:is_character]{character string}
+\item{dir}{\link[checkinput:is_character]{Character string}
 containing a \link[=is_path]{valid path} to a directory that should be created if
-it does not yet exist. \code{\link[fs:path]{fs::path()}} ensures the correct
-(\link[=.Platform]{platform}-dependent) file separator is used to indicate
-subdirectories and the dot (\code{"."}) indicates the \link[=getwd]{working directory},
+it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and the dot (\code{"."})
+indicates the \link[=getwd]{working directory},
 such that by default a subdirectory with the current date in the
 \link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
 directory is created.}
@@ -23,15 +22,13 @@ current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 A character string with the absolute \link[=normalizePath]{normalized} path to
 the requested directory, returned \link[=invisible]{invisibly}. The
 \link[=getwd]{working directory} is returned if an attempt to create a directory
-fails, with a warning.
+fails, with a warning. This happens if \code{dir} points to an existing file
+instead of an directory.
 }
 \description{
 Create a directory if it does not yet exist.
 }
 \details{
-If creating the directory fails, the working directory is returned instead.
-This happens if \code{dir} points to an existing file instead of an directory.
-
 The absolute \link[=normalizePath]{normalised} path is returned such that the
 returned path still works if the \link[=getwd]{working directory} changes. On
 case-insensitive file systems (e.g., Windows and macOS), normalization

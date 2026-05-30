@@ -2,11 +2,10 @@
 #'
 #' Create a directory if it does not yet exist.
 #'
-#' @param dir Non-empty [character string][checkinput::is_character()]
+#' @param dir [Character string][checkinput::is_character()]
 #' containing a [valid path][is_path()] to a directory that should be created if
-#' it does not yet exist. [fs::path()] ensures the correct
-#' ([platform][.Platform]-dependent) file separator is used to indicate
-#' subdirectories and the dot (`"."`) indicates the [working directory][getwd()],
+#' it does not yet exist. [fs::path()] adds file separators and the dot (`"."`)
+#' indicates the [working directory][getwd()],
 #' such that by default a subdirectory with the current date in the
 #' [format][strftime()] `YYYY_mm_dd` in directory `output` below the working
 #' directory is created.
@@ -15,9 +14,6 @@
 #' current date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
-#' If creating the directory fails, the working directory is returned instead.
-#' This happens if `dir` points to an existing file instead of an directory.
-#'
 #' The absolute [normalised][normalizePath()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes. On
 #' case-insensitive file systems (e.g., Windows and macOS), normalization
@@ -30,7 +26,8 @@
 #' A character string with the absolute [normalized][normalizePath()] path to
 #' the requested directory, returned [invisibly][invisible]. The
 #' [working directory][getwd()] is returned if an attempt to create a directory
-#' fails, with a warning.
+#' fails, with a warning. This happens if `dir` points to an existing file
+#' instead of an directory.
 #'
 #' @section Side effects:
 #' The directory indicated by the returned path is [created][create_dir()] if it
@@ -79,7 +76,7 @@
 #' rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 #'
 #' @export
-create_dir <- function(dir = fs::path_wd("output"), add_date = TRUE) {
+create_dir <- function(dir = fs::path(".", "output"), add_date = TRUE) {
   stopifnot(is_path(dir), checkinput::is_logical(add_date))
 
   if(add_date) {
