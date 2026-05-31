@@ -34,6 +34,7 @@
 #' if it does not yet exist.
 #'
 #' @seealso
+#' [checkinput::is_path()] to check if a path is valid,
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern,
 #' [fs::path()] to construct file paths in a platform-independent way,
 #' [normalizePath()] to create absolute normalised paths,
@@ -73,7 +74,7 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
   stopifnot(checkinput::is_character(filename),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_logical(add_date))
-  is_path(path = dir)
+  checkinput::is_path(path = dir)
 
   filename_no_ext <- fs::path_ext_remove(path = filename)
   file_ext <- fs::path_ext(path = filename)
@@ -94,7 +95,7 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
 
   file_path <- fs::path(create_dir(dir = dir, add_date = add_date), filename)
   file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)
-  is_valid_file_path <- try(expr = is_path(path = file_path), silent = TRUE)
+  is_valid_file_path <- try(expr = checkinput::is_path(path = file_path), silent = TRUE)
   if(inherits(x = is_valid_file_path, what = "try-error")) {
     stop("No path created: ", attr(is_valid_file_path, "condition")$message)
   }

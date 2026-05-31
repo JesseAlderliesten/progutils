@@ -4,7 +4,7 @@
 #'
 #' @param subdir A [character string][checkinput::is_character()] with the name
 #' of a **not-yet** existing temporary subdirectory to be created inside
-#' [tempdir()]. `subdir` should be a [valid path][is_path()].
+#' [tempdir()]. `subdir` should be a [valid path][checkinput::is_path()].
 #'
 #' @details
 #' `subdir` is created inside [tempdir()] and an error is thrown if it already
@@ -35,7 +35,8 @@
 #' up. `use_tempdir()` follows the latter approach.
 #'
 #' @seealso
-#' [create_dir()] to create (non-temporary) directories.
+#' [create_dir()] to create (non-temporary) directories;
+#' [checkinput::is_path()] to check if a path is valid.
 #'
 #' @family functions to handle paths and directories
 #'
@@ -57,7 +58,7 @@
 #' @export
 create_tempdir <- function(subdir = "subdir") {
   stopifnot(checkinput::is_character(subdir))
-  is_path(path = subdir)
+  checkinput::is_path(path = subdir)
   subdir_target <- normalizePath(path = fs::path(tempdir(), subdir),
                                  winslash = "/", mustWork = FALSE)
   tempdir_normalised <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)

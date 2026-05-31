@@ -181,7 +181,7 @@ expect_warning(
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
   expect_error(
     create_file_path(filename = "abc.txt", dir = dir),
-    pattern = "checkinput::is_character(path) is not TRUE", fixed = TRUE)
+    pattern = "is_character(path) is not TRUE", fixed = TRUE)
 }
 
 for(dir in list(paste0(my_tempdir, "//"),

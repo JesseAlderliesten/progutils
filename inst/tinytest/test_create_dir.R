@@ -96,7 +96,7 @@ expect_true(endsWith(
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
   expect_error(
     create_dir(dir = dir),
-    pattern = "checkinput::is_character(path) is not TRUE", fixed = TRUE)
+    pattern = "is_character(path) is not TRUE", fixed = TRUE)
 }
 
 for(dir in list(fs::path(my_tempdir, "temp", "."),

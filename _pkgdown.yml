@@ -17,7 +17,6 @@ reference:
   - create_file_path
   - create_tempdir
   - get_file_path
-  - is_path
 
 - title: Text
 - contents:

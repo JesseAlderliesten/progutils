@@ -7,7 +7,7 @@
 get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{Character string with the \link[=is_path]{path} to a directory.}
+\item{dir}{Character string with the \link[checkinput:is_path]{path} to a directory.}
 
 \item{pattern}{Character string containing a \link[base:regex]{regular expression}
 used to select names of files that are present in \code{dir}.}
@@ -71,6 +71,7 @@ rm(my_tempfiles)
 
 }
 \seealso{
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid;
 \code{\link[=create_dir]{create_dir()}} to create a directory if does not yet exist;
 \code{\link[=file.exists]{file.exists()}} and \code{\link[=list.files]{list.files()}} to check for existence of files without
 checking they are a unique match to a pattern;
@@ -82,8 +83,7 @@ directories;
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_file_path]{create_file_path()}},
-\code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=is_path]{is_path()}}
+\code{\link[=create_tempdir]{create_tempdir()}}
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

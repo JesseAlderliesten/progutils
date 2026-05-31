@@ -9,7 +9,7 @@ create_tempdir(subdir = "subdir")
 \arguments{
 \item{subdir}{A \link[checkinput:is_character]{character string} with the name
 of a \strong{not-yet} existing temporary subdirectory to be created inside
-\code{\link[=tempdir]{tempdir()}}. \code{subdir} should be a \link[=is_path]{valid path}.}
+\code{\link[=tempdir]{tempdir()}}. \code{subdir} should be a \link[checkinput:is_path]{valid path}.}
 }
 \value{
 The \link[=normalizePath]{normalized} path to the created temporary directory,
@@ -63,12 +63,12 @@ rm(tempdir_recursive, tempdir_std)
 
 }
 \seealso{
-\code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories.
+\code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_file_path]{create_file_path()}},
-\code{\link[=get_file_path]{get_file_path()}},
-\code{\link[=is_path]{is_path()}}
+\code{\link[=get_file_path]{get_file_path()}}
 }
 \concept{functions to handle paths and directories}
