@@ -152,12 +152,16 @@ is_path <- function(path, test_is_path = FALSE) {
 
   filename <- basename(path)
   file_ext <- fs::path_ext(path = filename)
+  filename_no_ext <- fs::path_ext_remove(path = filename)
+
   # To catch case where filename ends in a dot, e.g., "ff..txt"
-  end_dot <- filename != "." && filename != ".." && endsWith(
-    sub(pattern = paste0("[.]", file_ext, "$"), replacement = "", x = filename),
-    suffix = ".")
+  end_dot <- filename != "." && filename != ".." &&
+    (endsWith(
+      sub(pattern = paste0("[.]", file_ext, "$"), replacement = "", x = filename),
+      suffix = ".") ||
+       endsWith(filename_no_ext, suffix = "."))
   if(test_is_path) {
-    return(sub(pattern = paste0("[.]", file_ext, "$"), replacement = "", x = filename))
+    return(filename_no_ext)
   }
   if(!end_dot && (length(file_ext) == 0L || !nzchar(file_ext))) {
     to_tempdir <-
@@ -168,7 +172,6 @@ is_path <- function(path, test_is_path = FALSE) {
       basename(dirname(normalizePath(path, winslash = "/", mustWork = FALSE))) ==
       basename(normalizePath(tempdir(), winslash = "/", mustWork = FALSE))
 
-    filename_no_ext <- fs::path_ext_remove(path = filename)
     if(length(filename_no_ext) == 0L || !nzchar(filename_no_ext)) {
       stop("filename without extension (", paste_quoted(filename_no_ext),
            ") should not be empty:\n", path)
