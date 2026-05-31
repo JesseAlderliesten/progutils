@@ -152,7 +152,11 @@ is_path <- function(path) {
 
   filename <- basename(path)
   file_ext <- fs::path_ext(path = filename)
-  if(length(file_ext) == 0L || !nzchar(file_ext)) {
+  # To catch case where filename ends in a dot, e.g., "ff..txt"
+  end_dot <- endsWith(
+    sub(pattern = paste0("[.]", file_ext, "$"), replacement = "", x = filename),
+    suffix = ".")
+  if(!end_dot && (length(file_ext) == 0L || !nzchar(file_ext))) {
     to_tempdir <-
       basename(normalizePath(path, winslash = "/", mustWork = FALSE)) ==
       basename(normalizePath(tempdir(), winslash = "/", mustWork = FALSE))
@@ -178,9 +182,7 @@ is_path <- function(path) {
     if(endsWith(x = filename_no_ext, suffix = " ") ||
        endsWith(x = filename_no_ext, suffix = ".") ||
        # To catch case where filename ends in a dot, e.g., "ff..txt"
-       endsWith(sub(pattern = paste0("[.]", file_ext, "$"), replacement = "",
-                    x = filename),
-                suffix = ".")) {
+       end_dot) {
       stop("'filename' should not end with ' ' or '.' (i.e., a space or a dot):\n",
            filename)
     }
