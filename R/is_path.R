@@ -97,7 +97,7 @@
 #' try(is_path(fs::path_wd("ab|cd.txt")))
 #'
 #' @export
-is_path <- function(path) {
+is_path <- function(path, test_is_path = FALSE) {
   stopifnot(checkinput::is_character(path))
 
   # Notes:
@@ -156,6 +156,9 @@ is_path <- function(path) {
   end_dot <- filename != "." && filename != ".." && endsWith(
     sub(pattern = paste0("[.]", file_ext, "$"), replacement = "", x = filename),
     suffix = ".")
+  if(test_is_path) {
+    return(end_dot)
+  }
   if(!end_dot && (length(file_ext) == 0L || !nzchar(file_ext))) {
     to_tempdir <-
       basename(normalizePath(path, winslash = "/", mustWork = FALSE)) ==

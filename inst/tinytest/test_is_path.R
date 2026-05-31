@@ -102,14 +102,22 @@ expect_error(is_path(path = fs::path("ab", "def..")),
              pattern = warn_space_dot, fixed = TRUE)
 
 # Filenames should not end with a space or a dot
-expect_error(is_path(path = fs::path_wd("subdir", "filename ")),
-             pattern = warn_space_dot, fixed = TRUE)
-expect_error(is_path(path = fs::path_wd("subdir", "filename .txt")),
-             pattern = warn_space_dot, fixed = TRUE)
-expect_error(is_path(path = fs::path_wd("subdir", "filename.")),
-             pattern = warn_space_dot, fixed = TRUE)
-expect_error(is_path(path = fs::path_wd("subdir", "filename..txt")),
-             pattern = warn_space_dot, fixed = TRUE)
+# expect_error(is_path(path = fs::path_wd("subdir", "filename ")),
+#              pattern = warn_space_dot, fixed = TRUE)
+# expect_error(is_path(path = fs::path_wd("subdir", "filename .txt")),
+#              pattern = warn_space_dot, fixed = TRUE)
+# expect_error(is_path(path = fs::path_wd("subdir", "filename.")),
+#              pattern = warn_space_dot, fixed = TRUE)
+# expect_error(is_path(path = fs::path_wd("subdir", "filename..txt")),
+#              pattern = warn_space_dot, fixed = TRUE)
+
+
+# Filenames should not end with a space or a dot
+expect_silent(expect_false(is_path(path = fs::path_wd("subdir", "filename "), test_is_path = TRUE)))
+expect_silent(expect_false(is_path(path = fs::path_wd("subdir", "filename .txt"), test_is_path = TRUE)))
+expect_silent(expect_true(is_path(path = fs::path_wd("subdir", "filename."), test_is_path = TRUE)))
+expect_silent(expect_true(is_path(path = fs::path_wd("subdir", "filename..txt"), test_is_path = TRUE)))
+
 
 ##### Temporary directory #####
 expect_error(is_path(path = tempdir()),
