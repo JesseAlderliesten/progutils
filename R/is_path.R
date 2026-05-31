@@ -156,10 +156,7 @@ is_path <- function(path) {
 
   # To catch case where filename ends in a dot, e.g., "ff..txt"
   end_dot <- filename != "." && filename != ".." &&
-    (endsWith(
-      sub(pattern = paste0("[.]", file_ext, "$"), replacement = "", x = filename),
-      suffix = ".") ||
-       endsWith(filename_no_ext, suffix = ".") ||
+    (endsWith(filename_no_ext, suffix = ".") ||
        # Modified from fs::path_ext_remove() to only remove a single dot
        endsWith(sub("\\.([^.]+)$", "", filename, perl = TRUE), suffix = "."))
 
