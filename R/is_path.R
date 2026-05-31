@@ -12,20 +12,21 @@
 #'   nor any of the control characters (`ASCII` octal codes 000 through 037 and
 #'   177, see `help("regex")`).
 #' - `path` components (i.e., parts separated by file separators `/` or `\\`)
+#'   should **not** be the Windows-reserved terms `CON`, `PRN`, `AUX`, `NUL`,
+#'   `COM<non-zero digit>`, `LPT<non-zero digit>`, case-insensitive variants of
+#'   these names, or these names followed by an extension.
+#' - `path` components
 #'   should **not** end with a space or dot (`"."` and `".."` are allowed as
 #'   first component to indicate the working directory and the parent directory,
 #'   respectively).
-#' - `path` components should **not** be `CON`, `PRN`, `AUX`, `NUL`,
-#'   `COM<non-zero digit>`, `LPT<non-zero digit>`, case-insensitive variants of
-#'   these names, or these names followed by an extension.
 #' - `path` should not point to `tempdir()`: a temporary subdirectory should be
 #'   used instead (see [create_tempdir()]).
 #'
 #' Furthermore, if `path` contains a file extension or compression extension,
 #' the part after the last
 #' slash is considered the filename, which should adhere to the same
-#' restrictions as the path, and in addition should **not** contain `:` nor
-#' start with a space.
+#' restrictions as the path but should **not** contain `:` **nor**
+#' start with a space, while it might contain Windows-reserved terms.
 #'
 #' These restrictions on the path and the filename consider characters that
 #' would lead to an error in Windows because they are not allowed; characters
@@ -33,10 +34,11 @@
 #' path because they are silently removed in Windows; and words that are
 #' reserved names in Windows.
 #'
-#' `path` does **not** have to contain a file separator (i.e., `/` or
-#' `\\`), such that `is_path()` can be used to check that input to [fs::path()]
-#' only contains allowed characters. Repeated file separators (e.g., `//` or
-#' `\\\\`) are treated as single separators, with a warning.
+#' `path` does **not** have to point to an existing directory: `path` even does
+#' **not** have to contain a file separator (e.g., `/` or `\\`), such that
+#' `is_path()` can be used to check that input to [fs::path()] only contains
+#' allowed characters. Repeated file separators (e.g., `//` or `\\\\`) are
+#' treated as single separators, with a warning.
 #'
 #' @returns
 #' `TRUE`: an error occurs if `path` is not a valid path or if `path` contains a
@@ -84,13 +86,13 @@
 #'
 #' @examples
 #' is_path(getwd())
+#' is_path(fs::path_wd("abcd"))
 #' try(is_path(fs::path_wd("ab|cd")))
 #'
 #' is_path(fs::path_wd("abcd.txt"))
 #' is_path(fs::path_wd("abcd.txt.gz"))
+#' is_path(fs::path_wd("abcd.gz"))
 #'
-#' try(is_path(fs::path_wd("abcd")))
-#' try(is_path(fs::path_wd("abcd.gz")))
 #' try(is_path(fs::path_wd("ab:cd.txt")))
 #' try(is_path(fs::path_wd("ab|cd.txt")))
 #'
@@ -169,7 +171,7 @@ is_path <- function(path) {
       stop("'filename' should not start with ' ' (i.e., a space):\n", filename)
     }
 
-    if(grepl(pattern = ':', x = filename, fixed = TRUE)) {
+    if(grepl(pattern = ":", x = filename, fixed = TRUE)) {
       stop("'filename' should not contain ':':\n", filename)
     }
 
