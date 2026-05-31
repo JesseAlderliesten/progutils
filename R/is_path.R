@@ -157,7 +157,7 @@ is_path <- function(path, test_is_path = FALSE) {
     sub(pattern = paste0("[.]", file_ext, "$"), replacement = "", x = filename),
     suffix = ".")
   if(test_is_path) {
-    return(end_dot)
+    return(sub(pattern = paste0("[.]", file_ext, "$"), replacement = "", x = filename))
   }
   if(!end_dot && (length(file_ext) == 0L || !nzchar(file_ext))) {
     to_tempdir <-

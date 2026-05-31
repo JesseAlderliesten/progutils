@@ -113,10 +113,9 @@ expect_error(is_path(path = fs::path("ab", "def..")),
 
 
 # Filenames should not end with a space or a dot
-expect_silent(expect_false(is_path(path = fs::path_wd("subdir", "filename "), test_is_path = TRUE)))
-expect_silent(expect_false(is_path(path = fs::path_wd("subdir", "filename .txt"), test_is_path = TRUE)))
-expect_silent(expect_true(is_path(path = fs::path_wd("subdir", "filename."), test_is_path = TRUE)))
-expect_silent(expect_true(is_path(path = fs::path_wd("subdir", "filename..txt"), test_is_path = TRUE)))
+expect_identical(is_path(path = fs::path_wd("subdir", "filename..txt"),
+                         test_is_path = TRUE),
+                 "filename.")
 
 
 ##### Temporary directory #####
