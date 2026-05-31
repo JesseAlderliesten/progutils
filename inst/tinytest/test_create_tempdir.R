@@ -25,7 +25,7 @@ expect_true(file.exists(my_tempfile))
 expect_warning(
   expect_error(
     create_tempdir(subdir = fs::path(basename(dirname(my_tempfile)),
-                                      basename(my_tempfile))),
+                                     basename(my_tempfile))),
     pattern = "create a subdirectory in the temporary directory failed",
     fixed = TRUE),
   pattern = "already exists", fixed = TRUE, strict = TRUE)
@@ -35,7 +35,7 @@ expect_false(dir.exists(fs::path(my_tempdir, "subdir", "abc")))
 res_subdir_recursive <- create_tempdir(subdir = fs::path("subdir", "abc"))
 expect_true(dir.exists(res_subdir_recursive))
 
-# Checks on input to 'dir'
+# Checks on input to 'subdir'
 for(subdir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
   expect_error(
     create_tempdir(subdir = subdir),
@@ -43,8 +43,8 @@ for(subdir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
 }
 
 # Trailing '\\' is changed to '/' but trailing '/' is removed
-subdir_in <- c("tem\\p_p4", "temp_p5\\", "tem/p_p7", "temp_p8/")
-subdir_out <- c("tem/p_p4", "temp_p5", "tem/p_p7", "temp_p8")
+subdir_in <- c("tem\\p_p1", "temp_p2\\", "tem/p_p3", "temp_p4/")
+subdir_out <- c("tem/p_p1", "temp_p2", "tem/p_p3", "temp_p4")
 for(ind_subdir in seq_along(subdir_in)) {
   expect_true(endsWith(
     create_tempdir(subdir = subdir_in[ind_subdir]),
@@ -55,8 +55,8 @@ for(ind_subdir in seq_along(subdir_in)) {
 
 expect_warning(
   expect_true(endsWith(
-    create_tempdir(subdir = "\\temp_p3"),
-    suffix = fs::path(basename(my_tempdir), "temp_p3")
+    create_tempdir(subdir = "\\temp_p5"),
+    suffix = fs::path(basename(my_tempdir), "temp_p5")
   )),
   pattern = "Repeated '/' or '\\\\' in 'subdir' will be ignored",
   strict = TRUE, fixed = TRUE)
@@ -77,7 +77,7 @@ expect_error(
   create_tempdir(subdir = ".."),
   pattern = "would write above 'tempdir()'", fixed = TRUE)
 
-for(subdir in list("temp_p5.", "temp_p6 ")) {
+for(subdir in list("temp_p7.", "temp_p8 ")) {
   expect_error(
     create_tempdir(subdir = subdir),
     pattern = "should not end with ' ' or '.'", fixed = TRUE)
@@ -87,7 +87,7 @@ for(subdir in list("temp_p5.", "temp_p6 ")) {
 #### Delete the created temporary files ####
 unlink(c(res_subdir, dirname(res_subdir_recursive),
          fs::path(my_tempdir, subdir_out), fs::path(my_tempdir, "temp_p5"),
-         fs::path(my_tempdir, "temp_p8"), fs::path(my_tempdir, "tem")),
+         fs::path(my_tempdir, "temp_p6"), fs::path(my_tempdir, "tem")),
        recursive = TRUE)
 
 
