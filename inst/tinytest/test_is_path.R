@@ -102,21 +102,14 @@ expect_error(is_path(path = fs::path("ab", "def..")),
              pattern = warn_space_dot, fixed = TRUE)
 
 # Filenames should not end with a space or a dot
-# expect_error(is_path(path = fs::path_wd("subdir", "filename ")),
-#              pattern = warn_space_dot, fixed = TRUE)
-# expect_error(is_path(path = fs::path_wd("subdir", "filename .txt")),
-#              pattern = warn_space_dot, fixed = TRUE)
-# expect_error(is_path(path = fs::path_wd("subdir", "filename.")),
-#              pattern = warn_space_dot, fixed = TRUE)
-# expect_error(is_path(path = fs::path_wd("subdir", "filename..txt")),
-#              pattern = warn_space_dot, fixed = TRUE)
-
-# Filenames should not end with a space or a dot
-expect_equal(is_path(path = fs::path_wd("subdir", "filename..txt"),
-                         test_is_path = TRUE),
-             list(c("function (path) , {,     dir <- path_dir(path),     file <- sub(\"(?<!^|[.])\\\\.+([^.]+)$\", \"\", path_file(path), ,         perl = TRUE),     na <- is.na(path),     no_dir <- dir == \".\" | dir == \"\",     path[!na & no_dir] <- path_tidy(file[!na & no_dir]),     path[!na & !no_dir] <- path(dir[!na & !no_dir], file[!na & ,         !no_dir]),     path, }"),
-                  c("function (path) , {,     if (length(path) == 0) {,         return(character()),     },     res <- captures(path_file(path), regexpr(\"(?<!^|[.]|/)[.]+([^.]+)$\", ,         path_file(path), perl = TRUE))[[1]],     res[!is.na(path) & is.na(res)] <- \"\",     res, }")))
-
+expect_error(is_path(path = fs::path_wd("subdir", "filename ")),
+             pattern = warn_space_dot, fixed = TRUE)
+expect_error(is_path(path = fs::path_wd("subdir", "filename .txt")),
+             pattern = warn_space_dot, fixed = TRUE)
+expect_error(is_path(path = fs::path_wd("subdir", "filename.")),
+             pattern = warn_space_dot, fixed = TRUE)
+expect_error(is_path(path = fs::path_wd("subdir", "filename..txt")),
+             pattern = warn_space_dot, fixed = TRUE)
 
 ##### Temporary directory #####
 expect_error(is_path(path = tempdir()),

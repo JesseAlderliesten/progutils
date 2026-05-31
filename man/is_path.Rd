@@ -4,7 +4,7 @@
 \alias{is_path}
 \title{Check that \code{x} is a valid path}
 \usage{
-is_path(path, test_is_path = FALSE)
+is_path(path)
 }
 \arguments{
 \item{path}{\link[checkinput:is_character]{character string} with the path.}
