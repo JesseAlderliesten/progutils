@@ -107,75 +107,75 @@ my_tempdir <- normalizePath(path = fs::path(tempdir(), "subdir"),
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir
+#> /tmp/RtmpSy8iZ4/subdir
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir
+#> /tmp/RtmpSy8iZ4/subdir
 #> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/2026_05_30/abc.txt
-#> [1] "/tmp/Rtmp7Uw4Nz/subdir/2026_05_30/abc.txt"
+#> /tmp/RtmpSy8iZ4/subdir/2026_05_31/abc.txt
+#> [1] "/tmp/RtmpSy8iZ4/subdir/2026_05_31/abc.txt"
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir
+#> /tmp/RtmpSy8iZ4/subdir
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir
+#> /tmp/RtmpSy8iZ4/subdir
 #> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/2026_05_30/30_05_2026_abc.txt
-#> [1] "/tmp/Rtmp7Uw4Nz/subdir/2026_05_30/30_05_2026_abc.txt"
+#> /tmp/RtmpSy8iZ4/subdir/2026_05_31/31_05_2026_abc.txt
+#> [1] "/tmp/RtmpSy8iZ4/subdir/2026_05_31/31_05_2026_abc.txt"
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir
+#> /tmp/RtmpSy8iZ4/subdir
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir
+#> /tmp/RtmpSy8iZ4/subdir
 #> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/def.html
-#> [1] "/tmp/Rtmp7Uw4Nz/subdir/def.html"
+#> /tmp/RtmpSy8iZ4/subdir/def.html
+#> [1] "/tmp/RtmpSy8iZ4/subdir/def.html"
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir
+#> /tmp/RtmpSy8iZ4/subdir
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir
+#> /tmp/RtmpSy8iZ4/subdir
 #> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/30_05_2026_def.html
-#> [1] "/tmp/Rtmp7Uw4Nz/subdir/30_05_2026_def.html"
+#> /tmp/RtmpSy8iZ4/subdir/31_05_2026_def.html
+#> [1] "/tmp/RtmpSy8iZ4/subdir/31_05_2026_def.html"
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir
+#> /tmp/RtmpSy8iZ4/subdir/subdir
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir
+#> /tmp/RtmpSy8iZ4/subdir/subdir
 #> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir/2026_05_30/abc.txt
-#> [1] "/tmp/Rtmp7Uw4Nz/subdir/subdir/2026_05_30/abc.txt"
+#> /tmp/RtmpSy8iZ4/subdir/subdir/2026_05_31/abc.txt
+#> [1] "/tmp/RtmpSy8iZ4/subdir/subdir/2026_05_31/abc.txt"
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir
+#> /tmp/RtmpSy8iZ4/subdir/subdir
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir
+#> /tmp/RtmpSy8iZ4/subdir/subdir
 #> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir/2026_05_30/30_05_2026_abc.txt
-#> [1] "/tmp/Rtmp7Uw4Nz/subdir/subdir/2026_05_30/30_05_2026_abc.txt"
+#> /tmp/RtmpSy8iZ4/subdir/subdir/2026_05_31/31_05_2026_abc.txt
+#> [1] "/tmp/RtmpSy8iZ4/subdir/subdir/2026_05_31/31_05_2026_abc.txt"
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir
+#> /tmp/RtmpSy8iZ4/subdir/subdir
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir
+#> /tmp/RtmpSy8iZ4/subdir/subdir
 #> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir/def.html
-#> [1] "/tmp/Rtmp7Uw4Nz/subdir/subdir/def.html"
+#> /tmp/RtmpSy8iZ4/subdir/subdir/def.html
+#> [1] "/tmp/RtmpSy8iZ4/subdir/subdir/def.html"
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir
+#> /tmp/RtmpSy8iZ4/subdir/subdir
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir
+#> /tmp/RtmpSy8iZ4/subdir/subdir
 #> Warning: Repeated '/' or '\\' in 'file_path' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/subdir/subdir/30_05_2026_def.html
-#> [1] "/tmp/Rtmp7Uw4Nz/subdir/subdir/30_05_2026_def.html"
+#> /tmp/RtmpSy8iZ4/subdir/subdir/31_05_2026_def.html
+#> [1] "/tmp/RtmpSy8iZ4/subdir/subdir/31_05_2026_def.html"
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

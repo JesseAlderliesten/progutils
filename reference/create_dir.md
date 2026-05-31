@@ -88,7 +88,7 @@ my_tempdir <- fs::path(tempdir(), "testcreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/testcreatedir/dir_one
+#> /tmp/RtmpSy8iZ4/testcreatedir/dir_one
 dir.exists(res_dir_one) # TRUE
 #> [1] TRUE
 
@@ -97,7 +97,7 @@ dir.exists(res_dir_one) # TRUE
 res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                              add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/testcreatedir/dir_one
+#> /tmp/RtmpSy8iZ4/testcreatedir/dir_one
 identical(res_dir_one, res_dir_one_v2) # TRUE
 #> [1] TRUE
 
@@ -107,7 +107,7 @@ identical(res_dir_one, res_dir_one_v2) # TRUE
 res_dir_one_v3 <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                              add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/testcreatedir/dir_ONE
+#> /tmp/RtmpSy8iZ4/testcreatedir/dir_ONE
 # TRUE on Windows and macOS, FALSE on Ubuntu
 identical(res_dir_one, res_dir_one_v3)
 #> [1] FALSE
@@ -116,7 +116,7 @@ identical(res_dir_one, res_dir_one_v3)
 res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/Rtmp7Uw4Nz/testcreatedir/dir_two
+#> /tmp/RtmpSy8iZ4/testcreatedir/dir_two
 dir.exists(res_dir_two) # TRUE
 #> [1] TRUE
 

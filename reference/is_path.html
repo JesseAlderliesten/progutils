@@ -68,28 +68,30 @@ valid paths before creating a directory or a file:</p><ul><li><p><code>path</cod
 nor any of the control characters (<code>ASCII</code> octal codes 000 through 037 and
 177, see <code><a href="https://rdrr.io/r/base/regex.html" class="external-link">help("regex")</a></code>).</p></li>
 <li><p><code>path</code> components (i.e., parts separated by file separators <code>/</code> or <code>\\</code>)
+should <strong>not</strong> be the Windows-reserved terms <code>CON</code>, <code>PRN</code>, <code>AUX</code>, <code>NUL</code>,
+<code>COM&lt;non-zero digit&gt;</code>, <code>LPT&lt;non-zero digit&gt;</code>, case-insensitive variants of
+these names, or these names followed by an extension.</p></li>
+<li><p><code>path</code> components
 should <strong>not</strong> end with a space or dot (<code>"."</code> and <code>".."</code> are allowed as
 first component to indicate the working directory and the parent directory,
 respectively).</p></li>
-<li><p><code>path</code> components should <strong>not</strong> be <code>CON</code>, <code>PRN</code>, <code>AUX</code>, <code>NUL</code>,
-<code>COM&lt;non-zero digit&gt;</code>, <code>LPT&lt;non-zero digit&gt;</code>, case-insensitive variants of
-these names, or these names followed by an extension.</p></li>
 <li><p><code>path</code> should not point to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>: a temporary subdirectory should be
 used instead (see <code><a href="create_tempdir.html">create_tempdir()</a></code>).</p></li>
 </ul><p>Furthermore, if <code>path</code> contains a file extension or compression extension,
 the part after the last
 slash is considered the filename, which should adhere to the same
-restrictions as the path, and in addition should <strong>not</strong> contain <code>:</code> nor
-start with a space.</p>
+restrictions as the path but should <strong>not</strong> contain <code>:</code> <strong>nor</strong>
+start with a space, while it might contain Windows-reserved terms.</p>
 <p>These restrictions on the path and the filename consider characters that
 would lead to an error in Windows because they are not allowed; characters
 that would lead to a mismatch between the created directory and the returned
 path because they are silently removed in Windows; and words that are
 reserved names in Windows.</p>
-<p><code>path</code> does <strong>not</strong> have to contain a file separator (i.e., <code>/</code> or
-<code>\\</code>), such that <code>is_path()</code> can be used to check that input to <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code>
-only contains allowed characters. Repeated file separators (e.g., <code>//</code> or
-<code>\\\\</code>) are treated as single separators, with a warning.</p>
+<p><code>path</code> does <strong>not</strong> have to point to an existing directory: <code>path</code> even does
+<strong>not</strong> have to contain a file separator (e.g., <code>/</code> or <code>\\</code>), such that
+<code>is_path()</code> can be used to check that input to <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code> only contains
+allowed characters. Repeated file separators (e.g., <code>//</code> or <code>\\\\</code>) are
+treated as single separators, with a warning.</p>
     </div>
     <div class="section level2">
     <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
@@ -145,6 +147,10 @@ paths), <code><a href="create_dir.html">create_dir()</a></code> to create a dire
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'getwd()' will be ignored:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"abcd"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("abcd")' will be ignored:</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/abcd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"ab|cd"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("ab|cd")' will be ignored:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/ab|cd</span>
@@ -160,15 +166,11 @@ paths), <code><a href="create_dir.html">create_dir()</a></code> to create a dire
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("abcd.txt.gz")' will be ignored:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/abcd.txt.gz</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"abcd"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("abcd")' will be ignored:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/abcd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"abcd.gz"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"abcd.gz"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("abcd.gz")' will be ignored:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/abcd.gz</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">is_path</span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path_wd</a></span><span class="op">(</span><span class="st">"ab:cd.txt"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'fs::path_wd("ab:cd.txt")' will be ignored:</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> /home/runner/work/progutils/progutils/docs/reference/ab:cd.txt</span>
