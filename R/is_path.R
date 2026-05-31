@@ -12,20 +12,21 @@
 #'   nor any of the control characters (`ASCII` octal codes 000 through 037 and
 #'   177, see `help("regex")`).
 #' - `path` components (i.e., parts separated by file separators `/` or `\\`)
+#'   should **not** be the Windows-reserved terms `CON`, `PRN`, `AUX`, `NUL`,
+#'   `COM<non-zero digit>`, `LPT<non-zero digit>`, case-insensitive variants of
+#'   these names, or these names followed by an extension.
+#' - `path` components
 #'   should **not** end with a space or dot (`"."` and `".."` are allowed as
 #'   first component to indicate the working directory and the parent directory,
 #'   respectively).
-#' - `path` components should **not** be `CON`, `PRN`, `AUX`, `NUL`,
-#'   `COM<non-zero digit>`, `LPT<non-zero digit>`, case-insensitive variants of
-#'   these names, or these names followed by an extension.
 #' - `path` should not point to `tempdir()`: a temporary subdirectory should be
 #'   used instead (see [create_tempdir()]).
 #'
 #' Furthermore, if `path` contains a file extension or compression extension,
 #' the part after the last
 #' slash is considered the filename, which should adhere to the same
-#' restrictions as the path, and in addition should **not** contain `:` nor
-#' start with a space.
+#' restrictions as the path but should **not** contain `:` **nor**
+#' start with a space, while it might contain Windows-reserved terms.
 #'
 #' These restrictions on the path and the filename consider characters that
 #' would lead to an error in Windows because they are not allowed; characters
@@ -33,10 +34,11 @@
 #' path because they are silently removed in Windows; and words that are
 #' reserved names in Windows.
 #'
-#' `path` does **not** have to contain a file separator (i.e., `/` or
-#' `\\`), such that `is_path()` can be used to check that input to [fs::path()]
-#' only contains allowed characters. Repeated file separators (e.g., `//` or
-#' `\\\\`) are treated as single separators, with a warning.
+#' `path` does **not** have to point to an existing directory: `path` even does
+#' **not** have to contain a file separator (e.g., `/` or `\\`), such that
+#' `is_path()` can be used to check that input to [fs::path()] only contains
+#' allowed characters. Repeated file separators (e.g., `//` or `\\\\`) are
+#' treated as single separators, with a warning.
 #'
 #' @returns
 #' `TRUE`: an error occurs if `path` is not a valid path or if `path` contains a
@@ -84,13 +86,13 @@
 #'
 #' @examples
 #' is_path(getwd())
+#' is_path(fs::path_wd("abcd"))
 #' try(is_path(fs::path_wd("ab|cd")))
 #'
 #' is_path(fs::path_wd("abcd.txt"))
 #' is_path(fs::path_wd("abcd.txt.gz"))
+#' is_path(fs::path_wd("abcd.gz"))
 #'
-#' try(is_path(fs::path_wd("abcd")))
-#' try(is_path(fs::path_wd("abcd.gz")))
 #' try(is_path(fs::path_wd("ab:cd.txt")))
 #' try(is_path(fs::path_wd("ab|cd.txt")))
 #'
@@ -150,7 +152,15 @@ is_path <- function(path) {
 
   filename <- basename(path)
   file_ext <- fs::path_ext(path = filename)
-  if(length(file_ext) == 0L || !nzchar(file_ext)) {
+  filename_no_ext <- fs::path_ext_remove(path = filename)
+
+  # To catch case where filename ends in a dot, e.g., "ff..txt"
+  end_dot <- filename != "." && filename != ".." &&
+    (endsWith(filename_no_ext, suffix = ".") ||
+       # Modified from fs::path_ext_remove() to only remove a single dot
+       endsWith(sub("\\.([^.]+)$", "", filename, perl = TRUE), suffix = "."))
+
+  if(!end_dot && (length(file_ext) == 0L || !nzchar(file_ext))) {
     to_tempdir <-
       basename(normalizePath(path, winslash = "/", mustWork = FALSE)) ==
       basename(normalizePath(tempdir(), winslash = "/", mustWork = FALSE))
@@ -159,7 +169,6 @@ is_path <- function(path) {
       basename(dirname(normalizePath(path, winslash = "/", mustWork = FALSE))) ==
       basename(normalizePath(tempdir(), winslash = "/", mustWork = FALSE))
 
-    filename_no_ext <- fs::path_ext_remove(path = filename)
     if(length(filename_no_ext) == 0L || !nzchar(filename_no_ext)) {
       stop("filename without extension (", paste_quoted(filename_no_ext),
            ") should not be empty:\n", path)
@@ -169,16 +178,14 @@ is_path <- function(path) {
       stop("'filename' should not start with ' ' (i.e., a space):\n", filename)
     }
 
-    if(grepl(pattern = ':', x = filename, fixed = TRUE)) {
+    if(grepl(pattern = ":", x = filename, fixed = TRUE)) {
       stop("'filename' should not contain ':':\n", filename)
     }
 
     if(endsWith(x = filename_no_ext, suffix = " ") ||
        endsWith(x = filename_no_ext, suffix = ".") ||
        # To catch case where filename ends in a dot, e.g., "ff..txt"
-       endsWith(sub(pattern = paste0("[.]", file_ext, "$"), replacement = "",
-                    x = filename),
-                suffix = ".")) {
+       end_dot) {
       stop("'filename' should not end with ' ' or '.' (i.e., a space or a dot):\n",
            filename)
     }

@@ -24,12 +24,13 @@ valid paths before creating a directory or a file:
 nor any of the control characters (\code{ASCII} octal codes 000 through 037 and
 177, see \code{help("regex")}).
 \item \code{path} components (i.e., parts separated by file separators \code{/} or \verb{\\\\})
+should \strong{not} be the Windows-reserved terms \code{CON}, \code{PRN}, \code{AUX}, \code{NUL},
+\verb{COM<non-zero digit>}, \verb{LPT<non-zero digit>}, case-insensitive variants of
+these names, or these names followed by an extension.
+\item \code{path} components
 should \strong{not} end with a space or dot (\code{"."} and \code{".."} are allowed as
 first component to indicate the working directory and the parent directory,
 respectively).
-\item \code{path} components should \strong{not} be \code{CON}, \code{PRN}, \code{AUX}, \code{NUL},
-\verb{COM<non-zero digit>}, \verb{LPT<non-zero digit>}, case-insensitive variants of
-these names, or these names followed by an extension.
 \item \code{path} should not point to \code{tempdir()}: a temporary subdirectory should be
 used instead (see \code{\link[=create_tempdir]{create_tempdir()}}).
 }
@@ -37,8 +38,8 @@ used instead (see \code{\link[=create_tempdir]{create_tempdir()}}).
 Furthermore, if \code{path} contains a file extension or compression extension,
 the part after the last
 slash is considered the filename, which should adhere to the same
-restrictions as the path, and in addition should \strong{not} contain \code{:} nor
-start with a space.
+restrictions as the path but should \strong{not} contain \code{:} \strong{nor}
+start with a space, while it might contain Windows-reserved terms.
 
 These restrictions on the path and the filename consider characters that
 would lead to an error in Windows because they are not allowed; characters
@@ -46,10 +47,11 @@ that would lead to a mismatch between the created directory and the returned
 path because they are silently removed in Windows; and words that are
 reserved names in Windows.
 
-\code{path} does \strong{not} have to contain a file separator (i.e., \code{/} or
-\verb{\\\\}), such that \code{is_path()} can be used to check that input to \code{\link[fs:path]{fs::path()}}
-only contains allowed characters. Repeated file separators (e.g., \verb{//} or
-\verb{\\\\\\\\}) are treated as single separators, with a warning.
+\code{path} does \strong{not} have to point to an existing directory: \code{path} even does
+\strong{not} have to contain a file separator (e.g., \code{/} or \verb{\\\\}), such that
+\code{is_path()} can be used to check that input to \code{\link[fs:path]{fs::path()}} only contains
+allowed characters. Repeated file separators (e.g., \verb{//} or \verb{\\\\\\\\}) are
+treated as single separators, with a warning.
 }
 \section{Programming notes}{
 
@@ -88,13 +90,13 @@ removed in some operations.
 
 \examples{
 is_path(getwd())
+is_path(fs::path_wd("abcd"))
 try(is_path(fs::path_wd("ab|cd")))
 
 is_path(fs::path_wd("abcd.txt"))
 is_path(fs::path_wd("abcd.txt.gz"))
+is_path(fs::path_wd("abcd.gz"))
 
-try(is_path(fs::path_wd("abcd")))
-try(is_path(fs::path_wd("abcd.gz")))
 try(is_path(fs::path_wd("ab:cd.txt")))
 try(is_path(fs::path_wd("ab|cd.txt")))
 
