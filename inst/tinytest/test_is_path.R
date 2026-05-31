@@ -132,10 +132,16 @@ expect_warning(
   pattern = "Repeated '/' or '\\\\' in", fixed = TRUE, strict = TRUE)
 
 ##### Trailing file separators #####
-expect_silent(
-  expect_true(is_path(path = paste0(fs::path_wd("subdir", "filename.txt"), "/"))))
-expect_silent(
-  expect_true(is_path(path = paste0(fs::path_wd("subdir", "filename.txt"), "\\"))))
+# To prevent warning about repeated file separators on MacOS and Ubuntu (where
+# the paths will end in a slash)
+path_in <- fs::path_wd("subdir", "filename.txt")
+if(endsWith(path_in, suffix = "/")) {
+  expect_true(is_path(path = path_in))
+} else {
+  expect_true(is_path(path = paste0(path_in, "/")))
+}
+
+expect_true(is_path(path = paste0(fs::path_wd("subdir", "filename.txt"), "\\")))
 
 
 #### Cleaning up ####
