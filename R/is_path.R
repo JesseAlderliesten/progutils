@@ -161,7 +161,7 @@ is_path <- function(path, test_is_path = FALSE) {
       suffix = ".") ||
        endsWith(filename_no_ext, suffix = "."))
   if(test_is_path) {
-    return(filename_no_ext)
+    return(list(fs::path_ext, fs::path_ext_remove))
   }
   if(!end_dot && (length(file_ext) == 0L || !nzchar(file_ext))) {
     to_tempdir <-
