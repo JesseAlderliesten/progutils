@@ -4,20 +4,12 @@
 
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
   : Create a directory
-
 - [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
   : Create a file path
-
 - [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
   : Create a temporary directory
-
 - [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
   : Check that only a single matching file is present
-
-- [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
-  :
-
-  Check that `x` is a valid path
 
 ## Text
 

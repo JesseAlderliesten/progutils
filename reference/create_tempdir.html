@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@
 <dl><dt id="arg-subdir">subdir<a class="anchor" aria-label="anchor" href="#arg-subdir"></a></dt>
 <dd><p>A <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> with the name
 of a <strong>not-yet</strong> existing temporary subdirectory to be created inside
-<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. <code>subdir</code> should be a <a href="is_path.html">valid path</a>.</p></dd>
+<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. <code>subdir</code> should be a <a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">valid path</a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -95,31 +95,31 @@ up. <code>use_tempdir()</code> follows the latter approach.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="create_dir.html">create_dir()</a></code> to create (non-temporary) directories.</p>
+    <div class="dont-index"><p><code><a href="create_dir.html">create_dir()</a></code> to create (non-temporary) directories;
+<code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> to check if a path is valid.</p>
 <p>Other functions to handle paths and directories:
 <code><a href="create_dir.html">create_dir()</a></code>,
 <code><a href="create_file_path.html">create_file_path()</a></code>,
-<code><a href="get_file_path.html">get_file_path()</a></code>,
-<code><a href="is_path.html">is_path()</a></code></p></div>
+<code><a href="get_file_path.html">get_file_path()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpSy8iZ4"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpETjhnx"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_std</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"examplesubtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpSy8iZ4/examplesubtempdir"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpETjhnx/examplesubtempdir"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error if the directory already exists</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"examplesubtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in create_tempdir(subdir = "examplesubtempdir") : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpSy8iZ4/examplesubtempdir</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpETjhnx/examplesubtempdir</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is possible to create recursive directories</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_recursive</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="st">"abc"</span>, <span class="st">"def"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpSy8iZ4/abc/def"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpETjhnx/abc/def"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tempdir_std</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">dirname</a></span><span class="op">(</span><span class="va">tempdir_recursive</span><span class="op">)</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

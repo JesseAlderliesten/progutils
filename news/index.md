@@ -1,5 +1,11 @@
 # Changelog
 
+## progutils 0.4.0
+
+#### Breaking changes
+
+- `is_path()`: moved to package `checkinput`.
+
 ## progutils 0.3.0
 
 #### Breaking changes
@@ -15,11 +21,9 @@
 - `get_filename()`: rename to
   [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
   and return the complete file path instead of only the file name.
-- `is_filename()`: removed, use
-  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
-- [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md):
-  drop argument `as_file`. Instead, check that the filename is valid if
-  a file extension is present.
+- `is_filename()`: removed, use `is_path()`.
+- `is_path()`: drop argument `as_file`. Instead, check that the filename
+  is valid if a file extension is present.
 - Replace `file.path(".", ...)` and `file.path(getwd(), ...)` with
   `fs::path_wd(...)`; replace other instances of
   [`file.path()`](https://rdrr.io/r/base/file.path.html) with
@@ -69,8 +73,7 @@
 - [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md):
   no longer erroneously document that `n` can be zero. Removed
   uninformative example.
-- [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md):
-  add section `Programming notes` about file separators.
+- `is_path()`: add section `Programming notes` about file separators.
 
 ## progutils 0.0.11
 
@@ -78,14 +81,11 @@
 
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
   use `is_filename()` to check if `filename` is valid.
-- `create_path`: use
-  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
-  to check that `dir` is a valid path.
+- `create_path`: use `is_path()` to check that `dir` is a valid path.
 - [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md):
   only write in subdirectories of
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html) and use
-  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
-  to check that `subdir` is valid.
+  `is_path()` to check that `subdir` is valid.
 - `file_path_sans_ext()`: rename to `file_path_no_ext()` to distinguish
   it from
   [`tools::file_path_sans_ext()`](https://rdrr.io/r/tools/fileutils.html)
@@ -98,8 +98,7 @@
 
 #### Added functions
 
-- Add functions `file_path_ext()`, `is_filename()` and
-  [`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md).
+- Add functions `file_path_ext()`, `is_filename()` and `is_path()`.
 
 ## progutils 0.0.9
 

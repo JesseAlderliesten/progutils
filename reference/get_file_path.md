@@ -15,7 +15,7 @@ get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 - dir:
 
   Character string with the
-  [path](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+  [path](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
   to a directory.
 
 - pattern:
@@ -63,6 +63,8 @@ returned path can be used in Windows' file system.
 
 ## See also
 
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+to check if a path is valid;
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
 to create a directory if does not yet exist;
 [`file.exists()`](https://rdrr.io/r/base/files.html) and
@@ -79,8 +81,7 @@ absolute paths.
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
-[`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
-[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+[`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),
@@ -99,39 +100,39 @@ file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
 get_file_path(dir = tempdir(), pattern = "some_file")
-#> Using file '/tmp/RtmpSy8iZ4/some_filename19672c0be32d.txt'
-#> [1] "/tmp/RtmpSy8iZ4/some_filename19672c0be32d.txt"
+#> Using file '/tmp/RtmpETjhnx/some_filename19bb7f4ff4ec.txt'
+#> [1] "/tmp/RtmpETjhnx/some_filename19bb7f4ff4ec.txt"
 
 # The same file is found if case-insensitive matching is used:
 get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
-#> Using file '/tmp/RtmpSy8iZ4/some_filename19672c0be32d.txt'
-#> [1] "/tmp/RtmpSy8iZ4/some_filename19672c0be32d.txt"
+#> Using file '/tmp/RtmpETjhnx/some_filename19bb7f4ff4ec.txt'
+#> [1] "/tmp/RtmpETjhnx/some_filename19bb7f4ff4ec.txt"
 
 # Error reporting the presence of a case-insensitive match.
 try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 #> Error in get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/RtmpSy8iZ4'.
-#> However, a case-insensitive match to 'pattern' is present: 'some_filename19672c0be32d.txt'.
+#> '/tmp/RtmpETjhnx'.
+#> However, a case-insensitive match to 'pattern' is present: 'some_filename19bb7f4ff4ec.txt'.
 
 # Error reporting no match found.
 try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
 #> Error in get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",  : 
 #>   No matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpSy8iZ4'.
+#> '/tmp/RtmpETjhnx'.
 try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 #> Error in get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpSy8iZ4'.
+#> '/tmp/RtmpETjhnx'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
 try(get_file_path(dir = tempdir(), pattern = "_filename"))
 #> Error in get_file_path(dir = tempdir(), pattern = "_filename") : 
 #>   Multiple matches to pattern '_filename' are present in directory
-#> '/tmp/RtmpSy8iZ4': 'another_filename19676242994b.txt', 'some_filename19672c0be32d.txt'!
+#> '/tmp/RtmpETjhnx': 'another_filename19bb64a0df44.txt', 'some_filename19bb7f4ff4ec.txt'!
 
 # Clean up
 unlink(x = my_tempfiles)

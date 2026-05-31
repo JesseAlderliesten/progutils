@@ -15,7 +15,7 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
   [Character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
-  path](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+  path](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
   to a directory that should be created if it does not yet exist.
   [`fs::path()`](https://fs.r-lib.org/reference/path.html) adds file
   separators and the dot (`"."`) indicates the [working
@@ -59,12 +59,14 @@ yet exist.
 
 ## See also
 
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+to check if a path is valid;
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
 to create a file path and creating the indicated directory if it does
 not yet exist;
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
 for a safe way to create temporary directories;
-[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
 and references there about file paths and directories;
 [`dir.exists()`](https://rdrr.io/r/base/files2.html) and
 [`dir.create()`](https://rdrr.io/r/base/files2.html) used by this
@@ -75,8 +77,7 @@ to check if a file exists and is a unique match to a pattern.
 Other functions to handle paths and directories:
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md),
-[`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md),
-[`is_path()`](https://jessealderliesten.github.io/progutils/reference/is_path.md)
+[`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
 
 ## Examples
 
@@ -88,7 +89,7 @@ my_tempdir <- fs::path(tempdir(), "testcreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/RtmpSy8iZ4/testcreatedir/dir_one
+#> /tmp/RtmpETjhnx/testcreatedir/dir_one
 dir.exists(res_dir_one) # TRUE
 #> [1] TRUE
 
@@ -97,7 +98,7 @@ dir.exists(res_dir_one) # TRUE
 res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                              add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/RtmpSy8iZ4/testcreatedir/dir_one
+#> /tmp/RtmpETjhnx/testcreatedir/dir_one
 identical(res_dir_one, res_dir_one_v2) # TRUE
 #> [1] TRUE
 
@@ -107,7 +108,7 @@ identical(res_dir_one, res_dir_one_v2) # TRUE
 res_dir_one_v3 <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                              add_date = FALSE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/RtmpSy8iZ4/testcreatedir/dir_ONE
+#> /tmp/RtmpETjhnx/testcreatedir/dir_ONE
 # TRUE on Windows and macOS, FALSE on Ubuntu
 identical(res_dir_one, res_dir_one_v3)
 #> [1] FALSE
@@ -116,7 +117,7 @@ identical(res_dir_one, res_dir_one_v3)
 res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
 #> Warning: Repeated '/' or '\\' in 'dir' will be ignored:
-#> /tmp/RtmpSy8iZ4/testcreatedir/dir_two
+#> /tmp/RtmpETjhnx/testcreatedir/dir_two
 dir.exists(res_dir_two) # TRUE
 #> [1] TRUE
 
