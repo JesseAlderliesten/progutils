@@ -3,7 +3,7 @@
 #' Create a directory if it does not yet exist.
 #'
 #' @param dir [Character string][checkinput::is_character()]
-#' containing a [valid path][is_path()] to a directory that should be created if
+#' containing a [valid path][checkinput::is_path()] to a directory that should be created if
 #' it does not yet exist. [fs::path()] adds file separators and the dot (`"."`)
 #' indicates the [working directory][getwd()],
 #' such that by default a subdirectory with the current date in the
@@ -34,9 +34,10 @@
 #' does not yet exist.
 #'
 #' @seealso
+#' [checkinput::is_path()] to check if a path is valid;
 #' [create_file_path()] to create a file path and creating the indicated
 #' directory if it does not yet exist; [create_tempdir()] for a safe way
-#' to create temporary directories; [is_path()] and references there about file
+#' to create temporary directories; [checkinput::is_path()] and references there about file
 #' paths and directories; [dir.exists()] and [dir.create()] used by this
 #' function; [get_file_path()] to check if a file exists and is a unique match to
 #' a pattern.
@@ -77,7 +78,8 @@
 #'
 #' @export
 create_dir <- function(dir = fs::path(".", "output"), add_date = TRUE) {
-  stopifnot(is_path(dir), checkinput::is_logical(add_date))
+  stopifnot(checkinput::is_logical(add_date))
+  checkinput::is_path(dir)
 
   if(add_date) {
     dir <- fs::path(dir, format(Sys.time(), format = "%Y_%m_%d"))

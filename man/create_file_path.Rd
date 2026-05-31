@@ -22,7 +22,7 @@ treated as part of the filename, such that the same restrictions apply, see
 \code{Details}.}
 
 \item{dir}{\link[checkinput:is_character]{Character string}
-containing a \link[=is_path]{valid path} to a directory that should be created if
+containing a \link[checkinput:is_path]{valid path} to a directory that should be created if
 it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and the dot (\code{"."})
 indicates the \link[=getwd]{working directory},
 such that by default a subdirectory with the current date in the
@@ -87,6 +87,7 @@ rm(my_tempdir)
 
 }
 \seealso{
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid,
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern,
 \code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way,
 \code{\link[=normalizePath]{normalizePath()}} to create absolute normalised paths,
@@ -95,7 +96,6 @@ rm(my_tempdir)
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=get_file_path]{get_file_path()}},
-\code{\link[=is_path]{is_path()}}
+\code{\link[=get_file_path]{get_file_path()}}
 }
 \concept{functions to handle paths and directories}

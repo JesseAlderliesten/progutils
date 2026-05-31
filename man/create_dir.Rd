@@ -8,7 +8,7 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 }
 \arguments{
 \item{dir}{\link[checkinput:is_character]{Character string}
-containing a \link[=is_path]{valid path} to a directory that should be created if
+containing a \link[checkinput:is_path]{valid path} to a directory that should be created if
 it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and the dot (\code{"."})
 indicates the \link[=getwd]{working directory},
 such that by default a subdirectory with the current date in the
@@ -77,9 +77,10 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 
 }
 \seealso{
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist; \code{\link[=create_tempdir]{create_tempdir()}} for a safe way
-to create temporary directories; \code{\link[=is_path]{is_path()}} and references there about file
+to create temporary directories; \code{\link[checkinput:is_path]{checkinput::is_path()}} and references there about file
 paths and directories; \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this
 function; \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to
 a pattern.
@@ -87,7 +88,6 @@ a pattern.
 Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},
 \code{\link[=create_tempdir]{create_tempdir()}},
-\code{\link[=get_file_path]{get_file_path()}},
-\code{\link[=is_path]{is_path()}}
+\code{\link[=get_file_path]{get_file_path()}}
 }
 \concept{functions to handle paths and directories}

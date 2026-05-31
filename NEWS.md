@@ -1,3 +1,9 @@
+# progutils 0.4.0
+
+### Breaking changes
+- `is_path()`: moved to package `checkinput`.
+
+
 # progutils 0.3.0
 
 ### Breaking changes
