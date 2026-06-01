@@ -3,16 +3,14 @@ tinytest::report_side_effects()
 #### Tests ####
 ##### Preparations #####
 # Create temporary directory and temporary file to use in tests.
-my_tempdir <- normalizePath(path = fs::path(tempdir(), "testcreatepath"),
-                            winslash = "/", mustWork = FALSE)
+my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "testcreatepath"))
 tempdir_pattern <- paste0(basename(tempdir()), ".+$")
 tempdir_basename <- basename(tempdir())
 current_date_Ymd <- format(Sys.time(), format = "%Y_%m_%d")
 current_date_dmY <- format(Sys.time(), format = "%d_%m_%Y")
 
 dir.create(path = my_tempdir, showWarnings = FALSE, recursive = TRUE)
-my_tempfile <- normalizePath(path = fs::path(my_tempdir, "test_df.csv"),
-                             winslash = "/", mustWork = FALSE)
+my_tempfile <- fs::path_abs(path = fs::path(my_tempdir, "test_df.csv"))
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 
@@ -131,12 +129,9 @@ expect_true(endsWith(
 
 # Non-alphanumeric characters are *not* replaced (they used to be replaced in
 # earlier versions.
-# On Ubuntu and MacOS led to warning ''Repeated '/' or '\\' in 'dir' will be
-# ignored: /tmp/RtmpaJfn0F/working_dir/RtmpLIBaPm/testcreatepath', so now try if
-# using normalizePath() on 'my_tempdir' solves that.
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d#.%m_%Ydef",
-                   dir = normalizePath(my_tempdir), add_date = TRUE),
+                   dir = my_tempdir, add_date = TRUE),
   suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
                      paste0(format(Sys.time(), format = "%d#.%m_%Y"), "def_abc.txt"))
 ))
@@ -181,12 +176,10 @@ expect_true(endsWith(
   fs::path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
 ))
 
-expect_warning(
-  expect_true(endsWith(
+expect_error(
     create_file_path(filename = "testfile123.csv", format_stamp = "",
                      dir = my_tempfile, add_date = FALSE),
-    suffix = fs::path(basename(getwd()), "testfile123.csv"))),
-  pattern = "already exists", fixed = TRUE
+  pattern = "Failed to make directory", fixed = TRUE
 )
 
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {

@@ -19,10 +19,8 @@
 #' character until the end of the file name) and should **not** contain slashes
 #' or backslashes: use `dir` to indicate subdirectories.
 #'
-#' The absolute [normalised][normalizePath()] path is returned such that the
-#' returned path still works if the [working directory][getwd()] changes. `"/"`
-#' instead of `"\\"` is used as argument [winslash][normalizePath()] such that
-#' the returned path can be used in Windows' file system.
+#' The [absolute normalised][fs::path_abs()] path is returned such that the
+#' returned path still works if the [working directory][getwd()] changes.
 #'
 #' A warning is issued if the **file** indicated by the returned path already
 #' exists. To prevent this when creating files in quick succession, use `"%OSn"`
@@ -37,15 +35,14 @@
 #' [checkinput::is_path()] to check if a path is valid,
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern,
 #' [fs::path()] to construct file paths in a platform-independent way,
-#' [normalizePath()] to create absolute normalised paths,
+#' [fs::path_abs()] to create absolute normalised paths,
 #' [create_dir()] to create a directory if it does not yet exist
 #'
 #' @family functions to handle paths and directories
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory
-#' my_tempdir <- normalizePath(path = fs::path(tempdir(), "subdir"),
-#'                             winslash = "/", mustWork = FALSE)
+#' my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"))
 #'
 #' (create_file_path(filename = "abc.txt", format_stamp = "",
 #'                   dir = my_tempdir, add_date = TRUE))
@@ -94,19 +91,14 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
   }
 
   file_path <- fs::path(create_dir(dir = dir, add_date = add_date), filename)
-  file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)
+  file_path <- fs::path_abs(path = file_path)
   is_valid_file_path <- try(expr = checkinput::is_path(file_path), silent = TRUE)
   if(inherits(x = is_valid_file_path, what = "try-error")) {
     stop("No path created: ", attr(is_valid_file_path, "condition")$message)
   }
 
-  if(file.exists(file_path)) {
-    if(dir.exists(file_path)) {
-      warning(paste0("Path already exists but points to a directory, not a file:\n",
-                     file_path))
-    } else {
-      warning(paste0("File already exists:\n", file_path))
-    }
+  if(fs::is_file(file_path)) {
+    warning("File already exists:\n", file_path)
   }
   invisible(file_path)
 }

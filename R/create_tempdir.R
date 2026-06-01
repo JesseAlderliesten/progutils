@@ -17,7 +17,7 @@
 #' yet exist.
 #'
 #' @returns
-#' The [normalized][normalizePath()] path to the created temporary directory,
+#' The [absolute normalized][fs::path_abs()] path to the created temporary directory,
 #' returned [invisibly][invisible].
 #'
 #' @section Side effects:
@@ -58,9 +58,8 @@
 #' @export
 create_tempdir <- function(subdir = "subdir") {
   stopifnot(checkinput::is_character(subdir), checkinput::is_path(subdir))
-  subdir_target <- normalizePath(path = fs::path(tempdir(), subdir),
-                                 winslash = "/", mustWork = FALSE)
-  tempdir_normalised <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
+  subdir_target <- fs::path_abs(path = fs::path(tempdir(), subdir))
+  tempdir_normalised <- fs::path_abs(tempdir())
   if(!grepl(pattern = basename(tempdir()), x = subdir_target, fixed = TRUE)) {
     stop("Using ", paste_quoted(subdir),
          " as 'subdir' would write above 'tempdir()' which is not safe: ",
@@ -73,8 +72,9 @@ create_tempdir <- function(subdir = "subdir") {
          tempdir_normalised)
   }
 
-  # dir.exists() returns FALSE if 'subdir_target' is a file instead of a directory.
-  if(!dir.exists(subdir_target)) {
+  # fs::dir_exists() returns FALSE if 'subdir_target' is a file instead of a
+  # directory.
+  if(!fs::dir_exists(subdir_target)) {
     # Notes:
     # - This branch is only used if the directory did not yet exist as directory,
     #   so it is not a problem that dir.create() returns FALSE if a directory
@@ -88,8 +88,8 @@ create_tempdir <- function(subdir = "subdir") {
            subdir_target)
     }
   } else {
-    stop("Temporary directory already exists: change 'subdir' ('", subdir,
-         "'):\n", subdir_target)
+    stop("Temporary directory already exists: change 'subdir' (",
+         paste_quoted(subdir), "):\n", subdir_target)
   }
   invisible(subdir_target)
 }

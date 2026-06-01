@@ -43,10 +43,8 @@ Create a file path, creating the indicated directory if it does not yet exist.
 character until the end of the file name) and should \strong{not} contain slashes
 or backslashes: use \code{dir} to indicate subdirectories.
 
-The absolute \link[=normalizePath]{normalised} path is returned such that the
-returned path still works if the \link[=getwd]{working directory} changes. \code{"/"}
-instead of \code{"\\\\"} is used as argument \link[=normalizePath]{winslash} such that
-the returned path can be used in Windows' file system.
+The \link[fs:path_abs]{absolute normalised} path is returned such that the
+returned path still works if the \link[=getwd]{working directory} changes.
 
 A warning is issued if the \strong{file} indicated by the returned path already
 exists. To prevent this when creating files in quick succession, use \code{"\%OSn"}
@@ -61,8 +59,7 @@ if it does not yet exist.
 
 \examples{
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- normalizePath(path = fs::path(tempdir(), "subdir"),
-                            winslash = "/", mustWork = FALSE)
+my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"))
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
@@ -90,7 +87,7 @@ rm(my_tempdir)
 \code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid,
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern,
 \code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way,
-\code{\link[=normalizePath]{normalizePath()}} to create absolute normalised paths,
+\code{\link[fs:path_abs]{fs::path_abs()}} to create absolute normalised paths,
 \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist
 
 Other functions to handle paths and directories:

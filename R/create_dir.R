@@ -14,20 +14,17 @@
 #' current date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
-#' The absolute [normalised][normalizePath()] path is returned such that the
+#' The [absolute normalised][fs::path_abs()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes. On
 #' case-insensitive file systems (e.g., Windows and macOS), normalization
 #' adjusts the case to match case-insensitive names of directories that are
-#' already present (see the `Examples`). `"/"` instead of `"\\"` is used as
-#' [winslash][normalizePath()] during normalisation, such that the returned path
-#' can be used in Windows' file system.
+#' already present (see the `Examples`).
 #'
 #' @returns
-#' A character string with the absolute [normalized][normalizePath()] path to
-#' the requested directory, returned [invisibly][invisible]. The
-#' [working directory][getwd()] is returned if an attempt to create a directory
-#' fails, with a warning. This happens if `dir` points to an existing file
-#' instead of an directory.
+#' A character string with the [absolute normalized][fs::path_abs()] path to
+#' the requested directory, returned [invisibly][invisible]. An error is thrown
+#' if the attempt to create a directory fails. This happens if `dir` points to
+#' an existing file instead of an directory.
 #'
 #' @section Side effects:
 #' The directory indicated by the returned path is [created][create_dir()] if it
@@ -38,7 +35,7 @@
 #' [create_file_path()] to create a file path and creating the indicated
 #' directory if it does not yet exist; [create_tempdir()] for a safe way
 #' to create temporary directories; [checkinput::is_path()] and references there about file
-#' paths and directories; [dir.exists()] and [dir.create()] used by this
+#' paths and directories; [fs::dir_exists()] and [dir.create()] used by this
 #' function; [get_file_path()] to check if a file exists and is a unique match to
 #' a pattern.
 #'
@@ -51,7 +48,7 @@
 #' # Create directory 'dir_one' inside this temporary directory
 #' res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
 #'                           add_date = FALSE)
-#' dir.exists(res_dir_one) # TRUE
+#' fs::dir_exists(res_dir_one) # TRUE
 #'
 #' # An attempt to create a directory that already exists does not change any
 #' # directory and the same directory is returned.
@@ -70,7 +67,7 @@
 #' # Create directory 'dir_two' with a subdirectory containing the current date
 #' res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
 #'                           add_date = TRUE)
-#' dir.exists(res_dir_two) # TRUE
+#' fs::dir_exists(res_dir_two) # TRUE
 #'
 #' # Cleaning up
 #' unlink(dirname(res_dir_one), recursive = TRUE)
@@ -85,26 +82,15 @@ create_dir <- function(dir = fs::path(".", "output"), add_date = TRUE) {
     dir <- fs::path(dir, format(Sys.time(), format = "%Y_%m_%d"))
   }
 
-  dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)
+  dir <- fs::path_abs(dir)
 
-  # dir.exists() returns FALSE if 'dir' is a file instead of a directory.
-  if(!dir.exists(dir)) {
-    # Notes:
-    # - This branch is only used if the directory did not yet exist as directory,
-    #   so it is not a problem that dir.create() returns FALSE if a directory
-    #   already exists. However, the path can already exist as a file: then the
-    #   attempt to create it as a directory will fail (indicated by a warning)
-    #   and the working directory will be used instead (indicated by an
-    #   additional warning).
-    # - Using 'recursive = TRUE' to allow creation of subdirectories inside a
-    #   not-yet existing directory (e.g., creating './output/<date>' if
-    #   './output' does not yet exist).
-    if(!dir.create(path = dir, recursive = TRUE)) {
-      warning("Attempt to create directory failed (perhaps it points to an",
-              " existing file?):\n", dir,
-              "\nReturning the working directory instead:\n", getwd())
-      dir <- normalizePath(getwd(), winslash = "/", mustWork = NA)
-    }
+  # fs::dir_exists() returns FALSE if 'dir' is a file instead of a directory but
+  # fs::dir_create() then throws an informative error.
+  if(!fs::dir_exists(dir)) {
+    # Using 'recurse = TRUE' to allow creation of subdirectories inside a
+    # not-yet existing directory (e.g., creating './output/<date>' if './output'
+    # does not yet exist).
+    fs::dir_create(path = dir, recurse = TRUE)
   }
 
   invisible(dir)

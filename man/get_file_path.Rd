@@ -18,7 +18,7 @@ used to select names of files that are present in \code{dir}.}
 name?}
 }
 \value{
-A character string with the \link[=normalizePath]{normalized} path to the file
+A character string with the \link[fs:path_abs]{absolute normalized} path to the file
 with a name matching \code{pattern} if there is exactly one such file in directory
 \code{dir}. Otherwise an error is thrown. Use \code{\link[=basename]{basename()}} on the result to obtain
 the filename itself.
@@ -36,10 +36,8 @@ message indicates if any case-insensitive match is present.
 In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_file_path()} also finds
 'hidden' files, i.e., files with names that start with a dot.
 
-Paths will be \link[=normalizePath]{normalized} to ensure they still work if the
-\link[=getwd]{working directory} changes. \code{"/"} instead of \code{"\\\\"} is
-used as argument \link[=normalizePath]{winslash} such that the returned path can
-be used in Windows' file system.
+Paths will be \link[fs:path_abs]{normalized} to ensure they still work if the
+\link[=getwd]{working directory} changes.
 }
 \examples{
 # Create files in a temporary directory so we know what is present.
@@ -78,7 +76,7 @@ checking they are a unique match to a pattern;
 \code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or
 directories;
 \code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way;
-\code{\link[=normalizePath]{normalizePath()}} to create absolute paths.
+\code{\link[fs:path_abs]{fs::path_abs()}} to create absolute paths.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},

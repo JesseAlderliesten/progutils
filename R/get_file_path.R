@@ -19,13 +19,11 @@
 #' In contrast to the default of [list.files()], `get_file_path()` also finds
 #' 'hidden' files, i.e., files with names that start with a dot.
 #'
-#' Paths will be [normalized][normalizePath()] to ensure they still work if the
-#' [working directory][getwd()] changes. `"/"` instead of `"\\"` is
-#' used as argument [winslash][normalizePath()] such that the returned path can
-#' be used in Windows' file system.
+#' Paths will be [normalized][fs::path_abs()] to ensure they still work if the
+#' [working directory][getwd()] changes.
 #'
 #' @returns
-#' A character string with the [normalized][normalizePath()] path to the file
+#' A character string with the [absolute normalized][fs::path_abs()] path to the file
 #' with a name matching `pattern` if there is exactly one such file in directory
 #' `dir`. Otherwise an error is thrown. Use [basename()] on the result to obtain
 #' the filename itself.
@@ -38,7 +36,7 @@
 #' [file.info()] and [file.access()] to extract information about files or
 #' directories;
 #' [fs::path()] to construct file paths in a platform-independent way;
-#' [normalizePath()] to create absolute paths.
+#' [fs::path_abs()] to create absolute paths.
 #'
 #' @family functions to handle paths and directories
 #' @family functions to check equality
@@ -77,20 +75,16 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALS
             checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 
-  dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)
-  if(!dir.exists(dir)) {
-    if(file.exists(dir)) {
-      stop("The path in 'dir' ('", dir,
-           "') points to a file but should point to a directory!")
-    } else {
-      stop("'", dir, "' does not exist!")
-    }
+  dir <- fs::path_abs(dir)
+  if(!fs::dir_exists(dir)) {
+    stop("Directory does not exist:\n", paste_quoted(dir))
   }
 
-  files_present <- normalizePath(
+  files_present <- fs::path_abs(
     list.files(path = dir, pattern = pattern, all.files = TRUE,
-               full.names = TRUE, ignore.case = ignore_case),
-    winslash = "/", mustWork = FALSE)
+               full.names = TRUE, ignore.case = ignore_case)
+  )
+
   # 'list.files()' also returns directories (even though 'include.dirs' is FALSE
   # by default) because 'recursive' is also FALSE.
   if(length(files_present) > 0L) {

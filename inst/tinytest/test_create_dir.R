@@ -2,13 +2,12 @@ tinytest::report_side_effects()
 
 
 #### Test the examples ####
-my_tempdir <- normalizePath(path = fs::path(tempdir(), "testcreatedir"),
-                            winslash = "/", mustWork = FALSE)
+my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "testcreatedir"))
 tempdir_basename <- basename(tempdir())
 
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
-expect_true(dir.exists(res_dir_one))
+expect_true(fs::dir_exists(res_dir_one))
 
 res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                              add_date = FALSE)
@@ -31,7 +30,7 @@ create_dir(dir = fs::path(my_tempdir, "dir_ONE"), add_date = FALSE)
 
 res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
-expect_true(dir.exists(res_dir_two))
+expect_true(fs::dir_exists(res_dir_two))
 
 # Cleaning up
 unlink(dirname(res_dir_one), recursive = TRUE)
@@ -39,25 +38,24 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, tempdir_basename)
 
 
 #### Tests ####
-my_tempdir <- normalizePath(path = fs::path(tempdir(), "testcreatedir"),
-                            winslash = "/", mustWork = FALSE)
+my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "testcreatedir"))
 dir.create(my_tempdir)
 tempdir_basename <- basename(tempdir())
 my_tempfile <- fs::path(my_tempdir, "test_df.csv")
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 
-pattern_temp <- file.path(tempdir_basename, "testcreatedir", "temp")
-pattern_subtemp <- file.path(pattern_temp, "subtemp")
+pattern_temp <- fs::path(tempdir_basename, "testcreatedir", "temp")
+pattern_subtemp <- fs::path(pattern_temp, "subtemp")
 
 
 # without date directory
 dir <- fs::path(my_tempdir, "temp_subdirF_dateF")
 expected_path <- dir
 
-expect_false(dir.exists(expected_path))
+expect_false(fs::dir_exists(expected_path))
 dir_no_date <- create_dir(dir = dir, add_date = FALSE)
-expect_true(dir.exists(expected_path))
+expect_true(fs::dir_exists(expected_path))
 expect_true(endsWith(
   dir_no_date,
   suffix = fs::path(tempdir_basename, "testcreatedir", "temp_subdirF_dateF")
@@ -74,9 +72,9 @@ expect_true(endsWith(
 dir <- fs::path(my_tempdir, "temp_subdirF_dateT")
 expected_path <- fs::path(dir, format(Sys.time(), format = "%Y_%m_%d"))
 
-expect_false(dir.exists(expected_path))
+expect_false(fs::dir_exists(expected_path))
 dir_date <- create_dir(dir = dir, add_date = TRUE)
-expect_true(dir.exists(expected_path))
+expect_true(fs::dir_exists(expected_path))
 expect_true(endsWith(
   dir_date,
   suffix = fs::path(tempdir_basename, "testcreatedir", "temp_subdirF_dateT",
@@ -87,9 +85,9 @@ expect_true(endsWith(
 dir <- fs::path(my_tempdir, "temp_subdirT_dateT")
 expected_path <- fs::path(dir, "subdir", format(Sys.time(), format = "%Y_%m_%d"))
 
-expect_false(dir.exists(expected_path))
+expect_false(fs::dir_exists(expected_path))
 dir_subdir_date <- create_dir(dir = fs::path(dir, "subdir"), add_date = TRUE)
-expect_true(dir.exists(expected_path))
+expect_true(fs::dir_exists(expected_path))
 expect_true(endsWith(
   dir_subdir_date,
   suffix = fs::path(tempdir_basename, "testcreatedir", "temp_subdirT_dateT", "subdir",
@@ -165,13 +163,11 @@ for(dir in list(fs::path(my_tempdir, " "),
     fixed = TRUE, strict = TRUE)
 }
 
-# Working directory is returned if 'dir' points to a file instead of a directory
-expect_warning(
-  expect_true(endsWith(
-    create_dir(dir = my_tempfile, add_date = FALSE),
-    suffix = basename(getwd())
-  )),
-  pattern = "Attempt to create directory failed", strict = TRUE, fixed = TRUE)
+# Throw an error if 'dir' points to a file instead of a directory (versions up
+# to 0.4.0 returned the working directory but that is unsafe).
+expect_error(
+  create_dir(dir = my_tempfile, add_date = FALSE),
+  pattern = "Failed to make directory", fixed = TRUE)
 
 # Checks on input to 'add_date'
 for(add_date in list(1, NA)) {
