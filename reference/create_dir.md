@@ -32,25 +32,21 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 
 ## Value
 
-A character string with the absolute
-[normalized](https://rdrr.io/r/base/normalizePath.html) path to the
+A character string with the [absolute
+normalized](https://fs.r-lib.org/reference/path_math.html) path to the
 requested directory, returned
-[invisibly](https://rdrr.io/r/base/invisible.html). The [working
-directory](https://rdrr.io/r/base/getwd.html) is returned if an attempt
-to create a directory fails, with a warning. This happens if `dir`
-points to an existing file instead of an directory.
+[invisibly](https://rdrr.io/r/base/invisible.html). An error is thrown
+if the attempt to create a directory fails. This happens if `dir` points
+to an existing file instead of an directory.
 
 ## Details
 
-The absolute [normalised](https://rdrr.io/r/base/normalizePath.html)
+The [absolute normalised](https://fs.r-lib.org/reference/path_math.html)
 path is returned such that the returned path still works if the [working
 directory](https://rdrr.io/r/base/getwd.html) changes. On
 case-insensitive file systems (e.g., Windows and macOS), normalization
 adjusts the case to match case-insensitive names of directories that are
-already present (see the `Examples`). `"/"` instead of `"\\"` is used as
-[winslash](https://rdrr.io/r/base/normalizePath.html) during
-normalisation, such that the returned path can be used in Windows' file
-system.
+already present (see the `Examples`).
 
 ## Side effects
 
@@ -68,8 +64,8 @@ not yet exist;
 for a safe way to create temporary directories;
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
 and references there about file paths and directories;
-[`dir.exists()`](https://rdrr.io/r/base/files2.html) and
-[`dir.create()`](https://rdrr.io/r/base/files2.html) used by this
+[`fs::dir_exists()`](https://fs.r-lib.org/reference/file_access.html)
+and [`dir.create()`](https://rdrr.io/r/base/files2.html) used by this
 function;
 [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
 to check if a file exists and is a unique match to a pattern.
@@ -88,8 +84,9 @@ my_tempdir <- fs::path(tempdir(), "testcreatedir")
 # Create directory 'dir_one' inside this temporary directory
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
-dir.exists(res_dir_one) # TRUE
-#> [1] TRUE
+fs::dir_exists(res_dir_one) # TRUE
+#> /tmp/RtmpfB37Tt/testcreatedir/dir_one 
+#>                                  TRUE 
 
 # An attempt to create a directory that already exists does not change any
 # directory and the same directory is returned.
@@ -110,8 +107,9 @@ identical(res_dir_one, res_dir_one_v3)
 # Create directory 'dir_two' with a subdirectory containing the current date
 res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
-dir.exists(res_dir_two) # TRUE
-#> [1] TRUE
+fs::dir_exists(res_dir_two) # TRUE
+#> /tmp/RtmpfB37Tt/testcreatedir/dir_two/2026_06_01 
+#>                                             TRUE 
 
 # Cleaning up
 unlink(dirname(res_dir_one), recursive = TRUE)

@@ -61,12 +61,9 @@ The created file path, returned
 any character until the end of the file name) and should **not** contain
 slashes or backslashes: use `dir` to indicate subdirectories.
 
-The absolute [normalised](https://rdrr.io/r/base/normalizePath.html)
+The [absolute normalised](https://fs.r-lib.org/reference/path_math.html)
 path is returned such that the returned path still works if the [working
-directory](https://rdrr.io/r/base/getwd.html) changes. `"/"` instead of
-`"\\"` is used as argument
-[winslash](https://rdrr.io/r/base/normalizePath.html) such that the
-returned path can be used in Windows' file system.
+directory](https://rdrr.io/r/base/getwd.html) changes.
 
 A warning is issued if the **file** indicated by the returned path
 already exists. To prevent this when creating files in quick succession,
@@ -88,8 +85,8 @@ to check if a path is valid,
 to check if a file exists and is a unique match to a pattern,
 [`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
 file paths in a platform-independent way,
-[`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) to create
-absolute normalised paths,
+[`fs::path_abs()`](https://fs.r-lib.org/reference/path_math.html) to
+create absolute normalised paths,
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
 to create a directory if it does not yet exist
 
@@ -102,33 +99,32 @@ Other functions to handle paths and directories:
 
 ``` r
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- normalizePath(path = fs::path(tempdir(), "subdir"),
-                            winslash = "/", mustWork = FALSE)
+my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"))
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpOel7tq/subdir/2026_06_01/abc.txt"
+#> /tmp/RtmpfB37Tt/subdir/2026_06_01/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> [1] "/tmp/RtmpOel7tq/subdir/2026_06_01/01_06_2026_abc.txt"
+#> /tmp/RtmpfB37Tt/subdir/2026_06_01/01_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpOel7tq/subdir/def.html"
+#> /tmp/RtmpfB37Tt/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> [1] "/tmp/RtmpOel7tq/subdir/01_06_2026_def.html"
+#> /tmp/RtmpfB37Tt/subdir/01_06_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpOel7tq/subdir/subdir/2026_06_01/abc.txt"
+#> /tmp/RtmpfB37Tt/subdir/subdir/2026_06_01/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> [1] "/tmp/RtmpOel7tq/subdir/subdir/2026_06_01/01_06_2026_abc.txt"
+#> /tmp/RtmpfB37Tt/subdir/subdir/2026_06_01/01_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpOel7tq/subdir/subdir/def.html"
+#> /tmp/RtmpfB37Tt/subdir/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> [1] "/tmp/RtmpOel7tq/subdir/subdir/01_06_2026_def.html"
+#> /tmp/RtmpfB37Tt/subdir/subdir/01_06_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

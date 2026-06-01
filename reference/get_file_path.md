@@ -34,9 +34,9 @@ get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 
 ## Value
 
-A character string with the
-[normalized](https://rdrr.io/r/base/normalizePath.html) path to the file
-with a name matching `pattern` if there is exactly one such file in
+A character string with the [absolute
+normalized](https://fs.r-lib.org/reference/path_math.html) path to the
+file with a name matching `pattern` if there is exactly one such file in
 directory `dir`. Otherwise an error is thrown. Use
 [`basename()`](https://rdrr.io/r/base/basename.html) on the result to
 obtain the filename itself.
@@ -54,12 +54,10 @@ In contrast to the default of
 `get_file_path()` also finds 'hidden' files, i.e., files with names that
 start with a dot.
 
-Paths will be [normalized](https://rdrr.io/r/base/normalizePath.html) to
-ensure they still work if the [working
-directory](https://rdrr.io/r/base/getwd.html) changes. `"/"` instead of
-`"\\"` is used as argument
-[winslash](https://rdrr.io/r/base/normalizePath.html) such that the
-returned path can be used in Windows' file system.
+Paths will be
+[normalized](https://fs.r-lib.org/reference/path_math.html) to ensure
+they still work if the [working
+directory](https://rdrr.io/r/base/getwd.html) changes.
 
 ## See also
 
@@ -75,8 +73,8 @@ pattern; [`file.info()`](https://rdrr.io/r/base/file.info.html) and
 information about files or directories;
 [`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
 file paths in a platform-independent way;
-[`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) to create
-absolute paths.
+[`fs::path_abs()`](https://fs.r-lib.org/reference/path_math.html) to
+create absolute paths.
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
@@ -100,39 +98,39 @@ file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
 get_file_path(dir = tempdir(), pattern = "some_file")
-#> Using file '/tmp/RtmpOel7tq/some_filename19be1a00dd53.txt'
-#> [1] "/tmp/RtmpOel7tq/some_filename19be1a00dd53.txt"
+#> Using file '/tmp/RtmpfB37Tt/some_filename199914180e62.txt'
+#> /tmp/RtmpfB37Tt/some_filename199914180e62.txt
 
 # The same file is found if case-insensitive matching is used:
 get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
-#> Using file '/tmp/RtmpOel7tq/some_filename19be1a00dd53.txt'
-#> [1] "/tmp/RtmpOel7tq/some_filename19be1a00dd53.txt"
+#> Using file '/tmp/RtmpfB37Tt/some_filename199914180e62.txt'
+#> /tmp/RtmpfB37Tt/some_filename199914180e62.txt
 
 # Error reporting the presence of a case-insensitive match.
 try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 #> Error in get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/RtmpOel7tq'.
-#> However, a case-insensitive match to 'pattern' is present: 'some_filename19be1a00dd53.txt'.
+#> '/tmp/RtmpfB37Tt'.
+#> However, a case-insensitive match to 'pattern' is present: 'some_filename199914180e62.txt'.
 
 # Error reporting no match found.
 try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
 #> Error in get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",  : 
 #>   No matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpOel7tq'.
+#> '/tmp/RtmpfB37Tt'.
 try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 #> Error in get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpOel7tq'.
+#> '/tmp/RtmpfB37Tt'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
 try(get_file_path(dir = tempdir(), pattern = "_filename"))
 #> Error in get_file_path(dir = tempdir(), pattern = "_filename") : 
 #>   Multiple matches to pattern '_filename' are present in directory
-#> '/tmp/RtmpOel7tq': 'another_filename19be26ad6ee2.txt', 'some_filename19be1a00dd53.txt'!
+#> '/tmp/RtmpfB37Tt': 'another_filename199924d0d6e4.txt', 'some_filename199914180e62.txt'!
 
 # Clean up
 unlink(x = my_tempfiles)

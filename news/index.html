@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,16 @@
       <small>Source: <a href="https://github.com/JesseAlderliesten/progutils/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.0" id="progutils-050">progutils 0.5.0<a class="anchor" aria-label="anchor" href="#progutils-050"></a></h2>
+<div class="section level4">
+<h4 id="breaking-changes-0-5-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-0"></a></h4>
+<ul><li>
+<code><a href="../reference/create_dir.html">create_dir()</a></code>: throw an error instead of returning the working directory if creating the directory fails: returning the working directory is an unsafe fall-back because the reasonable assumption that the newly-created directory did not yet exist before <code><a href="../reference/create_dir.html">create_dir()</a></code> was called then could lead to deleting the working directory.</li>
+<li>
+<code><a href="../reference/create_file_path.html">create_file_path()</a></code> and <code><a href="../reference/get_file_path.html">get_file_path()</a></code>: no need to warn about an already-existing directory with a path equal to a file path or about an already-existing file with a path equal to a directory path.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.0" id="progutils-040">progutils 0.4.0<a class="anchor" aria-label="anchor" href="#progutils-040"></a></h2>
 <div class="section level4">

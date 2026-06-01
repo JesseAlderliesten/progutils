@@ -21,8 +21,8 @@ create_tempdir(subdir = "subdir")
 
 ## Value
 
-The [normalized](https://rdrr.io/r/base/normalizePath.html) path to the
-created temporary directory, returned
+The [absolute normalized](https://fs.r-lib.org/reference/path_math.html)
+path to the created temporary directory, returned
 [invisibly](https://rdrr.io/r/base/invisible.html).
 
 ## Details
@@ -75,20 +75,20 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir()
-#> [1] "/tmp/RtmpOel7tq"
+#> [1] "/tmp/RtmpfB37Tt"
 # Create a directory inside the directory returned by 'tempdir()'
 (tempdir_std <- create_tempdir(subdir = "examplesubtempdir"))
-#> [1] "/tmp/RtmpOel7tq/examplesubtempdir"
+#> /tmp/RtmpfB37Tt/examplesubtempdir
 
 # Error if the directory already exists
 try(create_tempdir(subdir = "examplesubtempdir"))
 #> Error in create_tempdir(subdir = "examplesubtempdir") : 
 #>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'):
-#> /tmp/RtmpOel7tq/examplesubtempdir
+#> /tmp/RtmpfB37Tt/examplesubtempdir
 
 # It is possible to create recursive directories
 (tempdir_recursive <- create_tempdir(subdir = fs::path("abc", "def")))
-#> [1] "/tmp/RtmpOel7tq/abc/def"
+#> /tmp/RtmpfB37Tt/abc/def
 
 # Clean up
 unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,21 +69,18 @@ current date in the <a href="https://rdrr.io/r/base/strptime.html" class="extern
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A character string with the absolute <a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalized</a> path to
-the requested directory, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>. The
-<a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> is returned if an attempt to create a directory
-fails, with a warning. This happens if <code>dir</code> points to an existing file
-instead of an directory.</p>
+    <p>A character string with the <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalized</a> path to
+the requested directory, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>. An error is thrown
+if the attempt to create a directory fails. This happens if <code>dir</code> points to
+an existing file instead of an directory.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The absolute <a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalised</a> path is returned such that the
+    <p>The <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalised</a> path is returned such that the
 returned path still works if the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> changes. On
 case-insensitive file systems (e.g., Windows and macOS), normalization
 adjusts the case to match case-insensitive names of directories that are
-already present (see the <code>Examples</code>). <code>"/"</code> instead of <code>"\\"</code> is used as
-<a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">winslash</a> during normalisation, such that the returned path
-can be used in Windows' file system.</p>
+already present (see the <code>Examples</code>).</p>
     </div>
     <div class="section level2">
     <h2 id="side-effects">Side effects<a class="anchor" aria-label="anchor" href="#side-effects"></a></h2>
@@ -98,7 +95,7 @@ does not yet exist.</p>
 <code><a href="create_file_path.html">create_file_path()</a></code> to create a file path and creating the indicated
 directory if it does not yet exist; <code><a href="create_tempdir.html">create_tempdir()</a></code> for a safe way
 to create temporary directories; <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> and references there about file
-paths and directories; <code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists()</a></code> and <code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create()</a></code> used by this
+paths and directories; <code><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">fs::dir_exists()</a></code> and <code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create()</a></code> used by this
 function; <code><a href="get_file_path.html">get_file_path()</a></code> to check if a file exists and is a unique match to
 a pattern.</p>
 <p>Other functions to handle paths and directories:
@@ -115,8 +112,9 @@ a pattern.</p>
 <span class="r-in"><span><span class="co"># Create directory 'dir_one' inside this temporary directory</span></span></span>
 <span class="r-in"><span><span class="va">res_dir_one</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_one"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">res_dir_one</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">dir_exists</a></span><span class="op">(</span><span class="va">res_dir_one</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpfB37Tt/testcreatedir/dir_one </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  TRUE </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># An attempt to create a directory that already exists does not change any</span></span></span>
 <span class="r-in"><span><span class="co"># directory and the same directory is returned.</span></span></span>
@@ -137,8 +135,9 @@ a pattern.</p>
 <span class="r-in"><span><span class="co"># Create directory 'dir_two' with a subdirectory containing the current date</span></span></span>
 <span class="r-in"><span><span class="va">res_dir_two</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_two"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">res_dir_two</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">dir_exists</a></span><span class="op">(</span><span class="va">res_dir_two</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpfB37Tt/testcreatedir/dir_two/2026_06_01 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                             TRUE </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cleaning up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">dirname</a></span><span class="op">(</span><span class="va">res_dir_one</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@ of a <strong>not-yet</strong> existing temporary subdirectory to be created insi
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The <a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalized</a> path to the created temporary directory,
+    <p>The <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalized</a> path to the created temporary directory,
 returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>.</p>
     </div>
     <div class="section level2">
@@ -106,20 +106,20 @@ up. <code>use_tempdir()</code> follows the latter approach.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpOel7tq"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpfB37Tt"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_std</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"examplesubtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpOel7tq/examplesubtempdir"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpfB37Tt/examplesubtempdir</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error if the directory already exists</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"examplesubtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in create_tempdir(subdir = "examplesubtempdir") : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpOel7tq/examplesubtempdir</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpfB37Tt/examplesubtempdir</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is possible to create recursive directories</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_recursive</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="st">"abc"</span>, <span class="st">"def"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpOel7tq/abc/def"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpfB37Tt/abc/def</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tempdir_std</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">dirname</a></span><span class="op">(</span><span class="va">tempdir_recursive</span><span class="op">)</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
