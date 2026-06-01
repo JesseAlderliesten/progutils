@@ -4,7 +4,11 @@
 
 #### Breaking changes
 
-- `is_path()`: moved to package `checkinput`.
+- `is_path()`: move to package `checkinput`. Rename argument `path` to
+  `x`. Adjusted to warn and return `FALSE` instead of throwing an error
+  if `path` is not a valid path. Not allow filenames to start with a
+  hyphen. Not warn about duplicated file separators or pointing to
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html).
 
 ## progutils 0.3.0
 

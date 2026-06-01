@@ -43,7 +43,7 @@
 <div class="section level4">
 <h4 id="breaking-changes-0-4-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-4-0"></a></h4>
 <ul><li>
-<code>is_path()</code>: moved to package <code>checkinput</code>.</li>
+<code>is_path()</code>: move to package <code>checkinput</code>. Rename argument <code>path</code> to <code>x</code>. Adjusted to warn and return <code>FALSE</code> instead of throwing an error if <code>path</code> is not a valid path. Not allow filenames to start with a hyphen. Not warn about duplicated file separators or pointing to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">

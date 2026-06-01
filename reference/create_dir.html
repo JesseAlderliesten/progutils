@@ -115,8 +115,6 @@ a pattern.</p>
 <span class="r-in"><span><span class="co"># Create directory 'dir_one' inside this temporary directory</span></span></span>
 <span class="r-in"><span><span class="va">res_dir_one</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_one"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpETjhnx/testcreatedir/dir_one</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">res_dir_one</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
@@ -124,8 +122,6 @@ a pattern.</p>
 <span class="r-in"><span><span class="co"># directory and the same directory is returned.</span></span></span>
 <span class="r-in"><span><span class="va">res_dir_one_v2</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_one"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                             add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpETjhnx/testcreatedir/dir_one</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">res_dir_one</span>, <span class="va">res_dir_one_v2</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
@@ -134,8 +130,6 @@ a pattern.</p>
 <span class="r-in"><span><span class="co"># done above for 'res_dir_one'</span></span></span>
 <span class="r-in"><span><span class="va">res_dir_one_v3</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_ONE"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                             add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpETjhnx/testcreatedir/dir_ONE</span>
 <span class="r-in"><span><span class="co"># TRUE on Windows and macOS, FALSE on Ubuntu</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">res_dir_one</span>, <span class="va">res_dir_one_v3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -143,8 +137,6 @@ a pattern.</p>
 <span class="r-in"><span><span class="co"># Create directory 'dir_two' with a subdirectory containing the current date</span></span></span>
 <span class="r-in"><span><span class="va">res_dir_two</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_two"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Repeated '/' or '\\' in 'dir' will be ignored:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> /tmp/RtmpETjhnx/testcreatedir/dir_two</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">res_dir_two</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
