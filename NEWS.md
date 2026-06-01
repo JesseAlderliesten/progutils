@@ -1,3 +1,16 @@
+# progutils 0.5.0
+
+### Breaking changes
+- `create_dir()`: throw an error instead of returning the working directory if
+  creating the directory fails: returning the working directory is an unsafe
+  fall-back because the reasonable assumption that the newly-created directory
+  did not yet exist before `create_dir()` was called then could lead to deleting
+  the working directory.
+- `create_file_path()` and `get_file_path()`: no need to warn about an
+  already-existing directory with a path equal to a file path or about an
+  already-existing file with a path equal to a directory path.
+
+
 # progutils 0.4.0
 
 ### Breaking changes
