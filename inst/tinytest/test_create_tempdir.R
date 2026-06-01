@@ -2,12 +2,12 @@ tinytest::report_side_effects()
 
 
 #### Tests ####
-my_tempdir <- normalizePath(path = tempdir(), winslash = "/", mustWork = FALSE)
+my_tempdir <- fs::path_abs(path = tempdir())
 
 # Possible to create a temporary subdirectory
-expect_false(dir.exists(fs::path(my_tempdir, "createtempdir")))
+expect_false(fs::dir_exists(fs::path(my_tempdir, "createtempdir")))
 res_subdir <- create_tempdir(subdir = "createtempdir")
-expect_true(dir.exists(res_subdir))
+expect_true(fs::dir_exists(res_subdir))
 
 # Error if temporary subdirectory already exists
 expect_error(create_tempdir(subdir = "createtempdir"),
@@ -31,9 +31,9 @@ expect_warning(
   pattern = "already exists", fixed = TRUE, strict = TRUE)
 
 # Also recognise that a directory already exists if it has subdirectories
-expect_false(dir.exists(fs::path(my_tempdir, "subdir", "abc")))
+expect_false(fs::dir_exists(fs::path(my_tempdir, "subdir", "abc")))
 res_subdir_recursive <- create_tempdir(subdir = fs::path("subdir", "abc"))
-expect_true(dir.exists(res_subdir_recursive))
+expect_true(fs::dir_exists(res_subdir_recursive))
 
 # Checks on input to 'subdir'
 for(subdir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {

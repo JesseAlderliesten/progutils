@@ -2,9 +2,9 @@ tinytest::report_side_effects()
 
 
 #### Test the examples ####
-my_tempfiles <- normalizePath(
-  tempfile(pattern = c("some_filename", "another_filename"), fileext = ".txt"),
-  winslash = "/", mustWork = FALSE)
+my_tempfiles <- fs::path_abs(
+  tempfile(pattern = c("some_filename", "another_filename"), fileext = ".txt")
+  )
 
 # Create the files
 expect_silent(
@@ -89,12 +89,11 @@ expect_silent(
 
 # 'dir' points to a file instead of a directory
 expect_error(get_file_path(dir = my_tempfile, pattern = "test_"),
-             pattern = "points to a file but should point to a directory")
+             pattern = "Directory does not exist")
 
 # 'dir' points to a non-existing directory
 expect_error(get_file_path(dir = fs::path(my_tempdir, "abc"), pattern = "test_"),
-             pattern = paste0(basename(path = fs::path(my_tempdir, "abc")),
-                              "' does not exist"))
+             pattern = "Directory does not exist")
 
 # 'pattern' points to an existing directory instead of to an existing file
 dir.create(path = fs::path(tempdir(), "test_dir"), recursive = TRUE)
