@@ -19,23 +19,20 @@ directory is created.}
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
-A character string with the absolute \link[=normalizePath]{normalized} path to
-the requested directory, returned \link[=invisible]{invisibly}. The
-\link[=getwd]{working directory} is returned if an attempt to create a directory
-fails, with a warning. This happens if \code{dir} points to an existing file
-instead of an directory.
+A character string with the \link[fs:path_abs]{absolute normalized} path to
+the requested directory, returned \link[=invisible]{invisibly}. An error is thrown
+if the attempt to create a directory fails. This happens if \code{dir} points to
+an existing file instead of an directory.
 }
 \description{
 Create a directory if it does not yet exist.
 }
 \details{
-The absolute \link[=normalizePath]{normalised} path is returned such that the
+The \link[fs:path_abs]{absolute normalised} path is returned such that the
 returned path still works if the \link[=getwd]{working directory} changes. On
 case-insensitive file systems (e.g., Windows and macOS), normalization
 adjusts the case to match case-insensitive names of directories that are
-already present (see the \code{Examples}). \code{"/"} instead of \code{"\\\\"} is used as
-\link[=normalizePath]{winslash} during normalisation, such that the returned path
-can be used in Windows' file system.
+already present (see the \code{Examples}).
 }
 \section{Side effects}{
 
@@ -50,7 +47,7 @@ my_tempdir <- fs::path(tempdir(), "testcreatedir")
 # Create directory 'dir_one' inside this temporary directory
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
-dir.exists(res_dir_one) # TRUE
+fs::dir_exists(res_dir_one) # TRUE
 
 # An attempt to create a directory that already exists does not change any
 # directory and the same directory is returned.
@@ -69,7 +66,7 @@ identical(res_dir_one, res_dir_one_v3)
 # Create directory 'dir_two' with a subdirectory containing the current date
 res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
-dir.exists(res_dir_two) # TRUE
+fs::dir_exists(res_dir_two) # TRUE
 
 # Cleaning up
 unlink(dirname(res_dir_one), recursive = TRUE)
@@ -81,7 +78,7 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist; \code{\link[=create_tempdir]{create_tempdir()}} for a safe way
 to create temporary directories; \code{\link[checkinput:is_path]{checkinput::is_path()}} and references there about file
-paths and directories; \code{\link[=dir.exists]{dir.exists()}} and \code{\link[=dir.create]{dir.create()}} used by this
+paths and directories; \code{\link[fs:dir_exists]{fs::dir_exists()}} and \code{\link[=dir.create]{dir.create()}} used by this
 function; \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to
 a pattern.
 
