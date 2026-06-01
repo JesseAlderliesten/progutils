@@ -42,8 +42,7 @@
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory
-#' my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"),
-#'                             winslash = "/", mustWork = FALSE)
+#' my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"))
 #'
 #' (create_file_path(filename = "abc.txt", format_stamp = "",
 #'                   dir = my_tempdir, add_date = TRUE))
