@@ -71,15 +71,15 @@
 #' @export
 create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
                              dir = fs::path_wd("output"), add_date = TRUE) {
-  stopifnot(checkinput::is_character(filename),
+  stopifnot(checkinput::is_character(filename), checkinput::is_path(filename),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
+            checkinput::is_character(dir), checkinput::is_path(dir),
             checkinput::is_logical(add_date))
-  checkinput::is_path(path = dir)
 
   filename_no_ext <- fs::path_ext_remove(path = filename)
   file_ext <- fs::path_ext(path = filename)
-  if(!nzchar(filename_no_ext) || !nzchar(file_ext) ||
-     length(filename_no_ext) == 0L || length(file_ext) == 0L) {
+  if(length(filename_no_ext) == 0L || !nzchar(filename_no_ext) ||
+     length(file_ext) == 0L || !nzchar(file_ext)) {
     stop("Empty filename or missing extension:\n", filename)
   }
 
@@ -95,7 +95,7 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
 
   file_path <- fs::path(create_dir(dir = dir, add_date = add_date), filename)
   file_path <- normalizePath(path = file_path, winslash = "/", mustWork = FALSE)
-  is_valid_file_path <- try(expr = checkinput::is_path(path = file_path), silent = TRUE)
+  is_valid_file_path <- try(expr = checkinput::is_path(file_path), silent = TRUE)
   if(inherits(x = is_valid_file_path, what = "try-error")) {
     stop("No path created: ", attr(is_valid_file_path, "condition")$message)
   }

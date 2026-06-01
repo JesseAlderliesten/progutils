@@ -80,12 +80,19 @@ for(filenm in c("a.txt", "c#c.txt", "d d.txt", "e3f.txt", "g_g.g.txt", "ab.c#"))
   ))
 }
 
-for(filenm_in in c("abcd", "abc.", ".", ".txt", ".html")) {
+for(filenm_in in c("abcd", ".", ".txt", ".html")) {
   expect_error(create_file_path(filename = filenm_in, dir = my_tempdir,
                                 format_stamp = ""),
                pattern = "Empty filename or missing extension",
                fixed = TRUE)
 }
+
+expect_warning(
+  expect_error(
+    create_file_path(filename = "abc.", dir = my_tempdir, format_stamp = ""),
+    pattern = "is_path(filename) is not TRUE", fixed = TRUE),
+  pattern = "Components of 'filename' should not end with ' ' or '.'",
+  strict = TRUE, fixed = TRUE)
 
 filenm_in <- c("a/a.txt", "b\\b.txt")
 for(ind_filenm in seq_along(filenm_in)) {
@@ -96,17 +103,21 @@ for(ind_filenm in seq_along(filenm_in)) {
     fixed = TRUE)
 }
 
-expect_error(
-  create_file_path(filename = "ff .txt", format_stamp = "",
-                   dir = my_tempdir, add_date = FALSE),
-  pattern = "'filename' should not end with ' ' or '.'", fixed = TRUE)
+expect_warning(
+  expect_error(
+    create_file_path(filename = "ff .txt", format_stamp = "",
+                     dir = my_tempdir, add_date = FALSE),
+    pattern = "is_path(filename) is not TRUE", fixed = TRUE),
+  pattern = "'filename' should not end with ' ' or '.'", strict = TRUE, fixed = TRUE)
 
-# No error message specified: on Windows with R 4.6.0 the error message is
+# No warning message specified: on Windows with R 4.6.0 the warning message is
 # '"'filename' should not end with ' ' or '.'"', but on Windows with R 4.1.0 the
 # error message is "Empty filename or missing extension"
-expect_error(
-  create_file_path(filename = "ff..txt", format_stamp = "",
-                   dir = my_tempdir, add_date = FALSE))
+expect_warning(
+  expect_error(
+    create_file_path(filename = "ff..txt", format_stamp = "", dir = my_tempdir,
+                     add_date = FALSE))
+)
 
 ##### format_stamp #####
 # Characters in 'format_stamp' not part of a conversion specification in
@@ -181,14 +192,12 @@ expect_warning(
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
   expect_error(
     create_file_path(filename = "abc.txt", dir = dir),
-    pattern = "is_character(path) is not TRUE", fixed = TRUE)
+    pattern = "is_character(dir) is not TRUE", fixed = TRUE)
 }
 
 for(dir in list(paste0(my_tempdir, "//"),
                 paste0(my_tempdir, "//temp_p1"))) {
-  expect_warning(
-    create_file_path(filename = "abc.txt", dir = dir),
-    pattern = "Repeated '/' or '\\\\'", fixed = TRUE)
+  expect_silent(create_file_path(filename = "abc.txt", dir = dir))
 }
 
 for(dir in list(paste0(my_tempdir, ".."),
@@ -197,9 +206,11 @@ for(dir in list(paste0(my_tempdir, ".."),
                 fs::path(my_tempdir, "."),
                 paste0(my_tempdir, ". "),
                 paste0(my_tempdir, "temp_p1 "))) {
-  expect_error(
-    create_file_path(filename = "abc.txt", dir = dir),
-    pattern = "should not end with ' ' or '.'", fixed = TRUE)
+  expect_warning(
+    expect_error(
+      create_file_path(filename = "abc.txt", dir = dir),
+      pattern = "is_path(dir) is not TRUE", fixed = TRUE),
+    pattern = "should not end with ' ' or '.'", strict = TRUE, fixed = TRUE)
 }
 
 ##### Warnings #####

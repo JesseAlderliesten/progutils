@@ -73,7 +73,8 @@
 #'
 #' @export
 get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
-  stopifnot(checkinput::is_character(dir), checkinput::is_character(pattern),
+  stopifnot(checkinput::is_character(dir), checkinput::is_path(dir),
+            checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 
   dir <- normalizePath(dir, winslash = "/", mustWork = FALSE)

@@ -57,8 +57,7 @@
 #'
 #' @export
 create_tempdir <- function(subdir = "subdir") {
-  stopifnot(checkinput::is_character(subdir))
-  checkinput::is_path(path = subdir)
+  stopifnot(checkinput::is_character(subdir), checkinput::is_path(subdir))
   subdir_target <- normalizePath(path = fs::path(tempdir(), subdir),
                                  winslash = "/", mustWork = FALSE)
   tempdir_normalised <- normalizePath(tempdir(), winslash = "/", mustWork = FALSE)
