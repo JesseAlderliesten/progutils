@@ -53,21 +53,19 @@ for(ind_subdir in seq_along(subdir_in)) {
   ))
 }
 
-expect_warning(
+expect_silent(
   expect_true(endsWith(
     create_tempdir(subdir = "\\temp_p5"),
     suffix = fs::path(basename(my_tempdir), "temp_p5")
-  )),
-  pattern = "Repeated '/' or '\\\\' in 'subdir' will be ignored",
-  strict = TRUE, fixed = TRUE)
+  ))
+)
 
-expect_warning(
+expect_silent(
   expect_true(endsWith(
     create_tempdir(subdir = "/temp_p6"),
     suffix = fs::path(basename(my_tempdir), "temp_p6")
-  )),
-  pattern = "Repeated '/' or '\\\\' in 'subdir' will be ignored",
-  strict = TRUE, fixed = TRUE)
+  ))
+)
 
 expect_error(
   create_tempdir(subdir = "."),
@@ -78,9 +76,11 @@ expect_error(
   pattern = "would write above 'tempdir()'", fixed = TRUE)
 
 for(subdir in list("temp_p7.", "temp_p8 ")) {
-  expect_error(
-    create_tempdir(subdir = subdir),
-    pattern = "should not end with ' ' or '.'", fixed = TRUE)
+  expect_warning(
+    expect_error(
+      create_tempdir(subdir = subdir),
+      pattern = "is_path(subdir) is not TRUE", fixed = TRUE),
+    pattern = "should not end with ' ' or '.'", strict = TRUE, fixed = TRUE)
 }
 
 

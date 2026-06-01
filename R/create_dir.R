@@ -78,8 +78,8 @@
 #'
 #' @export
 create_dir <- function(dir = fs::path(".", "output"), add_date = TRUE) {
-  stopifnot(checkinput::is_logical(add_date))
-  checkinput::is_path(dir)
+  stopifnot(checkinput::is_character(dir), checkinput::is_path(dir),
+            checkinput::is_logical(add_date))
 
   if(add_date) {
     dir <- fs::path(dir, format(Sys.time(), format = "%Y_%m_%d"))

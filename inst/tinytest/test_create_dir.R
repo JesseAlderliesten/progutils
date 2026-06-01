@@ -47,6 +47,10 @@ my_tempfile <- fs::path(my_tempdir, "test_df.csv")
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 
+pattern_temp <- file.path(tempdir_basename, "testcreatedir", "temp")
+pattern_subtemp <- file.path(pattern_temp, "subtemp")
+
+
 # without date directory
 dir <- fs::path(my_tempdir, "temp_subdirF_dateF")
 expected_path <- dir
@@ -76,7 +80,7 @@ expect_true(dir.exists(expected_path))
 expect_true(endsWith(
   dir_date,
   suffix = fs::path(tempdir_basename, "testcreatedir", "temp_subdirF_dateT",
-                     format(Sys.time(), format = "%Y_%m_%d"))
+                    format(Sys.time(), format = "%Y_%m_%d"))
 ))
 
 # with subdirectories, with date directory
@@ -89,50 +93,58 @@ expect_true(dir.exists(expected_path))
 expect_true(endsWith(
   dir_subdir_date,
   suffix = fs::path(tempdir_basename, "testcreatedir", "temp_subdirT_dateT", "subdir",
-                     format(Sys.time(), format = "%Y_%m_%d"))
+                    format(Sys.time(), format = "%Y_%m_%d"))
 ))
 
 # Checks on input to 'dir'
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
   expect_error(
     create_dir(dir = dir),
-    pattern = "is_character(path) is not TRUE", fixed = TRUE)
+    pattern = "is_character(dir) is not TRUE", fixed = TRUE)
 }
 
 for(dir in list(fs::path(my_tempdir, "temp", "."),
                 fs::path(my_tempdir, "temp."),
                 fs::path(my_tempdir, "temp.", "subtemp"))) {
-  expect_error(
-    create_dir(dir = dir),
-    pattern = "'dir' should not end with ' ' or '.'", fixed = TRUE)
+  expect_warning(
+    expect_error(
+      create_dir(dir = dir),
+      pattern = "is_path(dir) is not TRUE", fixed = TRUE),
+    pattern = "Components of 'dir' should not end with ' ' or '.'",
+    fixed = TRUE, strict = TRUE)
 }
 
 # Notes:
 # - Need paste0() because fs::path() removes trailing slashes.
-# - Need to use '\\\\': '\\' would test for '\'.
-expect_warning(
-  create_dir(dir = paste0(fs::path(my_tempdir, "temp"), "//")),
-  pattern = "Repeated '/' or '\\\\'", fixed = TRUE)
+expect_silent(expect_true(
+  grepl(pattern = pattern_temp,
+        x = create_dir(dir = paste0(fs::path(my_tempdir, "temp"), "//")))
+))
 
-expect_warning(
-  create_dir(dir = paste0(fs::path(my_tempdir, "temp"), "//subtemp")),
-  pattern = "Repeated '/' or '\\\\'", fixed = TRUE)
+expect_silent(expect_true(
+  grepl(pattern = pattern_subtemp,
+        x = create_dir(dir = paste0(fs::path(my_tempdir, "temp"), "//subtemp")))
+))
 
-expect_warning(
-  create_dir(dir = paste0(fs::path(my_tempdir), "\\\\")),
-  pattern = "Repeated '/' or '\\\\'", fixed = TRUE)
+expect_silent(expect_true(
+  grepl(pattern = dirname(pattern_temp),
+        x = create_dir(dir = paste0(fs::path(my_tempdir), "\\\\")))
+))
 
-expect_warning(
-  create_dir(dir = paste0(fs::path(my_tempdir), "\\\\subtemp")),
-  pattern = "Repeated '/' or '\\\\'", fixed = TRUE)
+expect_silent(expect_true(
+  grepl(pattern = pattern_temp,
+        x = create_dir(dir = paste0(fs::path(my_tempdir), "\\\\temp")))
+))
 
-expect_warning(
-  create_dir(dir = paste0(my_tempdir, "\\\\")),
-  pattern = "Repeated '/' or '\\\\'", fixed = TRUE)
+expect_silent(expect_true(
+  grepl(pattern = dirname(pattern_temp),
+        x = create_dir(dir = paste0(my_tempdir, "\\\\")))
+))
 
-expect_warning(
-  create_dir(dir = paste0(my_tempdir, "\\\\subtemp")),
-  pattern = "Repeated '/' or '\\\\'", fixed = TRUE)
+expect_silent(expect_true(
+  grepl(pattern = pattern_temp,
+        x = create_dir(dir = paste0(my_tempdir, "\\\\temp")))
+))
 
 # NB. 'dir' equal to '.' or '..' can be used to denote the current working
 # directory and its parent directory, respectively. By default, this will add
@@ -145,9 +157,12 @@ for(dir in list(fs::path(my_tempdir, " "),
                 fs::path(my_tempdir, ".."),
                 fs::path(my_tempdir, "temp."),
                 fs::path(my_tempdir, "temp.", "subtemp"))) {
-  expect_error(
-    create_dir(dir = dir),
-    pattern = "'dir' should not end with ' ' or '.'", fixed = TRUE)
+  expect_warning(
+    expect_error(
+      create_dir(dir = dir),
+      pattern = "checkinput::is_path(dir) is not TRUE", fixed = TRUE),
+    pattern = "Components of 'dir' should not end with ' ' or '.'",
+    fixed = TRUE, strict = TRUE)
 }
 
 # Working directory is returned if 'dir' points to a file instead of a directory
@@ -155,7 +170,7 @@ expect_warning(
   expect_true(endsWith(
     create_dir(dir = my_tempfile, add_date = FALSE),
     suffix = basename(getwd())
-    )),
+  )),
   pattern = "Attempt to create directory failed", strict = TRUE, fixed = TRUE)
 
 # Checks on input to 'add_date'
@@ -172,4 +187,5 @@ unlink(my_tempdir, recursive = TRUE)
 
 #### Remove objects used in tests ####
 rm(add_date, dir, dir_no_date, dir_no_date_v2, dir_date, dir_subdir_date,
-   expected_path, my_tempdir, my_tempfile, tempdir_basename)
+   expected_path, my_tempdir, my_tempfile, pattern_temp, pattern_subtemp,
+   tempdir_basename)
