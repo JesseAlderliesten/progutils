@@ -78,7 +78,7 @@ yet exist.</p>
 
 
 <p>The temporary directory indicated by the returned path is
-<a href="https://rdrr.io/r/base/files2.html" class="external-link">created</a> if does not yet exist.</p>
+<a href="https://rdrr.io/r/base/files2.html" class="external-link">created</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="usage-in-practice">Usage in practice<a class="anchor" aria-label="anchor" href="#usage-in-practice"></a></h2>
@@ -110,20 +110,20 @@ in its documentation.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpMGf5cw"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmph9T1TP"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_std</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"examplesubtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpMGf5cw/examplesubtempdir</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmph9T1TP/examplesubtempdir</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error if the directory already exists</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="st">"examplesubtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in create_tempdir(subdir = "examplesubtempdir") : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpMGf5cw/examplesubtempdir</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmph9T1TP/examplesubtempdir</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is possible to create recursive directories</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_recursive</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>subdir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="st">"abc"</span>, <span class="st">"def"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpMGf5cw/abc/def</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmph9T1TP/abc/def</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tempdir_std</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">dirname</a></span><span class="op">(</span><span class="va">tempdir_recursive</span><span class="op">)</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
