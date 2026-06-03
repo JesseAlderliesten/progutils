@@ -76,11 +76,13 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 \seealso{
 \code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
-directory if it does not yet exist; \code{\link[=create_tempdir]{create_tempdir()}} for a safe way
-to create temporary directories; \code{\link[checkinput:is_path]{checkinput::is_path()}} and references there about file
-paths and directories; \code{\link[fs:dir_exists]{fs::dir_exists()}} and \code{\link[=dir.create]{dir.create()}} used by this
-function; \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to
-a pattern.
+directory if it does not yet exist;
+\code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create temporary directories;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} and references there about file paths and directories;
+\code{\link[fs:dir_exists]{fs::dir_exists()}} and \code{\link[fs:dir_create]{fs::dir_create()}} used by this function (and the
+base-equivalent of the latter: \code{\link[=dir.create]{dir.create()}});
+\code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a
+pattern.
 
 Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},
