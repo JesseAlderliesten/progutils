@@ -32,7 +32,10 @@
 #' uses it. Instead, store the paths to temporary files written to [tempdir()]
 #' and [unlink][unlink()] those paths when cleaning up, or create a temporary
 #' subdirectory in `tempdir()` which can be completely be removed when cleaning
-#' up. `use_tempdir()` follows the latter approach.
+#' up. `use_tempdir()` follows the latter approach. It is good practice to
+#' create the complete temporary directory with all required files and folders
+#' before running any example or test: this ensures no spurious matches occur if
+#' examples or tests are removed or added.
 #'
 #' @seealso
 #' [create_dir()] to create (non-temporary) directories;
@@ -80,6 +83,8 @@ create_tempdir <- function(subdir = "subdir") {
     #   so it is not a problem that dir.create() returns FALSE if a directory
     #   already exists. However, the path can already exist as a file: then the
     #   attempt to create it as a directory will fail, resulting in an error.
+    # - Not using fs::dir_create() because that returns the path instead of a
+    #   boolean vector indicating if creation succeeded.
     # - Using 'recursive = TRUE' to allow creation of subdirectories inside a
     #   not-yet existing directory (e.g., creating '<tempdir>/output/<date>' if
     #   '<tempdir>/output' does not yet exist).

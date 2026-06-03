@@ -43,7 +43,10 @@ removed because \href{https://posit.co/products/open-source/rstudio}{RStudio} al
 uses it. Instead, store the paths to temporary files written to \code{\link[=tempdir]{tempdir()}}
 and \link{unlink} those paths when cleaning up, or create a temporary
 subdirectory in \code{tempdir()} which can be completely be removed when cleaning
-up. \code{use_tempdir()} follows the latter approach.
+up. \code{use_tempdir()} follows the latter approach. It is good practice to
+create the complete temporary directory with all required files and folders
+before running any example or test: this ensures no spurious matches occur if
+examples or tests are removed or added.
 }
 
 \examples{
