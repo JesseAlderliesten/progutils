@@ -22,7 +22,7 @@
 #'
 #' @section Side effects:
 #' The temporary directory indicated by the returned path is
-#' [created][dir.create()] if does not yet exist.
+#' [created][dir.create()].
 #'
 #' @section Usage in practice:
 #' Examples and tests should **not** write to the [working directory][getwd()]

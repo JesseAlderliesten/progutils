@@ -31,7 +31,7 @@ yet exist.
 \section{Side effects}{
 
 The temporary directory indicated by the returned path is
-\link[=dir.create]{created} if does not yet exist.
+\link[=dir.create]{created}.
 }
 
 \section{Usage in practice}{
