@@ -39,7 +39,8 @@
 #'
 #' @seealso
 #' [create_dir()] to create (non-temporary) directories;
-#' [checkinput::is_path()] to check if a path is valid.
+#' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
+#' in its documentation.
 #'
 #' @family functions to handle paths and directories
 #'

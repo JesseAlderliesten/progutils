@@ -74,7 +74,8 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, res_dir_one_v3)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the 'Note on paths'
+in its documentation;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist;
 \code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create temporary directories;

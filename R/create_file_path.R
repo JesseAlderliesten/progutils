@@ -4,7 +4,8 @@
 #'
 #' @inheritParams create_dir
 #' @param filename A character string with the file name, including the file
-#' extension like `.csv` or `.txt`.
+#' extension like `.csv` or `.txt`. Should adhere to the restrictions described
+#' in [checkinput::is_path()].
 #' @param format_stamp A character string indicating the [format][strftime()] of
 #' the stamp to be added in front of the file name. No stamp is added if
 #' `format_stamp` is an empty string (i.e., `""`). The formatted stamp is
@@ -32,7 +33,8 @@
 #' if it does not yet exist.
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid,
+#' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
+#' in its documentation;
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern,
 #' [fs::path()] to construct file paths in a platform-independent way,
 #' [fs::path_abs()] to create absolute normalised paths,

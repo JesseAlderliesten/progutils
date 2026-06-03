@@ -67,7 +67,8 @@ rm(tempdir_recursive, tempdir_std)
 }
 \seealso{
 \code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories;
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid.
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the 'Note on paths'
+in its documentation.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
