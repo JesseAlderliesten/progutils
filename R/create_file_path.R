@@ -68,6 +68,8 @@
 #' @export
 create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
                              dir = fs::path_wd("output"), add_date = TRUE) {
+  filename_label <- deparse1(substitute(filename))
+
   stopifnot(checkinput::is_character(filename), checkinput::is_path(filename),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_character(dir), checkinput::is_path(dir),
@@ -86,7 +88,7 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
 
   if(grepl(pattern = "/", x = filename, fixed = TRUE) ||
      grepl(pattern = "\\", x = filename, fixed = TRUE)) {
-    stop("'filename' (", paste_quoted(deparse(substitute(filename))),
+    stop("'filename' (", paste_quoted(filename_label),
          ") should not contain '/' or '\\':\n", filename)
   }
 
