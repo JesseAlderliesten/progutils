@@ -31,13 +31,16 @@
 #' does not yet exist.
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid;
+#' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
+#' in its documentation;
 #' [create_file_path()] to create a file path and creating the indicated
-#' directory if it does not yet exist; [create_tempdir()] for a safe way
-#' to create temporary directories; [checkinput::is_path()] and references there about file
-#' paths and directories; [fs::dir_exists()] and [dir.create()] used by this
-#' function; [get_file_path()] to check if a file exists and is a unique match to
-#' a pattern.
+#' directory if it does not yet exist;
+#' [create_tempdir()] for a safe way to create temporary directories;
+#' [checkinput::is_path()] and references there about file paths and directories;
+#' [fs::dir_exists()] and [fs::dir_create()] used by this function (and the
+#' base-equivalent of the latter: [dir.create()]);
+#' [get_file_path()] to check if a file exists and is a unique match to a
+#' pattern.
 #'
 #' @family functions to handle paths and directories
 #'

@@ -9,7 +9,7 @@ tempdir_basename <- basename(tempdir())
 current_date_Ymd <- format(Sys.time(), format = "%Y_%m_%d")
 current_date_dmY <- format(Sys.time(), format = "%d_%m_%Y")
 
-dir.create(path = my_tempdir, showWarnings = FALSE, recursive = TRUE)
+fs::dir_create(path = my_tempdir, showWarnings = FALSE, recursive = TRUE)
 my_tempfile <- fs::path_abs(path = fs::path(my_tempdir, "test_df.csv"))
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
@@ -21,14 +21,14 @@ expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "",
                    dir = my_tempdir, add_date = TRUE),
   suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
-                     "abc.txt")
+                    "abc.txt")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                    dir = my_tempdir, add_date = TRUE),
   suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
-                     paste0(current_date_dmY, "_abc.txt"))
+                    paste0(current_date_dmY, "_abc.txt"))
 ))
 
 expect_true(endsWith(
@@ -53,7 +53,7 @@ expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                    dir = fs::path(my_tempdir, "subdir"), add_date = TRUE),
   suffix = fs::path(tempdir_basename, "testcreatepath", "subdir",
-                     current_date_Ymd, paste0(current_date_dmY, "_abc.txt"))
+                    current_date_Ymd, paste0(current_date_dmY, "_abc.txt"))
 ))
 
 expect_true(endsWith(
@@ -66,7 +66,7 @@ expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                    dir = fs::path(my_tempdir, "subdir"), add_date = FALSE),
   suffix = fs::path(tempdir_basename, "testcreatepath", "subdir",
-                     paste0(current_date_dmY, "_def.html"))
+                    paste0(current_date_dmY, "_def.html"))
 ))
 
 ##### filename #####
@@ -124,7 +124,7 @@ expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Ydef",
                    dir = my_tempdir, add_date = TRUE),
   suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
-                     paste0(current_date_dmY, "def_abc.txt"))
+                    paste0(current_date_dmY, "def_abc.txt"))
 ))
 
 # Non-alphanumeric characters are *not* replaced (they used to be replaced in
@@ -133,7 +133,7 @@ expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d#.%m_%Ydef",
                    dir = my_tempdir, add_date = TRUE),
   suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
-                     paste0(format(Sys.time(), format = "%d#.%m_%Y"), "def_abc.txt"))
+                    paste0(format(Sys.time(), format = "%d#.%m_%Y"), "def_abc.txt"))
 ))
 
 expect_true(
@@ -177,8 +177,8 @@ expect_true(endsWith(
 ))
 
 expect_error(
-    create_file_path(filename = "testfile123.csv", format_stamp = "",
-                     dir = my_tempfile, add_date = FALSE),
+  create_file_path(filename = "testfile123.csv", format_stamp = "",
+                   dir = my_tempfile, add_date = FALSE),
   pattern = "Failed to make directory", fixed = TRUE
 )
 

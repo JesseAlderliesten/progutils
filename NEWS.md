@@ -1,3 +1,9 @@
+# progutils 0.5.1
+
+### Bugfixes
+- `get_file_path()` would return directories matching `pattern`.
+
+
 # progutils 0.5.0
 
 ### Breaking changes
@@ -23,7 +29,7 @@
 # progutils 0.3.0
 
 ### Breaking changes
-- Added dependency `fs`.
+- Added dependency `fs` to `Imports`.
 - `create_file_path()`: no longer replace non-alphanumeric characters in the
   filename because reconstituting the filename is brittle.
 - Replace `file_path_no_ext()` by `fs::path_ext_remove()` and `file_path_ext()`  
@@ -168,8 +174,8 @@
 
 ### Breaking changes
 - `checkinput`: increased minimum version to `0.1.0`.
-- Add `stats` and `tools` as dependencies in the `Suggests` field because they
-  are linked to in help pages.
+- Add dependencies `stats` and `tools` to `Suggests` because they are linked to
+  in help pages.
 - No longer import `methods::formalArgs()`.
 - `create_dir()`: show the warnings if creating a directory fails.
 - `create_dir()`: use `winslash = "/"` instead of `winslash = "\\"` to normalise

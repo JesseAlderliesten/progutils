@@ -29,7 +29,8 @@
 #' the filename itself.
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid;
+#' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
+#' in its documentation;
 #' [create_dir()] to create a directory if does not yet exist;
 #' [file.exists()] and [list.files()] to check for existence of files without
 #' checking they are a unique match to a pattern;
@@ -88,7 +89,7 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALS
   # 'list.files()' also returns directories (even though 'include.dirs' is FALSE
   # by default) because 'recursive' is also FALSE.
   if(length(files_present) > 0L) {
-    dirs_present <- list.dirs(path = dir, full.names = FALSE, recursive = FALSE)
+    dirs_present <- list.dirs(path = dir, full.names = TRUE, recursive = FALSE)
     if(length(dirs_present) > 0L) {
       files_present <- not_in(files_present, dirs_present)
     }

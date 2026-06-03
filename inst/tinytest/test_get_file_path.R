@@ -4,7 +4,7 @@ tinytest::report_side_effects()
 #### Test the examples ####
 my_tempfiles <- fs::path_abs(
   tempfile(pattern = c("some_filename", "another_filename"), fileext = ".txt")
-  )
+)
 
 # Create the files
 expect_silent(
@@ -14,13 +14,13 @@ expect_silent(
 expect_message(
   expect_equal(basename(get_file_path(dir = tempdir(), pattern = "some_filename")),
                basename(grep(pattern = "some_filename", x = my_tempfiles,
-                    value = TRUE, fixed = TRUE))),
+                             value = TRUE, fixed = TRUE))),
   pattern = "Using file", strict = TRUE, fixed = TRUE)
 
 # The same file is found if case-insensitive matching is used:
 expect_message(
   expect_equal(basename(get_file_path(dir = tempdir(), pattern = "SOME_FILE",
-                            ignore_case = TRUE)),
+                                      ignore_case = TRUE)),
                grep(pattern = "some_file", x = basename(my_tempfiles),
                     value = TRUE, fixed = TRUE)),
   pattern = "Using file", strict = TRUE, fixed = TRUE)
@@ -32,13 +32,13 @@ expect_error(
 
 expect_error(
   get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
-               ignore_case = TRUE),
+                ignore_case = TRUE),
   pattern = "No matches to pattern 'missing_filename_abcde' are present"
 )
 
 expect_error(
   get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
-               ignore_case = FALSE),
+                ignore_case = FALSE),
   pattern = "No case-sensitive matches to pattern 'missing_filename_abcde' are present"
 )
 
@@ -64,8 +64,8 @@ rm(my_tempfiles)
 
 #### Tests ####
 # Create files in a temporary directory so we know what is present.
-my_tempdir <- fs::path(tempdir(), "testgetfilename")
-dir.create(my_tempdir)
+my_tempdir <- fs::path(tempdir(), "testgetfilepath")
+fs::dir_create(my_tempdir)
 my_tempfile <- fs::path(my_tempdir, "test_df.csv")
 
 # Write csv-file, modified from example in help(write.table)
@@ -75,15 +75,15 @@ expect_message(
   expect_true(endsWith(
     get_file_path(dir = dirname(my_tempfile), pattern = "test_df",
                   quietly = FALSE),
-    suffix = fs::path("testgetfilename", "test_df.csv")
-    )),
+    suffix = fs::path("testgetfilepath", "test_df.csv")
+  )),
   pattern = "Using file", strict = TRUE, fixed = TRUE)
 
 expect_silent(
   expect_true(endsWith(
     get_file_path(dir = dirname(my_tempfile), pattern = "test_df",
                   quietly = TRUE),
-    suffix = fs::path("testgetfilename", "test_df.csv")
+    suffix = fs::path("testgetfilepath", "test_df.csv")
   ))
 )
 
@@ -96,9 +96,11 @@ expect_error(get_file_path(dir = fs::path(my_tempdir, "abc"), pattern = "test_")
              pattern = "Directory does not exist")
 
 # 'pattern' points to an existing directory instead of to an existing file
-dir.create(path = fs::path(tempdir(), "test_dir"), recursive = TRUE)
-expect_error(get_file_path(dir = my_tempdir, pattern = "test_dir"),
-             pattern = "No matches to pattern 'test_dir' are present",
+fs::dir_create(path = fs::path(tempdir(), "testgetfilepath", "test_dir", "abc"),
+               recursive = TRUE)
+expect_error(get_file_path(dir = fs::path(tempdir(), "testgetfilepath", "test_dir"),
+                           pattern = "abc"),
+             pattern = "No matches to pattern 'abc' are present",
              fixed = TRUE)
 
 ##### Invalid input #####
@@ -116,8 +118,7 @@ expect_error(get_file_path(dir = my_tempdir, pattern = "test_dir", quietly = 1),
 
 
 #### Delete the created temporary files ####
-unlink(x = c(dirname(my_tempfile), fs::path(tempdir(), "test_dir")),
-       recursive = TRUE)
+unlink(x = dirname(my_tempfile), recursive = TRUE)
 
 
 #### Remove objects used in tests ####

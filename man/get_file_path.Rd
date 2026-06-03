@@ -69,7 +69,8 @@ rm(my_tempfiles)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the 'Note on paths'
+in its documentation;
 \code{\link[=create_dir]{create_dir()}} to create a directory if does not yet exist;
 \code{\link[=file.exists]{file.exists()}} and \code{\link[=list.files]{list.files()}} to check for existence of files without
 checking they are a unique match to a pattern;

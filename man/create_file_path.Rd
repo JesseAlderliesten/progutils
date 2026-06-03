@@ -13,7 +13,8 @@ create_file_path(
 }
 \arguments{
 \item{filename}{A character string with the file name, including the file
-extension like \code{.csv} or \code{.txt}.}
+extension like \code{.csv} or \code{.txt}. Should adhere to the restrictions described
+in \code{\link[checkinput:is_path]{checkinput::is_path()}}.}
 
 \item{format_stamp}{A character string indicating the \link[=strftime]{format} of
 the stamp to be added in front of the file name. No stamp is added if
@@ -84,7 +85,8 @@ rm(my_tempdir)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid,
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the 'Note on paths'
+in its documentation;
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern,
 \code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way,
 \code{\link[fs:path_abs]{fs::path_abs()}} to create absolute normalised paths,

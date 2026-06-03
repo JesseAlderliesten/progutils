@@ -39,7 +39,7 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_two, tempdir_basename)
 
 #### Tests ####
 my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "testcreatedir"))
-dir.create(my_tempdir)
+fs::dir_create(my_tempdir)
 tempdir_basename <- basename(tempdir())
 my_tempfile <- fs::path(my_tempdir, "test_df.csv")
 # Write csv-file, modified from example in help(write.table)

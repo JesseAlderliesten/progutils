@@ -43,7 +43,10 @@ removed because \href{https://posit.co/products/open-source/rstudio}{RStudio} al
 uses it. Instead, store the paths to temporary files written to \code{\link[=tempdir]{tempdir()}}
 and \link{unlink} those paths when cleaning up, or create a temporary
 subdirectory in \code{tempdir()} which can be completely be removed when cleaning
-up. \code{use_tempdir()} follows the latter approach.
+up. \code{use_tempdir()} follows the latter approach. It is good practice to
+create the complete temporary directory with all required files and folders
+before running any example or test: this ensures no spurious matches occur if
+examples or tests are removed or added.
 }
 
 \examples{
@@ -64,7 +67,8 @@ rm(tempdir_recursive, tempdir_std)
 }
 \seealso{
 \code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories;
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid.
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the 'Note on paths'
+in its documentation.
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},
