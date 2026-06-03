@@ -19,7 +19,8 @@ create_file_path(
 - filename:
 
   A character string with the file name, including the file extension
-  like `.csv` or `.txt`.
+  like `.csv` or `.txt`. Should adhere to the restrictions described in
+  [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html).
 
 - format_stamp:
 
@@ -80,7 +81,8 @@ if it does not yet exist.
 ## See also
 
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid,
+to check if a path is valid, and the 'Note on paths' in its
+documentation;
 [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
 to check if a file exists and is a unique match to a pattern,
 [`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
@@ -103,28 +105,28 @@ my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"))
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpfB37Tt/subdir/2026_06_01/abc.txt
+#> /tmp/RtmpMGf5cw/subdir/2026_06_03/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpfB37Tt/subdir/2026_06_01/01_06_2026_abc.txt
+#> /tmp/RtmpMGf5cw/subdir/2026_06_03/03_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpfB37Tt/subdir/def.html
+#> /tmp/RtmpMGf5cw/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpfB37Tt/subdir/01_06_2026_def.html
+#> /tmp/RtmpMGf5cw/subdir/03_06_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpfB37Tt/subdir/subdir/2026_06_01/abc.txt
+#> /tmp/RtmpMGf5cw/subdir/subdir/2026_06_03/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpfB37Tt/subdir/subdir/2026_06_01/01_06_2026_abc.txt
+#> /tmp/RtmpMGf5cw/subdir/subdir/2026_06_03/03_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpfB37Tt/subdir/subdir/def.html
+#> /tmp/RtmpMGf5cw/subdir/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpfB37Tt/subdir/subdir/01_06_2026_def.html
+#> /tmp/RtmpMGf5cw/subdir/subdir/03_06_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

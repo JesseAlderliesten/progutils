@@ -1,5 +1,12 @@
 # Changelog
 
+## progutils 0.5.1
+
+#### Bugfixes
+
+- [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
+  would return directories matching `pattern`.
+
 ## progutils 0.5.0
 
 #### Breaking changes
@@ -32,7 +39,7 @@
 
 #### Breaking changes
 
-- Added dependency `fs`.
+- Added dependency `fs` to `Imports`.
 - [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md):
   no longer replace non-alphanumeric characters in the filename because
   reconstituting the filename is brittle.
@@ -218,8 +225,8 @@
 #### Breaking changes
 
 - `checkinput`: increased minimum version to `0.1.0`.
-- Add `stats` and `tools` as dependencies in the `Suggests` field
-  because they are linked to in help pages.
+- Add dependencies `stats` and `tools` to `Suggests` because they are
+  linked to in help pages.
 - No longer import
   [`methods::formalArgs()`](https://rdrr.io/r/methods/methodUtilities.html).
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):

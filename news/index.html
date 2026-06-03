@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,14 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.1" id="progutils-051">progutils 0.5.1<a class="anchor" aria-label="anchor" href="#progutils-051"></a></h2>
+<div class="section level4">
+<h4 id="bugfixes-0-5-1">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes-0-5-1"></a></h4>
+<ul><li>
+<code><a href="../reference/get_file_path.html">get_file_path()</a></code> would return directories matching <code>pattern</code>.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="progutils-050">progutils 0.5.0<a class="anchor" aria-label="anchor" href="#progutils-050"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-5-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-0"></a></h4>
@@ -60,7 +68,7 @@
 <h2 class="pkg-version" data-toc-text="0.3.0" id="progutils-030">progutils 0.3.0<a class="anchor" aria-label="anchor" href="#progutils-030"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h4>
-<ul><li>Added dependency <code>fs</code>.</li>
+<ul><li>Added dependency <code>fs</code> to <code>Imports</code>.</li>
 <li>
 <code><a href="../reference/create_file_path.html">create_file_path()</a></code>: no longer replace non-alphanumeric characters in the filename because reconstituting the filename is brittle.</li>
 <li>Replace <code>file_path_no_ext()</code> by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">fs::path_ext_remove()</a></code> and <code>file_path_ext()</code><br>
@@ -217,7 +225,7 @@ by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external
 <h4 id="breaking-changes-0-0-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-3"></a></h4>
 <ul><li>
 <code>checkinput</code>: increased minimum version to <code>0.1.0</code>.</li>
-<li>Add <code>stats</code> and <code>tools</code> as dependencies in the <code>Suggests</code> field because they are linked to in help pages.</li>
+<li>Add dependencies <code>stats</code> and <code>tools</code> to <code>Suggests</code> because they are linked to in help pages.</li>
 <li>No longer import <code><a href="https://rdrr.io/r/methods/methodUtilities.html" class="external-link">methods::formalArgs()</a></code>.</li>
 <li>
 <code><a href="../reference/create_dir.html">create_dir()</a></code>: show the warnings if creating a directory fails.</li>

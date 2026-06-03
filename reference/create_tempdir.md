@@ -57,14 +57,18 @@ Instead, store the paths to temporary files written to
 up, or create a temporary subdirectory in
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html) which can be
 completely be removed when cleaning up. `use_tempdir()` follows the
-latter approach.
+latter approach. It is good practice to create the complete temporary
+directory with all required files and folders before running any example
+or test: this ensures no spurious matches occur if examples or tests are
+removed or added.
 
 ## See also
 
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
 to create (non-temporary) directories;
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid.
+to check if a path is valid, and the 'Note on paths' in its
+documentation.
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
@@ -75,20 +79,20 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir()
-#> [1] "/tmp/RtmpfB37Tt"
+#> [1] "/tmp/RtmpMGf5cw"
 # Create a directory inside the directory returned by 'tempdir()'
 (tempdir_std <- create_tempdir(subdir = "examplesubtempdir"))
-#> /tmp/RtmpfB37Tt/examplesubtempdir
+#> /tmp/RtmpMGf5cw/examplesubtempdir
 
 # Error if the directory already exists
 try(create_tempdir(subdir = "examplesubtempdir"))
 #> Error in create_tempdir(subdir = "examplesubtempdir") : 
 #>   Temporary directory already exists: change 'subdir' ('examplesubtempdir'):
-#> /tmp/RtmpfB37Tt/examplesubtempdir
+#> /tmp/RtmpMGf5cw/examplesubtempdir
 
 # It is possible to create recursive directories
 (tempdir_recursive <- create_tempdir(subdir = fs::path("abc", "def")))
-#> /tmp/RtmpfB37Tt/abc/def
+#> /tmp/RtmpMGf5cw/abc/def
 
 # Clean up
 unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
