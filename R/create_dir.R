@@ -90,10 +90,10 @@ create_dir <- function(dir = fs::path(".", "output"), add_date = TRUE) {
   # fs::dir_exists() returns FALSE if 'dir' is a file instead of a directory but
   # fs::dir_create() then throws an informative error.
   if(!fs::dir_exists(dir)) {
-    # Using 'recurse = TRUE' to allow creation of subdirectories inside a
+    # By default 'recurse' is TRUE to allow creation of subdirectories inside a
     # not-yet existing directory (e.g., creating './output/<date>' if './output'
     # does not yet exist).
-    fs::dir_create(path = dir, recurse = TRUE)
+    fs::dir_create(path = dir)
   }
 
   invisible(dir)

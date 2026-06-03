@@ -96,8 +96,7 @@ expect_error(get_file_path(dir = fs::path(my_tempdir, "abc"), pattern = "test_")
              pattern = "Directory does not exist")
 
 # 'pattern' points to an existing directory instead of to an existing file
-fs::dir_create(path = fs::path(tempdir(), "testgetfilepath", "test_dir", "abc"),
-               recursive = TRUE)
+fs::dir_create(path = fs::path(tempdir(), "testgetfilepath", "test_dir", "abc"))
 expect_error(get_file_path(dir = fs::path(tempdir(), "testgetfilepath", "test_dir"),
                            pattern = "abc"),
              pattern = "No matches to pattern 'abc' are present",

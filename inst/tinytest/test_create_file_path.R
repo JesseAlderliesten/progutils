@@ -9,7 +9,7 @@ tempdir_basename <- basename(tempdir())
 current_date_Ymd <- format(Sys.time(), format = "%Y_%m_%d")
 current_date_dmY <- format(Sys.time(), format = "%d_%m_%Y")
 
-fs::dir_create(path = my_tempdir, showWarnings = FALSE, recursive = TRUE)
+fs::dir_create(path = my_tempdir, showWarnings = FALSE)
 my_tempfile <- fs::path_abs(path = fs::path(my_tempdir, "test_df.csv"))
 # Write csv-file, modified from example in help(write.table)
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
