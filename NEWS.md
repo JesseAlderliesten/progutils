@@ -1,6 +1,13 @@
 # progutils 0.5.1
 
+### Breaking changes
+- Dependency `checkinput`: increase minimum version from `0.9.0` to `0.10.0` to
+  incorporate bugfix: `is_path("C:")` would warn that `filename` should not
+  contain `:`.
+
 ### Bugfixes
+- `dir_create()` uses argument `recurse` instead of `recursive`, which is `TRUE`
+  by default.
 - `get_file_path()` would return directories matching `pattern`.
 
 
