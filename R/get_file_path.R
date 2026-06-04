@@ -58,6 +58,9 @@
 #' # Error reporting the presence of a case-insensitive match.
 #' try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
 #'
+#' # 'pattern' is interpreted as a regular expression
+#' get_file_path(dir = tempdir(), pattern = "^.+er_file")
+#'
 #' # Error reporting no match found.
 #' try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
 #'                  ignore_case = TRUE))
