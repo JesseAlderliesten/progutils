@@ -87,6 +87,15 @@ expect_silent(
   ))
 )
 
+# Check that 'pattern' is interpreted as a regular expression
+expect_message(
+  expect_true(endsWith(
+    get_file_path(dir = dirname(my_tempfile), pattern = "te.t_df",
+                  quietly = FALSE),
+    suffix = fs::path("testgetfilepath", "test_df.csv")
+  )),
+  pattern = "Using file", strict = TRUE, fixed = TRUE)
+
 # 'dir' points to a file instead of a directory
 expect_error(get_file_path(dir = my_tempfile, pattern = "test_"),
              pattern = "Directory does not exist")
