@@ -1,5 +1,13 @@
 # Changelog
 
+## progutils 0.6.0
+
+#### Breaking changes
+
+- Dependency `checkinput`: increase minimum version from `0.10.0` to
+  `0.11.0` to incorporate change of argument name `allow_zero_length()`
+  to `allow_zerolength()`.
+
 ## progutils 0.5.1
 
 #### Breaking changes

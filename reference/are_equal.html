@@ -9,7 +9,7 @@ numeric errors to make are_equal() safer than ==."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,8 +60,8 @@ numeric errors to make <code>are_equal()</code> safer than <a href="https://rdrr
 
 
 <dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>
-<dd><p>A small <a href="https://jessealderliesten.github.io/checkinput/reference/is_number.html" class="external-link">positive</a> number. Numbers that
-differ less than <code>tol</code> are considered to be equal.</p></dd>
+<dd><p>A small <a href="https://jessealderliesten.github.io/checkinput/reference/is_number.html" class="external-link">positive</a> number. Numbers that differ less
+than <code>tol</code> are considered equal.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -70,6 +70,13 @@ differ less than <code>tol</code> are considered to be equal.</p></dd>
 elements in <code>x</code> and <code>y</code> are equal to each other. <a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a> is returned for
 comparisons involving numeric <code>NA</code>s (i.e., <code>NA_integer_</code> and <code>NA_real_</code>),
 <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a>s, or <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">infinite values</a> with the same sign.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>are_equal()</code> allows for small numeric errors when comparing numbers. Such
+numeric errors can arise because of rounding or representation error. As the
+<code>Note</code> at <code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">==</a></code> warns, <code>x == round(x)</code> does <strong>not</strong> allow for such errors
+but tests exact equality.</p>
     </div>
     <div class="section level2">
     <h2 id="acknowledgement">Acknowledgement<a class="anchor" aria-label="anchor" href="#acknowledgement"></a></h2>
@@ -82,10 +89,12 @@ comparisons involving numeric <code>NA</code>s (i.e., <code>NA_integer_</code> a
     <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_natural.html" class="external-link">checkinput::is_natural()</a></code> to check for element-wise near-equality to natural
 numbers; <code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> to check more generally for near-equality;
 <code><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical()</a></code> to check for exact equality and <a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a> to do so using
-binary operators; <code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code> and <code><a href="not_in.html">progutils::not_in()</a></code> to compare character
-vectors; <a href="https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" class="external-link"><span style="R">R</span> FAQ 7.31</a>
-for background on numerical equality; the vignette <em>Type coercion in vectors</em>
-in package <code>checkinput</code>: <code>vignette("Type_Coercion", package = "checkinput")</code>.</p>
+binary operators;
+<code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code> and <code><a href="not_in.html">progutils::not_in()</a></code> to compare character vectors;
+<a href="https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" class="external-link"><span style="R">R</span> FAQ 7.31</a>
+for background on numerical equality;
+the vignette <em>Type coercion</em> in package <code>checkinput</code>:
+<code>vignette("Type_Coercion", package = "checkinput")</code>.</p>
 <p>Other functions to check equality:
 <code><a href="check_case.html">check_case()</a></code>,
 <code><a href="get_file_path.html">get_file_path()</a></code>,

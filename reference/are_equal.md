@@ -20,8 +20,7 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 
   A small
   [positive](https://jessealderliesten.github.io/checkinput/reference/is_number.html)
-  number. Numbers that differ less than `tol` are considered to be
-  equal.
+  number. Numbers that differ less than `tol` are considered equal.
 
 ## Value
 
@@ -31,6 +30,14 @@ elements in `x` and `y` are equal to each other.
 involving numeric `NA`s (i.e., `NA_integer_` and `NA_real_`),
 [NaN](https://rdrr.io/r/base/is.finite.html)s, or [infinite
 values](https://rdrr.io/r/base/is.finite.html) with the same sign.
+
+## Details
+
+`are_equal()` allows for small numeric errors when comparing numbers.
+Such numeric errors can arise because of rounding or representation
+error. As the `Note` at [`==`](https://rdrr.io/r/base/Comparison.html)
+warns, `x == round(x)` does **not** allow for such errors but tests
+exact equality.
 
 ## Acknowledgement
 
@@ -49,8 +56,8 @@ to do so using binary operators;
 [`progutils::not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
 to compare character vectors; [R FAQ
 7.31](https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
-for background on numerical equality; the vignette *Type coercion in
-vectors* in package `checkinput`:
+for background on numerical equality; the vignette *Type coercion* in
+package `checkinput`:
 `vignette("Type_Coercion", package = "checkinput")`.
 
 Other functions to check equality:

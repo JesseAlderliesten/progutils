@@ -67,8 +67,8 @@ for a safe way to create temporary directories;
 and references there about file paths and directories;
 [`fs::dir_exists()`](https://fs.r-lib.org/reference/file_access.html)
 and [`fs::dir_create()`](https://fs.r-lib.org/reference/create.html)
-used by this function (and the base-equivalent of the latter:
-[`dir.create()`](https://rdrr.io/r/base/files2.html));
+used by this function (and the base-equivalent
+[`dir.create()`](https://rdrr.io/r/base/files2.html) of the latter);
 [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
 to check if a file exists and is a unique match to a pattern.
 
@@ -87,7 +87,7 @@ my_tempdir <- fs::path(tempdir(), "testcreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
-#> /tmp/Rtmph9T1TP/testcreatedir/dir_one 
+#> /tmp/RtmpPJA758/testcreatedir/dir_one 
 #>                                  TRUE 
 
 # An attempt to create a directory that already exists does not change any
@@ -110,7 +110,7 @@ identical(res_dir_one, res_dir_one_v3)
 res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),
                           add_date = TRUE)
 fs::dir_exists(res_dir_two) # TRUE
-#> /tmp/Rtmph9T1TP/testcreatedir/dir_two/2026_06_03 
+#> /tmp/RtmpPJA758/testcreatedir/dir_two/2026_06_04 
 #>                                             TRUE 
 
 # Cleaning up
