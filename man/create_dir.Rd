@@ -8,21 +8,20 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 }
 \arguments{
 \item{dir}{\link[checkinput:is_character]{Character string}
-containing a \link[checkinput:is_path]{valid path} to a directory that should be created if
-it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and the dot (\code{"."})
-indicates the \link[=getwd]{working directory},
-such that by default a subdirectory with the current date in the
-\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
-directory is created.}
+containing a \link[checkinput:is_path]{valid path} to a directory that should
+be created if it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and
+the dot (\code{"."}) indicates the \link[=getwd]{working directory}, such that by
+default a subdirectory with the current date in the \link[=strftime]{format}
+\code{YYYY_mm_dd} in directory \code{output} below the working directory is created.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
-A character string with the \link[fs:path_abs]{absolute normalized} path to
-the requested directory, returned \link[=invisible]{invisibly}. An error is thrown
-if the attempt to create a directory fails. This happens if \code{dir} points to
-an existing file instead of an directory.
+A character string with the \link[fs:path_abs]{absolute normalized} path to the
+requested directory, returned \link[=invisible]{invisibly}. An error is thrown if
+the attempt to create a directory fails. This happens if \code{dir} points to an
+existing file instead of an directory.
 }
 \description{
 Create a directory if it does not yet exist.
@@ -81,7 +80,7 @@ directory if it does not yet exist;
 \code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create temporary directories;
 \code{\link[checkinput:is_path]{checkinput::is_path()}} and references there about file paths and directories;
 \code{\link[fs:dir_exists]{fs::dir_exists()}} and \code{\link[fs:dir_create]{fs::dir_create()}} used by this function (and the
-base-equivalent of the latter: \code{\link[=dir.create]{dir.create()}});
+base-equivalent \code{\link[=dir.create]{dir.create()}} of the latter);
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a
 pattern.
 

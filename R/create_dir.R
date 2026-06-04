@@ -3,13 +3,11 @@
 #' Create a directory if it does not yet exist.
 #'
 #' @param dir [Character string][checkinput::is_character()]
-#' containing a [valid path][checkinput::is_path()] to a directory that should be created if
-#' it does not yet exist. [fs::path()] adds file separators and the dot (`"."`)
-#' indicates the [working directory][getwd()],
-#' such that by default a subdirectory with the current date in the
-#' [format][strftime()] `YYYY_mm_dd` in directory `output` below the working
-#' directory is created.
-#'
+#' containing a [valid path][checkinput::is_path()] to a directory that should
+#' be created if it does not yet exist. [fs::path()] adds file separators and
+#' the dot (`"."`) indicates the [working directory][getwd()], such that by
+#' default a subdirectory with the current date in the [format][strftime()]
+#' `YYYY_mm_dd` in directory `output` below the working directory is created.
 #' @param add_date `TRUE` or `FALSE`: create a subdirectory in `dir` with the
 #' current date in the [format][strftime()] `YYYY_mm_dd`?
 #'
@@ -21,10 +19,10 @@
 #' already present (see the `Examples`).
 #'
 #' @returns
-#' A character string with the [absolute normalized][fs::path_abs()] path to
-#' the requested directory, returned [invisibly][invisible]. An error is thrown
-#' if the attempt to create a directory fails. This happens if `dir` points to
-#' an existing file instead of an directory.
+#' A character string with the [absolute normalized][fs::path_abs()] path to the
+#' requested directory, returned [invisibly][invisible]. An error is thrown if
+#' the attempt to create a directory fails. This happens if `dir` points to an
+#' existing file instead of an directory.
 #'
 #' @section Side effects:
 #' The directory indicated by the returned path is [created][create_dir()] if it
@@ -38,7 +36,7 @@
 #' [create_tempdir()] for a safe way to create temporary directories;
 #' [checkinput::is_path()] and references there about file paths and directories;
 #' [fs::dir_exists()] and [fs::dir_create()] used by this function (and the
-#' base-equivalent of the latter: [dir.create()]);
+#' base-equivalent [dir.create()] of the latter);
 #' [get_file_path()] to check if a file exists and is a unique match to a
 #' pattern.
 #'

@@ -50,8 +50,8 @@ influenced by argument \code{signal_old_ignore_case}.}
 that have been replaced?}
 }
 \value{
-\code{x} with the requested replacements. Factor levels are \strong{not} reordered after
-the replacement.
+\code{x} with the requested replacements. Factor levels are \strong{not} reordered
+after the replacement.
 }
 \description{
 Replace character values or factor levels

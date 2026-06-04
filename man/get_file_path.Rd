@@ -7,7 +7,8 @@
 get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{Character string with the \link[checkinput:is_path]{path} to a directory.}
+\item{dir}{Character string with the \link[checkinput:is_path]{path} to a
+directory.}
 
 \item{pattern}{Character string containing a \link[base:regex]{regular expression}
 used to select names of files that are present in \code{dir}.}
@@ -18,10 +19,10 @@ used to select names of files that are present in \code{dir}.}
 name?}
 }
 \value{
-A character string with the \link[fs:path_abs]{absolute normalized} path to the file
-with a name matching \code{pattern} if there is exactly one such file in directory
-\code{dir}. Otherwise an error is thrown. Use \code{\link[=basename]{basename()}} on the result to obtain
-the filename itself.
+A character string with the \link[fs:path_abs]{absolute normalized} path to the
+file with a name matching \code{pattern} if there is exactly one such file in
+directory \code{dir}. Otherwise an error is thrown. Use \code{\link[=basename]{basename()}} on the result
+to obtain the filename itself.
 }
 \description{
 Check that only one file in a directory has a name matching \code{pattern}, for
@@ -53,6 +54,9 @@ get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
 
 # Error reporting the presence of a case-insensitive match.
 try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
+
+# 'pattern' is interpreted as a regular expression
+get_file_path(dir = tempdir(), pattern = "^.+er_file")
 
 # Error reporting no match found.
 try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",

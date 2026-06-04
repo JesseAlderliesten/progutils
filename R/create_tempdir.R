@@ -17,8 +17,8 @@
 #' yet exist.
 #'
 #' @returns
-#' The [absolute normalized][fs::path_abs()] path to the created temporary directory,
-#' returned [invisibly][invisible].
+#' The [absolute normalized][fs::path_abs()] path to the created temporary
+#' directory, returned [invisibly][invisible].
 #'
 #' @section Side effects:
 #' The temporary directory indicated by the returned path is
@@ -89,7 +89,8 @@ create_tempdir <- function(subdir = "subdir") {
     # - Using 'recursive = TRUE' to allow creation of subdirectories inside a
     #   not-yet existing directory (e.g., creating '<tempdir>/output/<date>' if
     #   '<tempdir>/output' does not yet exist).
-    if(!dir.create(path = subdir_target, recursive = TRUE, showWarnings = TRUE)) {
+    if(!dir.create(path = subdir_target, recursive = TRUE,
+                   showWarnings = TRUE)) {
       stop("Attempt to create a subdirectory in the temporary directory failed:\n",
            subdir_target)
     }

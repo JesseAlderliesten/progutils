@@ -53,13 +53,13 @@ expect_error(
 
 expect_error(
   signal_text(text = test_text, signal = "error", origin = NA_character_),
-  pattern = paste0("checkinput::is_character(origin, allow_zero_length = TRUE)",
+  pattern = paste0("checkinput::is_character(origin, allow_zerolength = TRUE)",
                    " is not TRUE"),
   fixed = TRUE)
 
 expect_error(
   signal_text(text = test_text, signal = "error", origin = 1),
-  pattern = paste0("checkinput::is_character(origin, allow_zero_length = TRUE)",
+  pattern = paste0("checkinput::is_character(origin, allow_zerolength = TRUE)",
                    " is not TRUE"),
   fixed = TRUE)
 

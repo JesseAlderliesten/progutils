@@ -1,6 +1,6 @@
 #' Check for values that differ only in their case
 #'
-#' @inheritParams signal_text
+#' @inheritParams signal_text signal
 #' @param x Character vector to check.
 #'
 #' @details
@@ -81,8 +81,8 @@ check_case <- function(x, signal = c("error", "warning", "message", "quiet")) {
 
   if(length(vals) > 0L) {
     vals <- sort(vals)
-    signal_text(text = paste0("'x' contains values that only differ in their case: ",
-                              paste_quoted(vals)),
+    signal_text(paste0("'x' contains values that only differ in their case: ",
+                       paste_quoted(vals)),
                 signal = signal)
   }
   invisible(vals)

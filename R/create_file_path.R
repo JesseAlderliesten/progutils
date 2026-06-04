@@ -2,7 +2,7 @@
 #'
 #' Create a file path, creating the indicated directory if it does not yet exist.
 #'
-#' @inheritParams create_dir
+#' @inheritParams create_dir dir add_date
 #' @param filename A character string with the file name, including the file
 #' extension like `.csv` or `.txt`. Should adhere to the restrictions described
 #' in [checkinput::is_path()].
@@ -35,9 +35,9 @@
 #' @seealso
 #' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
 #' in its documentation;
-#' [get_file_path()] to check if a file exists and is a unique match to a pattern,
-#' [fs::path()] to construct file paths in a platform-independent way,
-#' [fs::path_abs()] to create absolute normalised paths,
+#' [get_file_path()] to check if a file exists and is a unique match to a pattern;
+#' [fs::path()] to construct file paths in a platform-independent way;
+#' [fs::path_abs()] to create absolute normalised paths;
 #' [create_dir()] to create a directory if it does not yet exist
 #'
 #' @family functions to handle paths and directories

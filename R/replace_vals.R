@@ -37,8 +37,8 @@
 #' The order of the factor **levels** determines the order used in the message.
 #'
 #' @returns
-#' `x` with the requested replacements. Factor levels are **not** reordered after
-#' the replacement.
+#' `x` with the requested replacements. Factor levels are **not** reordered
+#' after the replacement.
 #'
 #' @family functions to check equality
 #' @family functions to modify character vectors
@@ -167,7 +167,8 @@ replace_vals <- function(
            ") matched 'x' (", paste_quoted(x), "): ", old_detected_quoted)
     }
     if(!quiet) {
-      message("Replaced values ", old_detected_quoted, " with ", paste_quoted(new))
+      message("Replaced values ", old_detected_quoted, " with ",
+              paste_quoted(new))
     }
     x[ind_replace] <- new
   } else {
