@@ -2,7 +2,7 @@
 #'
 #' Create a file path, creating the indicated directory if it does not yet exist.
 #'
-#' @inheritParams create_dir
+#' @inheritParams create_dir dir add_date
 #' @param filename A character string with the file name, including the file
 #' extension like `.csv` or `.txt`. Should adhere to the restrictions described
 #' in [checkinput::is_path()].

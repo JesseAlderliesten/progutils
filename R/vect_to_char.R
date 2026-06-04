@@ -3,12 +3,7 @@
 #' Convert a vector to a character string while preserving names and rounding
 #' numeric values.
 #'
-#' @details
-#' `vect_to_char()` returns `NULL` as `"NULL"`, other zero-length objects as
-#' `"<class>(0)"` (e.g., `"logical(0)"`), `""` as `'""'`, and non-logical `NA`s
-#' as `"NA_<class>_"` (e.g., `"NA_real_"`; for [factors][factor] this is
-#' `"NA_character_"`).
-#'
+#' @inheritParams wrap_text width ignore_newlines
 #' @param x A vector, [factor], `NULL`, or a non-dataframe [list] (unlisted
 #' through `unlist(x, use.names = TRUE)`, with a warning).
 #' @param signif Positive number of length one, rounded to the nearest positive
@@ -18,7 +13,12 @@
 #' @param collapse Character string of length one to collapse values into a
 #' single character string, or `NULL` to return each value as an element of a
 #' character vector.
-#' @inheritParams wrap_text
+#'
+#' @details
+#' `vect_to_char()` returns `NULL` as `"NULL"`, other zero-length objects as
+#' `"<class>(0)"` (e.g., `"logical(0)"`), `""` as `'""'`, and non-logical `NA`s
+#' as `"NA_<class>_"` (e.g., `"NA_real_"`; for [factors][factor] this is
+#' `"NA_character_"`).
 #'
 #' @returns
 #' The names and values in `x`, with values of numeric `x` rounded to `signif`

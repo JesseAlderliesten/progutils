@@ -1,6 +1,6 @@
 #' Check for values that differ only in their case
 #'
-#' @inheritParams signal_text
+#' @inheritParams signal_text signal
 #' @param x Character vector to check.
 #'
 #' @details
