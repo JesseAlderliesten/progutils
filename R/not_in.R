@@ -81,6 +81,7 @@ not_in <- function(x, table, value = TRUE) {
             is.null(dim(table)), length(table) > 0L, is.atomic(table),
             "Use are_equal() to match input of type 'double'" = !is.double(table),
             checkinput::is_logical(value))
+
   if(is.factor(x)) {
     x <- as.character(x)
   }

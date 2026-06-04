@@ -55,11 +55,11 @@
 #'
 #' @export
 reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
-  stopifnot(is.factor(x) || is.character(x), length(x) > 0L,
-            checkinput::all_characters(new_order, allow_empty = TRUE,
-                                       allow_NA = TRUE),
-            "Values in 'new_order' should be unique" = anyDuplicated(new_order) == 0L,
-            checkinput::is_logical(warn_drop_order))
+  stopifnot(
+    is.factor(x) || is.character(x), length(x) > 0L,
+    checkinput::all_characters(new_order, allow_empty = TRUE, allow_NA = TRUE),
+    "Values in 'new_order' should be unique" = anyDuplicated(new_order) == 0L,
+    checkinput::is_logical(warn_drop_order))
 
   if(is.character(x)) {
     x <- factor(x, exclude = NULL)

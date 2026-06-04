@@ -3,7 +3,8 @@
 #' Check that only one file in a directory has a name matching `pattern`, for
 #' example before attempting to [read a file][utils::read.table()].
 #'
-#' @param dir Character string with the [path][checkinput::is_path()] to a directory.
+#' @param dir Character string with the [path][checkinput::is_path()] to a
+#' directory.
 #' @param pattern Character string containing a [regular expression][base::regex]
 #' used to select names of files that are present in `dir`.
 #' @param ignore_case `TRUE` or `FALSE`: use case-insensitive pattern matching?
@@ -23,10 +24,10 @@
 #' [working directory][getwd()] changes.
 #'
 #' @returns
-#' A character string with the [absolute normalized][fs::path_abs()] path to the file
-#' with a name matching `pattern` if there is exactly one such file in directory
-#' `dir`. Otherwise an error is thrown. Use [basename()] on the result to obtain
-#' the filename itself.
+#' A character string with the [absolute normalized][fs::path_abs()] path to the
+#' file with a name matching `pattern` if there is exactly one such file in
+#' directory `dir`. Otherwise an error is thrown. Use [basename()] on the result
+#' to obtain the filename itself.
 #'
 #' @seealso
 #' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
@@ -71,7 +72,8 @@
 #' rm(my_tempfiles)
 #'
 #' @export
-get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE) {
+get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
+                          quietly = FALSE) {
   stopifnot(checkinput::is_character(dir), checkinput::is_path(dir),
             checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
@@ -100,7 +102,8 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE, quietly = FALS
     pattern, "' are present in directory\n'", dir, "'")
 
   if(length(files_present) > 1L) {
-    stop(paste0("Multiple ", msg_match, ": ", paste_quoted(basename(files_present)), "!"))
+    stop(paste0("Multiple ", msg_match, ": ",
+                paste_quoted(basename(files_present)), "!"))
   }
 
   if(length(files_present) == 0L) {

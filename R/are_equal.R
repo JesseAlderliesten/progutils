@@ -24,11 +24,13 @@
 #' [checkinput::is_natural()] to check for element-wise near-equality to natural
 #' numbers; [all.equal()] to check more generally for near-equality;
 #' [identical()] to check for exact equality and [Comparison] to do so using
-#' binary operators; [match()] and `progutils::not_in()` to compare character
-#' vectors; [\R FAQ 7.31](
+#' binary operators;
+#' [match()] and `progutils::not_in()` to compare character vectors;
+#' [\R FAQ 7.31](
 #' https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
-#' for background on numerical equality; the vignette *Type coercion* in package
-#' `checkinput`: `vignette("Type_Coercion", package = "checkinput")`.
+#' for background on numerical equality;
+#' the vignette *Type coercion* in package `checkinput`:
+#' `vignette("Type_Coercion", package = "checkinput")`.
 #'
 #' @family functions to check equality
 #'

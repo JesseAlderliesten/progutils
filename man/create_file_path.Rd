@@ -23,12 +23,11 @@ treated as part of the filename, such that the same restrictions apply, see
 \code{Details}.}
 
 \item{dir}{\link[checkinput:is_character]{Character string}
-containing a \link[checkinput:is_path]{valid path} to a directory that should be created if
-it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and the dot (\code{"."})
-indicates the \link[=getwd]{working directory},
-such that by default a subdirectory with the current date in the
-\link[=strftime]{format} \code{YYYY_mm_dd} in directory \code{output} below the working
-directory is created.}
+containing a \link[checkinput:is_path]{valid path} to a directory that should
+be created if it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and
+the dot (\code{"."}) indicates the \link[=getwd]{working directory}, such that by
+default a subdirectory with the current date in the \link[=strftime]{format}
+\code{YYYY_mm_dd} in directory \code{output} below the working directory is created.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
@@ -87,9 +86,9 @@ rm(my_tempdir)
 \seealso{
 \code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the 'Note on paths'
 in its documentation;
-\code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern,
-\code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way,
-\code{\link[fs:path_abs]{fs::path_abs()}} to create absolute normalised paths,
+\code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern;
+\code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way;
+\code{\link[fs:path_abs]{fs::path_abs()}} to create absolute normalised paths;
 \code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist
 
 Other functions to handle paths and directories:

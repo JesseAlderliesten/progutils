@@ -51,8 +51,9 @@ reorder_cols <- function(x, new_order) {
   bool_present <- original_order %in% new_order
   if(any(!bool_present)) {
     new_order <- c(new_order, original_order[!bool_present])
-    warning("Appended columns that are present in 'x' but missing from 'new_order':\n",
-            paste_quoted(original_order[!bool_present]))
+    warning(
+      "Appended columns that are present in 'x' but missing from 'new_order':\n",
+      paste_quoted(original_order[!bool_present]))
   }
 
   bool_order_in_names <- new_order %in% colnames(x)

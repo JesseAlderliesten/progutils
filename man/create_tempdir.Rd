@@ -12,8 +12,8 @@ of a \strong{not-yet} existing temporary subdirectory to be created inside
 \code{\link[=tempdir]{tempdir()}}. \code{subdir} should be a \link[checkinput:is_path]{valid path}.}
 }
 \value{
-The \link[fs:path_abs]{absolute normalized} path to the created temporary directory,
-returned \link[=invisible]{invisibly}.
+The \link[fs:path_abs]{absolute normalized} path to the created temporary
+directory, returned \link[=invisible]{invisibly}.
 }
 \description{
 Create a temporary directory that can safely be removed.
