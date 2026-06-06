@@ -61,7 +61,8 @@
 #'
 #' @export
 create_tempdir <- function(subdir = "subdir") {
-  stopifnot(checkinput::is_character(subdir), checkinput::is_path(subdir))
+  stopifnot(checkinput::is_character(subdir),
+            checkinput::is_path(subdir, require_sep = FALSE))
   subdir_target <- fs::path_abs(path = fs::path(tempdir(), subdir))
   tempdir_normalised <- fs::path_abs(tempdir())
   if(!grepl(pattern = basename(tempdir()), x = subdir_target, fixed = TRUE)) {

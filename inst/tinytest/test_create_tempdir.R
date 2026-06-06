@@ -79,7 +79,7 @@ for(subdir in list("temp_p7.", "temp_p8 ")) {
   expect_warning(
     expect_error(
       create_tempdir(subdir = subdir),
-      pattern = "is_path(subdir) is not TRUE", fixed = TRUE),
+      pattern = "is_path(subdir, require_sep = FALSE) is not TRUE", fixed = TRUE),
     pattern = "should not end with ' ' or '.'", strict = TRUE, fixed = TRUE)
 }
 

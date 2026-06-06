@@ -72,7 +72,8 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
                              dir = fs::path_wd("output"), add_date = TRUE) {
   filename_label <- deparse1(substitute(filename))
 
-  stopifnot(checkinput::is_character(filename), checkinput::is_path(filename),
+  stopifnot(checkinput::is_character(filename),
+            checkinput::is_path(filename, require_sep = FALSE),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
             checkinput::is_character(dir), checkinput::is_path(dir),
             checkinput::is_logical(add_date))
