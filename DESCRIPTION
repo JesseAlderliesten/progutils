@@ -9,7 +9,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
-    checkinput (>= 0.11.0),
+    checkinput (>= 0.12.0),
     fs,
     utils
 Remotes: github::JesseAlderliesten/checkinput
