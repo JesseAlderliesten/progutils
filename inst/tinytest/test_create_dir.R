@@ -23,9 +23,6 @@ expect_true(endsWith(
 # On case-insensitive file systems such as Windows and macOS, the directory
 # created below is the same as 'res_dir_one'. On case-sensitive file systems
 # such as Ubuntu, it differs in case from 'res_dir_one'.
-# Notes:
-# - Issues a spurious warning on MacOS ('Repeated '/' or '\\' in 'dir'') because
-#   there the part before the output of 'tempdir()' contains repeated slashes.
 create_dir(dir = fs::path(my_tempdir, "dir_ONE"), add_date = FALSE)
 
 res_dir_two <- create_dir(dir = fs::path(my_tempdir, "dir_two"),

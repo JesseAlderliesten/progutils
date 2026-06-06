@@ -88,7 +88,7 @@ for(filenm_in in c("abcd", ".", ".txt", ".html")) {
 expect_warning(
   expect_error(
     create_file_path(filename = "abc.", dir = my_tempdir, format_stamp = ""),
-    pattern = "is_path(filename) is not TRUE", fixed = TRUE),
+    pattern = "is_path(filename, require_sep = FALSE) is not TRUE", fixed = TRUE),
   pattern = "Components of 'filename' should not end with ' ' or '.'",
   strict = TRUE, fixed = TRUE)
 
@@ -105,7 +105,7 @@ expect_warning(
   expect_error(
     create_file_path(filename = "ff .txt", format_stamp = "",
                      dir = my_tempdir, add_date = FALSE),
-    pattern = "is_path(filename) is not TRUE", fixed = TRUE),
+    pattern = "is_path(filename, require_sep = FALSE) is not TRUE", fixed = TRUE),
   pattern = "'filename' should not end with ' ' or '.'", strict = TRUE, fixed = TRUE)
 
 # No warning message specified: on Windows with R 4.6.0 the warning message is
