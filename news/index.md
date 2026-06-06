@@ -1,12 +1,22 @@
 # Changelog
 
+## progutils 0.7.0
+
+#### Breaking changes
+
+- Dependency `checkinput`: increase minimum version from `0.11.0` to
+  `0.12.0` to use argument `require_sep` from `is_path()` in
+  [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
+  and in
+  [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md).
+
 ## progutils 0.6.0
 
 #### Breaking changes
 
 - Dependency `checkinput`: increase minimum version from `0.10.0` to
-  `0.11.0` to incorporate change of argument name `allow_zero_length()`
-  to `allow_zerolength()`.
+  `0.11.0` to incorporate change of argument name `allow_zero_length` to
+  `allow_zerolength`.
 
 ## progutils 0.5.1
 
