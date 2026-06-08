@@ -1,6 +1,6 @@
 Package: progutils
 Title: Programming Utilities
-Version: 0.7.0
+Version: 0.8.0
 Authors@R: 
     person("Jesse", "Alderliesten", email = "jessealderliesten@hotmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1132-4310"))
@@ -9,7 +9,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
-    checkinput (>= 0.12.0),
+    checkinput (>= 1.0.0),
     fs,
     utils
 Remotes: github::JesseAlderliesten/checkinput
