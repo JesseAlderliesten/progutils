@@ -5,7 +5,7 @@ template:
 
 home:
   sidebar:
-  structure: [toc, links, license, community, citation, authors]
+    structure: [toc, links, license, community, citation, authors]
 
 toc:
   depth: 3
