@@ -1,5 +1,12 @@
 # Changelog
 
+## progutils 0.8.0
+
+#### Breaking changes
+
+- Dependency `checkinput`: increase minimum version from `0.12.0` to
+  `1.0.0` to depend on a stable version.
+
 ## progutils 0.7.0
 
 #### Breaking changes
@@ -115,20 +122,6 @@
 - `create_path`: rename to `create_file_path`. Replace non-alphanumeric
   characters other than dots and underscores by underscores instead of
   replacing non-alphanumeric characters other than underscores by dots.
-
-#### Documentation
-
-- [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md):
-  moved `Note` to `Details`. Condensed example section.
-- [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md):
-  add section `Usage in practice` which explains why using
-  [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
-  is preferable over using
-  [`tempdir()`](https://rdrr.io/r/base/tempfile.html).
-- [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md):
-  no longer erroneously document that `n` can be zero. Removed
-  uninformative example.
-- `is_path()`: add section `Programming notes` about file separators.
 
 ## progutils 0.0.11
 
@@ -274,14 +267,3 @@
   reorder columns.
 - [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md):
   reorder factor levels.
-
-#### Documentation
-
-- [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
-  move some documentation to `create_path()`; document format of
-  date-time stamp with same case as
-  [`strftime()`](https://rdrr.io/r/base/strptime.html).
-
-## progutils 0.0.2
-
-NEWS for this and earlier versions has not been tracked.

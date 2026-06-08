@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,13 @@
       <small>Source: <a href="https://github.com/JesseAlderliesten/progutils/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.8.0" id="progutils-080">progutils 0.8.0<a class="anchor" aria-label="anchor" href="#progutils-080"></a></h2>
+<div class="section level4">
+<h4 id="breaking-changes-0-8-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-8-0"></a></h4>
+<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.12.0</code> to <code>1.0.0</code> to depend on a stable version.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.0" id="progutils-070">progutils 0.7.0<a class="anchor" aria-label="anchor" href="#progutils-070"></a></h2>
 <div class="section level4">
@@ -130,17 +137,6 @@ by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external
 <h4 id="breaking-changes-0-0-12">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-12"></a></h4>
 <ul><li>
 <code>create_path</code>: rename to <code>create_file_path</code>. Replace non-alphanumeric characters other than dots and underscores by underscores instead of replacing non-alphanumeric characters other than underscores by dots.</li>
-</ul></div>
-<div class="section level4">
-<h4 id="documentation-0-0-12">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-0-12"></a></h4>
-<ul><li>
-<code><a href="../reference/as.numeric_safe.html">as.numeric_safe()</a></code>: moved <code>Note</code> to <code>Details</code>. Condensed example section.</li>
-<li>
-<code><a href="../reference/create_tempdir.html">create_tempdir()</a></code>: add section <code>Usage in practice</code> which explains why using <code><a href="../reference/create_tempdir.html">create_tempdir()</a></code> is preferable over using <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>.</li>
-<li>
-<code><a href="../reference/head_tail.html">head_tail()</a></code>: no longer erroneously document that <code>n</code> can be zero. Removed uninformative example.</li>
-<li>
-<code>is_path()</code>: add section <code>Programming notes</code> about file separators.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -267,15 +263,6 @@ by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external
 <li>
 <code><a href="../reference/reorder_levels.html">reorder_levels()</a></code>: reorder factor levels.</li>
 </ul></div>
-<div class="section level4">
-<h4 id="documentation-0-0-3">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-0-3"></a></h4>
-<ul><li>
-<code><a href="../reference/create_dir.html">create_dir()</a></code>: move some documentation to <code>create_path()</code>; document format of date-time stamp with same case as <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strftime()</a></code>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.0.2" id="progutils-002">progutils 0.0.2<a class="anchor" aria-label="anchor" href="#progutils-002"></a></h2>
-<p>NEWS for this and earlier versions has not been tracked.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
