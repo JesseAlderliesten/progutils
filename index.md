@@ -107,3 +107,13 @@ Many packages with miscellaneous functions exist on
 [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html):
 frequently they have ‘misc’ or ‘util’ in their title or description. In
 addition, many packages have an `utils` folder in their `R` directory.
+
+## License
+
+This project is licensed under the terms of the [MIT
+License](https://jessealderliesten.github.io/LICENSE.md).
+
+## Citation
+
+Please cite this project [as described
+here](https://jessealderliesten.github.io/CITATION.cff).
