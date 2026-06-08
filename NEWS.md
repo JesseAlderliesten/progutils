@@ -1,3 +1,10 @@
+# progutils 0.8.0
+
+### Breaking changes
+- Dependency `checkinput`: increase minimum version from `0.12.0` to `1.0.0` to
+  depend on a stable version.
+
+
 # progutils 0.7.0
 
 ### Breaking changes
