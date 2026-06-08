@@ -93,14 +93,6 @@
   characters other than dots and underscores by underscores instead of replacing
   non-alphanumeric characters other than underscores by dots.
 
-### Documentation
-- `as.numeric_safe()`: moved `Note` to `Details`. Condensed example section.
-- `create_tempdir()`: add section `Usage in practice` which explains why using
-  `create_tempdir()` is preferable over using `tempdir()`.
-- `head_tail()`: no longer erroneously document that `n` can be zero. Removed
-  uninformative example.
-- `is_path()`: add section `Programming notes` about file separators.
-
 
 # progutils 0.0.11
 
@@ -212,12 +204,3 @@
   recognise the extension of file names that end in a dot.
 - `reorder_cols()`: reorder columns.
 - `reorder_levels()`: reorder factor levels.
-
-### Documentation
-- `create_dir()`: move some documentation to `create_path()`; document format of
-  date-time stamp with same case as `strftime()`.
-
-
-# progutils 0.0.2
-
-NEWS for this and earlier versions has not been tracked.
