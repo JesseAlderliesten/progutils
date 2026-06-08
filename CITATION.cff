@@ -1,0 +1,107 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "progutils" in publications use:'
+type: software
+license: MIT
+title: 'progutils: Programming Utilities'
+version: 0.8.0
+abstract: Programming Utilities of Jesse Alderliesten.
+authors:
+- family-names: Alderliesten
+  given-names: Jesse
+  email: jessealderliesten@hotmail.com
+  orcid: https://orcid.org/0000-0003-1132-4310
+repository-code: https://github.com/JesseAlderliesten/progutils
+url: https://jessealderliesten.github.io/progutils/
+contact:
+- family-names: Alderliesten
+  given-names: Jesse
+  email: jessealderliesten@hotmail.com
+  orcid: https://orcid.org/0000-0003-1132-4310
+references:
+- type: software
+  title: checkinput
+  abstract: 'checkinput: Check Function Input'
+  notes: Imports
+  url: https://jessealderliesten.github.io/checkinput/
+  authors:
+  - family-names: Alderliesten
+    given-names: Jesse
+    email: jessealderliesten@hotmail.com
+    orcid: https://orcid.org/0000-0003-1132-4310
+  year: '2026'
+  version: '>= 1.0.0'
+- type: software
+  title: fs
+  abstract: 'fs: Cross-Platform File System Operations Based on ''libuv'''
+  notes: Imports
+  url: https://fs.r-lib.org
+  repository: https://CRAN.R-project.org/package=fs
+  authors:
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Wickham
+    given-names: Hadley
+  - family-names: Csárdi
+    given-names: Gábor
+  year: '2026'
+  doi: 10.32614/CRAN.package.fs
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+    website: https://ror.org/02zz1nj61
+  institution:
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
+    address: Vienna, Austria
+  year: '2026'
+  doi: 10.32614/R.manuals
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Suggests
+  authors:
+  - name: R Core Team
+    website: https://ror.org/02zz1nj61
+  institution:
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
+    address: Vienna, Austria
+  year: '2026'
+  doi: 10.32614/R.manuals
+- type: software
+  title: tinytest
+  abstract: 'tinytest: Lightweight and Feature Complete Unit Testing Framework'
+  notes: Suggests
+  url: https://github.com/markvanderloo/tinytest
+  repository: https://CRAN.R-project.org/package=tinytest
+  authors:
+  - family-names: Loo
+    given-names: Mark
+    name-particle: van der
+    email: mark.vanderloo@gmail.com
+    orcid: https://orcid.org/0000-0002-9807-4686
+  year: '2026'
+  doi: 10.32614/CRAN.package.tinytest
+  version: '>= 1.4.1'
+- type: software
+  title: tools
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Suggests
+  authors:
+  - name: R Core Team
+    website: https://ror.org/02zz1nj61
+  institution:
+    name: R Foundation for Statistical Computing
+    website: https://ror.org/05qewa988
+    address: Vienna, Austria
+  year: '2026'
+  doi: 10.32614/R.manuals
+
