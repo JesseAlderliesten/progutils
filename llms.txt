@@ -103,14 +103,29 @@ cat(wrap_text(paste(msg_part_one, vect_to_char(num_vect)), width = 20,
 ## License
 
 This project is licensed under the terms of the [MIT
-License](https://jessealderliesten.github.io/LICENSE.md).
+License](https://jessealderliesten.github.io/progutils/LICENSE.md).
 
 ## Citation
 
-Please cite this project [as described
-here](https://jessealderliesten.github.io/CITATION.cff).
+``` R
+To cite package 'progutils' in publications use:
 
-# Similar packages
+  Alderliesten J (2026). _progutils: Programming Utilities_. R package
+  version 0.8.0, commit 0e015904e9f4b84dbaf8873515a5a3a237056166,
+  <https://github.com/JesseAlderliesten/progutils>.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {progutils: Programming Utilities},
+    author = {Jesse Alderliesten},
+    year = {2026},
+    note = {R package version 0.8.0, commit 0e015904e9f4b84dbaf8873515a5a3a237056166},
+    url = {https://github.com/JesseAlderliesten/progutils},
+  }
+```
+
+## Similar packages
 
 Many packages with miscellaneous functions exist on
 [GitHub](https://github.com/) and

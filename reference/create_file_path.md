@@ -105,28 +105,28 @@ my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"))
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpxmJHtP/subdir/2026_06_08/abc.txt
+#> /tmp/Rtmp7sJ7Mh/subdir/2026_06_09/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpxmJHtP/subdir/2026_06_08/08_06_2026_abc.txt
+#> /tmp/Rtmp7sJ7Mh/subdir/2026_06_09/09_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpxmJHtP/subdir/def.html
+#> /tmp/Rtmp7sJ7Mh/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpxmJHtP/subdir/08_06_2026_def.html
+#> /tmp/Rtmp7sJ7Mh/subdir/09_06_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpxmJHtP/subdir/subdir/2026_06_08/abc.txt
+#> /tmp/Rtmp7sJ7Mh/subdir/subdir/2026_06_09/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpxmJHtP/subdir/subdir/2026_06_08/08_06_2026_abc.txt
+#> /tmp/Rtmp7sJ7Mh/subdir/subdir/2026_06_09/09_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpxmJHtP/subdir/subdir/def.html
+#> /tmp/Rtmp7sJ7Mh/subdir/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpxmJHtP/subdir/subdir/08_06_2026_def.html
+#> /tmp/Rtmp7sJ7Mh/subdir/subdir/09_06_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)
