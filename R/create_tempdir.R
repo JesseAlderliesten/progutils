@@ -1,20 +1,30 @@
-#' Create a temporary directory
+#' Create a new temporary directory
 #'
-#' Create a temporary directory that can safely be removed.
+#' Create a new temporary directory that can safely be removed.
 #'
-#' @param subdir A [character string][checkinput::is_character()] with the name
-#' of a **not-yet** existing temporary subdirectory to be created inside
-#' [tempdir()]. `subdir` should be a [valid path][checkinput::is_path()].
+#' @param pattern A [character string][checkinput::is_character()] with the
+#' initial part of the name of the new temporary directory, only containing
+#' characters that are valid in a [path][checkinput::is_path()].
 #'
 #' @details
-#' `subdir` is created inside [tempdir()] and an error is thrown if it already
-#' exists or creating the directory fails. This ensures that [removing][unlink()]
-#' the created directory does not remove files that are still needed by other
-#' processes (see `Usage in practice` below).
+#' The new directory is [created][dir.create()] inside [tempdir()]. Its
+#' [name][tempfile()] starts with the string given by `pattern` and is followed
+#' by a random string in hex. This random string **might** contain a dot (`.`)
+#' such that the directory might appear to have a file extension, see the
+#' section `Source` in `help("tempdir")`. An error is thrown if creating the
+#' directory fails.
 #'
-#' It is possible to create subdirectories inside a not-yet existing directory
-#' (e.g., to create `<tempdir>/output/outputsub` if `<tempdir>/output` does not
-#' yet exist.
+#' It is **not** possible to create recursive subdirectories (e.g.,
+#' `tempdir/subtempdir/otherdir`, see the `Examples`) because
+#' [removing][unlink()] such directories might remove files that are still
+#' needed by other processes.
+#'
+#' Although the temporary directory given by [tempdir()] will normally be
+#' automatically [removed][unlink()] when \R [quits][quit()] (and operating
+#' systems might
+#' [periodically](https://cran.r-project.org/doc/manuals/R-admin.html#Running-R)
+#' empty the temporary directory), the created subdirectories should be removed
+#' once they are not needed anymore, see the section `Usage in practice` below.
 #'
 #' @returns
 #' The [absolute normalized][fs::path_abs()] path to the created temporary
@@ -22,82 +32,95 @@
 #'
 #' @section Side effects:
 #' The temporary directory indicated by the returned path is
-#' [created][dir.create()].
+#' [created][fs::dir_create()] inside [tempdir()].
 #'
 #' @section Usage in practice:
-#' Examples and tests should **not** write to the [working directory][getwd()]
-#' but to a temporary directory that is cleaned up afterwards. Although
-#' [tempdir()] points to a temporary directory, that directory should **not** be
-#' removed because [RStudio](https://posit.co/products/open-source/rstudio) also
-#' uses it. Instead, store the paths to temporary files written to [tempdir()]
-#' and [unlink][unlink()] those paths when cleaning up, or create a temporary
-#' subdirectory in `tempdir()` which can be completely be removed when cleaning
-#' up. `use_tempdir()` follows the latter approach. It is good practice to
-#' create the complete temporary directory with all required files and folders
-#' before running any example or test: this ensures no spurious matches occur if
-#' examples or tests are removed or added.
+#' `Examples` and `tests` should write to a temporary directory that is cleaned
+#' up afterwards (otherwise R cmd check will issue a `Note` about
+#' '[detritus in the temp directory](
+#' https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)'
+#' and
+#' [CRAN](https://cran.r-project.org/web/packages/policies.html#Source-packages)
+#' will not accept your package). Although [tempdir()] points to a temporary
+#' directory, that directory should **not** be removed because other \R
+#' processes and [RStudio](https://posit.co/products/open-source/rstudio) might
+#' use it. Instead, create a temporary subdirectory in [tempdir()] and
+#' afterwards clean up by [removing][unlink()] that subdirectory:
+#'
+#' ```
+#' my_tempdir <- create_tempdir(pattern = "subtempdir")
+#' < do stuff >
+#' unlink(my_tempdir, recursive = TRUE)
+#' ```
+#'
+#' It is good practice to create the complete temporary directory with all
+#' required files and folders before running any test for the presence or
+#' absence of particular files or folders: this ensures no spurious matches
+#' occur if examples or tests are removed or added.
+#'
+#' @inheritSection checkinput::is_path Programming notes
 #'
 #' @seealso
+#' [tempfile()] used in this function to create the paths for the temporary
+#' directory;
+#' [local()] and
+#' [withr::local_tempdir()](https://withr.r-lib.org/reference/with_tempfile.html)
+#' for automated deletion of temporary directories;
 #' [create_dir()] to create (non-temporary) directories;
-#' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
+#' [checkinput::is_path()] to check if a path is valid, with the `Note on paths`
 #' in its documentation.
 #'
 #' @family functions to handle paths and directories
 #'
 #' @examples
-#' tempdir()
+#' tempdir(check = TRUE)
 #' # Create a directory inside the directory returned by 'tempdir()'
-#' (tempdir_std <- create_tempdir(subdir = "examplesubtempdir"))
+#' (my_subtempdir_ex1 <- create_tempdir(pattern = "subtempdir"))
 #'
-#' # Error if the directory already exists
-#' try(create_tempdir(subdir = "examplesubtempdir"))
+#' # Using the same 'pattern' again creates another directory
+#' (my_subtempdir_ex2 <- create_tempdir(pattern = "subtempdir"))
 #'
-#' # It is possible to create recursive directories
-#' (tempdir_recursive <- create_tempdir(subdir = fs::path("abc", "def")))
+#' # It is not possible to create recursive subdirectories
+#' try(no_subtempdir <- create_tempdir(pattern = "subtempdir/otherdir"))
+#' try(no_subtempdir <- create_tempdir(pattern = "subtempdir\\otherdir"))
 #'
 #' # Clean up
-#' unlink(c(tempdir_std, dirname(tempdir_recursive)), recursive = TRUE)
-#' rm(tempdir_recursive, tempdir_std)
+#' unlink(c(my_subtempdir_ex1, my_subtempdir_ex2), recursive = TRUE)
+#' rm(my_subtempdir_ex1, my_subtempdir_ex2)
 #'
 #' @export
-create_tempdir <- function(subdir = "subdir") {
-  stopifnot(checkinput::is_character(subdir),
-            checkinput::is_path(subdir, require_sep = FALSE))
-  subdir_target <- fs::path_abs(path = fs::path(tempdir(), subdir))
-  tempdir_normalised <- fs::path_abs(tempdir())
-  if(!grepl(pattern = basename(tempdir()), x = subdir_target, fixed = TRUE)) {
-    stop("Using ", paste_quoted(subdir),
-         " as 'subdir' would write above 'tempdir()' which is not safe: ",
-         subdir_target)
+create_tempdir <- function(pattern = "tempdir") {
+  stopifnot(
+    "'pattern' should be a non-empty, non-NA_character_ character string" =
+      checkinput::is_character(pattern),
+    "'pattern' should not include file separators" = pattern == basename(pattern))
+
+  # Inspired by withr::local_tempdir()
+  tempdir_target <- tempfile(pattern = pattern, tmpdir = tempdir(check = TRUE))
+  stopifnot(checkinput::is_path(tempdir_target))
+  tempdir_target <- as.character(fs::path_abs(path = tempdir_target))
+
+  # fs::file_exists(tempdir_target) returns TRUE if 'tempdir_target' is an
+  # existing file or an existing directory.
+  if(fs::file_exists(tempdir_target)) {
+    # This error should not occur if 'tempfile()' worked correctly when creating
+    # 'tempdir_target' but makes it possible to detect problems that might arise.
+    stop("Temporary directory already exists (possibly as a file): change",
+         " 'pattern' (", paste_quoted(pattern), "):\n", tempdir_target)
   }
 
-  if(basename(subdir_target) == basename(tempdir())) {
-    stop("Using ", paste_quoted(subdir),
-         " as 'subdir' would write to 'tempdir()' which is not safe: ",
-         tempdir_normalised)
+  # Notes:
+  # - It was checked above that the target directory does not yet exist as a
+  #   directory nor as a file, so it is not a problem that fs::dir_exists() does
+  #   not complain if a directory already exists.
+  # - Using 'recurse = FALSE' to not allow the creation of recursive
+  #   subdirectories.
+  tempdir_target <- as.character(
+    fs::path_abs(fs::dir_create(path = tempdir_target, recurse = FALSE)))
+  if(!fs::dir_exists(tempdir_target)) {
+    stop("Attempt to create a subdirectory in the temporary directory failed:\n",
+         tempdir_target)
   }
 
-  # fs::dir_exists() returns FALSE if 'subdir_target' is a file instead of a
-  # directory.
-  if(!fs::dir_exists(subdir_target)) {
-    # Notes:
-    # - This branch is only used if the directory did not yet exist as directory,
-    #   so it is not a problem that dir.create() returns FALSE if a directory
-    #   already exists. However, the path can already exist as a file: then the
-    #   attempt to create it as a directory will fail, resulting in an error.
-    # - Not using fs::dir_create() because that returns the path instead of a
-    #   boolean vector indicating if creation succeeded.
-    # - Using 'recursive = TRUE' to allow creation of subdirectories inside a
-    #   not-yet existing directory (e.g., creating '<tempdir>/output/<date>' if
-    #   '<tempdir>/output' does not yet exist).
-    if(!dir.create(path = subdir_target, recursive = TRUE,
-                   showWarnings = TRUE)) {
-      stop("Attempt to create a subdirectory in the temporary directory failed:\n",
-           subdir_target)
-    }
-  } else {
-    stop("Temporary directory already exists: change 'subdir' (",
-         paste_quoted(subdir), "):\n", subdir_target)
-  }
-  invisible(subdir_target)
+  invisible(tempdir_target)
 }
