@@ -101,32 +101,32 @@ Other functions to handle paths and directories:
 
 ``` r
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"))
+my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpxR3dLJ/subdir/2026_06_11/abc.txt
+#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/2026_06_11/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpxR3dLJ/subdir/2026_06_11/11_06_2026_abc.txt
+#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/2026_06_11/11_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpxR3dLJ/subdir/def.html
+#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpxR3dLJ/subdir/11_06_2026_def.html
+#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/11_06_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpxR3dLJ/subdir/subdir/2026_06_11/abc.txt
+#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/subdir/2026_06_11/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpxR3dLJ/subdir/subdir/2026_06_11/11_06_2026_abc.txt
+#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/subdir/2026_06_11/11_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpxR3dLJ/subdir/subdir/def.html
+#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpxR3dLJ/subdir/subdir/11_06_2026_def.html
+#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/subdir/11_06_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

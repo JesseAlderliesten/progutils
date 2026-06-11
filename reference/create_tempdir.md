@@ -66,8 +66,8 @@ and
 will not accept your package). Although
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html) points to a
 temporary directory, that directory should **not** be removed because
-other R processes and
-[RStudio](https://posit.co/products/open-source/rstudio) might use it.
+other processes in R and
+[RStudio](https://posit.co/products/open-source/rstudio) also use it.
 Instead, create a temporary subdirectory in
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html) and afterwards clean
 up by [removing](https://rdrr.io/r/base/unlink.html) that subdirectory:
@@ -112,14 +112,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/RtmpxR3dLJ"
+#> [1] "/tmp/RtmptJZ0Kd"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(pattern = "subtempdir"))
-#> [1] "/tmp/RtmpxR3dLJ/subtempdir1a716aa2989f"
+#> [1] "/tmp/RtmptJZ0Kd/subtempdir1a1e7b540919"
 
 # Using the same 'pattern' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(pattern = "subtempdir"))
-#> [1] "/tmp/RtmpxR3dLJ/subtempdir1a71633ad333"
+#> [1] "/tmp/RtmptJZ0Kd/subtempdir1a1e38861dc0"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(pattern = "subtempdir/otherdir"))

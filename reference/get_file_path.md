@@ -92,51 +92,54 @@ Other functions to check equality:
 
 ``` r
 # Create files in a temporary directory so we know what is present.
-my_tempfiles <- tempfile(pattern = c("some_filename", "another_filename"),
-                         fileext = ".txt")
+my_tempdir <- create_tempdir(pattern = "examplegetfilepath")
+my_tempfiles <- fs::path_abs(
+  fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
+)
+
 # Create the files
 file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
-get_file_path(dir = tempdir(), pattern = "some_file")
-#> Using file '/tmp/RtmpxR3dLJ/some_filename1a712a8b72be.txt'
-#> /tmp/RtmpxR3dLJ/some_filename1a712a8b72be.txt
+get_file_path(dir = my_tempdir, pattern = "some_file")
+#> Using file '/tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c/some_filename.txt'
+#> /tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c/some_filename.txt
 
 # The same file is found if case-insensitive matching is used:
-get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
-#> Using file '/tmp/RtmpxR3dLJ/some_filename1a712a8b72be.txt'
-#> /tmp/RtmpxR3dLJ/some_filename1a712a8b72be.txt
+get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = TRUE)
+#> Using file '/tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c/some_filename.txt'
+#> /tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c/some_filename.txt
 
 # Error reporting the presence of a case-insensitive match.
-try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
-#> Error in get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE) : 
+try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE))
+#> Error in get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/RtmpxR3dLJ'.
-#> However, a case-insensitive match to 'pattern' is present: 'some_filename1a712a8b72be.txt'.
+#> '/tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c'.
+#> However, a case-insensitive match to 'pattern' is present: 'some_filename.txt'.
 
 # 'pattern' is interpreted as a regular expression
-get_file_path(dir = tempdir(), pattern = "^.+er_file")
-#> Using file '/tmp/RtmpxR3dLJ/another_filename1a71db5ab32.txt'
-#> /tmp/RtmpxR3dLJ/another_filename1a71db5ab32.txt
+get_file_path(dir = my_tempdir, pattern = "^.+er_file")
+#> Using file '/tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c/another_filename.txt'
+#> /tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c/another_filename.txt
 
 # Error reporting no match found.
-try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
+try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
-#> Error in get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",  : 
+#> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpxR3dLJ'.
-try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
+#> '/tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c'.
+try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
-#> Error in get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",  : 
+#> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpxR3dLJ'.
+#> '/tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
-try(get_file_path(dir = tempdir(), pattern = "_filename"))
-#> Error in get_file_path(dir = tempdir(), pattern = "_filename") : 
+try(get_file_path(dir = my_tempdir, pattern = "_filename"))
+#> Error in get_file_path(dir = my_tempdir, pattern = "_filename") : 
 #>   Multiple matches to pattern '_filename' are present in directory
-#> '/tmp/RtmpxR3dLJ': 'another_filename1a71db5ab32.txt', 'some_filename1a712a8b72be.txt'!
+#> '/tmp/RtmptJZ0Kd/examplegetfilepath1a1e630a923c': 'another_filename.txt', 'some_filename.txt'!
 
 # Clean up
 unlink(x = my_tempfiles)
