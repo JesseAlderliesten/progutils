@@ -1,5 +1,16 @@
 # Changelog
 
+## progutils 0.9.0
+
+#### Breaking changes
+
+- Update
+  [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md):
+  always create a new temporary directory instead of throwing an error
+  if `subdir` is re-used. Not allow creating recursive subdirectories:
+  cleaning up such directories is unsafe. Rename argument `subdir` to
+  `pattern`.
+
 ## progutils 0.8.0
 
 #### Breaking changes

@@ -7,7 +7,7 @@
 - [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
   : Create a file path
 - [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
-  : Create a temporary directory
+  : Create a new temporary directory
 - [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
   : Check that only a single matching file is present
 
