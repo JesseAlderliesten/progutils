@@ -2,16 +2,16 @@ tinytest::report_side_effects()
 
 
 #### Test the examples ####
-my_tempdir <- create_tempdir(pattern = "examplecreatedir")
+my_tempdir <- create_tempdir(pattern = "testexamplecreatedir")
 basename_my_tempdir <- basename(my_tempdir)
 
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                              add_date = FALSE)
-# On case-insensitive file systems such as Windows and macOS, the directory
-# 'res_dir_ONE' is the same as 'res_dir_one'. On case-sensitive file systems
-# such as Ubuntu, it differs in case from 'res_dir_one'.
+# On case-insensitive file systems, the directory 'res_dir_ONE' is the same as
+# 'res_dir_one'. On case-sensitive file systems it differs in case from
+# 'res_dir_one'.
 res_dir_ONE <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                           add_date = FALSE)
 res_dir_date <- create_dir(dir = fs::path(my_tempdir, "dir_date"),
