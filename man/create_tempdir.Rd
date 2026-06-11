@@ -52,10 +52,10 @@ up afterwards (otherwise R cmd check will issue a \code{Note} about
 and
 \href{https://cran.r-project.org/web/packages/policies.html#Source-packages}{CRAN}
 will not accept your package). Although \code{\link[=tempdir]{tempdir()}} points to a temporary
-directory, that directory should \strong{not} be removed because other \R
-processes and \href{https://posit.co/products/open-source/rstudio}{RStudio} might
-use it. Instead, create a temporary subdirectory in \code{\link[=tempdir]{tempdir()}} and
-afterwards clean up by \link[=unlink]{removing} that subdirectory:
+directory, that directory should \strong{not} be removed because other processes
+in \R and \href{https://posit.co/products/open-source/rstudio}{RStudio} also use
+it. Instead, create a temporary subdirectory in \code{\link[=tempdir]{tempdir()}} and afterwards
+clean up by \link[=unlink]{removing} that subdirectory:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{my_tempdir <- create_tempdir(pattern = "subtempdir")
 < do stuff >
