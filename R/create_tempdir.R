@@ -42,10 +42,10 @@
 #' and
 #' [CRAN](https://cran.r-project.org/web/packages/policies.html#Source-packages)
 #' will not accept your package). Although [tempdir()] points to a temporary
-#' directory, that directory should **not** be removed because other \R
-#' processes and [RStudio](https://posit.co/products/open-source/rstudio) might
-#' use it. Instead, create a temporary subdirectory in [tempdir()] and
-#' afterwards clean up by [removing][unlink()] that subdirectory:
+#' directory, that directory should **not** be removed because other processes
+#' in \R and [RStudio](https://posit.co/products/open-source/rstudio) also use
+#' it. Instead, create a temporary subdirectory in [tempdir()] and afterwards
+#' clean up by [removing][unlink()] that subdirectory:
 #'
 #' ```
 #' my_tempdir <- create_tempdir(pattern = "subtempdir")
