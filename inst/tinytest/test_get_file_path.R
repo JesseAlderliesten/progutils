@@ -2,7 +2,7 @@ tinytest::report_side_effects()
 
 
 #### Test the examples ####
-my_tempdir <- create_tempdir(pattern = "examplegetfilepath")
+my_tempdir <- create_tempdir(pattern = "testexamplegetfilepath")
 my_tempfiles <- fs::path_abs(
   fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
 )
