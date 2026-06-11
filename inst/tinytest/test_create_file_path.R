@@ -3,16 +3,29 @@ tinytest::report_side_effects()
 #### Tests ####
 ##### Preparations #####
 # Create temporary directory and temporary file to use in tests.
-my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "testcreatepath"))
-tempdir_pattern <- paste0(basename(tempdir()), ".+$")
-tempdir_basename <- basename(tempdir())
+my_tempdir <- create_tempdir(pattern = "testcreatepath")
+basename_my_tempdir <- basename(my_tempdir)
+
+pattern_temp <- paste0(basename_my_tempdir, ".+$")
 current_date_Ymd <- format(Sys.time(), format = "%Y_%m_%d")
 current_date_dmY <- format(Sys.time(), format = "%d_%m_%Y")
 
-fs::dir_create(path = my_tempdir, showWarnings = FALSE)
+# Test that temporary subdirectory is writeable by writing a csv-file, modified
+# from an example in help(write.table)
 my_tempfile <- fs::path_abs(path = fs::path(my_tempdir, "test_df.csv"))
-# Write csv-file, modified from example in help(write.table)
+expect_false(fs::is_file(my_tempfile))
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
+expect_true(fs::is_file(my_tempfile))
+
+##### Warnings #####
+# A warning is issued if the file indicated by the returned path already exists.
+expect_warning(
+  expect_true(endsWith(
+    create_file_path(filename = basename(my_tempfile), format_stamp = "",
+                     dir = my_tempdir, add_date = FALSE),
+    suffix = fs::path(basename_my_tempdir, basename(my_tempfile)))),
+  pattern = "File already exists:", strict = TRUE, fixed = TRUE)
+
 
 ##### Correct combinations #####
 # Test combinations of stamp formats (absent, default or alternative format)
@@ -20,52 +33,51 @@ write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "",
                    dir = my_tempdir, add_date = TRUE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
-                    "abc.txt")
+  suffix = fs::path(basename_my_tempdir, current_date_Ymd, "abc.txt")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                    dir = my_tempdir, add_date = TRUE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
+  suffix = fs::path(basename_my_tempdir, current_date_Ymd,
                     paste0(current_date_dmY, "_abc.txt"))
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "",
                    dir = my_tempdir, add_date = FALSE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", "def.html")
+  suffix = fs::path(basename_my_tempdir, "def.html")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                    dir = my_tempdir, add_date = FALSE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", paste0(current_date_dmY, "_def.html"))
+  suffix = fs::path(basename_my_tempdir, paste0(current_date_dmY, "_def.html"))
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "",
                    dir = fs::path(my_tempdir, "subdir"), add_date = TRUE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", "subdir", current_date_Ymd, "abc.txt")
+  suffix = fs::path(basename_my_tempdir, "subdir", current_date_Ymd, "abc.txt")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                    dir = fs::path(my_tempdir, "subdir"), add_date = TRUE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", "subdir",
+  suffix = fs::path(basename_my_tempdir, "subdir",
                     current_date_Ymd, paste0(current_date_dmY, "_abc.txt"))
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "",
                    dir = fs::path(my_tempdir, "subdir"), add_date = FALSE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", "subdir", "def.html")
+  suffix = fs::path(basename_my_tempdir, "subdir", "def.html")
 ))
 
 expect_true(endsWith(
   create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                    dir = fs::path(my_tempdir, "subdir"), add_date = FALSE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", "subdir",
+  suffix = fs::path(basename_my_tempdir, "subdir",
                     paste0(current_date_dmY, "_def.html"))
 ))
 
@@ -74,7 +86,7 @@ for(filenm in c("a.txt", "c#c.txt", "d d.txt", "e3f.txt", "g_g.g.txt", "ab.c#"))
   expect_true(endsWith(
     create_file_path(filename = filenm, format_stamp = "",
                      dir = my_tempdir, add_date = FALSE),
-    suffix = fs::path(tempdir_basename, "testcreatepath", filenm)
+    suffix = fs::path(basename_my_tempdir, filenm)
   ))
 }
 
@@ -123,7 +135,7 @@ expect_warning(
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Ydef",
                    dir = my_tempdir, add_date = TRUE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
+  suffix = fs::path(basename_my_tempdir, current_date_Ymd,
                     paste0(current_date_dmY, "def_abc.txt"))
 ))
 
@@ -132,19 +144,20 @@ expect_true(endsWith(
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "%d#.%m_%Ydef",
                    dir = my_tempdir, add_date = TRUE),
-  suffix = fs::path(tempdir_basename, "testcreatepath", current_date_Ymd,
+  suffix = fs::path(basename_my_tempdir, current_date_Ymd,
                     paste0(format(Sys.time(), format = "%d#.%m_%Y"), "def_abc.txt"))
 ))
 
 expect_true(
-  grepl(pattern = paste0("testcreatepath.[[:digit:]]{2}_[[:digit:]]{2}",
+  grepl(pattern = paste0(basename_my_tempdir,
+                         ".[[:digit:]]{2}_[[:digit:]]{2}",
                          "_[[:digit:]]{2}\\.[[:digit:]]{3}_test1c.txt$"),
         x = create_file_path(filename = "test1c.txt", format_stamp = "%H_%M_%OS3",
                              dir = my_tempdir, add_date = FALSE))
 )
 
 expect_true(
-  grepl(pattern = paste0("testcreatepath.[[:digit:]]{2}_[[:digit:]]{2}",
+  grepl(pattern = paste0(basename_my_tempdir, ".[[:digit:]]{2}_[[:digit:]]{2}",
                          "_[[:digit:]]{2}\\.[[:digit:]]{5}_test1c.txt$"),
         x = create_file_path(filename = "test1c.txt", format_stamp = "%H_%M_%OS5",
                              dir = my_tempdir, add_date = FALSE))
@@ -173,7 +186,7 @@ expect_error(
 expect_true(endsWith(
   create_file_path(filename = "abc.txt", format_stamp = "",
                    dir = fs::path(my_tempdir, ".txt"), add_date = FALSE),
-  fs::path(tempdir_basename, "testcreatepath", ".txt", "abc.txt")
+  fs::path(basename_my_tempdir, ".txt", "abc.txt")
 ))
 
 expect_error(
@@ -205,17 +218,6 @@ for(dir in list(paste0(my_tempdir, ".."),
       pattern = "is_path(dir) is not TRUE", fixed = TRUE),
     pattern = "should not end with ' ' or '.'", strict = TRUE, fixed = TRUE)
 }
-
-##### Warnings #####
-# A warning is issued if the file indicated by the returned path already exists.
-my_tempfile <- fs::path(my_tempdir, "testfile.csv")
-write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
-expect_warning(
-  expect_true(endsWith(
-    create_file_path(filename = basename(my_tempfile), format_stamp = "",
-                     dir = my_tempdir, add_date = FALSE),
-    suffix = fs::path(tempdir_basename, "testcreatepath", basename(my_tempfile)))),
-  pattern = "File already exists:", strict = TRUE, fixed = TRUE)
 
 
 #### Invalid input ####
@@ -249,4 +251,4 @@ unlink(x = my_tempdir, recursive = TRUE)
 
 ##### Remove objects used in tests #####
 rm(add_date, current_date_dmY, current_date_Ymd, dir, filenm, filenm_in,
-   ind_filenm, my_tempdir, my_tempfile, tempdir_basename, tempdir_pattern)
+   ind_filenm, my_tempdir, my_tempfile, basename_my_tempdir, pattern_temp)

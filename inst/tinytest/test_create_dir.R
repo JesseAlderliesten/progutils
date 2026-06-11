@@ -53,10 +53,12 @@ my_tempdir <- create_tempdir(pattern = "testcreatedir")
 basename_my_tempdir <- basename(my_tempdir)
 pattern_temp <- fs::path(basename_my_tempdir, "temp")
 
-my_tempfile <- fs::path(my_tempdir, "test_df.csv")
-# Write csv-file, modified from example in help(write.table)
+# Test that temporary subdirectory is writeable by writing a csv-file, modified
+# from an example in help(write.table)
+my_tempfile <- fs::path_abs(fs::path(my_tempdir, "test_df.csv"))
+expect_false(fs::is_file(my_tempfile))
 write.table(x = data.frame(a = "a", b = pi), file = my_tempfile)
-
+expect_true(fs::is_file(my_tempfile))
 
 # without date directory
 dir <- fs::path(my_tempdir, "temp_subdirF_dateF")
