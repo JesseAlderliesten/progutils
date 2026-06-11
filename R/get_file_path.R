@@ -45,30 +45,33 @@
 #'
 #' @examples
 #' # Create files in a temporary directory so we know what is present.
-#' my_tempfiles <- tempfile(pattern = c("some_filename", "another_filename"),
-#'                          fileext = ".txt")
+#' my_tempdir <- create_tempdir(pattern = "examplegetfilepath")
+#' my_tempfiles <- fs::path_abs(
+#'   fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
+#' )
+#'
 #' # Create the files
 #' file.create(my_tempfiles)
 #'
-#' get_file_path(dir = tempdir(), pattern = "some_file")
+#' get_file_path(dir = my_tempdir, pattern = "some_file")
 #'
 #' # The same file is found if case-insensitive matching is used:
-#' get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = TRUE)
+#' get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = TRUE)
 #'
 #' # Error reporting the presence of a case-insensitive match.
-#' try(get_file_path(dir = tempdir(), pattern = "SOME_FILE", ignore_case = FALSE))
+#' try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE))
 #'
 #' # 'pattern' is interpreted as a regular expression
-#' get_file_path(dir = tempdir(), pattern = "^.+er_file")
+#' get_file_path(dir = my_tempdir, pattern = "^.+er_file")
 #'
 #' # Error reporting no match found.
-#' try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
+#' try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
 #'                  ignore_case = TRUE))
-#' try(get_file_path(dir = tempdir(), pattern = "missing_filename_abcde",
+#' try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
 #'                  ignore_case = FALSE))
 #'
 #' # Error if multiple matches are present.
-#' try(get_file_path(dir = tempdir(), pattern = "_filename"))
+#' try(get_file_path(dir = my_tempdir, pattern = "_filename"))
 #'
 #' # Clean up
 #' unlink(x = my_tempfiles)

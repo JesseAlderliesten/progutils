@@ -59,7 +59,7 @@ if it does not yet exist.
 
 \examples{
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- fs::path_abs(path = fs::path(tempdir(), "subdir"))
+my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
