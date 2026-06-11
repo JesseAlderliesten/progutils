@@ -93,7 +93,10 @@ create_tempdir <- function(pattern = "tempdir") {
   stopifnot(
     "'pattern' should be a non-empty, non-NA_character_ character string" =
       checkinput::is_character(pattern),
-    "'pattern' should not include file separators" = pattern == basename(pattern))
+    # Using 'pattern == basename(pattern)' to detect slashes does not work on
+    # Ubuntu and MacOS
+    "'pattern' should not include file separators" =
+      !grepl(pattern = "\\\\", x = pattern) && !grepl(pattern = "/", x = pattern))
 
   # Inspired by withr::local_tempdir()
   tempdir_target <- tempfile(pattern = pattern, tmpdir = tempdir(check = TRUE))
