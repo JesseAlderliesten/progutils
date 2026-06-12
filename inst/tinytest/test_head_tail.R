@@ -36,7 +36,7 @@ expect_silent(expect_identical(head_tail(as.data.frame(m)), as.data.frame(m_out)
 expect_silent(expect_identical(head_tail(x = test_list, n = 1), test_list[c(1, 6)]))
 expect_silent(expect_identical(head_tail(x = test_list), test_list))
 
-expect_silent(expect_identical(head_tail(x = NULL, n = 1), NULL))
+expect_silent(expect_null(head_tail(x = NULL, n = 1)))
 expect_silent(expect_identical(head_tail(x = character(0L), n = 1), character(0L)))
 expect_silent(expect_identical(head_tail(x = numeric(0L), n = 1), numeric(0L)))
 

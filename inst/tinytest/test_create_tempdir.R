@@ -15,8 +15,8 @@ expect_true(fs::dir_exists(my_subtempdir_ex1))
 expect_true(fs::dir_exists(my_subtempdir_ex2))
 
 # Test that directories are inside 'tempdir()'
-expect_true(basename(dirname(my_subtempdir_ex1)) == basename_my_tempdir)
-expect_true(basename(dirname(my_subtempdir_ex2)) == basename_my_tempdir)
+expect_identical(basename(dirname(my_subtempdir_ex1)), basename_my_tempdir)
+expect_identical(basename(dirname(my_subtempdir_ex2)), basename_my_tempdir)
 
 # Test that names start with 'pattern'
 expect_true(startsWith(x = basename(my_subtempdir_ex1), prefix = pattern))

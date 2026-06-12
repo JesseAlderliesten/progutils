@@ -101,7 +101,6 @@ replace_vals <- function(
   }
 
   if(is.factor(x)) {
-    x_orig <- x
     levels_repl <- replace_vals(
       x = levels(x), old = old, new = new, ignore_case = ignore_case,
       allow_multiple = allow_multiple, warn_absent = warn_absent,
@@ -155,10 +154,10 @@ replace_vals <- function(
 
   if(length(ind_replace) > 0L) {
     old_detected <- unique(x[ind_replace])
-    if(!ignore_case) {
-      old_detected_case <- old_detected
-    } else {
+    if(ignore_case) {
       old_detected_case <- unique(tolower(old_detected))
+    } else {
+      old_detected_case <- old_detected
     }
 
     old_detected_quoted <- paste_quoted(old_detected)

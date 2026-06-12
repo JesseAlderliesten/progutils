@@ -9,9 +9,15 @@ x_char_mix <- c("1.0", "-3", "NA", "Inf", "5.0", "1.3", "-1.3", "13.4", "0.013")
 x_num <- c(1, 20, 20, 5, 5)
 out_num_mix <- c(1, -3, NA, Inf, 5, 1.3, -1.3, 13.4, 0.013)
 
-as_num_fact <- function(x) {as.numeric(levels(x))[x]}
-as_num_7.10 <- function(x) {as.numeric(levels(x))[as.integer(x)]}
-as_num_base <- function(x) {as.numeric(x)}
+as_num_fact <- function(x) {
+  as.numeric(levels(x))[x]
+}
+as_num_7.10 <- function(x) {
+  as.numeric(levels(x))[as.integer(x)]
+}
+as_num_base <- function(x) {
+  as.numeric(x)
+}
 
 
 #### Test the examples ####

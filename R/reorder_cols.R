@@ -41,7 +41,7 @@ reorder_cols <- function(x, new_order) {
     stop("'x' should have column names!")
   }
 
-  if(any(is.na(colnames(x))) ||
+  if(anyNA(colnames(x)) ||
      any(colnames(x) != make.names(colnames(x), unique = TRUE))) {
     checkinput::all_names(colnames(x))
     stop("Column names of 'x' should be unique and syntactically valid!")

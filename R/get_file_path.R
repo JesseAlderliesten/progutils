@@ -108,8 +108,7 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
     pattern, "' are present in directory\n'", dir, "'")
 
   if(length(files_present) > 1L) {
-    stop(paste0("Multiple ", msg_match, ": ",
-                paste_quoted(basename(files_present)), "!"))
+    stop("Multiple ", msg_match, ": ", paste_quoted(basename(files_present)), "!")
   }
 
   if(length(files_present) == 0L) {

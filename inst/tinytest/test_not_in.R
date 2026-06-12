@@ -59,7 +59,7 @@ expect_silent(expect_identical(
 # 2a (allow integer input)
 expect_silent(expect_identical(
   not_in(x = 10:13, table = 12:15, value = TRUE),
-  c(10:11)))
+  10:11))
 
 expect_silent(expect_identical(
   not_in(x = 12:15, table = 10:13, value = FALSE),

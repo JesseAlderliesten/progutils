@@ -72,12 +72,12 @@ wrap_text <- function(x, width = 80L, ignore_newlines = TRUE) {
   bool_end_newline <- grepl(pattern = "\n$", x = x)
 
   n_discard <- 0L
-  if(!ignore_newlines) {
-    x <- strsplit(x = x, split = "\n")[[1]]
-  } else {
+  if(ignore_newlines) {
     if(bool_start_newline) {
       n_discard <- attr(regexpr("^\n+", x), "match.length") - 1L
     }
+  } else {
+    x <- strsplit(x = x, split = "\n", fixed = TRUE)[[1]]
   }
 
   # Notes:
