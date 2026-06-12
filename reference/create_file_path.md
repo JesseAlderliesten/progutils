@@ -105,28 +105,28 @@ my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/2026_06_11/abc.txt
+#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/2026_06_12/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/2026_06_11/11_06_2026_abc.txt
+#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/2026_06_12/12_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/def.html
+#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/11_06_2026_def.html
+#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/12_06_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/subdir/2026_06_11/abc.txt
+#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/subdir/2026_06_12/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/subdir/2026_06_11/11_06_2026_abc.txt
+#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/subdir/2026_06_12/12_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/subdir/def.html
+#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmptJZ0Kd/examplecreatefilepath1a1e256f4d/subdir/11_06_2026_def.html
+#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/subdir/12_06_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

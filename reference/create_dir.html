@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,8 +115,8 @@ pattern.</p>
 <span class="r-in"><span><span class="va">res_dir_one</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_one"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">dir_exists</a></span><span class="op">(</span><span class="va">res_dir_one</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmptJZ0Kd/examplecreatedir1a1ed9c556d/dir_one </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                TRUE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpoQCDEQ/examplecreatedir19c06a7b155a/dir_one </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 TRUE </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># An attempt to create a directory that already exists does not change any</span></span></span>
 <span class="r-in"><span><span class="co"># directory and the same directory is returned.</span></span></span>
@@ -137,8 +137,8 @@ pattern.</p>
 <span class="r-in"><span><span class="va">res_dir_date</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_date"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                           add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">dir_exists</a></span><span class="op">(</span><span class="va">res_dir_date</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmptJZ0Kd/examplecreatedir1a1ed9c556d/dir_date/2026_06_11 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                            TRUE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpoQCDEQ/examplecreatedir19c06a7b155a/dir_date/2026_06_12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                             TRUE </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cleaning up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">my_tempdir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
