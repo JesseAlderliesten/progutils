@@ -1,3 +1,13 @@
+# progutils 0.10.0
+
+### Bugfixes
+- Fix pattern used to detect backslashes in `pattern`.
+
+### Documentation
+- Apply stylistic suggestions provided by various packages like `goodpractice`
+  that check code sanity.
+
+
 # progutils 0.9.0
 
 ### Breaking changes

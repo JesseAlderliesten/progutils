@@ -61,8 +61,7 @@ signal_text <- function(text, signal = c("error", "warning", "message", "quiet")
          "warning" = warning(text, call. = FALSE),
          "message" = message(text),
          "quiet" = NULL,
-         stop(paste0("Invalid value for argument 'signal': ",
-                     paste_quoted(signal))))
+         stop("Invalid value for argument 'signal': ", paste_quoted(signal)))
 
   invisible(text)
 }

@@ -8,7 +8,7 @@ my_tempfiles <- fs::path_abs(
 )
 
 # Create the files
-expect_equal(file.create(my_tempfiles), rep.int(TRUE, length(my_tempfiles)))
+expect_identical(file.create(my_tempfiles), rep.int(TRUE, length(my_tempfiles)))
 expect_true(all(fs::is_file(my_tempfiles)))
 
 expect_message(

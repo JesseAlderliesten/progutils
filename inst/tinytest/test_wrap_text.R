@@ -74,7 +74,8 @@ expect_identical(
   x_single)
 expect_identical(
   wrap_text(x = x_single,
-            width = nchar_x - regexpr(pattern = "\n", text = x_single)[[1]],
+            width = nchar_x - regexpr(pattern = "\n", text = x_single,
+                                      fixed = TRUE)[[1]],
             ignore_newlines = FALSE),
   x_single)
 

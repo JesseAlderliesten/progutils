@@ -11,7 +11,7 @@ x_in <- c(am = -1, bm = -2, i = 9, j = 10, z = 26, a = 1, b = 2, c = 3)
 x_in_InfNa <- c(x_in[1:3], l = NA, m = NaN, n = Inf, o = -Inf, x_in[4:8])
 x_in_char <- c(a = "abc", b = "def", c = "this is text")
 x_out_named <- paste(names(x_in), x_in, sep = ": ", collapse = ", ")
-x_out_nonint <- paste(signif(x = x_in / 8, digits = 2), collapse = ", ")
+x_out_nonint <- toString(signif(x = x_in / 8, digits = 2))
 x_out_char <- "a: abc, b: def, c: this is text"
 x_fact_ind <- c(4:6, 5L)
 x_fact <- as.factor(letters[x_fact_ind])
@@ -52,7 +52,7 @@ expect_silent(expect_identical(vect_to_char(as.factor(c("a", "", "c", NA_charact
 
 expect_silent(expect_identical(vect_to_char(x = x_in), x_out_named))
 expect_silent(expect_identical(vect_to_char(x = unname(x_in)),
-                               paste(x_in, collapse = ", ")))
+                               toString(x_in)))
 
 expect_silent(expect_identical(vect_to_char(x = x_in_char), x_out_char))
 expect_silent(expect_identical(vect_to_char(x = unname(x_in_char)),
@@ -104,7 +104,8 @@ expect_silent(
 
 # If the use of 'signif_custom()' is implemented, the next test should change to:
 # expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14286")
-expect_silent(expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14300"))
+expect_silent(
+  expect_identical(vect_to_char(x = c(10^c(-1, 5) / 7)), "0.0143, 14300"))
 
 expect_silent(expect_identical(vect_to_char(x = x_fact), "d, e, f, e"))
 expect_silent(expect_identical(vect_to_char(x = x_fact_int), "4, 5, 6, 5"))

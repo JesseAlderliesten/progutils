@@ -307,8 +307,7 @@ expect_message(
     c("b", "L", "M")),
   pattern = "Replaced values 'K' with 'b'", strict = TRUE, fixed = TRUE)
 
-# Handle false-positive matches if a value in tolower(old) is equal to
-# tolower(new)
+# Handle false-positive matches if a value in tolower(old) is equal to tolower(new)
 expect_silent(
   expect_identical(
     replace_vals(x = c("d", "A", "b", "c"), old = "a", new = "A",
