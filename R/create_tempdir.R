@@ -96,7 +96,8 @@ create_tempdir <- function(pattern = "tempdir") {
     # Using 'pattern == basename(pattern)' to detect slashes does not work on
     # Ubuntu and MacOS
     "'pattern' should not include file separators" =
-      !grepl(pattern = "\\\\", x = pattern) && !grepl(pattern = "/", x = pattern))
+      !grepl(pattern = "\\", x = pattern, fixed = TRUE) &&
+      !grepl(pattern = "/", x = pattern, fixed = TRUE))
 
   # Inspired by withr::local_tempdir()
   tempdir_target <- tempfile(pattern = pattern, tmpdir = tempdir(check = TRUE))
