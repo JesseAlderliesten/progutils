@@ -22,9 +22,8 @@ values are present. The return is \link{invisible}.
 Check for values that differ only in their case
 }
 \details{
-Values in \code{x} that only differ from each other in their case generate an
-\link[=stop]{error}, \link{warning}, or \link{message} if \code{signal} is \code{error}, \code{warning}, or
-\code{message}, respectively. Values are silently returned if \code{signal} is \code{quiet}.
+Values in \code{x} that only differ from each other in their case lead to a
+\link[=signal_text]{signal} as indicated by argument \code{signal}.
 }
 \section{Notes}{
 

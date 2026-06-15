@@ -4,9 +4,8 @@
 #' @param x Character vector to check.
 #'
 #' @details
-#' Values in `x` that only differ from each other in their case generate an
-#' [error][stop], [warning], or [message] if `signal` is `error`, `warning`, or
-#' `message`, respectively. Values are silently returned if `signal` is `quiet`.
+#' Values in `x` that only differ from each other in their case lead to a
+#' [signal][signal_text()] as indicated by argument `signal`.
 #'
 #' @returns
 #' Character vector with [unique][unique()], [sorted][sort()] values in `x` that
