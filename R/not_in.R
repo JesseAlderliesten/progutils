@@ -77,9 +77,9 @@ not_in <- function(x, table, value = TRUE) {
   # list input to 'x' or 'table' is not allowed because it leads to 'x' being
   # returned.
   stopifnot(is.null(dim(x)), length(x) > 0L, is.atomic(x),
-            "Use are_equal() to match input of type 'double'" = !is.double(x),
             is.null(dim(table)), length(table) > 0L, is.atomic(table),
-            "Use are_equal() to match input of type 'double'" = !is.double(table),
+            "Use are_equal() to match input of type 'double'" =
+              !is.double(x) && !is.double(table),
             checkinput::is_logical(value))
 
   if(is.factor(x)) {

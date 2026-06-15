@@ -102,8 +102,8 @@ expect_silent(
   )
 )
 
-# If the use of 'signif_custom()' is implemented, the next test should change to:
-# expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14286")
+# If the use of 'signif_custom()' is implemented, the next test should change
+# to: expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14286")
 expect_silent(
   expect_identical(vect_to_char(x = c(10^c(-1, 5) / 7)), "0.0143, 14300"))
 
