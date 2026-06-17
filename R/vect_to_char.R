@@ -38,6 +38,7 @@
 #'
 #' @seealso [toString()] which can be used if names of `x` can be removed.
 #'
+#' @family functions to convert types
 #' @family functions to modify character vectors
 #' @family functions to modify factors
 #'

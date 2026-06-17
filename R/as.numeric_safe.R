@@ -39,6 +39,7 @@
 #' [formatC()] and [option][options()] `scipen` on formatting numbers,
 #' [utils::type.convert()]
 #'
+#' @family functions to convert types
 #' @family functions to modify character vectors
 #' @family functions to modify factors
 #'

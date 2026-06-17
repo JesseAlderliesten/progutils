@@ -23,6 +23,7 @@ reference:
   - check_case
   - paste_quoted
   - replace_vals
+  - signal_text
   - unpaste_unquote
   - vect_to_char
   - wrap_text
@@ -47,8 +48,3 @@ reference:
   - paste_quoted
   - reorder_levels
   - vect_to_char
-  - wrap_text
-
-- title: Miscellaneous
-- contents:
-  - signal_text

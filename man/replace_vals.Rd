@@ -106,12 +106,15 @@ Other functions to check equality:
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link{reexports}},
+\code{\link[=signal_text]{signal_text()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},
 \code{\link[=vect_to_char]{vect_to_char()}},
 \code{\link[=wrap_text]{wrap_text()}}
 
 Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link{reexports}},
 \code{\link[=reorder_levels]{reorder_levels()}},
 \code{\link[=vect_to_char]{vect_to_char()}}
 }

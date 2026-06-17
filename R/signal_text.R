@@ -25,6 +25,8 @@
 #' `text`, with a phrase indicating the origin of the signal if `origin` is not
 #' `NULL`, returned [invisibly][invisible()].
 #'
+#' @family functions to modify character vectors
+#'
 #' @seealso
 #' [wrap_text()]
 #'

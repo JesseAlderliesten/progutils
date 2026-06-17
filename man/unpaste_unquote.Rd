@@ -41,7 +41,9 @@ unpaste_unquote(x = x, collapse = character(0), quotemarks = character(0))
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link{reexports}},
 \code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=signal_text]{signal_text()}},
 \code{\link[=vect_to_char]{vect_to_char()}},
 \code{\link[=wrap_text]{wrap_text()}}
 }
