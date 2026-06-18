@@ -2,7 +2,7 @@
 
 Test element-wise near-equality of numeric vectors by allowing for small
 numeric errors to make `are_equal()` safer than
-[==](https://rdrr.io/r/base/Comparison.html).
+[`==`](https://rdrr.io/r/base/Comparison.html).
 
 ## Usage
 
@@ -27,8 +27,8 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 A vector with logical values (`TRUE`, `FALSE` or `NA`) indicating if
 elements in `x` and `y` are equal to each other.
 [NA](https://rdrr.io/r/base/NA.html) is returned for comparisons
-involving numeric `NA`s (i.e., `NA_integer_` and `NA_real_`),
-[NaN](https://rdrr.io/r/base/is.finite.html)s, or [infinite
+involving numeric `NA` (i.e., `NA_integer_` or `NA_real_`),
+[NaN](https://rdrr.io/r/base/is.finite.html), or [infinite
 values](https://rdrr.io/r/base/is.finite.html) with the same sign.
 
 ## Details
@@ -50,9 +50,9 @@ to check for element-wise near-equality to natural numbers;
 [`all.equal()`](https://rdrr.io/r/base/all.equal.html) to check more
 generally for near-equality;
 [`identical()`](https://rdrr.io/r/base/identical.html) to check for
-exact equality and [Comparison](https://rdrr.io/r/base/Comparison.html)
-to do so using binary operators;
-[`match()`](https://rdrr.io/r/base/match.html) and
+exact equality and
+[`Comparison`](https://rdrr.io/r/base/Comparison.html) to do so using
+binary operators; [`match()`](https://rdrr.io/r/base/match.html) and
 [`progutils::not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
 to compare character vectors; [R FAQ
 7.31](https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)

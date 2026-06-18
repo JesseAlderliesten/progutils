@@ -9,7 +9,7 @@ numeric values."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,10 +105,10 @@ the name-value pairs are separated by <code>collapse</code>, thus returning a ch
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>vect_to_char()</code> returns <code>NULL</code> as <code>"NULL"</code>, other zero-length objects as
-<code>"&lt;class&gt;(0)"</code> (e.g., <code>"logical(0)"</code>), <code>""</code> as <code>'""'</code>, and non-logical <code>NA</code>s
-as <code>"NA_&lt;class&gt;_"</code> (e.g., <code>"NA_real_"</code>; for <a href="https://rdrr.io/r/base/factor.html" class="external-link">factors</a> this is
-<code>"NA_character_"</code>).</p>
+    <p><code>NULL</code> is returned as <code>"'NULL'"</code>, other zero-length objects are returned as
+<code>"'&lt;class&gt;(0)'"</code> (e.g., <code>"'logical(0)'"</code>), <code>""</code> as <code>'""'</code>, logical <code>NA</code> as
+<code>"'NA'"</code>, and non-logical <code>NA</code>s as <code>"'NA_&lt;class&gt;_'"</code> (e.g., <code>"'NA_real_'"</code>;
+for <a href="https://rdrr.io/r/base/factor.html" class="external-link">factors</a> this is <code>"'NA_character_'"</code>).</p>
     </div>
     <div class="section level2">
     <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
@@ -121,13 +121,20 @@ see the last <code>Example</code>.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/toString.html" class="external-link">toString()</a></code> which can be used if names of <code>x</code> can be removed.</p>
+<p>Other functions to convert types:
+<code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
+<code>reexports</code>,
+<code><a href="reorder_levels.html">reorder_levels()</a></code></p>
 <p>Other functions to modify character vectors:
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
+<code>reexports</code>,
 <code><a href="replace_vals.html">replace_vals()</a></code>,
+<code><a href="signal_text.html">signal_text()</a></code>,
 <code><a href="unpaste_unquote.html">unpaste_unquote()</a></code>,
 <code><a href="wrap_text.html">wrap_text()</a></code></p>
 <p>Other functions to modify factors:
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
+<code>reexports</code>,
 <code><a href="reorder_levels.html">reorder_levels()</a></code>,
 <code><a href="replace_vals.html">replace_vals()</a></code></p></div>
     </div>

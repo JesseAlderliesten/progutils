@@ -111,8 +111,7 @@ License](https://jessealderliesten.github.io/progutils/LICENSE.md).
 To cite package 'progutils' in publications use:
 
   Alderliesten J (2026). _progutils: Programming Utilities_. R package
-  version 0.8.0, commit 0e015904e9f4b84dbaf8873515a5a3a237056166,
-  <https://github.com/JesseAlderliesten/progutils>.
+  version 0.10.1, <https://github.com/JesseAlderliesten/progutils>.
 
 A BibTeX entry for LaTeX users is
 
@@ -120,7 +119,7 @@ A BibTeX entry for LaTeX users is
     title = {progutils: Programming Utilities},
     author = {Jesse Alderliesten},
     year = {2026},
-    note = {R package version 0.8.0, commit 0e015904e9f4b84dbaf8873515a5a3a237056166},
+    note = {R package version 0.10.1},
     url = {https://github.com/JesseAlderliesten/progutils},
   }
 ```
@@ -155,6 +154,8 @@ addition, many packages have an `utils` folder in their `R` directory.
   : Objects exported from other packages
 - [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
   : Replace character values or factor levels
+- [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
+  : Signal a text to the user
 - [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md)
   : Create a character vector from a string with quotation marks
 - [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
@@ -195,11 +196,4 @@ addition, many packages have an `utils` folder in their `R` directory.
   : Reorder factor levels
 - [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
   : Convert a vector to a character string
-- [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
-  : Wrap text
-
-## Miscellaneous
-
-- [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
-  : Signal a text to the user
 

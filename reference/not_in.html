@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,17 +85,18 @@ returned <code>NA</code>s (if <code>value</code> is <code>TRUE</code>) and the r
 <code>value</code> is <code>FALSE</code>) have the same type as the <code>NA</code>s in <code>x</code> if <code>NA</code>s are
 absent from <code>table</code>. <code>NA</code>s of different types in <code>x</code> and <code>table</code> match each
 other.</p>
-<p>Names are <em>not</em> considered when matching but are retained in the output,
+<p>Names are <strong>not</strong> considered when matching but are retained in the output,
 similar to <code>%in%</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
 
 
-<p><code>not_in()</code> does not allow input of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code> because matching
-such input should take small numerical errors into account by using a
-tolerance, for example, as the error message indicates, using <code><a href="are_equal.html">are_equal()</a></code>.</p>
-<p><code>not_in()</code> does not allow zero-length input because zero-length input behaves
+<p><code>not_in()</code> does <strong>not</strong> allow input of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code> because
+matching
+such input should allow for small numerical errors by using a tolerance, for
+example, as the error message indicates, using <code><a href="are_equal.html">are_equal()</a></code>.</p>
+<p><code>not_in()</code> does <strong>not</strong> allow zero-length input because zero-length input behaves
 slightly different from other values: if <code>character(0)</code> is present in <code>x</code> but
 absent from <code>table</code>, <code>not_in()</code> would return <code>logical(0)</code> if <code>value</code> is
 <code>FALSE</code>. If <code>value</code> is <code>TRUE</code>, the behaviour would be normal: returning

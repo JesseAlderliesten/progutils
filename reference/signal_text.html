@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,20 +74,30 @@ message. Ignored if it is <code>character(0)</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>text</code>, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>.</p>
+    <p><code>text</code>, with a phrase indicating the origin of the signal if <code>origin</code> is not
+<code>NULL</code>, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>text</code> is coerced to a character vector using <code><a href="vect_to_char.html">vect_to_char()</a></code>, which treats
 zero-length input and input with length larger than one better than
 <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> etc. that use <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>, see the <code>Examples</code>. Call <code><a href="vect_to_char.html">vect_to_char()</a></code>
-beforehand on <code>text</code> to control rounding and wrapping, see the last example.</p>
+beforehand on <code>text</code> to control rounding and wrapping, see the <code>Examples</code>.</p>
 <p><code>text</code> is signalled through an <a href="https://rdrr.io/r/base/stop.html" class="external-link">error</a>, <a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a>, <a href="https://rdrr.io/r/base/message.html" class="external-link">message</a>, or
-quietly, depending on argument <code>signal</code>.</p>
+quietly, depending on argument <code>signal</code>. To make <code>text</code> available for further
+queries when using <code>signal_text()</code> in another function, add the content of the signal as an
+attribute to the returned object, see the last <code>Example</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="wrap_text.html">wrap_text()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="wrap_text.html">wrap_text()</a></code></p>
+<p>Other functions to modify character vectors:
+<code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
+<code>reexports</code>,
+<code><a href="replace_vals.html">replace_vals()</a></code>,
+<code><a href="unpaste_unquote.html">unpaste_unquote()</a></code>,
+<code><a href="vect_to_char.html">vect_to_char()</a></code>,
+<code><a href="wrap_text.html">wrap_text()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -95,6 +105,8 @@ quietly, depending on argument <code>signal</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">test_text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Some text"</span>, <span class="st">"Some other text"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">signal_text</span><span class="op">(</span>text <span class="op">=</span> <span class="va">test_text</span>, signal <span class="op">=</span> <span class="st">"error"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : Some text, Some other text</span>
+<span class="r-in"><span><span class="fu">signal_text</span><span class="op">(</span>text <span class="op">=</span> <span class="va">test_text</span>, signal <span class="op">=</span> <span class="st">"warn"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Some text, Some other text</span>
 <span class="r-in"><span><span class="fu">signal_text</span><span class="op">(</span>text <span class="op">=</span> <span class="va">test_text</span>, signal <span class="op">=</span> <span class="st">"message"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Some text, Some other text</span>
 <span class="r-in"><span><span class="fu">signal_text</span><span class="op">(</span>text <span class="op">=</span> <span class="va">test_text</span>, signal <span class="op">=</span> <span class="st">"quiet"</span><span class="op">)</span></span></span>
@@ -117,6 +129,41 @@ quietly, depending on argument <code>signal</code>.</p>
 <span class="r-in"><span>            signal <span class="op">=</span> <span class="st">"message"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1.571, 1.714,</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 1.857</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># This example shows how to make the content of the signal available for</span></span></span>
+<span class="r-in"><span><span class="co"># further queries:</span></span></span>
+<span class="r-in"><span><span class="va">signal_negative</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">signal</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"error"</span>, <span class="st">"warning"</span>, <span class="st">"message"</span>, <span class="st">"quiet"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">text_signal</span> <span class="op">&lt;-</span> <span class="st">"This is a negative number"</span></span></span>
+<span class="r-in"><span>  <span class="kw">if</span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu">progutils</span><span class="fu">::</span><span class="fu">signal_text</span><span class="op">(</span>text <span class="op">=</span> <span class="va">text_signal</span>, signal <span class="op">=</span> <span class="va">signal</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>text_signal <span class="op">=</span> <span class="va">text_signal</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="co"># Using '""' as attribute such that</span></span></span>
+<span class="r-in"><span>    <span class="co"># grepl(pattern = "&lt;text&gt;", x = attr(x, "text_signal"), fixed = TRUE)</span></span></span>
+<span class="r-in"><span>    <span class="co"># returns 'FALSE' if &lt;text&gt; is not found in 'text_signal' (using</span></span></span>
+<span class="r-in"><span>    <span class="co"># 'character(0)' as attribute would lead to 'logical(0)' as return).</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>text_signal <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">res_negative</span> <span class="op">&lt;-</span> <span class="fu">signal_negative</span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, signal <span class="op">=</span> <span class="st">"warning"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>This is a negative number</span>
+<span class="r-in"><span><span class="va">res_positive</span> <span class="op">&lt;-</span> <span class="fu">signal_negative</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, signal <span class="op">=</span> <span class="st">"warning"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">res_negative</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"text_signal")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "This is a negative number"</span>
+<span class="r-in"><span><span class="va">res_positive</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"text_signal")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ""</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"negative"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">res_negative</span>, <span class="st">"text_signal"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      ignore.case <span class="op">=</span> <span class="cn">FALSE</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"negative"</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">res_positive</span>, <span class="st">"text_signal"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      ignore.case <span class="op">=</span> <span class="cn">FALSE</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># FALSE</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

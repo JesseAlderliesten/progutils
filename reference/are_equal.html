@@ -9,7 +9,7 @@ numeric errors to make are_equal() safer than ==."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@ numeric errors to make are_equal() safer than ==."></head><body>
 
     <div class="ref-description section level2">
     <p>Test element-wise near-equality of numeric vectors by allowing for small
-numeric errors to make <code>are_equal()</code> safer than <a href="https://rdrr.io/r/base/Comparison.html" class="external-link">==</a>.</p>
+numeric errors to make <code>are_equal()</code> safer than <code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">==</a></code>.</p>
     </div>
 
     <div class="section level2">
@@ -68,8 +68,8 @@ than <code>tol</code> are considered equal.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A vector with logical values (<code>TRUE</code>, <code>FALSE</code> or <code>NA</code>) indicating if
 elements in <code>x</code> and <code>y</code> are equal to each other. <a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a> is returned for
-comparisons involving numeric <code>NA</code>s (i.e., <code>NA_integer_</code> and <code>NA_real_</code>),
-<a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a>s, or <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">infinite values</a> with the same sign.</p>
+comparisons involving numeric <code>NA</code> (i.e., <code>NA_integer_</code> or <code>NA_real_</code>),
+<a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a>, or <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">infinite values</a> with the same sign.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -88,7 +88,7 @@ but tests exact equality.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_natural.html" class="external-link">checkinput::is_natural()</a></code> to check for element-wise near-equality to natural
 numbers; <code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> to check more generally for near-equality;
-<code><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical()</a></code> to check for exact equality and <a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a> to do so using
+<code><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical()</a></code> to check for exact equality and <code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a></code> to do so using
 binary operators;
 <code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code> and <code><a href="not_in.html">progutils::not_in()</a></code> to compare character vectors;
 <a href="https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" class="external-link"><span style="R">R</span> FAQ 7.31</a>

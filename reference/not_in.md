@@ -49,19 +49,19 @@ behave the same as other values: the returned `NA`s (if `value` is
 the same type as the `NA`s in `x` if `NA`s are absent from `table`.
 `NA`s of different types in `x` and `table` match each other.
 
-Names are *not* considered when matching but are retained in the output,
-similar to `%in%`.
+Names are **not** considered when matching but are retained in the
+output, similar to `%in%`.
 
 ## Programming notes
 
-`not_in()` does not allow input of
+`not_in()` does **not** allow input of
 [type](https://rdrr.io/r/base/typeof.html) `double` because matching
-such input should take small numerical errors into account by using a
-tolerance, for example, as the error message indicates, using
+such input should allow for small numerical errors by using a tolerance,
+for example, as the error message indicates, using
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md).
 
-`not_in()` does not allow zero-length input because zero-length input
-behaves slightly different from other values: if `character(0)` is
+`not_in()` does **not** allow zero-length input because zero-length
+input behaves slightly different from other values: if `character(0)` is
 present in `x` but absent from `table`, `not_in()` would return
 `logical(0)` if `value` is `FALSE`. If `value` is `TRUE`, the behaviour
 would be normal: returning `character(0)`.

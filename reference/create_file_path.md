@@ -81,7 +81,7 @@ if it does not yet exist.
 ## See also
 
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid, and the 'Note on paths' in its
+to check if a path is valid, and the `Note on paths` in its
 documentation;
 [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
 to check if a file exists and is a unique match to a pattern;
@@ -105,28 +105,28 @@ my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/2026_06_12/abc.txt
+#> /tmp/RtmpHC4D20/examplecreatefilepath1a362a5a9b18/2026_06_18/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/2026_06_12/12_06_2026_abc.txt
+#> /tmp/RtmpHC4D20/examplecreatefilepath1a362a5a9b18/2026_06_18/18_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/def.html
+#> /tmp/RtmpHC4D20/examplecreatefilepath1a362a5a9b18/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/12_06_2026_def.html
+#> /tmp/RtmpHC4D20/examplecreatefilepath1a362a5a9b18/18_06_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/subdir/2026_06_12/abc.txt
+#> /tmp/RtmpHC4D20/examplecreatefilepath1a362a5a9b18/subdir/2026_06_18/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/subdir/2026_06_12/12_06_2026_abc.txt
+#> /tmp/RtmpHC4D20/examplecreatefilepath1a362a5a9b18/subdir/2026_06_18/18_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/subdir/def.html
+#> /tmp/RtmpHC4D20/examplecreatefilepath1a362a5a9b18/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpoQCDEQ/examplecreatefilepath19c02b6fa1a4/subdir/12_06_2026_def.html
+#> /tmp/RtmpHC4D20/examplecreatefilepath1a362a5a9b18/subdir/18_06_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

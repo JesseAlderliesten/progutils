@@ -58,13 +58,14 @@ The temporary directory indicated by the returned path is
 ## Usage in practice
 
 `Examples` and `tests` should write to a temporary directory that is
-cleaned up afterwards (otherwise R cmd check will issue a `Note` about
-'[detritus in the temp
-directory](https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)'
-and
-[CRAN](https://cran.r-project.org/web/packages/policies.html#Source-packages)
-will not accept your package). Although
-[`tempdir()`](https://rdrr.io/r/base/tempfile.html) points to a
+cleaned up afterwards (otherwise
+[`R cmd check`](https://r-pkgs.org/R-CMD-check.html) will issue a `Note`
+about
+[`detritus in the temp directory`](https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)
+and CRAN will not accept your package, see section `Source packages`
+from the [CRAN
+policies](https://cran.r-project.org/web/packages/policies.html).
+Although [`tempdir()`](https://rdrr.io/r/base/tempfile.html) points to a
 temporary directory, that directory should **not** be removed because
 other processes in R and
 [RStudio](https://posit.co/products/open-source/rstudio) also use it.
@@ -84,11 +85,14 @@ occur if examples or tests are removed or added.
 ## Programming notes
 
 The output of [`tempdir()`](https://rdrr.io/r/base/tempfile.html) during
-[R CMD checks](https://r-pkgs.org/R-CMD-check.html) on MacOS contains
+[`R CMD checks`](https://r-pkgs.org/R-CMD-check.html) on MacOS contains
 successive forward slashes (e.g.,
 `/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR`) which in earlier
-versions of `is_path()` (then in package `progutils`) led to spurious
-warnings about duplicated file separators.
+versions of
+[`is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+(then in package
+[progutils](https://jessealderliesten.github.io/progutils/)) led to
+spurious warnings about duplicated file separators.
 
 ## See also
 
@@ -112,14 +116,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/RtmpoQCDEQ"
+#> [1] "/tmp/RtmpHC4D20"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(pattern = "subtempdir"))
-#> [1] "/tmp/RtmpoQCDEQ/subtempdir19c06bc28eeb"
+#> [1] "/tmp/RtmpHC4D20/subtempdir1a366f1008bc"
 
 # Using the same 'pattern' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(pattern = "subtempdir"))
-#> [1] "/tmp/RtmpoQCDEQ/subtempdir19c0a93beaf"
+#> [1] "/tmp/RtmpHC4D20/subtempdir1a3613a9f00b"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(pattern = "subtempdir/otherdir"))

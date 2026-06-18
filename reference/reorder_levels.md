@@ -67,8 +67,14 @@ Could also use an approach like
 [`stats::relevel()`](https://rdrr.io/r/stats/relevel.html) to assign one
 reference level to a factor
 
+Other functions to convert types:
+[`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
+`reexports`,
+[`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
+
 Other functions to modify factors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
+`reexports`,
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
 

@@ -20,6 +20,8 @@
   : Objects exported from other packages
 - [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
   : Replace character values or factor levels
+- [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
+  : Signal a text to the user
 - [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md)
   : Create a character vector from a string with quotation marks
 - [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
@@ -60,10 +62,3 @@
   : Reorder factor levels
 - [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
   : Convert a vector to a character string
-- [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
-  : Wrap text
-
-## Miscellaneous
-
-- [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
-  : Signal a text to the user

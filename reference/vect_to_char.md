@@ -65,11 +65,11 @@ See `Details` on handling of some special values.
 
 ## Details
 
-`vect_to_char()` returns `NULL` as `"NULL"`, other zero-length objects
-as `"<class>(0)"` (e.g., `"logical(0)"`), `""` as `'""'`, and
-non-logical `NA`s as `"NA_<class>_"` (e.g., `"NA_real_"`; for
-[factors](https://rdrr.io/r/base/factor.html) this is
-`"NA_character_"`).
+`NULL` is returned as `"'NULL'"`, other zero-length objects are returned
+as `"'<class>(0)'"` (e.g., `"'logical(0)'"`), `""` as `'""'`, logical
+`NA` as `"'NA'"`, and non-logical `NA`s as `"'NA_<class>_'"` (e.g.,
+`"'NA_real_'"`; for [factors](https://rdrr.io/r/base/factor.html) this
+is `"'NA_character_'"`).
 
 ## Programming notes
 
@@ -82,14 +82,22 @@ see the last `Example`.
 [`toString()`](https://rdrr.io/r/base/toString.html) which can be used
 if names of `x` can be removed.
 
+Other functions to convert types:
+[`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
+`reexports`,
+[`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md)
+
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
+`reexports`,
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
+[`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
 [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
 
 Other functions to modify factors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
+`reexports`,
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
 

@@ -32,22 +32,22 @@ values are present. The return is
 
 ## Details
 
-Values in `x` that only differ from each other in their case generate an
-[error](https://rdrr.io/r/base/stop.html),
-[warning](https://rdrr.io/r/base/warning.html), or
-[message](https://rdrr.io/r/base/message.html) if `signal` is `error`,
-`warning`, or `message`, respectively. Values are silently returned if
-`signal` is `quiet`.
+Values in `x` that only differ from each other in their case lead to a
+[signal](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
+as indicated by argument `signal`.
 
 ## Notes
 
 The sorting order in the result depends on the used
 [locale](https://rdrr.io/r/base/locales.html) (see also the section
-`Details` of [Comparison](https://rdrr.io/r/base/Comparison.html)),
+`Details` of [`Comparison`](https://rdrr.io/r/base/Comparison.html)),
 which also affects if uppercase characters are sorted before or after
 lowercase characters.
 
 ## See also
+
+[tolower](https://rdrr.io/r/base/chartr.html) and
+[toupper](https://rdrr.io/r/base/chartr.html) to **change** case.
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),

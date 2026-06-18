@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,21 +70,21 @@ values are present. The return is <a href="https://rdrr.io/r/base/invisible.html
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Values in <code>x</code> that only differ from each other in their case generate an
-<a href="https://rdrr.io/r/base/stop.html" class="external-link">error</a>, <a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a>, or <a href="https://rdrr.io/r/base/message.html" class="external-link">message</a> if <code>signal</code> is <code>error</code>, <code>warning</code>, or
-<code>message</code>, respectively. Values are silently returned if <code>signal</code> is <code>quiet</code>.</p>
+    <p>Values in <code>x</code> that only differ from each other in their case lead to a
+<a href="signal_text.html">signal</a> as indicated by argument <code>signal</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a></h2>
 
 
 <p>The sorting order in the result depends on the used <a href="https://rdrr.io/r/base/locales.html" class="external-link">locale</a> (see
-also the section <code>Details</code> of <a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a>), which also affects if uppercase
+also the section <code>Details</code> of <code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a></code>), which also affects if uppercase
 characters are sorted before or after lowercase characters.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other functions to check equality:
+    <div class="dont-index"><p><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a> and <a href="https://rdrr.io/r/base/chartr.html" class="external-link">toupper</a> to <strong>change</strong> case.</p>
+<p>Other functions to check equality:
 <code><a href="are_equal.html">are_equal()</a></code>,
 <code><a href="get_file_path.html">get_file_path()</a></code>,
 <code><a href="not_in.html">not_in()</a></code>,

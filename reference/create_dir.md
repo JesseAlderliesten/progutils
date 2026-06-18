@@ -56,7 +56,7 @@ yet exist.
 ## See also
 
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid, and the 'Note on paths' in its
+to check if a path is valid, and the `Note on paths` in its
 documentation;
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
 to create a file path and creating the indicated directory if it does
@@ -87,7 +87,7 @@ my_tempdir <- create_tempdir(pattern = "examplecreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
-#> /tmp/RtmpoQCDEQ/examplecreatedir19c06a7b155a/dir_one 
+#> /tmp/RtmpHC4D20/examplecreatedir1a363a3d10b0/dir_one 
 #>                                                 TRUE 
 
 # An attempt to create a directory that already exists does not change any
@@ -109,7 +109,7 @@ identical(res_dir_one, res_dir_ONE)
 res_dir_date <- create_dir(dir = fs::path(my_tempdir, "dir_date"),
                            add_date = TRUE)
 fs::dir_exists(res_dir_date) # TRUE
-#> /tmp/RtmpoQCDEQ/examplecreatedir19c06a7b155a/dir_date/2026_06_12 
+#> /tmp/RtmpHC4D20/examplecreatedir1a363a3d10b0/dir_date/2026_06_18 
 #>                                                             TRUE 
 
 # Cleaning up
