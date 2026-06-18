@@ -14,11 +14,7 @@
 #' single character string, or `NULL` to return each value as an element of a
 #' character vector.
 #'
-#' @details
-#' `vect_to_char()` returns `NULL` as `"NULL"`, other zero-length objects as
-#' `"<class>(0)"` (e.g., `"logical(0)"`), `""` as `'""'`, and non-logical `NA`s
-#' as `"NA_<class>_"` (e.g., `"NA_real_"`; for [factors][factor] this is
-#' `"NA_character_"`).
+#' @inherit checkinput::paste_quoted details
 #'
 #' @returns
 #' The names and values in `x`, with values of numeric `x` rounded to `signif`

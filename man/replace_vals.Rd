@@ -96,7 +96,9 @@ try(replace_vals(x = x, old = letters[13:12], new = "b",
 
 }
 \seealso{
-\code{\link[=gsub]{gsub()}} \code{\link[=replace]{replace()}}
+\code{\link[=gsub]{gsub()}}; \code{\link[=replace]{replace()}};
+\code{\link[=append]{append()}} which, despite its name, can insert values into a vector at any
+place
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

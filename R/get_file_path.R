@@ -30,7 +30,7 @@
 #' to obtain the filename itself.
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
+#' [checkinput::is_path()] to check if a path is valid, and the `Note on paths`
 #' in its documentation;
 #' [create_dir()] to create a directory if does not yet exist;
 #' [file.exists()] and [list.files()] to check for existence of files without

@@ -84,7 +84,7 @@ rm(my_tempdir)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the 'Note on paths'
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the \verb{Note on paths}
 in its documentation;
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern;
 \code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way;

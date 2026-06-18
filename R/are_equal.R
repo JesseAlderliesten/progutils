@@ -1,7 +1,7 @@
 #' Are numeric values nearly equal
 #'
 #' Test element-wise near-equality of numeric vectors by allowing for small
-#' numeric errors to make `are_equal()` safer than [==][Comparison].
+#' numeric errors to make `are_equal()` safer than [`==`][Comparison].
 #'
 #' @param x,y Numeric vectors to compare for equality.
 #' @inheritParams checkinput::is_natural tol
@@ -14,8 +14,8 @@
 #'
 #' @returns A vector with logical values (`TRUE`, `FALSE` or `NA`) indicating if
 #' elements in `x` and `y` are equal to each other. [NA] is returned for
-#' comparisons involving numeric `NA`s (i.e., `NA_integer_` and `NA_real_`),
-#' [NaN]s, or [infinite values][Inf] with the same sign.
+#' comparisons involving numeric `NA` (i.e., `NA_integer_` or `NA_real_`),
+#' [NaN], or [infinite values][Inf] with the same sign.
 #'
 #' @section Acknowledgement:
 #' Code `abs(x - y) < tol` was taken from `dplyr::near()`.
@@ -23,7 +23,7 @@
 #' @seealso
 #' [checkinput::is_natural()] to check for element-wise near-equality to natural
 #' numbers; [all.equal()] to check more generally for near-equality;
-#' [identical()] to check for exact equality and [Comparison] to do so using
+#' [identical()] to check for exact equality and [`Comparison`] to do so using
 #' binary operators;
 #' [match()] and `progutils::not_in()` to compare character vectors;
 #' [\R FAQ 7.31](

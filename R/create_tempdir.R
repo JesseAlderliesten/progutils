@@ -36,10 +36,10 @@
 #'
 #' @section Usage in practice:
 #' `Examples` and `tests` should write to a temporary directory that is cleaned
-#' up afterwards (otherwise [R cmd check](https://r-pkgs.org/R-CMD-check.html)
-#' will issue a `Note` about '[detritus in the temp directory](
-#' https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)'
-#' and CRAN will not accept your package, see section 'Source packages' from the
+#' up afterwards (otherwise [`R cmd check`](https://r-pkgs.org/R-CMD-check.html)
+#' will issue a `Note` about [`detritus in the temp directory`](
+#' https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)
+#' and CRAN will not accept your package, see section `Source packages` from the
 #' [CRAN policies](https://cran.r-project.org/web/packages/policies.html).
 #' Although [tempdir()] points to a temporary
 #' directory, that directory should **not** be removed because other processes

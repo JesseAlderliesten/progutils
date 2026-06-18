@@ -47,9 +47,9 @@ The temporary directory indicated by the returned path is
 \section{Usage in practice}{
 
 \code{Examples} and \code{tests} should write to a temporary directory that is cleaned
-up afterwards (otherwise \href{https://r-pkgs.org/R-CMD-check.html}{R cmd check}
-will issue a \code{Note} about '\href{https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory}{detritus in the temp directory}'
-and CRAN will not accept your package, see section 'Source packages' from the
+up afterwards (otherwise \href{https://r-pkgs.org/R-CMD-check.html}{\verb{R cmd check}}
+will issue a \code{Note} about \href{https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory}{\verb{detritus in the temp directory}}
+and CRAN will not accept your package, see section \verb{Source packages} from the
 \href{https://cran.r-project.org/web/packages/policies.html}{CRAN policies}.
 Although \code{\link[=tempdir]{tempdir()}} points to a temporary
 directory, that directory should \strong{not} be removed because other processes
@@ -71,10 +71,11 @@ occur if examples or tests are removed or added.
 \section{Programming notes}{
 
 
-The output of \code{tempdir()} during
-\href{https://r-pkgs.org/R-CMD-check.html}{R CMD checks} on MacOS contains successive
+The output of \code{\link[=tempdir]{tempdir()}} during
+\href{https://r-pkgs.org/R-CMD-check.html}{\verb{R CMD checks}} on MacOS contains successive
 forward slashes (e.g., \verb{/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR})
-which in earlier versions of \code{is_path()} (then in package \code{progutils}) led to
+which in earlier versions of \code{\link[checkinput:is_path]{is_path()}} (then in package
+\href{https://jessealderliesten.github.io/progutils/}{progutils}) led to
 spurious warnings about duplicated file separators.
 
 }

@@ -14,10 +14,13 @@
 #'
 #' @section Notes:
 #' The sorting order in the result depends on the used [locale][locales] (see
-#' also the section `Details` of [Comparison]), which also affects if uppercase
+#' also the section `Details` of [`Comparison`]), which also affects if uppercase
 #' characters are sorted before or after lowercase characters.
 #'
 #' @family functions to check equality
+#'
+#' @seealso
+#' [tolower] and [toupper] to **change** case.
 #'
 #' @examples
 #' x <- c("Ee", "Ee", "LL", "Ll")
