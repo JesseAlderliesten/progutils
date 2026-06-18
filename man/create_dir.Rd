@@ -72,7 +72,7 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_date, res_dir_ONE)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the 'Note on paths'
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the \verb{Note on paths}
 in its documentation;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist;

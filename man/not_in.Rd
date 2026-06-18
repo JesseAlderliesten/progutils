@@ -38,16 +38,17 @@ returned \code{NA}s (if \code{value} is \code{TRUE}) and the returned zero-lengt
 absent from \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
 other.
 
-Names are \emph{not} considered when matching but are retained in the output,
+Names are \strong{not} considered when matching but are retained in the output,
 similar to \code{\%in\%}.
 }
 \section{Programming notes}{
 
-\code{not_in()} does not allow input of \link[=typeof]{type} \code{double} because matching
-such input should take small numerical errors into account by using a
-tolerance, for example, as the error message indicates, using \code{\link[=are_equal]{are_equal()}}.
+\code{not_in()} does \strong{not} allow input of \link[=typeof]{type} \code{double} because
+matching
+such input should allow for small numerical errors by using a tolerance, for
+example, as the error message indicates, using \code{\link[=are_equal]{are_equal()}}.
 
-\code{not_in()} does not allow zero-length input because zero-length input behaves
+\code{not_in()} does \strong{not} allow zero-length input because zero-length input behaves
 slightly different from other values: if \code{character(0)} is present in \code{x} but
 absent from \code{table}, \code{not_in()} would return \code{logical(0)} if \code{value} is
 \code{FALSE}. If \code{value} is \code{TRUE}, the behaviour would be normal: returning

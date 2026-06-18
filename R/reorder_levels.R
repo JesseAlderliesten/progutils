@@ -41,6 +41,7 @@
 #' @seealso
 #' [stats::relevel()] to assign one reference level to a factor
 #'
+#' @family functions to convert types
 #' @family functions to modify factors
 #' @family functions to modify sorting order
 #'

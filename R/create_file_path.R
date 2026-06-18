@@ -33,7 +33,7 @@
 #' if it does not yet exist.
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
+#' [checkinput::is_path()] to check if a path is valid, and the `Note on paths`
 #' in its documentation;
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern;
 #' [fs::path()] to construct file paths in a platform-independent way;

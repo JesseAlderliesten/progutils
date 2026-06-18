@@ -4,9 +4,8 @@
 #' @param x Character vector to check.
 #'
 #' @details
-#' Values in `x` that only differ from each other in their case generate an
-#' [error][stop], [warning], or [message] if `signal` is `error`, `warning`, or
-#' `message`, respectively. Values are silently returned if `signal` is `quiet`.
+#' Values in `x` that only differ from each other in their case lead to a
+#' [signal][signal_text()] as indicated by argument `signal`.
 #'
 #' @returns
 #' Character vector with [unique][unique()], [sorted][sort()] values in `x` that
@@ -15,10 +14,13 @@
 #'
 #' @section Notes:
 #' The sorting order in the result depends on the used [locale][locales] (see
-#' also the section `Details` of [Comparison]), which also affects if uppercase
+#' also the section `Details` of [`Comparison`]), which also affects if uppercase
 #' characters are sorted before or after lowercase characters.
 #'
 #' @family functions to check equality
+#'
+#' @seealso
+#' [tolower] and [toupper] to **change** case.
 #'
 #' @examples
 #' x <- c("Ee", "Ee", "LL", "Ll")

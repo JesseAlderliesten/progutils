@@ -29,7 +29,7 @@
 #' does not yet exist.
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, and the 'Note on paths'
+#' [checkinput::is_path()] to check if a path is valid, and the `Note on paths`
 #' in its documentation;
 #' [create_file_path()] to create a file path and creating the indicated
 #' directory if it does not yet exist;

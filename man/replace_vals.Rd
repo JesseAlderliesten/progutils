@@ -96,7 +96,9 @@ try(replace_vals(x = x, old = letters[13:12], new = "b",
 
 }
 \seealso{
-\code{\link[=gsub]{gsub()}} \code{\link[=replace]{replace()}}
+\code{\link[=gsub]{gsub()}}; \code{\link[=replace]{replace()}};
+\code{\link[=append]{append()}} which, despite its name, can insert values into a vector at any
+place
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
@@ -106,12 +108,15 @@ Other functions to check equality:
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link{reexports}},
+\code{\link[=signal_text]{signal_text()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},
 \code{\link[=vect_to_char]{vect_to_char()}},
 \code{\link[=wrap_text]{wrap_text()}}
 
 Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link{reexports}},
 \code{\link[=reorder_levels]{reorder_levels()}},
 \code{\link[=vect_to_char]{vect_to_char()}}
 }

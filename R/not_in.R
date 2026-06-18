@@ -21,7 +21,7 @@
 #' absent from `table`. `NA`s of different types in `x` and `table` match each
 #' other.
 #'
-#' Names are *not* considered when matching but are retained in the output,
+#' Names are **not** considered when matching but are retained in the output,
 #' similar to `%in%`.
 #'
 #' @returns
@@ -32,11 +32,12 @@
 #' for each element in `x` if it is absent from `table`.
 #'
 #' @section Programming notes:
-#' `not_in()` does not allow input of [type][typeof] `double` because matching
-#' such input should take small numerical errors into account by using a
-#' tolerance, for example, as the error message indicates, using [are_equal()].
+#' `not_in()` does **not** allow input of [type][typeof] `double` because
+#' matching
+#' such input should allow for small numerical errors by using a tolerance, for
+#' example, as the error message indicates, using [are_equal()].
 #'
-#' `not_in()` does not allow zero-length input because zero-length input behaves
+#' `not_in()` does **not** allow zero-length input because zero-length input behaves
 #' slightly different from other values: if `character(0)` is present in `x` but
 #' absent from `table`, `not_in()` would return `logical(0)` if `value` is
 #' `FALSE`. If `value` is `TRUE`, the behaviour would be normal: returning
@@ -77,9 +78,9 @@ not_in <- function(x, table, value = TRUE) {
   # list input to 'x' or 'table' is not allowed because it leads to 'x' being
   # returned.
   stopifnot(is.null(dim(x)), length(x) > 0L, is.atomic(x),
-            "Use are_equal() to match input of type 'double'" = !is.double(x),
             is.null(dim(table)), length(table) > 0L, is.atomic(table),
-            "Use are_equal() to match input of type 'double'" = !is.double(table),
+            "Use are_equal() to match input of type 'double'" =
+              !is.double(x) && !is.double(table),
             checkinput::is_logical(value))
 
   if(is.factor(x)) {

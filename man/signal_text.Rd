@@ -22,7 +22,8 @@ signal_text(
 message. Ignored if it is \code{character(0)}.}
 }
 \value{
-\code{text}, returned \link[=invisible]{invisibly}.
+\code{text}, with a phrase indicating the origin of the signal if \code{origin} is not
+\code{NULL}, returned \link[=invisible]{invisibly}.
 }
 \description{
 Signal a text to the user through an error, warning, or message.
@@ -31,14 +32,17 @@ Signal a text to the user through an error, warning, or message.
 \code{text} is coerced to a character vector using \code{\link[=vect_to_char]{vect_to_char()}}, which treats
 zero-length input and input with length larger than one better than
 \code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}, see the \code{Examples}. Call \code{\link[=vect_to_char]{vect_to_char()}}
-beforehand on \code{text} to control rounding and wrapping, see the last example.
+beforehand on \code{text} to control rounding and wrapping, see the \code{Examples}.
 
 \code{text} is signalled through an \link[=stop]{error}, \link{warning}, \link{message}, or
-quietly, depending on argument \code{signal}.
+quietly, depending on argument \code{signal}. To make \code{text} available for further
+queries when using \code{signal_text()} in another function, add the content of the signal as an
+attribute to the returned object, see the last \code{Example}.
 }
 \examples{
 test_text <- c("Some text", "Some other text")
 try(signal_text(text = test_text, signal = "error"))
+signal_text(text = test_text, signal = "warn")
 signal_text(text = test_text, signal = "message")
 signal_text(text = test_text, signal = "quiet")
 
@@ -55,7 +59,42 @@ signal_text(text = test_numbers / 7, signal = "message")
 signal_text(text = vect_to_char(x = test_numbers / 7, signif = 4, width = 15),
             signal = "message")
 
+# This example shows how to make the content of the signal available for
+# further queries:
+signal_negative <- function(x, signal = c("error", "warning", "message", "quiet")) {
+  text_signal <- "This is a negative number"
+  if(x < 0) {
+    progutils::signal_text(text = text_signal, signal = signal)
+    attributes(x) <- list(text_signal = text_signal)
+  } else {
+    # Using '""' as attribute such that
+    # grepl(pattern = "<text>", x = attr(x, "text_signal"), fixed = TRUE)
+    # returns 'FALSE' if <text> is not found in 'text_signal' (using
+    # 'character(0)' as attribute would lead to 'logical(0)' as return).
+    attributes(x) <- list(text_signal = "")
+  }
+  x
+}
+
+res_negative <- signal_negative(x = -1, signal = "warning")
+res_positive <- signal_negative(x = 1, signal = "warning")
+res_negative
+res_positive
+grepl(pattern = "negative", x = attr(res_negative, "text_signal"),
+      ignore.case = FALSE, fixed = TRUE) # TRUE
+grepl(pattern = "negative", x = attr(res_positive, "text_signal"),
+      ignore.case = FALSE, fixed = TRUE) # FALSE
+
 }
 \seealso{
 \code{\link[=wrap_text]{wrap_text()}}
+
+Other functions to modify character vectors:
+\code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link{reexports}},
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=unpaste_unquote]{unpaste_unquote()}},
+\code{\link[=vect_to_char]{vect_to_char()}},
+\code{\link[=wrap_text]{wrap_text()}}
 }
+\concept{functions to modify character vectors}

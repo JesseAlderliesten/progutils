@@ -22,14 +22,13 @@ values are present. The return is \link{invisible}.
 Check for values that differ only in their case
 }
 \details{
-Values in \code{x} that only differ from each other in their case generate an
-\link[=stop]{error}, \link{warning}, or \link{message} if \code{signal} is \code{error}, \code{warning}, or
-\code{message}, respectively. Values are silently returned if \code{signal} is \code{quiet}.
+Values in \code{x} that only differ from each other in their case lead to a
+\link[=signal_text]{signal} as indicated by argument \code{signal}.
 }
 \section{Notes}{
 
 The sorting order in the result depends on the used \link[=locales]{locale} (see
-also the section \code{Details} of \link{Comparison}), which also affects if uppercase
+also the section \code{Details} of \code{\link{Comparison}}), which also affects if uppercase
 characters are sorted before or after lowercase characters.
 }
 
@@ -40,6 +39,8 @@ check_case(x = x, signal = "warning")
 
 }
 \seealso{
+\link{tolower} and \link{toupper} to \strong{change} case.
+
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
 \code{\link[=get_file_path]{get_file_path()}},

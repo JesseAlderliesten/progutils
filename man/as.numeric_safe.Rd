@@ -88,16 +88,25 @@ str_as_num_base(x_fact) # wrong
 \code{\link[=formatC]{formatC()}} and \link[=options]{option} \code{scipen} on formatting numbers,
 \code{\link[utils:type.convert]{utils::type.convert()}}
 
+Other functions to convert types:
+\code{\link{reexports}},
+\code{\link[=reorder_levels]{reorder_levels()}},
+\code{\link[=vect_to_char]{vect_to_char()}}
+
 Other functions to modify character vectors:
+\code{\link{reexports}},
 \code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=signal_text]{signal_text()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},
 \code{\link[=vect_to_char]{vect_to_char()}},
 \code{\link[=wrap_text]{wrap_text()}}
 
 Other functions to modify factors:
+\code{\link{reexports}},
 \code{\link[=reorder_levels]{reorder_levels()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=vect_to_char]{vect_to_char()}}
 }
+\concept{functions to convert types}
 \concept{functions to modify character vectors}
 \concept{functions to modify factors}

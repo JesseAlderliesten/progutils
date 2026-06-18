@@ -45,7 +45,9 @@
 #' @family functions to modify factors
 #'
 #' @seealso
-#' [gsub()] [replace()]
+#' [gsub()]; [replace()];
+#' [append()] which, despite its name, can insert values into a vector at any
+#' place
 #'
 #' @examples
 #' x <- c("k", "l", "m")
