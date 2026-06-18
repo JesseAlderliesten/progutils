@@ -1,3 +1,14 @@
+# progutils 0.10.1
+
+### Documentation
+- `signal_text()`: document and show example how to make `text` available for
+  further queries.
+- Update grouping of functions in the `See Also` sections and in the package
+  index on the website, adding the re-exported function `paste_quoted()`.
+- Apply a few more stylistic suggestions provided by various packages like
+  `goodpractice` that check code sanity.
+
+
 # progutils 0.10.0
 
 ### Bugfixes
