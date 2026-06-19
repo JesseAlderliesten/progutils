@@ -2,7 +2,10 @@
 <!-- badges: start -->
 
 ![](https://img.shields.io/github/r-package/v/JesseAlderliesten/progutils?color=blue)
-[![R-CMD-check](https://github.com/JesseAlderliesten/progutils/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JesseAlderliesten/progutils/actions/workflows/R-CMD-check.yaml)
+[![R CMD
+check](https://github.com/JesseAlderliesten/progutils/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/JesseAlderliesten/progutils/actions/workflows/check-standard.yaml)
+[![R CMD check
+no-suggests](https://github.com/JesseAlderliesten/progutils/actions/workflows/check-no-suggests.yaml/badge.svg)](https://github.com/JesseAlderliesten/progutils/actions/workflows/check-no-suggests.yaml)
 <!-- badges: end -->
 
 # progutils
@@ -106,7 +109,8 @@ License](LICENSE.md).
     To cite package 'progutils' in publications use:
 
       Alderliesten J (2026). _progutils: Programming Utilities_. R package
-      version 0.10.1, <https://github.com/JesseAlderliesten/progutils>.
+      version 0.10.1, commit 5f14b8eb1775d94dde826798a879bef19d53f510,
+      <https://github.com/JesseAlderliesten/progutils>.
 
     A BibTeX entry for LaTeX users is
 
@@ -114,7 +118,7 @@ License](LICENSE.md).
         title = {progutils: Programming Utilities},
         author = {Jesse Alderliesten},
         year = {2026},
-        note = {R package version 0.10.1},
+        note = {R package version 0.10.1, commit 5f14b8eb1775d94dde826798a879bef19d53f510},
         url = {https://github.com/JesseAlderliesten/progutils},
       }
 
