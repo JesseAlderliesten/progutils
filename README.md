@@ -109,8 +109,7 @@ License](LICENSE.md).
     To cite package 'progutils' in publications use:
 
       Alderliesten J (2026). _progutils: Programming Utilities_. R package
-      version 0.10.1, commit 5f14b8eb1775d94dde826798a879bef19d53f510,
-      <https://github.com/JesseAlderliesten/progutils>.
+      version 0.10.1, <https://github.com/JesseAlderliesten/progutils>.
 
     A BibTeX entry for LaTeX users is
 
@@ -118,7 +117,7 @@ License](LICENSE.md).
         title = {progutils: Programming Utilities},
         author = {Jesse Alderliesten},
         year = {2026},
-        note = {R package version 0.10.1, commit 5f14b8eb1775d94dde826798a879bef19d53f510},
+        note = {R package version 0.10.1},
         url = {https://github.com/JesseAlderliesten/progutils},
       }
 
