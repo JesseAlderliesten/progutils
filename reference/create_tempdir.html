@@ -142,14 +142,14 @@ in its documentation.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpHC4D20"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptYT621"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex1</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpHC4D20/subtempdir1a366f1008bc"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptYT621/subtempdir19832d873816"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using the same 'pattern' again creates another directory</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex2</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpHC4D20/subtempdir1a3613a9f00b"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptYT621/subtempdir198333a549a9"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is not possible to create recursive subdirectories</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">no_subtempdir</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"subtempdir/otherdir"</span><span class="op">)</span><span class="op">)</span></span></span>
