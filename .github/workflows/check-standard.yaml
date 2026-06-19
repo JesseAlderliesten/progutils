@@ -20,12 +20,12 @@ on:
       - cron: "23 4 * * 6" # run GHA every Saturday on 04:23 UTC
   workflow_dispatch: # to be able to manually trigger GHA
 
-name: R-CMD-check.yaml
+name: check-standard.yaml
 
 permissions: read-all
 
 jobs:
-  R-CMD-check:
+  check-standard:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
