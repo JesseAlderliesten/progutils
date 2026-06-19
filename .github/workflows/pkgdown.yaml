@@ -1,12 +1,18 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+
+# For help debugging build failures, see https://r-pkgs.org/R-CMD-check.html and
+# https://github.com/r-lib/actions#where-to-find-help. For more background,
+# including an explanation of the syntax used in this file, see
+# https://docs.github.com/en/actions/reference/workflows-and-actions and
+# https://docs.github.com/en/actions/how-tos/manage-workflow-runs.
+
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
   release:
     types: [published]
-  workflow_dispatch:
+  workflow_dispatch: # to be able to manually trigger GHA
 
 name: pkgdown.yaml
 
