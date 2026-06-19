@@ -89,19 +89,12 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
     stop("Directory does not exist:\n", paste_quoted(dir))
   }
 
+  # Not using list.files() because that also returns directories (even though
+  # 'include.dirs' is FALSE by default) because 'recursive' is also FALSE.
   files_present <- fs::path_abs(
-    list.files(path = dir, pattern = pattern, all.files = TRUE,
-               full.names = TRUE, ignore.case = ignore_case)
+    fs::dir_ls(path = dir, all = TRUE, recurse = FALSE, type = "file",
+               regexp = pattern, fail = FALSE, ignore.case = ignore_case)
   )
-
-  # 'list.files()' also returns directories (even though 'include.dirs' is FALSE
-  # by default) because 'recursive' is also FALSE.
-  if(length(files_present) > 0L) {
-    dirs_present <- list.dirs(path = dir, full.names = TRUE, recursive = FALSE)
-    if(length(dirs_present) > 0L) {
-      files_present <- not_in(files_present, dirs_present)
-    }
-  }
 
   msg_match <- paste0(
     if(!ignore_case) {"case-sensitive "}, "matches to pattern '",
@@ -114,8 +107,10 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
   if(length(files_present) == 0L) {
     if(!ignore_case) {
       # Check if any case-insensitive match is present
-      match_case_insensitive <- list.files(path = dir, pattern = pattern,
-                                           ignore.case = TRUE)
+      match_case_insensitive <-   files_present <- fs::path_abs(
+        fs::dir_ls(path = dir, all = TRUE, recurse = FALSE, type = "file",
+                   regexp = pattern, fail = FALSE, ignore.case = TRUE)
+      )
 
       if(length(match_case_insensitive) == 0L) {
         msg_match <- paste0(
