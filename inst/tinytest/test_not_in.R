@@ -114,36 +114,93 @@ for(value in c(TRUE, FALSE)) {
     not_in(x = c("a", "b"), table = NA_character_, value = value),
     if(value) {c("a", "b")} else {c(TRUE, TRUE)})
 
-  # 3g (zero-length value in x, normal character value in table)
-  expect_error(
-    not_in(x = character(0), table = c("a", "b"), value = value),
-    pattern = "length(x) > 0L is not TRUE", fixed = TRUE)
-
-  # 3h (normal character values in x, zero-length value in table)
-  expect_error(
-    not_in(x = c("a", "b"), table = character(0), value = value),
-    pattern = "length(table) > 0L is not TRUE", fixed = TRUE)
-
-  # 3i (empty quotes behave normally)
+  # empty quotes behave normally
   expect_identical(
     not_in(x = "", table = c("a", "b"), value = value),
     if(value) {""} else {TRUE})
 
-  # 3j (empty quotes behave normally)
+  # empty quotes behave normally
   expect_identical(
     not_in(x = c("a", "b"), table = "", value = value),
     if(value) {c("a", "b")} else {c(TRUE, TRUE)})
 
-  # 3k (empty quotes behave normally)
+  # empty quotes behave normally
   expect_identical(
     not_in(x = c("a", "", "b"), table = "", value = value),
     if(value) {c("a", "b")} else {c(TRUE, FALSE, TRUE)})
 
-  # 3l (empty quotes behave normally)
+  # empty quotes behave normally
   expect_identical(
     not_in(x = "", table = "", value = value),
     if(value) {character(0)} else {FALSE})
 }
+
+# zero-length value in x, 'value' is FALSE
+expect_identical(
+  not_in(x = character(0), table = c("a", "b"), value = FALSE),
+  logical(0))
+
+expect_identical(
+  not_in(x = logical(0), table = c("a", "b"), value = FALSE),
+  logical(0))
+
+expect_identical(
+  not_in(x = character(0), table = character(0), value = FALSE),
+  logical(0))
+
+expect_identical(
+  not_in(x = logical(0), table = logical(0), value = FALSE),
+  logical(0))
+
+expect_identical(
+  not_in(x = character(0), table = logical(0), value = FALSE),
+  logical(0))
+
+expect_identical(
+  not_in(x = logical(0), table = character(0), value = FALSE),
+  logical(0))
+
+# 3g_p2 (zero-length value in x, 'value' is TRUE)
+expect_identical(
+  not_in(x = character(0), table = c("a", "b"), value = TRUE),
+  character(0))
+
+expect_identical(
+  not_in(x = logical(0), table = c("a", "b"), value = TRUE),
+  logical(0))
+
+expect_identical(
+  not_in(x = character(0), table = character(0), value = TRUE),
+  character(0))
+
+expect_identical(
+  not_in(x = logical(0), table = logical(0), value = TRUE),
+  logical(0))
+
+expect_identical(
+  not_in(x = character(0), table = logical(0), value = TRUE),
+  character(0))
+
+expect_identical(
+  not_in(x = logical(0), table = character(0), value = TRUE),
+  logical(0))
+
+# zero-length value in table
+expect_identical(
+  not_in(x = c("a", "b"), table = character(0), value = FALSE),
+  c(TRUE, TRUE))
+
+expect_identical(
+  not_in(x = c("a", "b"), table = logical(0), value = FALSE),
+  c(TRUE, TRUE))
+
+expect_identical(
+  not_in(x = c("a", "b"), table = character(0), value = TRUE),
+  c("a", "b"))
+
+expect_identical(
+  not_in(x = c("a", "b"), table = logical(0), value = TRUE),
+  c("a", "b"))
 
 ##### Factor input to 'x' or 'table' #####
 # Factor input to 'x' is converted to character, factor input to 'table' behaves
