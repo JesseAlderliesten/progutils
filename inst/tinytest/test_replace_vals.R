@@ -75,6 +75,14 @@ expect_error(
   pattern = paste0(warn_mult_old, "'m', 'l') matched 'x' (", x_quoted,
                    "): 'l', 'm'"), fixed = TRUE)
 
+#### Test other sections ####
+expect_message(
+expect_identical(
+  replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b",
+               ignore_case = TRUE, allow_multiple = FALSE),
+  c("b", "b")
+  ), pattern = "Replaced values", strict = TRUE, fixed = TRUE
+)
 
 #### Tests ####
 ##### ignore_case #####

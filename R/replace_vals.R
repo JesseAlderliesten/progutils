@@ -31,7 +31,8 @@
 #' An error is thrown if `allow_multiple` is `FALSE` and multiple values of
 #' `old` match `x`, unless those values of `old` only differ in their case and
 #' `ignore_case` is `TRUE`. An example of such an exception is
-#' `replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)`.
+#' `replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)`,
+#' which returns `c("b", "b")`.
 #'
 #' If `quiet` is `FALSE`, a message indicates which values have been replaced.
 #' The order of the factor **levels** determines the order used in the message.
