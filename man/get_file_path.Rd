@@ -7,10 +7,11 @@
 get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{Character string with the \link[checkinput:is_path]{path} to a
-directory.}
+\item{dir}{\link[checkinput:is_character]{character string} containing the
+\link[checkinput:is_path]{path} to a directory.}
 
-\item{pattern}{Character string containing a \link[base:regex]{regular expression}
+\item{pattern}{\link[checkinput:is_character]{character string} containing a
+\link[base:regex]{regular expression}
 used to select names of files that are present in \code{dir}.}
 
 \item{ignore_case}{\code{TRUE} or \code{FALSE}: use case-insensitive pattern matching?}
@@ -79,8 +80,9 @@ rm(my_tempfiles)
 \code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the \verb{Note on paths}
 in its documentation;
 \code{\link[=create_dir]{create_dir()}} to create a directory if does not yet exist;
-\code{\link[=file.exists]{file.exists()}} and \code{\link[=list.files]{list.files()}} to check for existence of files without
-checking they are a unique match to a pattern;
+\code{\link[fs:file_exists]{fs::file_exists()}} and \code{\link[=list.files]{list.files()}} (which \strong{includes} directories) to
+check for existence of files without checking they are a unique match to a
+pattern;
 \code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or
 directories;
 \code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way;

@@ -12,7 +12,8 @@ create_file_path(
 )
 }
 \arguments{
-\item{filename}{A character string with the file name, including the file
+\item{filename}{\link[checkinput:is_character]{character string} with the file
+name, including the file
 extension like \code{.csv} or \code{.txt}. Should adhere to the restrictions described
 in \code{\link[checkinput:is_path]{checkinput::is_path()}}.}
 

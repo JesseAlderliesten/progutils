@@ -3,9 +3,9 @@
 #' Check that values from one vector are absent from another vector
 #'
 #' @param x Vector or factor with values to test absence from `table`. `x`
-#' should have a length larger than zero and not be of [type][typeof] `double`.
+#' should not be of [type][typeof] `double`.
 #' @param table Vector or factor in which to test for absence of `x`. `table`
-#' should have a length larger than zero and not be of `type` `double`.
+#' should not be of `type` `double`.
 #' @param value `TRUE` or `FALSE`: should a vector with values be returned
 #' instead of a boolean vector?
 #'
@@ -15,9 +15,14 @@
 #' [Factor-input][factor()] to `x` is converted to character, to prevent
 #' returning a factor with all values of `x` as [levels].
 #'
-#' [NA]s are allowed in `x` and `table` and behave the same as other values: the
-#' returned `NA`s (if `value` is `TRUE`) and the returned zero-length value (if
-#' `value` is `FALSE`) have the same type as the `NA`s in `x` if `NA`s are
+#' Zero-length input behaves slightly different from other values: `not_in()`
+#' returns `logical(0)` for zero-length input to `x` if that is absent from
+#' `table` if `value` is `FALSE`. If `value` is `TRUE`, the behaviour is normal:
+#' returning `x`.
+#'
+#' [NA] is allowed in `x` and `table` and behaves the same as other values: the
+#' returned `NA` (if `value` is `TRUE`) and the returned zero-length value (if
+#' `value` is `FALSE`) have the same type as the `NA` in `x` if `NA` is
 #' absent from `table`. `NA`s of different types in `x` and `table` match each
 #' other.
 #'
@@ -37,13 +42,7 @@
 #' such input should allow for small numerical errors by using a tolerance, for
 #' example, as the error message indicates, using [are_equal()].
 #'
-#' `not_in()` does **not** allow zero-length input because zero-length input behaves
-#' slightly different from other values: if `character(0)` is present in `x` but
-#' absent from `table`, `not_in()` would return `logical(0)` if `value` is
-#' `FALSE`. If `value` is `TRUE`, the behaviour would be normal: returning
-#' `character(0)`.
-#'
-#' Apart from **not** allowing numeric or zero-length input,
+#' Apart from **not** allowing numeric input,
 #' `not_in(x, table, value = FALSE)` is equivalent to `x %notin% table`, where
 #' `%notin%` is a function in base \R since version `4.6.0`.
 #'
@@ -77,8 +76,7 @@
 not_in <- function(x, table, value = TRUE) {
   # list input to 'x' or 'table' is not allowed because it leads to 'x' being
   # returned.
-  stopifnot(is.null(dim(x)), length(x) > 0L, is.atomic(x),
-            is.null(dim(table)), length(table) > 0L, is.atomic(table),
+  stopifnot(is.null(dim(x)), is.atomic(x), is.null(dim(table)), is.atomic(table),
             "Use are_equal() to match input of type 'double'" =
               !is.double(x) && !is.double(table),
             checkinput::is_logical(value))

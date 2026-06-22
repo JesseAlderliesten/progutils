@@ -4,7 +4,8 @@
 #'
 #' @param text Vector with text to be signalled, coerced to character by
 #' [vect_to_char()].
-#' @param signal Character string indicating the type of signal to be used:
+#' @param signal [character string][checkinput::is_character()] indicating the
+#' type of signal to be used:
 #' `"error"` to throw an [error][stop()], `"warning"` to issue a [warning],
 #' `"message"` to show a [message], or `"quiet"` to be quiet.
 #' @param origin Character string pasted behind `text` giving the origin of the

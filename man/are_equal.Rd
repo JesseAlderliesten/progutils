@@ -7,7 +7,7 @@
 are_equal(x, y, tol = sqrt(.Machine$double.eps))
 }
 \arguments{
-\item{x, y}{Numeric vectors to compare for equality.}
+\item{x, y}{Numeric vectors with length larger than zero to compare for equality.}
 
 \item{tol}{A small \link[checkinput:is_positive]{positive} number. Numbers that differ less
 than \code{tol} are considered equal.}
@@ -30,7 +30,8 @@ but tests exact equality.
 }
 \section{Acknowledgement}{
 
-Code \code{abs(x - y) < tol} was taken from \code{dplyr::near()}.
+Code \code{abs(x - y) < tol} was taken from
+\href{https://dplyr.tidyverse.org/reference/near.html}{\code{dplyr::near()}}.
 }
 
 \examples{

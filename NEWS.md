@@ -1,3 +1,19 @@
+# progutils 0.11.0
+
+### Breaking changes
+- `not_in()`: allow zero-length input in `x` and `table`, returning `logical(0)`
+  for zero-length input that is absent from `table` if `value` is `FALSE`.
+- `vect_to_char()`: report the `type` instead of the `class` for zero-length
+  input and `NA`s. Not round integer values. Add examples on handling
+  zero-length input.
+- `wrap_text()`: allow `character(0)` as input to `x`, returning it unchanged,
+  with a warning. `width` now has to be a natural number.
+
+### Minor updates
+- `get_file_path()`: use `fs::dir_ls()` instead of `list.files()` to more easily
+  list only files.
+
+
 # progutils 0.10.1
 
 ### Documentation

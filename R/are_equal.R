@@ -3,7 +3,7 @@
 #' Test element-wise near-equality of numeric vectors by allowing for small
 #' numeric errors to make `are_equal()` safer than [`==`][Comparison].
 #'
-#' @param x,y Numeric vectors to compare for equality.
+#' @param x,y Numeric vectors with length larger than zero to compare for equality.
 #' @inheritParams checkinput::is_natural tol
 #'
 #' @details
@@ -18,7 +18,8 @@
 #' [NaN], or [infinite values][Inf] with the same sign.
 #'
 #' @section Acknowledgement:
-#' Code `abs(x - y) < tol` was taken from `dplyr::near()`.
+#' Code `abs(x - y) < tol` was taken from
+#' [`dplyr::near()`](https://dplyr.tidyverse.org/reference/near.html).
 #'
 #' @seealso
 #' [checkinput::is_natural()] to check for element-wise near-equality to natural

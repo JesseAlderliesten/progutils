@@ -14,7 +14,8 @@ signal_text(
 \item{text}{Vector with text to be signalled, coerced to character by
 \code{\link[=vect_to_char]{vect_to_char()}}.}
 
-\item{signal}{Character string indicating the type of signal to be used:
+\item{signal}{\link[checkinput:is_character]{character string} indicating the
+type of signal to be used:
 \code{"error"} to throw an \link[=stop]{error}, \code{"warning"} to issue a \link{warning},
 \code{"message"} to show a \link{message}, or \code{"quiet"} to be quiet.}
 

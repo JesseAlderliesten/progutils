@@ -25,7 +25,9 @@ The \link[=typeof]{type} of \link[=integer]{integers} is kept \code{integer} if
 \code{keep_integer} is \code{TRUE} and is changed to \code{double} if \code{keep_integer} is
 \code{FALSE}.
 
-\code{NULL} and zero-length vectors are converted to \code{numeric(0)}. Logical vectors
+\code{NULL} and zero-length vectors are converted to \code{numeric(0)}, except for
+\code{integer(0)} that is converted to \code{integer(0)} if \code{keep_integer} is \code{TRUE}.
+Logical vectors
 of length larger than zero are converted to a vector of \code{NA_real_}, with a
 warning.
 

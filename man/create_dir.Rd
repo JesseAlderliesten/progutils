@@ -20,8 +20,8 @@ current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 \value{
 A character string with the \link[fs:path_abs]{absolute normalized} path to the
 requested directory, returned \link[=invisible]{invisibly}. An error is thrown if
-the attempt to create a directory fails. This happens if \code{dir} points to an
-existing file instead of an directory.
+the attempt to create a directory fails, for example because \code{dir} points to
+an existing file instead of to an directory.
 }
 \description{
 Create a directory if it does not yet exist.

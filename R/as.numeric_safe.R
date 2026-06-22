@@ -15,7 +15,9 @@
 #' `keep_integer` is `TRUE` and is changed to `double` if `keep_integer` is
 #' `FALSE`.
 #'
-#' `NULL` and zero-length vectors are converted to `numeric(0)`. Logical vectors
+#' `NULL` and zero-length vectors are converted to `numeric(0)`, except for
+#' `integer(0)` that is converted to `integer(0)` if `keep_integer` is `TRUE`.
+#' Logical vectors
 #' of length larger than zero are converted to a vector of `NA_real_`, with a
 #' warning.
 #'

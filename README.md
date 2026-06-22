@@ -13,7 +13,7 @@ check equality, construct messages, or handle files and directories.
 
 ## Installation
 
-Visit the [progutils
+Visit the [`progutils`
 website](https://jessealderliesten.github.io/progutils/) to explore the
 package, or install `progutils` from
 [GitHub](https://github.com/JesseAlderliesten/progutils) using the
@@ -31,7 +31,7 @@ remotes::install_github(repo = "JesseAlderliesten/progutils",
 
 For more information about installing and configuring R and RStudio, see
 my package
-[checkrpkgs](https://jessealderliesten.github.io/checkrpkgs/).
+[`checkrpkgs`](https://jessealderliesten.github.io/checkrpkgs/).
 
 ## Examples
 
@@ -52,7 +52,7 @@ as.numeric_safe(x) # Returns the values.
 #> [1] 11 12 13
 ```
 
-Similarly, using `relevel` or `levels()` from base R to reorder factor
+Similarly, using `relevel()` or `levels()` from base R to reorder factor
 levels does **not** work, whereas using `reorder_levels()` from
 `progutils` **does**:
 
@@ -107,7 +107,7 @@ License](LICENSE.md).
     To cite package 'progutils' in publications use:
 
       Alderliesten J (2026). _progutils: Programming Utilities_. R package
-      version 0.10.1, <https://github.com/JesseAlderliesten/progutils>.
+      version 0.11.0, <https://github.com/JesseAlderliesten/progutils>.
 
     A BibTeX entry for LaTeX users is
 
@@ -115,7 +115,7 @@ License](LICENSE.md).
         title = {progutils: Programming Utilities},
         author = {Jesse Alderliesten},
         year = {2026},
-        note = {R package version 0.10.1},
+        note = {R package version 0.11.0},
         url = {https://github.com/JesseAlderliesten/progutils},
       }
 

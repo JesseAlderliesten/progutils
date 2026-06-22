@@ -47,13 +47,6 @@ Reordering levels of factor \code{f} by replacing levels through code like
 \code{Example}.
 }
 
-\section{Programming notes}{
-
-Could also use an approach like
-\code{levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))}, see
-\code{\link[=levels]{levels()}}.
-}
-
 \examples{
 orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
 orig

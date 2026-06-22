@@ -20,18 +20,19 @@ through \code{unlist(x, use.names = TRUE)}, with a warning).}
 \item{signif}{Positive number of length one, rounded to the nearest positive
 integer indicating the number of significant digits to round numeric \code{x} to.}
 
-\item{width}{A positive number giving the maximum line width (in characters)
+\item{width}{\link[checkinput:is_natural]{natural number} giving the maximum
+line width (in characters)
 after wrapping. Can be \code{Inf} to not wrap text.}
 
-\item{sep}{Character string of length one used to separate the names and the
-values. Ignored if \code{x} does not have names.}
+\item{sep}{\link[checkinput:is_character]{character string} used to separate
+the names and the values. Ignored if \code{x} does not have names.}
 
-\item{collapse}{Character string of length one to collapse values into a
-single character string, or \code{NULL} to return each value as an element of a
-character vector.}
+\item{collapse}{\link[checkinput:is_character]{character string} to collapse
+values into a single character string, or \code{NULL} to return each value as an
+element of a character vector.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
-by a blank character?}
+by blank characters?}
 }
 \value{
 The names and values in \code{x}, with values of numeric \code{x} rounded to \code{signif}
@@ -49,10 +50,19 @@ Convert a vector to a character string while preserving names and rounding
 numeric values.
 }
 \details{
-\code{NULL} is returned as \code{"'NULL'"}, other zero-length objects are returned as
-\code{"'<class>(0)'"} (e.g., \code{"'logical(0)'"}), \code{""} as \code{'""'}, logical \code{NA} as
-\code{"'NA'"}, and non-logical \code{NA}s as \code{"'NA_<class>_'"} (e.g., \code{"'NA_real_'"};
-for \link[=factor]{factors} this is \code{"'NA_character_'"}).
+Some values are handled specially to better distinguish different values than
+\code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}:
+\itemize{
+\item \code{NULL} is returned as \code{"NULL"}
+\item non-\code{NULL} zero-length objects are returned as \code{"<type>(0)"} (e.g.,
+\code{"logical(0)"}; for \code{numeric(0)} this is \code{"double(0)"})
+\item \code{""} is returned as \code{""}
+\item logical \code{NA} is returned as \code{"NA"}
+\item non-logical \code{NA} is returned as \code{"NA_<type>_"} (e.g., \code{"NA_character_"};
+for \code{NA_real_} this is \code{"NA_double_"};
+for \link[=factor]{factors} this is \code{"NA_character_"} because \code{vect_to_char()}
+converts factors to characters).
+}
 }
 \section{Programming notes}{
 
@@ -76,6 +86,11 @@ x_char <- c(a = "abc", b = "def", c = "this is text")
 vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
 vect_to_char(x = unname(x_char)) # "abc, def, this is some text"
 
+# Nicer handling of zero-length input
+vect_to_char(logical(0)) # "logical(0)"
+message(logical(0)) # <empty>
+message(vect_to_char(logical(0))) # logical(0)
+
 # Using vect_to_char() to get a frequency table
 x <- 1:10
 names(x) <- letters[x]
@@ -86,7 +101,11 @@ paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")
 
 }
 \seealso{
-\code{\link[=toString]{toString()}} which can be used if names of \code{x} can be removed.
+\code{\link[=toString]{toString()}} which can be used if names of \code{x} can be removed;
+\code{vignette("type_coercion", package = "checkinput")} and
+\code{help("is_zerolength", package = "checkinput")} for a discussion of some
+issues with type conversion and zero-length input when \link[=c]{combining}
+objects into a vector.
 
 Other functions to convert types:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},

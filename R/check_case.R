@@ -20,7 +20,7 @@
 #' @family functions to check equality
 #'
 #' @seealso
-#' [tolower] and [toupper] to **change** case.
+#' [tolower()] and [toupper()] to **change** case.
 #'
 #' @examples
 #' x <- c("Ee", "Ee", "LL", "Ll")

@@ -8,10 +8,10 @@ not_in(x, table, value = TRUE)
 }
 \arguments{
 \item{x}{Vector or factor with values to test absence from \code{table}. \code{x}
-should have a length larger than zero and not be of \link[=typeof]{type} \code{double}.}
+should not be of \link[=typeof]{type} \code{double}.}
 
 \item{table}{Vector or factor in which to test for absence of \code{x}. \code{table}
-should have a length larger than zero and not be of \code{type} \code{double}.}
+should not be of \code{type} \code{double}.}
 
 \item{value}{\code{TRUE} or \code{FALSE}: should a vector with values be returned
 instead of a boolean vector?}
@@ -32,9 +32,14 @@ Duplicates in \code{x} are kept, in contrast to \code{\link[=setdiff]{setdiff()}
 \link[=factor]{Factor-input} to \code{x} is converted to character, to prevent
 returning a factor with all values of \code{x} as \link{levels}.
 
-\link{NA}s are allowed in \code{x} and \code{table} and behave the same as other values: the
-returned \code{NA}s (if \code{value} is \code{TRUE}) and the returned zero-length value (if
-\code{value} is \code{FALSE}) have the same type as the \code{NA}s in \code{x} if \code{NA}s are
+Zero-length input behaves slightly different from other values: \code{not_in()}
+returns \code{logical(0)} for zero-length input to \code{x} if that is absent from
+\code{table} if \code{value} is \code{FALSE}. If \code{value} is \code{TRUE}, the behaviour is normal:
+returning \code{x}.
+
+\link{NA} is allowed in \code{x} and \code{table} and behaves the same as other values: the
+returned \code{NA} (if \code{value} is \code{TRUE}) and the returned zero-length value (if
+\code{value} is \code{FALSE}) have the same type as the \code{NA} in \code{x} if \code{NA} is
 absent from \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
 other.
 
@@ -48,13 +53,7 @@ matching
 such input should allow for small numerical errors by using a tolerance, for
 example, as the error message indicates, using \code{\link[=are_equal]{are_equal()}}.
 
-\code{not_in()} does \strong{not} allow zero-length input because zero-length input behaves
-slightly different from other values: if \code{character(0)} is present in \code{x} but
-absent from \code{table}, \code{not_in()} would return \code{logical(0)} if \code{value} is
-\code{FALSE}. If \code{value} is \code{TRUE}, the behaviour would be normal: returning
-\code{character(0)}.
-
-Apart from \strong{not} allowing numeric or zero-length input,
+Apart from \strong{not} allowing numeric input,
 \code{not_in(x, table, value = FALSE)} is equivalent to \code{x \%notin\% table}, where
 \verb{\%notin\%} is a function in base \R since version \verb{4.6.0}.
 }

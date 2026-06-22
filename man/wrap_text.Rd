@@ -7,13 +7,14 @@
 wrap_text(x, width = 80L, ignore_newlines = TRUE)
 }
 \arguments{
-\item{x}{Character vector to be wrapped.}
+\item{x}{\link[checkinput:all_characters]{character vector} to be wrapped.}
 
-\item{width}{A positive number giving the maximum line width (in characters)
+\item{width}{\link[checkinput:is_natural]{natural number} giving the maximum
+line width (in characters)
 after wrapping. Can be \code{Inf} to not wrap text.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
-by a blank character?}
+by blank characters?}
 }
 \value{
 A string containing \code{x} wrapped to a maximum of \code{width} characters, with
@@ -25,6 +26,8 @@ characters longer than \code{width} occurs without a blank character to wrap at.
 Wrap text at blank characters to achieve a maximum line width.
 }
 \details{
+\code{character(0)} input to \code{x} is returned unchanged, with a warning.
+
 \code{x} of length larger than one is pasted into a single string, separating the
 parts by blank characters.
 

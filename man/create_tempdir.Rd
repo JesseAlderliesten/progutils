@@ -7,7 +7,7 @@
 create_tempdir(pattern = "tempdir")
 }
 \arguments{
-\item{pattern}{A \link[checkinput:is_character]{character string} with the
+\item{pattern}{\link[checkinput:is_character]{character string} with the
 initial part of the name of the new temporary directory, only containing
 characters that are valid in a \link[checkinput:is_path]{path}.}
 }
@@ -35,8 +35,9 @@ Although the temporary directory given by \code{\link[=tempdir]{tempdir()}} will
 automatically \link[=unlink]{removed} when \R \link[=quit]{quits} (and operating
 systems might
 \href{https://cran.r-project.org/doc/manuals/R-admin.html#Running-R}{periodically}
-empty the temporary directory), the created subdirectories should be removed
-once they are not needed anymore, see the section \verb{Usage in practice} below.
+empty the temporary directory), the created subdirectories should be
+\link[=unlink]{removed} once they are not needed anymore, see the section
+\verb{Usage in practice} below.
 }
 \section{Side effects}{
 

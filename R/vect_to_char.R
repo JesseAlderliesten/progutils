@@ -8,13 +8,25 @@
 #' through `unlist(x, use.names = TRUE)`, with a warning).
 #' @param signif Positive number of length one, rounded to the nearest positive
 #' integer indicating the number of significant digits to round numeric `x` to.
-#' @param sep Character string of length one used to separate the names and the
-#' values. Ignored if `x` does not have names.
-#' @param collapse Character string of length one to collapse values into a
-#' single character string, or `NULL` to return each value as an element of a
-#' character vector.
+#' @param sep [character string][checkinput::is_character()] used to separate
+#' the names and the values. Ignored if `x` does not have names.
+#' @param collapse [character string][checkinput::is_character()] to collapse
+#' values into a single character string, or `NULL` to return each value as an
+#' element of a character vector.
 #'
-#' @inherit checkinput::paste_quoted details
+#' @details
+#' Some values are handled specially to better distinguish different values than
+#' [message()] etc. that use [paste0()]:
+#'
+#' - `NULL` is returned as `"NULL"`
+#' - non-`NULL` zero-length objects are returned as `"<type>(0)"` (e.g.,
+#'   `"logical(0)"`; for `numeric(0)` this is `"double(0)"`)
+#' - `""` is returned as `""`
+#' - logical `NA` is returned as `"NA"`
+#' - non-logical `NA` is returned as `"NA_<type>_"` (e.g., `"NA_character_"`;
+#'   for `NA_real_` this is `"NA_double_"`;
+#'   for [factors][factor] this is `"NA_character_"` because `vect_to_char()`
+#'   converts factors to characters).
 #'
 #' @returns
 #' The names and values in `x`, with values of numeric `x` rounded to `signif`
@@ -32,7 +44,12 @@
 #' `paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")`,
 #' see the last `Example`.
 #'
-#' @seealso [toString()] which can be used if names of `x` can be removed.
+#' @seealso
+#' [toString()] which can be used if names of `x` can be removed;
+#' `vignette("type_coercion", package = "checkinput")` and
+#' `help("is_zerolength", package = "checkinput")` for a discussion of some
+#' issues with type conversion and zero-length input when [combining][c()]
+#' objects into a vector.
 #'
 #' @family functions to convert types
 #' @family functions to modify character vectors
@@ -52,6 +69,11 @@
 #' x_char <- c(a = "abc", b = "def", c = "this is text")
 #' vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
 #' vect_to_char(x = unname(x_char)) # "abc, def, this is some text"
+#'
+#' # Nicer handling of zero-length input
+#' vect_to_char(logical(0)) # "logical(0)"
+#' message(logical(0)) # <empty>
+#' message(vect_to_char(logical(0))) # logical(0)
 #'
 #' # Using vect_to_char() to get a frequency table
 #' x <- 1:10
@@ -74,7 +96,7 @@ vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
   }
   stopifnot(is.vector(x) || is.factor(x) || is.null(x))
 
-  if(is.numeric(x)) {
+  if(is.double(x)) {
     x <- signif(x = x, digits = signif)
   }
 
@@ -86,23 +108,14 @@ vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
     if(is.null(x)) {
       x <- "NULL"
     } else {
-      x <- paste0(class(x), "(0)")
+      x <- paste0(typeof(x), "(0)")
     }
   }
 
-  bool_NA <- is.na(x) & !is.nan(x)
-  if(any(bool_NA)) {
-    if(!is.list(x)) {
-      if(!is.logical(x)) {
-        x[bool_NA] <- paste0("NA_", class(x), "_")
-      }
-    } else {
-      NA_new <- paste0("NA_",
-                       vapply(X = x[bool_NA], FUN = class,
-                              FUN.VALUE = character(1), USE.NAMES = FALSE),
-                       "_")
-      NA_new[NA_new == "NA_logical_"] <- "NA"
-      x[bool_NA] <- NA_new
+  if(!is.logical(x)) {
+    bool_NA <- is.na(x) & !is.nan(x)
+    if(any(bool_NA)) {
+      x[bool_NA] <- paste0("NA_", typeof(x), "_")
     }
   }
 

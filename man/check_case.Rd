@@ -9,7 +9,8 @@ check_case(x, signal = c("error", "warning", "message", "quiet"))
 \arguments{
 \item{x}{Character vector to check.}
 
-\item{signal}{Character string indicating the type of signal to be used:
+\item{signal}{\link[checkinput:is_character]{character string} indicating the
+type of signal to be used:
 \code{"error"} to throw an \link[=stop]{error}, \code{"warning"} to issue a \link{warning},
 \code{"message"} to show a \link{message}, or \code{"quiet"} to be quiet.}
 }
@@ -39,7 +40,7 @@ check_case(x = x, signal = "warning")
 
 }
 \seealso{
-\link{tolower} and \link{toupper} to \strong{change} case.
+\code{\link[=tolower]{tolower()}} and \code{\link[=toupper]{toupper()}} to \strong{change} case.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

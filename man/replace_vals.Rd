@@ -64,7 +64,8 @@ argument \code{signal_case_new}.
 An error is thrown if \code{allow_multiple} is \code{FALSE} and multiple values of
 \code{old} match \code{x}, unless those values of \code{old} only differ in their case and
 \code{ignore_case} is \code{TRUE}. An example of such an exception is
-\code{replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)}.
+\code{replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)},
+which returns \code{c("b", "b")}.
 
 If \code{quiet} is \code{FALSE}, a message indicates which values have been replaced.
 The order of the factor \strong{levels} determines the order used in the message.
