@@ -12,17 +12,21 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE)
 
 - x:
 
-  Character vector to be wrapped.
+  [character
+  vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  to be wrapped.
 
 - width:
 
-  A positive number giving the maximum line width (in characters) after
-  wrapping. Can be `Inf` to not wrap text.
+  [natural
+  number](https://jessealderliesten.github.io/checkinput/reference/is_natural.html)
+  giving the maximum line width (in characters) after wrapping. Can be
+  `Inf` to not wrap text.
 
 - ignore_newlines:
 
-  `TRUE` or `FALSE`: should newlines in `x` be replaced by a blank
-  character?
+  `TRUE` or `FALSE`: should newlines in `x` be replaced by blank
+  characters?
 
 ## Value
 
@@ -33,6 +37,8 @@ characters longer than `width` occurs without a blank character to wrap
 at.
 
 ## Details
+
+`character(0)` input to `x` is returned unchanged, with a warning.
 
 `x` of length larger than one is pasted into a single string, separating
 the parts by blank characters.

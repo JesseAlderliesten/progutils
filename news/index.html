@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,23 @@
       <small>Source: <a href="https://github.com/JesseAlderliesten/progutils/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.11.0" id="progutils-0110">progutils 0.11.0<a class="anchor" aria-label="anchor" href="#progutils-0110"></a></h2>
+<div class="section level4">
+<h4 id="breaking-changes-0-11-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-11-0"></a></h4>
+<ul><li>
+<code><a href="../reference/not_in.html">not_in()</a></code>: allow zero-length input in <code>x</code> and <code>table</code>, returning <code>logical(0)</code> for zero-length input that is absent from <code>table</code> if <code>value</code> is <code>FALSE</code>.</li>
+<li>
+<code><a href="../reference/vect_to_char.html">vect_to_char()</a></code>: report the <code>type</code> instead of the <code>class</code> for zero-length input and <code>NA</code>s. Not round integer values. Add examples on handling zero-length input.</li>
+<li>
+<code><a href="../reference/wrap_text.html">wrap_text()</a></code>: allow <code>character(0)</code> as input to <code>x</code>, returning it unchanged, with a warning. <code>width</code> now has to be a natural number.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="minor-updates-0-11-0">Minor updates<a class="anchor" aria-label="anchor" href="#minor-updates-0-11-0"></a></h4>
+<ul><li>
+<code><a href="../reference/get_file_path.html">get_file_path()</a></code>: use <code><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">fs::dir_ls()</a></code> instead of <code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files()</a></code> to more easily list only files.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.10.1" id="progutils-0101">progutils 0.10.1<a class="anchor" aria-label="anchor" href="#progutils-0101"></a></h2>
 <div class="section level4">

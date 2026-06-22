@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,17 +53,18 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>Character vector to be wrapped.</p></dd>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a> to be wrapped.</p></dd>
 
 
 <dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
-<dd><p>A positive number giving the maximum line width (in characters)
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/is_natural.html" class="external-link">natural number</a> giving the maximum
+line width (in characters)
 after wrapping. Can be <code>Inf</code> to not wrap text.</p></dd>
 
 
 <dt id="arg-ignore-newlines">ignore_newlines<a class="anchor" aria-label="anchor" href="#arg-ignore-newlines"></a></dt>
 <dd><p><code>TRUE</code> or <code>FALSE</code>: should newlines in <code>x</code> be replaced
-by a blank character?</p></dd>
+by blank characters?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -75,7 +76,8 @@ characters longer than <code>width</code> occurs without a blank character to wr
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>x</code> of length larger than one is pasted into a single string, separating the
+    <p><code>character(0)</code> input to <code>x</code> is returned unchanged, with a warning.</p>
+<p><code>x</code> of length larger than one is pasted into a single string, separating the
 parts by blank characters.</p>
 <p>Consecutive white space is collapsed into a single blank character, except
 for double spaces after periods, question marks and exclamation marks (as

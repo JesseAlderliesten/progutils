@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Visit the <a href="https://jessealderliesten.github.io/progutils/">progutils website</a> to explore the package, or install <code>progutils</code> from <a href="https://github.com/JesseAlderliesten/progutils" class="external-link">GitHub</a> using the following R code (you need to run R as administrator):</p>
+<p>Visit the <a href="https://jessealderliesten.github.io/progutils/"><code>progutils</code> website</a> to explore the package, or install <code>progutils</code> from <a href="https://github.com/JesseAlderliesten/progutils" class="external-link">GitHub</a> using the following R code (you need to run R as administrator):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">"remotes"</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -71,7 +71,7 @@
 <span>                        dependencies <span class="op">=</span> <span class="cn">NA</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span>, force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                        quiet <span class="op">=</span> <span class="cn">FALSE</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>, lib <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>                        verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"verbose"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>For more information about installing and configuring R and RStudio, see my package <a href="https://jessealderliesten.github.io/checkrpkgs/" class="external-link">checkrpkgs</a>.</p>
+<p>For more information about installing and configuring R and RStudio, see my package <a href="https://jessealderliesten.github.io/checkrpkgs/" class="external-link"><code>checkrpkgs</code></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -87,7 +87,7 @@
 <span><span class="co">#&gt; [1] 1 2 3</span></span>
 <span><span class="fu"><a href="reference/as.numeric_safe.html">as.numeric_safe</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Returns the values.</span></span>
 <span><span class="co">#&gt; [1] 11 12 13</span></span></code></pre></div>
-<p>Similarly, using <code>relevel</code> or <code><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels()</a></code> from base R to reorder factor levels does <strong>not</strong> work, whereas using <code><a href="reference/reorder_levels.html">reorder_levels()</a></code> from <code>progutils</code> <strong>does</strong>:</p>
+<p>Similarly, using <code><a href="https://rdrr.io/r/stats/relevel.html" class="external-link">relevel()</a></code> or <code><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels()</a></code> from base R to reorder factor levels does <strong>not</strong> work, whereas using <code><a href="reference/reorder_levels.html">reorder_levels()</a></code> from <code>progutils</code> <strong>does</strong>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JesseAlderliesten/progutils" class="external-link">progutils</a></span><span class="op">)</span></span>
 <span><span class="va">f_orig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span><span class="op">:</span><span class="fl">13</span>, <span class="fl">13</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span><span class="op">]</span>, levels <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">13</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span></span>
@@ -133,7 +133,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>To cite package <span class="st">'progutils'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  Alderliesten <span class="fu">J</span> (<span class="dv">2026</span>). _progutils<span class="sc">:</span> Programming Utilities_. R package</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">10.1</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils<span class="sc">&gt;</span>.</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">11.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils<span class="sc">&gt;</span>.</span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
@@ -141,7 +141,7 @@
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    title <span class="ot">=</span> {progutils<span class="sc">:</span> Programming Utilities},</span>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    author <span class="ot">=</span> {Jesse Alderliesten},</span>
 <span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2026</span>},</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">10.1</span>},</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">11.0</span>},</span>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils},</span>
 <span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  }</span></code></pre></div>
 </div>

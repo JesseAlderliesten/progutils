@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,11 +53,12 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A character string</p></dd>
+<dd><p>a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a>.</p></dd>
 
 
 <dt id="arg-collapse">collapse<a class="anchor" aria-label="anchor" href="#arg-collapse"></a></dt>
-<dd><p>Character vector with elements that were used to collapse
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> with
+elements that were used to collapse
 values when <code>x</code> was created, and are now used to <a href="https://rdrr.io/r/base/strsplit.html" class="external-link">split</a> <code>x</code> on.
 Can be <code>character(0)</code> to leave <code>x</code> as a character string.</p></dd>
 
@@ -69,12 +70,13 @@ Can be <code>character(0)</code> to leave <code>x</code> as a character string.<
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>x</code> without the quotation marks and split into a vector.</p>
+    <p><code>x</code> without the quotation marks indicated by <code>quotemarks</code>, split into a
+vector on <code>collapse</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>unpaste_unquote()</code> is not the exact reverse of <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>: it does
-<em>not</em> restore zero-length elements to their original value, e.g., <code>"'NULL'"</code>
+    <p><code>unpaste_unquote()</code> is <strong>not</strong> the exact reverse of <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>: it does
+<strong>not</strong> restore zero-length elements to their original value, e.g., <code>"'NULL'"</code>
 to <code>NULL</code>, or <code>"'character(0)'"</code> to <code>character(0)</code>.</p>
     </div>
     <div class="section level2">

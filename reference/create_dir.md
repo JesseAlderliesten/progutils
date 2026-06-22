@@ -36,8 +36,8 @@ A character string with the [absolute
 normalized](https://fs.r-lib.org/reference/path_math.html) path to the
 requested directory, returned
 [invisibly](https://rdrr.io/r/base/invisible.html). An error is thrown
-if the attempt to create a directory fails. This happens if `dir` points
-to an existing file instead of an directory.
+if the attempt to create a directory fails, for example because `dir`
+points to an existing file instead of to an directory.
 
 ## Details
 
@@ -87,7 +87,7 @@ my_tempdir <- create_tempdir(pattern = "examplecreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
-#> /tmp/Rtmpn73qaj/examplecreatedir19cd657d7298/dir_one 
+#> /tmp/Rtmp886Ylj/examplecreatedir198822efb185/dir_one 
 #>                                                 TRUE 
 
 # An attempt to create a directory that already exists does not change any
@@ -109,7 +109,7 @@ identical(res_dir_one, res_dir_ONE)
 res_dir_date <- create_dir(dir = fs::path(my_tempdir, "dir_date"),
                            add_date = TRUE)
 fs::dir_exists(res_dir_date) # TRUE
-#> /tmp/Rtmpn73qaj/examplecreatedir19cd657d7298/dir_date/2026_06_19 
+#> /tmp/Rtmp886Ylj/examplecreatedir198822efb185/dir_date/2026_06_22 
 #>                                                             TRUE 
 
 # Cleaning up

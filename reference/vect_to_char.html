@@ -9,7 +9,7 @@ numeric values."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,24 +73,25 @@ integer indicating the number of significant digits to round numeric <code>x</co
 
 
 <dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
-<dd><p>A positive number giving the maximum line width (in characters)
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/is_natural.html" class="external-link">natural number</a> giving the maximum
+line width (in characters)
 after wrapping. Can be <code>Inf</code> to not wrap text.</p></dd>
 
 
 <dt id="arg-sep">sep<a class="anchor" aria-label="anchor" href="#arg-sep"></a></dt>
-<dd><p>Character string of length one used to separate the names and the
-values. Ignored if <code>x</code> does not have names.</p></dd>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> used to separate
+the names and the values. Ignored if <code>x</code> does not have names.</p></dd>
 
 
 <dt id="arg-collapse">collapse<a class="anchor" aria-label="anchor" href="#arg-collapse"></a></dt>
-<dd><p>Character string of length one to collapse values into a
-single character string, or <code>NULL</code> to return each value as an element of a
-character vector.</p></dd>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> to collapse
+values into a single character string, or <code>NULL</code> to return each value as an
+element of a character vector.</p></dd>
 
 
 <dt id="arg-ignore-newlines">ignore_newlines<a class="anchor" aria-label="anchor" href="#arg-ignore-newlines"></a></dt>
 <dd><p><code>TRUE</code> or <code>FALSE</code>: should newlines in <code>x</code> be replaced
-by a blank character?</p></dd>
+by blank characters?</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -105,11 +106,17 @@ the name-value pairs are separated by <code>collapse</code>, thus returning a ch
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>NULL</code> is returned as <code>"'NULL'"</code>, other zero-length objects are returned as
-<code>"'&lt;class&gt;(0)'"</code> (e.g., <code>"'logical(0)'"</code>), <code>""</code> as <code>'""'</code>, logical <code>NA</code> as
-<code>"'NA'"</code>, and non-logical <code>NA</code>s as <code>"'NA_&lt;class&gt;_'"</code> (e.g., <code>"'NA_real_'"</code>;
-for <a href="https://rdrr.io/r/base/factor.html" class="external-link">factors</a> this is <code>"'NA_character_'"</code>).</p>
-    </div>
+    <p>Some values are handled specially to better distinguish different values than
+<code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> etc. that use <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>:</p><ul><li><p><code>NULL</code> is returned as <code>"NULL"</code></p></li>
+<li><p>non-<code>NULL</code> zero-length objects are returned as <code>"&lt;type&gt;(0)"</code> (e.g.,
+<code>"logical(0)"</code>; for <code>numeric(0)</code> this is <code>"double(0)"</code>)</p></li>
+<li><p><code>""</code> is returned as <code>""</code></p></li>
+<li><p>logical <code>NA</code> is returned as <code>"NA"</code></p></li>
+<li><p>non-logical <code>NA</code> is returned as <code>"NA_&lt;type&gt;_"</code> (e.g., <code>"NA_character_"</code>;
+for <code>NA_real_</code> this is <code>"NA_double_"</code>;
+for <a href="https://rdrr.io/r/base/factor.html" class="external-link">factors</a> this is <code>"NA_character_"</code> because <code>vect_to_char()</code>
+converts factors to characters).</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
 
@@ -120,7 +127,11 @@ see the last <code>Example</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/toString.html" class="external-link">toString()</a></code> which can be used if names of <code>x</code> can be removed.</p>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/toString.html" class="external-link">toString()</a></code> which can be used if names of <code>x</code> can be removed;
+<code><a href="https://jessealderliesten.github.io/checkinput/articles/type_coercion.html" class="external-link">vignette("type_coercion", package = "checkinput")</a></code> and
+<code><a href="https://jessealderliesten.github.io/checkinput/reference/is_zerolength.html" class="external-link">help("is_zerolength", package = "checkinput")</a></code> for a discussion of some
+issues with type conversion and zero-length input when <a href="https://rdrr.io/r/base/c.html" class="external-link">combining</a>
+objects into a vector.</p>
 <p>Other functions to convert types:
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
 <code>reexports</code>,
@@ -161,6 +172,14 @@ see the last <code>Example</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a: abc, b: def, c: this is text"</span>
 <span class="r-in"><span><span class="fu">vect_to_char</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="va">x_char</span><span class="op">)</span><span class="op">)</span> <span class="co"># "abc, def, this is some text"</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "abc, def, this is text"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Nicer handling of zero-length input</span></span></span>
+<span class="r-in"><span><span class="fu">vect_to_char</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># "logical(0)"</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "logical(0)"</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># &lt;empty&gt;</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu">vect_to_char</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># logical(0)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> logical(0)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using vect_to_char() to get a frequency table</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></span>

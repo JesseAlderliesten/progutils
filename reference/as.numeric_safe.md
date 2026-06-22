@@ -36,9 +36,10 @@ The [type](https://rdrr.io/r/base/typeof.html) of
 `keep_integer` is `TRUE` and is changed to `double` if `keep_integer` is
 `FALSE`.
 
-`NULL` and zero-length vectors are converted to `numeric(0)`. Logical
-vectors of length larger than zero are converted to a vector of
-`NA_real_`, with a warning.
+`NULL` and zero-length vectors are converted to `numeric(0)`, except for
+`integer(0)` that is converted to `integer(0)` if `keep_integer` is
+`TRUE`. Logical vectors of length larger than zero are converted to a
+vector of `NA_real_`, with a warning.
 
 `as.numeric_safe()` uses a suggestion from
 [`factor()`](https://rdrr.io/r/base/factor.html) and [R FAQ

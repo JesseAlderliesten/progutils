@@ -31,24 +31,29 @@ vect_to_char(
 
 - width:
 
-  A positive number giving the maximum line width (in characters) after
-  wrapping. Can be `Inf` to not wrap text.
+  [natural
+  number](https://jessealderliesten.github.io/checkinput/reference/is_natural.html)
+  giving the maximum line width (in characters) after wrapping. Can be
+  `Inf` to not wrap text.
 
 - sep:
 
-  Character string of length one used to separate the names and the
-  values. Ignored if `x` does not have names.
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  used to separate the names and the values. Ignored if `x` does not
+  have names.
 
 - collapse:
 
-  Character string of length one to collapse values into a single
-  character string, or `NULL` to return each value as an element of a
-  character vector.
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  to collapse values into a single character string, or `NULL` to return
+  each value as an element of a character vector.
 
 - ignore_newlines:
 
-  `TRUE` or `FALSE`: should newlines in `x` be replaced by a blank
-  character?
+  `TRUE` or `FALSE`: should newlines in `x` be replaced by blank
+  characters?
 
 ## Value
 
@@ -65,11 +70,24 @@ See `Details` on handling of some special values.
 
 ## Details
 
-`NULL` is returned as `"'NULL'"`, other zero-length objects are returned
-as `"'<class>(0)'"` (e.g., `"'logical(0)'"`), `""` as `'""'`, logical
-`NA` as `"'NA'"`, and non-logical `NA`s as `"'NA_<class>_'"` (e.g.,
-`"'NA_real_'"`; for [factors](https://rdrr.io/r/base/factor.html) this
-is `"'NA_character_'"`).
+Some values are handled specially to better distinguish different values
+than [`message()`](https://rdrr.io/r/base/message.html) etc. that use
+[`paste0()`](https://rdrr.io/r/base/paste.html):
+
+- `NULL` is returned as `"NULL"`
+
+- non-`NULL` zero-length objects are returned as `"<type>(0)"` (e.g.,
+  `"logical(0)"`; for `numeric(0)` this is `"double(0)"`)
+
+- `""` is returned as `""`
+
+- logical `NA` is returned as `"NA"`
+
+- non-logical `NA` is returned as `"NA_<type>_"` (e.g.,
+  `"NA_character_"`; for `NA_real_` this is `"NA_double_"`; for
+  [factors](https://rdrr.io/r/base/factor.html) this is
+  `"NA_character_"` because `vect_to_char()` converts factors to
+  characters).
 
 ## Programming notes
 
@@ -80,7 +98,13 @@ see the last `Example`.
 ## See also
 
 [`toString()`](https://rdrr.io/r/base/toString.html) which can be used
-if names of `x` can be removed.
+if names of `x` can be removed;
+[`vignette("type_coercion", package = "checkinput")`](https://jessealderliesten.github.io/checkinput/articles/type_coercion.html)
+and
+[`help("is_zerolength", package = "checkinput")`](https://jessealderliesten.github.io/checkinput/reference/is_zerolength.html)
+for a discussion of some issues with type conversion and zero-length
+input when [combining](https://rdrr.io/r/base/c.html) objects into a
+vector.
 
 Other functions to convert types:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
@@ -124,6 +148,14 @@ vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
 #> [1] "a: abc, b: def, c: this is text"
 vect_to_char(x = unname(x_char)) # "abc, def, this is some text"
 #> [1] "abc, def, this is text"
+
+# Nicer handling of zero-length input
+vect_to_char(logical(0)) # "logical(0)"
+#> [1] "logical(0)"
+message(logical(0)) # <empty>
+#> 
+message(vect_to_char(logical(0))) # logical(0)
+#> logical(0)
 
 # Using vect_to_char() to get a frequency table
 x <- 1:10

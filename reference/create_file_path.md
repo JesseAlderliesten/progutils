@@ -18,8 +18,10 @@ create_file_path(
 
 - filename:
 
-  A character string with the file name, including the file extension
-  like `.csv` or `.txt`. Should adhere to the restrictions described in
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  with the file name, including the file extension like `.csv` or
+  `.txt`. Should adhere to the restrictions described in
   [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html).
 
 - format_stamp:
@@ -105,28 +107,28 @@ my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/Rtmpn73qaj/examplecreatefilepath19cd2046bb8f/2026_06_19/abc.txt
+#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/2026_06_22/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/Rtmpn73qaj/examplecreatefilepath19cd2046bb8f/2026_06_19/19_06_2026_abc.txt
+#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/2026_06_22/22_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/Rtmpn73qaj/examplecreatefilepath19cd2046bb8f/def.html
+#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/Rtmpn73qaj/examplecreatefilepath19cd2046bb8f/19_06_2026_def.html
+#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/22_06_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/Rtmpn73qaj/examplecreatefilepath19cd2046bb8f/subdir/2026_06_19/abc.txt
+#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/subdir/2026_06_22/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/Rtmpn73qaj/examplecreatefilepath19cd2046bb8f/subdir/2026_06_19/19_06_2026_abc.txt
+#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/subdir/2026_06_22/22_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/Rtmpn73qaj/examplecreatefilepath19cd2046bb8f/subdir/def.html
+#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/Rtmpn73qaj/examplecreatefilepath19cd2046bb8f/subdir/19_06_2026_def.html
+#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/subdir/22_06_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

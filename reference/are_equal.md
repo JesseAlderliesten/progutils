@@ -14,7 +14,7 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 
 - x, y:
 
-  Numeric vectors to compare for equality.
+  Numeric vectors with length larger than zero to compare for equality.
 
 - tol:
 
@@ -41,7 +41,8 @@ exact equality.
 
 ## Acknowledgement
 
-Code `abs(x - y) < tol` was taken from `dplyr::near()`.
+Code `abs(x - y) < tol` was taken from
+[`dplyr::near()`](https://dplyr.tidyverse.org/reference/near.html).
 
 ## See also
 

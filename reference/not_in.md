@@ -13,13 +13,12 @@ not_in(x, table, value = TRUE)
 - x:
 
   Vector or factor with values to test absence from `table`. `x` should
-  have a length larger than zero and not be of
-  [type](https://rdrr.io/r/base/typeof.html) `double`.
+  not be of [type](https://rdrr.io/r/base/typeof.html) `double`.
 
 - table:
 
   Vector or factor in which to test for absence of `x`. `table` should
-  have a length larger than zero and not be of `type` `double`.
+  not be of `type` `double`.
 
 - value:
 
@@ -43,11 +42,16 @@ Duplicates in `x` are kept, in contrast to
 to character, to prevent returning a factor with all values of `x` as
 [levels](https://rdrr.io/r/base/levels.html).
 
-[NA](https://rdrr.io/r/base/NA.html)s are allowed in `x` and `table` and
-behave the same as other values: the returned `NA`s (if `value` is
+Zero-length input behaves slightly different from other values:
+`not_in()` returns `logical(0)` for zero-length input to `x` if that is
+absent from `table` if `value` is `FALSE`. If `value` is `TRUE`, the
+behaviour is normal: returning `x`.
+
+[NA](https://rdrr.io/r/base/NA.html) is allowed in `x` and `table` and
+behaves the same as other values: the returned `NA` (if `value` is
 `TRUE`) and the returned zero-length value (if `value` is `FALSE`) have
-the same type as the `NA`s in `x` if `NA`s are absent from `table`.
-`NA`s of different types in `x` and `table` match each other.
+the same type as the `NA` in `x` if `NA` is absent from `table`. `NA`s
+of different types in `x` and `table` match each other.
 
 Names are **not** considered when matching but are retained in the
 output, similar to `%in%`.
@@ -60,13 +64,7 @@ such input should allow for small numerical errors by using a tolerance,
 for example, as the error message indicates, using
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md).
 
-`not_in()` does **not** allow zero-length input because zero-length
-input behaves slightly different from other values: if `character(0)` is
-present in `x` but absent from `table`, `not_in()` would return
-`logical(0)` if `value` is `FALSE`. If `value` is `TRUE`, the behaviour
-would be normal: returning `character(0)`.
-
-Apart from **not** allowing numeric or zero-length input,
+Apart from **not** allowing numeric input,
 `not_in(x, table, value = FALSE)` is equivalent to `x %notin% table`,
 where `%notin%` is a function in base R since version `4.6.0`.
 

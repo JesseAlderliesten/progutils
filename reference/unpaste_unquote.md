@@ -12,14 +12,16 @@ unpaste_unquote(x, collapse = c(", ", "; "), quotemarks = c("'", "\""))
 
 - x:
 
-  A character string
+  a [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html).
 
 - collapse:
 
-  Character vector with elements that were used to collapse values when
-  `x` was created, and are now used to
-  [split](https://rdrr.io/r/base/strsplit.html) `x` on. Can be
-  `character(0)` to leave `x` as a character string.
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  with elements that were used to collapse values when `x` was created,
+  and are now used to [split](https://rdrr.io/r/base/strsplit.html) `x`
+  on. Can be `character(0)` to leave `x` as a character string.
 
 - quotemarks:
 
@@ -28,13 +30,14 @@ unpaste_unquote(x, collapse = c(", ", "; "), quotemarks = c("'", "\""))
 
 ## Value
 
-`x` without the quotation marks and split into a vector.
+`x` without the quotation marks indicated by `quotemarks`, split into a
+vector on `collapse`.
 
 ## Details
 
-`unpaste_unquote()` is not the exact reverse of
+`unpaste_unquote()` is **not** the exact reverse of
 [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html):
-it does *not* restore zero-length elements to their original value,
+it does **not** restore zero-length elements to their original value,
 e.g., `"'NULL'"` to `NULL`, or `"'character(0)'"` to `character(0)`.
 
 ## See also

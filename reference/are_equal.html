@@ -9,7 +9,7 @@ numeric errors to make are_equal() safer than ==."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,7 @@ numeric errors to make <code>are_equal()</code> safer than <code><a href="https:
 
 
 <dl><dt id="arg-x-y">x, y<a class="anchor" aria-label="anchor" href="#arg-x-y"></a></dt>
-<dd><p>Numeric vectors to compare for equality.</p></dd>
+<dd><p>Numeric vectors with length larger than zero to compare for equality.</p></dd>
 
 
 <dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>
@@ -82,7 +82,8 @@ but tests exact equality.</p>
     <h2 id="acknowledgement">Acknowledgement<a class="anchor" aria-label="anchor" href="#acknowledgement"></a></h2>
 
 
-<p>Code <code>abs(x - y) &lt; tol</code> was taken from <code>dplyr::near()</code>.</p>
+<p>Code <code>abs(x - y) &lt; tol</code> was taken from
+<a href="https://dplyr.tidyverse.org/reference/near.html" class="external-link"><code>dplyr::near()</code></a>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

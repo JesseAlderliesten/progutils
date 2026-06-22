@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
 
 
 <dl><dt id="arg-pattern">pattern<a class="anchor" aria-label="anchor" href="#arg-pattern"></a></dt>
-<dd><p>A <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> with the
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> with the
 initial part of the name of the new temporary directory, only containing
 characters that are valid in a <a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">path</a>.</p></dd>
 
@@ -79,8 +79,9 @@ needed by other processes.</p>
 automatically <a href="https://rdrr.io/r/base/unlink.html" class="external-link">removed</a> when <span style="R">R</span> <a href="https://rdrr.io/r/base/quit.html" class="external-link">quits</a> (and operating
 systems might
 <a href="https://cran.r-project.org/doc/manuals/R-admin.html#Running-R" class="external-link">periodically</a>
-empty the temporary directory), the created subdirectories should be removed
-once they are not needed anymore, see the section <code>Usage in practice</code> below.</p>
+empty the temporary directory), the created subdirectories should be
+<a href="https://rdrr.io/r/base/unlink.html" class="external-link">removed</a> once they are not needed anymore, see the section
+<code>Usage in practice</code> below.</p>
     </div>
     <div class="section level2">
     <h2 id="side-effects">Side effects<a class="anchor" aria-label="anchor" href="#side-effects"></a></h2>
@@ -142,14 +143,14 @@ in its documentation.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpn73qaj"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp886Ylj"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex1</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpn73qaj/subtempdir19cd5db82dab"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp886Ylj/subtempdir19889d0d43e"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using the same 'pattern' again creates another directory</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex2</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpn73qaj/subtempdir19cd7caf8a79"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp886Ylj/subtempdir198814f5ce29"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is not possible to create recursive subdirectories</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">no_subtempdir</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"subtempdir/otherdir"</span><span class="op">)</span><span class="op">)</span></span></span>

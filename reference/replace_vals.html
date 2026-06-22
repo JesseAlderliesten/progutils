@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +125,8 @@ argument <code>signal_case_new</code>.</p>
 <p>An error is thrown if <code>allow_multiple</code> is <code>FALSE</code> and multiple values of
 <code>old</code> match <code>x</code>, unless those values of <code>old</code> only differ in their case and
 <code>ignore_case</code> is <code>TRUE</code>. An example of such an exception is
-<code>replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)</code>.</p>
+<code>replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)</code>,
+which returns <code>c("b", "b")</code>.</p>
 <p>If <code>quiet</code> is <code>FALSE</code>, a message indicates which values have been replaced.
 The order of the factor <strong>levels</strong> determines the order used in the message.</p>
     </div>

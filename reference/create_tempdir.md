@@ -12,7 +12,7 @@ create_tempdir(pattern = "tempdir")
 
 - pattern:
 
-  A [character
+  [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   with the initial part of the name of the new temporary directory, only
   containing characters that are valid in a
@@ -46,8 +46,8 @@ automatically [removed](https://rdrr.io/r/base/unlink.html) when R
 [quits](https://rdrr.io/r/base/quit.html) (and operating systems might
 [periodically](https://cran.r-project.org/doc/manuals/R-admin.html#Running-R)
 empty the temporary directory), the created subdirectories should be
-removed once they are not needed anymore, see the section
-`Usage in practice` below.
+[removed](https://rdrr.io/r/base/unlink.html) once they are not needed
+anymore, see the section `Usage in practice` below.
 
 ## Side effects
 
@@ -116,14 +116,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/Rtmpn73qaj"
+#> [1] "/tmp/Rtmp886Ylj"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(pattern = "subtempdir"))
-#> [1] "/tmp/Rtmpn73qaj/subtempdir19cd5db82dab"
+#> [1] "/tmp/Rtmp886Ylj/subtempdir19889d0d43e"
 
 # Using the same 'pattern' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(pattern = "subtempdir"))
-#> [1] "/tmp/Rtmpn73qaj/subtempdir19cd7caf8a79"
+#> [1] "/tmp/Rtmp886Ylj/subtempdir198814f5ce29"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(pattern = "subtempdir/otherdir"))

@@ -1,5 +1,27 @@
 # Changelog
 
+## progutils 0.11.0
+
+#### Breaking changes
+
+- [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md):
+  allow zero-length input in `x` and `table`, returning `logical(0)` for
+  zero-length input that is absent from `table` if `value` is `FALSE`.
+- [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md):
+  report the `type` instead of the `class` for zero-length input and
+  `NA`s. Not round integer values. Add examples on handling zero-length
+  input.
+- [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md):
+  allow `character(0)` as input to `x`, returning it unchanged, with a
+  warning. `width` now has to be a natural number.
+
+#### Minor updates
+
+- [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md):
+  use [`fs::dir_ls()`](https://fs.r-lib.org/reference/dir_ls.html)
+  instead of [`list.files()`](https://rdrr.io/r/base/list.files.html) to
+  more easily list only files.
+
 ## progutils 0.10.1
 
 #### Documentation

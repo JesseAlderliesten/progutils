@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,12 +54,12 @@
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>Vector or factor with values to test absence from <code>table</code>. <code>x</code>
-should have a length larger than zero and not be of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code>.</p></dd>
+should not be of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code>.</p></dd>
 
 
 <dt id="arg-table">table<a class="anchor" aria-label="anchor" href="#arg-table"></a></dt>
 <dd><p>Vector or factor in which to test for absence of <code>x</code>. <code>table</code>
-should have a length larger than zero and not be of <code>type</code> <code>double</code>.</p></dd>
+should not be of <code>type</code> <code>double</code>.</p></dd>
 
 
 <dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
@@ -80,9 +80,13 @@ for each element in <code>x</code> if it is absent from <code>table</code>.</p>
     <p>Duplicates in <code>x</code> are kept, in contrast to <code><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff()</a></code>, see the <code>Examples</code>.</p>
 <p><a href="https://rdrr.io/r/base/factor.html" class="external-link">Factor-input</a> to <code>x</code> is converted to character, to prevent
 returning a factor with all values of <code>x</code> as <a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a>.</p>
-<p><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a>s are allowed in <code>x</code> and <code>table</code> and behave the same as other values: the
-returned <code>NA</code>s (if <code>value</code> is <code>TRUE</code>) and the returned zero-length value (if
-<code>value</code> is <code>FALSE</code>) have the same type as the <code>NA</code>s in <code>x</code> if <code>NA</code>s are
+<p>Zero-length input behaves slightly different from other values: <code>not_in()</code>
+returns <code>logical(0)</code> for zero-length input to <code>x</code> if that is absent from
+<code>table</code> if <code>value</code> is <code>FALSE</code>. If <code>value</code> is <code>TRUE</code>, the behaviour is normal:
+returning <code>x</code>.</p>
+<p><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a> is allowed in <code>x</code> and <code>table</code> and behaves the same as other values: the
+returned <code>NA</code> (if <code>value</code> is <code>TRUE</code>) and the returned zero-length value (if
+<code>value</code> is <code>FALSE</code>) have the same type as the <code>NA</code> in <code>x</code> if <code>NA</code> is
 absent from <code>table</code>. <code>NA</code>s of different types in <code>x</code> and <code>table</code> match each
 other.</p>
 <p>Names are <strong>not</strong> considered when matching but are retained in the output,
@@ -96,12 +100,7 @@ similar to <code>%in%</code>.</p>
 matching
 such input should allow for small numerical errors by using a tolerance, for
 example, as the error message indicates, using <code><a href="are_equal.html">are_equal()</a></code>.</p>
-<p><code>not_in()</code> does <strong>not</strong> allow zero-length input because zero-length input behaves
-slightly different from other values: if <code>character(0)</code> is present in <code>x</code> but
-absent from <code>table</code>, <code>not_in()</code> would return <code>logical(0)</code> if <code>value</code> is
-<code>FALSE</code>. If <code>value</code> is <code>TRUE</code>, the behaviour would be normal: returning
-<code>character(0)</code>.</p>
-<p>Apart from <strong>not</strong> allowing numeric or zero-length input,
+<p>Apart from <strong>not</strong> allowing numeric input,
 <code>not_in(x, table, value = FALSE)</code> is equivalent to <code>x %notin% table</code>, where
 <code>%notin%</code> is a function in base <span style="R">R</span> since version <code>4.6.0</code>.</p>
     </div>

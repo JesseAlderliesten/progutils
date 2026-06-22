@@ -9,7 +9,7 @@ works if x is a factor, a character vector, or already a numeric vector."></head
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,9 @@ without converting it to double.</p></dd>
     <p>The <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> of <a href="https://rdrr.io/r/base/integer.html" class="external-link">integers</a> is kept <code>integer</code> if
 <code>keep_integer</code> is <code>TRUE</code> and is changed to <code>double</code> if <code>keep_integer</code> is
 <code>FALSE</code>.</p>
-<p><code>NULL</code> and zero-length vectors are converted to <code>numeric(0)</code>. Logical vectors
+<p><code>NULL</code> and zero-length vectors are converted to <code>numeric(0)</code>, except for
+<code>integer(0)</code> that is converted to <code>integer(0)</code> if <code>keep_integer</code> is <code>TRUE</code>.
+Logical vectors
 of length larger than zero are converted to a vector of <code>NA_real_</code>, with a
 warning.</p>
 <p><code>as.numeric_safe()</code> uses a suggestion from <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor()</a></code> and

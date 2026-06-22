@@ -21,11 +21,13 @@ signal_text(
 
 - signal:
 
-  Character string indicating the type of signal to be used: `"error"`
-  to throw an [error](https://rdrr.io/r/base/stop.html), `"warning"` to
-  issue a [warning](https://rdrr.io/r/base/warning.html), `"message"` to
-  show a [message](https://rdrr.io/r/base/message.html), or `"quiet"` to
-  be quiet.
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  indicating the type of signal to be used: `"error"` to throw an
+  [error](https://rdrr.io/r/base/stop.html), `"warning"` to issue a
+  [warning](https://rdrr.io/r/base/warning.html), `"message"` to show a
+  [message](https://rdrr.io/r/base/message.html), or `"quiet"` to be
+  quiet.
 
 - origin:
 

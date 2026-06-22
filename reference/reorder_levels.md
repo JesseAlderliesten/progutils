@@ -56,12 +56,6 @@ Reordering levels of factor `f` by replacing levels through code like
 `levels(f) <- levels(f)[<some order>]` does **not** work, see the last
 `Example`.
 
-## Programming notes
-
-Could also use an approach like
-`levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))`, see
-[`levels()`](https://rdrr.io/r/base/levels.html).
-
 ## See also
 
 [`stats::relevel()`](https://rdrr.io/r/stats/relevel.html) to assign one

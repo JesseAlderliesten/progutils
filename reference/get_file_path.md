@@ -14,15 +14,18 @@ get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 
 - dir:
 
-  Character string with the
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  containing the
   [path](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
   to a directory.
 
 - pattern:
 
-  Character string containing a [regular
-  expression](https://rdrr.io/r/base/regex.html) used to select names of
-  files that are present in `dir`.
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  containing a [regular expression](https://rdrr.io/r/base/regex.html)
+  used to select names of files that are present in `dir`.
 
 - ignore_case:
 
@@ -66,10 +69,11 @@ to check if a path is valid, and the `Note on paths` in its
 documentation;
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
 to create a directory if does not yet exist;
-[`file.exists()`](https://rdrr.io/r/base/files.html) and
-[`list.files()`](https://rdrr.io/r/base/list.files.html) to check for
-existence of files without checking they are a unique match to a
-pattern; [`file.info()`](https://rdrr.io/r/base/file.info.html) and
+[`fs::file_exists()`](https://fs.r-lib.org/reference/file_access.html)
+and [`list.files()`](https://rdrr.io/r/base/list.files.html) (which
+**includes** directories) to check for existence of files without
+checking they are a unique match to a pattern;
+[`file.info()`](https://rdrr.io/r/base/file.info.html) and
 [`file.access()`](https://rdrr.io/r/base/file.access.html) to extract
 information about files or directories;
 [`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
@@ -102,44 +106,44 @@ file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
 get_file_path(dir = my_tempdir, pattern = "some_file")
-#> Using file '/tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b/some_filename.txt'
-#> /tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b/some_filename.txt
+#> Using file '/tmp/Rtmp886Ylj/examplegetfilepath19884f25831/some_filename.txt'
+#> /tmp/Rtmp886Ylj/examplegetfilepath19884f25831/some_filename.txt
 
 # The same file is found if case-insensitive matching is used:
 get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = TRUE)
-#> Using file '/tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b/some_filename.txt'
-#> /tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b/some_filename.txt
+#> Using file '/tmp/Rtmp886Ylj/examplegetfilepath19884f25831/some_filename.txt'
+#> /tmp/Rtmp886Ylj/examplegetfilepath19884f25831/some_filename.txt
 
 # Error reporting the presence of a case-insensitive match.
 try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b'.
+#> '/tmp/Rtmp886Ylj/examplegetfilepath19884f25831'.
 #> However, a case-insensitive match to 'pattern' is present: 'some_filename.txt'.
 
 # 'pattern' is interpreted as a regular expression
 get_file_path(dir = my_tempdir, pattern = "^.+er_file")
-#> Using file '/tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b/another_filename.txt'
-#> /tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b/another_filename.txt
+#> Using file '/tmp/Rtmp886Ylj/examplegetfilepath19884f25831/another_filename.txt'
+#> /tmp/Rtmp886Ylj/examplegetfilepath19884f25831/another_filename.txt
 
 # Error reporting no match found.
 try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b'.
+#> '/tmp/Rtmp886Ylj/examplegetfilepath19884f25831'.
 try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b'.
+#> '/tmp/Rtmp886Ylj/examplegetfilepath19884f25831'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
 try(get_file_path(dir = my_tempdir, pattern = "_filename"))
 #> Error in get_file_path(dir = my_tempdir, pattern = "_filename") : 
 #>   Multiple matches to pattern '_filename' are present in directory
-#> '/tmp/Rtmpn73qaj/examplegetfilepath19cd65c57f4b': 'another_filename.txt', 'some_filename.txt'!
+#> '/tmp/Rtmp886Ylj/examplegetfilepath19884f25831': 'another_filename.txt', 'some_filename.txt'!
 
 # Clean up
 unlink(x = my_tempfiles)
