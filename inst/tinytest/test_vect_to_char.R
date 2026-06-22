@@ -33,6 +33,12 @@ expect_identical(
 expect_identical(vect_to_char(x = x_in_char), x_out_char)
 expect_identical(vect_to_char(x = unname(x_in_char)), "abc, def, this is text")
 
+expect_identical(vect_to_char(logical(0)), "logical(0)")
+expect_message(message(logical(0)), pattern = "")
+expect_message(message(vect_to_char(logical(0))),
+               pattern = "logical(0)", strict = TRUE, fixed = TRUE)
+
+
 expect_identical(
   paste0(vect_to_char(c(table(c(c, d))), sep = " (", collapse =  "), "), ")"),
   paste0("1 (1), 2 (1), 3 (1), 4 (1), 5 (2), 6 (2), 7 (2), 8 (2), 9 (2),",
@@ -40,10 +46,19 @@ expect_identical(
 
 
 #### Tests ####
-expect_silent(expect_identical(vect_to_char(NULL), "NULL"))
-expect_silent(expect_identical(vect_to_char(numeric(0)), "numeric(0)"))
-expect_silent(expect_identical(vect_to_char(c("a", "", "c", NA_character_)),
-                               "a, \"\", c, NA_character_"))
+expect_identical(vect_to_char(x = NULL), "NULL")
+expect_identical(vect_to_char(x = character(0L)), "character(0)")
+expect_identical(vect_to_char(x = logical(0L)), "logical(0)")
+expect_identical(vect_to_char(x = numeric(0)), "double(0)")
+expect_identical(vect_to_char(x = double(0L)), "double(0)")
+expect_identical(vect_to_char(x = integer(0L)), "integer(0)")
+expect_identical(vect_to_char(x = c("a", "", "c", NA_character_)),
+                 "a, \"\", c, NA_character_")
+
+expect_identical(vect_to_char(x = NA), "NA")
+expect_identical(vect_to_char(x = NA_character_), "NA_character_")
+expect_identical(vect_to_char(x = NA_real_), "NA_double_")
+expect_identical(vect_to_char(x = NA_integer_), "NA_integer_")
 
 expect_silent(expect_identical(vect_to_char(as.factor(NULL)), "character(0)"))
 expect_silent(expect_identical(vect_to_char(as.factor(numeric(0))), "character(0)"))
@@ -97,7 +112,7 @@ expect_silent(expect_identical(
 expect_silent(
   expect_identical(
     vect_to_char(x = x_in_InfNa),
-    paste0("am: -1, bm: -2, i: 9, l: NA_numeric_, m: NaN,",
+    paste0("am: -1, bm: -2, i: 9, l: NA_double_, m: NaN,",
            " n: Inf, o: -Inf, j: 10, z: 26, a: 1, b: 2, c: 3")
   )
 )
@@ -114,7 +129,7 @@ expect_silent(expect_identical(vect_to_char(x = x_fact_num),
 
 expect_warning(expect_identical(
   vect_to_char(x = list(x_in_InfNa, b, unname(b)), signif = 2),
-  paste0("am: -1, bm: -2, i: 9, l: NA_numeric_, m: NaN, n: Inf, o: -Inf, j: 10, z: 26,",
+  paste0("am: -1, bm: -2, i: 9, l: NA_double_, m: NaN, n: Inf, o: -Inf, j: 10, z: 26,",
          " a: 1, b: 2, c: 3, a: 0.14, b: 0.29, c: 0.43, : 0.14, : 0.29, : 0.43")),
   pattern = "Unlisted 'x' to obtain a vector!", strict = TRUE)
 
