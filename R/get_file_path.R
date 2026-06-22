@@ -3,9 +3,10 @@
 #' Check that only one file in a directory has a name matching `pattern`, for
 #' example before attempting to [read a file][utils::read.table()].
 #'
-#' @param dir Character string with the [path][checkinput::is_path()] to a
-#' directory.
-#' @param pattern Character string containing a [regular expression][base::regex]
+#' @param dir [character string][checkinput::is_character()] containing the
+#' [path][checkinput::is_path()] to a directory.
+#' @param pattern [character string][checkinput::is_character()] containing a
+#' [regular expression][base::regex]
 #' used to select names of files that are present in `dir`.
 #' @param ignore_case `TRUE` or `FALSE`: use case-insensitive pattern matching?
 #' @param quietly `TRUE` or `FALSE`: suppress the message with the found file
@@ -33,8 +34,9 @@
 #' [checkinput::is_path()] to check if a path is valid, and the `Note on paths`
 #' in its documentation;
 #' [create_dir()] to create a directory if does not yet exist;
-#' [file.exists()] and [list.files()] to check for existence of files without
-#' checking they are a unique match to a pattern;
+#' [fs::file_exists()] and [list.files()] (which **includes** directories) to
+#' check for existence of files without checking they are a unique match to a
+#' pattern;
 #' [file.info()] and [file.access()] to extract information about files or
 #' directories;
 #' [fs::path()] to construct file paths in a platform-independent way;
@@ -107,7 +109,7 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
   if(length(files_present) == 0L) {
     if(!ignore_case) {
       # Check if any case-insensitive match is present
-      match_case_insensitive <-   files_present <- fs::path_abs(
+      match_case_insensitive <- fs::path_abs(
         fs::dir_ls(path = dir, all = TRUE, recurse = FALSE, type = "file",
                    regexp = pattern, fail = FALSE, ignore.case = TRUE)
       )
