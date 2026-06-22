@@ -33,11 +33,6 @@
 #' `levels(f) <- levels(f)[<some order>]` does **not** work, see the last
 #' `Example`.
 #'
-#' @section Programming notes:
-#' Could also use an approach like
-#' `levels(x) <- list("Yes" = c("Y", "Yes"), "No" = c("N", "No"))`, see
-#' [levels()].
-#'
 #' @seealso
 #' [stats::relevel()] to assign one reference level to a factor
 #'
