@@ -2,13 +2,16 @@
 #'
 #' Wrap text at blank characters to achieve a maximum line width.
 #'
-#' @param x Character vector to be wrapped.
-#' @param width A positive number giving the maximum line width (in characters)
+#' @param x [character vector][checkinput::all_characters()] to be wrapped.
+#' @param width [natural number][checkinput::is_natural()] giving the maximum
+#' line width (in characters)
 #' after wrapping. Can be `Inf` to not wrap text.
 #' @param ignore_newlines `TRUE` or `FALSE`: should newlines in `x` be replaced
-#' by a blank character?
+#' by blank characters?
 #'
 #' @details
+#' `character(0)` input to `x` is returned unchanged, with a warning.
+#'
 #' `x` of length larger than one is pasted into a single string, separating the
 #' parts by blank characters.
 #'
@@ -59,9 +62,16 @@
 #'
 #' @export
 wrap_text <- function(x, width = 80L, ignore_newlines = TRUE) {
-  stopifnot(checkinput::all_characters(x, allow_empty = TRUE),
-            checkinput::is_positive(width),
-            checkinput::is_logical(ignore_newlines))
+  stopifnot(
+    checkinput::all_characters(x, allow_empty = TRUE, allow_zerolength = TRUE),
+    checkinput::is_logical(ignore_newlines))
+  if(!is.infinite(width)) {
+    width <- checkinput::make_natural(width)
+  }
+  if(length(x) == 0L) {
+    warning("'x' is 'character(0)'")
+    return(x)
+  }
   if(length(x) > 1L) {
     x <- paste0(x, collapse = " ")
   }

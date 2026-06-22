@@ -218,6 +218,16 @@ expect_warning(expect_identical(
   pattern = paste0("Width of 3 text fragments (15, 13, 11 characters) exceeds",
                    " 'width' (10 characters)"), strict = TRUE, fixed = TRUE)
 
+##### zero-length x #####
+expect_error(
+  wrap_text(NULL),
+  pattern = "all_characters(x, allow_empty = TRUE, allow_zerolength = TRUE)",
+  fixed = TRUE)
+
+expect_warning(
+  expect_identical(wrap_text(character(0)), character(0)),
+  pattern = "'x' is 'character(0)'", strict = TRUE, fixed = TRUE)
+
 ##### x of length > 1 #####
 expect_identical(
   wrap_text(x = letters[1:3], width = Inf), "a b c")
@@ -239,10 +249,14 @@ expect_identical(
   wrap_text(x = x_nonspace_blanks, width = 11L, ignore_newlines = FALSE),
   "123\f567\n911 141\f719\n123 262 931")
 
-##### Error for width < 6L #####
+##### width #####
 expect_error(
   wrap_text(x = x, width = 0L),
-  pattern = "is_positive(width) is not TRUE", fixed = TRUE)
+  pattern = "is_natural(width) is not TRUE", fixed = TRUE)
+
+expect_error(
+  wrap_text(x = x, width = 10.1),
+  pattern = "is_natural(width) is not TRUE", fixed = TRUE)
 
 expect_warning(expect_identical(
   wrap_text(x = x, width = 1L), "123\n567\n911\n141\n719\n123\n262\n931"),
