@@ -22,8 +22,8 @@ knitr::opts_chunk$set(
 equality, construct messages, or handle files and directories.
 
 ## Installation
-Visit the [progutils website](https://jessealderliesten.github.io/progutils/) to
-explore the package, or install `progutils` from
+Visit the [`progutils` website](https://jessealderliesten.github.io/progutils/)
+to explore the package, or install `progutils` from
 [GitHub](https://github.com/JesseAlderliesten/progutils) using the following
 R code (you need to run R as administrator):
 
@@ -38,7 +38,7 @@ remotes::install_github(repo = "JesseAlderliesten/progutils",
 ```
 
 For more information about installing and configuring R and RStudio, see my
-package [checkrpkgs](https://jessealderliesten.github.io/checkrpkgs/).
+package [`checkrpkgs`](https://jessealderliesten.github.io/checkrpkgs/).
 
 
 ## Examples
@@ -55,7 +55,7 @@ as.numeric(x) # Returns the indices instead of the values!
 as.numeric_safe(x) # Returns the values.
 ```
 
-Similarly, using `relevel` or `levels()` from base R to reorder factor levels
+Similarly, using `relevel()` or `levels()` from base R to reorder factor levels
 does **not** work, whereas using `reorder_levels()` from `progutils` **does**:
 
 ```{r reorder_levels}
