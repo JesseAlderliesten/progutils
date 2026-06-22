@@ -20,18 +20,19 @@ through \code{unlist(x, use.names = TRUE)}, with a warning).}
 \item{signif}{Positive number of length one, rounded to the nearest positive
 integer indicating the number of significant digits to round numeric \code{x} to.}
 
-\item{width}{A positive number giving the maximum line width (in characters)
+\item{width}{\link[checkinput:is_natural]{natural number} giving the maximum
+line width (in characters)
 after wrapping. Can be \code{Inf} to not wrap text.}
 
-\item{sep}{Character string of length one used to separate the names and the
-values. Ignored if \code{x} does not have names.}
+\item{sep}{\link[checkinput:is_character]{character string} used to separate
+the names and the values. Ignored if \code{x} does not have names.}
 
-\item{collapse}{Character string of length one to collapse values into a
-single character string, or \code{NULL} to return each value as an element of a
-character vector.}
+\item{collapse}{\link[checkinput:is_character]{character string} to collapse
+values into a single character string, or \code{NULL} to return each value as an
+element of a character vector.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
-by a blank character?}
+by blank characters?}
 }
 \value{
 The names and values in \code{x}, with values of numeric \code{x} rounded to \code{signif}
@@ -49,10 +50,16 @@ Convert a vector to a character string while preserving names and rounding
 numeric values.
 }
 \details{
-\code{NULL} is returned as \code{"'NULL'"}, other zero-length objects are returned as
-\code{"'<class>(0)'"} (e.g., \code{"'logical(0)'"}), \code{""} as \code{'""'}, logical \code{NA} as
-\code{"'NA'"}, and non-logical \code{NA}s as \code{"'NA_<class>_'"} (e.g., \code{"'NA_real_'"};
+Some values are handled specially to make them print clearer:
+\itemize{
+\item \code{NULL} is returned as \code{"'NULL'"}
+\item non-\code{NULL} zero-length objects are returned as \code{"'<class>(0)'"} (e.g.,
+\code{"'logical(0)'"})
+\item \code{""} is returned as \code{'""'}
+\item logical \code{NA} is returned as \code{"'NA'"}
+\item non-logical \code{NA} is returned as \code{"'NA_<class>_'"} (e.g., \code{"'NA_real_'"};
 for \link[=factor]{factors} this is \code{"'NA_character_'"}).
+}
 }
 \section{Programming notes}{
 

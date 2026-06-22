@@ -8,11 +8,11 @@
 #' through `unlist(x, use.names = TRUE)`, with a warning).
 #' @param signif Positive number of length one, rounded to the nearest positive
 #' integer indicating the number of significant digits to round numeric `x` to.
-#' @param sep Character string of length one used to separate the names and the
-#' values. Ignored if `x` does not have names.
-#' @param collapse Character string of length one to collapse values into a
-#' single character string, or `NULL` to return each value as an element of a
-#' character vector.
+#' @param sep [character string][checkinput::is_character()] used to separate
+#' the names and the values. Ignored if `x` does not have names.
+#' @param collapse [character string][checkinput::is_character()] to collapse
+#' values into a single character string, or `NULL` to return each value as an
+#' element of a character vector.
 #'
 #' @inherit checkinput::paste_quoted details
 #'

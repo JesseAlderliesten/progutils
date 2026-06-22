@@ -21,8 +21,8 @@
 #' @returns
 #' A character string with the [absolute normalized][fs::path_abs()] path to the
 #' requested directory, returned [invisibly][invisible]. An error is thrown if
-#' the attempt to create a directory fails. This happens if `dir` points to an
-#' existing file instead of an directory.
+#' the attempt to create a directory fails, for example because `dir` points to
+#' an existing file instead of to an directory.
 #'
 #' @section Side effects:
 #' The directory indicated by the returned path is [created][create_dir()] if it

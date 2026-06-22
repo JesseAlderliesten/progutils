@@ -2,7 +2,7 @@
 #'
 #' Create a new temporary directory that can safely be removed.
 #'
-#' @param pattern A [character string][checkinput::is_character()] with the
+#' @param pattern [character string][checkinput::is_character()] with the
 #' initial part of the name of the new temporary directory, only containing
 #' characters that are valid in a [path][checkinput::is_path()].
 #'
@@ -23,8 +23,9 @@
 #' automatically [removed][unlink()] when \R [quits][quit()] (and operating
 #' systems might
 #' [periodically](https://cran.r-project.org/doc/manuals/R-admin.html#Running-R)
-#' empty the temporary directory), the created subdirectories should be removed
-#' once they are not needed anymore, see the section `Usage in practice` below.
+#' empty the temporary directory), the created subdirectories should be
+#' [removed][unlink()] once they are not needed anymore, see the section
+#' `Usage in practice` below.
 #'
 #' @returns
 #' The [absolute normalized][fs::path_abs()] path to the created temporary

@@ -7,9 +7,10 @@
 unpaste_unquote(x, collapse = c(", ", "; "), quotemarks = c("'", "\\""))
 }
 \arguments{
-\item{x}{A character string}
+\item{x}{a \link[checkinput:is_character]{character string}.}
 
-\item{collapse}{Character vector with elements that were used to collapse
+\item{collapse}{\link[checkinput:all_characters]{character string} with
+elements that were used to collapse
 values when \code{x} was created, and are now used to \link[=strsplit]{split} \code{x} on.
 Can be \code{character(0)} to leave \code{x} as a character string.}
 
@@ -17,14 +18,15 @@ Can be \code{character(0)} to leave \code{x} as a character string.}
 \code{x}. Can be \code{character(0)} to not remove any quotation marks.}
 }
 \value{
-\code{x} without the quotation marks and split into a vector.
+\code{x} without the quotation marks indicated by \code{quotemarks}, split into a
+vector on \code{collapse}.
 }
 \description{
 Create a character vector from a string with quotation marks
 }
 \details{
-\code{unpaste_unquote()} is not the exact reverse of \code{\link[=paste_quoted]{paste_quoted()}}: it does
-\emph{not} restore zero-length elements to their original value, e.g., \code{"'NULL'"}
+\code{unpaste_unquote()} is \strong{not} the exact reverse of \code{\link[=paste_quoted]{paste_quoted()}}: it does
+\strong{not} restore zero-length elements to their original value, e.g., \code{"'NULL'"}
 to \code{NULL}, or \code{"'character(0)'"} to \code{character(0)}.
 }
 \examples{
