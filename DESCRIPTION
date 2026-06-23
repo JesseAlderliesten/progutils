@@ -11,12 +11,11 @@ URL: https://github.com/JesseAlderliesten/progutils,
 BugReports: https://github.com/JesseAlderliesten/progutils/issues
 Imports: 
     checkinput (>= 1.0.0),
-    fs,
+    fs (>= 1.3.0),
     utils
 Suggests:
     stats,
-    tinytest (>= 1.4.1),
-    tools
+    tinytest (>= 1.4.1)
 Remotes: 
     github::JesseAlderliesten/checkinput
 Config/roxygen2/version: 8.0.0
