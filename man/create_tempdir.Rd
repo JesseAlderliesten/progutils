@@ -2,12 +2,12 @@
 % Please edit documentation in R/create_tempdir.R
 \name{create_tempdir}
 \alias{create_tempdir}
-\title{Create a new temporary directory}
+\title{Create a temporary directory}
 \usage{
-create_tempdir(pattern = "tempdir")
+create_tempdir(prefix = "tempdir")
 }
 \arguments{
-\item{pattern}{\link[checkinput:is_character]{character string} with the
+\item{prefix}{\link[checkinput:is_character]{character string} with the
 initial part of the name of the new temporary directory, only containing
 characters that are valid in a \link[checkinput:is_path]{path}.}
 }
@@ -16,11 +16,11 @@ The \link[fs:path_abs]{absolute normalized} path to the created temporary
 directory, returned \link[=invisible]{invisibly}.
 }
 \description{
-Create a new temporary directory that can safely be removed.
+Create a temporary directory that can safely be removed.
 }
 \details{
 The new directory is \link[=dir.create]{created} inside \code{\link[=tempdir]{tempdir()}}. Its
-\link[=tempfile]{name} starts with the string given by \code{pattern} and is followed
+\link[=tempfile]{name} starts with the string given by \code{prefix} and is followed
 by a random string in hex. This random string \strong{might} contain a dot (\code{.})
 such that the directory might appear to have a file extension, see the
 section \code{Source} in \code{help("tempdir")}. An error is thrown if creating the
@@ -39,26 +39,20 @@ empty the temporary directory), the created subdirectories should be
 \link[=unlink]{removed} once they are not needed anymore, see the section
 \verb{Usage in practice} below.
 }
-\section{Side effects}{
-
-The temporary directory indicated by the returned path is
-\link[fs:dir_create]{created} inside \code{\link[=tempdir]{tempdir()}}.
-}
-
 \section{Usage in practice}{
 
 \code{Examples} and \code{tests} should write to a temporary directory that is cleaned
 up afterwards (otherwise \href{https://r-pkgs.org/R-CMD-check.html}{\verb{R cmd check}}
 will issue a \code{Note} about \href{https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory}{\verb{detritus in the temp directory}}
 and CRAN will not accept your package, see section \verb{Source packages} from the
-\href{https://cran.r-project.org/web/packages/policies.html}{CRAN policies}.
+\href{https://cran.r-project.org/web/packages/policies.html}{CRAN policies}).
 Although \code{\link[=tempdir]{tempdir()}} points to a temporary
 directory, that directory should \strong{not} be removed because other processes
 in \R and \href{https://posit.co/products/open-source/rstudio}{RStudio} also use
 it. Instead, create a temporary subdirectory in \code{\link[=tempdir]{tempdir()}} and afterwards
 clean up by \link[=unlink]{removing} that subdirectory:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{my_tempdir <- create_tempdir(pattern = "subtempdir")
+\if{html}{\out{<div class="sourceCode">}}\preformatted{my_tempdir <- create_tempdir(prefix = "subtempdir")
 < do stuff >
 unlink(my_tempdir, recursive = TRUE)
 }\if{html}{\out{</div>}}
@@ -67,6 +61,12 @@ It is good practice to create the complete temporary directory with all
 required files and folders before running any test for the presence or
 absence of particular files or folders: this ensures no spurious matches
 occur if examples or tests are removed or added.
+}
+
+\section{Side effects}{
+
+The directory indicated by the returned path is \link[fs:dir_create]{created}
+if it does not yet exist.
 }
 
 \section{Programming notes}{
@@ -84,14 +84,14 @@ spurious warnings about duplicated file separators.
 \examples{
 tempdir(check = TRUE)
 # Create a directory inside the directory returned by 'tempdir()'
-(my_subtempdir_ex1 <- create_tempdir(pattern = "subtempdir"))
+(my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
 
-# Using the same 'pattern' again creates another directory
-(my_subtempdir_ex2 <- create_tempdir(pattern = "subtempdir"))
+# Using the same 'prefix' again creates another directory
+(my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
 
 # It is not possible to create recursive subdirectories
-try(no_subtempdir <- create_tempdir(pattern = "subtempdir/otherdir"))
-try(no_subtempdir <- create_tempdir(pattern = "subtempdir\\\\otherdir"))
+try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))
+try(no_subtempdir <- create_tempdir(prefix = "subtempdir\\\\otherdir"))
 
 # Clean up
 unlink(c(my_subtempdir_ex1, my_subtempdir_ex2), recursive = TRUE)
@@ -99,14 +99,14 @@ rm(my_subtempdir_ex1, my_subtempdir_ex2)
 
 }
 \seealso{
-\code{\link[=tempfile]{tempfile()}} used in this function to create the paths for the temporary
-directory;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with a \verb{Note on paths}
+and extensive references about file paths and directories;
+\code{\link[=create_dir]{create_dir()}} to create a (non-temporary) directory if it does not yet exist;
 \code{\link[=local]{local()}} and
 \href{https://withr.r-lib.org/reference/with_tempfile.html}{withr::local_tempdir()}
 for automated deletion of temporary directories;
-\code{\link[=create_dir]{create_dir()}} to create (non-temporary) directories;
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with the \verb{Note on paths}
-in its documentation.
+\code{\link[=tempfile]{tempfile()}} used in this function to create the paths for the temporary
+directory;
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},

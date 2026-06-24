@@ -2,7 +2,7 @@ tinytest::report_side_effects()
 
 
 #### Test the examples ####
-my_tempdir <- create_tempdir(pattern = "testexamplegetfilepath")
+my_tempdir <- create_tempdir(prefix = "testexamplegetfilepath")
 my_tempfiles <- fs::path_abs(
   fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
 )
@@ -66,7 +66,7 @@ rm(my_tempdir, my_tempfiles)
 
 #### Tests ####
 # Create files in a temporary directory so we know what is present.
-my_tempdir <- create_tempdir(pattern = "testgetfilepath")
+my_tempdir <- create_tempdir(prefix = "testgetfilepath")
 fs::dir_create(path = fs::path(my_tempdir, "test_dir", "abc"))
 
 # Test that temporary subdirectory is writeable by writing a csv-file, modified

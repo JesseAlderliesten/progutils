@@ -2,7 +2,7 @@ tinytest::report_side_effects()
 
 
 #### Test the examples ####
-my_tempdir <- create_tempdir(pattern = "testexamplecreatedir")
+my_tempdir <- create_tempdir(prefix = "testexamplecreatedir")
 basename_my_tempdir <- basename(my_tempdir)
 
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
@@ -49,7 +49,7 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_ONE, res_dir_date,
 
 
 #### Tests ####
-my_tempdir <- create_tempdir(pattern = "testcreatedir")
+my_tempdir <- create_tempdir(prefix = "testcreatedir")
 basename_my_tempdir <- basename(my_tempdir)
 pattern_temp <- fs::path(basename_my_tempdir, "temp")
 
