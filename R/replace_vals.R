@@ -1,15 +1,18 @@
-#' Replace character values or factor levels
+#' Replace values
+#'
+#' Replace values, also handling factor levels
 #'
 #' @param x [Character][character] vector with values to be replaced, or
 #' [factor] with [levels] to be replaced.
 #' @param old Character vector with values to be replaced. Should be [unique]
 #' and not contain the value `new`, otherwise an error is thrown.
-#' @param new Character string of length one with the new value.
-#' @param ignore_case `TRUE` or `FALSE`: ignore [case][tolower] when looking for
+#' @param new Character string with the new value.
+#' @param ignore_case `TRUE` or `FALSE`: ignore [case][tolower()] when looking for
 #' `old`? See `Details`.
 #' @param allow_multiple `TRUE` or `FALSE`: allow multiple values of `old` to
 #' match `x`? See `Details`.
-#' @param warn_absent `TRUE` or `FALSE`: warn if `old` nor `new` are found in
+#' @param warn_absent `TRUE` or `FALSE`: warn if neither `old` nor `new` is
+#' found in
 #' `x`? It is silently assumed replacement is not necessary anymore if `new` is
 #' found.
 #' @param signal_case_old,signal_case_new `"error"`, `"warning"`, `"message"`,
@@ -20,8 +23,8 @@
 #' @param signal_old_ignore_case `TRUE` or `FALSE`: use `signal_case_old` if
 #' `ignore_case` is `TRUE`? If `FALSE`, no signal is emitted if `ignore_case` is
 #' `TRUE`.
-#' @param quiet `TRUE` or `FALSE`: suppress printing the message with the values
-#' that have been replaced?
+#' @param quiet `TRUE` or `FALSE`: suppress the message indicating which values
+#' have been replaced?
 #'
 #' @details
 #' Values in `x` that [only differ][check_case()] from `new` in their case are

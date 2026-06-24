@@ -1,3 +1,13 @@
+# progutils devel
+
+### Breaking changes
+- `create_tempdir()`: rename argument `pattern` to `prefix`.
+- Dependency `fs`: require minimum version of `1.3.0` to use argument `recurse`.
+- Remove suggested dependency `tools` that has been obsolete since replacing
+  `file_path_no_ext()` by `fs::path_ext_remove()` and `file_path_ext()` by
+  `fs::path_ext()` in `progutils 0.3.0`.
+
+
 # progutils 0.11.0
 
 ### Breaking changes

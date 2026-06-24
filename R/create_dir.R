@@ -12,11 +12,10 @@
 #' current date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
-#' The [absolute normalised][fs::path_abs()] path is returned such that the
+#' The [absolute, normalised][fs::path_abs()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes. On
-#' case-insensitive file systems (e.g., Windows and macOS), normalization
-#' adjusts the case to match case-insensitive names of directories that are
-#' already present (see the `Examples`).
+#' case-insensitive file systems, normalization also adjusts the case to match
+#' names of directories that are already present (see the `Examples`).
 #'
 #' @returns
 #' A character string with the [absolute normalized][fs::path_abs()] path to the
@@ -25,20 +24,17 @@
 #' an existing file instead of to an directory.
 #'
 #' @section Side effects:
-#' The directory indicated by the returned path is [created][create_dir()] if it
-#' does not yet exist.
+#' The directory indicated by the returned path is [created][fs::dir_create()]
+#' if it does not yet exist.
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, and the `Note on paths`
-#' in its documentation;
+#' [checkinput::is_path()] to check if a path is valid, with a `Note on paths`
+#' and extensive references about file paths and directories;
+#' [create_tempdir()] for a safe way to create temporary directories;
 #' [create_file_path()] to create a file path and creating the indicated
 #' directory if it does not yet exist;
-#' [create_tempdir()] for a safe way to create temporary directories;
-#' [checkinput::is_path()] and references there about file paths and directories;
-#' [fs::dir_exists()] and [fs::dir_create()] used by this function (and the
-#' base-equivalent [dir.create()] of the latter);
-#' [get_file_path()] to check if a file exists and is a unique match to a
-#' pattern.
+#' [fs::dir_exists()] and [fs::dir_create()] (with its base-equivalent
+#' [dir.create()]) used by this function;
 #'
 #' @family functions to handle paths and directories
 #'

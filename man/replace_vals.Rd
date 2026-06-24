@@ -2,7 +2,7 @@
 % Please edit documentation in R/replace_vals.R
 \name{replace_vals}
 \alias{replace_vals}
-\title{Replace character values or factor levels}
+\title{Replace values}
 \usage{
 replace_vals(
   x,
@@ -24,7 +24,7 @@ replace_vals(
 \item{old}{Character vector with values to be replaced. Should be \link{unique}
 and not contain the value \code{new}, otherwise an error is thrown.}
 
-\item{new}{Character string of length one with the new value.}
+\item{new}{Character string with the new value.}
 
 \item{ignore_case}{\code{TRUE} or \code{FALSE}: ignore \link[=tolower]{case} when looking for
 \code{old}? See \code{Details}.}
@@ -32,7 +32,8 @@ and not contain the value \code{new}, otherwise an error is thrown.}
 \item{allow_multiple}{\code{TRUE} or \code{FALSE}: allow multiple values of \code{old} to
 match \code{x}? See \code{Details}.}
 
-\item{warn_absent}{\code{TRUE} or \code{FALSE}: warn if \code{old} nor \code{new} are found in
+\item{warn_absent}{\code{TRUE} or \code{FALSE}: warn if neither \code{old} nor \code{new} is
+found in
 \code{x}? It is silently assumed replacement is not necessary anymore if \code{new} is
 found.}
 
@@ -46,15 +47,15 @@ influenced by argument \code{signal_old_ignore_case}.}
 \code{ignore_case} is \code{TRUE}? If \code{FALSE}, no signal is emitted if \code{ignore_case} is
 \code{TRUE}.}
 
-\item{quiet}{\code{TRUE} or \code{FALSE}: suppress printing the message with the values
-that have been replaced?}
+\item{quiet}{\code{TRUE} or \code{FALSE}: suppress the message indicating which values
+have been replaced?}
 }
 \value{
 \code{x} with the requested replacements. Factor levels are \strong{not} reordered
 after the replacement.
 }
 \description{
-Replace character values or factor levels
+Replace values, also handling factor levels
 }
 \details{
 Values in \code{x} that \link[=check_case]{only differ} from \code{new} in their case are

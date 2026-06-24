@@ -35,13 +35,15 @@ element of a character vector.}
 by blank characters?}
 }
 \value{
-The names and values in \code{x}, with values of numeric \code{x} rounded to \code{signif}
+A character vector or character string with the names and values in \code{x}, with
+values of numeric \code{x} rounded to \code{signif}
 \link[=signif]{significant} digits, wrapped to \code{width} characters.
 
-If \code{collapse} is \code{NULL}, a character \strong{vector} with the same elements as \code{x}
+If \code{collapse} is \code{NULL}, a \link[checkinput:all_characters]{character \strong{vector}}
+with the same elements as \code{x}
 is returned, wrapping on a per-element basis. If \code{collapse} is not \code{NULL},
-the name-value pairs are separated by \code{collapse}, thus returning a character
-\strong{string}.
+the name-value pairs are separated by \code{collapse}, thus returning a
+\link[checkinput:is_character]{character \strong{string}}.
 
 See \code{Details} on handling of some special values.
 }
@@ -101,7 +103,8 @@ paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")
 
 }
 \seealso{
-\code{\link[=toString]{toString()}} which can be used if names of \code{x} can be removed;
+\code{\link[=toString]{toString()}} which is shorthand for \code{paste(x, collapse = ", ")} and can be
+used instead of \code{vect_to_char()} if names of \code{x} can be removed;
 \code{vignette("type_coercion", package = "checkinput")} and
 \code{help("is_zerolength", package = "checkinput")} for a discussion of some
 issues with type conversion and zero-length input when \link[=c]{combining}

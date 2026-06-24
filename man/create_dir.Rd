@@ -27,16 +27,15 @@ an existing file instead of to an directory.
 Create a directory if it does not yet exist.
 }
 \details{
-The \link[fs:path_abs]{absolute normalised} path is returned such that the
+The \link[fs:path_abs]{absolute, normalised} path is returned such that the
 returned path still works if the \link[=getwd]{working directory} changes. On
-case-insensitive file systems (e.g., Windows and macOS), normalization
-adjusts the case to match case-insensitive names of directories that are
-already present (see the \code{Examples}).
+case-insensitive file systems, normalization also adjusts the case to match
+names of directories that are already present (see the \code{Examples}).
 }
 \section{Side effects}{
 
-The directory indicated by the returned path is \link[=create_dir]{created} if it
-does not yet exist.
+The directory indicated by the returned path is \link[fs:dir_create]{created}
+if it does not yet exist.
 }
 
 \examples{
@@ -72,16 +71,13 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_date, res_dir_ONE)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the \verb{Note on paths}
-in its documentation;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with a \verb{Note on paths}
+and extensive references about file paths and directories;
+\code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create temporary directories;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist;
-\code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create temporary directories;
-\code{\link[checkinput:is_path]{checkinput::is_path()}} and references there about file paths and directories;
-\code{\link[fs:dir_exists]{fs::dir_exists()}} and \code{\link[fs:dir_create]{fs::dir_create()}} used by this function (and the
-base-equivalent \code{\link[=dir.create]{dir.create()}} of the latter);
-\code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a
-pattern.
+\code{\link[fs:dir_exists]{fs::dir_exists()}} and \code{\link[fs:dir_create]{fs::dir_create()}} (with its base-equivalent
+\code{\link[=dir.create]{dir.create()}}) used by this function;
 
 Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},

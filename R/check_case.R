@@ -8,9 +8,10 @@
 #' [signal][signal_text()] as indicated by argument `signal`.
 #'
 #' @returns
-#' Character vector with [unique][unique()], [sorted][sort()] values in `x` that
-#' only differ from each other in their case, or `character(0)` if no such
-#' values are present. The return is [invisible].
+#' A [character vector][checkinput::all_characters()] with [unique][unique()],
+#' [sorted][sort()] values in `x` that only differ from each other in their
+#' case, or `character(0)` if no such values are present, returned
+#' [invisibly][invisible].
 #'
 #' @section Notes:
 #' The sorting order in the result depends on the used [locale][locales] (see

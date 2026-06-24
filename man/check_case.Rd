@@ -15,9 +15,10 @@ type of signal to be used:
 \code{"message"} to show a \link{message}, or \code{"quiet"} to be quiet.}
 }
 \value{
-Character vector with \link{unique}, \link[=sort]{sorted} values in \code{x} that
-only differ from each other in their case, or \code{character(0)} if no such
-values are present. The return is \link{invisible}.
+A \link[checkinput:all_characters]{character vector} with \link{unique},
+\link[=sort]{sorted} values in \code{x} that only differ from each other in their
+case, or \code{character(0)} if no such values are present, returned
+\link[=invisible]{invisibly}.
 }
 \description{
 Check for values that differ only in their case
