@@ -11,7 +11,8 @@ signal_text(
 )
 }
 \arguments{
-\item{text}{Vector with text to be signalled, coerced to character by
+\item{text}{\link[checkinput:all_characters]{character vector} with text to be
+signalled, coerced to a \link[checkinput:is_character]{character string} by
 \code{\link[=vect_to_char]{vect_to_char()}}.}
 
 \item{signal}{\link[checkinput:is_character]{character string} indicating the
@@ -23,8 +24,9 @@ type of signal to be used:
 message. Ignored if it is \code{character(0)}.}
 }
 \value{
-\code{text}, with a phrase indicating the origin of the signal if \code{origin} is not
-\code{NULL}, returned \link[=invisible]{invisibly}.
+\link[checkinput:is_character]{character string} containing \code{text}, with a
+phrase indicating the origin of the signal if \code{origin} is not \code{NULL},
+returned \link[=invisible]{invisibly}.
 }
 \description{
 Signal a text to the user through an error, warning, or message.
@@ -88,8 +90,6 @@ grepl(pattern = "negative", x = attr(res_positive, "text_signal"),
 
 }
 \seealso{
-\code{\link[=wrap_text]{wrap_text()}}
-
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link{reexports}},

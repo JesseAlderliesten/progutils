@@ -8,7 +8,8 @@
 #' @param pattern [character string][checkinput::is_character()] containing a
 #' [regular expression][base::regex]
 #' used to select names of files that are present in `dir`.
-#' @param ignore_case `TRUE` or `FALSE`: use case-insensitive pattern matching?
+#' @param ignore_case `TRUE` or `FALSE`: use [case-insensitive][tolower()]
+#' pattern matching?
 #' @param quietly `TRUE` or `FALSE`: suppress the message with the found file
 #' name?
 #'
@@ -19,7 +20,8 @@
 #' message indicates if any case-insensitive match is present.
 #'
 #' In contrast to the default of [list.files()], `get_file_path()` also finds
-#' 'hidden' files, i.e., files with names that start with a dot.
+#' 'hidden' files, i.e., files with names that start with a dot, and excludes
+#' directories.
 #'
 #' Paths will be [normalized][fs::path_abs()] to ensure they still work if the
 #' [working directory][getwd()] changes.
@@ -31,23 +33,22 @@
 #' to obtain the filename itself.
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, and the `Note on paths`
-#' in its documentation;
-#' [create_dir()] to create a directory if does not yet exist;
+#' [checkinput::is_path()] to check if a path is valid, with a `Note on paths`
+#' and extensive references about file paths and directories;
+#' [create_file_path()] to create a file path and creating the indicated
+#' directory if it does not yet exist;
 #' [fs::file_exists()] and [list.files()] (which **includes** directories) to
 #' check for existence of files without checking they are a unique match to a
 #' pattern;
 #' [file.info()] and [file.access()] to extract information about files or
-#' directories;
-#' [fs::path()] to construct file paths in a platform-independent way;
-#' [fs::path_abs()] to create absolute paths.
+#' directories
 #'
 #' @family functions to handle paths and directories
 #' @family functions to check equality
 #'
 #' @examples
 #' # Create files in a temporary directory so we know what is present.
-#' my_tempdir <- create_tempdir(pattern = "examplegetfilepath")
+#' my_tempdir <- create_tempdir(prefix = "examplegetfilepath")
 #' my_tempfiles <- fs::path_abs(
 #'   fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
 #' )

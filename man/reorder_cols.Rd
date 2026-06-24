@@ -11,7 +11,7 @@ reorder_cols(x, new_order)
 syntactically valid names, see \code{\link[checkinput:all_names]{checkinput::all_names()}}.}
 
 \item{new_order}{Character vector with a length larger than zero containing
-unique names in the new order of the columns.}
+unique names in the new order.}
 }
 \value{
 \code{x} with reordered columns.
@@ -37,7 +37,9 @@ reorder_cols(x = test_df, new_order = c("b", "a", "d"))
 
 }
 \seealso{
-\code{\link[=order]{order()}}, \code{\link[=sort]{sort()}}
+\code{\link[=order]{order()}}; \code{\link[=sort]{sort()}};
+\code{\link[=append]{append()}} which, despite its name, can insert values into a vector at any
+place
 
 Other functions to modify sorting order:
 \code{\link[=reorder_levels]{reorder_levels()}}

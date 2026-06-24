@@ -17,7 +17,8 @@ after wrapping. Can be \code{Inf} to not wrap text.}
 by blank characters?}
 }
 \value{
-A string containing \code{x} wrapped to a maximum of \code{width} characters, with
+A \link[checkinput:is_character]{character string} containing \code{x} wrapped to a
+maximum of \code{width} characters, with
 newlines inserted at blank characters. A warning is issued if the width of a
 fragment in the output exceeds \code{width}: this occurs if a stretch of
 characters longer than \code{width} occurs without a blank character to wrap at.
@@ -43,7 +44,6 @@ Leading and trailing newlines are collapsed into a single blank character if
 The call \code{wrap_text(x, width)} can be replaced by
 \code{paste0(strwrap(x, width + 1L), collapse = "\\n")} if \code{x} has length one and
 \code{ignore_newlines} is \code{TRUE}.
-
 
 Using \code{wrap_text()} on \code{x} of variable length, e.g., in the text of warnings
 that report a file path or a user-provided variable name, makes the location
@@ -72,7 +72,7 @@ cat(wrap_text(example_text,
 
 }
 \seealso{
-\code{\link[=cat]{cat()}} \code{\link[=paste]{paste()}} \code{\link[=strwrap]{strwrap()}}
+\code{\link[=cat]{cat()}}; \code{\link[=paste]{paste()}}; \code{\link[=strwrap]{strwrap()}}
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},

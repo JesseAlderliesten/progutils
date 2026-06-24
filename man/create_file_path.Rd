@@ -7,7 +7,7 @@
 create_file_path(
   filename,
   format_stamp = "\%Y_\%m_\%d_\%H_\%M_\%S",
-  dir = fs::path_wd("output"),
+  dir = fs::path(".", "output"),
   add_date = TRUE
 )
 }
@@ -17,7 +17,8 @@ name, including the file
 extension like \code{.csv} or \code{.txt}. Should adhere to the restrictions described
 in \code{\link[checkinput:is_path]{checkinput::is_path()}}.}
 
-\item{format_stamp}{A character string indicating the \link[=strftime]{format} of
+\item{format_stamp}{\link[checkinput:is_character]{character string} indicating
+the \link[=strftime]{format} of
 the stamp to be added in front of the file name. No stamp is added if
 \code{format_stamp} is an empty string (i.e., \code{""}). The formatted stamp is
 treated as part of the filename, such that the same restrictions apply, see
@@ -34,7 +35,8 @@ default a subdirectory with the current date in the \link[=strftime]{format}
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
-The created file path, returned \link[=invisible]{invisibly}.
+The created \link[fs:path_abs]{absolute normalized} file path, returned
+\link[=invisible]{invisibly}.
 }
 \description{
 Create a file path, creating the indicated directory if it does not yet exist.
@@ -54,13 +56,13 @@ as part of \code{format_stamp} to create precise stamps by truncating seconds to
 }
 \section{Side effects}{
 
-The directory indicated by the returned file path is \link[=create_dir]{created}
+The directory indicated by the returned path is \link[fs:dir_create]{created}
 if it does not yet exist.
 }
 
 \examples{
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
+my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
@@ -85,12 +87,11 @@ rm(my_tempdir)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, and the \verb{Note on paths}
-in its documentation;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with a \verb{Note on paths}
+and extensive references about file paths and directories;
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern;
-\code{\link[fs:path]{fs::path()}} to construct file paths in a platform-independent way;
-\code{\link[fs:path_abs]{fs::path_abs()}} to create absolute normalised paths;
-\code{\link[=create_dir]{create_dir()}} to create a directory if it does not yet exist
+\code{\link[=create_dir]{create_dir()}} (used by this function) to create a directory if it does not
+yet exist
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},

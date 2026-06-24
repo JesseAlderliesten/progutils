@@ -3,7 +3,7 @@ tinytest::report_side_effects()
 #### Tests ####
 ##### Preparations #####
 # Create temporary directory and temporary file to use in tests.
-my_tempdir <- create_tempdir(pattern = "testcreatepath")
+my_tempdir <- create_tempdir(prefix = "testcreatepath")
 basename_my_tempdir <- basename(my_tempdir)
 
 pattern_temp <- paste0(basename_my_tempdir, ".+$")

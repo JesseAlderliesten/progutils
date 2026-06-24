@@ -1,10 +1,9 @@
 #' Reorder factor levels
 #'
+#' @inheritParams reorder_cols new_order
 #' @param x Factor with levels to be reordered to `new_order`, or character
 #' vector to be converted to a factor with levels ordered as `new_order`. Should
 #' have length larger than zero.
-#' @param new_order Unique character vector with a length larger than zero
-#' indicating the new order of the factor levels.
 #' @param warn_drop_order `TRUE` or `FALSE`: warn if values of `new_order` are
 #' dropped because they are not present in `x`?
 #'
@@ -25,8 +24,8 @@
 #' warning if `warn_drop_order` is `TRUE`.
 #'
 #' @returns
-#' `x` after converting it to a [factor] with its levels reordered to
-#' `new_order`, dropping values in `new_order` not present in `x`.
+#' `x` after converting it to a [factor] with levels reordered to
+#' `new_order`, dropping values in `new_order` that are not present in `x`.
 #'
 #' @section Notes:
 #' Reordering levels of factor `f` by replacing levels through code like
@@ -34,7 +33,8 @@
 #' `Example`.
 #'
 #' @seealso
-#' [stats::relevel()] to assign one reference level to a factor
+#' [stats::relevel()] to assign one reference level to a factor;
+#' [order()]; [sort()]
 #'
 #' @family functions to convert types
 #' @family functions to modify factors

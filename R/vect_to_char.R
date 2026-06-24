@@ -29,13 +29,15 @@
 #'   converts factors to characters).
 #'
 #' @returns
-#' The names and values in `x`, with values of numeric `x` rounded to `signif`
+#' A character vector or character string with the names and values in `x`, with
+#' values of numeric `x` rounded to `signif`
 #' [significant][signif()] digits, wrapped to `width` characters.
 #'
-#' If `collapse` is `NULL`, a character **vector** with the same elements as `x`
+#' If `collapse` is `NULL`, a [character vector][checkinput::all_characters()]
+#' with the same elements as `x`
 #' is returned, wrapping on a per-element basis. If `collapse` is not `NULL`,
-#' the name-value pairs are separated by `collapse`, thus returning a character
-#' **string**.
+#' the name-value pairs are separated by `collapse`, thus returning a
+#' [character string][checkinput::is_character()].
 #'
 #' See `Details` on handling of some special values.
 #'
@@ -45,7 +47,8 @@
 #' see the last `Example`.
 #'
 #' @seealso
-#' [toString()] which can be used if names of `x` can be removed;
+#' [toString()] which is shorthand for `paste(x, collapse = ", ")` and can be
+#' used instead of `vect_to_char()` if names of `x` can be removed;
 #' `vignette("type_coercion", package = "checkinput")` and
 #' `help("is_zerolength", package = "checkinput")` for a discussion of some
 #' issues with type conversion and zero-length input when [combining][c()]

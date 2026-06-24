@@ -1,12 +1,13 @@
 #' Create a character vector from a string with quotation marks
 #'
 #' @param x a [character string][checkinput::is_character()].
-#' @param collapse [character string][checkinput::all_characters()] with
+#' @param collapse [character vector][checkinput::all_characters()] with
 #' elements that were used to collapse
 #' values when `x` was created, and are now used to [split][strsplit()] `x` on.
 #' Can be `character(0)` to leave `x` as a character string.
-#' @param quotemarks Character vector with quotation marks to be removed from
-#' `x`. Can be `character(0)` to not remove any quotation marks.
+#' @param quotemarks [character vector][checkinput::all_characters()] with
+#' quotation marks to be removed from `x`. Can be `character(0)` to not remove
+#' any quotation marks.
 #'
 #' @details
 #' `unpaste_unquote()` is **not** the exact reverse of [paste_quoted()]: it does
@@ -14,8 +15,8 @@
 #' to `NULL`, or `"'character(0)'"` to `character(0)`.
 #'
 #' @returns
-#' `x` without the quotation marks indicated by `quotemarks`, split into a
-#' vector on `collapse`.
+#' `x` without the quotation marks in `quotemarks`, split into a vector on the
+#' string in `collapse`.
 #'
 #' @seealso
 #' [paste_quoted()] for the approximate opposite of `unpaste_unquote()`.

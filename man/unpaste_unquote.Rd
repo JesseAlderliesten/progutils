@@ -9,17 +9,18 @@ unpaste_unquote(x, collapse = c(", ", "; "), quotemarks = c("'", "\\""))
 \arguments{
 \item{x}{a \link[checkinput:is_character]{character string}.}
 
-\item{collapse}{\link[checkinput:all_characters]{character string} with
+\item{collapse}{\link[checkinput:all_characters]{character vector} with
 elements that were used to collapse
 values when \code{x} was created, and are now used to \link[=strsplit]{split} \code{x} on.
 Can be \code{character(0)} to leave \code{x} as a character string.}
 
-\item{quotemarks}{Character vector with quotation marks to be removed from
-\code{x}. Can be \code{character(0)} to not remove any quotation marks.}
+\item{quotemarks}{\link[checkinput:all_characters]{character vector} with
+quotation marks to be removed from \code{x}. Can be \code{character(0)} to not remove
+any quotation marks.}
 }
 \value{
-\code{x} without the quotation marks indicated by \code{quotemarks}, split into a
-vector on \code{collapse}.
+\code{x} without the quotation marks in \code{quotemarks}, split into a vector on the
+string in \code{collapse}.
 }
 \description{
 Create a character vector from a string with quotation marks

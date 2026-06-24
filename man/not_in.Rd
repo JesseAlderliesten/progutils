@@ -2,7 +2,7 @@
 % Please edit documentation in R/not_in.R
 \name{not_in}
 \alias{not_in}
-\title{Are values absent}
+\title{Check that values are absent}
 \usage{
 not_in(x, table, value = TRUE)
 }
@@ -80,8 +80,9 @@ not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 \seealso{
 \code{\link[=setdiff]{setdiff()}} for a similar function which removes duplicates;
 \code{\link[=are_equal]{are_equal()}} to match numeric input using a tolerance;
-\code{\link[=match]{match()}} containing \code{\%in\%}, and, from \R \verb{4.6.0} onwards, \code{'\%notin\%'}, on
-which this function is based.
+\code{\link[=identical]{identical()}}, \code{\link[=not_in]{not_in()}} and \code{\link[=match]{match()}} (containing \code{\%in\%} and, from \R
+\verb{4.6.0} onwards, \code{'\%notin\%'}) to check for exact (in)equality, with
+\code{\link{Comparison}} to do so using binary operators
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

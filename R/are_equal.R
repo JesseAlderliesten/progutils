@@ -1,4 +1,4 @@
-#' Are numeric values nearly equal
+#' Check that numeric values are nearly equal
 #'
 #' Test element-wise near-equality of numeric vectors by allowing for small
 #' numeric errors to make `are_equal()` safer than [`==`][Comparison].
@@ -24,9 +24,9 @@
 #' @seealso
 #' [checkinput::is_natural()] to check for element-wise near-equality to natural
 #' numbers; [all.equal()] to check more generally for near-equality;
-#' [identical()] to check for exact equality and [`Comparison`] to do so using
-#' binary operators;
-#' [match()] and `progutils::not_in()` to compare character vectors;
+#' [identical()], [not_in()] and [match()] (containing `%in%` and, from \R
+#' `4.6.0` onwards, `'%notin%'`) to check for exact (in)equality, with
+#' [`Comparison`] to do so using binary operators;
 #' [\R FAQ 7.31](
 #' https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
 #' for background on numerical equality;

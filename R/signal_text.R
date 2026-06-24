@@ -2,7 +2,8 @@
 #'
 #' Signal a text to the user through an error, warning, or message.
 #'
-#' @param text Vector with text to be signalled, coerced to character by
+#' @param text [character vector][checkinput::all_characters()] with text to be
+#' signalled, coerced to a [character string][checkinput::is_character()] by
 #' [vect_to_char()].
 #' @param signal [character string][checkinput::is_character()] indicating the
 #' type of signal to be used:
@@ -23,13 +24,11 @@
 #' attribute to the returned object, see the last `Example`.
 #'
 #' @returns
-#' `text`, with a phrase indicating the origin of the signal if `origin` is not
-#' `NULL`, returned [invisibly][invisible()].
+#' [character string][checkinput::is_character()] containing `text`, with a
+#' phrase indicating the origin of the signal if `origin` is not `NULL`,
+#' returned [invisibly][invisible()].
 #'
 #' @family functions to modify character vectors
-#'
-#' @seealso
-#' [wrap_text()]
 #'
 #' @examples
 #' test_text <- c("Some text", "Some other text")

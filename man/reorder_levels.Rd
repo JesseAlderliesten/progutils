@@ -11,15 +11,15 @@ reorder_levels(x, new_order, warn_drop_order = TRUE)
 vector to be converted to a factor with levels ordered as \code{new_order}. Should
 have length larger than zero.}
 
-\item{new_order}{Unique character vector with a length larger than zero
-indicating the new order of the factor levels.}
+\item{new_order}{Character vector with a length larger than zero containing
+unique names in the new order.}
 
 \item{warn_drop_order}{\code{TRUE} or \code{FALSE}: warn if values of \code{new_order} are
 dropped because they are not present in \code{x}?}
 }
 \value{
-\code{x} after converting it to a \link{factor} with its levels reordered to
-\code{new_order}, dropping values in \code{new_order} not present in \code{x}.
+\code{x} after converting it to a \link{factor} with levels reordered to
+\code{new_order}, dropping values in \code{new_order} that are not present in \code{x}.
 }
 \description{
 Reorder factor levels
@@ -58,7 +58,8 @@ orig
 
 }
 \seealso{
-\code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor
+\code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor;
+\code{\link[=order]{order()}}; \code{\link[=sort]{sort()}}
 
 Other functions to convert types:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},

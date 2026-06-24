@@ -3,7 +3,7 @@
 #' @param x Object with at least one column. Columns should have unique,
 #' syntactically valid names, see [checkinput::all_names()].
 #' @param new_order Character vector with a length larger than zero containing
-#' unique names in the new order of the columns.
+#' unique names in the new order.
 #'
 #' @details
 #' Column names of `x` that are missing from `new_order` are appended to
@@ -16,7 +16,9 @@
 #' `x` with reordered columns.
 #'
 #' @seealso
-#' [order()], [sort()]
+#' [order()]; [sort()];
+#' [append()] which, despite its name, can insert values into a vector at any
+#' place
 #'
 #' @family functions to modify sorting order
 #'

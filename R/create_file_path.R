@@ -7,14 +7,16 @@
 #' name, including the file
 #' extension like `.csv` or `.txt`. Should adhere to the restrictions described
 #' in [checkinput::is_path()].
-#' @param format_stamp A character string indicating the [format][strftime()] of
+#' @param format_stamp [character string][checkinput::is_character()] indicating
+#' the [format][strftime()] of
 #' the stamp to be added in front of the file name. No stamp is added if
 #' `format_stamp` is an empty string (i.e., `""`). The formatted stamp is
 #' treated as part of the filename, such that the same restrictions apply, see
 #' `Details`.
 #'
 #' @returns
-#' The created file path, returned [invisibly][invisible()].
+#' The created [absolute normalized][fs::path_abs()] file path, returned
+#' [invisibly][invisible()].
 #'
 #' @details
 #' `filename` **should** contain a file extension (i.e., a dot followed by any
@@ -29,23 +31,20 @@
 #' as part of `format_stamp` to create precise stamps by truncating seconds to
 #' `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
-#' @section Side effects:
-#' The directory indicated by the returned file path is [created][create_dir()]
-#' if it does not yet exist.
+#' @inheritSection create_dir Side effects
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, and the `Note on paths`
-#' in its documentation;
+#' [checkinput::is_path()] to check if a path is valid, with a `Note on paths`
+#' and extensive references about file paths and directories;
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern;
-#' [fs::path()] to construct file paths in a platform-independent way;
-#' [fs::path_abs()] to create absolute normalised paths;
-#' [create_dir()] to create a directory if it does not yet exist
+#' [create_dir()] (used by this function) to create a directory if it does not
+#' yet exist
 #'
 #' @family functions to handle paths and directories
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory
-#' my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
+#' my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 #'
 #' (create_file_path(filename = "abc.txt", format_stamp = "",
 #'                   dir = my_tempdir, add_date = TRUE))
@@ -70,7 +69,7 @@
 #'
 #' @export
 create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
-                             dir = fs::path_wd("output"), add_date = TRUE) {
+                             dir = fs::path(".", "output"), add_date = TRUE) {
   filename_label <- deparse1(substitute(filename))
 
   stopifnot(checkinput::is_character(filename),

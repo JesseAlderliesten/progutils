@@ -1,4 +1,4 @@
-#' Are values absent
+#' Check that values are absent
 #'
 #' Check that values from one vector are absent from another vector
 #'
@@ -49,8 +49,9 @@
 #' @seealso
 #' [setdiff()] for a similar function which removes duplicates;
 #' [are_equal()] to match numeric input using a tolerance;
-#' [match()] containing `%in%`, and, from \R `4.6.0` onwards, `'%notin%'`, on
-#' which this function is based.
+#' [identical()], [not_in()] and [match()] (containing `%in%` and, from \R
+#' `4.6.0` onwards, `'%notin%'`) to check for exact (in)equality, with
+#' [`Comparison`] to do so using binary operators
 #'
 #' @family functions to check equality
 #'

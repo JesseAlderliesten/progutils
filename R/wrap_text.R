@@ -23,7 +23,8 @@
 #' `ignore_newlines` is `TRUE` and are retained if `ignore_newlines` is `FALSE`.
 #'
 #' @returns
-#' A string containing `x` wrapped to a maximum of `width` characters, with
+#' A [character string][checkinput::is_character()] containing `x` wrapped to a
+#' maximum of `width` characters, with
 #' newlines inserted at blank characters. A warning is issued if the width of a
 #' fragment in the output exceeds `width`: this occurs if a stretch of
 #' characters longer than `width` occurs without a blank character to wrap at.
@@ -32,6 +33,12 @@
 #' The call `wrap_text(x, width)` can be replaced by
 #' `paste0(strwrap(x, width + 1L), collapse = "\n")` if `x` has length one and
 #' `ignore_newlines` is `TRUE`.
+#'
+#' Using `wrap_text()` on `x` of variable length, e.g., in the text of warnings
+#' that report a file path or a user-provided variable name, makes the location
+#' of newlines unpredictable and thus difficult to test reliably. To circumvent
+#' this, put the constant part in the front of the message and hardcode newlines
+#' using `\n`.
 #'
 #' @section Notes:
 #' The output is printed as a string with newlines represented as `\n`. Use
@@ -42,14 +49,8 @@
 #' contrast, argument `width` in [strwrap()] indicates the width **at** which
 #' text should be wrapped.
 #'
-#' @section Programming notes:
-#' Using `wrap_text()` on `x` of variable length, e.g., in the text of warnings
-#' that report a file path or a user-provided variable name, makes the location
-#' of newlines unpredictable and thus difficult to test reliably. To circumvent
-#' this, put the constant part in the front of the message and hardcode newlines
-#' using `\n`.
-#'
-#' @seealso [cat()] [paste()] [strwrap()]
+#' @seealso
+#' [cat()]; [paste()]; [strwrap()]
 #'
 #' @family functions to modify character vectors
 #'
