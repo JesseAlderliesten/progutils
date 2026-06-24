@@ -33,11 +33,11 @@
 #' values of numeric `x` rounded to `signif`
 #' [significant][signif()] digits, wrapped to `width` characters.
 #'
-#' If `collapse` is `NULL`, a [character **vector**][checkinput::all_characters()]
+#' If `collapse` is `NULL`, a [character vector][checkinput::all_characters()]
 #' with the same elements as `x`
 #' is returned, wrapping on a per-element basis. If `collapse` is not `NULL`,
 #' the name-value pairs are separated by `collapse`, thus returning a
-#' [character **string**][checkinput::is_character()].
+#' [character string][checkinput::is_character()].
 #'
 #' See `Details` on handling of some special values.
 #'

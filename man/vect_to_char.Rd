@@ -39,11 +39,11 @@ A character vector or character string with the names and values in \code{x}, wi
 values of numeric \code{x} rounded to \code{signif}
 \link[=signif]{significant} digits, wrapped to \code{width} characters.
 
-If \code{collapse} is \code{NULL}, a \link[checkinput:all_characters]{character \strong{vector}}
+If \code{collapse} is \code{NULL}, a \link[checkinput:all_characters]{character vector}
 with the same elements as \code{x}
 is returned, wrapping on a per-element basis. If \code{collapse} is not \code{NULL},
 the name-value pairs are separated by \code{collapse}, thus returning a
-\link[checkinput:is_character]{character \strong{string}}.
+\link[checkinput:is_character]{character string}.
 
 See \code{Details} on handling of some special values.
 }
