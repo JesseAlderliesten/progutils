@@ -45,7 +45,7 @@ Paths will be \link[fs:path_abs]{normalized} to ensure they still work if the
 }
 \examples{
 # Create files in a temporary directory so we know what is present.
-my_tempdir <- create_tempdir(pattern = "examplegetfilepath")
+my_tempdir <- create_tempdir(prefix = "examplegetfilepath")
 my_tempfiles <- fs::path_abs(
   fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
 )

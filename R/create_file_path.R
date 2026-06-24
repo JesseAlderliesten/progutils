@@ -44,7 +44,7 @@
 #'
 #' @examples
 #' # Use a temporary directory to not write in the user's directory
-#' my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
+#' my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 #'
 #' (create_file_path(filename = "abc.txt", format_stamp = "",
 #'                   dir = my_tempdir, add_date = TRUE))

@@ -40,7 +40,7 @@ if it does not yet exist.
 
 \examples{
 # Use a temporary subdirectory to not write in the user's directory
-my_tempdir <- create_tempdir(pattern = "examplecreatedir")
+my_tempdir <- create_tempdir(prefix = "examplecreatedir")
 
 # Create directory 'dir_one' inside this temporary directory
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
