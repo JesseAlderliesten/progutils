@@ -1,4 +1,4 @@
-# progutils devel
+# progutils 0.12.0
 
 ### Breaking changes
 - `create_tempdir()`: rename argument `pattern` to `prefix`.
