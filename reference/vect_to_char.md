@@ -57,14 +57,17 @@ vect_to_char(
 
 ## Value
 
-The names and values in `x`, with values of numeric `x` rounded to
-`signif` [significant](https://rdrr.io/r/base/Round.html) digits,
-wrapped to `width` characters.
+A character vector or character string with the names and values in `x`,
+with values of numeric `x` rounded to `signif`
+[significant](https://rdrr.io/r/base/Round.html) digits, wrapped to
+`width` characters.
 
-If `collapse` is `NULL`, a character **vector** with the same elements
-as `x` is returned, wrapping on a per-element basis. If `collapse` is
-not `NULL`, the name-value pairs are separated by `collapse`, thus
-returning a character **string**.
+If `collapse` is `NULL`, a [character
+vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+with the same elements as `x` is returned, wrapping on a per-element
+basis. If `collapse` is not `NULL`, the name-value pairs are separated
+by `collapse`, thus returning a [character
+string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html).
 
 See `Details` on handling of some special values.
 
@@ -97,8 +100,9 @@ see the last `Example`.
 
 ## See also
 
-[`toString()`](https://rdrr.io/r/base/toString.html) which can be used
-if names of `x` can be removed;
+[`toString()`](https://rdrr.io/r/base/toString.html) which is shorthand
+for `paste(x, collapse = ", ")` and can be used instead of
+`vect_to_char()` if names of `x` can be removed;
 [`vignette("type_coercion", package = "checkinput")`](https://jessealderliesten.github.io/checkinput/articles/type_coercion.html)
 and
 [`help("is_zerolength", package = "checkinput")`](https://jessealderliesten.github.io/checkinput/reference/is_zerolength.html)

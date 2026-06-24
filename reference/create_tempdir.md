@@ -1,16 +1,16 @@
-# Create a new temporary directory
+# Create a temporary directory
 
-Create a new temporary directory that can safely be removed.
+Create a temporary directory that can safely be removed.
 
 ## Usage
 
 ``` r
-create_tempdir(pattern = "tempdir")
+create_tempdir(prefix = "tempdir")
 ```
 
 ## Arguments
 
-- pattern:
+- prefix:
 
   [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
@@ -29,9 +29,9 @@ path to the created temporary directory, returned
 The new directory is [created](https://rdrr.io/r/base/files2.html)
 inside [`tempdir()`](https://rdrr.io/r/base/tempfile.html). Its
 [name](https://rdrr.io/r/base/tempfile.html) starts with the string
-given by `pattern` and is followed by a random string in hex. This
-random string **might** contain a dot (`.`) such that the directory
-might appear to have a file extension, see the section `Source` in
+given by `prefix` and is followed by a random string in hex. This random
+string **might** contain a dot (`.`) such that the directory might
+appear to have a file extension, see the section `Source` in
 [`help("tempdir")`](https://rdrr.io/r/base/tempfile.html). An error is
 thrown if creating the directory fails.
 
@@ -49,12 +49,6 @@ empty the temporary directory), the created subdirectories should be
 [removed](https://rdrr.io/r/base/unlink.html) once they are not needed
 anymore, see the section `Usage in practice` below.
 
-## Side effects
-
-The temporary directory indicated by the returned path is
-[created](https://fs.r-lib.org/reference/create.html) inside
-[`tempdir()`](https://rdrr.io/r/base/tempfile.html).
-
 ## Usage in practice
 
 `Examples` and `tests` should write to a temporary directory that is
@@ -64,7 +58,7 @@ about
 [`detritus in the temp directory`](https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)
 and CRAN will not accept your package, see section `Source packages`
 from the [CRAN
-policies](https://cran.r-project.org/web/packages/policies.html).
+policies](https://cran.r-project.org/web/packages/policies.html)).
 Although [`tempdir()`](https://rdrr.io/r/base/tempfile.html) points to a
 temporary directory, that directory should **not** be removed because
 other processes in R and
@@ -73,7 +67,7 @@ Instead, create a temporary subdirectory in
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html) and afterwards clean
 up by [removing](https://rdrr.io/r/base/unlink.html) that subdirectory:
 
-    my_tempdir <- create_tempdir(pattern = "subtempdir")
+    my_tempdir <- create_tempdir(prefix = "subtempdir")
     < do stuff >
     unlink(my_tempdir, recursive = TRUE)
 
@@ -81,6 +75,12 @@ It is good practice to create the complete temporary directory with all
 required files and folders before running any test for the presence or
 absence of particular files or folders: this ensures no spurious matches
 occur if examples or tests are removed or added.
+
+## Side effects
+
+The directory indicated by the returned path is
+[created](https://fs.r-lib.org/reference/create.html) if it does not yet
+exist.
 
 ## Programming notes
 
@@ -96,16 +96,16 @@ spurious warnings about duplicated file separators.
 
 ## See also
 
-[`tempfile()`](https://rdrr.io/r/base/tempfile.html) used in this
-function to create the paths for the temporary directory;
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+to check if a path is valid, with a `Note on paths` and extensive
+references about file paths and directories;
+[`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
+to create a (non-temporary) directory if it does not yet exist;
 [`local()`](https://rdrr.io/r/base/eval.html) and
 [withr::local_tempdir()](https://withr.r-lib.org/reference/with_tempfile.html)
 for automated deletion of temporary directories;
-[`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
-to create (non-temporary) directories;
-[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid, with the `Note on paths` in its
-documentation.
+[`tempfile()`](https://rdrr.io/r/base/tempfile.html) used in this
+function to create the paths for the temporary directory;
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
@@ -116,22 +116,22 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/Rtmp886Ylj"
+#> [1] "/tmp/RtmpoivS2Y"
 # Create a directory inside the directory returned by 'tempdir()'
-(my_subtempdir_ex1 <- create_tempdir(pattern = "subtempdir"))
-#> [1] "/tmp/Rtmp886Ylj/subtempdir19889d0d43e"
+(my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
+#> [1] "/tmp/RtmpoivS2Y/subtempdir1a0e2bb6644"
 
-# Using the same 'pattern' again creates another directory
-(my_subtempdir_ex2 <- create_tempdir(pattern = "subtempdir"))
-#> [1] "/tmp/Rtmp886Ylj/subtempdir198814f5ce29"
+# Using the same 'prefix' again creates another directory
+(my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
+#> [1] "/tmp/RtmpoivS2Y/subtempdir1a0e30882e0b"
 
 # It is not possible to create recursive subdirectories
-try(no_subtempdir <- create_tempdir(pattern = "subtempdir/otherdir"))
-#> Error in create_tempdir(pattern = "subtempdir/otherdir") : 
-#>   'pattern' should not include file separators
-try(no_subtempdir <- create_tempdir(pattern = "subtempdir\\otherdir"))
-#> Error in create_tempdir(pattern = "subtempdir\\otherdir") : 
-#>   'pattern' should not include file separators
+try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))
+#> Error in create_tempdir(prefix = "subtempdir/otherdir") : 
+#>   'prefix' should not include file separators
+try(no_subtempdir <- create_tempdir(prefix = "subtempdir\\otherdir"))
+#> Error in create_tempdir(prefix = "subtempdir\\otherdir") : 
+#>   'prefix' should not include file separators
 
 # Clean up
 unlink(c(my_subtempdir_ex1, my_subtempdir_ex2), recursive = TRUE)

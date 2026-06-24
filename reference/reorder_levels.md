@@ -18,8 +18,8 @@ reorder_levels(x, new_order, warn_drop_order = TRUE)
 
 - new_order:
 
-  Unique character vector with a length larger than zero indicating the
-  new order of the factor levels.
+  Character vector with a length larger than zero containing unique
+  names in the new order.
 
 - warn_drop_order:
 
@@ -29,8 +29,8 @@ reorder_levels(x, new_order, warn_drop_order = TRUE)
 ## Value
 
 `x` after converting it to a
-[factor](https://rdrr.io/r/base/factor.html) with its levels reordered
-to `new_order`, dropping values in `new_order` not present in `x`.
+[factor](https://rdrr.io/r/base/factor.html) with levels reordered to
+`new_order`, dropping values in `new_order` that are not present in `x`.
 
 ## Details
 
@@ -59,7 +59,9 @@ Reordering levels of factor `f` by replacing levels through code like
 ## See also
 
 [`stats::relevel()`](https://rdrr.io/r/stats/relevel.html) to assign one
-reference level to a factor
+reference level to a factor;
+[`order()`](https://rdrr.io/r/base/order.html);
+[`sort()`](https://rdrr.io/r/base/sort.html)
 
 Other functions to convert types:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),

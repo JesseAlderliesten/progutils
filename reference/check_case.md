@@ -26,11 +26,13 @@ check_case(x, signal = c("error", "warning", "message", "quiet"))
 
 ## Value
 
-Character vector with [unique](https://rdrr.io/r/base/unique.html),
+A [character
+vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+with [unique](https://rdrr.io/r/base/unique.html),
 [sorted](https://rdrr.io/r/base/sort.html) values in `x` that only
 differ from each other in their case, or `character(0)` if no such
-values are present. The return is
-[invisible](https://rdrr.io/r/base/invisible.html).
+values are present, returned
+[invisibly](https://rdrr.io/r/base/invisible.html).
 
 ## Details
 

@@ -19,7 +19,7 @@ reorder_cols(x, new_order)
 - new_order:
 
   Character vector with a length larger than zero containing unique
-  names in the new order of the columns.
+  names in the new order.
 
 ## Value
 
@@ -35,8 +35,10 @@ dropped, with a warning.
 
 ## See also
 
-[`order()`](https://rdrr.io/r/base/order.html),
-[`sort()`](https://rdrr.io/r/base/sort.html)
+[`order()`](https://rdrr.io/r/base/order.html);
+[`sort()`](https://rdrr.io/r/base/sort.html);
+[`append()`](https://rdrr.io/r/base/append.html) which, despite its
+name, can insert values into a vector at any place
 
 Other functions to modify sorting order:
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md)

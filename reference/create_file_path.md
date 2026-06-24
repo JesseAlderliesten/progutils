@@ -9,7 +9,7 @@ exist.
 create_file_path(
   filename,
   format_stamp = "%Y_%m_%d_%H_%M_%S",
-  dir = fs::path_wd("output"),
+  dir = fs::path(".", "output"),
   add_date = TRUE
 )
 ```
@@ -26,12 +26,13 @@ create_file_path(
 
 - format_stamp:
 
-  A character string indicating the
-  [format](https://rdrr.io/r/base/strptime.html) of the stamp to be
-  added in front of the file name. No stamp is added if `format_stamp`
-  is an empty string (i.e., `""`). The formatted stamp is treated as
-  part of the filename, such that the same restrictions apply, see
-  `Details`.
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  indicating the [format](https://rdrr.io/r/base/strptime.html) of the
+  stamp to be added in front of the file name. No stamp is added if
+  `format_stamp` is an empty string (i.e., `""`). The formatted stamp is
+  treated as part of the filename, such that the same restrictions
+  apply, see `Details`.
 
 - dir:
 
@@ -55,8 +56,9 @@ create_file_path(
 
 ## Value
 
-The created file path, returned
-[invisibly](https://rdrr.io/r/base/invisible.html).
+The created [absolute
+normalized](https://fs.r-lib.org/reference/path_math.html) file path,
+returned [invisibly](https://rdrr.io/r/base/invisible.html).
 
 ## Details
 
@@ -76,23 +78,19 @@ truncating seconds to `0 <= n <= 6` decimal places, see
 
 ## Side effects
 
-The directory indicated by the returned file path is
-[created](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
-if it does not yet exist.
+The directory indicated by the returned path is
+[created](https://fs.r-lib.org/reference/create.html) if it does not yet
+exist.
 
 ## See also
 
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid, and the `Note on paths` in its
-documentation;
+to check if a path is valid, with a `Note on paths` and extensive
+references about file paths and directories;
 [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
 to check if a file exists and is a unique match to a pattern;
-[`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
-file paths in a platform-independent way;
-[`fs::path_abs()`](https://fs.r-lib.org/reference/path_math.html) to
-create absolute normalised paths;
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
-to create a directory if it does not yet exist
+(used by this function) to create a directory if it does not yet exist
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
@@ -103,32 +101,32 @@ Other functions to handle paths and directories:
 
 ``` r
 # Use a temporary directory to not write in the user's directory
-my_tempdir <- create_tempdir(pattern = "examplecreatefilepath")
+my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/2026_06_22/abc.txt
+#> /tmp/RtmpoivS2Y/examplecreatefilepath1a0e47c50dcd/2026_06_24/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/2026_06_22/22_06_2026_abc.txt
+#> /tmp/RtmpoivS2Y/examplecreatefilepath1a0e47c50dcd/2026_06_24/24_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/def.html
+#> /tmp/RtmpoivS2Y/examplecreatefilepath1a0e47c50dcd/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/22_06_2026_def.html
+#> /tmp/RtmpoivS2Y/examplecreatefilepath1a0e47c50dcd/24_06_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/subdir/2026_06_22/abc.txt
+#> /tmp/RtmpoivS2Y/examplecreatefilepath1a0e47c50dcd/subdir/2026_06_24/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/subdir/2026_06_22/22_06_2026_abc.txt
+#> /tmp/RtmpoivS2Y/examplecreatefilepath1a0e47c50dcd/subdir/2026_06_24/24_06_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/subdir/def.html
+#> /tmp/RtmpoivS2Y/examplecreatefilepath1a0e47c50dcd/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/Rtmp886Ylj/examplecreatefilepath19885a8f7280/subdir/22_06_2026_def.html
+#> /tmp/RtmpoivS2Y/examplecreatefilepath1a0e47c50dcd/subdir/24_06_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

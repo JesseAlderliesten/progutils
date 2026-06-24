@@ -30,9 +30,11 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE)
 
 ## Value
 
-A string containing `x` wrapped to a maximum of `width` characters, with
-newlines inserted at blank characters. A warning is issued if the width
-of a fragment in the output exceeds `width`: this occurs if a stretch of
+A [character
+string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+containing `x` wrapped to a maximum of `width` characters, with newlines
+inserted at blank characters. A warning is issued if the width of a
+fragment in the output exceeds `width`: this occurs if a stretch of
 characters longer than `width` occurs without a blank character to wrap
 at.
 
@@ -78,8 +80,8 @@ In contrast, argument `width` in
 
 ## See also
 
-[`cat()`](https://rdrr.io/r/base/cat.html)
-[`paste()`](https://rdrr.io/r/base/paste.html)
+[`cat()`](https://rdrr.io/r/base/cat.html);
+[`paste()`](https://rdrr.io/r/base/paste.html);
 [`strwrap()`](https://rdrr.io/r/base/strwrap.html)
 
 Other functions to modify character vectors:

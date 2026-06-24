@@ -1,6 +1,6 @@
-# Replace character values or factor levels
+# Replace values
 
-Replace character values or factor levels
+Replace values, also handling factor levels
 
 ## Usage
 
@@ -35,7 +35,7 @@ replace_vals(
 
 - new:
 
-  Character string of length one with the new value.
+  Character string with the new value.
 
 - ignore_case:
 
@@ -49,8 +49,8 @@ replace_vals(
 
 - warn_absent:
 
-  `TRUE` or `FALSE`: warn if `old` nor `new` are found in `x`? It is
-  silently assumed replacement is not necessary anymore if `new` is
+  `TRUE` or `FALSE`: warn if neither `old` nor `new` is found in `x`? It
+  is silently assumed replacement is not necessary anymore if `new` is
   found.
 
 - signal_case_old, signal_case_new:
@@ -69,8 +69,8 @@ replace_vals(
 
 - quiet:
 
-  `TRUE` or `FALSE`: suppress printing the message with the values that
-  have been replaced?
+  `TRUE` or `FALSE`: suppress the message indicating which values have
+  been replaced?
 
 ## Value
 

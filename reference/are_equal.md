@@ -1,4 +1,4 @@
-# Are numeric values nearly equal
+# Check that numeric values are nearly equal
 
 Test element-wise near-equality of numeric vectors by allowing for small
 numeric errors to make `are_equal()` safer than
@@ -50,12 +50,13 @@ Code `abs(x - y) < tol` was taken from
 to check for element-wise near-equality to natural numbers;
 [`all.equal()`](https://rdrr.io/r/base/all.equal.html) to check more
 generally for near-equality;
-[`identical()`](https://rdrr.io/r/base/identical.html) to check for
-exact equality and
+[`identical()`](https://rdrr.io/r/base/identical.html),
+[`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
+and [`match()`](https://rdrr.io/r/base/match.html) (containing `%in%`
+and, from R `4.6.0` onwards, `'%notin%'`) to check for exact
+(in)equality, with
 [`Comparison`](https://rdrr.io/r/base/Comparison.html) to do so using
-binary operators; [`match()`](https://rdrr.io/r/base/match.html) and
-[`progutils::not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
-to compare character vectors; [R FAQ
+binary operators; [R FAQ
 7.31](https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
 for background on numerical equality; the vignette *Type coercion* in
 package `checkinput`:

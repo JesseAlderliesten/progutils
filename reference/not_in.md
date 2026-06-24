@@ -1,4 +1,4 @@
-# Are values absent
+# Check that values are absent
 
 Check that values from one vector are absent from another vector
 
@@ -74,8 +74,11 @@ where `%notin%` is a function in base R since version `4.6.0`.
 which removes duplicates;
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md)
 to match numeric input using a tolerance;
-[`match()`](https://rdrr.io/r/base/match.html) containing `%in%`, and,
-from R `4.6.0` onwards, `'%notin%'`, on which this function is based.
+[`identical()`](https://rdrr.io/r/base/identical.html), `not_in()` and
+[`match()`](https://rdrr.io/r/base/match.html) (containing `%in%` and,
+from R `4.6.0` onwards, `'%notin%'`) to check for exact (in)equality,
+with [`Comparison`](https://rdrr.io/r/base/Comparison.html) to do so
+using binary operators
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),

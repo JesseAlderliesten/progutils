@@ -9,7 +9,7 @@ numeric values."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,12 +96,14 @@ by blank characters?</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The names and values in <code>x</code>, with values of numeric <code>x</code> rounded to <code>signif</code>
+    <p>A character vector or character string with the names and values in <code>x</code>, with
+values of numeric <code>x</code> rounded to <code>signif</code>
 <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant</a> digits, wrapped to <code>width</code> characters.</p>
-<p>If <code>collapse</code> is <code>NULL</code>, a character <strong>vector</strong> with the same elements as <code>x</code>
+<p>If <code>collapse</code> is <code>NULL</code>, a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a>
+with the same elements as <code>x</code>
 is returned, wrapping on a per-element basis. If <code>collapse</code> is not <code>NULL</code>,
-the name-value pairs are separated by <code>collapse</code>, thus returning a character
-<strong>string</strong>.</p>
+the name-value pairs are separated by <code>collapse</code>, thus returning a
+<a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a>.</p>
 <p>See <code>Details</code> on handling of some special values.</p>
     </div>
     <div class="section level2">
@@ -127,7 +129,8 @@ see the last <code>Example</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/toString.html" class="external-link">toString()</a></code> which can be used if names of <code>x</code> can be removed;
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/toString.html" class="external-link">toString()</a></code> which is shorthand for <code>paste(x, collapse = ", ")</code> and can be
+used instead of <code>vect_to_char()</code> if names of <code>x</code> can be removed;
 <code><a href="https://jessealderliesten.github.io/checkinput/articles/type_coercion.html" class="external-link">vignette("type_coercion", package = "checkinput")</a></code> and
 <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_zerolength.html" class="external-link">help("is_zerolength", package = "checkinput")</a></code> for a discussion of some
 issues with type conversion and zero-length input when <a href="https://rdrr.io/r/base/c.html" class="external-link">combining</a>

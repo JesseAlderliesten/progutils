@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,8 @@ by blank characters?</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A string containing <code>x</code> wrapped to a maximum of <code>width</code> characters, with
+    <p>A <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> containing <code>x</code> wrapped to a
+maximum of <code>width</code> characters, with
 newlines inserted at blank characters. A warning is issued if the width of a
 fragment in the output exceeds <code>width</code>: this occurs if a stretch of
 characters longer than <code>width</code> occurs without a blank character to wrap at.</p>
@@ -92,7 +93,6 @@ documented in the section <code>Details</code> of <code><a href="https://rdrr.io
 <p>The call <code>wrap_text(x, width)</code> can be replaced by
 <code>paste0(strwrap(x, width + 1L), collapse = "\n")</code> if <code>x</code> has length one and
 <code>ignore_newlines</code> is <code>TRUE</code>.</p>
-
 <p>Using <code>wrap_text()</code> on <code>x</code> of variable length, e.g., in the text of warnings
 that report a file path or a user-provided variable name, makes the location
 of newlines unpredictable and thus difficult to test reliably. To circumvent
@@ -112,7 +112,7 @@ text should be wrapped.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat()</a></code> <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste()</a></code> <code><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap()</a></code></p>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat()</a></code>; <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste()</a></code>; <code><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap()</a></code></p>
 <p>Other functions to modify character vectors:
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
 <code>reexports</code>,

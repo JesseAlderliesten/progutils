@@ -18,20 +18,22 @@ unpaste_unquote(x, collapse = c(", ", "; "), quotemarks = c("'", "\""))
 - collapse:
 
   [character
-  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   with elements that were used to collapse values when `x` was created,
   and are now used to [split](https://rdrr.io/r/base/strsplit.html) `x`
   on. Can be `character(0)` to leave `x` as a character string.
 
 - quotemarks:
 
-  Character vector with quotation marks to be removed from `x`. Can be
-  `character(0)` to not remove any quotation marks.
+  [character
+  vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  with quotation marks to be removed from `x`. Can be `character(0)` to
+  not remove any quotation marks.
 
 ## Value
 
-`x` without the quotation marks indicated by `quotemarks`, split into a
-vector on `collapse`.
+`x` without the quotation marks in `quotemarks`, split into a vector on
+the string in `collapse`.
 
 ## Details
 

@@ -16,7 +16,11 @@ signal_text(
 
 - text:
 
-  Vector with text to be signalled, coerced to character by
+  [character
+  vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  with text to be signalled, coerced to a [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  by
   [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md).
 
 - signal:
@@ -36,8 +40,11 @@ signal_text(
 
 ## Value
 
-`text`, with a phrase indicating the origin of the signal if `origin` is
-not `NULL`, returned [invisibly](https://rdrr.io/r/base/invisible.html).
+[character
+string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+containing `text`, with a phrase indicating the origin of the signal if
+`origin` is not `NULL`, returned
+[invisibly](https://rdrr.io/r/base/invisible.html).
 
 ## Details
 
@@ -60,8 +67,6 @@ using `signal_text()` in another function, add the content of the signal
 as an attribute to the returned object, see the last `Example`.
 
 ## See also
-
-[`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
 
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
