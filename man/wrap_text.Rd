@@ -4,7 +4,7 @@
 \alias{wrap_text}
 \title{Wrap text}
 \usage{
-wrap_text(x, width = 80L, ignore_newlines = TRUE)
+wrap_text(x, width = 80L, ignore_newlines = TRUE, warn_length = FALSE)
 }
 \arguments{
 \item{x}{\link[checkinput:all_characters]{character vector} to be wrapped.}
@@ -15,13 +15,15 @@ after wrapping. Can be \code{Inf} to not wrap text.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
 by blank characters?}
+
+\item{warn_length}{\code{TRUE} or \code{FALSE}: warn if a fragment exceeds \code{width}?}
 }
 \value{
 A \link[checkinput:is_character]{character string} containing \code{x} wrapped to a
-maximum of \code{width} characters, with
-newlines inserted at blank characters. A warning is issued if the width of a
-fragment in the output exceeds \code{width}: this occurs if a stretch of
-characters longer than \code{width} occurs without a blank character to wrap at.
+maximum of \code{width} characters, with newlines inserted at blank characters. A
+warning is issued if \code{warn_length} is \code{TRUE} and the width of a fragment in
+the output exceeds \code{width}: this occurs if a stretch of characters longer
+than \code{width} occurs without a blank character to wrap at.
 }
 \description{
 Wrap text at blank characters to achieve a maximum line width.
