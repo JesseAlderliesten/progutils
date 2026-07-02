@@ -31,6 +31,10 @@
 #' as part of `format_stamp` to create precise stamps by truncating seconds to
 #' `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
+#' The file is **not** created by `create_file_path()`, use
+#' `fs::file_create(create_file_path(filename = "abc.txt", ...))` or
+#' `file.create(create_file_path(filename = "abc.txt", ...))` to do so.
+#'
 #' @inheritSection create_dir Side effects
 #'
 #' @seealso
