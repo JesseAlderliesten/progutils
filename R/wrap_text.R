@@ -8,6 +8,7 @@
 #' after wrapping. Can be `Inf` to not wrap text.
 #' @param ignore_newlines `TRUE` or `FALSE`: should newlines in `x` be replaced
 #' by blank characters?
+#' @param warn_length `TRUE` or `FALSE`: warn if a fragment exceeds `width`?
 #'
 #' @details
 #' `character(0)` input to `x` is returned unchanged, with a warning.
@@ -24,10 +25,10 @@
 #'
 #' @returns
 #' A [character string][checkinput::is_character()] containing `x` wrapped to a
-#' maximum of `width` characters, with
-#' newlines inserted at blank characters. A warning is issued if the width of a
-#' fragment in the output exceeds `width`: this occurs if a stretch of
-#' characters longer than `width` occurs without a blank character to wrap at.
+#' maximum of `width` characters, with newlines inserted at blank characters. A
+#' warning is issued if `warn_length` is `TRUE` and the width of a fragment in
+#' the output exceeds `width`: this occurs if a stretch of characters longer
+#' than `width` occurs without a blank character to wrap at.
 #'
 #' @section Programming notes:
 #' The call `wrap_text(x, width)` can be replaced by
@@ -62,10 +63,11 @@
 #'               width = 20, ignore_newlines = FALSE))
 #'
 #' @export
-wrap_text <- function(x, width = 80L, ignore_newlines = TRUE) {
+wrap_text <- function(x, width = 80L, ignore_newlines = TRUE,
+                      warn_length = FALSE) {
   stopifnot(
     checkinput::all_characters(x, allow_empty = TRUE, allow_zerolength = TRUE),
-    checkinput::is_logical(ignore_newlines))
+    checkinput::is_logical(ignore_newlines), checkinput::is_logical(warn_length))
   if(!is.infinite(width)) {
     width <- checkinput::make_natural(width)
   }
@@ -117,7 +119,7 @@ wrap_text <- function(x, width = 80L, ignore_newlines = TRUE) {
   }
 
   bool_too_long <- nchar(x) > width
-  if(any(bool_too_long)) {
+  if(warn_length && any(bool_too_long)) {
     warning("Width of ", length(which(bool_too_long)), " text fragments (",
             toString(nchar(x[bool_too_long])), " characters) exceeds 'width' (",
             width, " characters)")

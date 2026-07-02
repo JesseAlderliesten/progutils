@@ -9,7 +9,7 @@
 #' @details
 #' The new directory is [created][dir.create()] inside [tempdir()]. Its
 #' [name][tempfile()] starts with the string given by `prefix` and is followed
-#' by a random string in hex. This random string **might** contain a dot (`.`)
+#' by a random string. This random string **might** contain a dot (`.`)
 #' such that the directory might appear to have a file extension, see the
 #' section `Source` in `help("tempdir")`. An error is thrown if creating the
 #' directory fails.
@@ -66,6 +66,9 @@
 #' [local()] and
 #' [withr::local_tempdir()](https://withr.r-lib.org/reference/with_tempfile.html)
 #' for automated deletion of temporary directories;
+#' [withr::withr::local_dir()](https://withr.r-lib.org/reference/with_dir.html)
+#' and [usethis::local_project()](https://usethis.r-lib.org/reference/proj_utils.html)
+#' to change the working directory to a temporary directory;
 #' [tempfile()] used in this function to create the paths for the temporary
 #' directory;
 #'

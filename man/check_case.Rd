@@ -41,7 +41,7 @@ check_case(x = x, signal = "warning")
 
 }
 \seealso{
-\code{\link[=tolower]{tolower()}} and \code{\link[=toupper]{toupper()}} to \strong{change} case.
+\code{\link[=tolower]{tolower()}} and \code{\link[=toupper]{toupper()}} to change case.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},

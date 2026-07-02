@@ -1,3 +1,12 @@
+# progutils 0.13.0
+
+### Breaking changes
+- `wrap_text()`: gain argument `warn_length` with default `FALSE` to not warn if
+  a text fragment exceeds `width`. This prevents spurious warnings when
+  `wrap_text()` is called from other functions but differs from to the previous
+  implicit `warn_length = TRUE`.
+
+
 # progutils 0.12.0
 
 ### Breaking changes

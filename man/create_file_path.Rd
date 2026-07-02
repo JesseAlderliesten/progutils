@@ -53,6 +53,10 @@ A warning is issued if the \strong{file} indicated by the returned path already
 exists. To prevent this when creating files in quick succession, use \code{"\%OSn"}
 as part of \code{format_stamp} to create precise stamps by truncating seconds to
 \verb{0 <= n <= 6} decimal places, see \code{\link[=strftime]{strftime()}} for details.
+
+The file is \strong{not} created by \code{create_file_path()}, use
+\code{fs::file_create(create_file_path(filename = "abc.txt", ...))} or
+\code{file.create(create_file_path(filename = "abc.txt", ...))} to do so.
 }
 \section{Side effects}{
 
