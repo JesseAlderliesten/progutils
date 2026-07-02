@@ -21,7 +21,7 @@ Create a temporary directory that can safely be removed.
 \details{
 The new directory is \link[=dir.create]{created} inside \code{\link[=tempdir]{tempdir()}}. Its
 \link[=tempfile]{name} starts with the string given by \code{prefix} and is followed
-by a random string in hex. This random string \strong{might} contain a dot (\code{.})
+by a random string. This random string \strong{might} contain a dot (\code{.})
 such that the directory might appear to have a file extension, see the
 section \code{Source} in \code{help("tempdir")}. An error is thrown if creating the
 directory fails.
@@ -105,6 +105,9 @@ and extensive references about file paths and directories;
 \code{\link[=local]{local()}} and
 \href{https://withr.r-lib.org/reference/with_tempfile.html}{withr::local_tempdir()}
 for automated deletion of temporary directories;
+\href{https://withr.r-lib.org/reference/with_dir.html}{withr::withr::local_dir()}
+and \href{https://usethis.r-lib.org/reference/proj_utils.html}{usethis::local_project()}
+to change the working directory to a temporary directory;
 \code{\link[=tempfile]{tempfile()}} used in this function to create the paths for the temporary
 directory;
 
