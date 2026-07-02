@@ -5,7 +5,7 @@ Wrap text at blank characters to achieve a maximum line width.
 ## Usage
 
 ``` r
-wrap_text(x, width = 80L, ignore_newlines = TRUE)
+wrap_text(x, width = 80L, ignore_newlines = TRUE, warn_length = FALSE)
 ```
 
 ## Arguments
@@ -28,15 +28,19 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE)
   `TRUE` or `FALSE`: should newlines in `x` be replaced by blank
   characters?
 
+- warn_length:
+
+  `TRUE` or `FALSE`: warn if a fragment exceeds `width`?
+
 ## Value
 
 A [character
 string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
 containing `x` wrapped to a maximum of `width` characters, with newlines
-inserted at blank characters. A warning is issued if the width of a
-fragment in the output exceeds `width`: this occurs if a stretch of
-characters longer than `width` occurs without a blank character to wrap
-at.
+inserted at blank characters. A warning is issued if `warn_length` is
+`TRUE` and the width of a fragment in the output exceeds `width`: this
+occurs if a stretch of characters longer than `width` occurs without a
+blank character to wrap at.
 
 ## Details
 

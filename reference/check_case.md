@@ -51,7 +51,7 @@ lowercase characters.
 ## See also
 
 [`tolower()`](https://rdrr.io/r/base/chartr.html) and
-[`toupper()`](https://rdrr.io/r/base/chartr.html) to **change** case.
+[`toupper()`](https://rdrr.io/r/base/chartr.html) to change case.
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),

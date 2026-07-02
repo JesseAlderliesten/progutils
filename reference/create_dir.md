@@ -86,7 +86,7 @@ my_tempdir <- create_tempdir(prefix = "examplecreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
-#> /tmp/RtmpoivS2Y/examplecreatedir1a0e4f81398d/dir_one 
+#> /tmp/Rtmp31i27G/examplecreatedir1a625544d5fd/dir_one 
 #>                                                 TRUE 
 
 # An attempt to create a directory that already exists does not change any
@@ -108,7 +108,7 @@ identical(res_dir_one, res_dir_ONE)
 res_dir_date <- create_dir(dir = fs::path(my_tempdir, "dir_date"),
                            add_date = TRUE)
 fs::dir_exists(res_dir_date) # TRUE
-#> /tmp/RtmpoivS2Y/examplecreatedir1a0e4f81398d/dir_date/2026_06_24 
+#> /tmp/Rtmp31i27G/examplecreatedir1a625544d5fd/dir_date/2026_07_02 
 #>                                                             TRUE 
 
 # Cleaning up

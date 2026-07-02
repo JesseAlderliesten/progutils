@@ -29,9 +29,9 @@ path to the created temporary directory, returned
 The new directory is [created](https://rdrr.io/r/base/files2.html)
 inside [`tempdir()`](https://rdrr.io/r/base/tempfile.html). Its
 [name](https://rdrr.io/r/base/tempfile.html) starts with the string
-given by `prefix` and is followed by a random string in hex. This random
-string **might** contain a dot (`.`) such that the directory might
-appear to have a file extension, see the section `Source` in
+given by `prefix` and is followed by a random string. This random string
+**might** contain a dot (`.`) such that the directory might appear to
+have a file extension, see the section `Source` in
 [`help("tempdir")`](https://rdrr.io/r/base/tempfile.html). An error is
 thrown if creating the directory fails.
 
@@ -104,6 +104,10 @@ to create a (non-temporary) directory if it does not yet exist;
 [`local()`](https://rdrr.io/r/base/eval.html) and
 [withr::local_tempdir()](https://withr.r-lib.org/reference/with_tempfile.html)
 for automated deletion of temporary directories;
+[withr::withr::local_dir()](https://withr.r-lib.org/reference/with_dir.html)
+and
+[usethis::local_project()](https://usethis.r-lib.org/reference/proj_utils.html)
+to change the working directory to a temporary directory;
 [`tempfile()`](https://rdrr.io/r/base/tempfile.html) used in this
 function to create the paths for the temporary directory;
 
@@ -116,14 +120,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/RtmpoivS2Y"
+#> [1] "/tmp/Rtmp31i27G"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpoivS2Y/subtempdir1a0e2bb6644"
+#> [1] "/tmp/Rtmp31i27G/subtempdir1a6246ae7578"
 
 # Using the same 'prefix' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpoivS2Y/subtempdir1a0e30882e0b"
+#> [1] "/tmp/Rtmp31i27G/subtempdir1a625a659ed8"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))
