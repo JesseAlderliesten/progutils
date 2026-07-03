@@ -120,14 +120,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/Rtmp31i27G"
+#> [1] "/tmp/Rtmpj2Adm3"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/Rtmp31i27G/subtempdir1a6246ae7578"
+#> [1] "/tmp/Rtmpj2Adm3/subtempdir1a0419d45851"
 
 # Using the same 'prefix' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/Rtmp31i27G/subtempdir1a625a659ed8"
+#> [1] "/tmp/Rtmpj2Adm3/subtempdir1a047b6e34f2"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))
