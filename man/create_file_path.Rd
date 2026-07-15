@@ -54,9 +54,14 @@ exists. To prevent this when creating files in quick succession, use \code{"\%OS
 as part of \code{format_stamp} to create precise stamps by truncating seconds to
 \verb{0 <= n <= 6} decimal places, see \code{\link[=strftime]{strftime()}} for details.
 
-The file is \strong{not} created by \code{create_file_path()}, use
-\code{fs::file_create(create_file_path(filename = "abc.txt", ...))} or
-\code{file.create(create_file_path(filename = "abc.txt", ...))} to do so.
+\code{create_file_path()} does \strong{not} create the file: use
+\code{fs::file_create(create_file_path(filename = "<filename>", ...))} or
+\code{file.create(create_file_path(filename = "<filename>", ...))} to do so.
+
+Calls where date nor time stamps are added (e.g.,
+\code{create_file_path(filename = "<filename>", format_stamp = "", dir = "<dir>", add_date = FALSE)})
+can be replaced by \code{fs::path(fs::dir_create("<dir>"), "<filename>")} if it is
+fine to \strong{not} get a warning if the file already exists.
 }
 \section{Side effects}{
 
