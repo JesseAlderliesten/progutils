@@ -105,7 +105,8 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
     pattern, "' are present in directory\n'", dir, "'")
 
   if(length(files_present) > 1L) {
-    stop("Multiple ", msg_match, ": ", paste_quoted(basename(files_present)), "!")
+    stop("Multiple ", msg_match, ":\n",
+         paste_quoted(basename(files_present), collapse = "\n"), "!")
   }
 
   if(length(files_present) == 0L) {
@@ -123,13 +124,13 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
         if(length(match_case_insensitive) == 1L) {
           msg_match <- paste0(
             msg_match,
-            ".\nHowever, a case-insensitive match to 'pattern' is present: ",
+            ".\nHowever, a case-insensitive match to 'pattern' is present:\n",
             paste_quoted(basename(match_case_insensitive)))
         } else {
           msg_match <- paste0(
             msg_match,
-            ".\nHowever, case-insensitive matches to 'pattern' are present: ",
-            paste_quoted(basename(match_case_insensitive)))
+            ".\nHowever, case-insensitive matches to 'pattern' are present:\n",
+            paste_quoted(basename(match_case_insensitive), collapse = "\n"))
         }
       }
     }
