@@ -36,8 +36,8 @@ The default \code{dir} (\code{"."}) indicates the \link[=getwd]{working director
 If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, the error
 message indicates if any case-insensitive match is present.
 
-In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_file_path()} also finds
-'hidden' files, i.e., files with names that start with a dot, and excludes
+In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_file_path()} includes
+'hidden' files, i.e., files with names that start with a dot, but excludes
 directories.
 
 Paths will be \link[fs:path_abs]{normalized} to ensure they still work if the
@@ -83,7 +83,8 @@ rm(my_tempfiles)
 and extensive references about file paths and directories;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist;
-\code{\link[fs:file_exists]{fs::file_exists()}} and \code{\link[=list.files]{list.files()}} (which \strong{includes} directories) to
+\code{\link[fs:file_exists]{fs::file_exists()}} and \code{\link[=list.files]{list.files()}} (which \strong{includes} directories in its
+output) to
 check for existence of files without checking they are a unique match to a
 pattern;
 \code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or

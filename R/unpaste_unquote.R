@@ -1,4 +1,4 @@
-#' Create a character vector from a string with quotation marks
+#' Split a character string into a vector, removing quotation marks
 #'
 #' @param x a [character string][checkinput::is_character()].
 #' @param collapse [character vector][checkinput::all_characters()] with
@@ -10,9 +10,12 @@
 #' any quotation marks.
 #'
 #' @details
-#' `unpaste_unquote()` is **not** the exact reverse of [paste_quoted()]: it does
-#' **not** restore zero-length elements to their original value, e.g., `"'NULL'"`
-#' to `NULL`, or `"'character(0)'"` to `character(0)`.
+#' `unpaste_unquote()` does **not** restore `NA`s or zero-length elements to
+#' their original values after removing the quotation marks, such that
+#' `unpaste_unquote()` is **not** the exact reverse of [paste_quoted()]. For
+#' example, `"'NA_character_'"` becomes `"NA_character_"` instead of
+#' `NA_character_`, `"'NULL'"` becomes `"NULL"` instead of `NULL`, and
+#' `"'character(0)'"` becomes `"character(0)"` instead of `character(0)`.
 #'
 #' @returns
 #' `x` without the quotation marks in `quotemarks`, split into a vector on the

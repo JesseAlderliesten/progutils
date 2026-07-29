@@ -1,9 +1,10 @@
-#' Check that numeric values are nearly equal
+#' Check that values in two numeric vectors are nearly equal
 #'
-#' Test element-wise near-equality of numeric vectors by allowing for small
+#' Check element-wise near-equality of numeric vectors while allowing for small
 #' numeric errors to make `are_equal()` safer than [`==`][Comparison].
 #'
-#' @param x,y Numeric vectors with length larger than zero to compare for equality.
+#' @param x,y Numeric vectors with length larger than zero to compare for
+#' equality. They may contain [NA]s or [NaN]s, see `Value`.
 #' @inheritParams checkinput::is_natural tol
 #'
 #' @details

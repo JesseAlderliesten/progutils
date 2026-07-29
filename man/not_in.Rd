@@ -43,21 +43,17 @@ returned \code{NA} (if \code{value} is \code{TRUE}) and the returned zero-length
 absent from \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
 other.
 
+\code{not_in()} does \strong{not} allow input of \link[=typeof]{type} \code{double} because
+matching such input should allow for small numerical errors by using a
+tolerance, for example, as the error message indicates, using \code{\link[=are_equal]{are_equal()}}.
+
+Apart from \strong{not} allowing numeric input, \code{not_in(x, table, value = FALSE)}
+is equivalent to \code{x \%notin\% table}, where \verb{\%notin\%} is a function in base \R
+since version \verb{4.6.0}.
+
 Names are \strong{not} considered when matching but are retained in the output,
 similar to \code{\%in\%}.
 }
-\section{Programming notes}{
-
-\code{not_in()} does \strong{not} allow input of \link[=typeof]{type} \code{double} because
-matching
-such input should allow for small numerical errors by using a tolerance, for
-example, as the error message indicates, using \code{\link[=are_equal]{are_equal()}}.
-
-Apart from \strong{not} allowing numeric input,
-\code{not_in(x, table, value = FALSE)} is equivalent to \code{x \%notin\% table}, where
-\verb{\%notin\%} is a function in base \R since version \verb{4.6.0}.
-}
-
 \examples{
 x <- letters[1:4]
 table <- letters[3:6]
