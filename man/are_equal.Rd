@@ -2,12 +2,13 @@
 % Please edit documentation in R/are_equal.R
 \name{are_equal}
 \alias{are_equal}
-\title{Check that numeric values are nearly equal}
+\title{Check that values in two numeric vectors are nearly equal}
 \usage{
 are_equal(x, y, tol = sqrt(.Machine$double.eps))
 }
 \arguments{
-\item{x, y}{Numeric vectors with length larger than zero to compare for equality.}
+\item{x, y}{Numeric vectors with length larger than zero to compare for
+equality. They may contain \link{NA}s or \link{NaN}s, see \code{Value}.}
 
 \item{tol}{A small \link[checkinput:is_positive]{positive} number. Numbers that differ less
 than \code{tol} are considered equal.}
@@ -19,7 +20,7 @@ comparisons involving numeric \code{NA} (i.e., \code{NA_integer_} or \code{NA_re
 \link{NaN}, or \link[=Inf]{infinite values} with the same sign.
 }
 \description{
-Test element-wise near-equality of numeric vectors by allowing for small
+Check element-wise near-equality of numeric vectors while allowing for small
 numeric errors to make \code{are_equal()} safer than \code{\link[=Comparison]{==}}.
 }
 \details{

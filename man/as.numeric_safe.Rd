@@ -26,10 +26,9 @@ The \link[=typeof]{type} of \link[=integer]{integers} is kept \code{integer} if
 \code{FALSE}.
 
 \code{NULL} and zero-length vectors are converted to \code{numeric(0)}, except for
-\code{integer(0)} that is converted to \code{integer(0)} if \code{keep_integer} is \code{TRUE}.
-Logical vectors
-of length larger than zero are converted to a vector of \code{NA_real_}, with a
-warning.
+\code{integer(0)} that is kept unchanged if \code{keep_integer} is \code{TRUE} (which is the
+default). In contrast to \code{\link[=as.numeric]{as.numeric()}}, logical vectors of length larger
+than zero are converted to a vector of \code{NA_real_}, with a warning, .
 
 \code{as.numeric_safe()} uses a suggestion from \code{\link[=factor]{factor()}} and
 \href{https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f}{\R FAQ 7.10}

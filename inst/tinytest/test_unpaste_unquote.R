@@ -101,6 +101,52 @@ expect_silent(
     y)
 )
 
+# Characters denoting NAs
+expect_silent(
+  expect_identical(
+    unpaste_unquote(x = "'NA_character_'", collapse = ", ", quotemarks = "'"),
+    "NA_character_")
+)
+
+expect_silent(
+  expect_identical(
+    unpaste_unquote(x = "'NA_real_'", collapse = ", ", quotemarks = "'"),
+    "NA_real_")
+)
+
+# Characters denoting zero-length input
+expect_silent(
+  expect_identical(
+    unpaste_unquote(x = "'a', 'NULL', 'character(0)', 'numeric(0)', 'b'",
+                    collapse = ", ", quotemarks = "'"),
+    c("a", "NULL", "character(0)", "numeric(0)", "b"))
+)
+
+expect_silent(
+  expect_identical(
+    unpaste_unquote(x = "'NULL', 'character(0)', 'numeric(0)'",
+                    collapse = ", ", quotemarks = "'"),
+    c("NULL", "character(0)", "numeric(0)"))
+)
+
+expect_silent(
+  expect_identical(
+    unpaste_unquote(x = "'NULL'", collapse = ", ", quotemarks = "'"),
+    "NULL")
+)
+
+expect_silent(
+  expect_identical(
+    unpaste_unquote(x = "'character(0)'", collapse = ", ", quotemarks = "'"),
+    "character(0)")
+)
+
+expect_silent(
+  expect_identical(
+    unpaste_unquote(x = "'numeric(0)'", collapse = ", ", quotemarks = "'"),
+    "numeric(0)")
+)
+
 ##### Erroneous input #####
 expect_error(
   unpaste_unquote(x = x, collapse = "", quotemarks = c("'", "\"")),

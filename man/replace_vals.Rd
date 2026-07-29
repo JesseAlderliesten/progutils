@@ -39,8 +39,8 @@ found.}
 
 \item{signal_case_old, signal_case_new}{\code{"error"}, \code{"warning"}, \code{"message"},
 or \code{"quiet"}: character string indicating the type of \link[=signal_text]{signal}
-if values in \code{x} are a case-insensitive match but not a case-sensitive match
-to \code{old} or \code{new}, respectively. For \code{signal_case_old}, this is also
+to give if values in \code{x} are a case-insensitive match but not a case-sensitive
+match to \code{old} or \code{new}, respectively. For \code{signal_case_old}, this is also
 influenced by argument \code{signal_old_ignore_case}.}
 
 \item{signal_old_ignore_case}{\code{TRUE} or \code{FALSE}: use \code{signal_case_old} if
@@ -55,7 +55,7 @@ have been replaced?}
 after the replacement.
 }
 \description{
-Replace values, also handling factor levels
+Replace character values or factor levels.
 }
 \details{
 Values in \code{x} that \link[=check_case]{only differ} from \code{new} in their case are
@@ -69,7 +69,9 @@ An error is thrown if \code{allow_multiple} is \code{FALSE} and multiple values 
 which returns \code{c("b", "b")}.
 
 If \code{quiet} is \code{FALSE}, a message indicates which values have been replaced.
-The order of the factor \strong{levels} determines the order used in the message.
+The order of the factor \strong{levels} determines the order used in the message,
+which is influenced by the locale at the time of their creation, see the
+\code{Warning} in \code{\link[=factor]{factor()}}.
 }
 \examples{
 x <- c("k", "l", "m")

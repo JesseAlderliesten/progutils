@@ -30,7 +30,9 @@
 #'
 #' @export
 check_case <- function(x, signal = c("error", "warning", "message", "quiet")) {
-  stopifnot(is.character(x))
+  stopifnot(checkinput::all_characters(
+    x, allow_empty = TRUE, allow_zerolength = TRUE, allow_NA = TRUE))
+
   signal <- match.arg(signal)
 
   vals <- character(0)

@@ -1,3 +1,12 @@
+# progutils 0.14.0
+
+### Breaking changes
+- Dependency `checkinput`: increase minimum version from `1.0.0` to `1.3.0` to
+  be able to use argument `collapse` of `paste_quoted()`.
+- `get_file_path()`: use argument `collapse` of `paste_quoted()` to separate the
+  quoted file paths by newlines instead of by commas.
+
+
 # progutils 0.13.0
 
 ### Breaking changes

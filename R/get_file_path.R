@@ -19,8 +19,8 @@
 #' If `ignore_case` is `FALSE` and no case-sensitive match is found, the error
 #' message indicates if any case-insensitive match is present.
 #'
-#' In contrast to the default of [list.files()], `get_file_path()` also finds
-#' 'hidden' files, i.e., files with names that start with a dot, and excludes
+#' In contrast to the default of [list.files()], `get_file_path()` includes
+#' 'hidden' files, i.e., files with names that start with a dot, but excludes
 #' directories.
 #'
 #' Paths will be [normalized][fs::path_abs()] to ensure they still work if the
@@ -37,7 +37,8 @@
 #' and extensive references about file paths and directories;
 #' [create_file_path()] to create a file path and creating the indicated
 #' directory if it does not yet exist;
-#' [fs::file_exists()] and [list.files()] (which **includes** directories) to
+#' [fs::file_exists()] and [list.files()] (which **includes** directories in its
+#' output) to
 #' check for existence of files without checking they are a unique match to a
 #' pattern;
 #' [file.info()] and [file.access()] to extract information about files or
@@ -104,7 +105,8 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
     pattern, "' are present in directory\n'", dir, "'")
 
   if(length(files_present) > 1L) {
-    stop("Multiple ", msg_match, ": ", paste_quoted(basename(files_present)), "!")
+    stop("Multiple ", msg_match, ":\n",
+         paste_quoted(basename(files_present), collapse = "\n"), "!")
   }
 
   if(length(files_present) == 0L) {
@@ -122,13 +124,13 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
         if(length(match_case_insensitive) == 1L) {
           msg_match <- paste0(
             msg_match,
-            ".\nHowever, a case-insensitive match to 'pattern' is present: ",
+            ".\nHowever, a case-insensitive match to 'pattern' is present:\n",
             paste_quoted(basename(match_case_insensitive)))
         } else {
           msg_match <- paste0(
             msg_match,
-            ".\nHowever, case-insensitive matches to 'pattern' are present: ",
-            paste_quoted(basename(match_case_insensitive)))
+            ".\nHowever, case-insensitive matches to 'pattern' are present:\n",
+            paste_quoted(basename(match_case_insensitive), collapse = "\n"))
         }
       }
     }

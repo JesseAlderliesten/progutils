@@ -50,7 +50,7 @@ The call \code{wrap_text(x, width)} can be replaced by
 Using \code{wrap_text()} on \code{x} of variable length, e.g., in the text of warnings
 that report a file path or a user-provided variable name, makes the location
 of newlines unpredictable and thus difficult to test reliably. To circumvent
-this, put the constant part in the front of the message and hardcode newlines
+this, put the constant part at the front of the message and hardcode newlines
 using \verb{\\n}.
 }
 

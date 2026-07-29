@@ -31,9 +31,14 @@
 #' as part of `format_stamp` to create precise stamps by truncating seconds to
 #' `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
-#' The file is **not** created by `create_file_path()`, use
-#' `fs::file_create(create_file_path(filename = "abc.txt", ...))` or
-#' `file.create(create_file_path(filename = "abc.txt", ...))` to do so.
+#' `create_file_path()` does **not** create the file: use
+#' `fs::file_create(create_file_path(filename = "<filename>", ...))` or
+#' `file.create(create_file_path(filename = "<filename>", ...))` to do so.
+#'
+#' Calls where date nor time stamps are added (e.g.,
+#' `create_file_path(filename = "<filename>", format_stamp = "", dir = "<dir>", add_date = FALSE)`)
+#' can be replaced by `fs::path(fs::dir_create("<dir>"), "<filename>")` if it is
+#' fine to **not** get a warning if the file already exists.
 #'
 #' @inheritSection create_dir Side effects
 #'

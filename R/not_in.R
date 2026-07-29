@@ -26,6 +26,14 @@
 #' absent from `table`. `NA`s of different types in `x` and `table` match each
 #' other.
 #'
+#' `not_in()` does **not** allow input of [type][typeof] `double` because
+#' matching such input should allow for small numerical errors by using a
+#' tolerance, for example, as the error message indicates, using [are_equal()].
+#'
+#' Apart from **not** allowing numeric input, `not_in(x, table, value = FALSE)`
+#' is equivalent to `x %notin% table`, where `%notin%` is a function in base \R
+#' since version `4.6.0`.
+#'
 #' Names are **not** considered when matching but are retained in the output,
 #' similar to `%in%`.
 #'
@@ -35,16 +43,6 @@
 #' `logical(0)` if none of the values in `x` are absent from `table` (i.e., all
 #' are present in `table`). If `value` is `FALSE`: a boolean vector indicating
 #' for each element in `x` if it is absent from `table`.
-#'
-#' @section Programming notes:
-#' `not_in()` does **not** allow input of [type][typeof] `double` because
-#' matching
-#' such input should allow for small numerical errors by using a tolerance, for
-#' example, as the error message indicates, using [are_equal()].
-#'
-#' Apart from **not** allowing numeric input,
-#' `not_in(x, table, value = FALSE)` is equivalent to `x %notin% table`, where
-#' `%notin%` is a function in base \R since version `4.6.0`.
 #'
 #' @seealso
 #' [setdiff()] for a similar function which removes duplicates;

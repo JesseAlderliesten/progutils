@@ -1,6 +1,6 @@
 #' Replace values
 #'
-#' Replace values, also handling factor levels
+#' Replace character values or factor levels.
 #'
 #' @param x [Character][character] vector with values to be replaced, or
 #' [factor] with [levels] to be replaced.
@@ -17,8 +17,8 @@
 #' found.
 #' @param signal_case_old,signal_case_new `"error"`, `"warning"`, `"message"`,
 #' or `"quiet"`: character string indicating the type of [signal][signal_text()]
-#' if values in `x` are a case-insensitive match but not a case-sensitive match
-#' to `old` or `new`, respectively. For `signal_case_old`, this is also
+#' to give if values in `x` are a case-insensitive match but not a case-sensitive
+#' match to `old` or `new`, respectively. For `signal_case_old`, this is also
 #' influenced by argument `signal_old_ignore_case`.
 #' @param signal_old_ignore_case `TRUE` or `FALSE`: use `signal_case_old` if
 #' `ignore_case` is `TRUE`? If `FALSE`, no signal is emitted if `ignore_case` is
@@ -38,7 +38,9 @@
 #' which returns `c("b", "b")`.
 #'
 #' If `quiet` is `FALSE`, a message indicates which values have been replaced.
-#' The order of the factor **levels** determines the order used in the message.
+#' The order of the factor **levels** determines the order used in the message,
+#' which is influenced by the locale at the time of their creation, see the
+#' `Warning` in [factor()].
 #'
 #' @returns
 #' `x` with the requested replacements. Factor levels are **not** reordered

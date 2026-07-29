@@ -2,7 +2,7 @@
 % Please edit documentation in R/unpaste_unquote.R
 \name{unpaste_unquote}
 \alias{unpaste_unquote}
-\title{Create a character vector from a string with quotation marks}
+\title{Split a character string into a vector, removing quotation marks}
 \usage{
 unpaste_unquote(x, collapse = c(", ", "; "), quotemarks = c("'", "\\""))
 }
@@ -23,12 +23,15 @@ any quotation marks.}
 string in \code{collapse}.
 }
 \description{
-Create a character vector from a string with quotation marks
+Split a character string into a vector, removing quotation marks
 }
 \details{
-\code{unpaste_unquote()} is \strong{not} the exact reverse of \code{\link[=paste_quoted]{paste_quoted()}}: it does
-\strong{not} restore zero-length elements to their original value, e.g., \code{"'NULL'"}
-to \code{NULL}, or \code{"'character(0)'"} to \code{character(0)}.
+\code{unpaste_unquote()} does \strong{not} restore \code{NA}s or zero-length elements to
+their original values after removing the quotation marks, such that
+\code{unpaste_unquote()} is \strong{not} the exact reverse of \code{\link[=paste_quoted]{paste_quoted()}}. For
+example, \code{"'NA_character_'"} becomes \code{"NA_character_"} instead of
+\code{NA_character_}, \code{"'NULL'"} becomes \code{"NULL"} instead of \code{NULL}, and
+\code{"'character(0)'"} becomes \code{"character(0)"} instead of \code{character(0)}.
 }
 \examples{
 x <- paste_quoted(c("ff", "gG", "HH"))
