@@ -74,7 +74,7 @@ if it does not yet exist.
 
 The output of \code{\link[=tempdir]{tempdir()}} during
 \href{https://r-pkgs.org/R-CMD-check.html}{\verb{R CMD checks}} on MacOS contains successive
-forward slashes (e.g., \verb{/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR})
+forward slashes (e.g., \verb{/var/<...>/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR})
 which in earlier versions of \code{\link[checkinput:is_path]{is_path()}} (then in package
 \href{https://jessealderliesten.github.io/progutils/}{progutils}) led to
 spurious warnings about duplicated file separators.
