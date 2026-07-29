@@ -1,6 +1,6 @@
 # Replace values
 
-Replace values, also handling factor levels
+Replace character values or factor levels.
 
 ## Usage
 
@@ -58,9 +58,10 @@ replace_vals(
   `"error"`, `"warning"`, `"message"`, or `"quiet"`: character string
   indicating the type of
   [signal](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
-  if values in `x` are a case-insensitive match but not a case-sensitive
-  match to `old` or `new`, respectively. For `signal_case_old`, this is
-  also influenced by argument `signal_old_ignore_case`.
+  to give if values in `x` are a case-insensitive match but not a
+  case-sensitive match to `old` or `new`, respectively. For
+  `signal_case_old`, this is also influenced by argument
+  `signal_old_ignore_case`.
 
 - signal_old_ignore_case:
 
@@ -93,7 +94,9 @@ which returns `c("b", "b")`.
 
 If `quiet` is `FALSE`, a message indicates which values have been
 replaced. The order of the factor **levels** determines the order used
-in the message.
+in the message, which is influenced by the locale at the time of their
+creation, see the `Warning` in
+[`factor()`](https://rdrr.io/r/base/factor.html).
 
 ## See also
 

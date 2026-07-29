@@ -87,7 +87,7 @@ exist.
 The output of [`tempdir()`](https://rdrr.io/r/base/tempfile.html) during
 [`R CMD checks`](https://r-pkgs.org/R-CMD-check.html) on MacOS contains
 successive forward slashes (e.g.,
-`/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR`) which in earlier
+`/var/<...>/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR`) which in earlier
 versions of
 [`is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
 (then in package
@@ -120,14 +120,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/Rtmpj2Adm3"
+#> [1] "/tmp/Rtmpe2EeAu"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/Rtmpj2Adm3/subtempdir1a0419d45851"
+#> [1] "/tmp/Rtmpe2EeAu/subtempdir1a1910a1c559"
 
 # Using the same 'prefix' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/Rtmpj2Adm3/subtempdir1a047b6e34f2"
+#> [1] "/tmp/Rtmpe2EeAu/subtempdir1a1950ac11a8"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))

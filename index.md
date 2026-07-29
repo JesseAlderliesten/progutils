@@ -9,17 +9,15 @@ Visit the [`progutils`
 website](https://jessealderliesten.github.io/progutils/) to explore the
 package, or install `progutils` from
 [GitHub](https://github.com/JesseAlderliesten/progutils) using the
-following R code (you need to run R as administrator):
+following R code:
 
 ``` r
 
-if(!requireNamespace("remotes", quietly = TRUE)) {
-  install.packages(pkgs = "remotes", quiet = FALSE)
+if(!requireNamespace("remotes")) {
+  install.packages(pkgs = "remotes")
 }
 remotes::install_github(repo = "JesseAlderliesten/progutils",
-                        dependencies = NA, upgrade = FALSE, force = FALSE,
-                        quiet = FALSE, build_vignettes = TRUE, lib = NULL,
-                        verbose = getOption("verbose"))
+                        upgrade = FALSE, build_vignettes = TRUE, lib = NULL)
 ```
 
 For more information about installing and configuring R and RStudio, see
@@ -111,7 +109,7 @@ License](https://jessealderliesten.github.io/progutils/LICENSE.md).
 To cite package 'progutils' in publications use:
 
   Alderliesten J (2026). _progutils: Programming Utilities_. R package
-  version 0.13.0, <https://github.com/JesseAlderliesten/progutils>.
+  version 0.14.0, <https://github.com/JesseAlderliesten/progutils>.
 
 A BibTeX entry for LaTeX users is
 
@@ -119,7 +117,7 @@ A BibTeX entry for LaTeX users is
     title = {progutils: Programming Utilities},
     author = {Jesse Alderliesten},
     year = {2026},
-    note = {R package version 0.13.0},
+    note = {R package version 0.14.0},
     url = {https://github.com/JesseAlderliesten/progutils},
   }
 ```

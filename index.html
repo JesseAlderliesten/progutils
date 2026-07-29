@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,15 +62,13 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Visit the <a href="https://jessealderliesten.github.io/progutils/"><code>progutils</code> website</a> to explore the package, or install <code>progutils</code> from <a href="https://github.com/JesseAlderliesten/progutils" class="external-link">GitHub</a> using the following R code (you need to run R as administrator):</p>
+<p>Visit the <a href="https://jessealderliesten.github.io/progutils/"><code>progutils</code> website</a> to explore the package, or install <code>progutils</code> from <a href="https://github.com/JesseAlderliesten/progutils" class="external-link">GitHub</a> using the following R code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">"remotes"</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"JesseAlderliesten/progutils"</span>,</span>
-<span>                        dependencies <span class="op">=</span> <span class="cn">NA</span>, upgrade <span class="op">=</span> <span class="cn">FALSE</span>, force <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>                        quiet <span class="op">=</span> <span class="cn">FALSE</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>, lib <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>                        verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"verbose"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>                        upgrade <span class="op">=</span> <span class="cn">FALSE</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>, lib <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <p>For more information about installing and configuring R and RStudio, see my package <a href="https://jessealderliesten.github.io/checkrpkgs/" class="external-link"><code>checkrpkgs</code></a>.</p>
 </div>
 <div class="section level2">
@@ -133,7 +131,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>To cite package <span class="st">'progutils'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  Alderliesten <span class="fu">J</span> (<span class="dv">2026</span>). _progutils<span class="sc">:</span> Programming Utilities_. R package</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">13.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils<span class="sc">&gt;</span>.</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">14.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils<span class="sc">&gt;</span>.</span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
@@ -141,7 +139,7 @@
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    title <span class="ot">=</span> {progutils<span class="sc">:</span> Programming Utilities},</span>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    author <span class="ot">=</span> {Jesse Alderliesten},</span>
 <span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2026</span>},</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">13.0</span>},</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">14.0</span>},</span>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils},</span>
 <span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
@@ -199,7 +197,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

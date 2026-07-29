@@ -76,9 +76,14 @@ use `"%OSn"` as part of `format_stamp` to create precise stamps by
 truncating seconds to `0 <= n <= 6` decimal places, see
 [`strftime()`](https://rdrr.io/r/base/strptime.html) for details.
 
-The file is **not** created by `create_file_path()`, use
-`fs::file_create(create_file_path(filename = "abc.txt", ...))` or
-`file.create(create_file_path(filename = "abc.txt", ...))` to do so.
+`create_file_path()` does **not** create the file: use
+`fs::file_create(create_file_path(filename = "<filename>", ...))` or
+`file.create(create_file_path(filename = "<filename>", ...))` to do so.
+
+Calls where date nor time stamps are added (e.g.,
+`create_file_path(filename = "<filename>", format_stamp = "", dir = "<dir>", add_date = FALSE)`)
+can be replaced by `fs::path(fs::dir_create("<dir>"), "<filename>")` if
+it is fine to **not** get a warning if the file already exists.
 
 ## Side effects
 
@@ -109,28 +114,28 @@ my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/2026_07_03/abc.txt
+#> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/2026_07_29/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = TRUE))
-#> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/2026_07_03/03_07_2026_abc.txt
+#> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/2026_07_29/29_07_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/def.html
+#> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = my_tempdir, add_date = FALSE))
-#> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/03_07_2026_def.html
+#> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/29_07_2026_def.html
 (create_file_path(filename = "abc.txt", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/subdir/2026_07_03/abc.txt
+#> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/subdir/2026_07_29/abc.txt
 (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/subdir/2026_07_03/03_07_2026_abc.txt
+#> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/subdir/2026_07_29/29_07_2026_abc.txt
 (create_file_path(filename = "def.html", format_stamp = "",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/subdir/def.html
+#> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/subdir/def.html
 (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/subdir/03_07_2026_def.html
+#> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/subdir/29_07_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

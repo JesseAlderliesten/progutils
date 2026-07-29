@@ -1,5 +1,17 @@
 # Changelog
 
+## progutils 0.14.0
+
+#### Breaking changes
+
+- Dependency `checkinput`: increase minimum version from `1.0.0` to
+  `1.3.0` to be able to use argument `collapse` of
+  [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html).
+- [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md):
+  use argument `collapse` of
+  [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html)
+  to separate the quoted file paths by newlines instead of by commas.
+
 ## progutils 0.13.0
 
 #### Breaking changes

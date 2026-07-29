@@ -1,7 +1,7 @@
-# Check that numeric values are nearly equal
+# Check that values in two numeric vectors are nearly equal
 
-Test element-wise near-equality of numeric vectors by allowing for small
-numeric errors to make `are_equal()` safer than
+Check element-wise near-equality of numeric vectors while allowing for
+small numeric errors to make `are_equal()` safer than
 [`==`](https://rdrr.io/r/base/Comparison.html).
 
 ## Usage
@@ -15,6 +15,8 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 - x, y:
 
   Numeric vectors with length larger than zero to compare for equality.
+  They may contain [NA](https://rdrr.io/r/base/NA.html)s or
+  [NaN](https://rdrr.io/r/base/is.finite.html)s, see `Value`.
 
 - tol:
 

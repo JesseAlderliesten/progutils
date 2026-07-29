@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,9 +103,13 @@ returned path still works if the <a href="https://rdrr.io/r/base/getwd.html" cla
 exists. To prevent this when creating files in quick succession, use <code>"%OSn"</code>
 as part of <code>format_stamp</code> to create precise stamps by truncating seconds to
 <code>0 &lt;= n &lt;= 6</code> decimal places, see <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strftime()</a></code> for details.</p>
-<p>The file is <strong>not</strong> created by <code>create_file_path()</code>, use
-<code>fs::file_create(create_file_path(filename = "abc.txt", ...))</code> or
-<code>file.create(create_file_path(filename = "abc.txt", ...))</code> to do so.</p>
+<p><code>create_file_path()</code> does <strong>not</strong> create the file: use
+<code>fs::file_create(create_file_path(filename = "&lt;filename&gt;", ...))</code> or
+<code>file.create(create_file_path(filename = "&lt;filename&gt;", ...))</code> to do so.</p>
+<p>Calls where date nor time stamps are added (e.g.,
+<code>create_file_path(filename = "&lt;filename&gt;", format_stamp = "", dir = "&lt;dir&gt;", add_date = FALSE)</code>)
+can be replaced by <code>fs::path(fs::dir_create("&lt;dir&gt;"), "&lt;filename&gt;")</code> if it is
+fine to <strong>not</strong> get a warning if the file already exists.</p>
     </div>
     <div class="section level2">
     <h2 id="side-effects">Side effects<a class="anchor" aria-label="anchor" href="#side-effects"></a></h2>
@@ -134,28 +138,28 @@ yet exist</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/2026_07_03/abc.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/2026_07_29/abc.txt</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/2026_07_03/03_07_2026_abc.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/2026_07_29/29_07_2026_abc.txt</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/def.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/def.html</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="va">my_tempdir</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/03_07_2026_def.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/29_07_2026_def.html</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/subdir/2026_07_03/abc.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/subdir/2026_07_29/abc.txt</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"abc.txt"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/subdir/2026_07_03/03_07_2026_abc.txt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/subdir/2026_07_29/29_07_2026_abc.txt</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">""</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/subdir/def.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/subdir/def.html</span>
 <span class="r-in"><span><span class="op">(</span><span class="fu">create_file_path</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"def.html"</span>, format_stamp <span class="op">=</span> <span class="st">"%d_%m_%Y"</span>,</span></span>
 <span class="r-in"><span>                  dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"subdir"</span><span class="op">)</span>, add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpj2Adm3/examplecreatefilepath1a047a59d7e7/subdir/03_07_2026_def.html</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmpe2EeAu/examplecreatefilepath1a192cd48daf/subdir/29_07_2026_def.html</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cleaning up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">my_tempdir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
@@ -172,7 +176,7 @@ yet exist</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

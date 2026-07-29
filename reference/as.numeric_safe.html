@@ -9,7 +9,7 @@ works if x is a factor, a character vector, or already a numeric vector."></head
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,10 +75,9 @@ without converting it to double.</p></dd>
 <code>keep_integer</code> is <code>TRUE</code> and is changed to <code>double</code> if <code>keep_integer</code> is
 <code>FALSE</code>.</p>
 <p><code>NULL</code> and zero-length vectors are converted to <code>numeric(0)</code>, except for
-<code>integer(0)</code> that is converted to <code>integer(0)</code> if <code>keep_integer</code> is <code>TRUE</code>.
-Logical vectors
-of length larger than zero are converted to a vector of <code>NA_real_</code>, with a
-warning.</p>
+<code>integer(0)</code> that is kept unchanged if <code>keep_integer</code> is <code>TRUE</code> (which is the
+default). In contrast to <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code>, logical vectors of length larger
+than zero are converted to a vector of <code>NA_real_</code>, with a warning, .</p>
 <p><code>as.numeric_safe()</code> uses a suggestion from <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor()</a></code> and
 <a href="https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f" class="external-link"><span style="R">R</span> FAQ 7.10</a>
 that works if <code>x</code> is a factor, a character vector or already is a numeric
@@ -183,7 +182,7 @@ indices of the factor levels), see the <code>Warnings</code> in <code><a href="h
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

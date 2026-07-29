@@ -53,11 +53,6 @@ behaves the same as other values: the returned `NA` (if `value` is
 the same type as the `NA` in `x` if `NA` is absent from `table`. `NA`s
 of different types in `x` and `table` match each other.
 
-Names are **not** considered when matching but are retained in the
-output, similar to `%in%`.
-
-## Programming notes
-
 `not_in()` does **not** allow input of
 [type](https://rdrr.io/r/base/typeof.html) `double` because matching
 such input should allow for small numerical errors by using a tolerance,
@@ -67,6 +62,9 @@ for example, as the error message indicates, using
 Apart from **not** allowing numeric input,
 `not_in(x, table, value = FALSE)` is equivalent to `x %notin% table`,
 where `%notin%` is a function in base R since version `4.6.0`.
+
+Names are **not** considered when matching but are retained in the
+output, similar to `%in%`.
 
 ## See also
 

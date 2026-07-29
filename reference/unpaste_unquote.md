@@ -1,6 +1,6 @@
-# Create a character vector from a string with quotation marks
+# Split a character string into a vector, removing quotation marks
 
-Create a character vector from a string with quotation marks
+Split a character string into a vector, removing quotation marks
 
 ## Usage
 
@@ -37,10 +37,13 @@ the string in `collapse`.
 
 ## Details
 
+`unpaste_unquote()` does **not** restore `NA`s or zero-length elements
+to their original values after removing the quotation marks, such that
 `unpaste_unquote()` is **not** the exact reverse of
-[`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html):
-it does **not** restore zero-length elements to their original value,
-e.g., `"'NULL'"` to `NULL`, or `"'character(0)'"` to `character(0)`.
+[`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html).
+For example, `"'NA_character_'"` becomes `"NA_character_"` instead of
+`NA_character_`, `"'NULL'"` becomes `"NULL"` instead of `NULL`, and
+`"'character(0)'"` becomes `"character(0)"` instead of `character(0)`.
 
 ## See also
 

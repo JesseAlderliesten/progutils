@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,20 +89,14 @@ returned <code>NA</code> (if <code>value</code> is <code>TRUE</code>) and the re
 <code>value</code> is <code>FALSE</code>) have the same type as the <code>NA</code> in <code>x</code> if <code>NA</code> is
 absent from <code>table</code>. <code>NA</code>s of different types in <code>x</code> and <code>table</code> match each
 other.</p>
+<p><code>not_in()</code> does <strong>not</strong> allow input of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code> because
+matching such input should allow for small numerical errors by using a
+tolerance, for example, as the error message indicates, using <code><a href="are_equal.html">are_equal()</a></code>.</p>
+<p>Apart from <strong>not</strong> allowing numeric input, <code>not_in(x, table, value = FALSE)</code>
+is equivalent to <code>x %notin% table</code>, where <code>%notin%</code> is a function in base <span style="R">R</span>
+since version <code>4.6.0</code>.</p>
 <p>Names are <strong>not</strong> considered when matching but are retained in the output,
 similar to <code>%in%</code>.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
-
-
-<p><code>not_in()</code> does <strong>not</strong> allow input of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code> because
-matching
-such input should allow for small numerical errors by using a tolerance, for
-example, as the error message indicates, using <code><a href="are_equal.html">are_equal()</a></code>.</p>
-<p>Apart from <strong>not</strong> allowing numeric input,
-<code>not_in(x, table, value = FALSE)</code> is equivalent to <code>x %notin% table</code>, where
-<code>%notin%</code> is a function in base <span style="R">R</span> since version <code>4.6.0</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -156,7 +150,7 @@ example, as the error message indicates, using <code><a href="are_equal.html">ar
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

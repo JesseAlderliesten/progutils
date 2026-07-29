@@ -23,7 +23,7 @@
 - [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
   : Signal a text to the user
 - [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md)
-  : Create a character vector from a string with quotation marks
+  : Split a character string into a vector, removing quotation marks
 - [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
   : Convert a vector to a character string
 - [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
@@ -32,7 +32,7 @@
 ## Equality
 
 - [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md)
-  : Check that numeric values are nearly equal
+  : Check that values in two numeric vectors are nearly equal
 - [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md)
   : Check for values that differ only in their case
 - [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)

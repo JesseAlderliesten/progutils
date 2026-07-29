@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,7 @@ if it does not yet exist.</p>
 
 <p>The output of <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> during
 <a href="https://r-pkgs.org/R-CMD-check.html" class="external-link"><code>R CMD checks</code></a> on MacOS contains successive
-forward slashes (e.g., <code>/var/[...]/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR</code>)
+forward slashes (e.g., <code>/var/&lt;...&gt;/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR</code>)
 which in earlier versions of <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">is_path()</a></code> (then in package
 <a href="https://jessealderliesten.github.io/progutils/">progutils</a>) led to
 spurious warnings about duplicated file separators.</p>
@@ -146,14 +146,14 @@ directory;</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpj2Adm3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpe2EeAu"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex1</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpj2Adm3/subtempdir1a0419d45851"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpe2EeAu/subtempdir1a1910a1c559"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using the same 'prefix' again creates another directory</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex2</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpj2Adm3/subtempdir1a047b6e34f2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpe2EeAu/subtempdir1a1950ac11a8"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is not possible to create recursive subdirectories</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">no_subtempdir</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir/otherdir"</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -178,7 +178,7 @@ directory;</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>
