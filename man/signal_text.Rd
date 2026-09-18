@@ -34,13 +34,14 @@ Signal a text to the user through an error, warning, or message.
 \details{
 \code{text} is coerced to a character vector using \code{\link[=vect_to_char]{vect_to_char()}}, which treats
 zero-length input and input with length larger than one better than
-\code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}, see the \code{Examples}. Call \code{\link[=vect_to_char]{vect_to_char()}}
-beforehand on \code{text} to control rounding and wrapping, see the \code{Examples}.
+\code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}, see the \code{Examples}. Call
+\code{\link[=vect_to_char]{vect_to_char()}} beforehand on \code{text} for finer control of rounding and
+wrapping of text, see the \code{Examples}.
 
 \code{text} is signalled through an \link[=stop]{error}, \link{warning}, \link{message}, or
 quietly, depending on argument \code{signal}. To make \code{text} available for further
-queries when using \code{signal_text()} in another function, add the content of the signal as an
-attribute to the returned object, see the last \code{Example}.
+queries when using \code{signal_text()} in another function, add the content of
+the signal as an attribute to the returned object, see the last \code{Example}.
 }
 \examples{
 test_text <- c("Some text", "Some other text")
@@ -55,11 +56,20 @@ test_numbers <- 11:13
 signal_text(text = test_numbers, signal = "message")
 message(test_numbers)
 
-# Call vect_to_char() beforehand on 'text' to control rounding of numbers and
-# wrapping of text:
+# Newlines in 'signal' are respected:
+signal_text(text = paste0(test_text, collapse = "\n"), signal = "warn")
+
+# 'vect_to_char()' is used to display the different NA's in the signal
+# clearer than standard printing:
+signal_text(text = NA_integer_, signal = "message") # prints NA_integer_
+message(NA_integer_) # prints NA
+
+# Call 'vect_to_char()' beforehand on 'text' for finer control of rounding
+# and wrapping of text:
 message(test_numbers / 7)
 signal_text(text = test_numbers / 7, signal = "message")
-signal_text(text = vect_to_char(x = test_numbers / 7, signif = 4, width = 15),
+signal_text(text = vect_to_char(x = test_numbers / 7, signif = 4, width = 15,
+                                collapse = "\n"),
             signal = "message")
 
 # This example shows how to make the content of the signal available for
