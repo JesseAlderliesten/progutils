@@ -27,9 +27,9 @@
 #' `replacement`.
 #'
 #' @seealso
-#' [trimws()] to remove leading and/or trailing whitespace;
-#' [checkinput::all_names()] and [checkinput::is_path()] for other relevant
-#' checks.
+#' [trimws()] to remove leading and/or trailing whitespace; [replace_vals()] to
+#' replace specific values; [checkinput::all_names()] and [checkinput::is_path()]
+#' for more specific checks.
 #'
 #' @family functions to check equality
 #'

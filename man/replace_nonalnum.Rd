@@ -53,9 +53,9 @@ replace_nonalnum("a+bc_d.txt", keep_underscore = FALSE) # "a_bc_d.txt"
 
 }
 \seealso{
-\code{\link[=trimws]{trimws()}} to remove leading and/or trailing whitespace;
-\code{\link[checkinput:all_names]{checkinput::all_names()}} and \code{\link[checkinput:is_path]{checkinput::is_path()}} for other relevant
-checks.
+\code{\link[=trimws]{trimws()}} to remove leading and/or trailing whitespace; \code{\link[=replace_vals]{replace_vals()}} to
+replace specific values; \code{\link[checkinput:all_names]{checkinput::all_names()}} and \code{\link[checkinput:is_path]{checkinput::is_path()}}
+for more specific checks.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
