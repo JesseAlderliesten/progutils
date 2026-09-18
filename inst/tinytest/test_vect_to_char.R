@@ -29,7 +29,7 @@ expect_identical(
 expect_identical(
   vect_to_char(x = b, signif = 2, sep = " = ", collapse = " and ", width = 15),
   "a = 0.14 and b\n= 0.29 and c =\n0.43")
-expect_identical(vect_to_char(x = 1e3/7, signif = 2), "143")
+expect_identical(vect_to_char(x = 1e3 / 7, signif = 2), "143")
 
 expect_identical(vect_to_char(x = x_in_char), x_out_char)
 expect_identical(vect_to_char(x = unname(x_in_char)), "abc, def, this is text")
