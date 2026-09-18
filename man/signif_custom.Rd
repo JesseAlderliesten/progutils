@@ -10,8 +10,8 @@ signif_custom(x, digits = 3L, type = c("selective", "expanded"))
 \item{x}{\link[checkinput:all_numbers]{numeric vector}, \link{matrix} or
 \link{data.frame}, see \code{Details}.}
 
-\item{digits}{the minimum number of \link[=signif]{significant digits} to round
-to (rounded to the nearest integer in the range from 1 to 22), see \code{Details}.}
+\item{digits}{the \strong{minimum} number of \link[=signif]{significant digits} to
+round to (see \code{Details}) or \code{Inf} to not round values.}
 
 \item{type}{\link[checkinput:is_character]{character string} \code{"selective"} or
 \code{"expanded"} to indicate the type of rounding to be used, see \code{Details}.}
@@ -37,8 +37,12 @@ differ if \code{x} has length larger than one. If type is \code{"expanded"}, the
 of \code{digits} is increased to the same value for all numbers in a vector or
 column.
 
-\code{signif_custom()} also handles \link[=matrix]{matrices} and
-\link[=data.frame]{dataframes}, rounding only their numeric columns.
+\link[=Inf]{Infinite values} are is returned unchanged. \code{NA_integer_} and
+\code{NA_real_} are both returned as \link[=NA]{NA_real_}. \code{signif_custom()} also
+handles \link[=matrix]{matrices} and \link[=data.frame]{dataframes}, rounding the numeric
+columns with rounding of type \code{expanded} type on a per-column basis. It does
+\strong{not} handle \link[=factor]{factors}, use \code{\link[=as.numeric_safe]{as.numeric_safe()}} on \code{x} or use
+\code{round_levels(x = x, level_order = levels(x), digits = digits, type = type)}.
 }
 \examples{
 x1 <- (1e5)/7
@@ -68,8 +72,9 @@ signif_custom(x_df, type = "expanded")
 
 }
 \seealso{
-\code{\link[=signif]{signif()}} to round to a specified number of significant digits; \code{\link[=zapsmall]{zapsmall()}}
-to put small values to zero; \code{\link[=formatC]{formatC()}} for other ways to format numbers;
+\code{\link[=round]{round()}} to round to a specified number of decimal places; \code{\link[=signif]{signif()}} to
+round to a specified number of significant digits; \code{\link[=zapsmall]{zapsmall()}} to put small
+values to zero; \code{\link[=formatC]{formatC()}} for other ways to format numbers;
 \code{\link[=round_levels]{round_levels()}} to round \link{factor} levels.
 
 Other functions to check equality:

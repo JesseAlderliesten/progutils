@@ -5,8 +5,8 @@
 #'
 #' @param x [numeric vector][checkinput::all_numbers()], [matrix] or
 #' [data.frame], see `Details`.
-#' @param digits the minimum number of [significant digits][signif()] to round
-#' to (rounded to the nearest integer in the range from 1 to 22), see `Details`.
+#' @param digits the **minimum** number of [significant digits][signif()] to
+#' round to (see `Details`) or `Inf` to not round values.
 #' @param type [character string][checkinput::is_character()] `"selective"` or
 #' `"expanded"` to indicate the type of rounding to be used, see `Details`.
 #'
@@ -27,12 +27,17 @@
 #' of `digits` is increased to the same value for all numbers in a vector or
 #' column.
 #'
-#' `signif_custom()` also handles [matrices][matrix] and
-#' [dataframes][data.frame], rounding only their numeric columns.
+#' [Infinite values][Inf] are is returned unchanged. `NA_integer_` and
+#' `NA_real_` are both returned as [NA_real_][NA]. `signif_custom()` also
+#' handles [matrices][matrix] and [dataframes][data.frame], rounding the numeric
+#' columns with rounding of type `expanded` type on a per-column basis. It does
+#' **not** handle [factors][factor], use [as.numeric_safe()] on `x` or use
+#' `round_levels(x = x, level_order = levels(x), digits = digits, type = type)`.
 #'
 #' @seealso
-#' [signif()] to round to a specified number of significant digits; [zapsmall()]
-#' to put small values to zero; [formatC()] for other ways to format numbers;
+#' [round()] to round to a specified number of decimal places; [signif()] to
+#' round to a specified number of significant digits; [zapsmall()] to put small
+#' values to zero; [formatC()] for other ways to format numbers;
 #' [round_levels()] to round [factor] levels.
 #'
 #' @family functions to check equality
@@ -68,9 +73,9 @@ signif_custom <- function(x, digits = 3L, type = c("selective", "expanded")) {
   type <- match.arg(type, several.ok = FALSE)
 
   # Notes:
-  # - Values in 'digits' are rounded to the nearest integer in the range from 0
-  #   to 22 in signif(), so no need to check if 'digits' are nonnegative and
-  #   integer.
+  # - Values in argument 'digits' of signif() are rounded to the nearest integer
+  #   in the range from 0 to 22 (unless it is Inf such that no rounding is
+  #   applied), so no need to check if 'digits' are nonnegative and integer.
   stopifnot(checkinput::is_number(digits))
 
   if(!is.null(nrow(x))) {
@@ -86,21 +91,30 @@ signif_custom <- function(x, digits = 3L, type = c("selective", "expanded")) {
     }
     return(x)
   } else {
+    if(is.factor(x)) {
+      stop("'signif_custom()' does not handle factors. You can use",
+           "\nsignif_custom(x = progutils::as.numeric_safe(x), digits = digits,",
+           " type = type) or\nprogutils::round_levels(x = x, level_order =",
+           " levels(x), digits = digits, type = type)")
+    }
     stopifnot(is.numeric(x))
   }
 
-  # Using abs(x) to also work if x contains negative values.
-  ceiling_digits_x <- ceiling(log10(abs(x)))
+  # Notes:
+  # - Using abs(x) to also work if x contains negative values.
+  # - Selecting finite elements of 'x' to prevent -Inf and Inf from putting
+  #   'ceiling_digits_x' at Inf
+  ceiling_digits_x <- ceiling(log10(abs(x[is.finite(x)])))
 
   if(type == "expanded") {
     digits <- max(digits, ceiling_digits_x)
   } else {
     digits_p <- pmax(digits, ceiling_digits_x)
 
-    # numeric(0) in 'x' propagates to zero-length numeric(0) in
-    # ceiling_digits_x and in digits_p, leading to an error in signif().
-    # To circumvent this, argument 'digits' is used instead of digits_p if
-    # digits_p has a length of zero.
+    # numeric(0) in 'x' (which also arises if 'x' contains only infinite values)
+    # propagates to zero-length numeric(0) in ceiling_digits_x and in digits_p,
+    # leading to an error when passed to signif(). To circumvent this, argument
+    # 'digits' is used instead of digits_p for zero-length digits_p.
     if(length(digits_p) > 0) {
       digits <- digits_p
     }

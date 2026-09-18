@@ -19,7 +19,7 @@ x_exp_mat <- as.matrix(x_exp_df)
 x1_mat_cols <- rbind(x1)
 x12_mat_cols <- as.matrix(cbind(x1_df, x2_df))
 
-x_df <- data.frame(a = 1:3, b = letters[11:13], c = c(1e5, 1e3, 1)/7, d = pi)
+x_df <- data.frame(a = 1:3, b = letters[11:13], c = c(1e5, 1e3, 1) / 7, d = pi)
 expect_equal(
   signif_custom(x_df, type = "selective"),
   data.frame(a = 1:3, b = letters[11:13], c = c(14286, 143, 0.143),
@@ -158,7 +158,19 @@ for(type in c("selective", "expanded")) {
   expect_error(
     signif_custom(x = NULL, type = type),
     pattern = "is.numeric(x) is not TRUE", fixed = TRUE,
-    info = paste0("5 (error for zero-length 'x', type '", type, "')")
+    info = paste0("5a (error for zero-length 'x', type '", type, "')")
+  )
+
+  expect_error(
+    signif_custom(x = "a", type = type),
+    pattern = "is.numeric(x) is not TRUE", fixed = TRUE,
+    info = paste0("5b (error for non-numeric 'x', type '", type, "')")
+  )
+
+  expect_error(
+    signif_custom(x = as.factor(x1), type = type),
+    pattern = "'signif_custom()' does not handle factors", fixed = TRUE,
+    info = paste0("5c (specific error for factor 'x', type '", type, "')")
   )
 
   expect_error(
@@ -183,6 +195,30 @@ for(type in c("selective", "expanded")) {
     signif_custom(x = x_exp_df, digits = -3, type = type),
     data.frame(x_exp = expect_t7),
     info = paste0("7_df (abs(x) < 10^digits, type '", type, "')")
+  )
+
+  expect_equal(
+    signif_custom(x = c(Inf, pi), digits = 3, type = type),
+    c(Inf, 3.14),
+    info = paste0("Inf and numeric values, type '", type, "')")
+  )
+
+  expect_equal(
+    signif_custom(x = c(Inf, NA_real_, pi), digits = 3, type = type),
+    c(Inf, NA_real_, 3.14),
+    info = paste0("Inf, NA, and numeric values, type '", type, "')")
+  )
+
+  expect_equal(
+    signif_custom(x = c(NA_real_, NA_real_), digits = 3, type = type),
+    c(NA_real_, NA_real_),
+    info = paste0("Only NAs, type '", type, "')")
+  )
+
+  expect_equal(
+    signif_custom(x = c(Inf, -Inf), digits = 3, type = type),
+    c(Inf, -Inf),
+    info = paste0("Only Infs, type '", type, "')")
   )
 }
 
