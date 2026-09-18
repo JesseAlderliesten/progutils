@@ -47,6 +47,9 @@ Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
 \code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=not_in]{not_in()}},
-\code{\link[=replace_vals]{replace_vals()}}
+\code{\link[=replace_nonalnum]{replace_nonalnum()}},
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=round_levels]{round_levels()}},
+\code{\link[=signif_custom]{signif_custom()}}
 }
 \concept{functions to check equality}

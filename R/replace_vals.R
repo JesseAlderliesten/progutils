@@ -53,7 +53,7 @@
 #' @seealso
 #' [gsub()]; [replace()];
 #' [append()] which, despite its name, can insert values into a vector at any
-#' place
+#' place; [replace_nonalnum()]
 #'
 #' @examples
 #' x <- c("k", "l", "m")

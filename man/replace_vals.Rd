@@ -102,13 +102,16 @@ try(replace_vals(x = x, old = letters[13:12], new = "b",
 \seealso{
 \code{\link[=gsub]{gsub()}}; \code{\link[=replace]{replace()}};
 \code{\link[=append]{append()}} which, despite its name, can insert values into a vector at any
-place
+place; \code{\link[=replace_nonalnum]{replace_nonalnum()}}
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
 \code{\link[=check_case]{check_case()}},
 \code{\link[=get_file_path]{get_file_path()}},
-\code{\link[=not_in]{not_in()}}
+\code{\link[=not_in]{not_in()}},
+\code{\link[=replace_nonalnum]{replace_nonalnum()}},
+\code{\link[=round_levels]{round_levels()}},
+\code{\link[=signif_custom]{signif_custom()}}
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
@@ -122,6 +125,7 @@ Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link{reexports}},
 \code{\link[=reorder_levels]{reorder_levels()}},
+\code{\link[=round_levels]{round_levels()}},
 \code{\link[=vect_to_char]{vect_to_char()}}
 }
 \concept{functions to check equality}

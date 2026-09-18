@@ -23,6 +23,7 @@ Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link[=reorder_levels]{reorder_levels()}},
 \code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=round_levels]{round_levels()}},
 \code{\link[=vect_to_char]{vect_to_char()}}
 }
 \concept{functions to convert types}

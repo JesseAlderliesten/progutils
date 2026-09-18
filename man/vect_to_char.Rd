@@ -36,8 +36,9 @@ by blank characters?}
 }
 \value{
 A character vector or character string with the names and values in \code{x}, with
-values of numeric \code{x} rounded to \code{signif}
-\link[=signif]{significant} digits, wrapped to \code{width} characters.
+values of numeric \code{x} rounded to \code{signif} \link[=signif]{significant} digits (but
+at least the integer part displayed compeletely, see \code{\link[=signif_custom]{signif_custom()}}),
+wrapped to \code{width} characters.
 
 If \code{collapse} is \code{NULL}, a \link[checkinput:all_characters]{character vector}
 with the same elements as \code{x}
@@ -83,6 +84,7 @@ y <- x / 7
 vect_to_char(x = y, signif = 7) # "a: 0.1428571, b: 0.2857143, c: 0.4285714"
 vect_to_char(x = y, signif = 2, sep = " = ", collapse = " and ", width = 15)
 # "a = 0.14 and b\n= 0.29 and c =\n0.43"
+vect_to_char(x = 1e3/7, signif = 2) # not 140: completely display integer part
 
 x_char <- c(a = "abc", b = "def", c = "this is text")
 vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
@@ -127,7 +129,8 @@ Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link{reexports}},
 \code{\link[=reorder_levels]{reorder_levels()}},
-\code{\link[=replace_vals]{replace_vals()}}
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=round_levels]{round_levels()}}
 }
 \concept{functions to convert types}
 \concept{functions to modify character vectors}

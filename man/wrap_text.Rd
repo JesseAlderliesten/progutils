@@ -74,7 +74,7 @@ cat(wrap_text(example_text,
 
 }
 \seealso{
-\code{\link[=cat]{cat()}}; \code{\link[=paste]{paste()}}; \code{\link[=strwrap]{strwrap()}}
+\code{\link[=cat]{cat()}}; \code{\link[=paste]{paste()}}; \code{\link[=strtrim]{strtrim()}}; \code{\link[=strwrap]{strwrap()}}
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
