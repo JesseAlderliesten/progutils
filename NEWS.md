@@ -1,3 +1,23 @@
+# progutils 0.15.0
+
+### Breaking changes
+- `vect_to_char()` uses `signif_custom()` instead of `signif()`, ensuring that
+  at least the integer part of numbers is displayed completely.
+- Dependency `checkinput`: increase minimum version from `1.3.0` to `1.4.0` to
+  use stricter argument checking for `all_numbers()`, `is_number()` and related
+  functions.
+
+### New functions
+- `replace_nonalnum()` to replace or remove non-alphanumeric characters,
+  handling underscores separately.
+- `round_levels()` to round values of factor levels.
+- `signif_custom()` to round values while ensuring that their integer part is
+  not rounded.
+
+### Miscellaneous
+- The used version of roxygen2 increased from `8.0.0` to `8.1.0`.
+
+
 # progutils 0.14.0
 
 ### Breaking changes
