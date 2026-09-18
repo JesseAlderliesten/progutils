@@ -1,5 +1,32 @@
 # Changelog
 
+## progutils 0.15.0
+
+#### Breaking changes
+
+- [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
+  uses
+  [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
+  instead of [`signif()`](https://rdrr.io/r/base/Round.html), ensuring
+  that at least the integer part of numbers is displayed completely.
+- Dependency `checkinput`: increase minimum version from `1.3.0` to
+  `1.4.0` to use stricter argument checking for `all_numbers()`,
+  `is_number()` and related functions.
+
+#### New functions
+
+- [`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md)
+  to replace or remove non-alphanumeric characters, handling underscores
+  separately.
+- [`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md)
+  to round values of factor levels.
+- [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
+  to round values while ensuring that their integer part is not rounded.
+
+#### Miscellaneous
+
+- The used version of roxygen2 increased from `8.0.0` to `8.1.0`.
+
 ## progutils 0.14.0
 
 #### Breaking changes

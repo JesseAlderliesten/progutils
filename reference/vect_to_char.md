@@ -59,8 +59,10 @@ vect_to_char(
 
 A character vector or character string with the names and values in `x`,
 with values of numeric `x` rounded to `signif`
-[significant](https://rdrr.io/r/base/Round.html) digits, wrapped to
-`width` characters.
+[significant](https://rdrr.io/r/base/Round.html) digits (but at least
+the integer part displayed compeletely, see
+[`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)),
+wrapped to `width` characters.
 
 If `collapse` is `NULL`, a [character
 vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
@@ -127,7 +129,8 @@ Other functions to modify factors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 `reexports`,
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md),
-[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
+[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
+[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md)
 
 ## Examples
 
@@ -146,6 +149,8 @@ vect_to_char(x = y, signif = 7) # "a: 0.1428571, b: 0.2857143, c: 0.4285714"
 vect_to_char(x = y, signif = 2, sep = " = ", collapse = " and ", width = 15)
 #> [1] "a = 0.14 and b\n= 0.29 and c =\n0.43"
 # "a = 0.14 and b\n= 0.29 and c =\n0.43"
+vect_to_char(x = 1e3/7, signif = 2) # not 140: completely display integer part
+#> [1] "143"
 
 x_char <- c(a = "abc", b = "def", c = "this is text")
 vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"

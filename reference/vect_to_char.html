@@ -9,7 +9,7 @@ numeric values."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.14.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,8 +97,9 @@ by blank characters?</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A character vector or character string with the names and values in <code>x</code>, with
-values of numeric <code>x</code> rounded to <code>signif</code>
-<a href="https://rdrr.io/r/base/Round.html" class="external-link">significant</a> digits, wrapped to <code>width</code> characters.</p>
+values of numeric <code>x</code> rounded to <code>signif</code> <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant</a> digits (but
+at least the integer part displayed compeletely, see <code><a href="signif_custom.html">signif_custom()</a></code>),
+wrapped to <code>width</code> characters.</p>
 <p>If <code>collapse</code> is <code>NULL</code>, a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a>
 with the same elements as <code>x</code>
 is returned, wrapping on a per-element basis. If <code>collapse</code> is not <code>NULL</code>,
@@ -150,7 +151,8 @@ objects into a vector.</p>
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
 <code>reexports</code>,
 <code><a href="reorder_levels.html">reorder_levels()</a></code>,
-<code><a href="replace_vals.html">replace_vals()</a></code></p></div>
+<code><a href="replace_vals.html">replace_vals()</a></code>,
+<code><a href="round_levels.html">round_levels()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -169,6 +171,8 @@ objects into a vector.</p>
 <span class="r-in"><span><span class="fu">vect_to_char</span><span class="op">(</span>x <span class="op">=</span> <span class="va">y</span>, signif <span class="op">=</span> <span class="fl">2</span>, sep <span class="op">=</span> <span class="st">" = "</span>, collapse <span class="op">=</span> <span class="st">" and "</span>, width <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a = 0.14 and b\n= 0.29 and c =\n0.43"</span>
 <span class="r-in"><span><span class="co"># "a = 0.14 and b\n= 0.29 and c =\n0.43"</span></span></span>
+<span class="r-in"><span><span class="fu">vect_to_char</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1e3</span><span class="op">/</span><span class="fl">7</span>, signif <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># not 140: completely display integer part</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "143"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x_char</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="st">"abc"</span>, b <span class="op">=</span> <span class="st">"def"</span>, c <span class="op">=</span> <span class="st">"this is text"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">vect_to_char</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_char</span><span class="op">)</span> <span class="co"># "a: abc, b: def, c: this is text"</span></span></span>

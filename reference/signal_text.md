@@ -55,8 +55,8 @@ better than [`message()`](https://rdrr.io/r/base/message.html) etc. that
 use [`paste0()`](https://rdrr.io/r/base/paste.html), see the `Examples`.
 Call
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
-beforehand on `text` to control rounding and wrapping, see the
-`Examples`.
+beforehand on `text` for finer control of rounding and wrapping of text,
+see the `Examples`.
 
 `text` is signalled through an
 [error](https://rdrr.io/r/base/stop.html),
@@ -96,15 +96,28 @@ signal_text(text = test_numbers, signal = "message")
 message(test_numbers)
 #> 111213
 
-# Call vect_to_char() beforehand on 'text' to control rounding of numbers and
-# wrapping of text:
+# Newlines in 'signal' are respected:
+signal_text(text = paste0(test_text, collapse = "\n"), signal = "warn")
+#> Warning: Some text
+#> Some other text
+
+# 'vect_to_char()' is used to display the different NA's in the signal
+# clearer than standard printing:
+signal_text(text = NA_integer_, signal = "message") # prints NA_integer_
+#> NA_integer_
+message(NA_integer_) # prints NA
+#> NA
+
+# Call 'vect_to_char()' beforehand on 'text' for finer control of rounding
+# and wrapping of text:
 message(test_numbers / 7)
 #> 1.571428571428571.714285714285711.85714285714286
 signal_text(text = test_numbers / 7, signal = "message")
 #> 1.57, 1.71, 1.86
-signal_text(text = vect_to_char(x = test_numbers / 7, signif = 4, width = 15),
+signal_text(text = vect_to_char(x = test_numbers / 7, signif = 4, width = 15,
+                                collapse = "\n"),
             signal = "message")
-#> 1.571, 1.714,
+#> 1.571 1.714
 #> 1.857
 
 # This example shows how to make the content of the signal available for

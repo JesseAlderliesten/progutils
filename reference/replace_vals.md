@@ -103,13 +103,17 @@ creation, see the `Warning` in
 [`gsub()`](https://rdrr.io/r/base/grep.html);
 [`replace()`](https://rdrr.io/r/base/replace.html);
 [`append()`](https://rdrr.io/r/base/append.html) which, despite its
-name, can insert values into a vector at any place
+name, can insert values into a vector at any place;
+[`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md)
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),
 [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md),
 [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md),
-[`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
+[`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md),
+[`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md),
+[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md),
+[`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
 
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
@@ -123,6 +127,7 @@ Other functions to modify factors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 `reexports`,
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md),
+[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
 
 ## Examples

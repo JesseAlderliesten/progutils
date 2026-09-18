@@ -86,6 +86,7 @@ In contrast, argument `width` in
 
 [`cat()`](https://rdrr.io/r/base/cat.html);
 [`paste()`](https://rdrr.io/r/base/paste.html);
+[`strtrim()`](https://rdrr.io/r/base/strtrim.html);
 [`strwrap()`](https://rdrr.io/r/base/strwrap.html)
 
 Other functions to modify character vectors:

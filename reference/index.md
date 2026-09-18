@@ -18,10 +18,16 @@
 - [`reexports`](https://jessealderliesten.github.io/progutils/reference/reexports.md)
   [`paste_quoted`](https://jessealderliesten.github.io/progutils/reference/reexports.md)
   : Objects exported from other packages
+- [`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md)
+  : Replace non-alphanumeric characters
 - [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
   : Replace values
+- [`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md)
+  : Round levels
 - [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
   : Signal a text to the user
+- [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
+  : Round numbers
 - [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md)
   : Split a character string into a vector, removing quotation marks
 - [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
@@ -39,6 +45,8 @@
   : Check that only a single matching file is present
 - [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
   : Check that values are absent
+- [`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md)
+  : Replace non-alphanumeric characters
 - [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
   : Replace values
 
