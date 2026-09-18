@@ -30,8 +30,9 @@
 #'
 #' @returns
 #' A character vector or character string with the names and values in `x`, with
-#' values of numeric `x` rounded to `signif`
-#' [significant][signif()] digits, wrapped to `width` characters.
+#' values of numeric `x` rounded to `signif` [significant][signif()] digits (but
+#' at least the integer part displayed compeletely, see [signif_custom()]),
+#' wrapped to `width` characters.
 #'
 #' If `collapse` is `NULL`, a [character vector][checkinput::all_characters()]
 #' with the same elements as `x`
@@ -68,6 +69,7 @@
 #' vect_to_char(x = y, signif = 7) # "a: 0.1428571, b: 0.2857143, c: 0.4285714"
 #' vect_to_char(x = y, signif = 2, sep = " = ", collapse = " and ", width = 15)
 #' # "a = 0.14 and b\n= 0.29 and c =\n0.43"
+#' vect_to_char(x = 1e3/7, signif = 2) # not 140: completely display integer part
 #'
 #' x_char <- c(a = "abc", b = "def", c = "this is text")
 #' vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
@@ -100,7 +102,7 @@ vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
   stopifnot(is.vector(x) || is.factor(x) || is.null(x))
 
   if(is.double(x)) {
-    x <- signif(x = x, digits = signif)
+    x <- signif_custom(x = x, digits = signif)
   }
 
   if(is.factor(x)) {

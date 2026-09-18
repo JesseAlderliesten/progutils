@@ -29,6 +29,7 @@ expect_identical(
 expect_identical(
   vect_to_char(x = b, signif = 2, sep = " = ", collapse = " and ", width = 15),
   "a = 0.14 and b\n= 0.29 and c =\n0.43")
+expect_identical(vect_to_char(x = 1e3/7, signif = 2), "143")
 
 expect_identical(vect_to_char(x = x_in_char), x_out_char)
 expect_identical(vect_to_char(x = unname(x_in_char)), "abc, def, this is text")
@@ -37,7 +38,6 @@ expect_identical(vect_to_char(logical(0)), "logical(0)")
 expect_message(message(logical(0)), pattern = "")
 expect_message(message(vect_to_char(logical(0))),
                pattern = "logical(0)", strict = TRUE, fixed = TRUE)
-
 
 expect_identical(
   paste0(vect_to_char(c(table(c(c, d))), sep = " (", collapse =  "), "), ")"),
@@ -117,10 +117,8 @@ expect_silent(
   )
 )
 
-# If the use of 'signif_custom()' is implemented, the next test should change
-# to: expect_identical(vect_to_char(x = c(10^c(-1, 5)/7)), "0.0143, 14286")
 expect_silent(
-  expect_identical(vect_to_char(x = c(10^c(-1, 5) / 7)), "0.0143, 14300"))
+  expect_identical(vect_to_char(x = c(10^c(-1, 5) / 7)), "0.0143, 14286"))
 
 expect_silent(expect_identical(vect_to_char(x = x_fact), "d, e, f, e"))
 expect_silent(expect_identical(vect_to_char(x = x_fact_int), "4, 5, 6, 5"))
