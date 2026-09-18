@@ -11,7 +11,7 @@ signif_custom(x, digits = 3L, type = c("selective", "expanded"))
 \link{data.frame}, see \code{Details}.}
 
 \item{digits}{the minimum number of \link[=signif]{significant digits} to round
-to (rounded to the nearest integer in the range from 0 to 22), see \code{Details}.}
+to (rounded to the nearest integer in the range from 1 to 22), see \code{Details}.}
 
 \item{type}{\link[checkinput:is_character]{character string} \code{"selective"} or
 \code{"expanded"} to indicate the type of rounding to be used, see \code{Details}.}
@@ -69,5 +69,16 @@ signif_custom(x_df, type = "expanded")
 }
 \seealso{
 \code{\link[=signif]{signif()}} to round to a specified number of significant digits; \code{\link[=zapsmall]{zapsmall()}}
-to put small values to zero; \code{\link[=formatC]{formatC()}} for other ways to format numbers.
+to put small values to zero; \code{\link[=formatC]{formatC()}} for other ways to format numbers;
+\code{\link[=round_levels]{round_levels()}} to round \link{factor} levels.
+
+Other functions to check equality:
+\code{\link[=are_equal]{are_equal()}},
+\code{\link[=check_case]{check_case()}},
+\code{\link[=get_file_path]{get_file_path()}},
+\code{\link[=not_in]{not_in()}},
+\code{\link[=replace_nonalnum]{replace_nonalnum()}},
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=round_levels]{round_levels()}}
 }
+\concept{functions to check equality}

@@ -22,8 +22,11 @@ reference:
 - contents:
   - check_case
   - paste_quoted
+  - replace_nonalnum
   - replace_vals
+  - round_levels
   - signal_text
+  - signif_custom
   - unpaste_unquote
   - vect_to_char
   - wrap_text
@@ -34,6 +37,7 @@ reference:
   - check_case
   - get_file_path
   - not_in
+  - replace_nonalnum
   - replace_vals
 
 - title: Order

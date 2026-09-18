@@ -31,6 +31,8 @@
 #' [checkinput::all_names()] and [checkinput::is_path()] for other relevant
 #' checks.
 #'
+#' @family functions to check equality
+#'
 #' @examples
 #' replace_nonalnum("a+b.txt")
 #' replace_nonalnum("a b.txt")

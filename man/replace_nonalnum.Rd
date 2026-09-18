@@ -56,4 +56,14 @@ replace_nonalnum("a+bc_d.txt", keep_underscore = FALSE) # "a_bc_d.txt"
 \code{\link[=trimws]{trimws()}} to remove leading and/or trailing whitespace;
 \code{\link[checkinput:all_names]{checkinput::all_names()}} and \code{\link[checkinput:is_path]{checkinput::is_path()}} for other relevant
 checks.
+
+Other functions to check equality:
+\code{\link[=are_equal]{are_equal()}},
+\code{\link[=check_case]{check_case()}},
+\code{\link[=get_file_path]{get_file_path()}},
+\code{\link[=not_in]{not_in()}},
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=round_levels]{round_levels()}},
+\code{\link[=signif_custom]{signif_custom()}}
 }
+\concept{functions to check equality}

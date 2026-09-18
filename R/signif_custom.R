@@ -6,7 +6,7 @@
 #' @param x [numeric vector][checkinput::all_numbers()], [matrix] or
 #' [data.frame], see `Details`.
 #' @param digits the minimum number of [significant digits][signif()] to round
-#' to (rounded to the nearest integer in the range from 0 to 22), see `Details`.
+#' to (rounded to the nearest integer in the range from 1 to 22), see `Details`.
 #' @param type [character string][checkinput::is_character()] `"selective"` or
 #' `"expanded"` to indicate the type of rounding to be used, see `Details`.
 #'
@@ -32,7 +32,10 @@
 #'
 #' @seealso
 #' [signif()] to round to a specified number of significant digits; [zapsmall()]
-#' to put small values to zero; [formatC()] for other ways to format numbers.
+#' to put small values to zero; [formatC()] for other ways to format numbers;
+#' [round_levels()] to round [factor] levels.
+#'
+#' @family functions to check equality
 #'
 #' @examples
 #' x1 <- (1e5)/7
