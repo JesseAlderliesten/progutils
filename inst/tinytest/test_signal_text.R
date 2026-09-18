@@ -111,6 +111,12 @@ expect_message(
     test_numbers_out_vect),
   pattern = test_numbers_out_vect, fixed = TRUE)
 
+expect_message(
+  expect_identical(
+    signal_text(text = NA_integer_, signal = "message"), "NA_integer_"
+  ), pattern = "NA_integer_"
+)
+
 expect_error(
   signal_text(text = test_text, signal = "abc"),
   pattern = "'arg' should be one of ", fixed = TRUE)
