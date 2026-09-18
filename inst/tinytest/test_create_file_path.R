@@ -226,15 +226,21 @@ for(dir in list(paste0(my_tempdir, ".."),
 expect_error(create_file_path(dir = my_tempdir),
              pattern = "argument \"filename\" is missing, with no default",
              fixed = TRUE)
-expect_error(create_file_path(filename = 123, dir = my_tempdir),
-             pattern = "checkinput::is_character(filename) is not TRUE",
-             fixed = TRUE)
-expect_error(create_file_path(filename = c("abc.txt", "def.txt"), dir = my_tempdir),
-             pattern = "checkinput::is_character(filename) is not TRUE",
-             fixed = TRUE)
-expect_error(create_file_path(filename = "", dir = my_tempdir),
-             pattern = "checkinput::is_character(filename) is not TRUE",
-             fixed = TRUE)
+expect_warning(
+  expect_error(create_file_path(filename = 123, dir = my_tempdir),
+               pattern = "checkinput::is_path(filename, require_sep = FALSE) is not TRUE",
+               fixed = TRUE),
+  pattern = "'filename' should be a non-empty, non-NA_character_ character string")
+expect_warning(
+  expect_error(create_file_path(filename = c("abc.txt", "def.txt"), dir = my_tempdir),
+               pattern = "checkinput::is_path(filename, require_sep = FALSE) is not TRUE",
+               fixed = TRUE),
+  pattern = "'filename' should be a non-empty, non-NA_character_ character string")
+expect_warning(
+  expect_error(create_file_path(filename = "", dir = my_tempdir),
+               pattern = "checkinput::is_path(filename, require_sep = FALSE) is not TRUE",
+               fixed = TRUE),
+  pattern = "'filename' should be a non-empty, non-NA_character_ character string")
 
 ##### add_date #####
 for(add_date in list(1, NA)) {
