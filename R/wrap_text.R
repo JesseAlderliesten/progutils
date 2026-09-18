@@ -51,7 +51,7 @@
 #' text should be wrapped.
 #'
 #' @seealso
-#' [cat()]; [paste()]; [strwrap()]
+#' [cat()]; [paste()]; [strtrim()]; [strwrap()]
 #'
 #' @family functions to modify character vectors
 #'
