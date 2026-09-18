@@ -18,8 +18,8 @@ round_levels(
 \item{level_order}{\code{NULL} to sort levels on increasing numerical value, or a
 a vector indicating the desired order of the factor \link{levels}.}
 
-\item{digits}{the minimum number of \link[=signif]{significant digits} to round
-to (rounded to the nearest integer in the range from 1 to 22), see \code{Details}.}
+\item{digits}{the \strong{minimum} number of \link[=signif]{significant digits} to
+round to (see \code{Details}) or \code{Inf} to not round values.}
 
 \item{type}{\link[checkinput:is_character]{character string} \code{"selective"} or
 \code{"expanded"} to indicate the type of rounding to be used, see \code{Details}.}
