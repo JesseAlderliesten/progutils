@@ -5,8 +5,8 @@
 #' ending in rounded zeros, e.g., `14300` instead of `14286` when rounding
 #' `1e5 / 7` to three significant digits.
 #'
-#' @param x [numeric vector][checkinput::all_numbers()], [matrix] or
-#' [data.frame], see `Details`.
+#' @param x [numeric vector][is.numeric()], [matrix] or [data.frame], see
+#' `Details`.
 #' @param digits the **minimum** number of [significant digits][signif()] to
 #' round to (see `Details`) or `Inf` to not round values.
 #' @param type [character string][checkinput::is_character()] `"selective"` or
@@ -16,6 +16,12 @@
 #' `x` with values rounded according to `digits` and `type`.
 #'
 #' @details
+#' [Infinite values][Inf] are returned unchanged. `NA_integer_` and `NA_real_`
+#' are returned as [NA_real_][NA]. [matrices][matrix] and
+#' [dataframes][data.frame] are handled by rounding values of numeric columns.
+#' [Non-numeric][is.numeric()] (e.g., [factor]) `x` is **not** supported, use
+#' [as.numeric_safe()] beforehand on `x` if appropriate.
+#'
 #' Numeric values are rounded according to arguments `digits` and `type`. Values
 #' are **not** rounded if `digits` is [Inf]. Otherwise, the value of `digits`
 #' rounded to the nearest positive integer is used as the **minimum** number of
@@ -26,14 +32,7 @@
 #' significant digits than `digits` if that is needed to not round their integer
 #' part, such that the number of significant digits might differ between values
 #' in a vector or in a column. If `type` is `"expanded"`, all values in a vector
-#' or a column are rounded to the same, possibly increased, value of `digits`.
-#'
-#' [Infinite values][Inf] are is returned unchanged. `NA_integer_` and
-#' `NA_real_` are both returned as [NA_real_][NA]. `signif_custom()` also
-#' handles [matrices][matrix] and [dataframes][data.frame], rounding the numeric
-#' columns with rounding of type `expanded` type on a per-column basis. It does
-#' **not** handle [factors][factor]: use [as.numeric_safe()] on `x` or use
-#' `round_factor(x = x, level_order = levels(x), digits = digits, type = type)`.
+#' or a in a column are rounded to the same number of significant digits.
 #'
 #' @seealso
 #' [round()] to round to a specified number of decimal places; [signif()] to
@@ -79,7 +78,9 @@ signif_custom <- function(x, digits = 3L, type = c("selective", "expanded")) {
   #   applied), so no need to check that 'digits' is nonnegative and integer.
   stopifnot(checkinput::is_number(digits))
 
-  if(!is.null(nrow(x))) {
+  if(is.null(nrow(x))) {
+    stopifnot(is.numeric(x))
+  } else {
     if(is.matrix(x)) {
       ind_cols_numeric <- which(apply(X = x, MARGIN = 2L, FUN = is.numeric))
     } else {
@@ -91,14 +92,6 @@ signif_custom <- function(x, digits = 3L, type = c("selective", "expanded")) {
       x[, ind_col] <- signif_custom(x = x[, ind_col], digits = digits, type = type)
     }
     return(x)
-  } else {
-    if(is.factor(x)) {
-      stop("'signif_custom()' does not handle factors. You can use",
-           "\nsignif_custom(x = progutils::as.numeric_safe(x), digits = digits,",
-           " type = type) or\nprogutils::round_levels(x = x, level_order =",
-           " levels(x), digits = digits, type = type)")
-    }
-    stopifnot(is.numeric(x))
   }
 
   # Notes:

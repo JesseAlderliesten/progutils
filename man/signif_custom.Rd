@@ -7,8 +7,8 @@
 signif_custom(x, digits = 3L, type = c("selective", "expanded"))
 }
 \arguments{
-\item{x}{\link[checkinput:all_numbers]{numeric vector}, \link{matrix} or
-\link{data.frame}, see \code{Details}.}
+\item{x}{\link[=is.numeric]{numeric vector}, \link{matrix} or \link{data.frame}, see
+\code{Details}.}
 
 \item{digits}{the \strong{minimum} number of \link[=signif]{significant digits} to
 round to (see \code{Details}) or \code{Inf} to not round values.}
@@ -26,6 +26,12 @@ ending in rounded zeros, e.g., \code{14300} instead of \code{14286} when roundin
 \code{1e5 / 7} to three significant digits.
 }
 \details{
+\link[=Inf]{Infinite values} are returned unchanged. \code{NA_integer_} and \code{NA_real_}
+are returned as \link[=NA]{NA_real_}. \link[=matrix]{matrices} and
+\link[=data.frame]{dataframes} are handled by rounding values of numeric columns.
+\link[=is.numeric]{Non-numeric} (e.g., \link{factor}) \code{x} is \strong{not} supported, use
+\code{\link[=as.numeric_safe]{as.numeric_safe()}} beforehand on \code{x} if appropriate.
+
 Numeric values are rounded according to arguments \code{digits} and \code{type}. Values
 are \strong{not} rounded if \code{digits} is \link{Inf}. Otherwise, the value of \code{digits}
 rounded to the nearest positive integer is used as the \strong{minimum} number of
@@ -36,14 +42,7 @@ If \code{type} is \code{"selective"}, values are individually rounded to more
 significant digits than \code{digits} if that is needed to not round their integer
 part, such that the number of significant digits might differ between values
 in a vector or in a column. If \code{type} is \code{"expanded"}, all values in a vector
-or a column are rounded to the same, possibly increased, value of \code{digits}.
-
-\link[=Inf]{Infinite values} are is returned unchanged. \code{NA_integer_} and
-\code{NA_real_} are both returned as \link[=NA]{NA_real_}. \code{signif_custom()} also
-handles \link[=matrix]{matrices} and \link[=data.frame]{dataframes}, rounding the numeric
-columns with rounding of type \code{expanded} type on a per-column basis. It does
-\strong{not} handle \link[=factor]{factors}: use \code{\link[=as.numeric_safe]{as.numeric_safe()}} on \code{x} or use
-\code{round_factor(x = x, level_order = levels(x), digits = digits, type = type)}.
+or a in a column are rounded to the same number of significant digits.
 }
 \examples{
 x1 <- (1e5) / 7

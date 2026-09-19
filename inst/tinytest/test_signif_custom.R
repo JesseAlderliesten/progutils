@@ -181,8 +181,8 @@ for(type in c("selective", "expanded")) {
 
   expect_error(
     signif_custom(x = as.factor(x1), type = type),
-    pattern = "'signif_custom()' does not handle factors", fixed = TRUE,
-    info = paste0("5c (specific error for factor 'x', type '", type, "')")
+    pattern = "is.numeric(x) is not TRUE", fixed = TRUE,
+    info = paste0("5c (error for non-numeric 'x', type '", type, "')")
   )
 
   expect_error(
