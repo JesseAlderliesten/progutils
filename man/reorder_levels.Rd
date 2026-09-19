@@ -7,12 +7,13 @@
 reorder_levels(x, new_order, warn_drop_order = TRUE)
 }
 \arguments{
-\item{x}{Factor with levels to be reordered to \code{new_order}, or character
+\item{x}{factor with levels to be reordered to \code{new_order}, or character
 vector to be converted to a factor with levels ordered as \code{new_order}. Should
 have length larger than zero.}
 
-\item{new_order}{Character vector with a length larger than zero containing
-unique names in the new order.}
+\item{new_order}{a \link[checkinput:all_characters]{character vector} with a
+length larger than zero containing \link{unique} levels giving the desired order,
+or \link{NULL} to sort levels on increasing numerical value.}
 
 \item{warn_drop_order}{\code{TRUE} or \code{FALSE}: warn if values of \code{new_order} are
 dropped because they are not present in \code{x}?}
@@ -29,16 +30,15 @@ Character input to \code{x} is silently converted to a \link{factor} before reor
 the factor levels.
 
 Values of factor \code{x} that are not present in its levels are added to its
-levels, with a warning.
-
-Levels of factor \code{x} that are not present in its values are dropped, with a
-warning.
+levels, and levels that are not present in its values are dropped, both with
+a warning.
 
 Levels of \code{x} that are missing from \code{new_order} are appended to \code{new_order},
-with a warning.
+with a warning. Values of \code{new_order} that are missing from levels of \code{x} are
+dropped, with a warning if \code{warn_drop_order} is \code{TRUE}.
 
-Values in \code{new_order} that are missing from levels of \code{x} are dropped, with a
-warning if \code{warn_drop_order} is \code{TRUE}.
+Sorting on on increasing numerical value only works if \code{x} can be suitably
+converted by \code{\link[=as.numeric_safe]{as.numeric_safe()}}.
 }
 \section{Notes}{
 
@@ -51,6 +51,14 @@ Reordering levels of factor \code{f} by replacing levels through code like
 orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
 orig
 reorder_levels(x = orig, new_order = letters[11:13])
+
+x_num <- factor(c(28, 3:2), levels = c(28, 3:2))
+# Correctly sorts level 28 after 2 and 3
+reorder_levels(x_num, new_order = NULL)
+
+# Incorrectly sorts level "28" between "2" and "3"
+sort(levels(x_num))
+"2"  "28" "3"
 
 # Changing the levels directly does *not* work because it changes the values
 levels(orig) <- letters[11:13]

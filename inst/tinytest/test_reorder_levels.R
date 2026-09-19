@@ -26,8 +26,7 @@ warn_append_levels <- paste0("Appended levels of 'x' that were not present in",
 warn_drop_levels <- "Dropped levels of 'x' that are not present in its values:\n"
 warn_drop_order <- "Dropped values of 'new_order' that are not present in 'x':\n"
 warn_missing_levels <- "Levels of 'x' are not present in 'new_order': "
-warn_new_order_nonchar <- paste0("checkinput::all_characters(new_order,",
-                                 " allow_empty = TRUE, allow_NA = TRUE) is not TRUE")
+warn_new_order_nonchar <- "is.null(new_order) || checkinput::all_characters(new_order"
 
 
 #### Test the examples ####
@@ -156,8 +155,18 @@ expect_error(reorder_levels(x = factor(), new_order = new_order),
 expect_error(reorder_levels(x = input, new_order = 1:3),
              pattern = warn_new_order_nonchar, fixed = TRUE)
 
-expect_error(reorder_levels(x = input, new_order = NULL),
-             pattern = warn_new_order_nonchar, fixed = TRUE)
+expect_warning(
+  expect_identical(
+    reorder_levels(x = input, new_order = NULL),
+    input),
+  pattern = "NAs introduced by coercion")
+
+expect_silent(
+  expect_equal(
+    reorder_levels(factor(c(28, 3:2), levels = c(28, 3:2)), new_order = NULL),
+    factor(c(28, 3, 2), levels = c(2:3, 28))
+  )
+)
 
 expect_error(reorder_levels(x = input, new_order = character(0)),
              pattern = warn_new_order_nonchar, fixed = TRUE)

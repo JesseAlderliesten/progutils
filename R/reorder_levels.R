@@ -1,9 +1,11 @@
 #' Reorder factor levels
 #'
-#' @inheritParams reorder_cols new_order
-#' @param x Factor with levels to be reordered to `new_order`, or character
+#' @param x factor with levels to be reordered to `new_order`, or character
 #' vector to be converted to a factor with levels ordered as `new_order`. Should
 #' have length larger than zero.
+#' @param new_order a [character vector][checkinput::all_characters()] with a
+#' length larger than zero containing [unique] levels giving the desired order,
+#' or [NULL] to sort levels on increasing numerical value.
 #' @param warn_drop_order `TRUE` or `FALSE`: warn if values of `new_order` are
 #' dropped because they are not present in `x`?
 #'
@@ -12,16 +14,15 @@
 #' the factor levels.
 #'
 #' Values of factor `x` that are not present in its levels are added to its
-#' levels, with a warning.
-#'
-#' Levels of factor `x` that are not present in its values are dropped, with a
-#' warning.
+#' levels, and levels that are not present in its values are dropped, both with
+#' a warning.
 #'
 #' Levels of `x` that are missing from `new_order` are appended to `new_order`,
-#' with a warning.
+#' with a warning. Values of `new_order` that are missing from levels of `x` are
+#' dropped, with a warning if `warn_drop_order` is `TRUE`.
 #'
-#' Values in `new_order` that are missing from levels of `x` are dropped, with a
-#' warning if `warn_drop_order` is `TRUE`.
+#' Sorting on on increasing numerical value only works if `x` can be suitably
+#' converted by [as.numeric_safe()].
 #'
 #' @returns
 #' `x` after converting it to a [factor] with levels reordered to
@@ -45,6 +46,14 @@
 #' orig
 #' reorder_levels(x = orig, new_order = letters[11:13])
 #'
+#' x_num <- factor(c(28, 3:2), levels = c(28, 3:2))
+#' # Correctly sorts level 28 after 2 and 3
+#' reorder_levels(x_num, new_order = NULL)
+#'
+#' # Incorrectly sorts level "28" between "2" and "3"
+#' sort(levels(x_num))
+#' "2"  "28" "3"
+#'
 #' # Changing the levels directly does *not* work because it changes the values
 #' levels(orig) <- letters[11:13]
 #' orig
@@ -53,7 +62,8 @@
 reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
   stopifnot(
     is.factor(x) || is.character(x), length(x) > 0L,
-    checkinput::all_characters(new_order, allow_empty = TRUE, allow_NA = TRUE),
+    is.null(new_order) ||
+      checkinput::all_characters(new_order, allow_empty = TRUE, allow_NA = TRUE),
     "Values in 'new_order' should be unique" = anyDuplicated(new_order) == 0L,
     checkinput::is_logical(warn_drop_order))
 
@@ -75,6 +85,10 @@ reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
       warning("Added missing levels for values of 'x':\n",
               paste_quoted(added_levels))
     }
+  }
+
+  if(is.null(new_order)) {
+    new_order <- sort(as.numeric_safe(levels(x)), na.last = TRUE)
   }
 
   bool_levels_in_new_order <- levels(x) %in% new_order
