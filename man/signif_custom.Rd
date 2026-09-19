@@ -43,7 +43,7 @@ or a column are rounded to the same, possibly increased, value of \code{digits}.
 handles \link[=matrix]{matrices} and \link[=data.frame]{dataframes}, rounding the numeric
 columns with rounding of type \code{expanded} type on a per-column basis. It does
 \strong{not} handle \link[=factor]{factors}: use \code{\link[=as.numeric_safe]{as.numeric_safe()}} on \code{x} or use
-\code{round_levels(x = x, level_order = levels(x), digits = digits, type = type)}.
+\code{round_factor(x = x, level_order = levels(x), digits = digits, type = type)}.
 }
 \examples{
 x1 <- (1e5) / 7
@@ -76,7 +76,7 @@ signif_custom(x_df, type = "expanded")
 \code{\link[=round]{round()}} to round to a specified number of decimal places; \code{\link[=signif]{signif()}} to
 round to a specified number of significant digits; \code{\link[=zapsmall]{zapsmall()}} to put small
 values to zero; \code{\link[=formatC]{formatC()}} for other ways to format numbers;
-\code{\link[=round_levels]{round_levels()}} to round \link{factor} levels.
+\code{\link[=round_factor]{round_factor()}} to round \link[=factor]{factors}.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
@@ -85,6 +85,6 @@ Other functions to check equality:
 \code{\link[=not_in]{not_in()}},
 \code{\link[=replace_nonalnum]{replace_nonalnum()}},
 \code{\link[=replace_vals]{replace_vals()}},
-\code{\link[=round_levels]{round_levels()}}
+\code{\link[=round_factor]{round_factor()}}
 }
 \concept{functions to check equality}

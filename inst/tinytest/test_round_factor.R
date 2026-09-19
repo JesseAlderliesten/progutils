@@ -23,7 +23,7 @@ for(ind_type_round in seq_along(types_round)) {
       order_class <- order_classes[ind_order_class]
 
       expect_equal(
-        round_levels(
+        round_factor(
           x = switch(x_class,
                      numeric = num_in,
                      character = as.character(num_in),
@@ -47,7 +47,7 @@ for(ind_type_round in seq_along(types_round)) {
       )
 
       expect_equal(
-        round_levels(
+        round_factor(
           x = switch(x_class,
                      numeric = num_in,
                      character = as.character(num_in),
@@ -72,7 +72,7 @@ for(ind_type_round in seq_along(types_round)) {
 
       expect_warning(
         expect_equal(
-          round_levels(
+          round_factor(
             x = switch(x_class,
                        numeric = num_in,
                        character = as.character(num_in),
@@ -103,7 +103,7 @@ for(ind_type_round in seq_along(types_round)) {
       )
 
       expect_error(
-        round_levels(
+        round_factor(
           x = switch(x_class,
                      numeric = num_in,
                      character = as.character(num_in),
@@ -127,7 +127,7 @@ for(ind_type_round in seq_along(types_round)) {
     # the correct numerical order: this test also checks that numeric values are
     # used to sort on for non-numeric input to 'x'.
     expect_equal(
-      round_levels(
+      round_factor(
         x = switch(x_class,
                    numeric = num_in,
                    character = as.character(num_in),
@@ -150,7 +150,7 @@ for(ind_type_round in seq_along(types_round)) {
 
   for(order_class in order_classes) {
     expect_error(
-      round_levels(
+      round_factor(
         x = NULL,
         level_order = switch(order_class,
                              numeric = num_in,
@@ -165,39 +165,39 @@ for(ind_type_round in seq_along(types_round)) {
 }
 
 # 'digits' is rounded to the nearest integer in 1 - 22
-expect_equal(round_levels(x = num_in, digits = -3),
-             round_levels(x = num_in, digits = 1)
+expect_equal(round_factor(x = num_in, digits = -3),
+             round_factor(x = num_in, digits = 1)
 )
 
 
 #### Input that should give an error ####
 for(x in list(data.frame(num_in), matrix(num_in))) {
   expect_error(
-    round_levels(x = x, level_order = num_in),
+    round_factor(x = x, level_order = num_in),
     pattern = "is.null(dim(x)) is not TRUE", fixed = TRUE,
     info = "6a ('x' should be a vector, not a dataframe or matrix)")
 }
 
 for(x in list(list(num_in), as.list(num_in))) {
   expect_error(
-    round_levels(x = x, level_order = num_in),
+    round_factor(x = x, level_order = num_in),
     pattern = "!is.list(x) is not TRUE", fixed = TRUE,
     info = "6b ('x' should be a vector, not a list)")
 }
 
 expect_error(
-  round_levels(x = num_in, level_order = as.factor(num_in)),
+  round_factor(x = num_in, level_order = as.factor(num_in)),
   pattern = "is.null(level_order) || is.vector(level_order) is not TRUE",
   fixed = TRUE,
   info = "7 ('level_order' should be a vector, not a factor)")
 
 expect_error(
-  round_levels(x = num_in, digits = "a"),
+  round_factor(x = num_in, digits = "a"),
   pattern = "checkinput::is_number(digits) is not TRUE", fixed = TRUE,
   info = "8 ('digits' should be numeric)")
 
 expect_error(
-  round_levels(x = num_in, type = "abc"),
+  round_factor(x = num_in, type = "abc"),
   pattern = "'arg' should be one of",
   info = "9 ('digits' should be numeric)")
 

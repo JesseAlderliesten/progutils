@@ -24,7 +24,7 @@ reference:
   - paste_quoted
   - replace_nonalnum
   - replace_vals
-  - round_levels
+  - round_factors
   - signal_text
   - signif_custom
   - unpaste_unquote

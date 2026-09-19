@@ -142,7 +142,7 @@ Other functions to modify factors:
 \code{\link{reexports}},
 \code{\link[=reorder_levels]{reorder_levels()}},
 \code{\link[=replace_vals]{replace_vals()}},
-\code{\link[=round_levels]{round_levels()}}
+\code{\link[=round_factor]{round_factor()}}
 }
 \concept{functions to convert types}
 \concept{functions to modify character vectors}

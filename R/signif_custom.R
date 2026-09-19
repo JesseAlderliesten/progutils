@@ -33,13 +33,13 @@
 #' handles [matrices][matrix] and [dataframes][data.frame], rounding the numeric
 #' columns with rounding of type `expanded` type on a per-column basis. It does
 #' **not** handle [factors][factor]: use [as.numeric_safe()] on `x` or use
-#' `round_levels(x = x, level_order = levels(x), digits = digits, type = type)`.
+#' `round_factor(x = x, level_order = levels(x), digits = digits, type = type)`.
 #'
 #' @seealso
 #' [round()] to round to a specified number of decimal places; [signif()] to
 #' round to a specified number of significant digits; [zapsmall()] to put small
 #' values to zero; [formatC()] for other ways to format numbers;
-#' [round_levels()] to round [factor] levels.
+#' [round_factor()] to round [factors][factor].
 #'
 #' @family functions to check equality
 #'

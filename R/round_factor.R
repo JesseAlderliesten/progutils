@@ -1,7 +1,7 @@
-#' Round levels
+#' Round factors
 #'
-#' Round numeric values of factor levels, e.g., to create facet labels that fit
-#' better.
+#' Round numeric values of factors levels, e.g., to create facet labels that fit
+#' better. This changes the values **and** the levels.
 #'
 #' @param x [factor] or [character] vector containing
 #' [numerish values][as.numeric_safe()] to be rounded, see `Details`.
@@ -25,12 +25,12 @@
 #' @family functions to modify factors
 #'
 #' @examples
-#' round_levels(x = factor(c(2, 2.2, 2.8)), level_order = c("2.2", "2.8", "2"))
-#' round_levels(x = factor(c(2, 2.2, 2.8)), level_order = c("2.2", "2.8", "2.0"))
-#' round_levels(x = factor(c(2, 2.2, 2.8)), level_order = NULL)
+#' round_factor(x = factor(c(2, 2.2, 2.8)), level_order = c("2.2", "2.8", "2"))
+#' round_factor(x = factor(c(2, 2.2, 2.8)), level_order = c("2.2", "2.8", "2.0"))
+#' round_factor(x = factor(c(2, 2.2, 2.8)), level_order = NULL)
 #'
 #' @export
-round_levels <- function(x, level_order = NULL, digits = 4L,
+round_factor <- function(x, level_order = NULL, digits = 4L,
                          type = c("selective", "expanded")) {
   stopifnot(is.null(dim(x)), !is.list(x),
             is.null(level_order) || is.vector(level_order),
