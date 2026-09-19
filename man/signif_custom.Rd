@@ -14,42 +14,43 @@ signif_custom(x, digits = 3L, type = c("selective", "expanded"))
 round to (see \code{Details}) or \code{Inf} to not round values.}
 
 \item{type}{\link[checkinput:is_character]{character string} \code{"selective"} or
-\code{"expanded"} to indicate the type of rounding to be used, see \code{Details}.}
+\code{"expanded"} indicating the type of rounding to be used, see \code{Details}.}
 }
 \value{
-\code{x} with rounded values, see \code{Details}.
+\code{x} with values rounded according to \code{digits} and \code{type}.
 }
 \description{
-Round numbers to a specified minimum number of significant digits while
-ensuring that the integer part is not rounded.
+Round numbers to a specified minimum number of \link[=signif]{significant digits}
+while ensuring the integer part is not rounded. This prevents values from
+ending in rounded zeros, e.g., \code{14300} instead of \code{14286} when rounding
+\code{1e5 / 7} to three significant digits.
 }
 \details{
-\link[=signif]{Rounding} numbers to a specified number of significant digits can
-lead to values ending in rounded zeros, e.g., \code{"14300"} instead of \code{"14286"}
-when rounding \code{(1e5)/7} to 3 significant digits. To prevent this,
-\code{signif_custom()} treats the value in argument \code{digits} as a \strong{minimum}
-value and rounds to more significant digits if that is needed to not round
-the integer part of numbers.
+Numeric values are rounded according to arguments \code{digits} and \code{type}. Values
+are \strong{not} rounded if \code{digits} is \link{Inf}. Otherwise, the value of \code{digits}
+rounded to the nearest positive integer is used as the \strong{minimum} number of
+\link[=signif]{significant digits} to round numeric \code{x} to while ensuring the
+integer part is not rounded.
 
-If \code{type} is \code{"selective"}, the required value of \code{digits} is determined for
-each value individually, such that the number of significant digits might
-differ if \code{x} has length larger than one. If type is \code{"expanded"}, the value
-of \code{digits} is increased to the same value for all numbers in a vector or
-column.
+If \code{type} is \code{"selective"}, values are individually rounded to more
+significant digits than \code{digits} if that is needed to not round their integer
+part, such that the number of significant digits might differ between values
+in a vector or in a column. If \code{type} is \code{"expanded"}, all values in a vector
+or a column are rounded to the same, possibly increased, value of \code{digits}.
 
 \link[=Inf]{Infinite values} are is returned unchanged. \code{NA_integer_} and
 \code{NA_real_} are both returned as \link[=NA]{NA_real_}. \code{signif_custom()} also
 handles \link[=matrix]{matrices} and \link[=data.frame]{dataframes}, rounding the numeric
 columns with rounding of type \code{expanded} type on a per-column basis. It does
-\strong{not} handle \link[=factor]{factors}, use \code{\link[=as.numeric_safe]{as.numeric_safe()}} on \code{x} or use
+\strong{not} handle \link[=factor]{factors}: use \code{\link[=as.numeric_safe]{as.numeric_safe()}} on \code{x} or use
 \code{round_levels(x = x, level_order = levels(x), digits = digits, type = type)}.
 }
 \examples{
-x1 <- (1e5)/7
+x1 <- (1e5) / 7
 signif(x = x1, digits = 3) # returns 14300
 signif_custom(x1, digits = 3) # returns 14286 to not round the integer part
 
-x2 <- c(10^c(-1, 5)/7)
+x2 <- 10^c(-1, 5) / 7
 signif(x = x2, digits = 3) # returns c(1.43e-02, 1.43e+04)
 # Increase the number of digits only for the
 # second number, returning c(0.0143, 14286.0000)
@@ -66,7 +67,7 @@ signif_custom(x = x4, digits = 3, type = "selective")
 signif_custom(x = x4, digits = 3, type = "expanded")
 # returns c(-0.014286, 0.14286, -1428.6, 14286)
 
-x_df <- data.frame(a = 1:3, b = letters[11:13], c = c(1e5, 1e3, 1)/7, d = pi)
+x_df <- data.frame(a = 1:3, b = letters[11:13], c = c(1e5, 1e3, 1) / 7, d = pi)
 signif_custom(x_df, type = "selective")
 signif_custom(x_df, type = "expanded")
 
