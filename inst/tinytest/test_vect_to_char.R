@@ -118,6 +118,13 @@ expect_silent(
 )
 
 expect_silent(
+  expect_identical(
+    vect_to_char(x = c(m = 100 / 7), signif = Inf),
+    "m: 14.2857142857143"
+  )
+)
+
+expect_silent(
   expect_identical(vect_to_char(x = c(10^c(-1, 5) / 7)), "0.0143, 14286"))
 
 expect_silent(expect_identical(vect_to_char(x = x_fact), "d, e, f, e"))
@@ -135,12 +142,16 @@ expect_error(vect_to_char(x = data.frame(a = 1:3)),
              pattern = "is.vector(x) || is.factor(x) || is.null(x) is not TRUE",
              fixed = TRUE)
 
-expect_error(vect_to_char(x = x_in, signif = 0L),
-             pattern = "checkinput::is_positive(signif) is not TRUE",
-             fixed = TRUE)
+# 'signif' is rounded to nearest positive integer if it is not 'Inf'
+expect_silent(
+  expect_identical(
+    vect_to_char(x = x_in, signif = 0L),
+    vect_to_char(x = x_in, signif = 1L)
+  )
+)
 
 expect_error(vect_to_char(x = x_in, signif = c(3L, 4L)),
-             pattern = "checkinput::is_positive(signif) is not TRUE",
+             pattern = "checkinput::is_number(signif) is not TRUE",
              fixed = TRUE)
 
 expect_error(vect_to_char(x = x_in, sep = c(":", "=")),

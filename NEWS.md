@@ -1,6 +1,8 @@
 # progutils 0.15.0
 
 ### Breaking changes
+- `reorder_levels()` accepts `NULL` for `new_order` to sort levels on increasing
+  numerical value.
 - `vect_to_char()` uses `signif_custom()` instead of `signif()`, ensuring that
   at least the integer part of numbers is displayed completely.
 - Dependency `checkinput`: increase minimum version from `1.3.0` to `1.4.0` to
@@ -10,8 +12,7 @@
 ### New functions
 - `replace_nonalnum()` to replace or remove non-alphanumeric characters,
   handling underscores separately.
-- `round_levels()` to round values of factor levels.
-- `signif_custom()` to round values while ensuring that their integer part is
+- `signif_custom()` to round values while ensuring that their integer parts are
   not rounded.
 
 ### Miscellaneous
