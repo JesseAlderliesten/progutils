@@ -63,7 +63,6 @@ Other functions to check equality:
 \code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=not_in]{not_in()}},
 \code{\link[=replace_vals]{replace_vals()}},
-\code{\link[=round_factor]{round_factor()}},
 \code{\link[=signif_custom]{signif_custom()}}
 }
 \concept{functions to check equality}

@@ -37,8 +37,7 @@
 #' @seealso
 #' [round()] to round to a specified number of decimal places; [signif()] to
 #' round to a specified number of significant digits; [zapsmall()] to put small
-#' values to zero; [formatC()] for other ways to format numbers;
-#' [round_factor()] to round [factors][factor].
+#' values to zero; [formatC()] for other ways to format numbers.
 #'
 #' @family functions to check equality
 #'

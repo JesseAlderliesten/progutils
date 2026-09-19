@@ -78,7 +78,6 @@ Other functions to modify factors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link{reexports}},
 \code{\link[=replace_vals]{replace_vals()}},
-\code{\link[=round_factor]{round_factor()}},
 \code{\link[=vect_to_char]{vect_to_char()}}
 
 Other functions to modify sorting order:

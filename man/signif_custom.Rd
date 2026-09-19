@@ -74,8 +74,7 @@ signif_custom(x_df, type = "expanded")
 \seealso{
 \code{\link[=round]{round()}} to round to a specified number of decimal places; \code{\link[=signif]{signif()}} to
 round to a specified number of significant digits; \code{\link[=zapsmall]{zapsmall()}} to put small
-values to zero; \code{\link[=formatC]{formatC()}} for other ways to format numbers;
-\code{\link[=round_factor]{round_factor()}} to round \link[=factor]{factors}.
+values to zero; \code{\link[=formatC]{formatC()}} for other ways to format numbers.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
@@ -83,7 +82,6 @@ Other functions to check equality:
 \code{\link[=get_file_path]{get_file_path()}},
 \code{\link[=not_in]{not_in()}},
 \code{\link[=replace_nonalnum]{replace_nonalnum()}},
-\code{\link[=replace_vals]{replace_vals()}},
-\code{\link[=round_factor]{round_factor()}}
+\code{\link[=replace_vals]{replace_vals()}}
 }
 \concept{functions to check equality}
