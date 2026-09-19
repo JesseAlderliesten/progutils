@@ -6,13 +6,17 @@
 #' @inheritParams wrap_text width ignore_newlines
 #' @param x A vector, [factor], `NULL`, or a non-dataframe [list] (unlisted
 #' through `unlist(x, use.names = TRUE)`, with a warning).
-#' @param signif Positive number of length one, rounded to the nearest positive
-#' integer indicating the number of significant digits to round numeric `x` to.
+#' @param signif Positive number indicating the number of
+#' [significant digits][signif()] to round numeric `x` to (see `Details`) or
+#' `Inf` to not round values.
 #' @param sep [character string][checkinput::is_character()] used to separate
 #' the names and the values. Ignored if `x` does not have names.
 #' @param collapse [character string][checkinput::is_character()] to collapse
 #' values into a single character string, or `NULL` to return each value as an
 #' element of a character vector.
+#' @param round_type [character string][checkinput::is_character()]
+#' `"selective"`, `"expanded"`, or `"signif"` indicating the type of rounding to
+#' be used, see `Details`.
 #'
 #' @details
 #' Some values are handled specially to better distinguish different values than
@@ -28,10 +32,16 @@
 #'   for [factors][factor] this is `"NA_character_"` because `vect_to_char()`
 #'   converts factors to characters).
 #'
+#' Numeric values are not rounded if `digits` is [Inf]. Otherwise, numeric
+#' values are rounded to **at least** `digits` [significant digits][signif()]
+#' while ensuring their integer parts are unrounded (if `round_type` is
+#' `selective` or `expanded`, see [signif_custom()] for details) or are rounded
+#' to **exactly** `digits` significant digits while their integer parts might be
+#' rounded (if `round_type` is `signif`).
+#'
 #' @returns
 #' A character vector or character string with the names and values in `x`, with
-#' values of numeric `x` rounded to `signif` [significant][signif()] digits (but
-#' at least the integer part displayed compeletely, see [signif_custom()]),
+#' values of numeric `x` rounded to `signif` [significant][signif()] digits,
 #' wrapped to `width` characters.
 #'
 #' If `collapse` is `NULL`, a [character vector][checkinput::all_characters()]
@@ -40,7 +50,7 @@
 #' the name-value pairs are separated by `collapse`, thus returning a
 #' [character string][checkinput::is_character()].
 #'
-#' See `Details` on handling of some special values.
+#' See `Details` on the handling of some special values.
 #'
 #' @section Programming notes:
 #' To get a cross-tabulation of `x` into a character string, one can use
@@ -90,10 +100,16 @@
 #'
 #' @export
 vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
-                         collapse = ", ", ignore_newlines = TRUE) {
-  stopifnot(checkinput::is_positive(signif), checkinput::is_positive(width),
+                         collapse = ", ", ignore_newlines = TRUE,
+                         round_type = c("selective", "expanded", "strict")) {
+  # Notes:
+  # - Values in argument 'digits' of signif() are rounded to the nearest integer
+  #   in the range from 0 to 22 (unless it is Inf such that no rounding is
+  #   applied), so no need to check that 'signif' is nonnegative and integer.
+  stopifnot(checkinput::is_number(signif), checkinput::is_positive(width),
             checkinput::is_character(sep),
             is.null(collapse) || checkinput::is_character(collapse))
+  round_type <- match.arg(round_type, several.ok = FALSE)
 
   if(is.list(x) && !is.data.frame(x)) {
     x <- unlist(x, use.names = TRUE)
@@ -102,7 +118,11 @@ vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
   stopifnot(is.vector(x) || is.factor(x) || is.null(x))
 
   if(is.double(x)) {
-    x <- signif_custom(x = x, digits = signif)
+    if(round_type == "strict") {
+      x <- signif(x = x, digits = signif)
+    } else {
+      x <- signif_custom(x = x, digits = signif, type = round_type)
+    }
   }
 
   if(is.factor(x)) {
