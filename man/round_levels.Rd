@@ -22,7 +22,7 @@ a vector indicating the desired order of the factor \link{levels}.}
 round to (see \code{Details}) or \code{Inf} to not round values.}
 
 \item{type}{\link[checkinput:is_character]{character string} \code{"selective"} or
-\code{"expanded"} to indicate the type of rounding to be used, see \code{Details}.}
+\code{"expanded"} indicating the type of rounding to be used, see \code{Details}.}
 }
 \value{
 \code{x} with rounded factor levels.
