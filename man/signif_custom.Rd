@@ -29,8 +29,8 @@ ending in rounded zeros, e.g., \code{14300} instead of \code{14286} when roundin
 Numeric values are rounded according to arguments \code{digits} and \code{type}. Values
 are \strong{not} rounded if \code{digits} is \link{Inf}. Otherwise, the value of \code{digits}
 rounded to the nearest positive integer is used as the \strong{minimum} number of
-\link[=signif]{significant digits} to round numeric \code{x} to while ensuring the
-integer part is not rounded.
+\link[=signif]{significant digits} to round numeric values in \code{x} to while
+ensuring their integer parts are not rounded.
 
 If \code{type} is \code{"selective"}, values are individually rounded to more
 significant digits than \code{digits} if that is needed to not round their integer

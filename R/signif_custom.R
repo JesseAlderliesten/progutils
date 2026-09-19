@@ -19,8 +19,8 @@
 #' Numeric values are rounded according to arguments `digits` and `type`. Values
 #' are **not** rounded if `digits` is [Inf]. Otherwise, the value of `digits`
 #' rounded to the nearest positive integer is used as the **minimum** number of
-#' [significant digits][signif()] to round numeric `x` to while ensuring the
-#' integer part is not rounded.
+#' [significant digits][signif()] to round numeric values in `x` to while
+#' ensuring their integer parts are not rounded.
 #'
 #' If `type` is `"selective"`, values are individually rounded to more
 #' significant digits than `digits` if that is needed to not round their integer
@@ -76,7 +76,7 @@ signif_custom <- function(x, digits = 3L, type = c("selective", "expanded")) {
   # Notes:
   # - Values in argument 'digits' of signif() are rounded to the nearest integer
   #   in the range from 0 to 22 (unless it is Inf such that no rounding is
-  #   applied), so no need to check if 'digits' are nonnegative and integer.
+  #   applied), so no need to check that 'digits' is nonnegative and integer.
   stopifnot(checkinput::is_number(digits))
 
   if(!is.null(nrow(x))) {
