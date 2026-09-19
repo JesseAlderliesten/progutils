@@ -1,7 +1,7 @@
 #' Round factors
 #'
-#' Round numeric values of factors levels, e.g., to create facet labels that fit
-#' better. This changes the values **and** the levels.
+#' Round values and levels of factors, e.g., to create facet labels that fit
+#' better.
 #'
 #' @param x [factor] or [character] vector containing
 #' [numerish values][as.numeric_safe()] to be rounded, see `Details`.

@@ -28,8 +28,8 @@ round to (see \code{Details}) or \code{Inf} to not round values.}
 \code{x} with rounded factor levels.
 }
 \description{
-Round numeric values of factors levels, e.g., to create facet labels that fit
-better. This changes the values \strong{and} the levels.
+Round values and levels of factors, e.g., to create facet labels that fit
+better.
 }
 \details{
 Arguments \code{digits} and \code{type} are passed to \code{\link[=signif_custom]{signif_custom()}}.
