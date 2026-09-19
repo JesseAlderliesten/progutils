@@ -58,7 +58,6 @@ reorder_levels(x_num, new_order = NULL)
 
 # Incorrectly sorts level "28" between "2" and "3"
 sort(levels(x_num))
-"2"  "28" "3"
 
 # Changing the levels directly does *not* work because it changes the values
 levels(orig) <- letters[11:13]
