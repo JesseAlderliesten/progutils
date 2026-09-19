@@ -154,8 +154,6 @@ addition, many packages have an `utils` folder in their `R` directory.
   : Replace non-alphanumeric characters
 - [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
   : Replace values
-- [`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md)
-  : Round levels
 - [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
   : Signal a text to the user
 - [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)

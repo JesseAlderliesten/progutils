@@ -4,6 +4,9 @@
 
 #### Breaking changes
 
+- [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md)
+  accepts `NULL` for `new_order` to sort levels on increasing numerical
+  value.
 - [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
   uses
   [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
@@ -18,10 +21,9 @@
 - [`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md)
   to replace or remove non-alphanumeric characters, handling underscores
   separately.
-- [`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md)
-  to round values of factor levels.
 - [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
-  to round values while ensuring that their integer part is not rounded.
+  to round values while ensuring that their integer parts are not
+  rounded.
 
 #### Miscellaneous
 

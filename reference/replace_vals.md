@@ -112,7 +112,6 @@ Other functions to check equality:
 [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md),
 [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md),
 [`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md),
-[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md),
 [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
 
 Other functions to modify character vectors:
@@ -127,7 +126,6 @@ Other functions to modify factors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 `reexports`,
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md),
-[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
 
 ## Examples

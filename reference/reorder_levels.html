@@ -53,14 +53,15 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>Factor with levels to be reordered to <code>new_order</code>, or character
+<dd><p>factor with levels to be reordered to <code>new_order</code>, or character
 vector to be converted to a factor with levels ordered as <code>new_order</code>. Should
 have length larger than zero.</p></dd>
 
 
 <dt id="arg-new-order">new_order<a class="anchor" aria-label="anchor" href="#arg-new-order"></a></dt>
-<dd><p>Character vector with a length larger than zero containing
-unique names in the new order.</p></dd>
+<dd><p>a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a> with a
+length larger than zero containing <a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a> levels giving the desired order,
+or <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> to sort levels on increasing numerical value.</p></dd>
 
 
 <dt id="arg-warn-drop-order">warn_drop_order<a class="anchor" aria-label="anchor" href="#arg-warn-drop-order"></a></dt>
@@ -78,13 +79,13 @@ dropped because they are not present in <code>x</code>?</p></dd>
     <p>Character input to <code>x</code> is silently converted to a <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a> before reordering
 the factor levels.</p>
 <p>Values of factor <code>x</code> that are not present in its levels are added to its
-levels, with a warning.</p>
-<p>Levels of factor <code>x</code> that are not present in its values are dropped, with a
-warning.</p>
+levels, and levels that are not present in its values are dropped, both with
+a warning.</p>
 <p>Levels of <code>x</code> that are missing from <code>new_order</code> are appended to <code>new_order</code>,
-with a warning.</p>
-<p>Values in <code>new_order</code> that are missing from levels of <code>x</code> are dropped, with a
-warning if <code>warn_drop_order</code> is <code>TRUE</code>.</p>
+with a warning. Values of <code>new_order</code> that are missing from levels of <code>x</code> are
+dropped, with a warning if <code>warn_drop_order</code> is <code>TRUE</code>.</p>
+<p>Sorting on on increasing numerical value only works if <code>x</code> can be suitably
+converted by <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a></h2>
@@ -106,7 +107,6 @@ warning if <code>warn_drop_order</code> is <code>TRUE</code>.</p>
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
 <code>reexports</code>,
 <code><a href="replace_vals.html">replace_vals()</a></code>,
-<code><a href="round_levels.html">round_levels()</a></code>,
 <code><a href="vect_to_char.html">vect_to_char()</a></code></p>
 <p>Other functions to modify sorting order:
 <code><a href="reorder_cols.html">reorder_cols()</a></code></p></div>
@@ -121,6 +121,16 @@ warning if <code>warn_drop_order</code> is <code>TRUE</code>.</p>
 <span class="r-in"><span><span class="fu">reorder_levels</span><span class="op">(</span>x <span class="op">=</span> <span class="va">orig</span>, new_order <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] l m m l k</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Levels: k l m</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Correctly sorts level 28 after 2 and 3</span></span></span>
+<span class="r-in"><span><span class="fu">reorder_levels</span><span class="op">(</span><span class="va">x_num</span>, new_order <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 28 3  2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Levels: 2 3 28</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Incorrectly sorts level "28" between "2" and "3"</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">x_num</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2"  "28" "3" </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Changing the levels directly does *not* work because it changes the values</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">orig</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span></span></span>

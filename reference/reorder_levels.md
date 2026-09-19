@@ -12,14 +12,18 @@ reorder_levels(x, new_order, warn_drop_order = TRUE)
 
 - x:
 
-  Factor with levels to be reordered to `new_order`, or character vector
+  factor with levels to be reordered to `new_order`, or character vector
   to be converted to a factor with levels ordered as `new_order`. Should
   have length larger than zero.
 
 - new_order:
 
-  Character vector with a length larger than zero containing unique
-  names in the new order.
+  a [character
+  vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  with a length larger than zero containing
+  [unique](https://rdrr.io/r/base/unique.html) levels giving the desired
+  order, or [NULL](https://rdrr.io/r/base/NULL.html) to sort levels on
+  increasing numerical value.
 
 - warn_drop_order:
 
@@ -39,16 +43,17 @@ Character input to `x` is silently converted to a
 factor levels.
 
 Values of factor `x` that are not present in its levels are added to its
-levels, with a warning.
-
-Levels of factor `x` that are not present in its values are dropped,
+levels, and levels that are not present in its values are dropped, both
 with a warning.
 
 Levels of `x` that are missing from `new_order` are appended to
-`new_order`, with a warning.
+`new_order`, with a warning. Values of `new_order` that are missing from
+levels of `x` are dropped, with a warning if `warn_drop_order` is
+`TRUE`.
 
-Values in `new_order` that are missing from levels of `x` are dropped,
-with a warning if `warn_drop_order` is `TRUE`.
+Sorting on on increasing numerical value only works if `x` can be
+suitably converted by
+[`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md).
 
 ## Notes
 
@@ -72,7 +77,6 @@ Other functions to modify factors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 `reexports`,
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
-[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
 
 Other functions to modify sorting order:
@@ -88,6 +92,16 @@ orig
 reorder_levels(x = orig, new_order = letters[11:13])
 #> [1] l m m l k
 #> Levels: k l m
+
+x_num <- factor(c(28, 3:2), levels = c(28, 3:2))
+# Correctly sorts level 28 after 2 and 3
+reorder_levels(x_num, new_order = NULL)
+#> [1] 28 3  2 
+#> Levels: 2 3 28
+
+# Incorrectly sorts level "28" between "2" and "3"
+sort(levels(x_num))
+#> [1] "2"  "28" "3" 
 
 # Changing the levels directly does *not* work because it changes the values
 levels(orig) <- letters[11:13]

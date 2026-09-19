@@ -70,7 +70,6 @@ Other functions to check equality:
 [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md),
 [`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
-[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md),
 [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
 
 ## Examples

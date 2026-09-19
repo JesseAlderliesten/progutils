@@ -26,5 +26,4 @@ Other functions to modify factors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
-[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)

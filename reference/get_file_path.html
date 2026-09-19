@@ -116,7 +116,6 @@ directories</p>
 <code><a href="not_in.html">not_in()</a></code>,
 <code><a href="replace_nonalnum.html">replace_nonalnum()</a></code>,
 <code><a href="replace_vals.html">replace_vals()</a></code>,
-<code><a href="round_levels.html">round_levels()</a></code>,
 <code><a href="signif_custom.html">signif_custom()</a></code></p></div>
     </div>
 
@@ -133,45 +132,45 @@ directories</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"some_file"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0/some_filename.txt'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0/some_filename.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/Rtmp88juUO/examplegetfilepath191543898069/some_filename.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmp88juUO/examplegetfilepath191543898069/some_filename.txt</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The same file is found if case-insensitive matching is used:</span></span></span>
 <span class="r-in"><span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"SOME_FILE"</span>, ignore_case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0/some_filename.txt'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0/some_filename.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/Rtmp88juUO/examplegetfilepath191543898069/some_filename.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmp88juUO/examplegetfilepath191543898069/some_filename.txt</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error reporting the presence of a case-insensitive match.</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"SOME_FILE"</span>, ignore_case <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/Rtmp88juUO/examplegetfilepath191543898069'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> However, a case-insensitive match to 'pattern' is present:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'some_filename.txt'.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 'pattern' is interpreted as a regular expression</span></span></span>
 <span class="r-in"><span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"^.+er_file"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0/another_filename.txt'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0/another_filename.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/Rtmp88juUO/examplegetfilepath191543898069/another_filename.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/Rtmp88juUO/examplegetfilepath191543898069/another_filename.txt</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error reporting no match found.</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"missing_filename_abcde"</span>,</span></span>
 <span class="r-in"><span>                 ignore_case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   No matches to pattern 'missing_filename_abcde' are present in directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/Rtmp88juUO/examplegetfilepath191543898069'.</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"missing_filename_abcde"</span>,</span></span>
 <span class="r-in"><span>                 ignore_case <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/Rtmp88juUO/examplegetfilepath191543898069'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No case-insensitive match is present either.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error if multiple matches are present.</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"_filename"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in get_file_path(dir = my_tempdir, pattern = "_filename") : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Multiple matches to pattern '_filename' are present in directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpizCSFg/examplegetfilepath1a17b98eb0':</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/Rtmp88juUO/examplegetfilepath191543898069':</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'another_filename.txt'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'some_filename.txt'!</span>
 <span class="r-in"><span></span></span>

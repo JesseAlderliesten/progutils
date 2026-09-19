@@ -84,7 +84,6 @@ Other functions to check equality:
 [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md),
 [`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
-[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md),
 [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
 
 ## Examples

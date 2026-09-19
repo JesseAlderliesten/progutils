@@ -54,7 +54,8 @@ numeric values.</p>
 <span>  width <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  sep <span class="op">=</span> <span class="st">": "</span>,</span>
 <span>  collapse <span class="op">=</span> <span class="st">", "</span>,</span>
-<span>  ignore_newlines <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  ignore_newlines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  round_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"selective"</span>, <span class="st">"expanded"</span>, <span class="st">"strict"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -68,8 +69,9 @@ through <code>unlist(x, use.names = TRUE)</code>, with a warning).</p></dd>
 
 
 <dt id="arg-signif">signif<a class="anchor" aria-label="anchor" href="#arg-signif"></a></dt>
-<dd><p>Positive number of length one, rounded to the nearest positive
-integer indicating the number of significant digits to round numeric <code>x</code> to.</p></dd>
+<dd><p>Positive number indicating the number of
+<a href="https://rdrr.io/r/base/Round.html" class="external-link">significant digits</a> to round numeric <code>x</code> to (see <code>Details</code>) or
+<code>Inf</code> to not round values.</p></dd>
 
 
 <dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
@@ -93,19 +95,24 @@ element of a character vector.</p></dd>
 <dd><p><code>TRUE</code> or <code>FALSE</code>: should newlines in <code>x</code> be replaced
 by blank characters?</p></dd>
 
+
+<dt id="arg-round-type">round_type<a class="anchor" aria-label="anchor" href="#arg-round-type"></a></dt>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a>
+<code>"selective"</code>, <code>"expanded"</code>, or <code>"signif"</code> indicating the type of rounding to
+be used, see <code>Details</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A character vector or character string with the names and values in <code>x</code>, with
-values of numeric <code>x</code> rounded to <code>signif</code> <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant</a> digits (but
-at least the integer part displayed compeletely, see <code><a href="signif_custom.html">signif_custom()</a></code>),
+values of numeric <code>x</code> rounded to <code>signif</code> <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant</a> digits,
 wrapped to <code>width</code> characters.</p>
 <p>If <code>collapse</code> is <code>NULL</code>, a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a>
 with the same elements as <code>x</code>
 is returned, wrapping on a per-element basis. If <code>collapse</code> is not <code>NULL</code>,
 the name-value pairs are separated by <code>collapse</code>, thus returning a
 <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a>.</p>
-<p>See <code>Details</code> on handling of some special values.</p>
+<p>See <code>Details</code> on the handling of some special values.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -119,7 +126,13 @@ the name-value pairs are separated by <code>collapse</code>, thus returning a
 for <code>NA_real_</code> this is <code>"NA_double_"</code>;
 for <a href="https://rdrr.io/r/base/factor.html" class="external-link">factors</a> this is <code>"NA_character_"</code> because <code>vect_to_char()</code>
 converts factors to characters).</p></li>
-</ul></div>
+</ul><p>Numeric values are not rounded if <code>digits</code> is <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">Inf</a>. Otherwise, numeric
+values are rounded to <strong>at least</strong> <code>digits</code> <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant digits</a>
+while ensuring their integer parts are unrounded (if <code>round_type</code> is
+<code>selective</code> or <code>expanded</code>, see <code><a href="signif_custom.html">signif_custom()</a></code> for details) or are rounded
+to <strong>exactly</strong> <code>digits</code> significant digits while their integer parts might be
+rounded (if <code>round_type</code> is <code>signif</code>).</p>
+    </div>
     <div class="section level2">
     <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
 
@@ -151,8 +164,7 @@ objects into a vector.</p>
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
 <code>reexports</code>,
 <code><a href="reorder_levels.html">reorder_levels()</a></code>,
-<code><a href="replace_vals.html">replace_vals()</a></code>,
-<code><a href="round_levels.html">round_levels()</a></code></p></div>
+<code><a href="replace_vals.html">replace_vals()</a></code></p></div>
     </div>
 
     <div class="section level2">

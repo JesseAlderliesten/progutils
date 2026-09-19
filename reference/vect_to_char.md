@@ -12,7 +12,8 @@ vect_to_char(
   width = Inf,
   sep = ": ",
   collapse = ", ",
-  ignore_newlines = TRUE
+  ignore_newlines = TRUE,
+  round_type = c("selective", "expanded", "strict")
 )
 ```
 
@@ -26,8 +27,9 @@ vect_to_char(
 
 - signif:
 
-  Positive number of length one, rounded to the nearest positive integer
-  indicating the number of significant digits to round numeric `x` to.
+  Positive number indicating the number of [significant
+  digits](https://rdrr.io/r/base/Round.html) to round numeric `x` to
+  (see `Details`) or `Inf` to not round values.
 
 - width:
 
@@ -55,14 +57,19 @@ vect_to_char(
   `TRUE` or `FALSE`: should newlines in `x` be replaced by blank
   characters?
 
+- round_type:
+
+  [character
+  string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  `"selective"`, `"expanded"`, or `"signif"` indicating the type of
+  rounding to be used, see `Details`.
+
 ## Value
 
 A character vector or character string with the names and values in `x`,
 with values of numeric `x` rounded to `signif`
-[significant](https://rdrr.io/r/base/Round.html) digits (but at least
-the integer part displayed compeletely, see
-[`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)),
-wrapped to `width` characters.
+[significant](https://rdrr.io/r/base/Round.html) digits, wrapped to
+`width` characters.
 
 If `collapse` is `NULL`, a [character
 vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
@@ -71,7 +78,7 @@ basis. If `collapse` is not `NULL`, the name-value pairs are separated
 by `collapse`, thus returning a [character
 string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html).
 
-See `Details` on handling of some special values.
+See `Details` on the handling of some special values.
 
 ## Details
 
@@ -93,6 +100,16 @@ than [`message()`](https://rdrr.io/r/base/message.html) etc. that use
   [factors](https://rdrr.io/r/base/factor.html) this is
   `"NA_character_"` because `vect_to_char()` converts factors to
   characters).
+
+Numeric values are not rounded if `digits` is
+[Inf](https://rdrr.io/r/base/is.finite.html). Otherwise, numeric values
+are rounded to **at least** `digits` [significant
+digits](https://rdrr.io/r/base/Round.html) while ensuring their integer
+parts are unrounded (if `round_type` is `selective` or `expanded`, see
+[`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
+for details) or are rounded to **exactly** `digits` significant digits
+while their integer parts might be rounded (if `round_type` is
+`signif`).
 
 ## Programming notes
 
@@ -129,8 +146,7 @@ Other functions to modify factors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 `reexports`,
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md),
-[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
-[`round_levels()`](https://jessealderliesten.github.io/progutils/reference/round_levels.md)
+[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
 
 ## Examples
 
