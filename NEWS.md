@@ -10,8 +10,8 @@
 ### New functions
 - `replace_nonalnum()` to replace or remove non-alphanumeric characters,
   handling underscores separately.
-- `round_levels()` to round values of factor levels.
-- `signif_custom()` to round values while ensuring that their integer part is
+- `round_factor()` to round values and levels of factors.
+- `signif_custom()` to round values while ensuring that their integer parts are
   not rounded.
 
 ### Miscellaneous
