@@ -79,6 +79,18 @@ for(type in c("selective", "expanded")) {
   )
 
   expect_equal(
+    signif_custom(x = x2, digits = Inf, type = type),
+    x2,
+    info = paste0("2 unrounded (abs(x) > 10^digits, type '", type, "')")
+  )
+
+  expect_equal(
+    signif_custom(x = x2, digits = -3, type = type),
+    signif_custom(x = x2, digits = 1, type = type),
+    info = paste0("2 negative 'digits' (abs(x) > 10^digits, type '", type, "')")
+  )
+
+  expect_equal(
     signif_custom(x = x2_df, digits = 3, type = type),
     data.frame(x2 = expect_x2),
     info = paste0("2_df (abs(x) < 10^digits, type '", type, "')")
