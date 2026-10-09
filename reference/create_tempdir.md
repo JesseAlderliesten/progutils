@@ -104,10 +104,12 @@ to create a (non-temporary) directory if it does not yet exist;
 [`local()`](https://rdrr.io/r/base/eval.html) and
 [withr::local_tempdir()](https://withr.r-lib.org/reference/with_tempfile.html)
 for automated deletion of temporary directories;
-[withr::withr::local_dir()](https://withr.r-lib.org/reference/with_dir.html)
+[withr::local_dir()](https://withr.r-lib.org/reference/with_dir.html)
 and
 [usethis::local_project()](https://usethis.r-lib.org/reference/proj_utils.html)
-to change the working directory to a temporary directory;
+to change the working directory to a temporary directory (use
+[`withr::deferred_run()`](https://withr.r-lib.org/reference/defer.html)
+to change back to the normal project in interactive use);
 [`tempfile()`](https://rdrr.io/r/base/tempfile.html) used in this
 function to create the paths for the temporary directory;
 
@@ -120,14 +122,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/Rtmp88juUO"
+#> [1] "/tmp/RtmpcqMW3N"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/Rtmp88juUO/subtempdir191543f04dee"
+#> [1] "/tmp/RtmpcqMW3N/subtempdir198e12bb97a3"
 
 # Using the same 'prefix' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/Rtmp88juUO/subtempdir1915572b43f8"
+#> [1] "/tmp/RtmpcqMW3N/subtempdir198e1139e86e"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))

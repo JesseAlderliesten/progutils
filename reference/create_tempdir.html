@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,9 +132,11 @@ and extensive references about file paths and directories;
 <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> and
 <a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">withr::local_tempdir()</a>
 for automated deletion of temporary directories;
-<a href="https://withr.r-lib.org/reference/with_dir.html" class="external-link">withr::withr::local_dir()</a>
-and <a href="https://usethis.r-lib.org/reference/proj_utils.html" class="external-link">usethis::local_project()</a>
-to change the working directory to a temporary directory;
+<a href="https://withr.r-lib.org/reference/with_dir.html" class="external-link">withr::local_dir()</a> and
+<a href="https://usethis.r-lib.org/reference/proj_utils.html" class="external-link">usethis::local_project()</a>
+to change the working directory to a temporary directory (use
+<code><a href="https://withr.r-lib.org/reference/defer.html" class="external-link">withr::deferred_run()</a></code> to change back to the normal project in interactive
+use);
 <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile()</a></code> used in this function to create the paths for the temporary
 directory;</p>
 <p>Other functions to handle paths and directories:
@@ -146,14 +148,14 @@ directory;</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp88juUO"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpcqMW3N"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex1</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp88juUO/subtempdir191543f04dee"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpcqMW3N/subtempdir198e12bb97a3"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using the same 'prefix' again creates another directory</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex2</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp88juUO/subtempdir1915572b43f8"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpcqMW3N/subtempdir198e1139e86e"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is not possible to create recursive subdirectories</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">no_subtempdir</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir/otherdir"</span><span class="op">)</span><span class="op">)</span></span></span>
