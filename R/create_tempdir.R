@@ -66,9 +66,11 @@
 #' [local()] and
 #' [withr::local_tempdir()](https://withr.r-lib.org/reference/with_tempfile.html)
 #' for automated deletion of temporary directories;
-#' [withr::withr::local_dir()](https://withr.r-lib.org/reference/with_dir.html)
-#' and [usethis::local_project()](https://usethis.r-lib.org/reference/proj_utils.html)
-#' to change the working directory to a temporary directory;
+#' [withr::local_dir()](https://withr.r-lib.org/reference/with_dir.html) and
+#' [usethis::local_project()](https://usethis.r-lib.org/reference/proj_utils.html)
+#' to change the working directory to a temporary directory (use
+#' `withr::deferred_run()` to change back to the normal project in interactive
+#' use);
 #' [tempfile()] used in this function to create the paths for the temporary
 #' directory;
 #'
