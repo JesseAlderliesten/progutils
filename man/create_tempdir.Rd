@@ -105,9 +105,11 @@ and extensive references about file paths and directories;
 \code{\link[=local]{local()}} and
 \href{https://withr.r-lib.org/reference/with_tempfile.html}{withr::local_tempdir()}
 for automated deletion of temporary directories;
-\href{https://withr.r-lib.org/reference/with_dir.html}{withr::withr::local_dir()}
-and \href{https://usethis.r-lib.org/reference/proj_utils.html}{usethis::local_project()}
-to change the working directory to a temporary directory;
+\href{https://withr.r-lib.org/reference/with_dir.html}{withr::local_dir()} and
+\href{https://usethis.r-lib.org/reference/proj_utils.html}{usethis::local_project()}
+to change the working directory to a temporary directory (use
+\code{withr::deferred_run()} to change back to the normal project in interactive
+use);
 \code{\link[=tempfile]{tempfile()}} used in this function to create the paths for the temporary
 directory;
 

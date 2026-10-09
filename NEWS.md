@@ -1,3 +1,9 @@
+# progutils 0.15.1
+
+### Documentation
+- `README`: add contact/contribution info.
+
+
 # progutils 0.15.0
 
 ### Breaking changes
@@ -16,7 +22,7 @@
   not rounded.
 
 ### Miscellaneous
-- The used version of roxygen2 increased from `8.0.0` to `8.1.0`.
+- The used version of `roxygen2` increased from `8.0.0` to `8.1.0`.
 
 
 # progutils 0.14.0

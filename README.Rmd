@@ -92,6 +92,11 @@ This project is licensed under the terms of the [MIT License](LICENSE.md).
 citation("progutils")
 ```
 
+## Contact
+Please open a
+[GitHub issue](https://github.com/JesseAlderliesten/progutils/issues) if you
+have suggestions for improvement of `progutils`.
+
 ## Similar packages
 Many packages with miscellaneous functions exist on [GitHub](https://github.com/)
 and [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html):
