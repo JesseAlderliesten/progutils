@@ -136,6 +136,20 @@ expect_error(reorder_cols(x = test_df, new_order = character(0)),
 expect_error(reorder_cols(x = test_df, new_order = c(new_order, new_order[2])),
              pattern = "Values in 'new_order' should be unique", fixed = TRUE)
 
+# Case-insensitive match
+expect_warning(
+  expect_identical(reorder_cols(x = test_df, new_order = c("b", "A", "c")),
+                   test_df[, c(2, 3, 1)]),
+  pattern = paste0("Appended columns that are present in 'x' but missing from",
+                   " 'new_order':\n'a'"),
+  strict = TRUE, fixed = TRUE)
+
+expect_warning(
+  expect_identical(reorder_cols(x = test_df, new_order = c("b", "A", "c")),
+                   test_df[, c(2, 3, 1)]),
+  pattern = paste0("Dropped values of 'new_order' that are not present in",
+                   " column names of 'x':\n'A'"),
+  strict = TRUE, fixed = TRUE)
 
 #### Remove objects used in tests ####
 rm(new_order, new_order_weird, output_df, output_mat, test_df, test_df_weird,
