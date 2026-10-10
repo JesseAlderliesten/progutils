@@ -15,7 +15,9 @@
 #'
 #' Values of factor `x` that are not present in its levels are added to its
 #' levels, and levels that are not present in its values are dropped, both with
-#' a warning.
+#' a warning. If the added levels and dropped values only differ in case, an
+#' additional warning is issued because that suggests values in `new_order` have
+#' the wrong case.
 #'
 #' Levels of `x` that are missing from `new_order` are appended to `new_order`,
 #' with a warning. Values of `new_order` that are missing from levels of `x` are
@@ -99,9 +101,22 @@ reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
   }
 
   bool_order_in_levels <- new_order %in% levels(x)
-  if(warn_drop_order && any(!bool_order_in_levels)) {
-    warning("Dropped values of 'new_order' that are not present in 'x':\n",
-            paste_quoted(new_order[!bool_order_in_levels]))
+  neg_bool_order_in_levels <- !bool_order_in_levels
+  if(any(neg_bool_order_in_levels)) {
+    if(warn_drop_order) {
+      warning("Dropped values of 'new_order' that are not present in 'x':\n",
+              paste_quoted(new_order[neg_bool_order_in_levels]))
+    }
+    if(any(!bool_levels_in_new_order)) {
+      bool_present_ignored_case <- tolower(levels_appended) %in%
+        tolower(new_order[neg_bool_order_in_levels])
+      if(any(bool_present_ignored_case)) {
+        warning("Did you use incorrect case in values of 'new_order' resulting",
+                " in levels appended\nto 'x' and values droped from",
+                " 'new_order' that only differ in their case:\n",
+                paste_quoted(levels_appended[bool_present_ignored_case]))
+      }
+    }
   }
   factor(x, levels = new_order[bool_order_in_levels], exclude = NULL)
 }
