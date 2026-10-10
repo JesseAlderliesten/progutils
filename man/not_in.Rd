@@ -4,7 +4,7 @@
 \alias{not_in}
 \title{Check that values are absent}
 \usage{
-not_in(x, table, value = TRUE)
+not_in(x, table, value = TRUE, ignore_case = FALSE)
 }
 \arguments{
 \item{x}{Vector or factor with values to test absence from \code{table}. \code{x}
@@ -15,6 +15,9 @@ should not be of \code{type} \code{double}.}
 
 \item{value}{\code{TRUE} or \code{FALSE}: should a vector with values be returned
 instead of a boolean vector?}
+
+\item{ignore_case}{\code{TRUE} or \code{FALSE}: should case be ignored when comparing
+\code{x} and \code{table}?}
 }
 \value{
 If \code{value} is \code{TRUE}: the values in \code{x} that are absent from \code{table}, with a
@@ -68,6 +71,11 @@ not_in(x_dupl, table_dupl) # c("a", "b", "b")
 setdiff(x_dupl, table_dupl) # c("a", "b")
 not_in(x_dupl, table_dupl, value = FALSE)
 # c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)
+
+not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+       ignore_case = FALSE) # c("b", "C")
+not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+       ignore_case = TRUE) # character(0)
 
 # Names are not considered when matching but are retained in the output
 not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
