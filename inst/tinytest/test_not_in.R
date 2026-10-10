@@ -38,6 +38,16 @@ expect_silent(expect_identical(
   not_in(x_example_dupl, table_example_dupl, value = FALSE),
   c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)))
 
+# ignore_case
+expect_silent(expect_identical(
+  not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+         ignore_case = FALSE),
+  c("b", "C")))
+
+expect_silent(expect_identical(
+  not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+         ignore_case = TRUE),
+  character(0)))
 
 # Names are not considered when matching but are retained in the output
 expect_silent(expect_identical(
