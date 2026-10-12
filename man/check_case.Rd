@@ -2,42 +2,69 @@
 % Please edit documentation in R/check_case.R
 \name{check_case}
 \alias{check_case}
-\title{Check for values that differ only in their case}
+\title{Check for case differences}
 \usage{
-check_case(x, signal = c("error", "warning", "message", "quiet"))
+check_case(
+  x,
+  y = NULL,
+  signal = c("error", "warning", "message", "quiet"),
+  signal_within = c("warning", "message", "quiet", "error")
+)
 }
 \arguments{
-\item{x}{Character vector to check.}
+\item{x, y}{\link[checkinput:all_characters]{character vectors} to check, see
+\code{Value}.}
 
 \item{signal}{\link[checkinput:is_character]{character string} indicating the
 type of signal to be used:
 \code{"error"} to throw an \link[=stop]{error}, \code{"warning"} to issue a \link{warning},
 \code{"message"} to show a \link{message}, or \code{"quiet"} to be quiet.}
+
+\item{signal_within}{as \code{signal} but indicating the type of
+\link[=signal_text]{signal} to be used if values within \code{x} or within \code{y} differ
+only in their case.}
 }
 \value{
-A \link[checkinput:all_characters]{character vector} with \link{unique},
-\link[=sort]{sorted} values in \code{x} that only differ from each other in their
-case, or \code{character(0)} if no such values are present, returned
-\link[=invisible]{invisibly}.
+A \link[checkinput:all_characters]{character vector} with \link{unique}
+values that only differ from other values in their case, or \code{character(0)} if
+no such values are present, returned \link[=invisible]{invisibly}.
+
+If \code{y} is \strong{not} \code{NULL}: values in \code{x} that only differ from values in \code{y}
+in their case. Such values lead to a \link[=signal_text]{signal} as indicated by
+argument \code{signal}. Values within \code{x} or within \code{y} only differ in their case
+lead to a \link[=signal_text]{signal} as indicated by argument \code{signal_within}.
+
+If \code{y} is \code{NULL}: values in \code{x} that only differ from other values in \code{x} in
+their case. Such values lead to a \link[=signal_text]{signal} as indicated by
+argument \code{signal_within}.
 }
 \description{
-Check for values that differ only in their case
+Signal the presence of values that differ only in their case.
 }
-\details{
-Values in \code{x} that only differ from each other in their case lead to a
-\link[=signal_text]{signal} as indicated by argument \code{signal}.
-}
-\section{Notes}{
-
-The sorting order in the result depends on the used \link[=locales]{locale} (see
-also the section \code{Details} of \code{\link{Comparison}}), which also affects if uppercase
-characters are sorted before or after lowercase characters.
-}
-
 \examples{
-x <- c("Ee", "Ee", "LL", "Ll")
-try(check_case(x = x, signal = "error"))
-check_case(x = x, signal = "warning")
+x <- c("a", "b", "C", "D")
+y <- c("a", "B", "c", "D")
+z <- c("a", "b", "C", "D", "A")
+
+try(check_case(x = x, y = y, signal = "error")) # an error
+(check_case(x = x, y = y, signal = "warning")) # c("b", "C"), with a warning
+
+(check_case(x = x, y = "h", signal = "warning")) # character(0)
+
+(check_case(x = z, y = NULL, signal = "warning", signal_within = "message"))
+# c("a", "A"), with a message:
+# 'x' contains values that only differ in their case: 'a', 'A'
+
+(check_case(x = z, y = "h", signal = "warning", signal_within = "warning"))
+# character(0), with a warning:
+# 'x' contains values that only differ in their case: 'a', 'A'
+(check_case(x = z, y = "h", signal = "warning", signal_within = "quiet"))
+# character(0), without a warning
+
+(check_case(x = x, y = z, signal = "warning"))
+# "a", with warnings
+# 1: 'y' contains values that only differ in their case: 'a', 'A'
+# 2: 'x' contains values that only differ in their case from values in 'y': 'a'
 
 }
 \seealso{
