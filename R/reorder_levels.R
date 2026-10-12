@@ -23,7 +23,7 @@
 #' with a warning. Values of `new_order` that are missing from levels of `x` are
 #' dropped, with a warning if `warn_drop_order` is `TRUE`.
 #'
-#' Sorting on on increasing numerical value only works if `x` can be suitably
+#' Sorting on increasing numerical value only works if `x` can be suitably
 #' converted by [as.numeric_safe()].
 #'
 #' @returns

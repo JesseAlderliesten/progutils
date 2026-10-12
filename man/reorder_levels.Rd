@@ -39,7 +39,7 @@ Levels of \code{x} that are missing from \code{new_order} are appended to \code{
 with a warning. Values of \code{new_order} that are missing from levels of \code{x} are
 dropped, with a warning if \code{warn_drop_order} is \code{TRUE}.
 
-Sorting on on increasing numerical value only works if \code{x} can be suitably
+Sorting on increasing numerical value only works if \code{x} can be suitably
 converted by \code{\link[=as.numeric_safe]{as.numeric_safe()}}.
 }
 \section{Notes}{
