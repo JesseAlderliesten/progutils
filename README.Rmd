@@ -100,5 +100,5 @@ have suggestions for improvement of `progutils`.
 ## Similar packages
 Many packages with miscellaneous functions exist on [GitHub](https://github.com/)
 and [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html):
-frequently they have 'misc' or 'util' in their title or description. In addition,
+frequently they have `misc` or `util` in their title or description. In addition,
 many packages have an `utils` folder in their `R` directory.
