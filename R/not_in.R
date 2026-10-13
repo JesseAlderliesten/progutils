@@ -104,9 +104,8 @@ not_in <- function(x, table, value = TRUE, ignore_case = FALSE, warn_case = TRUE
     res <- match(tolower(x), tolower(table), nomatch = 0L) == 0L
     bool_diff_case <- res_case_sensitive & !res
     if(warn_case && any(bool_diff_case)) {
-      warning(paste0("Values considered present would be absent when using",
-                     " case-sensitive matching:\n"),
-              paste_quoted(x[bool_diff_case]))
+      warning("Values considered present would be absent when using",
+              " case-sensitive matching:\n", paste_quoted(x[bool_diff_case]))
     }
   }
 
