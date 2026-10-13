@@ -51,18 +51,21 @@ Levels of `x` that are missing from `new_order` are appended to
 levels of `x` are dropped, with a warning if `warn_drop_order` is
 `TRUE`.
 
-Sorting on on increasing numerical value only works if `x` can be
-suitably converted by
+Sorting on increasing numerical value only works if `x` can be suitably
+converted by
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md).
 
 ## Notes
 
 Reordering levels of factor `f` by replacing levels through code like
-`levels(f) <- levels(f)[<some order>]` does **not** work, see the last
+`levels(f) <- levels(f)[<some order>]` or through assigning a named list
+does **not** work because it also changes the values, see the last
 `Example`.
 
 ## See also
 
+the examples in [`levels()`](https://rdrr.io/r/base/levels.html) on
+combining levels,
 [`stats::relevel()`](https://rdrr.io/r/stats/relevel.html) to assign one
 reference level to a factor;
 [`order()`](https://rdrr.io/r/base/order.html);

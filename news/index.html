@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,24 @@
       <small>Source: <a href="https://github.com/JesseAlderliesten/progutils/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.16.0" id="progutils-0160">progutils 0.16.0<a class="anchor" aria-label="anchor" href="#progutils-0160"></a></h2>
+<div class="section level4">
+<h4 id="breaking-changes-0-16-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-16-0"></a></h4>
+<ul><li>Dependency on <code>R &gt;= 4.0.0</code> to be able to use <code>deparse1(substitute(x))</code> to get the correct argument names when one function calls another function.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="new-features-0-16-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-16-0"></a></h4>
+<ul><li>
+<code><a href="../reference/check_case.html">check_case()</a></code> gains argument <code>y</code> to check for values that only differ in their case between two vectors. Output is no longer sorted, making it independent of the used <code>locale</code>.</li>
+<li>
+<code><a href="../reference/not_in.html">not_in()</a></code>: add argument <code>ignore_case</code> to make matching case-insensitive and argument <code>warn_case</code> to warn about values that would be absent when using case-sensitive matching.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="documentation-0-16-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-16-0"></a></h4>
+<ul><li>Version of <code>roxygen2</code> bumped to 8.1.1.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.15.1" id="progutils-0151">progutils 0.15.1<a class="anchor" aria-label="anchor" href="#progutils-0151"></a></h2>
 <div class="section level4">

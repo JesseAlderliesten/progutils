@@ -14,7 +14,7 @@
 ## Text
 
 - [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md)
-  : Check for values that differ only in their case
+  : Check for case differences
 - [`reexports`](https://jessealderliesten.github.io/progutils/reference/reexports.md)
   [`paste_quoted`](https://jessealderliesten.github.io/progutils/reference/reexports.md)
   : Objects exported from other packages
@@ -38,7 +38,7 @@
 - [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md)
   : Check that values in two numeric vectors are nearly equal
 - [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md)
-  : Check for values that differ only in their case
+  : Check for case differences
 - [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md)
   : Check that only a single matching file is present
 - [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)

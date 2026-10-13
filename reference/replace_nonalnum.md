@@ -58,7 +58,7 @@ to replace specific values;
 [`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html)
 and
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-for more specific checks.
+for more specific checks on the validity of strings.
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),

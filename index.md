@@ -46,11 +46,12 @@ as.numeric_safe(x) # Returns the values.
 #> [1] 11 12 13
 ```
 
-Similarly, using [`relevel()`](https://rdrr.io/r/stats/relevel.html) or
-[`levels()`](https://rdrr.io/r/base/levels.html) from base R to reorder
-factor levels does **not** work, whereas using
+Similarly, [`relevel()`](https://rdrr.io/r/stats/relevel.html) from base
+R can only be used to assign a reference level to a factor and using
+[`levels()`](https://rdrr.io/r/base/levels.html) from base R does
+**not** work to reorder factor levels, whereas using
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md)
-from `progutils` **does**:
+from `progutils` **does** work:
 
 ``` r
 
@@ -109,7 +110,7 @@ License](https://jessealderliesten.github.io/progutils/LICENSE.md).
 To cite package 'progutils' in publications use:
 
   Alderliesten J (2026). _progutils: Programming Utilities_. R package
-  version 0.15.1, <https://github.com/JesseAlderliesten/progutils>.
+  version 0.16.0, <https://github.com/JesseAlderliesten/progutils>.
 
 A BibTeX entry for LaTeX users is
 
@@ -117,7 +118,7 @@ A BibTeX entry for LaTeX users is
     title = {progutils: Programming Utilities},
     author = {Jesse Alderliesten},
     year = {2026},
-    note = {R package version 0.15.1},
+    note = {R package version 0.16.0},
     url = {https://github.com/JesseAlderliesten/progutils},
   }
 ```
@@ -133,5 +134,5 @@ have suggestions for improvement of `progutils`.
 Many packages with miscellaneous functions exist on
 [GitHub](https://github.com/) and
 [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html):
-frequently they have ‘misc’ or ‘util’ in their title or description. In
+frequently they have `misc` or `util` in their title or description. In
 addition, many packages have an `utils` folder in their `R` directory.

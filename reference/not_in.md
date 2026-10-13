@@ -5,7 +5,7 @@ Check that values from one vector are absent from another vector
 ## Usage
 
 ``` r
-not_in(x, table, value = TRUE)
+not_in(x, table, value = TRUE, ignore_case = FALSE, warn_case = TRUE)
 ```
 
 ## Arguments
@@ -24,6 +24,17 @@ not_in(x, table, value = TRUE)
 
   `TRUE` or `FALSE`: should a vector with values be returned instead of
   a boolean vector?
+
+- ignore_case:
+
+  `TRUE` or `FALSE`: should case be ignored when comparing `x` and
+  `table`?
+
+- warn_case:
+
+  `TRUE` or `FALSE`: should a warning be issued when `ignore_case` is
+  `FALSE` and values that are considered present would be absent when
+  using case-sensitive matching?
 
 ## Value
 
@@ -108,6 +119,18 @@ setdiff(x_dupl, table_dupl) # c("a", "b")
 not_in(x_dupl, table_dupl, value = FALSE)
 #> [1]  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
 # c(TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE)
+
+not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+       ignore_case = FALSE) # c("b", "C")
+#> [1] "b" "C"
+not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+       ignore_case = TRUE, warn_case = TRUE) # character(0), with a warning
+#> Warning: Values considered present would be absent when using case-sensitive matching:
+#> 'b', 'C'
+#> character(0)
+not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+       ignore_case = TRUE, warn_case = FALSE) # character(0), without a warning
+#> character(0)
 
 # Names are not considered when matching but are retained in the output
 not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))

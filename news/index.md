@@ -1,5 +1,28 @@
 # Changelog
 
+## progutils 0.16.0
+
+#### Breaking changes
+
+- Dependency on `R >= 4.0.0` to be able to use `deparse1(substitute(x))`
+  to get the correct argument names when one function calls another
+  function.
+
+#### New features
+
+- [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md)
+  gains argument `y` to check for values that only differ in their case
+  between two vectors. Output is no longer sorted, making it independent
+  of the used `locale`.
+- [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md):
+  add argument `ignore_case` to make matching case-insensitive and
+  argument `warn_case` to warn about values that would be absent when
+  using case-sensitive matching.
+
+#### Documentation
+
+- Version of `roxygen2` bumped to 8.1.1.
+
 ## progutils 0.15.1
 
 #### Documentation
