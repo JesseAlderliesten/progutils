@@ -10,6 +10,9 @@
 #' instead of a boolean vector?
 #' @param ignore_case `TRUE` or `FALSE`: should case be ignored when comparing
 #' `x` and `table`?
+#' @param warn_case `TRUE` or `FALSE`: should a warning be issued when
+#' `ignore_case` is `FALSE` and values that are considered present would be
+#' absent when using case-sensitive matching?
 #'
 #' @details
 #' Duplicates in `x` are kept, in contrast to [setdiff()], see the `Examples`.
@@ -73,34 +76,42 @@
 #' not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
 #'        ignore_case = FALSE) # c("b", "C")
 #' not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
-#'        ignore_case = TRUE) # character(0)
+#'        ignore_case = TRUE, warn_case = TRUE) # character(0), with a warning
+#' not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+#'        ignore_case = TRUE, warn_case = FALSE) # character(0), without a warning
 #'
 #' # Names are not considered when matching but are retained in the output
 #' not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 #'
 #' @export
-not_in <- function(x, table, value = TRUE, ignore_case = FALSE) {
+not_in <- function(x, table, value = TRUE, ignore_case = FALSE, warn_case = TRUE) {
   # list input to 'x' or 'table' is not allowed because it leads to 'x' being
   # returned.
   stopifnot(is.null(dim(x)), is.atomic(x), is.null(dim(table)), is.atomic(table),
             "Use are_equal() to match input of type 'double'" =
               !is.double(x) && !is.double(table),
-            checkinput::is_logical(value), checkinput::is_logical(ignore_case))
+            checkinput::is_logical(value), checkinput::is_logical(ignore_case),
+            checkinput::is_logical(warn_case))
 
   if(is.factor(x)) {
     x <- as.character(x)
   }
 
-  x_in <- x
-  if(ignore_case) {
-    x <- tolower(x)
-    table <- tolower(table)
+  res_case_sensitive <- match(x, table, nomatch = 0L) == 0L
+  if(!ignore_case) {
+    res <- res_case_sensitive
+  } else {
+    res <- match(tolower(x), tolower(table), nomatch = 0L) == 0L
+    bool_diff_case <- res_case_sensitive & !res
+    if(warn_case && any(bool_diff_case)) {
+      warning(paste0("Values considered present would be absent when using",
+                     " case-sensitive matching:\n"),
+              paste_quoted(x[bool_diff_case]))
+    }
   }
 
-  res <- match(x, table, nomatch = 0L) == 0L
-
   if(value) {
-    res <- x_in[res]
+    res <- x[res]
   }
   res
 }

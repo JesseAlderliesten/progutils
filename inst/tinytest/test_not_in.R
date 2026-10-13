@@ -44,9 +44,18 @@ expect_silent(expect_identical(
          ignore_case = FALSE),
   c("b", "C")))
 
+expect_warning(
+  expect_identical(
+    not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
+           ignore_case = TRUE, warn_case = TRUE),
+    character(0)),
+  pattern = paste0("Values considered present would be absent when using",
+                   " case-sensitive matching:\n'b', 'C'")
+)
+
 expect_silent(expect_identical(
   not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
-         ignore_case = TRUE),
+         ignore_case = TRUE, warn_case = FALSE),
   character(0)))
 
 # Names are not considered when matching but are retained in the output
