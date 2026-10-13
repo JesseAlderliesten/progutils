@@ -31,9 +31,7 @@ the factor levels.
 
 Values of factor \code{x} that are not present in its levels are added to its
 levels, and levels that are not present in its values are dropped, both with
-a warning. If the added levels and dropped values only differ in case, an
-additional warning is issued because that suggests values in \code{new_order} have
-the wrong case.
+a warning.
 
 Levels of \code{x} that are missing from \code{new_order} are appended to \code{new_order},
 with a warning. Values of \code{new_order} that are missing from levels of \code{x} are
@@ -45,8 +43,8 @@ converted by \code{\link[=as.numeric_safe]{as.numeric_safe()}}.
 \section{Notes}{
 
 Reordering levels of factor \code{f} by replacing levels through code like
-\verb{levels(f) <- levels(f)[<some order>]} does \strong{not} work, see the last
-\code{Example}.
+\verb{levels(f) <- levels(f)[<some order>]} or through assigning a named list does
+\strong{not} work because it also changes the values, see the last \code{Example}.
 }
 
 \examples{
@@ -67,8 +65,8 @@ orig
 
 }
 \seealso{
-\code{\link[stats:relevel]{stats::relevel()}} to assign one reference level to a factor;
-\code{\link[=order]{order()}}; \code{\link[=sort]{sort()}}
+the examples in \code{\link[=levels]{levels()}} on combining levels, \code{\link[stats:relevel]{stats::relevel()}} to assign
+one reference level to a factor; \code{\link[=order]{order()}}; \code{\link[=sort]{sort()}}
 
 Other functions to convert types:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},

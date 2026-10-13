@@ -15,9 +15,7 @@
 #'
 #' Values of factor `x` that are not present in its levels are added to its
 #' levels, and levels that are not present in its values are dropped, both with
-#' a warning. If the added levels and dropped values only differ in case, an
-#' additional warning is issued because that suggests values in `new_order` have
-#' the wrong case.
+#' a warning.
 #'
 #' Levels of `x` that are missing from `new_order` are appended to `new_order`,
 #' with a warning. Values of `new_order` that are missing from levels of `x` are
@@ -32,12 +30,12 @@
 #'
 #' @section Notes:
 #' Reordering levels of factor `f` by replacing levels through code like
-#' `levels(f) <- levels(f)[<some order>]` does **not** work, see the last
-#' `Example`.
+#' `levels(f) <- levels(f)[<some order>]` or through assigning a named list does
+#' **not** work because it also changes the values, see the last `Example`.
 #'
 #' @seealso
-#' [stats::relevel()] to assign one reference level to a factor;
-#' [order()]; [sort()]
+#' the examples in [levels()] on combining levels, [stats::relevel()] to assign
+#' one reference level to a factor; [order()]; [sort()]
 #'
 #' @family functions to convert types
 #' @family functions to modify factors
@@ -101,21 +99,10 @@ reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
   }
 
   bool_order_in_levels <- new_order %in% levels(x)
-  neg_bool_order_in_levels <- !bool_order_in_levels
-  if(any(neg_bool_order_in_levels)) {
+  if(any(!bool_order_in_levels)) {
     if(warn_drop_order) {
       warning("Dropped values of 'new_order' that are not present in 'x':\n",
-              paste_quoted(new_order[neg_bool_order_in_levels]))
-    }
-    if(any(!bool_levels_in_new_order)) {
-      bool_present_ignored_case <- tolower(levels_appended) %in%
-        tolower(new_order[neg_bool_order_in_levels])
-      if(any(bool_present_ignored_case)) {
-        warning("Did you use incorrect case in values of 'new_order' resulting",
-                " in levels appended\nto 'x' and values droped from",
-                " 'new_order' that only differ in their case:\n",
-                paste_quoted(levels_appended[bool_present_ignored_case]))
-      }
+              paste_quoted(new_order[!bool_order_in_levels]))
     }
   }
   factor(x, levels = new_order[bool_order_in_levels], exclude = NULL)
