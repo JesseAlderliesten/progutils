@@ -50,9 +50,10 @@ as.numeric_safe(x) # Returns the values.
 #> [1] 11 12 13
 ```
 
-Similarly, using `relevel()` or `levels()` from base R to reorder factor
-levels does **not** work, whereas using `reorder_levels()` from
-`progutils` **does**:
+Similarly, `relevel()` from base R can only be used to assign a
+reference level to a factor and using `levels()` from base R does
+**not** work to reorder factor levels, whereas using `reorder_levels()`
+from `progutils` **does** work:
 
 ``` r
 library(progutils)
@@ -105,7 +106,7 @@ License](LICENSE.md).
     To cite package 'progutils' in publications use:
 
       Alderliesten J (2026). _progutils: Programming Utilities_. R package
-      version 0.15.1, <https://github.com/JesseAlderliesten/progutils>.
+      version 0.16.0, <https://github.com/JesseAlderliesten/progutils>.
 
     A BibTeX entry for LaTeX users is
 
@@ -113,7 +114,7 @@ License](LICENSE.md).
         title = {progutils: Programming Utilities},
         author = {Jesse Alderliesten},
         year = {2026},
-        note = {R package version 0.15.1},
+        note = {R package version 0.16.0},
         url = {https://github.com/JesseAlderliesten/progutils},
       }
 
@@ -128,5 +129,5 @@ have suggestions for improvement of `progutils`.
 Many packages with miscellaneous functions exist on
 [GitHub](https://github.com/) and
 [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html):
-frequently they have ‘misc’ or ‘util’ in their title or description. In
+frequently they have `misc` or `util` in their title or description. In
 addition, many packages have an `utils` folder in their `R` directory.

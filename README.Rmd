@@ -53,8 +53,9 @@ as.numeric(x) # Returns the indices instead of the values!
 as.numeric_safe(x) # Returns the values.
 ```
 
-Similarly, using `relevel()` or `levels()` from base R to reorder factor levels
-does **not** work, whereas using `reorder_levels()` from `progutils` **does**:
+Similarly, `relevel()` from base R can only be used to assign a reference level
+to a factor and using `levels()` from base R does **not** work to reorder factor
+levels, whereas using `reorder_levels()` from `progutils` **does** work:
 
 ```{r reorder_levels}
 library(progutils)
