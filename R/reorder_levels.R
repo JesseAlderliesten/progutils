@@ -21,7 +21,7 @@
 #' with a warning. Values of `new_order` that are missing from levels of `x` are
 #' dropped, with a warning if `warn_drop_order` is `TRUE`.
 #'
-#' Sorting on on increasing numerical value only works if `x` can be suitably
+#' Sorting on increasing numerical value only works if `x` can be suitably
 #' converted by [as.numeric_safe()].
 #'
 #' @returns
@@ -30,12 +30,12 @@
 #'
 #' @section Notes:
 #' Reordering levels of factor `f` by replacing levels through code like
-#' `levels(f) <- levels(f)[<some order>]` does **not** work, see the last
-#' `Example`.
+#' `levels(f) <- levels(f)[<some order>]` or through assigning a named list does
+#' **not** work because it also changes the values, see the last `Example`.
 #'
 #' @seealso
-#' [stats::relevel()] to assign one reference level to a factor;
-#' [order()]; [sort()]
+#' the examples in [levels()] on combining levels, [stats::relevel()] to assign
+#' one reference level to a factor; [order()]; [sort()]
 #'
 #' @family functions to convert types
 #' @family functions to modify factors
@@ -99,9 +99,11 @@ reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
   }
 
   bool_order_in_levels <- new_order %in% levels(x)
-  if(warn_drop_order && any(!bool_order_in_levels)) {
-    warning("Dropped values of 'new_order' that are not present in 'x':\n",
-            paste_quoted(new_order[!bool_order_in_levels]))
+  if(any(!bool_order_in_levels)) {
+    if(warn_drop_order) {
+      warning("Dropped values of 'new_order' that are not present in 'x':\n",
+              paste_quoted(new_order[!bool_order_in_levels]))
+    }
   }
   factor(x, levels = new_order[bool_order_in_levels], exclude = NULL)
 }

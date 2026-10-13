@@ -29,7 +29,7 @@
 #' @seealso
 #' [trimws()] to remove leading and/or trailing whitespace; [replace_vals()] to
 #' replace specific values; [checkinput::all_names()] and [checkinput::is_path()]
-#' for more specific checks.
+#' for more specific checks on the validity of strings.
 #'
 #' @family functions to check equality
 #'
