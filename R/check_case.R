@@ -60,8 +60,11 @@ check_case <- function(
     signal = c("error", "warning", "message", "quiet"),
     signal_within = c("warning", "message", "quiet", "error")) {
 
-  stopifnot(is.character(x) && is.atomic(x) && is.null(dim(x)),
-            is.null(y) || (is.character(y) && is.atomic(y) && is.null(dim(y))))
+  stopifnot(is.character(x), is.atomic(x), is.null(dim(x)))
+  if(!is.null(y)) {
+    stopifnot(is.character(y), is.atomic(y), is.null(dim(y)))
+  }
+
   signal <- match.arg(signal)
   signal_within <- match.arg(signal_within)
   vals <- character(0)

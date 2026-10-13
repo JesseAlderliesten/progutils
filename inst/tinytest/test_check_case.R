@@ -3,7 +3,6 @@ x <- c("a", "b", "C", "D")
 y <- c("a", "B", "c", "D")
 z <- c("a", "b", "C", "D", "A")
 
-error_x <- "is.character(x) && is.atomic(x) && is.null(dim(x)) is not TRUE"
 msg_contains <- "contains values that only differ in their case"
 msg_text <- paste0("'x' ", msg_contains, " from values in 'y':\n'b', 'C'")
 
@@ -60,9 +59,21 @@ expect_silent(
 
 #### Erroneous input ####
 # 'x' should be a non-NULL character value without dimensions
-expect_error(check_case(x = NULL, y = "a"), pattern = error_x, fixed = TRUE)
-expect_error(check_case(x = 1, y = "a"), pattern = error_x, fixed = TRUE)
-expect_error(check_case(x = matrix("a"), y = "a"), pattern = error_x, fixed = TRUE)
+expect_error(check_case(x = NULL, y = "a"),
+             pattern = "is.character(x) is not TRUE", fixed = TRUE)
+expect_error(check_case(x = 1, y = "a"),
+             pattern = "is.character(x) is not TRUE", fixed = TRUE)
+expect_error(check_case(x = matrix("a"), y = "a"),
+             pattern = "is.null(dim(x)) is not TRUE", fixed = TRUE)
+
+# 'y' should be a character value without dimensions if it is not NULL
+expect_silent(
+  expect_identical(check_case(x = "a", y = NULL), character(0))
+)
+expect_error(check_case(x = "a", y = 1),
+             pattern = "is.character(y) is not TRUE", fixed = TRUE)
+expect_error(check_case(x = "a", y = matrix("a")),
+             pattern = "is.null(dim(y)) is not TRUE", fixed = TRUE)
 
 #### Remove objects used in tests ####
-rm(error_x, msg_contains, msg_text, x, y, z)
+rm(msg_contains, msg_text, x, y, z)
