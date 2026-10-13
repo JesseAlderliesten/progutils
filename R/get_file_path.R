@@ -121,17 +121,10 @@ get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
         msg_match <- paste0(
           msg_match, ".\nNo case-insensitive match is present either")
       } else {
-        if(length(match_case_insensitive) == 1L) {
-          msg_match <- paste0(
-            msg_match,
-            ".\nHowever, a case-insensitive match to 'pattern' is present:\n",
-            paste_quoted(basename(match_case_insensitive)))
-        } else {
-          msg_match <- paste0(
-            msg_match,
-            ".\nHowever, case-insensitive matches to 'pattern' are present:\n",
-            paste_quoted(basename(match_case_insensitive), collapse = "\n"))
-        }
+        msg_match <- paste0(
+          msg_match,
+          ".\nHowever, one or more case-insensitive matches to 'pattern' are",
+          " present:\n", paste_quoted(basename(match_case_insensitive)))
       }
     }
     stop("No ", msg_match, ".")
