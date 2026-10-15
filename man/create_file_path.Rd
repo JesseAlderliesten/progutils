@@ -24,18 +24,14 @@ the stamp to be added in front of the file name. No stamp is added if
 treated as part of the filename, such that the same restrictions apply, see
 \code{Details}.}
 
-\item{dir}{\link[checkinput:is_character]{Character string}
-containing a \link[checkinput:is_path]{valid path} to a directory that should
-be created if it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and
-the dot (\code{"."}) indicates the \link[=getwd]{working directory}, such that by
-default a subdirectory with the current date in the \link[=strftime]{format}
-\code{YYYY_mm_dd} in directory \code{output} below the working directory is created.}
+\item{dir}{\link[checkinput:is_character]{character string} containing a
+\link[checkinput:is_path]{valid path} to a directory that should be created.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
-The created \link[fs:path_abs]{absolute normalized} file path, returned
+The created \link[fs:path_abs]{absolute normalised} file path, returned
 \link[=invisible]{invisibly}.
 }
 \description{
@@ -46,7 +42,7 @@ Create a file path, creating the indicated directory if it does not yet exist.
 character until the end of the file name) and should \strong{not} contain slashes
 or backslashes: use \code{dir} to indicate subdirectories.
 
-The \link[fs:path_abs]{absolute normalised} path is returned such that the
+The \link[fs:path_abs]{absolute, normalised} path is returned such that the
 returned path still works if the \link[=getwd]{working directory} changes.
 
 A warning is issued if the \strong{file} indicated by the returned path already
@@ -54,9 +50,9 @@ exists. To prevent this when creating files in quick succession, use \code{"\%OS
 as part of \code{format_stamp} to create precise stamps by truncating seconds to
 \verb{0 <= n <= 6} decimal places, see \code{\link[=strftime]{strftime()}} for details.
 
-\code{create_file_path()} does \strong{not} create the file: use
-\code{fs::file_create(create_file_path(filename = "<filename>", ...))} or
-\code{file.create(create_file_path(filename = "<filename>", ...))} to do so.
+\code{create_file_path()} creates the directory but does \strong{not} create the file:
+wrap the call to \code{create_file_path()} in \code{fs::file_create()} or in
+\code{file.create()} to create the file.
 
 Calls where date nor time stamps are added (e.g.,
 \code{create_file_path(filename = "<filename>", format_stamp = "", dir = "<dir>", add_date = FALSE)})

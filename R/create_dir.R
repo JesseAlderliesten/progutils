@@ -2,23 +2,24 @@
 #'
 #' Create a directory if it does not yet exist.
 #'
-#' @param dir [Character string][checkinput::is_character()]
-#' containing a [valid path][checkinput::is_path()] to a directory that should
-#' be created if it does not yet exist. [fs::path()] adds file separators and
-#' the dot (`"."`) indicates the [working directory][getwd()], such that by
-#' default a subdirectory with the current date in the [format][strftime()]
-#' `YYYY_mm_dd` in directory `output` below the working directory is created.
+#' @param dir [character string][checkinput::is_character()] containing a
+#' [valid path][checkinput::is_path()] to a directory that should be created.
 #' @param add_date `TRUE` or `FALSE`: create a subdirectory in `dir` with the
 #' current date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
+#' By default a subdirectory with the current date in the [format][strftime()]
+#' `YYYY_mm_dd` in directory `output` below the working directory is created:
+#' [fs::path()] adds file separators and the dot (`"."`) indicates the
+#' [working directory][getwd()].
+#'
 #' The [absolute, normalised][fs::path_abs()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes. On
 #' case-insensitive file systems, normalization also adjusts the case to match
-#' names of directories that are already present (see the `Examples`).
+#' names of directories that are already present, see the `Examples`.
 #'
 #' @returns
-#' A character string with the [absolute normalized][fs::path_abs()] path to the
+#' A character string with the [absolute normalised][fs::path_abs()] path to the
 #' requested directory, returned [invisibly][invisible]. An error is thrown if
 #' the attempt to create a directory fails, for example because `dir` points to
 #' an existing file instead of to an directory.
@@ -34,7 +35,7 @@
 #' [create_file_path()] to create a file path and creating the indicated
 #' directory if it does not yet exist;
 #' [fs::dir_exists()] and [fs::dir_create()] (with its base-equivalent
-#' [dir.create()]) used by this function;
+#' [dir.create()]) used by this function
 #'
 #' @family functions to handle paths and directories
 #'
@@ -71,8 +72,7 @@
 #'
 #' @export
 create_dir <- function(dir = fs::path(".", "output"), add_date = TRUE) {
-  stopifnot(checkinput::is_character(dir), checkinput::is_path(dir),
-            checkinput::is_logical(add_date))
+  stopifnot(checkinput::is_path(dir), checkinput::is_logical(add_date))
 
   if(add_date) {
     dir <- fs::path(dir, format(Sys.time(), format = "%Y_%m_%d"))

@@ -107,9 +107,12 @@ expect_true(endsWith(
 
 # Checks on input to 'dir'
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
-  expect_error(
-    create_dir(dir = dir),
-    pattern = "is_character(dir) is not TRUE", fixed = TRUE)
+  expect_warning(
+    expect_error(
+      create_dir(dir = dir),
+      pattern = "checkinput::is_path(dir) is not TRUE", fixed = TRUE),
+    pattern = "'dir' should be a non-empty, non-NA_character_ character string"
+  )
 }
 
 for(dir in list(fs::path(my_tempdir, "temp", "."),
@@ -174,8 +177,8 @@ for(dir in list(fs::path(my_tempdir, " "),
     fixed = TRUE, strict = TRUE)
 }
 
-# Throw an error if 'dir' points to a file instead of a directory (versions up
-# to 0.4.0 returned the working directory but that is unsafe).
+# Throw an error if 'dir' points to a file instead of a directory (in progutils
+# versions up to 0.4.0 the working directory was returned but that is unsafe).
 expect_error(
   create_dir(dir = my_tempfile, add_date = FALSE),
   pattern = "Failed to make directory", fixed = TRUE)

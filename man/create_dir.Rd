@@ -7,18 +7,14 @@
 create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 }
 \arguments{
-\item{dir}{\link[checkinput:is_character]{Character string}
-containing a \link[checkinput:is_path]{valid path} to a directory that should
-be created if it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and
-the dot (\code{"."}) indicates the \link[=getwd]{working directory}, such that by
-default a subdirectory with the current date in the \link[=strftime]{format}
-\code{YYYY_mm_dd} in directory \code{output} below the working directory is created.}
+\item{dir}{\link[checkinput:is_character]{character string} containing a
+\link[checkinput:is_path]{valid path} to a directory that should be created.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
-A character string with the \link[fs:path_abs]{absolute normalized} path to the
+A character string with the \link[fs:path_abs]{absolute normalised} path to the
 requested directory, returned \link[=invisible]{invisibly}. An error is thrown if
 the attempt to create a directory fails, for example because \code{dir} points to
 an existing file instead of to an directory.
@@ -27,10 +23,15 @@ an existing file instead of to an directory.
 Create a directory if it does not yet exist.
 }
 \details{
+By default a subdirectory with the current date in the \link[=strftime]{format}
+\code{YYYY_mm_dd} in directory \code{output} below the working directory is created:
+\code{\link[fs:path]{fs::path()}} adds file separators and the dot (\code{"."}) indicates the
+\link[=getwd]{working directory}.
+
 The \link[fs:path_abs]{absolute, normalised} path is returned such that the
 returned path still works if the \link[=getwd]{working directory} changes. On
 case-insensitive file systems, normalization also adjusts the case to match
-names of directories that are already present (see the \code{Examples}).
+names of directories that are already present, see the \code{Examples}.
 }
 \section{Side effects}{
 
@@ -77,7 +78,7 @@ and extensive references about file paths and directories;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist;
 \code{\link[fs:dir_exists]{fs::dir_exists()}} and \code{\link[fs:dir_create]{fs::dir_create()}} (with its base-equivalent
-\code{\link[=dir.create]{dir.create()}}) used by this function;
+\code{\link[=dir.create]{dir.create()}}) used by this function
 
 Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},

@@ -15,7 +15,7 @@
 #' `Details`.
 #'
 #' @returns
-#' The created [absolute normalized][fs::path_abs()] file path, returned
+#' The created [absolute normalised][fs::path_abs()] file path, returned
 #' [invisibly][invisible()].
 #'
 #' @details
@@ -23,7 +23,7 @@
 #' character until the end of the file name) and should **not** contain slashes
 #' or backslashes: use `dir` to indicate subdirectories.
 #'
-#' The [absolute normalised][fs::path_abs()] path is returned such that the
+#' The [absolute, normalised][fs::path_abs()] path is returned such that the
 #' returned path still works if the [working directory][getwd()] changes.
 #'
 #' A warning is issued if the **file** indicated by the returned path already
@@ -31,9 +31,9 @@
 #' as part of `format_stamp` to create precise stamps by truncating seconds to
 #' `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
-#' `create_file_path()` does **not** create the file: use
-#' `fs::file_create(create_file_path(filename = "<filename>", ...))` or
-#' `file.create(create_file_path(filename = "<filename>", ...))` to do so.
+#' `create_file_path()` creates the directory but does **not** create the file:
+#' wrap the call to `create_file_path()` in `fs::file_create()` or in
+#' `file.create()` to create the file.
 #'
 #' Calls where date nor time stamps are added (e.g.,
 #' `create_file_path(filename = "<filename>", format_stamp = "", dir = "<dir>", add_date = FALSE)`)
@@ -83,8 +83,7 @@ create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
 
   stopifnot(checkinput::is_path(filename, require_sep = FALSE),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
-            checkinput::is_character(dir), checkinput::is_path(dir),
-            checkinput::is_logical(add_date))
+            checkinput::is_path(dir), checkinput::is_logical(add_date))
 
   filename_no_ext <- fs::path_ext_remove(path = filename)
   file_ext <- fs::path_ext(path = filename)

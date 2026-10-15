@@ -196,9 +196,12 @@ expect_error(
 )
 
 for(dir in list(3, "", character(0), NULL, c("temp_p1", "temp_p2"))) {
-  expect_error(
-    create_file_path(filename = "abc.txt", dir = dir),
-    pattern = "is_character(dir) is not TRUE", fixed = TRUE)
+  expect_warning(
+    expect_error(
+      create_file_path(filename = "abc.txt", dir = dir),
+      pattern = "checkinput::is_path(dir) is not TRUE", fixed = TRUE),
+    pattern = "'dir' should be a non-empty, non-NA_character_ character string"
+  )
 }
 
 for(dir in list(paste0(my_tempdir, "//"),
