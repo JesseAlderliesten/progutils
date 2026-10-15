@@ -116,14 +116,13 @@ create_tempdir <- function(prefix = "tempdir") {
          " 'prefix' (", paste_quoted(prefix), "):\n", tempdir_target)
   }
 
-  # Notes:
-  # - It was checked above that the target directory does not yet exist as a
-  #   directory nor as a file, so it is not a problem that fs::dir_exists() does
-  #   not complain if a directory already exists.
-  # - Using 'recurse = FALSE' to not allow the creation of recursive
-  #   subdirectories.
+  # Using 'recurse = FALSE' to not allow the creation of recursive subdirectories.
   tempdir_target <- as.character(
     fs::path_abs(fs::dir_create(path = tempdir_target, recurse = FALSE)))
+
+  # It was checked above that the target directory does not yet exist as a
+  # directory nor as a file, so it is not a problem that fs::dir_exists() does
+  # not complain if a directory already exists.
   if(!fs::dir_exists(tempdir_target)) {
     stop("Attempt to create a subdirectory in the temporary directory failed:\n",
          tempdir_target)
