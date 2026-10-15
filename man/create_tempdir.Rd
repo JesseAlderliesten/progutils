@@ -9,20 +9,20 @@ create_tempdir(prefix = "tempdir")
 \arguments{
 \item{prefix}{\link[checkinput:is_character]{character string} with the
 initial part of the name of the new temporary directory, only containing
-characters that are valid in a \link[checkinput:is_path]{path}.}
+characters that are \link[checkinput:is_path]{valid in a path}.}
 }
 \value{
-The \link[fs:path_abs]{absolute normalized} path to the created temporary
+The \link[fs:path_abs]{absolute normalised} path to the created temporary
 directory, returned \link[=invisible]{invisibly}.
 }
 \description{
 Create a temporary directory that can safely be removed.
 }
 \details{
-The new directory is \link[=dir.create]{created} inside \code{\link[=tempdir]{tempdir()}}. Its
-\link[=tempfile]{name} starts with the string given by \code{prefix} and is followed
-by a random string. This random string \strong{might} contain a dot (\code{.})
-such that the directory might appear to have a file extension, see the
+The new directory is \link[=dir.create]{created} inside the directory returned by
+\code{\link[=tempdir]{tempdir()}}. Its \link[=tempfile]{name} starts with the string given by \code{prefix}
+and is followed by a random string. This random string \strong{might} contain a
+dot (\code{.}) such that the directory appears to have a file extension, see the
 section \code{Source} in \code{help("tempdir")}. An error is thrown if creating the
 directory fails.
 
@@ -111,7 +111,7 @@ to change the working directory to a temporary directory (use
 \code{withr::deferred_run()} to change back to the normal project in interactive
 use);
 \code{\link[=tempfile]{tempfile()}} used in this function to create the paths for the temporary
-directory;
+directory
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},

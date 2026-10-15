@@ -4,13 +4,13 @@
 #'
 #' @param prefix [character string][checkinput::is_character()] with the
 #' initial part of the name of the new temporary directory, only containing
-#' characters that are valid in a [path][checkinput::is_path()].
+#' characters that are [valid in a path][checkinput::is_path()].
 #'
 #' @details
-#' The new directory is [created][dir.create()] inside [tempdir()]. Its
-#' [name][tempfile()] starts with the string given by `prefix` and is followed
-#' by a random string. This random string **might** contain a dot (`.`)
-#' such that the directory might appear to have a file extension, see the
+#' The new directory is [created][dir.create()] inside the directory returned by
+#' [tempdir()]. Its [name][tempfile()] starts with the string given by `prefix`
+#' and is followed by a random string. This random string **might** contain a
+#' dot (`.`) such that the directory appears to have a file extension, see the
 #' section `Source` in `help("tempdir")`. An error is thrown if creating the
 #' directory fails.
 #'
@@ -28,7 +28,7 @@
 #' `Usage in practice` below.
 #'
 #' @returns
-#' The [absolute normalized][fs::path_abs()] path to the created temporary
+#' The [absolute normalised][fs::path_abs()] path to the created temporary
 #' directory, returned [invisibly][invisible].
 #'
 #' @inheritSection create_dir Side effects
@@ -72,7 +72,7 @@
 #' `withr::deferred_run()` to change back to the normal project in interactive
 #' use);
 #' [tempfile()] used in this function to create the paths for the temporary
-#' directory;
+#' directory
 #'
 #' @family functions to handle paths and directories
 #'
@@ -95,8 +95,7 @@
 #' @export
 create_tempdir <- function(prefix = "tempdir") {
   stopifnot(
-    "'prefix' should be a non-empty, non-NA_character_ character string" =
-      checkinput::is_character(prefix),
+    checkinput::is_path(prefix, require_sep = FALSE),
     # Using 'prefix == basename(prefix)' to detect slashes does not work on
     # Ubuntu and MacOS
     "'prefix' should not include file separators" =
