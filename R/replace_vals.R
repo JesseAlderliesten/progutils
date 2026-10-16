@@ -2,19 +2,18 @@
 #'
 #' Replace character values or factor levels.
 #'
-#' @param x [Character][character] vector with values to be replaced, or
+#' @param x [character][character] vector with values to be replaced, or
 #' [factor] with [levels] to be replaced.
-#' @param old Character vector with values to be replaced. Should be [unique]
-#' and not contain the value `new`, otherwise an error is thrown.
-#' @param new Character string with the new value.
+#' @param old character vector with values to be replaced. Should be [unique]
+#' and not contain the value in `new`, otherwise an error is thrown.
+#' @param new character string with the new value.
 #' @param ignore_case `TRUE` or `FALSE`: ignore [case][tolower()] when looking for
 #' `old`? See `Details`.
 #' @param allow_multiple `TRUE` or `FALSE`: allow multiple values of `old` to
 #' match `x`? See `Details`.
 #' @param warn_absent `TRUE` or `FALSE`: warn if neither `old` nor `new` is
-#' found in
-#' `x`? It is silently assumed replacement is not necessary anymore if `new` is
-#' found.
+#' found in `x`? It is silently assumed replacement is **not** necessary anymore
+#' if `new` is found in `x`.
 #' @param signal_case_old,signal_case_new `"error"`, `"warning"`, `"message"`,
 #' or `"quiet"`: character string indicating the type of [signal][signal_text()]
 #' to give if values in `x` are a case-insensitive match but not a case-sensitive
@@ -38,22 +37,27 @@
 #' which returns `c("b", "b")`.
 #'
 #' If `quiet` is `FALSE`, a message indicates which values have been replaced.
-#' The order of the factor **levels** determines the order used in the message,
-#' which is influenced by the locale at the time of their creation, see the
-#' `Warning` in [factor()].
+#' The used order in the message is determined by the order of the factor
+#' **levels**, which is influenced by the [locale][locales] at the time of their
+#' creation, see the `Warning` in [factor()] and the `Programming notes` in
+#' [checkinput::all_names()].
 #'
 #' @returns
-#' `x` with the requested replacements. Factor levels are **not** reordered
+#' `x` with the requested replacements. Factor [levels] are **not** reordered
 #' after the replacement.
+#'
+#' @seealso
+#' [gsub()]; [replace()];
+#' [trimws()] to remove leading whitespace, trailing whitespace, or both;
+#' [replace_nonalnum()];
+#' [append()] which, despite its name, can insert values into a vector at any
+#' place;
+#' [checkinput::all_names()] and [checkinput::is_path()] for checks on the
+#' validity of strings.
 #'
 #' @family functions to check equality
 #' @family functions to modify character vectors
 #' @family functions to modify factors
-#'
-#' @seealso
-#' [gsub()]; [replace()];
-#' [append()] which, despite its name, can insert values into a vector at any
-#' place; [replace_nonalnum()]
 #'
 #' @examples
 #' x <- c("k", "l", "m")

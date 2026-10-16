@@ -23,10 +23,10 @@
 #' their case. Such values lead to a [signal][signal_text()] as indicated by
 #' argument `signal_within`.
 #'
-#' @family functions to check equality
-#'
 #' @seealso
 #' [tolower()] and [toupper()] to change case.
+#'
+#' @family functions to check equality
 #'
 #' @examples
 #' x <- c("a", "b", "C", "D")
