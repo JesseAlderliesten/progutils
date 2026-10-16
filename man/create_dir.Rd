@@ -7,35 +7,65 @@
 create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 }
 \arguments{
-\item{dir}{\link[checkinput:is_character]{Character string}
-containing a \link[checkinput:is_path]{valid path} to a directory that should
-be created if it does not yet exist. \code{\link[fs:path]{fs::path()}} adds file separators and
-the dot (\code{"."}) indicates the \link[=getwd]{working directory}, such that by
-default a subdirectory with the current date in the \link[=strftime]{format}
-\code{YYYY_mm_dd} in directory \code{output} below the working directory is created.}
+\item{dir}{\link[checkinput:is_character]{character string} containing a
+\link[checkinput:is_path]{valid path}, see \code{Details} and the section
+\verb{Notes on paths} below.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
-A character string with the \link[fs:path_abs]{absolute normalized} path to the
-requested directory, returned \link[=invisible]{invisibly}. An error is thrown if
-the attempt to create a directory fails, for example because \code{dir} points to
-an existing file instead of to an directory.
+A character string with the \link[fs:path_abs]{absolute normalised} path to the
+requested directory, returned \link[=invisible]{invisibly}, see the section
+\verb{Notes on paths} and the \code{Examples} below.
+
+By default a subdirectory with the current date in the \link[=strftime]{format}
+\code{YYYY_mm_dd} is created in directory \code{output} below the
+\link[=getwd]{working directory}.
+
+An error is thrown if the attempt to create a directory fails, for example
+because \code{dir} points to an existing file instead of to an directory.
 }
 \description{
 Create a directory if it does not yet exist.
 }
 \details{
-The \link[fs:path_abs]{absolute, normalised} path is returned such that the
-returned path still works if the \link[=getwd]{working directory} changes. On
-case-insensitive file systems, normalization also adjusts the case to match
-names of directories that are already present (see the \code{Examples}).
+The path in \code{dir} is interpreted as a \strong{relative} path to the directory that
+should be created, starting from the \link[=getwd]{working directory}, see the
+section \verb{Notes on paths} below.
 }
 \section{Side effects}{
 
 The directory indicated by the returned path is \link[fs:dir_create]{created}
-if it does not yet exist.
+if it does not yet \link[fs:dir_exists]{exist}.
+}
+
+\section{Notes on paths}{
+
+
+The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
+on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\link[fs:path]{fs::path()}} to construct
+paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
+get the file separator used on the current platform.
+
+Furthermore, the backslash is also used as
+\link[=regex]{escape character} in \R, such that backslashes need to be escaped in
+\R code by doubling them. Use \code{cat(x)} to omit the escape characters to see
+how \code{x} would be printed.
+
+The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
+the parent directory can be indicated by two dots (\code{".."}).
+
+\strong{relative} paths start from the \link[=getwd]{working directory}. In contrast,
+\strong{absolute} paths start from the root directory and thus give the complete
+path, such that the path still points to the same directory if the
+\link[=getwd]{working directory} changes.
+
+Paths can be normalised, e.g., through \code{\link[=normalizePath]{normalizePath()}} or \code{\link[fs:path_norm]{fs::path_norm()}}
+(which is also called by \code{\link[fs:path_abs]{fs::path_abs()}}). On case-insensitive file systems,
+this also adjusts the case to match names of directories that are already
+present.
+
 }
 
 \examples{
@@ -53,9 +83,9 @@ res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                              add_date = FALSE)
 identical(res_dir_one, res_dir_one_v2) # TRUE
 
-# On case-insensitive file systems, the directory 'res_dir_ONE' is the same as
-# 'res_dir_one'. On case-sensitive file systems it differs in case from
-# 'res_dir_one'.
+# On case-insensitive file systems, the directories 'res_dir_ONE' and
+# 'res_dir_one' are the same directory. On case-sensitive file systems they
+# are different directories.
 res_dir_ONE <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                           add_date = FALSE)
 identical(res_dir_one, res_dir_ONE)
@@ -71,13 +101,13 @@ rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_date, res_dir_ONE)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with a \verb{Note on paths}
-and extensive references about file paths and directories;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with extensive
+references about file paths and directories;
 \code{\link[=create_tempdir]{create_tempdir()}} for a safe way to create temporary directories;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist;
 \code{\link[fs:dir_exists]{fs::dir_exists()}} and \code{\link[fs:dir_create]{fs::dir_create()}} (with its base-equivalent
-\code{\link[=dir.create]{dir.create()}}) used by this function;
+\code{\link[=dir.create]{dir.create()}}) used by this function.
 
 Other functions to handle paths and directories:
 \code{\link[=create_file_path]{create_file_path()}},

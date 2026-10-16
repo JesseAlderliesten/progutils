@@ -4,15 +4,14 @@
 #'
 #' @param prefix [character string][checkinput::is_character()] with the
 #' initial part of the name of the new temporary directory, only containing
-#' characters that are valid in a [path][checkinput::is_path()].
+#' characters that are [valid in a path][checkinput::is_path()].
 #'
 #' @details
-#' The new directory is [created][dir.create()] inside [tempdir()]. Its
-#' [name][tempfile()] starts with the string given by `prefix` and is followed
-#' by a random string. This random string **might** contain a dot (`.`)
-#' such that the directory might appear to have a file extension, see the
-#' section `Source` in `help("tempdir")`. An error is thrown if creating the
-#' directory fails.
+#' The new directory is [created][dir.create()] inside the directory returned by
+#' [tempdir()]. Its [name][tempfile()] starts with the string given by `prefix`
+#' and is followed by a random string. This random string **might** contain a
+#' dot (`.`) such that the directory appears to have a file extension, see the
+#' section `Source` in `help("tempdir")`.
 #'
 #' It is **not** possible to create recursive subdirectories (e.g.,
 #' `tempdir/subtempdir/otherdir`, see the `Examples`) because
@@ -28,8 +27,12 @@
 #' `Usage in practice` below.
 #'
 #' @returns
-#' The [absolute normalized][fs::path_abs()] path to the created temporary
-#' directory, returned [invisibly][invisible].
+#' A character string with the [absolute normalised][fs::path_abs()] path to the
+#' created temporary directory, returned [invisibly][invisible], see the section
+#' `Notes on paths` below.
+#'
+#' An error is thrown when attempting to create subdirectories (see `Details`)
+#' and if creating the directory fails.
 #'
 #' @inheritSection create_dir Side effects
 #'
@@ -57,11 +60,12 @@
 #' absence of particular files or folders: this ensures no spurious matches
 #' occur if examples or tests are removed or added.
 #'
+#' @inheritSection checkinput::is_path Notes on paths
 #' @inheritSection checkinput::is_path Programming notes
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, with a `Note on paths`
-#' and extensive references about file paths and directories;
+#' [checkinput::is_path()] to check if a path is valid, with extensive
+#' references about file paths and directories;
 #' [create_dir()] to create a (non-temporary) directory if it does not yet exist;
 #' [local()] and
 #' [withr::local_tempdir()](https://withr.r-lib.org/reference/with_tempfile.html)
@@ -72,7 +76,7 @@
 #' `withr::deferred_run()` to change back to the normal project in interactive
 #' use);
 #' [tempfile()] used in this function to create the paths for the temporary
-#' directory;
+#' directory
 #'
 #' @family functions to handle paths and directories
 #'
@@ -95,8 +99,7 @@
 #' @export
 create_tempdir <- function(prefix = "tempdir") {
   stopifnot(
-    "'prefix' should be a non-empty, non-NA_character_ character string" =
-      checkinput::is_character(prefix),
+    checkinput::is_path(prefix, require_sep = FALSE),
     # Using 'prefix == basename(prefix)' to detect slashes does not work on
     # Ubuntu and MacOS
     "'prefix' should not include file separators" =
@@ -117,14 +120,13 @@ create_tempdir <- function(prefix = "tempdir") {
          " 'prefix' (", paste_quoted(prefix), "):\n", tempdir_target)
   }
 
-  # Notes:
-  # - It was checked above that the target directory does not yet exist as a
-  #   directory nor as a file, so it is not a problem that fs::dir_exists() does
-  #   not complain if a directory already exists.
-  # - Using 'recurse = FALSE' to not allow the creation of recursive
-  #   subdirectories.
+  # Using 'recurse = FALSE' to not allow the creation of recursive subdirectories.
   tempdir_target <- as.character(
     fs::path_abs(fs::dir_create(path = tempdir_target, recurse = FALSE)))
+
+  # It was checked above that the target directory does not yet exist as a
+  # directory nor as a file, so it is not a problem that fs::dir_exists() does
+  # not complain if a directory already exists.
   if(!fs::dir_exists(tempdir_target)) {
     stop("Attempt to create a subdirectory in the temporary directory failed:\n",
          tempdir_target)

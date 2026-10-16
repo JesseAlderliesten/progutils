@@ -1,9 +1,9 @@
 #' Reorder columns
 #'
-#' @param x Object with at least one column. Columns should have unique,
+#' @param x object with at least one column. Columns should have unique,
 #' syntactically valid names, see [checkinput::all_names()].
-#' @param new_order Character vector with a length larger than zero containing
-#' unique names in the new order.
+#' @param new_order [character vector][checkinput::all_characters()] with a
+#' length larger than zero containing [unique] column names in the new order.
 #'
 #' @details
 #' Column names of `x` that are missing from `new_order` are appended to

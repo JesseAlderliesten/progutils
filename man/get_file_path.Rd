@@ -7,8 +7,9 @@
 get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
-\item{dir}{\link[checkinput:is_character]{character string} containing the
-\link[checkinput:is_path]{path} to a directory.}
+\item{dir}{\link[checkinput:is_character]{character string} containing a
+\link[checkinput:is_path]{valid path}, see \code{Details} and the section
+\verb{Notes on paths} below.}
 
 \item{pattern}{\link[checkinput:is_character]{character string} containing a
 \link[base:regex]{regular expression}
@@ -23,26 +24,54 @@ name?}
 \value{
 A character string with the \link[fs:path_abs]{absolute normalized} path to the
 file with a name matching \code{pattern} if there is exactly one such file in
-directory \code{dir}. Otherwise an error is thrown. Use \code{\link[=basename]{basename()}} on the result
-to obtain the filename itself.
+directory \code{dir}. Use \code{\link[=basename]{basename()}} on the result to obtain the filename
+itself.
+
+An error is thrown if no match, or multiple matches, are found. If
+\code{ignore_case} is \code{FALSE}, the error message indicates if any case-insensitive
+match is present.
 }
 \description{
 Check that only one file in a directory has a name matching \code{pattern}, for
 example before attempting to \link[utils:read.table]{read a file}.
 }
 \details{
-The default \code{dir} (\code{"."}) indicates the \link[=getwd]{working directory}.
-
-If \code{ignore_case} is \code{FALSE} and no case-sensitive match is found, the error
-message indicates if any case-insensitive match is present.
+The path in \code{dir} is interpreted as a \strong{relative} path to the directory
+where to look for a file, starting from the \link[=getwd]{working directory},
+see the section \verb{Notes on paths} below.
 
 In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_file_path()} includes
 'hidden' files, i.e., files with names that start with a dot, but excludes
 directories.
-
-Paths will be \link[fs:path_abs]{normalized} to ensure they still work if the
-\link[=getwd]{working directory} changes.
 }
+\section{Notes on paths}{
+
+
+The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
+on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\link[fs:path]{fs::path()}} to construct
+paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
+get the file separator used on the current platform.
+
+Furthermore, the backslash is also used as
+\link[=regex]{escape character} in \R, such that backslashes need to be escaped in
+\R code by doubling them. Use \code{cat(x)} to omit the escape characters to see
+how \code{x} would be printed.
+
+The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
+the parent directory can be indicated by two dots (\code{".."}).
+
+\strong{relative} paths start from the \link[=getwd]{working directory}. In contrast,
+\strong{absolute} paths start from the root directory and thus give the complete
+path, such that the path still points to the same directory if the
+\link[=getwd]{working directory} changes.
+
+Paths can be normalised, e.g., through \code{\link[=normalizePath]{normalizePath()}} or \code{\link[fs:path_norm]{fs::path_norm()}}
+(which is also called by \code{\link[fs:path_abs]{fs::path_abs()}}). On case-insensitive file systems,
+this also adjusts the case to match names of directories that are already
+present.
+
+}
+
 \examples{
 # Create files in a temporary directory so we know what is present.
 my_tempdir <- create_tempdir(prefix = "examplegetfilepath")
@@ -79,14 +108,13 @@ rm(my_tempfiles)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with a \verb{Note on paths}
-and extensive references about file paths and directories;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with extensive
+references about file paths and directories;
 \code{\link[=create_file_path]{create_file_path()}} to create a file path and creating the indicated
 directory if it does not yet exist;
 \code{\link[fs:file_exists]{fs::file_exists()}} and \code{\link[=list.files]{list.files()}} (which \strong{includes} directories in its
-output) to
-check for existence of files without checking they are a unique match to a
-pattern;
+output) to check for existence of files without checking they are a unique
+match to a pattern;
 \code{\link[=file.info]{file.info()}} and \code{\link[=file.access]{file.access()}} to extract information about files or
 directories
 

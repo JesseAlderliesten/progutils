@@ -15,19 +15,19 @@ vect_to_char(
 )
 }
 \arguments{
-\item{x}{A vector, \link{factor}, \code{NULL}, or a non-dataframe \link{list} (unlisted
+\item{x}{vector, \link{factor}, \link{NULL}, or a non-dataframe \link{list} (unlisted
 through \code{unlist(x, use.names = TRUE)}, with a warning).}
 
-\item{signif}{Positive number indicating the number of
-\link[=signif]{significant digits} to round numeric \code{x} to (see \code{Details}) or
-\code{Inf} to not round values.}
+\item{signif}{positive \link[checkinput:is_number]{number} indicating the
+number of \link[=signif]{significant digits} to round numeric \code{x} to (see
+\code{Details}) or \code{Inf} to not round values.}
 
 \item{width}{\link[checkinput:is_natural]{natural number} giving the maximum
 line width (in characters)
 after wrapping. Can be \code{Inf} to not wrap text.}
 
 \item{sep}{\link[checkinput:is_character]{character string} used to separate
-the names and the values. Ignored if \code{x} does not have names.}
+the \link{names} and the values. Ignored if \code{x} does not have names.}
 
 \item{collapse}{\link[checkinput:is_character]{character string} to collapse
 values into a single character string, or \code{NULL} to return each value as an
@@ -41,15 +41,14 @@ by blank characters?}
 be used, see \code{Details}.}
 }
 \value{
-A character vector or character string with the names and values in \code{x}, with
-values of numeric \code{x} rounded to \code{signif} \link[=signif]{significant} digits,
-wrapped to \code{width} characters.
+A character vector or character string with the \link{names} and values in \code{x},
+with values of numeric \code{x} rounded to \code{signif} \link[=signif]{significant}
+digits, wrapped to \code{width} characters.
 
-If \code{collapse} is \code{NULL}, a \link[checkinput:all_characters]{character vector}
-with the same elements as \code{x}
-is returned, wrapping on a per-element basis. If \code{collapse} is not \code{NULL},
-the name-value pairs are separated by \code{collapse}, thus returning a
-\link[checkinput:is_character]{character string}.
+If \code{collapse} is \link{NULL}, a \link[checkinput:all_characters]{character vector}
+with the same elements as \code{x} is returned, wrapping on a per-element basis.
+If \code{collapse} is not \code{NULL}, the name-value pairs are separated by
+\code{collapse}, thus returning a \link[checkinput:is_character]{character string}.
 
 See \code{Details} on the handling of some special values.
 }
@@ -74,10 +73,10 @@ converts factors to characters).
 
 Numeric values are not rounded if \code{digits} is \link{Inf}. Otherwise, numeric
 values are rounded to \strong{at least} \code{digits} \link[=signif]{significant digits}
-while ensuring their integer parts are unrounded (if \code{round_type} is
-\code{selective} or \code{expanded}, see \code{\link[=signif_custom]{signif_custom()}} for details) or are rounded
-to \strong{exactly} \code{digits} significant digits while their integer parts might be
-rounded (if \code{round_type} is \code{signif}).
+while ensuring their integer parts are unrounded if \code{round_type} is
+\code{"selective"} or \code{"expanded"}, or to \strong{exactly} \code{digits} significant digits
+while their integer parts might be rounded if \code{round_type} is \code{"signif"}, see
+\code{\link[=signif_custom]{signif_custom()}} for details.
 }
 \section{Programming notes}{
 
@@ -132,6 +131,7 @@ Other functions to convert types:
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link{reexports}},
+\code{\link[=replace_nonalnum]{replace_nonalnum()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=signal_text]{signal_text()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},

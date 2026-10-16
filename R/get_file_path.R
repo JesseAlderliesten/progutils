@@ -3,8 +3,7 @@
 #' Check that only one file in a directory has a name matching `pattern`, for
 #' example before attempting to [read a file][utils::read.table()].
 #'
-#' @param dir [character string][checkinput::is_character()] containing the
-#' [path][checkinput::is_path()] to a directory.
+#' @inheritParams create_dir dir
 #' @param pattern [character string][checkinput::is_character()] containing a
 #' [regular expression][base::regex]
 #' used to select names of files that are present in `dir`.
@@ -14,33 +13,34 @@
 #' name?
 #'
 #' @details
-#' The default `dir` (`"."`) indicates the [working directory][getwd()].
-#'
-#' If `ignore_case` is `FALSE` and no case-sensitive match is found, the error
-#' message indicates if any case-insensitive match is present.
+#' The path in `dir` is interpreted as a **relative** path to the directory
+#' where to look for a file, starting from the [working directory][getwd()],
+#' see the section `Notes on paths` below.
 #'
 #' In contrast to the default of [list.files()], `get_file_path()` includes
 #' 'hidden' files, i.e., files with names that start with a dot, but excludes
 #' directories.
 #'
-#' Paths will be [normalized][fs::path_abs()] to ensure they still work if the
-#' [working directory][getwd()] changes.
-#'
 #' @returns
 #' A character string with the [absolute normalized][fs::path_abs()] path to the
 #' file with a name matching `pattern` if there is exactly one such file in
-#' directory `dir`. Otherwise an error is thrown. Use [basename()] on the result
-#' to obtain the filename itself.
+#' directory `dir`. Use [basename()] on the result to obtain the filename
+#' itself.
+#'
+#' An error is thrown if no match, or multiple matches, are found. If
+#' `ignore_case` is `FALSE`, the error message indicates if any case-insensitive
+#' match is present.
+#'
+#' @inheritSection checkinput::is_path Notes on paths
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, with a `Note on paths`
-#' and extensive references about file paths and directories;
+#' [checkinput::is_path()] to check if a path is valid, with extensive
+#' references about file paths and directories;
 #' [create_file_path()] to create a file path and creating the indicated
 #' directory if it does not yet exist;
 #' [fs::file_exists()] and [list.files()] (which **includes** directories in its
-#' output) to
-#' check for existence of files without checking they are a unique match to a
-#' pattern;
+#' output) to check for existence of files without checking they are a unique
+#' match to a pattern;
 #' [file.info()] and [file.access()] to extract information about files or
 #' directories
 #'
@@ -84,8 +84,7 @@
 #' @export
 get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
                           quietly = FALSE) {
-  stopifnot(checkinput::is_character(dir), checkinput::is_path(dir),
-            checkinput::is_character(pattern),
+  stopifnot(checkinput::is_path(dir), checkinput::is_character(pattern),
             checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
 
   dir <- fs::path_abs(dir)

@@ -9,22 +9,25 @@ create_tempdir(prefix = "tempdir")
 \arguments{
 \item{prefix}{\link[checkinput:is_character]{character string} with the
 initial part of the name of the new temporary directory, only containing
-characters that are valid in a \link[checkinput:is_path]{path}.}
+characters that are \link[checkinput:is_path]{valid in a path}.}
 }
 \value{
-The \link[fs:path_abs]{absolute normalized} path to the created temporary
-directory, returned \link[=invisible]{invisibly}.
+A character string with the \link[fs:path_abs]{absolute normalised} path to the
+created temporary directory, returned \link[=invisible]{invisibly}, see the section
+\verb{Notes on paths} below.
+
+An error is thrown when attempting to create subdirectories (see \code{Details})
+and if creating the directory fails.
 }
 \description{
 Create a temporary directory that can safely be removed.
 }
 \details{
-The new directory is \link[=dir.create]{created} inside \code{\link[=tempdir]{tempdir()}}. Its
-\link[=tempfile]{name} starts with the string given by \code{prefix} and is followed
-by a random string. This random string \strong{might} contain a dot (\code{.})
-such that the directory might appear to have a file extension, see the
-section \code{Source} in \code{help("tempdir")}. An error is thrown if creating the
-directory fails.
+The new directory is \link[=dir.create]{created} inside the directory returned by
+\code{\link[=tempdir]{tempdir()}}. Its \link[=tempfile]{name} starts with the string given by \code{prefix}
+and is followed by a random string. This random string \strong{might} contain a
+dot (\code{.}) such that the directory appears to have a file extension, see the
+section \code{Source} in \code{help("tempdir")}.
 
 It is \strong{not} possible to create recursive subdirectories (e.g.,
 \code{tempdir/subtempdir/otherdir}, see the \code{Examples}) because
@@ -66,7 +69,35 @@ occur if examples or tests are removed or added.
 \section{Side effects}{
 
 The directory indicated by the returned path is \link[fs:dir_create]{created}
-if it does not yet exist.
+if it does not yet \link[fs:dir_exists]{exist}.
+}
+
+\section{Notes on paths}{
+
+
+The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
+on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\link[fs:path]{fs::path()}} to construct
+paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
+get the file separator used on the current platform.
+
+Furthermore, the backslash is also used as
+\link[=regex]{escape character} in \R, such that backslashes need to be escaped in
+\R code by doubling them. Use \code{cat(x)} to omit the escape characters to see
+how \code{x} would be printed.
+
+The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
+the parent directory can be indicated by two dots (\code{".."}).
+
+\strong{relative} paths start from the \link[=getwd]{working directory}. In contrast,
+\strong{absolute} paths start from the root directory and thus give the complete
+path, such that the path still points to the same directory if the
+\link[=getwd]{working directory} changes.
+
+Paths can be normalised, e.g., through \code{\link[=normalizePath]{normalizePath()}} or \code{\link[fs:path_norm]{fs::path_norm()}}
+(which is also called by \code{\link[fs:path_abs]{fs::path_abs()}}). On case-insensitive file systems,
+this also adjusts the case to match names of directories that are already
+present.
+
 }
 
 \section{Programming notes}{
@@ -99,8 +130,8 @@ rm(my_subtempdir_ex1, my_subtempdir_ex2)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with a \verb{Note on paths}
-and extensive references about file paths and directories;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with extensive
+references about file paths and directories;
 \code{\link[=create_dir]{create_dir()}} to create a (non-temporary) directory if it does not yet exist;
 \code{\link[=local]{local()}} and
 \href{https://withr.r-lib.org/reference/with_tempfile.html}{withr::local_tempdir()}
@@ -111,7 +142,7 @@ to change the working directory to a temporary directory (use
 \code{withr::deferred_run()} to change back to the normal project in interactive
 use);
 \code{\link[=tempfile]{tempfile()}} used in this function to create the paths for the temporary
-directory;
+directory
 
 Other functions to handle paths and directories:
 \code{\link[=create_dir]{create_dir()}},

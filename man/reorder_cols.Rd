@@ -7,11 +7,11 @@
 reorder_cols(x, new_order)
 }
 \arguments{
-\item{x}{Object with at least one column. Columns should have unique,
+\item{x}{object with at least one column. Columns should have unique,
 syntactically valid names, see \code{\link[checkinput:all_names]{checkinput::all_names()}}.}
 
-\item{new_order}{Character vector with a length larger than zero containing
-unique names in the new order.}
+\item{new_order}{\link[checkinput:all_characters]{character vector} with a
+length larger than zero containing \link{unique} column names in the new order.}
 }
 \value{
 \code{x} with reordered columns.

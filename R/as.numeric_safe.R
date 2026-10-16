@@ -3,10 +3,10 @@
 #' Convert `x` to a vector with [numeric][as.numeric()] [mode] in a way that
 #' works if `x` is a [factor], a character vector, or already a numeric vector.
 #'
-#' @param x A factor, or a character or numeric vector to be converted to a
+#' @param x a [factor], or a character or numeric vector to be converted to a
 #' numeric vector.
 #' @param keep_integer `TRUE` or `FALSE`: return input of [type][typeof] integer
-#' without converting it to double.
+#' without converting it to double, see `Details`.
 #'
 #' @returns A numeric vector, possibly `numeric(0)` or containing `NA_real_`.
 #'
@@ -16,25 +16,25 @@
 #' `FALSE`.
 #'
 #' `NULL` and zero-length vectors are converted to `numeric(0)`, except for
-#' `integer(0)` that is kept unchanged if `keep_integer` is `TRUE` (which is the
-#' default). In contrast to [as.numeric()], logical vectors of length larger
-#' than zero are converted to a vector of `NA_real_`, with a warning, .
+#' `integer(0)` that is kept unchanged if `keep_integer` is `TRUE`, which is the
+#' default. `FALSE` and `TRUE` are converted to `NA_real_`, with warning,
+#' whereas [as.numeric()] converts those values to `0` and `1`, respectively.
 #'
 #' `as.numeric_safe()` uses a suggestion from [factor()] and
 #' [\R FAQ 7.10](https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f)
-#' that works if `x` is a factor, a character vector or already is a numeric
-#' vector (even though the last example of `as.numeric()` comments that this
-#' approach is less efficient for long vectors).
+#' that works if `x` is a [factor], a character vector or already is a numeric
+#' vector, even though the last example of [as.numeric()] comments that this
+#' approach is less efficient for long vectors.
 #'
 #' In contrast, the alternative conversions `as.numeric(levels(x))[x]` (suggested
-#' in the `Warning` of [factor()]) and `as.numeric(levels(x))[as.integer(x)]`
-#' (suggested in \R `FAQ 7.10` linked to above) **only** work if `x` is factor,
-#' see the `Examples`.
+#' in the `Warning` of [factor]) and `as.numeric(levels(x))[as.integer(x)]`
+#' (suggested in \R `FAQ 7.10` linked to above) **only** work if `x` is a
+#' [factor], see the `Examples`.
 #'
-#' Furthermore, `as.numeric()` **cannot** be used to convert a factor to numeric,
-#' because it returns their underlying numeric integer representation (i.e., the
-#' indices of the factor levels), see the `Warnings` in [as.numeric()] and
-#' [factor()].
+#' Furthermore, `as.numeric()` **cannot** be used to convert a [factor] to
+#' numeric because it returns their underlying numeric integer representation
+#' (i.e., the indices of the factor levels), see the `Warnings` in
+#' [as.numeric()] and [factor].
 #'
 #' @seealso
 #' [formatC()] and [option][options()] `scipen` on formatting numbers,

@@ -13,6 +13,7 @@ Other functions to convert types:
 
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link[=replace_nonalnum]{replace_nonalnum()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=signal_text]{signal_text()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},

@@ -71,10 +71,13 @@ rm(my_tempfile, prefix, my_subtempdir_t1, my_subtempdir_t2)
 
 #### Invalid input ####
 for(prefix in list(3, NULL, character(0), "", c("temp_p1", "temp_p2"))) {
+  expect_warning(
     expect_error(
       create_tempdir(prefix = prefix),
-      pattern = "'prefix' should be a non-empty, non-NA_character_ character string",
-      fixed = TRUE)
+      pattern = "checkinput::is_path(prefix, require_sep = FALSE) is not TRUE",
+      fixed = TRUE),
+    pattern = "'prefix' should be a non-empty, non-NA_character_ character string"
+  )
 }
 
 for(prefix in c("tem\\p_p1", "temp_p2\\", "tem/p_p3", "temp_p4/", "\\temp_p5",
@@ -87,9 +90,9 @@ for(prefix in c("tem\\p_p1", "temp_p2\\", "tem/p_p3", "temp_p4/", "\\temp_p5",
 expect_warning(
   expect_error(
     create_tempdir(prefix = "abc|def"),
-    pattern = "checkinput::is_path(tempdir_target) is not TRUE",
+    pattern = "checkinput::is_path(prefix, require_sep = FALSE) is not TRUE",
     fixed = TRUE),
-  pattern = "'tempdir_target' should not contain '\"', '*', '?', '|', '<' or '>'",
+  pattern = "'prefix' should not contain '\"', '*', '?', '|', '<' or '>'",
   strict = TRUE, fixed = TRUE)
 
 

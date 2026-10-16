@@ -7,21 +7,23 @@
 replace_nonalnum(x, replacement = "_", keep_underscore = TRUE)
 }
 \arguments{
-\item{x}{\link[checkinput:all_characters]{character vector} with the (possibly
-empty) strings to remove non-alphanumeric characters from.}
+\item{x}{\link[checkinput:all_characters]{character vector} with strings to
+remove non-alphanumeric characters from. Empty strings (\code{""}) are allowed.}
 
 \item{replacement}{\link[checkinput:is_character]{character string} used to
 replace non-alphanumeric characters. It might be empty (i.e., \code{""}) to remove
 instead of replace non-alphanumeric characters.}
 
 \item{keep_underscore}{\code{TRUE} or \code{FALSE}: keep underscores? If \code{FALSE},
-underscores are replaced by \code{replacement}, which only makes sense if a
+underscores are replaced by \code{replacement}, which is only apparent if a
 non-default \code{replacement} is used such that it is not an underscore, see the
 last \code{Example}.}
 }
 \value{
-\code{x} with non-alphanumeric characters other than dots, and possibly
-underscores, replaced by \code{replacement}.
+\code{x} with non-alphanumeric characters other than dots, as well as underscores
+if \code{keep_underscores} is \code{FALSE}, replaced by \code{replacement}. An empty string
+(\code{""}) is returned if the empty character string (\code{""}) is used for
+\code{replacement} and \code{x} does not contain non-replaced characters.
 }
 \description{
 Replace or remove non-alphanumeric characters, keeping dots and handling
@@ -31,10 +33,6 @@ underscores as indicated by \code{keep_underscores}.
 This implementation uses the \link[=regex]{character class} \verb{[:alnum:]} that
 depends on the current \link[=locales]{locale}, see the \verb{Programming notes} in
 \code{\link[checkinput:all_names]{checkinput::all_names()}}.
-
-Empty strings are allowed as input to \code{x} because they might also be returned
-by \code{replace_nonalnum()} if the empty character string (\code{""}) is used for
-\code{replacement}.
 }
 \examples{
 replace_nonalnum("a+b.txt")
@@ -53,9 +51,10 @@ replace_nonalnum("a+bc_d.txt", keep_underscore = FALSE) # "a_bc_d.txt"
 
 }
 \seealso{
-\code{\link[=trimws]{trimws()}} to remove leading and/or trailing whitespace; \code{\link[=replace_vals]{replace_vals()}} to
-replace specific values; \code{\link[checkinput:all_names]{checkinput::all_names()}} and \code{\link[checkinput:is_path]{checkinput::is_path()}}
-for more specific checks on the validity of strings.
+\code{\link[=trimws]{trimws()}} to remove leading whitespace, trailing whitespace, or both;
+\code{\link[=replace_vals]{replace_vals()}}, with more relevant links, to replace specific values;
+\code{\link[checkinput:all_names]{checkinput::all_names()}} and \code{\link[checkinput:is_path]{checkinput::is_path()}} for checks on the
+validity of strings.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
@@ -64,5 +63,15 @@ Other functions to check equality:
 \code{\link[=not_in]{not_in()}},
 \code{\link[=replace_vals]{replace_vals()}},
 \code{\link[=signif_custom]{signif_custom()}}
+
+Other functions to modify character vectors:
+\code{\link[=as.numeric_safe]{as.numeric_safe()}},
+\code{\link{reexports}},
+\code{\link[=replace_vals]{replace_vals()}},
+\code{\link[=signal_text]{signal_text()}},
+\code{\link[=unpaste_unquote]{unpaste_unquote()}},
+\code{\link[=vect_to_char]{vect_to_char()}},
+\code{\link[=wrap_text]{wrap_text()}}
 }
 \concept{functions to check equality}
+\concept{functions to modify character vectors}

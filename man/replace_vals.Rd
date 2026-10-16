@@ -18,13 +18,13 @@ replace_vals(
 )
 }
 \arguments{
-\item{x}{\link[=character]{Character} vector with values to be replaced, or
+\item{x}{\link{character} vector with values to be replaced, or
 \link{factor} with \link{levels} to be replaced.}
 
-\item{old}{Character vector with values to be replaced. Should be \link{unique}
-and not contain the value \code{new}, otherwise an error is thrown.}
+\item{old}{character vector with values to be replaced. Should be \link{unique}
+and not contain the value in \code{new}, otherwise an error is thrown.}
 
-\item{new}{Character string with the new value.}
+\item{new}{character string with the new value.}
 
 \item{ignore_case}{\code{TRUE} or \code{FALSE}: ignore \link[=tolower]{case} when looking for
 \code{old}? See \code{Details}.}
@@ -33,9 +33,8 @@ and not contain the value \code{new}, otherwise an error is thrown.}
 match \code{x}? See \code{Details}.}
 
 \item{warn_absent}{\code{TRUE} or \code{FALSE}: warn if neither \code{old} nor \code{new} is
-found in
-\code{x}? It is silently assumed replacement is not necessary anymore if \code{new} is
-found.}
+found in \code{x}? It is silently assumed replacement is \strong{not} necessary anymore
+if \code{new} is found in \code{x}.}
 
 \item{signal_case_old, signal_case_new}{\code{"error"}, \code{"warning"}, \code{"message"},
 or \code{"quiet"}: character string indicating the type of \link[=signal_text]{signal}
@@ -51,7 +50,7 @@ influenced by argument \code{signal_old_ignore_case}.}
 have been replaced?}
 }
 \value{
-\code{x} with the requested replacements. Factor levels are \strong{not} reordered
+\code{x} with the requested replacements. Factor \link{levels} are \strong{not} reordered
 after the replacement.
 }
 \description{
@@ -69,9 +68,10 @@ An error is thrown if \code{allow_multiple} is \code{FALSE} and multiple values 
 which returns \code{c("b", "b")}.
 
 If \code{quiet} is \code{FALSE}, a message indicates which values have been replaced.
-The order of the factor \strong{levels} determines the order used in the message,
-which is influenced by the locale at the time of their creation, see the
-\code{Warning} in \code{\link[=factor]{factor()}}.
+The used order in the message is determined by the order of the factor
+\strong{levels}, which is influenced by the \link[=locales]{locale} at the time of their
+creation, see the \code{Warning} in \code{\link[=factor]{factor()}} and the \verb{Programming notes} in
+\code{\link[checkinput:all_names]{checkinput::all_names()}}.
 }
 \examples{
 x <- c("k", "l", "m")
@@ -101,8 +101,12 @@ try(replace_vals(x = x, old = letters[13:12], new = "b",
 }
 \seealso{
 \code{\link[=gsub]{gsub()}}; \code{\link[=replace]{replace()}};
+\code{\link[=trimws]{trimws()}} to remove leading whitespace, trailing whitespace, or both;
+\code{\link[=replace_nonalnum]{replace_nonalnum()}};
 \code{\link[=append]{append()}} which, despite its name, can insert values into a vector at any
-place; \code{\link[=replace_nonalnum]{replace_nonalnum()}}
+place;
+\code{\link[checkinput:all_names]{checkinput::all_names()}} and \code{\link[checkinput:is_path]{checkinput::is_path()}} for checks on the
+validity of strings.
 
 Other functions to check equality:
 \code{\link[=are_equal]{are_equal()}},
@@ -115,6 +119,7 @@ Other functions to check equality:
 Other functions to modify character vectors:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
 \code{\link{reexports}},
+\code{\link[=replace_nonalnum]{replace_nonalnum()}},
 \code{\link[=signal_text]{signal_text()}},
 \code{\link[=unpaste_unquote]{unpaste_unquote()}},
 \code{\link[=vect_to_char]{vect_to_char()}},

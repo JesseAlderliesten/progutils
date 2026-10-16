@@ -116,9 +116,11 @@ expect_error(get_file_path(dir = fs::path(my_tempdir, "test_dir"),
              fixed = TRUE)
 
 ##### Invalid input #####
-expect_error(get_file_path(dir = "", pattern = "test_dir"),
-             pattern = "checkinput::is_character(dir) is not TRUE",
-             fixed = TRUE)
+expect_warning(
+  expect_error(get_file_path(dir = "", pattern = "test_dir"),
+               pattern = "checkinput::is_path(dir) is not TRUE",
+               fixed = TRUE),
+  pattern = "'dir' should be a non-empty, non-NA_character_ character string")
 
 expect_error(get_file_path(dir = my_tempdir, pattern = ""),
              pattern = "checkinput::is_character(pattern) is not TRUE",
