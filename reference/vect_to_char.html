@@ -9,7 +9,7 @@ numeric values."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,14 +64,14 @@ numeric values.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>A vector, <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a>, <code>NULL</code>, or a non-dataframe <a href="https://rdrr.io/r/base/list.html" class="external-link">list</a> (unlisted
+<dd><p>vector, <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a>, <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a>, or a non-dataframe <a href="https://rdrr.io/r/base/list.html" class="external-link">list</a> (unlisted
 through <code>unlist(x, use.names = TRUE)</code>, with a warning).</p></dd>
 
 
 <dt id="arg-signif">signif<a class="anchor" aria-label="anchor" href="#arg-signif"></a></dt>
-<dd><p>Positive number indicating the number of
-<a href="https://rdrr.io/r/base/Round.html" class="external-link">significant digits</a> to round numeric <code>x</code> to (see <code>Details</code>) or
-<code>Inf</code> to not round values.</p></dd>
+<dd><p>positive <a href="https://jessealderliesten.github.io/checkinput/reference/is_number.html" class="external-link">number</a> indicating the
+number of <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant digits</a> to round numeric <code>x</code> to (see
+<code>Details</code>) or <code>Inf</code> to not round values.</p></dd>
 
 
 <dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
@@ -82,7 +82,7 @@ after wrapping. Can be <code>Inf</code> to not wrap text.</p></dd>
 
 <dt id="arg-sep">sep<a class="anchor" aria-label="anchor" href="#arg-sep"></a></dt>
 <dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> used to separate
-the names and the values. Ignored if <code>x</code> does not have names.</p></dd>
+the <a href="https://rdrr.io/r/base/names.html" class="external-link">names</a> and the values. Ignored if <code>x</code> does not have names.</p></dd>
 
 
 <dt id="arg-collapse">collapse<a class="anchor" aria-label="anchor" href="#arg-collapse"></a></dt>
@@ -104,14 +104,13 @@ be used, see <code>Details</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A character vector or character string with the names and values in <code>x</code>, with
-values of numeric <code>x</code> rounded to <code>signif</code> <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant</a> digits,
-wrapped to <code>width</code> characters.</p>
-<p>If <code>collapse</code> is <code>NULL</code>, a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a>
-with the same elements as <code>x</code>
-is returned, wrapping on a per-element basis. If <code>collapse</code> is not <code>NULL</code>,
-the name-value pairs are separated by <code>collapse</code>, thus returning a
-<a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a>.</p>
+    <p>A character vector or character string with the <a href="https://rdrr.io/r/base/names.html" class="external-link">names</a> and values in <code>x</code>,
+with values of numeric <code>x</code> rounded to <code>signif</code> <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant</a>
+digits, wrapped to <code>width</code> characters.</p>
+<p>If <code>collapse</code> is <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a>, a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a>
+with the same elements as <code>x</code> is returned, wrapping on a per-element basis.
+If <code>collapse</code> is not <code>NULL</code>, the name-value pairs are separated by
+<code>collapse</code>, thus returning a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a>.</p>
 <p>See <code>Details</code> on the handling of some special values.</p>
     </div>
     <div class="section level2">
@@ -128,10 +127,10 @@ for <a href="https://rdrr.io/r/base/factor.html" class="external-link">factors</
 converts factors to characters).</p></li>
 </ul><p>Numeric values are not rounded if <code>digits</code> is <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">Inf</a>. Otherwise, numeric
 values are rounded to <strong>at least</strong> <code>digits</code> <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant digits</a>
-while ensuring their integer parts are unrounded (if <code>round_type</code> is
-<code>selective</code> or <code>expanded</code>, see <code><a href="signif_custom.html">signif_custom()</a></code> for details) or are rounded
-to <strong>exactly</strong> <code>digits</code> significant digits while their integer parts might be
-rounded (if <code>round_type</code> is <code>signif</code>).</p>
+while ensuring their integer parts are unrounded if <code>round_type</code> is
+<code>"selective"</code> or <code>"expanded"</code>, or to <strong>exactly</strong> <code>digits</code> significant digits
+while their integer parts might be rounded if <code>round_type</code> is <code>"signif"</code>, see
+<code><a href="signif_custom.html">signif_custom()</a></code> for details.</p>
     </div>
     <div class="section level2">
     <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
@@ -156,6 +155,7 @@ objects into a vector.</p>
 <p>Other functions to modify character vectors:
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
 <code>reexports</code>,
+<code><a href="replace_nonalnum.html">replace_nonalnum()</a></code>,
 <code><a href="replace_vals.html">replace_vals()</a></code>,
 <code><a href="signal_text.html">signal_text()</a></code>,
 <code><a href="unpaste_unquote.html">unpaste_unquote()</a></code>,

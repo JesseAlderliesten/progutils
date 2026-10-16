@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,17 +64,17 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">Character</a> vector with values to be replaced, or
+<dd><p><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a> vector with values to be replaced, or
 <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a> with <a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a> to be replaced.</p></dd>
 
 
 <dt id="arg-old">old<a class="anchor" aria-label="anchor" href="#arg-old"></a></dt>
-<dd><p>Character vector with values to be replaced. Should be <a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a>
-and not contain the value <code>new</code>, otherwise an error is thrown.</p></dd>
+<dd><p>character vector with values to be replaced. Should be <a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a>
+and not contain the value in <code>new</code>, otherwise an error is thrown.</p></dd>
 
 
 <dt id="arg-new">new<a class="anchor" aria-label="anchor" href="#arg-new"></a></dt>
-<dd><p>Character string with the new value.</p></dd>
+<dd><p>character string with the new value.</p></dd>
 
 
 <dt id="arg-ignore-case">ignore_case<a class="anchor" aria-label="anchor" href="#arg-ignore-case"></a></dt>
@@ -89,9 +89,8 @@ match <code>x</code>? See <code>Details</code>.</p></dd>
 
 <dt id="arg-warn-absent">warn_absent<a class="anchor" aria-label="anchor" href="#arg-warn-absent"></a></dt>
 <dd><p><code>TRUE</code> or <code>FALSE</code>: warn if neither <code>old</code> nor <code>new</code> is
-found in
-<code>x</code>? It is silently assumed replacement is not necessary anymore if <code>new</code> is
-found.</p></dd>
+found in <code>x</code>? It is silently assumed replacement is <strong>not</strong> necessary anymore
+if <code>new</code> is found in <code>x</code>.</p></dd>
 
 
 <dt id="arg-signal-case-old-signal-case-new">signal_case_old, signal_case_new<a class="anchor" aria-label="anchor" href="#arg-signal-case-old-signal-case-new"></a></dt>
@@ -115,7 +114,7 @@ have been replaced?</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>x</code> with the requested replacements. Factor levels are <strong>not</strong> reordered
+    <p><code>x</code> with the requested replacements. Factor <a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a> are <strong>not</strong> reordered
 after the replacement.</p>
     </div>
     <div class="section level2">
@@ -129,15 +128,20 @@ argument <code>signal_case_new</code>.</p>
 <code>replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)</code>,
 which returns <code>c("b", "b")</code>.</p>
 <p>If <code>quiet</code> is <code>FALSE</code>, a message indicates which values have been replaced.
-The order of the factor <strong>levels</strong> determines the order used in the message,
-which is influenced by the locale at the time of their creation, see the
-<code>Warning</code> in <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor()</a></code>.</p>
+The used order in the message is determined by the order of the factor
+<strong>levels</strong>, which is influenced by the <a href="https://rdrr.io/r/base/locales.html" class="external-link">locale</a> at the time of their
+creation, see the <code>Warning</code> in <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor()</a></code> and the <code>Programming notes</code> in
+<code><a href="https://jessealderliesten.github.io/checkinput/reference/all_names.html" class="external-link">checkinput::all_names()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub()</a></code>; <code><a href="https://rdrr.io/r/base/replace.html" class="external-link">replace()</a></code>;
+<code><a href="https://rdrr.io/r/base/trimws.html" class="external-link">trimws()</a></code> to remove leading whitespace, trailing whitespace, or both;
+<code><a href="replace_nonalnum.html">replace_nonalnum()</a></code>;
 <code><a href="https://rdrr.io/r/base/append.html" class="external-link">append()</a></code> which, despite its name, can insert values into a vector at any
-place; <code><a href="replace_nonalnum.html">replace_nonalnum()</a></code></p>
+place;
+<code><a href="https://jessealderliesten.github.io/checkinput/reference/all_names.html" class="external-link">checkinput::all_names()</a></code> and <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> for checks on the
+validity of strings.</p>
 <p>Other functions to check equality:
 <code><a href="are_equal.html">are_equal()</a></code>,
 <code><a href="check_case.html">check_case()</a></code>,
@@ -148,6 +152,7 @@ place; <code><a href="replace_nonalnum.html">replace_nonalnum()</a></code></p>
 <p>Other functions to modify character vectors:
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
 <code>reexports</code>,
+<code><a href="replace_nonalnum.html">replace_nonalnum()</a></code>,
 <code><a href="signal_text.html">signal_text()</a></code>,
 <code><a href="unpaste_unquote.html">unpaste_unquote()</a></code>,
 <code><a href="vect_to_char.html">vect_to_char()</a></code>,

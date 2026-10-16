@@ -16,9 +16,9 @@ get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 
   [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
-  containing the
-  [path](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-  to a directory.
+  containing a [valid
+  path](https://jessealderliesten.github.io/checkinput/reference/is_path.html),
+  see `Details` and the section `Notes on paths` below.
 
 - pattern:
 
@@ -42,33 +42,64 @@ get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 A character string with the [absolute
 normalized](https://fs.r-lib.org/reference/path_math.html) path to the
 file with a name matching `pattern` if there is exactly one such file in
-directory `dir`. Otherwise an error is thrown. Use
+directory `dir`. Use
 [`basename()`](https://rdrr.io/r/base/basename.html) on the result to
 obtain the filename itself.
 
+An error is thrown if no match, or multiple matches, are found. If
+`ignore_case` is `FALSE`, the error message indicates if any
+case-insensitive match is present.
+
 ## Details
 
-The default `dir` (`"."`) indicates the [working
-directory](https://rdrr.io/r/base/getwd.html).
-
-If `ignore_case` is `FALSE` and no case-sensitive match is found, the
-error message indicates if any case-insensitive match is present.
+The path in `dir` is interpreted as a **relative** path to the directory
+where to look for a file, starting from the [working
+directory](https://rdrr.io/r/base/getwd.html), see the section
+`Notes on paths` below.
 
 In contrast to the default of
 [`list.files()`](https://rdrr.io/r/base/list.files.html),
 `get_file_path()` includes 'hidden' files, i.e., files with names that
 start with a dot, but excludes directories.
 
-Paths will be
-[normalized](https://fs.r-lib.org/reference/path_math.html) to ensure
-they still work if the [working
+## Notes on paths
+
+The file separator is a backslash (`\`) on Windows but a forward slash
+(`/`) on other operating systems: use
+[`file.path()`](https://rdrr.io/r/base/file.path.html) or
+[`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
+paths in a platform-independent way and
+[.Platform\$file.sep](https://rdrr.io/r/base/Platform.html) to get the
+file separator used on the current platform.
+
+Furthermore, the backslash is also used as [escape
+character](https://rdrr.io/r/base/regex.html) in R, such that
+backslashes need to be escaped in R code by doubling them. Use `cat(x)`
+to omit the escape characters to see how `x` would be printed.
+
+The [working directory](https://rdrr.io/r/base/getwd.html) can be
+indicated by a single dot (`"."`) and the parent directory can be
+indicated by two dots (`".."`).
+
+**relative** paths start from the [working
+directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
+paths start from the root directory and thus give the complete path,
+such that the path still points to the same directory if the [working
 directory](https://rdrr.io/r/base/getwd.html) changes.
+
+Paths can be normalised, e.g., through
+[`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
+[`fs::path_norm()`](https://fs.r-lib.org/reference/path_math.html)
+(which is also called by
+[`fs::path_abs()`](https://fs.r-lib.org/reference/path_math.html)). On
+case-insensitive file systems, this also adjusts the case to match names
+of directories that are already present.
 
 ## See also
 
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid, with a `Note on paths` and extensive
-references about file paths and directories;
+to check if a path is valid, with extensive references about file paths
+and directories;
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
 to create a file path and creating the indicated directory if it does
 not yet exist;
@@ -107,45 +138,45 @@ file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
 get_file_path(dir = my_tempdir, pattern = "some_file")
-#> Using file '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/some_filename.txt'
-#> /tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/some_filename.txt
+#> Using file '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/some_filename.txt'
+#> /tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/some_filename.txt
 
 # The same file is found if case-insensitive matching is used:
 get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = TRUE)
-#> Using file '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/some_filename.txt'
-#> /tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/some_filename.txt
+#> Using file '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/some_filename.txt'
+#> /tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/some_filename.txt
 
 # Error reporting the presence of a case-insensitive match.
 try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e'.
+#> '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8'.
 #> However, one or more case-insensitive matches to 'pattern' are present:
 #> 'some_filename.txt'.
 
 # 'pattern' is interpreted as a regular expression
 get_file_path(dir = my_tempdir, pattern = "^.+er_file")
-#> Using file '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/another_filename.txt'
-#> /tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/another_filename.txt
+#> Using file '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/another_filename.txt'
+#> /tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/another_filename.txt
 
 # Error reporting no match found.
 try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e'.
+#> '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8'.
 try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e'.
+#> '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
 try(get_file_path(dir = my_tempdir, pattern = "_filename"))
 #> Error in get_file_path(dir = my_tempdir, pattern = "_filename") : 
 #>   Multiple matches to pattern '_filename' are present in directory
-#> '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e':
+#> '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8':
 #> 'another_filename.txt'
 #> 'some_filename.txt'!
 

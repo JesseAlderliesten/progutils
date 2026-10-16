@@ -1,5 +1,24 @@
 # Changelog
 
+## progutils 0.17.0
+
+#### Breaking changes
+
+- Dependency `checkinput`: increase minimum version from `1.4.0` to
+  `1.5.0` to be able to inherit updates to section `Note on paths` from
+  [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html).
+- Some warning messages changed: `checkinput::is_character(<path>)` is
+  already checked in `checkinput::is_path(<path>)`.
+
+#### Documentation
+
+- Clarify that `dir` is considered relative to the working directory
+  instead of an absolute path.
+- Inherit section `Note on paths` from
+  [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+  when appropriate.
+- Stylistic updates to documentation, including added cross-references.
+
 ## progutils 0.16.0
 
 #### Breaking changes

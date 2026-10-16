@@ -9,7 +9,7 @@ underscores as indicated by keep_underscores."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +56,8 @@ underscores as indicated by <code>keep_underscores</code>.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a> with the (possibly
-empty) strings to remove non-alphanumeric characters from.</p></dd>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a> with strings to
+remove non-alphanumeric characters from. Empty strings (<code>""</code>) are allowed.</p></dd>
 
 
 <dt id="arg-replacement">replacement<a class="anchor" aria-label="anchor" href="#arg-replacement"></a></dt>
@@ -68,37 +68,45 @@ instead of replace non-alphanumeric characters.</p></dd>
 
 <dt id="arg-keep-underscore">keep_underscore<a class="anchor" aria-label="anchor" href="#arg-keep-underscore"></a></dt>
 <dd><p><code>TRUE</code> or <code>FALSE</code>: keep underscores? If <code>FALSE</code>,
-underscores are replaced by <code>replacement</code>, which only makes sense if a
+underscores are replaced by <code>replacement</code>, which is only apparent if a
 non-default <code>replacement</code> is used such that it is not an underscore, see the
 last <code>Example</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>x</code> with non-alphanumeric characters other than dots, and possibly
-underscores, replaced by <code>replacement</code>.</p>
+    <p><code>x</code> with non-alphanumeric characters other than dots, as well as underscores
+if <code>keep_underscores</code> is <code>FALSE</code>, replaced by <code>replacement</code>. An empty string
+(<code>""</code>) is returned if the empty character string (<code>""</code>) is used for
+<code>replacement</code> and <code>x</code> does not contain non-replaced characters.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This implementation uses the <a href="https://rdrr.io/r/base/regex.html" class="external-link">character class</a> <code>[:alnum:]</code> that
 depends on the current <a href="https://rdrr.io/r/base/locales.html" class="external-link">locale</a>, see the <code>Programming notes</code> in
 <code><a href="https://jessealderliesten.github.io/checkinput/reference/all_names.html" class="external-link">checkinput::all_names()</a></code>.</p>
-<p>Empty strings are allowed as input to <code>x</code> because they might also be returned
-by <code>replace_nonalnum()</code> if the empty character string (<code>""</code>) is used for
-<code>replacement</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/trimws.html" class="external-link">trimws()</a></code> to remove leading and/or trailing whitespace; <code><a href="replace_vals.html">replace_vals()</a></code> to
-replace specific values; <code><a href="https://jessealderliesten.github.io/checkinput/reference/all_names.html" class="external-link">checkinput::all_names()</a></code> and <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code>
-for more specific checks on the validity of strings.</p>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/base/trimws.html" class="external-link">trimws()</a></code> to remove leading whitespace, trailing whitespace, or both;
+<code><a href="replace_vals.html">replace_vals()</a></code>, with more relevant links, to replace specific values;
+<code><a href="https://jessealderliesten.github.io/checkinput/reference/all_names.html" class="external-link">checkinput::all_names()</a></code> and <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> for checks on the
+validity of strings.</p>
 <p>Other functions to check equality:
 <code><a href="are_equal.html">are_equal()</a></code>,
 <code><a href="check_case.html">check_case()</a></code>,
 <code><a href="get_file_path.html">get_file_path()</a></code>,
 <code><a href="not_in.html">not_in()</a></code>,
 <code><a href="replace_vals.html">replace_vals()</a></code>,
-<code><a href="signif_custom.html">signif_custom()</a></code></p></div>
+<code><a href="signif_custom.html">signif_custom()</a></code></p>
+<p>Other functions to modify character vectors:
+<code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
+<code>reexports</code>,
+<code><a href="replace_vals.html">replace_vals()</a></code>,
+<code><a href="signal_text.html">signal_text()</a></code>,
+<code><a href="unpaste_unquote.html">unpaste_unquote()</a></code>,
+<code><a href="vect_to_char.html">vect_to_char()</a></code>,
+<code><a href="wrap_text.html">wrap_text()</a></code></p></div>
     </div>
 
     <div class="section level2">

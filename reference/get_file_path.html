@@ -9,7 +9,7 @@ example before attempting to read a file."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +56,9 @@ example before attempting to <a href="https://rdrr.io/r/utils/read.table.html" c
 
 
 <dl><dt id="arg-dir">dir<a class="anchor" aria-label="anchor" href="#arg-dir"></a></dt>
-<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> containing the
-<a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">path</a> to a directory.</p></dd>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> containing a
+<a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">valid path</a>, see <code>Details</code> and the section
+<code>Notes on paths</code> below.</p></dd>
 
 
 <dt id="arg-pattern">pattern<a class="anchor" aria-label="anchor" href="#arg-pattern"></a></dt>
@@ -80,30 +81,54 @@ name?</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A character string with the <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalized</a> path to the
 file with a name matching <code>pattern</code> if there is exactly one such file in
-directory <code>dir</code>. Otherwise an error is thrown. Use <code><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename()</a></code> on the result
-to obtain the filename itself.</p>
+directory <code>dir</code>. Use <code><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename()</a></code> on the result to obtain the filename
+itself.</p>
+<p>An error is thrown if no match, or multiple matches, are found. If
+<code>ignore_case</code> is <code>FALSE</code>, the error message indicates if any case-insensitive
+match is present.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The default <code>dir</code> (<code>"."</code>) indicates the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>.</p>
-<p>If <code>ignore_case</code> is <code>FALSE</code> and no case-sensitive match is found, the error
-message indicates if any case-insensitive match is present.</p>
+    <p>The path in <code>dir</code> is interpreted as a <strong>relative</strong> path to the directory
+where to look for a file, starting from the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>,
+see the section <code>Notes on paths</code> below.</p>
 <p>In contrast to the default of <code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files()</a></code>, <code>get_file_path()</code> includes
 'hidden' files, i.e., files with names that start with a dot, but excludes
 directories.</p>
-<p>Paths will be <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">normalized</a> to ensure they still work if the
+    </div>
+    <div class="section level2">
+    <h2 id="notes-on-paths">Notes on paths<a class="anchor" aria-label="anchor" href="#notes-on-paths"></a></h2>
+
+
+
+<p>The file separator is a backslash (<code>\</code>) on Windows but a forward slash (<code>/</code>)
+on other operating systems: use <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> or <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code> to construct
+paths in a platform-independent way and <a href="https://rdrr.io/r/base/Platform.html" class="external-link">.Platform$file.sep</a> to
+get the file separator used on the current platform.</p>
+<p>Furthermore, the backslash is also used as
+<a href="https://rdrr.io/r/base/regex.html" class="external-link">escape character</a> in <span style="R">R</span>, such that backslashes need to be escaped in
+<span style="R">R</span> code by doubling them. Use <code>cat(x)</code> to omit the escape characters to see
+how <code>x</code> would be printed.</p>
+<p>The <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> can be indicated by a single dot (<code>"."</code>) and
+the parent directory can be indicated by two dots (<code>".."</code>).</p>
+<p><strong>relative</strong> paths start from the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>. In contrast,
+<strong>absolute</strong> paths start from the root directory and thus give the complete
+path, such that the path still points to the same directory if the
 <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> changes.</p>
+<p>Paths can be normalised, e.g., through <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code> or <code><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">fs::path_norm()</a></code>
+(which is also called by <code><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">fs::path_abs()</a></code>). On case-insensitive file systems,
+this also adjusts the case to match names of directories that are already
+present.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> to check if a path is valid, with a <code>Note on paths</code>
-and extensive references about file paths and directories;
+    <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> to check if a path is valid, with extensive
+references about file paths and directories;
 <code><a href="create_file_path.html">create_file_path()</a></code> to create a file path and creating the indicated
 directory if it does not yet exist;
 <code><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">fs::file_exists()</a></code> and <code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files()</a></code> (which <strong>includes</strong> directories in its
-output) to
-check for existence of files without checking they are a unique match to a
-pattern;
+output) to check for existence of files without checking they are a unique
+match to a pattern;
 <code><a href="https://rdrr.io/r/base/file.info.html" class="external-link">file.info()</a></code> and <code><a href="https://rdrr.io/r/base/file.access.html" class="external-link">file.access()</a></code> to extract information about files or
 directories</p>
 <p>Other functions to handle paths and directories:
@@ -132,45 +157,45 @@ directories</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"some_file"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/some_filename.txt'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/some_filename.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/some_filename.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/some_filename.txt</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The same file is found if case-insensitive matching is used:</span></span></span>
 <span class="r-in"><span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"SOME_FILE"</span>, ignore_case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/some_filename.txt'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/some_filename.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/some_filename.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/some_filename.txt</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error reporting the presence of a case-insensitive match.</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"SOME_FILE"</span>, ignore_case <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> However, one or more case-insensitive matches to 'pattern' are present:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'some_filename.txt'.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># 'pattern' is interpreted as a regular expression</span></span></span>
 <span class="r-in"><span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"^.+er_file"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/another_filename.txt'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e/another_filename.txt</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using file '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/another_filename.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8/another_filename.txt</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error reporting no match found.</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"missing_filename_abcde"</span>,</span></span>
 <span class="r-in"><span>                 ignore_case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   No matches to pattern 'missing_filename_abcde' are present in directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8'.</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"missing_filename_abcde"</span>,</span></span>
 <span class="r-in"><span>                 ignore_case <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> No case-insensitive match is present either.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Error if multiple matches are present.</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">get_file_path</span><span class="op">(</span>dir <span class="op">=</span> <span class="va">my_tempdir</span>, pattern <span class="op">=</span> <span class="st">"_filename"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error in get_file_path(dir = my_tempdir, pattern = "_filename") : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Multiple matches to pattern '_filename' are present in directory</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpHeHnva/examplegetfilepath19a44f1bd88e':</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> '/tmp/RtmpgUrBhj/examplegetfilepath19dfdf591b8':</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'another_filename.txt'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'some_filename.txt'!</span>
 <span class="r-in"><span></span></span>

@@ -12,17 +12,11 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 
 - dir:
 
-  [Character
+  [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
-  path](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-  to a directory that should be created if it does not yet exist.
-  [`fs::path()`](https://fs.r-lib.org/reference/path.html) adds file
-  separators and the dot (`"."`) indicates the [working
-  directory](https://rdrr.io/r/base/getwd.html), such that by default a
-  subdirectory with the current date in the
-  [format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` in
-  directory `output` below the working directory is created.
+  path](https://jessealderliesten.github.io/checkinput/reference/is_path.html),
+  see `Details` and the section `Notes on paths` below.
 
 - add_date:
 
@@ -33,33 +27,71 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 ## Value
 
 A character string with the [absolute
-normalized](https://fs.r-lib.org/reference/path_math.html) path to the
+normalised](https://fs.r-lib.org/reference/path_math.html) path to the
 requested directory, returned
-[invisibly](https://rdrr.io/r/base/invisible.html). An error is thrown
-if the attempt to create a directory fails, for example because `dir`
-points to an existing file instead of to an directory.
+[invisibly](https://rdrr.io/r/base/invisible.html), see the section
+`Notes on paths` and the `Examples` below.
+
+By default a subdirectory with the current date in the
+[format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` is created
+in directory `output` below the [working
+directory](https://rdrr.io/r/base/getwd.html).
+
+An error is thrown if the attempt to create a directory fails, for
+example because `dir` points to an existing file instead of to an
+directory.
 
 ## Details
 
-The [absolute,
-normalised](https://fs.r-lib.org/reference/path_math.html) path is
-returned such that the returned path still works if the [working
-directory](https://rdrr.io/r/base/getwd.html) changes. On
-case-insensitive file systems, normalization also adjusts the case to
-match names of directories that are already present (see the
-`Examples`).
+The path in `dir` is interpreted as a **relative** path to the directory
+that should be created, starting from the [working
+directory](https://rdrr.io/r/base/getwd.html), see the section
+`Notes on paths` below.
 
 ## Side effects
 
 The directory indicated by the returned path is
 [created](https://fs.r-lib.org/reference/create.html) if it does not yet
-exist.
+[exist](https://fs.r-lib.org/reference/file_access.html).
+
+## Notes on paths
+
+The file separator is a backslash (`\`) on Windows but a forward slash
+(`/`) on other operating systems: use
+[`file.path()`](https://rdrr.io/r/base/file.path.html) or
+[`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
+paths in a platform-independent way and
+[.Platform\$file.sep](https://rdrr.io/r/base/Platform.html) to get the
+file separator used on the current platform.
+
+Furthermore, the backslash is also used as [escape
+character](https://rdrr.io/r/base/regex.html) in R, such that
+backslashes need to be escaped in R code by doubling them. Use `cat(x)`
+to omit the escape characters to see how `x` would be printed.
+
+The [working directory](https://rdrr.io/r/base/getwd.html) can be
+indicated by a single dot (`"."`) and the parent directory can be
+indicated by two dots (`".."`).
+
+**relative** paths start from the [working
+directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
+paths start from the root directory and thus give the complete path,
+such that the path still points to the same directory if the [working
+directory](https://rdrr.io/r/base/getwd.html) changes.
+
+Paths can be normalised, e.g., through
+[`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
+[`fs::path_norm()`](https://fs.r-lib.org/reference/path_math.html)
+(which is also called by
+[`fs::path_abs()`](https://fs.r-lib.org/reference/path_math.html)). On
+case-insensitive file systems, this also adjusts the case to match names
+of directories that are already present.
 
 ## See also
 
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid, with a `Note on paths` and extensive
-references about file paths and directories;
+to check if a path is valid, with extensive references about file paths
+and directories;
 [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md)
 for a safe way to create temporary directories;
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
@@ -69,7 +101,7 @@ not yet exist;
 and [`fs::dir_create()`](https://fs.r-lib.org/reference/create.html)
 (with its base-equivalent
 [`dir.create()`](https://rdrr.io/r/base/files2.html)) used by this
-function;
+function.
 
 Other functions to handle paths and directories:
 [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md),
@@ -86,7 +118,7 @@ my_tempdir <- create_tempdir(prefix = "examplecreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
-#> /tmp/RtmpHeHnva/examplecreatedir19a47b2fe26e/dir_one 
+#> /tmp/RtmpgUrBhj/examplecreatedir19df31f092a1/dir_one 
 #>                                                 TRUE 
 
 # An attempt to create a directory that already exists does not change any
@@ -96,9 +128,9 @@ res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
 identical(res_dir_one, res_dir_one_v2) # TRUE
 #> [1] TRUE
 
-# On case-insensitive file systems, the directory 'res_dir_ONE' is the same as
-# 'res_dir_one'. On case-sensitive file systems it differs in case from
-# 'res_dir_one'.
+# On case-insensitive file systems, the directories 'res_dir_ONE' and
+# 'res_dir_one' are the same directory. On case-sensitive file systems they
+# are different directories.
 res_dir_ONE <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                           add_date = FALSE)
 identical(res_dir_one, res_dir_ONE)
@@ -108,7 +140,7 @@ identical(res_dir_one, res_dir_ONE)
 res_dir_date <- create_dir(dir = fs::path(my_tempdir, "dir_date"),
                            add_date = TRUE)
 fs::dir_exists(res_dir_date) # TRUE
-#> /tmp/RtmpHeHnva/examplecreatedir19a47b2fe26e/dir_date/2026_10_13 
+#> /tmp/RtmpgUrBhj/examplecreatedir19df31f092a1/dir_date/2026_10_16 
 #>                                                             TRUE 
 
 # Cleaning up

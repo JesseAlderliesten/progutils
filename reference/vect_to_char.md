@@ -21,13 +21,16 @@ vect_to_char(
 
 - x:
 
-  A vector, [factor](https://rdrr.io/r/base/factor.html), `NULL`, or a
-  non-dataframe [list](https://rdrr.io/r/base/list.html) (unlisted
-  through `unlist(x, use.names = TRUE)`, with a warning).
+  vector, [factor](https://rdrr.io/r/base/factor.html),
+  [NULL](https://rdrr.io/r/base/NULL.html), or a non-dataframe
+  [list](https://rdrr.io/r/base/list.html) (unlisted through
+  `unlist(x, use.names = TRUE)`, with a warning).
 
 - signif:
 
-  Positive number indicating the number of [significant
+  positive
+  [number](https://jessealderliesten.github.io/checkinput/reference/is_number.html)
+  indicating the number of [significant
   digits](https://rdrr.io/r/base/Round.html) to round numeric `x` to
   (see `Details`) or `Inf` to not round values.
 
@@ -42,8 +45,8 @@ vect_to_char(
 
   [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
-  used to separate the names and the values. Ignored if `x` does not
-  have names.
+  used to separate the [names](https://rdrr.io/r/base/names.html) and
+  the values. Ignored if `x` does not have names.
 
 - collapse:
 
@@ -66,12 +69,13 @@ vect_to_char(
 
 ## Value
 
-A character vector or character string with the names and values in `x`,
-with values of numeric `x` rounded to `signif`
+A character vector or character string with the
+[names](https://rdrr.io/r/base/names.html) and values in `x`, with
+values of numeric `x` rounded to `signif`
 [significant](https://rdrr.io/r/base/Round.html) digits, wrapped to
 `width` characters.
 
-If `collapse` is `NULL`, a [character
+If `collapse` is [NULL](https://rdrr.io/r/base/NULL.html), a [character
 vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
 with the same elements as `x` is returned, wrapping on a per-element
 basis. If `collapse` is not `NULL`, the name-value pairs are separated
@@ -105,11 +109,11 @@ Numeric values are not rounded if `digits` is
 [Inf](https://rdrr.io/r/base/is.finite.html). Otherwise, numeric values
 are rounded to **at least** `digits` [significant
 digits](https://rdrr.io/r/base/Round.html) while ensuring their integer
-parts are unrounded (if `round_type` is `selective` or `expanded`, see
+parts are unrounded if `round_type` is `"selective"` or `"expanded"`, or
+to **exactly** `digits` significant digits while their integer parts
+might be rounded if `round_type` is `"signif"`, see
 [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
-for details) or are rounded to **exactly** `digits` significant digits
-while their integer parts might be rounded (if `round_type` is
-`signif`).
+for details.
 
 ## Programming notes
 
@@ -137,6 +141,7 @@ Other functions to convert types:
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 `reexports`,
+[`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),

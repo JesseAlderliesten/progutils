@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,15 +53,15 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>factor with levels to be reordered to <code>new_order</code>, or character
-vector to be converted to a factor with levels ordered as <code>new_order</code>. Should
-have length larger than zero.</p></dd>
+<dd><p><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a> with <a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a> to be reordered to <code>new_order</code>, or a
+<a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a> to be converted to a factor
+with levels ordered as <code>new_order</code>. Should have length larger than zero.</p></dd>
 
 
 <dt id="arg-new-order">new_order<a class="anchor" aria-label="anchor" href="#arg-new-order"></a></dt>
-<dd><p>a <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a> with a
-length larger than zero containing <a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a> levels giving the desired order,
-or <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> to sort levels on increasing numerical value.</p></dd>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a> with a
+length larger than zero containing <a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a> <a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a> giving the desired
+order, or <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> to sort levels on increasing numerical value.</p></dd>
 
 
 <dt id="arg-warn-drop-order">warn_drop_order<a class="anchor" aria-label="anchor" href="#arg-warn-drop-order"></a></dt>
@@ -71,7 +71,7 @@ dropped because they are not present in <code>x</code>?</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>x</code> after converting it to a <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a> with levels reordered to
+    <p><code>x</code> after converting it to a <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a> with <a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a> reordered to
 <code>new_order</code>, dropping values in <code>new_order</code> that are not present in <code>x</code>.</p>
     </div>
     <div class="section level2">
@@ -98,7 +98,9 @@ converted by <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>.<
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>the examples in <code><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels()</a></code> on combining levels, <code><a href="https://rdrr.io/r/stats/relevel.html" class="external-link">stats::relevel()</a></code> to assign
-one reference level to a factor; <code><a href="https://rdrr.io/r/base/order.html" class="external-link">order()</a></code>; <code><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort()</a></code></p>
+one reference level to a factor; <code><a href="https://rdrr.io/r/base/order.html" class="external-link">order()</a></code>; <code><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort()</a></code>;
+<code><a href="https://rdrr.io/r/base/append.html" class="external-link">append()</a></code> which, despite its name, can insert values into a vector at any
+place</p>
 <p>Other functions to convert types:
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>,
 <code>reexports</code>,

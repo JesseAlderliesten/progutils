@@ -23,19 +23,19 @@ replace_vals(
 
 - x:
 
-  [Character](https://rdrr.io/r/base/character.html) vector with values
+  [character](https://rdrr.io/r/base/character.html) vector with values
   to be replaced, or [factor](https://rdrr.io/r/base/factor.html) with
   [levels](https://rdrr.io/r/base/levels.html) to be replaced.
 
 - old:
 
-  Character vector with values to be replaced. Should be
+  character vector with values to be replaced. Should be
   [unique](https://rdrr.io/r/base/unique.html) and not contain the value
-  `new`, otherwise an error is thrown.
+  in `new`, otherwise an error is thrown.
 
 - new:
 
-  Character string with the new value.
+  character string with the new value.
 
 - ignore_case:
 
@@ -50,8 +50,8 @@ replace_vals(
 - warn_absent:
 
   `TRUE` or `FALSE`: warn if neither `old` nor `new` is found in `x`? It
-  is silently assumed replacement is not necessary anymore if `new` is
-  found.
+  is silently assumed replacement is **not** necessary anymore if `new`
+  is found in `x`.
 
 - signal_case_old, signal_case_new:
 
@@ -75,8 +75,9 @@ replace_vals(
 
 ## Value
 
-`x` with the requested replacements. Factor levels are **not** reordered
-after the replacement.
+`x` with the requested replacements. Factor
+[levels](https://rdrr.io/r/base/levels.html) are **not** reordered after
+the replacement.
 
 ## Details
 
@@ -93,18 +94,27 @@ and `ignore_case` is `TRUE`. An example of such an exception is
 which returns `c("b", "b")`.
 
 If `quiet` is `FALSE`, a message indicates which values have been
-replaced. The order of the factor **levels** determines the order used
-in the message, which is influenced by the locale at the time of their
+replaced. The used order in the message is determined by the order of
+the factor **levels**, which is influenced by the
+[locale](https://rdrr.io/r/base/locales.html) at the time of their
 creation, see the `Warning` in
-[`factor()`](https://rdrr.io/r/base/factor.html).
+[`factor()`](https://rdrr.io/r/base/factor.html) and the
+`Programming notes` in
+[`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html).
 
 ## See also
 
 [`gsub()`](https://rdrr.io/r/base/grep.html);
 [`replace()`](https://rdrr.io/r/base/replace.html);
+[`trimws()`](https://rdrr.io/r/base/trimws.html) to remove leading
+whitespace, trailing whitespace, or both;
+[`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md);
 [`append()`](https://rdrr.io/r/base/append.html) which, despite its
 name, can insert values into a vector at any place;
-[`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md)
+[`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html)
+and
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+for checks on the validity of strings.
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),
@@ -117,6 +127,7 @@ Other functions to check equality:
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 `reexports`,
+[`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md),
 [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md),

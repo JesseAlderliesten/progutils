@@ -12,17 +12,21 @@ reorder_levels(x, new_order, warn_drop_order = TRUE)
 
 - x:
 
-  factor with levels to be reordered to `new_order`, or character vector
+  [factor](https://rdrr.io/r/base/factor.html) with
+  [levels](https://rdrr.io/r/base/levels.html) to be reordered to
+  `new_order`, or a [character
+  vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   to be converted to a factor with levels ordered as `new_order`. Should
   have length larger than zero.
 
 - new_order:
 
-  a [character
+  [character
   vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   with a length larger than zero containing
-  [unique](https://rdrr.io/r/base/unique.html) levels giving the desired
-  order, or [NULL](https://rdrr.io/r/base/NULL.html) to sort levels on
+  [unique](https://rdrr.io/r/base/unique.html)
+  [levels](https://rdrr.io/r/base/levels.html) giving the desired order,
+  or [NULL](https://rdrr.io/r/base/NULL.html) to sort levels on
   increasing numerical value.
 
 - warn_drop_order:
@@ -33,8 +37,9 @@ reorder_levels(x, new_order, warn_drop_order = TRUE)
 ## Value
 
 `x` after converting it to a
-[factor](https://rdrr.io/r/base/factor.html) with levels reordered to
-`new_order`, dropping values in `new_order` that are not present in `x`.
+[factor](https://rdrr.io/r/base/factor.html) with
+[levels](https://rdrr.io/r/base/levels.html) reordered to `new_order`,
+dropping values in `new_order` that are not present in `x`.
 
 ## Details
 
@@ -69,7 +74,9 @@ combining levels,
 [`stats::relevel()`](https://rdrr.io/r/stats/relevel.html) to assign one
 reference level to a factor;
 [`order()`](https://rdrr.io/r/base/order.html);
-[`sort()`](https://rdrr.io/r/base/sort.html)
+[`sort()`](https://rdrr.io/r/base/sort.html);
+[`append()`](https://rdrr.io/r/base/append.html) which, despite its
+name, can insert values into a vector at any place
 
 Other functions to convert types:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),

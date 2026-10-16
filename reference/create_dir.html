@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,12 +53,9 @@
 
 
 <dl><dt id="arg-dir">dir<a class="anchor" aria-label="anchor" href="#arg-dir"></a></dt>
-<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">Character string</a>
-containing a <a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">valid path</a> to a directory that should
-be created if it does not yet exist. <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code> adds file separators and
-the dot (<code>"."</code>) indicates the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>, such that by
-default a subdirectory with the current date in the <a href="https://rdrr.io/r/base/strptime.html" class="external-link">format</a>
-<code>YYYY_mm_dd</code> in directory <code>output</code> below the working directory is created.</p></dd>
+<dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> containing a
+<a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">valid path</a>, see <code>Details</code> and the section
+<code>Notes on paths</code> below.</p></dd>
 
 
 <dt id="arg-add-date">add_date<a class="anchor" aria-label="anchor" href="#arg-add-date"></a></dt>
@@ -68,34 +65,61 @@ current date in the <a href="https://rdrr.io/r/base/strptime.html" class="extern
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A character string with the <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalized</a> path to the
-requested directory, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>. An error is thrown if
-the attempt to create a directory fails, for example because <code>dir</code> points to
-an existing file instead of to an directory.</p>
+    <p>A character string with the <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalised</a> path to the
+requested directory, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>, see the section
+<code>Notes on paths</code> and the <code>Examples</code> below.</p>
+<p>By default a subdirectory with the current date in the <a href="https://rdrr.io/r/base/strptime.html" class="external-link">format</a>
+<code>YYYY_mm_dd</code> is created in directory <code>output</code> below the
+<a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>.</p>
+<p>An error is thrown if the attempt to create a directory fails, for example
+because <code>dir</code> points to an existing file instead of to an directory.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute, normalised</a> path is returned such that the
-returned path still works if the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> changes. On
-case-insensitive file systems, normalization also adjusts the case to match
-names of directories that are already present (see the <code>Examples</code>).</p>
+    <p>The path in <code>dir</code> is interpreted as a <strong>relative</strong> path to the directory that
+should be created, starting from the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>, see the
+section <code>Notes on paths</code> below.</p>
     </div>
     <div class="section level2">
     <h2 id="side-effects">Side effects<a class="anchor" aria-label="anchor" href="#side-effects"></a></h2>
 
 
 <p>The directory indicated by the returned path is <a href="https://fs.r-lib.org/reference/create.html" class="external-link">created</a>
-if it does not yet exist.</p>
+if it does not yet <a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">exist</a>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="notes-on-paths">Notes on paths<a class="anchor" aria-label="anchor" href="#notes-on-paths"></a></h2>
+
+
+
+<p>The file separator is a backslash (<code>\</code>) on Windows but a forward slash (<code>/</code>)
+on other operating systems: use <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> or <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code> to construct
+paths in a platform-independent way and <a href="https://rdrr.io/r/base/Platform.html" class="external-link">.Platform$file.sep</a> to
+get the file separator used on the current platform.</p>
+<p>Furthermore, the backslash is also used as
+<a href="https://rdrr.io/r/base/regex.html" class="external-link">escape character</a> in <span style="R">R</span>, such that backslashes need to be escaped in
+<span style="R">R</span> code by doubling them. Use <code>cat(x)</code> to omit the escape characters to see
+how <code>x</code> would be printed.</p>
+<p>The <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> can be indicated by a single dot (<code>"."</code>) and
+the parent directory can be indicated by two dots (<code>".."</code>).</p>
+<p><strong>relative</strong> paths start from the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>. In contrast,
+<strong>absolute</strong> paths start from the root directory and thus give the complete
+path, such that the path still points to the same directory if the
+<a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> changes.</p>
+<p>Paths can be normalised, e.g., through <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code> or <code><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">fs::path_norm()</a></code>
+(which is also called by <code><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">fs::path_abs()</a></code>). On case-insensitive file systems,
+this also adjusts the case to match names of directories that are already
+present.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> to check if a path is valid, with a <code>Note on paths</code>
-and extensive references about file paths and directories;
+    <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> to check if a path is valid, with extensive
+references about file paths and directories;
 <code><a href="create_tempdir.html">create_tempdir()</a></code> for a safe way to create temporary directories;
 <code><a href="create_file_path.html">create_file_path()</a></code> to create a file path and creating the indicated
 directory if it does not yet exist;
 <code><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">fs::dir_exists()</a></code> and <code><a href="https://fs.r-lib.org/reference/create.html" class="external-link">fs::dir_create()</a></code> (with its base-equivalent
-<code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create()</a></code>) used by this function;</p>
+<code><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create()</a></code>) used by this function.</p>
 <p>Other functions to handle paths and directories:
 <code><a href="create_file_path.html">create_file_path()</a></code>,
 <code><a href="create_tempdir.html">create_tempdir()</a></code>,
@@ -111,7 +135,7 @@ directory if it does not yet exist;
 <span class="r-in"><span><span class="va">res_dir_one</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_one"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">dir_exists</a></span><span class="op">(</span><span class="va">res_dir_one</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpHeHnva/examplecreatedir19a47b2fe26e/dir_one </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpgUrBhj/examplecreatedir19df31f092a1/dir_one </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                 TRUE </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># An attempt to create a directory that already exists does not change any</span></span></span>
@@ -121,9 +145,9 @@ directory if it does not yet exist;
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">res_dir_one</span>, <span class="va">res_dir_one_v2</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># On case-insensitive file systems, the directory 'res_dir_ONE' is the same as</span></span></span>
-<span class="r-in"><span><span class="co"># 'res_dir_one'. On case-sensitive file systems it differs in case from</span></span></span>
-<span class="r-in"><span><span class="co"># 'res_dir_one'.</span></span></span>
+<span class="r-in"><span><span class="co"># On case-insensitive file systems, the directories 'res_dir_ONE' and</span></span></span>
+<span class="r-in"><span><span class="co"># 'res_dir_one' are the same directory. On case-sensitive file systems they</span></span></span>
+<span class="r-in"><span><span class="co"># are different directories.</span></span></span>
 <span class="r-in"><span><span class="va">res_dir_ONE</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_ONE"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          add_date <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">res_dir_one</span>, <span class="va">res_dir_ONE</span><span class="op">)</span></span></span>
@@ -133,7 +157,7 @@ directory if it does not yet exist;
 <span class="r-in"><span><span class="va">res_dir_date</span> <span class="op">&lt;-</span> <span class="fu">create_dir</span><span class="op">(</span>dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">my_tempdir</span>, <span class="st">"dir_date"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                           add_date <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">dir_exists</a></span><span class="op">(</span><span class="va">res_dir_date</span><span class="op">)</span> <span class="co"># TRUE</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpHeHnva/examplecreatedir19a47b2fe26e/dir_date/2026_10_13 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /tmp/RtmpgUrBhj/examplecreatedir19df31f092a1/dir_date/2026_10_16 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                             TRUE </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Cleaning up</span></span></span>

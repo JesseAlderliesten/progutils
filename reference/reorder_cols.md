@@ -12,14 +12,17 @@ reorder_cols(x, new_order)
 
 - x:
 
-  Object with at least one column. Columns should have unique,
+  object with at least one column. Columns should have unique,
   syntactically valid names, see
   [`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html).
 
 - new_order:
 
-  Character vector with a length larger than zero containing unique
-  names in the new order.
+  [character
+  vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+  with a length larger than zero containing
+  [unique](https://rdrr.io/r/base/unique.html) column names in the new
+  order.
 
 ## Value
 

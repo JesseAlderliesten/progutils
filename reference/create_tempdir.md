@@ -15,25 +15,30 @@ create_tempdir(prefix = "tempdir")
   [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   with the initial part of the name of the new temporary directory, only
-  containing characters that are valid in a
-  [path](https://jessealderliesten.github.io/checkinput/reference/is_path.html).
+  containing characters that are [valid in a
+  path](https://jessealderliesten.github.io/checkinput/reference/is_path.html).
 
 ## Value
 
-The [absolute normalized](https://fs.r-lib.org/reference/path_math.html)
-path to the created temporary directory, returned
-[invisibly](https://rdrr.io/r/base/invisible.html).
+A character string with the [absolute
+normalised](https://fs.r-lib.org/reference/path_math.html) path to the
+created temporary directory, returned
+[invisibly](https://rdrr.io/r/base/invisible.html), see the section
+`Notes on paths` below.
+
+An error is thrown when attempting to create subdirectories (see
+`Details`) and if creating the directory fails.
 
 ## Details
 
 The new directory is [created](https://rdrr.io/r/base/files2.html)
-inside [`tempdir()`](https://rdrr.io/r/base/tempfile.html). Its
+inside the directory returned by
+[`tempdir()`](https://rdrr.io/r/base/tempfile.html). Its
 [name](https://rdrr.io/r/base/tempfile.html) starts with the string
 given by `prefix` and is followed by a random string. This random string
-**might** contain a dot (`.`) such that the directory might appear to
-have a file extension, see the section `Source` in
-[`help("tempdir")`](https://rdrr.io/r/base/tempfile.html). An error is
-thrown if creating the directory fails.
+**might** contain a dot (`.`) such that the directory appears to have a
+file extension, see the section `Source` in
+[`help("tempdir")`](https://rdrr.io/r/base/tempfile.html).
 
 It is **not** possible to create recursive subdirectories (e.g.,
 `tempdir/subtempdir/otherdir`, see the `Examples`) because
@@ -80,7 +85,40 @@ occur if examples or tests are removed or added.
 
 The directory indicated by the returned path is
 [created](https://fs.r-lib.org/reference/create.html) if it does not yet
-exist.
+[exist](https://fs.r-lib.org/reference/file_access.html).
+
+## Notes on paths
+
+The file separator is a backslash (`\`) on Windows but a forward slash
+(`/`) on other operating systems: use
+[`file.path()`](https://rdrr.io/r/base/file.path.html) or
+[`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
+paths in a platform-independent way and
+[.Platform\$file.sep](https://rdrr.io/r/base/Platform.html) to get the
+file separator used on the current platform.
+
+Furthermore, the backslash is also used as [escape
+character](https://rdrr.io/r/base/regex.html) in R, such that
+backslashes need to be escaped in R code by doubling them. Use `cat(x)`
+to omit the escape characters to see how `x` would be printed.
+
+The [working directory](https://rdrr.io/r/base/getwd.html) can be
+indicated by a single dot (`"."`) and the parent directory can be
+indicated by two dots (`".."`).
+
+**relative** paths start from the [working
+directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
+paths start from the root directory and thus give the complete path,
+such that the path still points to the same directory if the [working
+directory](https://rdrr.io/r/base/getwd.html) changes.
+
+Paths can be normalised, e.g., through
+[`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
+[`fs::path_norm()`](https://fs.r-lib.org/reference/path_math.html)
+(which is also called by
+[`fs::path_abs()`](https://fs.r-lib.org/reference/path_math.html)). On
+case-insensitive file systems, this also adjusts the case to match names
+of directories that are already present.
 
 ## Programming notes
 
@@ -97,8 +135,8 @@ spurious warnings about duplicated file separators.
 ## See also
 
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-to check if a path is valid, with a `Note on paths` and extensive
-references about file paths and directories;
+to check if a path is valid, with extensive references about file paths
+and directories;
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md)
 to create a (non-temporary) directory if it does not yet exist;
 [`local()`](https://rdrr.io/r/base/eval.html) and
@@ -111,7 +149,7 @@ to change the working directory to a temporary directory (use
 [`withr::deferred_run()`](https://withr.r-lib.org/reference/defer.html)
 to change back to the normal project in interactive use);
 [`tempfile()`](https://rdrr.io/r/base/tempfile.html) used in this
-function to create the paths for the temporary directory;
+function to create the paths for the temporary directory
 
 Other functions to handle paths and directories:
 [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md),
@@ -122,14 +160,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/RtmpHeHnva"
+#> [1] "/tmp/RtmpgUrBhj"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpHeHnva/subtempdir19a43ce21c69"
+#> [1] "/tmp/RtmpgUrBhj/subtempdir19df6918aca7"
 
 # Using the same 'prefix' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpHeHnva/subtempdir19a423205cd8"
+#> [1] "/tmp/RtmpgUrBhj/subtempdir19df4d5a14d"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))

@@ -16,14 +16,14 @@ as.numeric_safe(x, keep_integer = TRUE)
 
 - x:
 
-  A factor, or a character or numeric vector to be converted to a
-  numeric vector.
+  a [factor](https://rdrr.io/r/base/factor.html), or a character or
+  numeric vector to be converted to a numeric vector.
 
 - keep_integer:
 
   `TRUE` or `FALSE`: return input of
   [type](https://rdrr.io/r/base/typeof.html) integer without converting
-  it to double.
+  it to double, see `Details`.
 
 ## Value
 
@@ -37,32 +37,33 @@ The [type](https://rdrr.io/r/base/typeof.html) of
 `FALSE`.
 
 `NULL` and zero-length vectors are converted to `numeric(0)`, except for
-`integer(0)` that is kept unchanged if `keep_integer` is `TRUE` (which
-is the default). In contrast to
-[`as.numeric()`](https://rdrr.io/r/base/numeric.html), logical vectors
-of length larger than zero are converted to a vector of `NA_real_`, with
-a warning, .
+`integer(0)` that is kept unchanged if `keep_integer` is `TRUE`, which
+is the default. `FALSE` and `TRUE` are converted to `NA_real_`, with
+warning, whereas [`as.numeric()`](https://rdrr.io/r/base/numeric.html)
+converts those values to `0` and `1`, respectively.
 
 `as.numeric_safe()` uses a suggestion from
 [`factor()`](https://rdrr.io/r/base/factor.html) and [R FAQ
 7.10](https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f)
-that works if `x` is a factor, a character vector or already is a
-numeric vector (even though the last example of
-[`as.numeric()`](https://rdrr.io/r/base/numeric.html) comments that this
-approach is less efficient for long vectors).
+that works if `x` is a [factor](https://rdrr.io/r/base/factor.html), a
+character vector or already is a numeric vector, even though the last
+example of [`as.numeric()`](https://rdrr.io/r/base/numeric.html)
+comments that this approach is less efficient for long vectors.
 
 In contrast, the alternative conversions `as.numeric(levels(x))[x]`
 (suggested in the `Warning` of
-[`factor()`](https://rdrr.io/r/base/factor.html)) and
+[factor](https://rdrr.io/r/base/factor.html)) and
 `as.numeric(levels(x))[as.integer(x)]` (suggested in R `FAQ 7.10` linked
-to above) **only** work if `x` is factor, see the `Examples`.
+to above) **only** work if `x` is a
+[factor](https://rdrr.io/r/base/factor.html), see the `Examples`.
 
 Furthermore, [`as.numeric()`](https://rdrr.io/r/base/numeric.html)
-**cannot** be used to convert a factor to numeric, because it returns
-their underlying numeric integer representation (i.e., the indices of
-the factor levels), see the `Warnings` in
+**cannot** be used to convert a
+[factor](https://rdrr.io/r/base/factor.html) to numeric because it
+returns their underlying numeric integer representation (i.e., the
+indices of the factor levels), see the `Warnings` in
 [`as.numeric()`](https://rdrr.io/r/base/numeric.html) and
-[`factor()`](https://rdrr.io/r/base/factor.html).
+[factor](https://rdrr.io/r/base/factor.html).
 
 ## See also
 
@@ -76,6 +77,7 @@ Other functions to convert types: `reexports`,
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
 
 Other functions to modify character vectors: `reexports`,
+[`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),

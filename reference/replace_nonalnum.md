@@ -15,8 +15,8 @@ replace_nonalnum(x, replacement = "_", keep_underscore = TRUE)
 
   [character
   vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
-  with the (possibly empty) strings to remove non-alphanumeric
-  characters from.
+  with strings to remove non-alphanumeric characters from. Empty strings
+  (`""`) are allowed.
 
 - replacement:
 
@@ -28,14 +28,17 @@ replace_nonalnum(x, replacement = "_", keep_underscore = TRUE)
 - keep_underscore:
 
   `TRUE` or `FALSE`: keep underscores? If `FALSE`, underscores are
-  replaced by `replacement`, which only makes sense if a non-default
+  replaced by `replacement`, which is only apparent if a non-default
   `replacement` is used such that it is not an underscore, see the last
   `Example`.
 
 ## Value
 
-`x` with non-alphanumeric characters other than dots, and possibly
-underscores, replaced by `replacement`.
+`x` with non-alphanumeric characters other than dots, as well as
+underscores if `keep_underscores` is `FALSE`, replaced by `replacement`.
+An empty string (`""`) is returned if the empty character string (`""`)
+is used for `replacement` and `x` does not contain non-replaced
+characters.
 
 ## Details
 
@@ -45,20 +48,16 @@ the current [locale](https://rdrr.io/r/base/locales.html), see the
 `Programming notes` in
 [`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html).
 
-Empty strings are allowed as input to `x` because they might also be
-returned by `replace_nonalnum()` if the empty character string (`""`) is
-used for `replacement`.
-
 ## See also
 
 [`trimws()`](https://rdrr.io/r/base/trimws.html) to remove leading
-and/or trailing whitespace;
-[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md)
-to replace specific values;
+whitespace, trailing whitespace, or both;
+[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
+with more relevant links, to replace specific values;
 [`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html)
 and
 [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-for more specific checks on the validity of strings.
+for checks on the validity of strings.
 
 Other functions to check equality:
 [`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md),
@@ -67,6 +66,15 @@ Other functions to check equality:
 [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
+
+Other functions to modify character vectors:
+[`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
+`reexports`,
+[`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
+[`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md),
+[`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
+[`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md),
+[`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md)
 
 ## Examples
 

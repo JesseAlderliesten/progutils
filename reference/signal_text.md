@@ -71,6 +71,7 @@ as an attribute to the returned object, see the last `Example`.
 Other functions to modify character vectors:
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md),
 `reexports`,
+[`replace_nonalnum()`](https://jessealderliesten.github.io/progutils/reference/replace_nonalnum.md),
 [`replace_vals()`](https://jessealderliesten.github.io/progutils/reference/replace_vals.md),
 [`unpaste_unquote()`](https://jessealderliesten.github.io/progutils/reference/unpaste_unquote.md),
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md),

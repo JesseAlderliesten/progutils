@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,22 +55,24 @@
 <dl><dt id="arg-prefix">prefix<a class="anchor" aria-label="anchor" href="#arg-prefix"></a></dt>
 <dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> with the
 initial part of the name of the new temporary directory, only containing
-characters that are valid in a <a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">path</a>.</p></dd>
+characters that are <a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">valid in a path</a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalized</a> path to the created temporary
-directory, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>.</p>
+    <p>A character string with the <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalised</a> path to the
+created temporary directory, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>, see the section
+<code>Notes on paths</code> below.</p>
+<p>An error is thrown when attempting to create subdirectories (see <code>Details</code>)
+and if creating the directory fails.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The new directory is <a href="https://rdrr.io/r/base/files2.html" class="external-link">created</a> inside <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. Its
-<a href="https://rdrr.io/r/base/tempfile.html" class="external-link">name</a> starts with the string given by <code>prefix</code> and is followed
-by a random string. This random string <strong>might</strong> contain a dot (<code>.</code>)
-such that the directory might appear to have a file extension, see the
-section <code>Source</code> in <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">help("tempdir")</a></code>. An error is thrown if creating the
-directory fails.</p>
+    <p>The new directory is <a href="https://rdrr.io/r/base/files2.html" class="external-link">created</a> inside the directory returned by
+<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>. Its <a href="https://rdrr.io/r/base/tempfile.html" class="external-link">name</a> starts with the string given by <code>prefix</code>
+and is followed by a random string. This random string <strong>might</strong> contain a
+dot (<code>.</code>) such that the directory appears to have a file extension, see the
+section <code>Source</code> in <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">help("tempdir")</a></code>.</p>
 <p>It is <strong>not</strong> possible to create recursive subdirectories (e.g.,
 <code>tempdir/subtempdir/otherdir</code>, see the <code>Examples</code>) because
 <a href="https://rdrr.io/r/base/unlink.html" class="external-link">removing</a> such directories might remove files that are still
@@ -110,7 +112,31 @@ occur if examples or tests are removed or added.</p>
 
 
 <p>The directory indicated by the returned path is <a href="https://fs.r-lib.org/reference/create.html" class="external-link">created</a>
-if it does not yet exist.</p>
+if it does not yet <a href="https://fs.r-lib.org/reference/file_access.html" class="external-link">exist</a>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="notes-on-paths">Notes on paths<a class="anchor" aria-label="anchor" href="#notes-on-paths"></a></h2>
+
+
+
+<p>The file separator is a backslash (<code>\</code>) on Windows but a forward slash (<code>/</code>)
+on other operating systems: use <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> or <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code> to construct
+paths in a platform-independent way and <a href="https://rdrr.io/r/base/Platform.html" class="external-link">.Platform$file.sep</a> to
+get the file separator used on the current platform.</p>
+<p>Furthermore, the backslash is also used as
+<a href="https://rdrr.io/r/base/regex.html" class="external-link">escape character</a> in <span style="R">R</span>, such that backslashes need to be escaped in
+<span style="R">R</span> code by doubling them. Use <code>cat(x)</code> to omit the escape characters to see
+how <code>x</code> would be printed.</p>
+<p>The <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> can be indicated by a single dot (<code>"."</code>) and
+the parent directory can be indicated by two dots (<code>".."</code>).</p>
+<p><strong>relative</strong> paths start from the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>. In contrast,
+<strong>absolute</strong> paths start from the root directory and thus give the complete
+path, such that the path still points to the same directory if the
+<a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> changes.</p>
+<p>Paths can be normalised, e.g., through <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code> or <code><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">fs::path_norm()</a></code>
+(which is also called by <code><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">fs::path_abs()</a></code>). On case-insensitive file systems,
+this also adjusts the case to match names of directories that are already
+present.</p>
     </div>
     <div class="section level2">
     <h2 id="programming-notes">Programming notes<a class="anchor" aria-label="anchor" href="#programming-notes"></a></h2>
@@ -126,8 +152,8 @@ spurious warnings about duplicated file separators.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> to check if a path is valid, with a <code>Note on paths</code>
-and extensive references about file paths and directories;
+    <div class="dont-index"><p><code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> to check if a path is valid, with extensive
+references about file paths and directories;
 <code><a href="create_dir.html">create_dir()</a></code> to create a (non-temporary) directory if it does not yet exist;
 <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> and
 <a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">withr::local_tempdir()</a>
@@ -138,7 +164,7 @@ to change the working directory to a temporary directory (use
 <code><a href="https://withr.r-lib.org/reference/defer.html" class="external-link">withr::deferred_run()</a></code> to change back to the normal project in interactive
 use);
 <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile()</a></code> used in this function to create the paths for the temporary
-directory;</p>
+directory</p>
 <p>Other functions to handle paths and directories:
 <code><a href="create_dir.html">create_dir()</a></code>,
 <code><a href="create_file_path.html">create_file_path()</a></code>,
@@ -148,14 +174,14 @@ directory;</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpHeHnva"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpgUrBhj"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex1</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpHeHnva/subtempdir19a43ce21c69"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpgUrBhj/subtempdir19df6918aca7"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using the same 'prefix' again creates another directory</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">my_subtempdir_ex2</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpHeHnva/subtempdir19a423205cd8"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpgUrBhj/subtempdir19df4d5a14d"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is not possible to create recursive subdirectories</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">no_subtempdir</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir/otherdir"</span><span class="op">)</span><span class="op">)</span></span></span>
