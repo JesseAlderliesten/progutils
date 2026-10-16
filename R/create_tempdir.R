@@ -11,8 +11,7 @@
 #' [tempdir()]. Its [name][tempfile()] starts with the string given by `prefix`
 #' and is followed by a random string. This random string **might** contain a
 #' dot (`.`) such that the directory appears to have a file extension, see the
-#' section `Source` in `help("tempdir")`. An error is thrown if creating the
-#' directory fails.
+#' section `Source` in `help("tempdir")`.
 #'
 #' It is **not** possible to create recursive subdirectories (e.g.,
 #' `tempdir/subtempdir/otherdir`, see the `Examples`) because
@@ -28,8 +27,12 @@
 #' `Usage in practice` below.
 #'
 #' @returns
-#' The [absolute normalised][fs::path_abs()] path to the created temporary
-#' directory, returned [invisibly][invisible].
+#' A character string with the [absolute normalised][fs::path_abs()] path to the
+#' created temporary directory, returned [invisibly][invisible], see the section
+#' `Notes on paths` below.
+#'
+#' An error is thrown when attempting to create subdirectories (see `Details`)
+#' and if creating the directory fails.
 #'
 #' @inheritSection create_dir Side effects
 #'
@@ -57,11 +60,12 @@
 #' absence of particular files or folders: this ensures no spurious matches
 #' occur if examples or tests are removed or added.
 #'
+#' @inheritSection checkinput::is_path Notes on paths
 #' @inheritSection checkinput::is_path Programming notes
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, with a `Note on paths`
-#' and extensive references about file paths and directories;
+#' [checkinput::is_path()] to check if a path is valid, with extensive
+#' references about file paths and directories;
 #' [create_dir()] to create a (non-temporary) directory if it does not yet exist;
 #' [local()] and
 #' [withr::local_tempdir()](https://withr.r-lib.org/reference/with_tempfile.html)

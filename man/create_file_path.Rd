@@ -13,26 +13,29 @@ create_file_path(
 }
 \arguments{
 \item{filename}{\link[checkinput:is_character]{character string} with the file
-name, including the file
-extension like \code{.csv} or \code{.txt}. Should adhere to the restrictions described
-in \code{\link[checkinput:is_path]{checkinput::is_path()}}.}
+name, including the file extension like \code{.csv} or \code{.txt}. Should adhere to
+the restrictions described in \code{\link[checkinput:is_path]{checkinput::is_path()}}.}
 
 \item{format_stamp}{\link[checkinput:is_character]{character string} indicating
-the \link[=strftime]{format} of
-the stamp to be added in front of the file name. No stamp is added if
-\code{format_stamp} is an empty string (i.e., \code{""}). The formatted stamp is
-treated as part of the filename, such that the same restrictions apply, see
-\code{Details}.}
+the \link[=strftime]{format} of the stamp to be added in front of the file name.
+No stamp is added if \code{format_stamp} is an empty string (i.e., \code{""}). The
+formatted stamp is treated as part of the filename, such that the same
+restrictions apply to \code{format_stamp} as to \code{filename}, see \code{Details}.}
 
 \item{dir}{\link[checkinput:is_character]{character string} containing a
-\link[checkinput:is_path]{valid path} to a directory that should be created.}
+\link[checkinput:is_path]{valid path}, see \code{Details} and the section
+\verb{Notes on paths} below.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 }
 \value{
-The created \link[fs:path_abs]{absolute normalised} file path, returned
-\link[=invisible]{invisibly}.
+A character string with the created \link[fs:path_abs]{absolute normalized}
+path, returned \link[=invisible]{invisibly}, see the section \verb{Notes on paths}
+below.
+
+An error is thrown if the attempt to create a file path fails. A warning is
+issued if the file already \link[fs:is_file]{exists}, see \code{Details}.
 }
 \description{
 Create a file path, creating the indicated directory if it does not yet exist.
@@ -42,8 +45,9 @@ Create a file path, creating the indicated directory if it does not yet exist.
 character until the end of the file name) and should \strong{not} contain slashes
 or backslashes: use \code{dir} to indicate subdirectories.
 
-The \link[fs:path_abs]{absolute, normalised} path is returned such that the
-returned path still works if the \link[=getwd]{working directory} changes.
+The path in \code{dir} is interpreted as a \strong{relative} path to the directory that
+should be created, starting from the \link[=getwd]{working directory}, see the
+section \verb{Notes on paths} below.
 
 A warning is issued if the \strong{file} indicated by the returned path already
 exists. To prevent this when creating files in quick succession, use \code{"\%OSn"}
@@ -51,18 +55,46 @@ as part of \code{format_stamp} to create precise stamps by truncating seconds to
 \verb{0 <= n <= 6} decimal places, see \code{\link[=strftime]{strftime()}} for details.
 
 \code{create_file_path()} creates the directory but does \strong{not} create the file:
-wrap the call to \code{create_file_path()} in \code{fs::file_create()} or in
-\code{file.create()} to create the file.
+wrap the call to \code{create_file_path()} in \code{\link[fs:file_create]{fs::file_create()}} or in
+\code{\link[=file.create]{file.create()}} to create the file.
 
-Calls where date nor time stamps are added (e.g.,
-\code{create_file_path(filename = "<filename>", format_stamp = "", dir = "<dir>", add_date = FALSE)})
-can be replaced by \code{fs::path(fs::dir_create("<dir>"), "<filename>")} if it is
-fine to \strong{not} get a warning if the file already exists.
+Calls where date \strong{nor} time stamps are added (i.e, using
+\code{format_stamp = ""} and \code{add_date = FALSE}) can be replaced by
+\code{fs::path(fs::dir_create(path = "<dir>"), "<filename>")} to \strong{not} get a
+warning if the file already \link[fs:is_file]{exists}.
 }
 \section{Side effects}{
 
 The directory indicated by the returned path is \link[fs:dir_create]{created}
-if it does not yet exist.
+if it does not yet \link[fs:dir_exists]{exist}.
+}
+
+\section{Notes on paths}{
+
+
+The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
+on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\link[fs:path]{fs::path()}} to construct
+paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
+get the file separator used on the current platform.
+
+Furthermore, the backslash is also used as
+\link[=regex]{escape character} in \R, such that backslashes need to be escaped in
+\R code by doubling them. Use \code{cat(x)} to omit the escape characters to see
+how \code{x} would be printed.
+
+The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
+the parent directory can be indicated by two dots (\code{".."}).
+
+\strong{relative} paths start from the \link[=getwd]{working directory}. In contrast,
+\strong{absolute} paths start from the root directory and thus give the complete
+path, such that the path still points to the same directory if the
+\link[=getwd]{working directory} changes.
+
+Paths can be normalised, e.g., through \code{\link[=normalizePath]{normalizePath()}} or \code{\link[fs:path_norm]{fs::path_norm()}}
+(which is also called by \code{\link[fs:path_abs]{fs::path_abs()}}). On case-insensitive file systems,
+this also adjusts the case to match names of directories that are already
+present.
+
 }
 
 \examples{
@@ -92,8 +124,8 @@ rm(my_tempdir)
 
 }
 \seealso{
-\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with a \verb{Note on paths}
-and extensive references about file paths and directories;
+\code{\link[checkinput:is_path]{checkinput::is_path()}} to check if a path is valid, with extensive
+references about file paths and directories;
 \code{\link[=get_file_path]{get_file_path()}} to check if a file exists and is a unique match to a pattern;
 \code{\link[=create_dir]{create_dir()}} (used by this function) to create a directory if it does not
 yet exist

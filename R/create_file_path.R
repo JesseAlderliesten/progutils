@@ -4,27 +4,22 @@
 #'
 #' @inheritParams create_dir dir add_date
 #' @param filename [character string][checkinput::is_character()] with the file
-#' name, including the file
-#' extension like `.csv` or `.txt`. Should adhere to the restrictions described
-#' in [checkinput::is_path()].
+#' name, including the file extension like `.csv` or `.txt`. Should adhere to
+#' the restrictions described in [checkinput::is_path()].
 #' @param format_stamp [character string][checkinput::is_character()] indicating
-#' the [format][strftime()] of
-#' the stamp to be added in front of the file name. No stamp is added if
-#' `format_stamp` is an empty string (i.e., `""`). The formatted stamp is
-#' treated as part of the filename, such that the same restrictions apply, see
-#' `Details`.
-#'
-#' @returns
-#' The created [absolute normalised][fs::path_abs()] file path, returned
-#' [invisibly][invisible()].
+#' the [format][strftime()] of the stamp to be added in front of the file name.
+#' No stamp is added if `format_stamp` is an empty string (i.e., `""`). The
+#' formatted stamp is treated as part of the filename, such that the same
+#' restrictions apply to `format_stamp` as to `filename`, see `Details`.
 #'
 #' @details
 #' `filename` **should** contain a file extension (i.e., a dot followed by any
 #' character until the end of the file name) and should **not** contain slashes
 #' or backslashes: use `dir` to indicate subdirectories.
 #'
-#' The [absolute, normalised][fs::path_abs()] path is returned such that the
-#' returned path still works if the [working directory][getwd()] changes.
+#' The path in `dir` is interpreted as a **relative** path to the directory that
+#' should be created, starting from the [working directory][getwd()], see the
+#' section `Notes on paths` below.
 #'
 #' A warning is issued if the **file** indicated by the returned path already
 #' exists. To prevent this when creating files in quick succession, use `"%OSn"`
@@ -32,19 +27,28 @@
 #' `0 <= n <= 6` decimal places, see [strftime()] for details.
 #'
 #' `create_file_path()` creates the directory but does **not** create the file:
-#' wrap the call to `create_file_path()` in `fs::file_create()` or in
-#' `file.create()` to create the file.
+#' wrap the call to `create_file_path()` in [fs::file_create()] or in
+#' [file.create()] to create the file.
 #'
-#' Calls where date nor time stamps are added (e.g.,
-#' `create_file_path(filename = "<filename>", format_stamp = "", dir = "<dir>", add_date = FALSE)`)
-#' can be replaced by `fs::path(fs::dir_create("<dir>"), "<filename>")` if it is
-#' fine to **not** get a warning if the file already exists.
+#' Calls where date **nor** time stamps are added (i.e, using
+#' `format_stamp = ""` and `add_date = FALSE`) can be replaced by
+#' `fs::path(fs::dir_create(path = "<dir>"), "<filename>")` to **not** get a
+#' warning if the file already [exists][fs::is_file()].
+#'
+#' @returns
+#' A character string with the created [absolute normalized][fs::path_abs()]
+#' path, returned [invisibly][invisible()], see the section `Notes on paths`
+#' below.
+#'
+#' An error is thrown if the attempt to create a file path fails. A warning is
+#' issued if the file already [exists][fs::is_file()], see `Details`.
 #'
 #' @inheritSection create_dir Side effects
+#' @inheritSection checkinput::is_path Notes on paths
 #'
 #' @seealso
-#' [checkinput::is_path()] to check if a path is valid, with a `Note on paths`
-#' and extensive references about file paths and directories;
+#' [checkinput::is_path()] to check if a path is valid, with extensive
+#' references about file paths and directories;
 #' [get_file_path()] to check if a file exists and is a unique match to a pattern;
 #' [create_dir()] (used by this function) to create a directory if it does not
 #' yet exist
