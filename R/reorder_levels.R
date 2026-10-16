@@ -1,11 +1,11 @@
 #' Reorder factor levels
 #'
-#' @param x factor with levels to be reordered to `new_order`, or character
-#' vector to be converted to a factor with levels ordered as `new_order`. Should
-#' have length larger than zero.
-#' @param new_order a [character vector][checkinput::all_characters()] with a
-#' length larger than zero containing [unique] levels giving the desired order,
-#' or [NULL] to sort levels on increasing numerical value.
+#' @param x [factor] with [levels] to be reordered to `new_order`, or a
+#' [character vector][checkinput::all_characters()] to be converted to a factor
+#' with levels ordered as `new_order`. Should have length larger than zero.
+#' @param new_order [character vector][checkinput::all_characters()] with a
+#' length larger than zero containing [unique] [levels] giving the desired
+#' order, or [NULL] to sort levels on increasing numerical value.
 #' @param warn_drop_order `TRUE` or `FALSE`: warn if values of `new_order` are
 #' dropped because they are not present in `x`?
 #'
@@ -25,7 +25,7 @@
 #' converted by [as.numeric_safe()].
 #'
 #' @returns
-#' `x` after converting it to a [factor] with levels reordered to
+#' `x` after converting it to a [factor] with [levels] reordered to
 #' `new_order`, dropping values in `new_order` that are not present in `x`.
 #'
 #' @section Notes:
@@ -35,7 +35,9 @@
 #'
 #' @seealso
 #' the examples in [levels()] on combining levels, [stats::relevel()] to assign
-#' one reference level to a factor; [order()]; [sort()]
+#' one reference level to a factor; [order()]; [sort()];
+#' [append()] which, despite its name, can insert values into a vector at any
+#' place
 #'
 #' @family functions to convert types
 #' @family functions to modify factors

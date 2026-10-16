@@ -7,11 +7,11 @@
 as.numeric_safe(x, keep_integer = TRUE)
 }
 \arguments{
-\item{x}{A factor, or a character or numeric vector to be converted to a
+\item{x}{a \link{factor}, or a character or numeric vector to be converted to a
 numeric vector.}
 
 \item{keep_integer}{\code{TRUE} or \code{FALSE}: return input of \link[=typeof]{type} integer
-without converting it to double.}
+without converting it to double, see \code{Details}.}
 }
 \value{
 A numeric vector, possibly \code{numeric(0)} or containing \code{NA_real_}.
@@ -26,25 +26,25 @@ The \link[=typeof]{type} of \link[=integer]{integers} is kept \code{integer} if
 \code{FALSE}.
 
 \code{NULL} and zero-length vectors are converted to \code{numeric(0)}, except for
-\code{integer(0)} that is kept unchanged if \code{keep_integer} is \code{TRUE} (which is the
-default). In contrast to \code{\link[=as.numeric]{as.numeric()}}, logical vectors of length larger
-than zero are converted to a vector of \code{NA_real_}, with a warning, .
+\code{integer(0)} that is kept unchanged if \code{keep_integer} is \code{TRUE}, which is the
+default. \code{FALSE} and \code{TRUE} are converted to \code{NA_real_}, with warning,
+whereas \code{\link[=as.numeric]{as.numeric()}} converts those values to \code{0} and \code{1}, respectively.
 
 \code{as.numeric_safe()} uses a suggestion from \code{\link[=factor]{factor()}} and
 \href{https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f}{\R FAQ 7.10}
-that works if \code{x} is a factor, a character vector or already is a numeric
-vector (even though the last example of \code{as.numeric()} comments that this
-approach is less efficient for long vectors).
+that works if \code{x} is a \link{factor}, a character vector or already is a numeric
+vector, even though the last example of \code{\link[=as.numeric]{as.numeric()}} comments that this
+approach is less efficient for long vectors.
 
 In contrast, the alternative conversions \code{as.numeric(levels(x))[x]} (suggested
-in the \code{Warning} of \code{\link[=factor]{factor()}}) and \code{as.numeric(levels(x))[as.integer(x)]}
-(suggested in \R \verb{FAQ 7.10} linked to above) \strong{only} work if \code{x} is factor,
-see the \code{Examples}.
+in the \code{Warning} of \link{factor}) and \code{as.numeric(levels(x))[as.integer(x)]}
+(suggested in \R \verb{FAQ 7.10} linked to above) \strong{only} work if \code{x} is a
+\link{factor}, see the \code{Examples}.
 
-Furthermore, \code{as.numeric()} \strong{cannot} be used to convert a factor to numeric,
-because it returns their underlying numeric integer representation (i.e., the
-indices of the factor levels), see the \code{Warnings} in \code{\link[=as.numeric]{as.numeric()}} and
-\code{\link[=factor]{factor()}}.
+Furthermore, \code{as.numeric()} \strong{cannot} be used to convert a \link{factor} to
+numeric because it returns their underlying numeric integer representation
+(i.e., the indices of the factor levels), see the \code{Warnings} in
+\code{\link[=as.numeric]{as.numeric()}} and \link{factor}.
 }
 \examples{
 x_int <- 5:7

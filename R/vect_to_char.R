@@ -4,13 +4,13 @@
 #' numeric values.
 #'
 #' @inheritParams wrap_text width ignore_newlines
-#' @param x A vector, [factor], `NULL`, or a non-dataframe [list] (unlisted
+#' @param x vector, [factor], [NULL], or a non-dataframe [list] (unlisted
 #' through `unlist(x, use.names = TRUE)`, with a warning).
-#' @param signif Positive number indicating the number of
-#' [significant digits][signif()] to round numeric `x` to (see `Details`) or
-#' `Inf` to not round values.
+#' @param signif positive [number][checkinput::is_number()] indicating the
+#' number of [significant digits][signif()] to round numeric `x` to (see
+#' `Details`) or `Inf` to not round values.
 #' @param sep [character string][checkinput::is_character()] used to separate
-#' the names and the values. Ignored if `x` does not have names.
+#' the [names] and the values. Ignored if `x` does not have names.
 #' @param collapse [character string][checkinput::is_character()] to collapse
 #' values into a single character string, or `NULL` to return each value as an
 #' element of a character vector.
@@ -34,21 +34,20 @@
 #'
 #' Numeric values are not rounded if `digits` is [Inf]. Otherwise, numeric
 #' values are rounded to **at least** `digits` [significant digits][signif()]
-#' while ensuring their integer parts are unrounded (if `round_type` is
-#' `selective` or `expanded`, see [signif_custom()] for details) or are rounded
-#' to **exactly** `digits` significant digits while their integer parts might be
-#' rounded (if `round_type` is `signif`).
+#' while ensuring their integer parts are unrounded if `round_type` is
+#' `"selective"` or `"expanded"`, or to **exactly** `digits` significant digits
+#' while their integer parts might be rounded if `round_type` is `"signif"`, see
+#' [signif_custom()] for details.
 #'
 #' @returns
-#' A character vector or character string with the names and values in `x`, with
-#' values of numeric `x` rounded to `signif` [significant][signif()] digits,
-#' wrapped to `width` characters.
+#' A character vector or character string with the [names] and values in `x`,
+#' with values of numeric `x` rounded to `signif` [significant][signif()]
+#' digits, wrapped to `width` characters.
 #'
-#' If `collapse` is `NULL`, a [character vector][checkinput::all_characters()]
-#' with the same elements as `x`
-#' is returned, wrapping on a per-element basis. If `collapse` is not `NULL`,
-#' the name-value pairs are separated by `collapse`, thus returning a
-#' [character string][checkinput::is_character()].
+#' If `collapse` is [NULL], a [character vector][checkinput::all_characters()]
+#' with the same elements as `x` is returned, wrapping on a per-element basis.
+#' If `collapse` is not `NULL`, the name-value pairs are separated by
+#' `collapse`, thus returning a [character string][checkinput::is_character()].
 #'
 #' See `Details` on the handling of some special values.
 #'

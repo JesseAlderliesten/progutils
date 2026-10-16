@@ -7,19 +7,19 @@
 reorder_levels(x, new_order, warn_drop_order = TRUE)
 }
 \arguments{
-\item{x}{factor with levels to be reordered to \code{new_order}, or character
-vector to be converted to a factor with levels ordered as \code{new_order}. Should
-have length larger than zero.}
+\item{x}{\link{factor} with \link{levels} to be reordered to \code{new_order}, or a
+\link[checkinput:all_characters]{character vector} to be converted to a factor
+with levels ordered as \code{new_order}. Should have length larger than zero.}
 
-\item{new_order}{a \link[checkinput:all_characters]{character vector} with a
-length larger than zero containing \link{unique} levels giving the desired order,
-or \link{NULL} to sort levels on increasing numerical value.}
+\item{new_order}{\link[checkinput:all_characters]{character vector} with a
+length larger than zero containing \link{unique} \link{levels} giving the desired
+order, or \link{NULL} to sort levels on increasing numerical value.}
 
 \item{warn_drop_order}{\code{TRUE} or \code{FALSE}: warn if values of \code{new_order} are
 dropped because they are not present in \code{x}?}
 }
 \value{
-\code{x} after converting it to a \link{factor} with levels reordered to
+\code{x} after converting it to a \link{factor} with \link{levels} reordered to
 \code{new_order}, dropping values in \code{new_order} that are not present in \code{x}.
 }
 \description{
@@ -66,7 +66,9 @@ orig
 }
 \seealso{
 the examples in \code{\link[=levels]{levels()}} on combining levels, \code{\link[stats:relevel]{stats::relevel()}} to assign
-one reference level to a factor; \code{\link[=order]{order()}}; \code{\link[=sort]{sort()}}
+one reference level to a factor; \code{\link[=order]{order()}}; \code{\link[=sort]{sort()}};
+\code{\link[=append]{append()}} which, despite its name, can insert values into a vector at any
+place
 
 Other functions to convert types:
 \code{\link[=as.numeric_safe]{as.numeric_safe()}},
