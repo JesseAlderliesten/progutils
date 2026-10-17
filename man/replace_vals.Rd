@@ -72,6 +72,10 @@ The used order in the message is determined by the order of the factor
 \strong{levels}, which is influenced by the \link[=locales]{locale} at the time of their
 creation, see the \code{Warning} in \code{\link[=factor]{factor()}} and the \verb{Programming notes} in
 \code{\link[checkinput:all_names]{checkinput::all_names()}}.
+
+\code{replace_vals()} does \strong{not} allow input of \link[=typeof]{type} \code{double} because
+matching such input should allow for small numerical errors by using a
+tolerance, for example using \code{\link[=are_equal]{are_equal()}}.
 }
 \examples{
 x <- c("k", "l", "m")
