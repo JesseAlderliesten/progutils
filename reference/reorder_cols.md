@@ -1,6 +1,7 @@
 # Reorder columns
 
-Reorder columns
+Reorder columns, warning about mismatches between columns and
+`new_order`.
 
 ## Usage
 

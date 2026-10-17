@@ -56,8 +56,9 @@ anymore, see the section `Usage in practice` below.
 
 ## Usage in practice
 
-`Examples` and `tests` should write to a temporary directory that is
-cleaned up afterwards (otherwise
+[Examples](https://rdrr.io/r/utils/example.html) and
+[tests](https://r-pkgs.org/testing-basics.html) should write to a
+temporary directory that is cleaned up afterwards (otherwise
 [`R cmd check`](https://r-pkgs.org/R-CMD-check.html) will issue a `Note`
 about
 [`detritus in the temp directory`](https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)
@@ -160,14 +161,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/RtmpgUrBhj"
+#> [1] "/tmp/RtmpErmCfJ"
 # Create a directory inside the directory returned by 'tempdir()'
 (my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpgUrBhj/subtempdir19df6918aca7"
+#> [1] "/tmp/RtmpErmCfJ/subtempdir187d3bfc19a9"
 
 # Using the same 'prefix' again creates another directory
 (my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpgUrBhj/subtempdir19df4d5a14d"
+#> [1] "/tmp/RtmpErmCfJ/subtempdir187d6f53ac71"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))

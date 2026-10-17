@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,6 +132,9 @@ The used order in the message is determined by the order of the factor
 <strong>levels</strong>, which is influenced by the <a href="https://rdrr.io/r/base/locales.html" class="external-link">locale</a> at the time of their
 creation, see the <code>Warning</code> in <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor()</a></code> and the <code>Programming notes</code> in
 <code><a href="https://jessealderliesten.github.io/checkinput/reference/all_names.html" class="external-link">checkinput::all_names()</a></code>.</p>
+<p><code>replace_vals()</code> does <strong>not</strong> allow input of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code> because
+matching such input should allow for small numerical errors by using a
+tolerance, for example using <code><a href="are_equal.html">are_equal()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

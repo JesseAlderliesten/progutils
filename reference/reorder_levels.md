@@ -1,6 +1,7 @@
 # Reorder factor levels
 
-Reorder factor levels
+Reorder columns, warning about mismatches between factor levels and
+`new_order`.
 
 ## Usage
 

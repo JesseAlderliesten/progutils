@@ -102,6 +102,12 @@ creation, see the `Warning` in
 `Programming notes` in
 [`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html).
 
+`replace_vals()` does **not** allow input of
+[type](https://rdrr.io/r/base/typeof.html) `double` because matching
+such input should allow for small numerical errors by using a tolerance,
+for example using
+[`are_equal()`](https://jessealderliesten.github.io/progutils/reference/are_equal.md).
+
 ## See also
 
 [`gsub()`](https://rdrr.io/r/base/grep.html);

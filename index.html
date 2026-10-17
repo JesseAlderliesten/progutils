@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>Every once in a while, reading data into R results in a factor that should be converted to a numeric vector. The code below illustrates that using <code>as.numeric(x)</code> from base R does <strong>not</strong> work to achieve this while using <code><a href="reference/as.numeric_safe.html">as.numeric_safe()</a></code> from <code>progutils</code> <strong>does</strong> work.</p>
+<p>Every once in a while, reading data into R results in a factor that should be converted to a numeric vector. The code below illustrates that using <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code> from base R does <strong>not</strong> work to achieve this while using <code><a href="reference/as.numeric_safe.html">as.numeric_safe()</a></code> from <code>progutils</code> <strong>does</strong> work.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JesseAlderliesten/progutils" class="external-link">progutils</a></span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fl">11</span><span class="op">:</span><span class="fl">13</span><span class="op">)</span></span>
@@ -101,7 +101,7 @@
 <span><span class="fu"><a href="reference/reorder_levels.html">reorder_levels</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_orig</span>, new_order <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span><span class="op">)</span> <span class="co"># Only changes the levels</span></span>
 <span><span class="co">#&gt; [1] l m m l k</span></span>
 <span><span class="co">#&gt; Levels: k l m</span></span></code></pre></div>
-<p>To use a named numeric vector in the subtitle of a plot, it should be converted to a character string wrapped to an appropriate length, to prevent text from running off the plot. <code>progutils</code> provides a way to achieve that by combining <code><a href="reference/vect_to_char.html">vect_to_char()</a></code> and <code><a href="reference/wrap_text.html">wrap_text()</a></code>:</p>
+<p>To use a named numeric vector in the subtitle of a plot, the vector should be converted to a character string wrapped to an appropriate length, to prevent text from running off the plot. <code>progutils</code> provides a way to achieve that by combining <code><a href="reference/vect_to_char.html">vect_to_char()</a></code> and <code><a href="reference/wrap_text.html">wrap_text()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JesseAlderliesten/progutils" class="external-link">progutils</a></span><span class="op">)</span></span>
 <span><span class="va">msg_part_one</span> <span class="op">&lt;-</span> <span class="st">"Some\nmessage you want to display"</span></span>
@@ -113,8 +113,12 @@
 <span><span class="co">#&gt; 10, k: 11, l: 12</span></span>
 <span></span>
 <span><span class="co"># Retaining newlines that were present in the original message:</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="reference/wrap_text.html">wrap_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">msg_part_one</span>, <span class="fu"><a href="reference/vect_to_char.html">vect_to_char</a></span><span class="op">(</span><span class="va">num_vect</span><span class="op">)</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>              ignore_newlines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="reference/wrap_text.html">wrap_text</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">msg_part_one</span>, <span class="fu"><a href="reference/vect_to_char.html">vect_to_char</a></span><span class="op">(</span><span class="va">num_vect</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    width <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>    ignore_newlines <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Some</span></span>
 <span><span class="co">#&gt; message you want to</span></span>
 <span><span class="co">#&gt; display j: 10, k:</span></span>
@@ -131,7 +135,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>To cite package <span class="st">'progutils'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  Alderliesten <span class="fu">J</span> (<span class="dv">2026</span>). _progutils<span class="sc">:</span> Programming Utilities_. R package</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="dv">0</span>.<span class="fl">17.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils<span class="sc">&gt;</span>.</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="dv">1</span>.<span class="fl">0.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils<span class="sc">&gt;</span>.</span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
@@ -139,7 +143,7 @@
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    title <span class="ot">=</span> {progutils<span class="sc">:</span> Programming Utilities},</span>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    author <span class="ot">=</span> {Jesse Alderliesten},</span>
 <span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2026</span>},</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">17.0</span>},</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">1</span>.<span class="fl">0.0</span>},</span>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils},</span>
 <span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
