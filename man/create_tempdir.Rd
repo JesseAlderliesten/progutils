@@ -44,7 +44,8 @@ empty the temporary directory), the created subdirectories should be
 }
 \section{Usage in practice}{
 
-\code{Examples} and \code{tests} should write to a temporary directory that is cleaned
+\link[utils:example]{Examples} and \href{https://r-pkgs.org/testing-basics.html}{tests}
+should write to a temporary directory that is cleaned
 up afterwards (otherwise \href{https://r-pkgs.org/R-CMD-check.html}{\verb{R cmd check}}
 will issue a \code{Note} about \href{https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory}{\verb{detritus in the temp directory}}
 and CRAN will not accept your package, see section \verb{Source packages} from the
