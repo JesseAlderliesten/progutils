@@ -1,3 +1,10 @@
+# progutils 1.0.0
+
+### Documentation
+- Update titles and description of functions.
+- `create_tempdir()`: add some links.
+
+
 # progutils 0.17.0
 
 ### Breaking changes
