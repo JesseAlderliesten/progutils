@@ -23,7 +23,8 @@ dropped because they are not present in \code{x}?}
 \code{new_order}, dropping values in \code{new_order} that are not present in \code{x}.
 }
 \description{
-Reorder factor levels
+Reorder columns, warning about mismatches between factor levels and
+\code{new_order}.
 }
 \details{
 Character input to \code{x} is silently converted to a \link{factor} before reordering

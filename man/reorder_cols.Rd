@@ -17,7 +17,7 @@ length larger than zero containing \link{unique} column names in the new order.}
 \code{x} with reordered columns.
 }
 \description{
-Reorder columns
+Reorder columns, warning about mismatches between columns and \code{new_order}.
 }
 \details{
 Column names of \code{x} that are missing from \code{new_order} are appended to

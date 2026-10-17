@@ -1,5 +1,7 @@
 #' Reorder columns
 #'
+#' Reorder columns, warning about mismatches between columns and `new_order`.
+#'
 #' @param x object with at least one column. Columns should have unique,
 #' syntactically valid names, see [checkinput::all_names()].
 #' @param new_order [character vector][checkinput::all_characters()] with a

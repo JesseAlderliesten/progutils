@@ -2,7 +2,7 @@
 % Please edit documentation in R/unpaste_unquote.R
 \name{unpaste_unquote}
 \alias{unpaste_unquote}
-\title{Split a character string into a vector, removing quotation marks}
+\title{Undo \code{paste_quoted()}}
 \usage{
 unpaste_unquote(x, collapse = c(", ", "; "), quotemarks = c("'", "\\""))
 }
@@ -23,7 +23,8 @@ any quotation marks.}
 string in \code{collapse}.
 }
 \description{
-Split a character string into a vector, removing quotation marks
+Split a character string into a vector and remove quotation marks, to undo
+\code{paste_quoted()} (but see \code{Details}).
 }
 \details{
 \code{unpaste_unquote()} does \strong{not} restore \code{NA}s or zero-length elements to

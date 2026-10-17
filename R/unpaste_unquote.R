@@ -1,4 +1,7 @@
-#' Split a character string into a vector, removing quotation marks
+#' Undo `paste_quoted()`
+#'
+#' Split a character string into a vector and remove quotation marks, to undo
+#' `paste_quoted()` (but see `Details`).
 #'
 #' @param x a [character string][checkinput::is_character()].
 #' @param collapse [character vector][checkinput::all_characters()] with
