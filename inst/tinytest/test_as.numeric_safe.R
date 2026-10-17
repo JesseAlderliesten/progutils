@@ -85,19 +85,19 @@ expect_warning(expect_equal(
   c(1:3, rep.int(NA_real_, 3L))),
   pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
 
-expect_silent(expect_equal(as.numeric_safe(NULL), numeric(0)))
-expect_silent(expect_equal(as.numeric_safe(character(0)), numeric(0)))
+expect_silent(expect_identical(as.numeric_safe(NULL), numeric(0)))
+expect_silent(expect_identical(as.numeric_safe(character(0)), numeric(0)))
 expect_silent(expect_equal(
   as.numeric_safe(factor(1:3, levels = 1:2)),
   c(1, 2, NA)))
 expect_silent(expect_equal(
   as.numeric_safe(factor(1:3, levels = 1:4)),
   c(1, 2, 3)))
-expect_warning(expect_equal(
+expect_warning(expect_identical(
   as.numeric_safe(c(TRUE, FALSE, NA), keep_integer = TRUE),
   c(NA_real_, NA_real_, NA_real_)),
   pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)
-expect_warning(expect_equal(
+expect_warning(expect_identical(
   as.numeric_safe(c(TRUE, FALSE, NA), keep_integer = FALSE),
   c(NA_real_, NA_real_, NA_real_)),
   pattern = "NAs introduced by coercion", strict = TRUE, fixed = TRUE)

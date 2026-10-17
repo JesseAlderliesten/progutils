@@ -42,6 +42,10 @@
 #' creation, see the `Warning` in [factor()] and the `Programming notes` in
 #' [checkinput::all_names()].
 #'
+#' `replace_vals()` does **not** allow input of [type][typeof] `double` because
+#' matching such input should allow for small numerical errors by using a
+#' tolerance, for example using [are_equal()].
+#'
 #' @returns
 #' `x` with the requested replacements. Factor [levels] are **not** reordered
 #' after the replacement.

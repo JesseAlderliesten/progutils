@@ -35,8 +35,8 @@ my package
 
 Every once in a while, reading data into R results in a factor that
 should be converted to a numeric vector. The code below illustrates that
-using `as.numeric(x)` from base R does **not** work to achieve this
-while using `as.numeric_safe()` from `progutils` **does** work.
+using `as.numeric()` from base R does **not** work to achieve this while
+using `as.numeric_safe()` from `progutils` **does** work.
 
 ``` r
 library(progutils)
@@ -72,10 +72,10 @@ reorder_levels(x = f_orig, new_order = letters[11:13]) # Only changes the levels
 #> Levels: k l m
 ```
 
-To use a named numeric vector in the subtitle of a plot, it should be
-converted to a character string wrapped to an appropriate length, to
-prevent text from running off the plot. `progutils` provides a way to
-achieve that by combining `vect_to_char()` and `wrap_text()`:
+To use a named numeric vector in the subtitle of a plot, the vector
+should be converted to a character string wrapped to an appropriate
+length, to prevent text from running off the plot. `progutils` provides
+a way to achieve that by combining `vect_to_char()` and `wrap_text()`:
 
 ``` r
 library(progutils)
@@ -88,8 +88,12 @@ cat(wrap_text(paste(msg_part_one, vect_to_char(num_vect)), width = 20))
 #> 10, k: 11, l: 12
 
 # Retaining newlines that were present in the original message:
-cat(wrap_text(paste(msg_part_one, vect_to_char(num_vect)), width = 20,
-              ignore_newlines = FALSE))
+cat(
+  wrap_text(
+    paste(msg_part_one, vect_to_char(num_vect)),
+    width = 20,
+    ignore_newlines = FALSE)
+)
 #> Some
 #> message you want to
 #> display j: 10, k:
@@ -106,7 +110,7 @@ License](LICENSE.md).
     To cite package 'progutils' in publications use:
 
       Alderliesten J (2026). _progutils: Programming Utilities_. R package
-      version 0.17.0, <https://github.com/JesseAlderliesten/progutils>.
+      version 1.0.0, <https://github.com/JesseAlderliesten/progutils>.
 
     A BibTeX entry for LaTeX users is
 
@@ -114,7 +118,7 @@ License](LICENSE.md).
         title = {progutils: Programming Utilities},
         author = {Jesse Alderliesten},
         year = {2026},
-        note = {R package version 0.17.0},
+        note = {R package version 1.0.0},
         url = {https://github.com/JesseAlderliesten/progutils},
       }
 

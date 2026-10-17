@@ -1,5 +1,8 @@
 #' Reorder factor levels
 #'
+#' Reorder columns, warning about mismatches between factor levels and
+#' `new_order`.
+#'
 #' @param x [factor] with [levels] to be reordered to `new_order`, or a
 #' [character vector][checkinput::all_characters()] to be converted to a factor
 #' with levels ordered as `new_order`. Should have length larger than zero.

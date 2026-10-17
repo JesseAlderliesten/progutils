@@ -37,7 +37,8 @@
 #' @inheritSection create_dir Side effects
 #'
 #' @section Usage in practice:
-#' `Examples` and `tests` should write to a temporary directory that is cleaned
+#' [Examples][utils::example()] and [tests](https://r-pkgs.org/testing-basics.html)
+#' should write to a temporary directory that is cleaned
 #' up afterwards (otherwise [`R cmd check`](https://r-pkgs.org/R-CMD-check.html)
 #' will issue a `Note` about [`detritus in the temp directory`](
 #' https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)

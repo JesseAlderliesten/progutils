@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_file_path.R
 \name{get_file_path}
 \alias{get_file_path}
-\title{Check that only a single matching file is present}
+\title{Get the file path to a matching file}
 \usage{
 get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
@@ -32,8 +32,9 @@ An error is thrown if no match, or multiple matches, are found. If
 match is present.
 }
 \description{
-Check that only one file in a directory has a name matching \code{pattern}, for
-example before attempting to \link[utils:read.table]{read a file}.
+Get the file path to a matching file while ensuring that only one file in a
+directory has a name matching \code{pattern}, for example before attempting to
+\link[utils:read.table]{read a file}.
 }
 \details{
 The path in \code{dir} is interpreted as a \strong{relative} path to the directory

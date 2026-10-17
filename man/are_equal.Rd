@@ -2,7 +2,7 @@
 % Please edit documentation in R/are_equal.R
 \name{are_equal}
 \alias{are_equal}
-\title{Check that values in two numeric vectors are nearly equal}
+\title{Check values in numeric vectors for near-equality}
 \usage{
 are_equal(x, y, tol = sqrt(.Machine$double.eps))
 }

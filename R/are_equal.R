@@ -1,4 +1,4 @@
-#' Check that values in two numeric vectors are nearly equal
+#' Check values in numeric vectors for near-equality
 #'
 #' Check element-wise near-equality of numeric vectors while allowing for small
 #' numeric errors to make `are_equal()` safer than [`==`][Comparison].

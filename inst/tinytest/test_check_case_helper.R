@@ -17,12 +17,23 @@ error_x <- "checkinput::all_characters(x, allow_empty = TRUE,"
 
 #### Tests ####
 ##### Values without problems #####
-expect_silent(expect_identical(progutils:::check_case_helper(x = "a"), character(0)))
-expect_silent(expect_identical(progutils:::check_case_helper(x = "+"), character(0)))
-expect_silent(expect_identical(progutils:::check_case_helper(x = c("a", "b")), character(0)))
-expect_silent(expect_identical(progutils:::check_case_helper(x = c("aB", "aBa")), character(0)))
-expect_silent(expect_identical(progutils:::check_case_helper(x = c("aB", "aba")), character(0)))
-expect_silent(expect_identical(progutils:::check_case_helper(x = fine), character(0)))
+expect_silent(expect_identical(
+  progutils:::check_case_helper(x = "a"), character(0)
+))
+expect_silent(expect_identical(
+  progutils:::check_case_helper(x = "+"), character(0)))
+expect_silent(expect_identical(
+  progutils:::check_case_helper(x = c("a", "b")), character(0)
+))
+expect_silent(expect_identical(
+  progutils:::check_case_helper(x = c("aB", "aBa")), character(0)
+))
+expect_silent(expect_identical(
+  progutils:::check_case_helper(x = c("aB", "aba")), character(0)
+))
+expect_silent(expect_identical(
+  progutils:::check_case_helper(x = fine), character(0)
+))
 
 ##### Values with a single problem #####
 expect_warning(

@@ -1,7 +1,8 @@
-#' Check that only a single matching file is present
+#' Get the file path to a matching file
 #'
-#' Check that only one file in a directory has a name matching `pattern`, for
-#' example before attempting to [read a file][utils::read.table()].
+#' Get the file path to a matching file while ensuring that only one file in a
+#' directory has a name matching `pattern`, for example before attempting to
+#' [read a file][utils::read.table()].
 #'
 #' @inheritParams create_dir dir
 #' @param pattern [character string][checkinput::is_character()] containing a

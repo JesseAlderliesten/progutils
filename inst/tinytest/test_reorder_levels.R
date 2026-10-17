@@ -162,7 +162,7 @@ expect_warning(
   pattern = "NAs introduced by coercion")
 
 expect_silent(
-  expect_equal(
+  expect_identical(
     reorder_levels(factor(c(28, 3:2), levels = c(28, 3:2)), new_order = NULL),
     factor(c(28, 3, 2), levels = c(2:3, 28))
   )
