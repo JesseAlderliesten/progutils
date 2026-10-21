@@ -2,7 +2,7 @@
 % Please edit documentation in R/signif_custom.R
 \name{signif_custom}
 \alias{signif_custom}
-\title{Round numbers}
+\title{Round Numbers}
 \usage{
 signif_custom(x, digits = 3L, type = c("selective", "expanded"))
 }
@@ -46,8 +46,9 @@ or a in a column are rounded to the same number of significant digits.
 }
 \examples{
 x1 <- (1e5) / 7
-signif(x = x1, digits = 3) # returns 14300
-signif_custom(x1, digits = 3) # returns 14286 to not round the integer part
+signif(x = x1, digits = 3) # 14300
+# 14286 to not round the integer part:
+signif_custom(x1, digits = 3)
 
 x2 <- 10^c(-1, 5) / 7
 signif(x = x2, digits = 3) # returns c(1.43e-02, 1.43e+04)
@@ -66,7 +67,8 @@ signif_custom(x = x4, digits = 3, type = "selective")
 signif_custom(x = x4, digits = 3, type = "expanded")
 # returns c(-0.014286, 0.14286, -1428.6, 14286)
 
-x_df <- data.frame(a = 1:3, b = letters[11:13], c = c(1e5, 1e3, 1) / 7, d = pi)
+x_df <- data.frame(a = 1:3, b = letters[11:13],
+                   c = c(1e5, 1e3, 1) / 7, d = pi)
 signif_custom(x_df, type = "selective")
 signif_custom(x_df, type = "expanded")
 

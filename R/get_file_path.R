@@ -1,4 +1,4 @@
-#' Get the file path to a matching file
+#' Get the File Path to a Matching File
 #'
 #' Get the file path to a matching file while ensuring that only one file in a
 #' directory has a name matching `pattern`, for example before attempting to
@@ -16,7 +16,7 @@
 #' @details
 #' The path in `dir` is interpreted as a **relative** path to the directory
 #' where to look for a file, starting from the [working directory][getwd()],
-#' see the section `Notes on paths` below.
+#' see the section `Notes on Paths` below.
 #'
 #' In contrast to the default of [list.files()], `get_file_path()` includes
 #' 'hidden' files, i.e., files with names that start with a dot, but excludes
@@ -32,7 +32,7 @@
 #' `ignore_case` is `FALSE`, the error message indicates if any case-insensitive
 #' match is present.
 #'
-#' @inheritSection checkinput::is_path Notes on paths
+#' @inheritSection checkinput::is_path Notes on Paths
 #'
 #' @seealso
 #' [checkinput::is_path()] to check if a path is valid, with extensive
@@ -49,10 +49,11 @@
 #' @family functions to check equality
 #'
 #' @examples
-#' # Create files in a temporary directory so we know what is present.
+#' # Create files in a temporary directory
 #' my_tempdir <- create_tempdir(prefix = "examplegetfilepath")
 #' my_tempfiles <- fs::path_abs(
-#'   fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
+#'   fs::path(my_tempdir,
+#'            c("some_filename.txt", "another_filename.txt"))
 #' )
 #'
 #' # Create the files
@@ -61,18 +62,22 @@
 #' get_file_path(dir = my_tempdir, pattern = "some_file")
 #'
 #' # The same file is found if case-insensitive matching is used:
-#' get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = TRUE)
+#' get_file_path(dir = my_tempdir, pattern = "SOME_FILE",
+#'               ignore_case = TRUE)
 #'
 #' # Error reporting the presence of a case-insensitive match.
-#' try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE))
+#' try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE",
+#'                   ignore_case = FALSE))
 #'
 #' # 'pattern' is interpreted as a regular expression
 #' get_file_path(dir = my_tempdir, pattern = "^.+er_file")
 #'
 #' # Error reporting no match found.
-#' try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
+#' try(get_file_path(dir = my_tempdir,
+#'                  pattern = "missing_filename_abcde",
 #'                  ignore_case = TRUE))
-#' try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
+#' try(get_file_path(dir = my_tempdir,
+#'                  pattern = "missing_filename_abcde",
 #'                  ignore_case = FALSE))
 #'
 #' # Error if multiple matches are present.
@@ -83,10 +88,14 @@
 #' rm(my_tempfiles)
 #'
 #' @export
-get_file_path <- function(dir = ".", pattern, ignore_case = TRUE,
+get_file_path <- function(dir = ".",
+                          pattern,
+                          ignore_case = TRUE,
                           quietly = FALSE) {
-  stopifnot(checkinput::is_path(dir), checkinput::is_character(pattern),
-            checkinput::is_logical(ignore_case), checkinput::is_logical(quietly))
+  stopifnot(checkinput::is_path(dir),
+            checkinput::is_character(pattern),
+            checkinput::is_logical(ignore_case),
+            checkinput::is_logical(quietly))
 
   dir <- fs::path_abs(dir)
   if(!fs::dir_exists(dir)) {

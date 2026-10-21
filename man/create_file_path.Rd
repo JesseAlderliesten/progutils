@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_file_path.R
 \name{create_file_path}
 \alias{create_file_path}
-\title{Create a file path}
+\title{Create a File Path}
 \usage{
 create_file_path(
   filename,
@@ -24,7 +24,7 @@ restrictions apply to \code{format_stamp} as to \code{filename}, see \code{Detai
 
 \item{dir}{\link[checkinput:is_character]{character string} containing a
 \link[checkinput:is_path]{valid path}, see \code{Details} and the section
-\verb{Notes on paths} below.}
+\verb{Notes on Paths} below.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
@@ -63,13 +63,13 @@ Calls where date \strong{nor} time stamps are added (i.e, using
 \code{fs::path(fs::dir_create(path = "<dir>"), "<filename>")} to \strong{not} get a
 warning if the file already \link[fs:is_file]{exists}.
 }
-\section{Side effects}{
+\section{Side Effects}{
 
 The directory indicated by the returned path is \link[fs:dir_create]{created}
 if it does not yet \link[fs:dir_exists]{exist}.
 }
 
-\section{Notes on paths}{
+\section{Notes on Paths}{
 
 
 The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
@@ -77,10 +77,9 @@ on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\
 paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
 get the file separator used on the current platform.
 
-Furthermore, the backslash is also used as
-\link[=regex]{escape character} in \R, such that backslashes need to be escaped in
-\R code by doubling them. Use \code{cat(x)} to omit the escape characters to see
-how \code{x} would be printed.
+Furthermore, the backslash is also used as \link[=regex]{escape character} in \R,
+such that backslashes need to be escaped in \R code by doubling them. Use
+\code{cat(x)} to omit the escape characters to see how \code{x} would be printed.
 
 The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
 the parent directory can be indicated by two dots (\code{".."}).
@@ -101,22 +100,30 @@ present.
 # Use a temporary directory to not write in the user's directory
 my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 
-(create_file_path(filename = "abc.txt", format_stamp = "",
-                  dir = my_tempdir, add_date = TRUE))
-(create_file_path(filename = "abc.txt", format_stamp = "\%d_\%m_\%Y",
-                  dir = my_tempdir, add_date = TRUE))
-(create_file_path(filename = "def.html", format_stamp = "",
-                  dir = my_tempdir, add_date = FALSE))
-(create_file_path(filename = "def.html", format_stamp = "\%d_\%m_\%Y",
-                  dir = my_tempdir, add_date = FALSE))
-(create_file_path(filename = "abc.txt", format_stamp = "",
-                  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-(create_file_path(filename = "abc.txt", format_stamp = "\%d_\%m_\%Y",
-                  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-(create_file_path(filename = "def.html", format_stamp = "",
-                  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-(create_file_path(filename = "def.html", format_stamp = "\%d_\%m_\%Y",
-                  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
+(create_file_path(
+  filename = "abc.txt", format_stamp = "",
+  dir = my_tempdir, add_date = TRUE))
+(create_file_path(
+  filename = "abc.txt", format_stamp = "\%d_\%m_\%Y",
+  dir = my_tempdir, add_date = TRUE))
+(create_file_path(
+  filename = "def.html", format_stamp = "",
+  dir = my_tempdir, add_date = FALSE))
+(create_file_path(
+  filename = "def.html", format_stamp = "\%d_\%m_\%Y",
+  dir = my_tempdir, add_date = FALSE))
+(create_file_path(
+  filename = "abc.txt", format_stamp = "",
+  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
+(create_file_path(
+  filename = "abc.txt", format_stamp = "\%d_\%m_\%Y",
+  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
+(create_file_path(
+  filename = "def.html", format_stamp = "",
+  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
+(create_file_path(
+  filename = "def.html", format_stamp = "\%d_\%m_\%Y",
+  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

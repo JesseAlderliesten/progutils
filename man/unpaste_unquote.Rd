@@ -2,7 +2,7 @@
 % Please edit documentation in R/unpaste_unquote.R
 \name{unpaste_unquote}
 \alias{unpaste_unquote}
-\title{Undo \code{paste_quoted()}}
+\title{Undo paste_quoted()}
 \usage{
 unpaste_unquote(x, collapse = c(", ", "; "), quotemarks = c("'", "\\""))
 }
@@ -39,8 +39,10 @@ x <- paste_quoted(c("ff", "gG", "HH"))
 x
 unpaste_unquote(x = x, collapse = ", ", quotemarks = "'")
 unpaste_unquote(x = x, collapse = ", ", quotemarks = "\"")
-unpaste_unquote(x = x, collapse = character(0), quotemarks = c("'", "\""))
-unpaste_unquote(x = x, collapse = character(0), quotemarks = character(0))
+unpaste_unquote(x = x, collapse = character(0),
+                quotemarks = c("'", "\""))
+unpaste_unquote(x = x, collapse = character(0),
+                quotemarks = character(0))
 
 }
 \seealso{

@@ -1,4 +1,4 @@
-#' Reorder columns
+#' Reorder Columns
 #'
 #' Reorder columns, warning about mismatches between columns and `new_order`.
 #'
@@ -28,9 +28,9 @@
 #' test_df <- data.frame(a = 1:2, b = 11:12, c = 21:22)
 #' reorder_cols(x = test_df, new_order = c("b", "a", "c"))
 #'
-#' # reorder_cols() appends column names that are missing from 'new_order' and
-#' # drops values from 'new_order' that are missing from column names, both with
-#' # a warning.
+#' # reorder_cols() appends column names that are missing from
+#' # 'new_order' and drops values from 'new_order' that are
+#' # missing from column names, both with a warning.
 #' reorder_cols(x = test_df, new_order = c("b", "a", "d"))
 #'
 #' @export

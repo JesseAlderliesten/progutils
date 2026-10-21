@@ -2,7 +2,7 @@
 % Please edit documentation in R/not_in.R
 \name{not_in}
 \alias{not_in}
-\title{Check that values are absent}
+\title{Check that Values are Absent}
 \usage{
 not_in(x, table, value = TRUE, ignore_case = FALSE, warn_case = TRUE)
 }
@@ -78,12 +78,15 @@ not_in(x_dupl, table_dupl, value = FALSE)
 
 not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
        ignore_case = FALSE) # c("b", "C")
+# character(0), with a warning:
 not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
-       ignore_case = TRUE, warn_case = TRUE) # character(0), with a warning
+       ignore_case = TRUE, warn_case = TRUE)
+# character(0), without a warning:
 not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
-       ignore_case = TRUE, warn_case = FALSE) # character(0), without a warning
+       ignore_case = TRUE, warn_case = FALSE)
 
-# Names are not considered when matching but are retained in the output
+# Names are not considered when matching
+# but are retained in the output
 not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 
 }

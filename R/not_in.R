@@ -1,4 +1,4 @@
-#' Check that values are absent
+#' Check that Values are Absent
 #'
 #' Check that values from one vector are absent from another vector
 #'
@@ -75,22 +75,31 @@
 #'
 #' not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
 #'        ignore_case = FALSE) # c("b", "C")
+#' # character(0), with a warning:
 #' not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
-#'        ignore_case = TRUE, warn_case = TRUE) # character(0), with a warning
+#'        ignore_case = TRUE, warn_case = TRUE)
+#' # character(0), without a warning:
 #' not_in(x = c("a", "b", "C", "D"), table = c("a", "B", "c", "D"),
-#'        ignore_case = TRUE, warn_case = FALSE) # character(0), without a warning
+#'        ignore_case = TRUE, warn_case = FALSE)
 #'
-#' # Names are not considered when matching but are retained in the output
+#' # Names are not considered when matching
+#' # but are retained in the output
 #' not_in(c(x = "c", y = "b", z = "a"), c(a = "a", b = "b"))
 #'
 #' @export
-not_in <- function(x, table, value = TRUE, ignore_case = FALSE, warn_case = TRUE) {
-  # list input to 'x' or 'table' is not allowed because it leads to 'x' being
-  # returned.
-  stopifnot(is.null(dim(x)), is.atomic(x), is.null(dim(table)), is.atomic(table),
+not_in <- function(x,
+                   table,
+                   value = TRUE,
+                   ignore_case = FALSE,
+                   warn_case = TRUE) {
+  # list input to 'x' or 'table' is not allowed
+  # because it leads to 'x' being returned.
+  stopifnot(is.null(dim(x)), is.atomic(x),
+            is.null(dim(table)), is.atomic(table),
             "Use are_equal() to match input of type 'double'" =
               !is.double(x) && !is.double(table),
-            checkinput::is_logical(value), checkinput::is_logical(ignore_case),
+            checkinput::is_logical(value),
+            checkinput::is_logical(ignore_case),
             checkinput::is_logical(warn_case))
 
   if(is.factor(x)) {

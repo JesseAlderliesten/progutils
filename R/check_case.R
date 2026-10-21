@@ -1,4 +1,4 @@
-#' Check for case differences
+#' Check for Case Differences
 #'
 #' Signal the presence of values that differ only in their case.
 #'
@@ -34,24 +34,30 @@
 #' z <- c("a", "b", "C", "D", "A")
 #'
 #' try(check_case(x = x, y = y, signal = "error")) # an error
-#' (check_case(x = x, y = y, signal = "warning")) # c("b", "C"), with a warning
+#' # c("b", "C"), with a warning:
+#' (check_case(x = x, y = y, signal = "warning"))
 #'
 #' (check_case(x = x, y = "h", signal = "warning")) # character(0)
 #'
-#' (check_case(x = z, y = NULL, signal = "warning", signal_within = "message"))
+#' (check_case(x = z, y = NULL, signal = "warning",
+#'             signal_within = "message"))
 #' # c("a", "A"), with a message:
 #' # 'x' contains values that only differ in their case: 'a', 'A'
 #'
-#' (check_case(x = z, y = "h", signal = "warning", signal_within = "warning"))
+#' (check_case(x = z, y = "h", signal = "warning",
+#'             signal_within = "warning"))
 #' # character(0), with a warning:
 #' # 'x' contains values that only differ in their case: 'a', 'A'
-#' (check_case(x = z, y = "h", signal = "warning", signal_within = "quiet"))
+#' (check_case(x = z, y = "h", signal = "warning",
+#'             signal_within = "quiet"))
 #' # character(0), without a warning
 #'
 #' (check_case(x = x, y = z, signal = "warning"))
 #' # "a", with warnings
-#' # 1: 'y' contains values that only differ in their case: 'a', 'A'
-#' # 2: 'x' contains values that only differ in their case from values in 'y': 'a'
+#' # 1: 'y' contains values that only differ in their case:
+#' # 'a', 'A'
+#' # 2: 'x' contains values that only differ in their case
+#' # from values in 'y': 'a'
 #'
 #' @export
 check_case <- function(
@@ -81,8 +87,8 @@ check_case <- function(
     invisible(vals)
   }
 
-  # Making values unique and keeping only non-NA values that have case makes it
-  # easier to compare values
+  # Making values unique and keeping only non-NA values
+  # that have case makes it easier to compare values
   x <- unique(x)
   bool_NA_x <- is.na(x)
   if(any(bool_NA_x)) {

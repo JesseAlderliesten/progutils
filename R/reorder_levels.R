@@ -1,4 +1,4 @@
-#' Reorder factor levels
+#' Reorder Factor Levels
 #'
 #' Reorder columns, warning about mismatches between factor levels and
 #' `new_order`.
@@ -47,7 +47,8 @@
 #' @family functions to modify sorting order
 #'
 #' @examples
-#' orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
+#' orig <- factor(letters[c(12:13, 13:11)],
+#'                levels = letters[13:11])
 #' orig
 #' reorder_levels(x = orig, new_order = letters[11:13])
 #'
@@ -58,12 +59,15 @@
 #' # Incorrectly sorts level "28" between "2" and "3"
 #' sort(levels(x_num))
 #'
-#' # Changing the levels directly does *not* work because it changes the values
+#' # Changing the levels directly does
+#' # *not* work: it changes the values
 #' levels(orig) <- letters[11:13]
 #' orig
 #'
 #' @export
-reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
+reorder_levels <- function(x,
+                           new_order,
+                           warn_drop_order = TRUE) {
   stopifnot(
     is.factor(x) || is.character(x), length(x) > 0L,
     is.null(new_order) ||
@@ -78,8 +82,8 @@ reorder_levels <- function(x, new_order, warn_drop_order = TRUE) {
     dropped_levels <- not_in(levels(x), levels(x_dropped), value = TRUE)
     added_levels <- not_in(levels(x_dropped), levels(x), value = TRUE)
 
-    # NA has been added to the levels of 'x' if NA is present in 'x' but was not
-    # present in its levels
+    # NA has been added to the levels of 'x' if NA is
+    # present in 'x' but was not present in its levels
     x <- x_dropped
     if(length(dropped_levels) > 0L) {
       warning("Dropped levels of 'x' that are not present in its values:\n",

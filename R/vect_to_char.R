@@ -1,4 +1,4 @@
-#' Convert a vector to a character string
+#' Convert a Vector to a Character String
 #'
 #' Convert a vector to a character string while preserving names and rounding
 #' numeric values.
@@ -51,7 +51,7 @@
 #'
 #' See `Details` on the handling of some special values.
 #'
-#' @section Programming notes:
+#' @section Programming Notes:
 #' To get a cross-tabulation of `x` into a character string, one can use
 #' `paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")`,
 #' see the last `Example`.
@@ -75,10 +75,13 @@
 #' vect_to_char(x = x, collapse = NULL) # c("a: 1", "b: 2", "c: 3")
 #' vect_to_char(x = unname(x)) # "1, 2, 3"
 #' y <- x / 7
-#' vect_to_char(x = y, signif = 7) # "a: 0.1428571, b: 0.2857143, c: 0.4285714"
-#' vect_to_char(x = y, signif = 2, sep = " = ", collapse = " and ", width = 15)
-#' # "a = 0.14 and b\n= 0.29 and c =\n0.43"
-#' vect_to_char(x = 1e3/7, signif = 2) # not 140: completely display integer part
+#' # "a: 0.1428571, b: 0.2857143, c: 0.4285714":
+#' vect_to_char(x = y, signif = 7)
+#' # "a = 0.14 and b\n= 0.29 and c =\n0.43":
+#' vect_to_char(x = y, signif = 2, sep = " = ",
+#'              collapse = " and ", width = 15)
+#' # not 140: completely display integer part:
+#' vect_to_char(x = 1e3/7, signif = 2)
 #'
 #' x_char <- c(a = "abc", b = "def", c = "this is text")
 #' vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
@@ -95,17 +98,29 @@
 #' y <- 5:15
 #' names(y) <- letters[y]
 #' x <- c(x, y)
-#' paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")
+#' paste0(
+#'   vect_to_char(
+#'     c(table(x)),
+#'     sep = " (",
+#'     collapse =  "), "),
+#'   ")")
 #'
 #' @export
-vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
-                         collapse = ", ", ignore_newlines = TRUE,
-                         round_type = c("selective", "expanded", "strict")) {
+vect_to_char <- function(
+    x,
+    signif = 3L,
+    width = Inf,
+    sep = ": ",
+    collapse = ", ",
+    ignore_newlines = TRUE,
+    round_type = c("selective", "expanded", "strict")) {
+
   # Notes:
   # - Values in argument 'digits' of signif() are rounded to the nearest integer
   #   in the range from 0 to 22 (unless it is Inf such that no rounding is
   #   applied), so no need to check that 'signif' is nonnegative and integer.
-  stopifnot(checkinput::is_number(signif), checkinput::is_positive(width),
+  stopifnot(checkinput::is_number(signif),
+            checkinput::is_positive(width),
             checkinput::is_character(sep),
             is.null(collapse) || checkinput::is_character(collapse))
   round_type <- match.arg(round_type, several.ok = FALSE)
@@ -154,8 +169,8 @@ vect_to_char <- function(x, signif = 3L, width = Inf, sep = ": ",
     x <- paste(x, collapse = collapse)
   }
 
-  # Not calling wrap_text() directly because it would paste the character vector
-  # obtained for 'collapse = NULL' into a single string.
+  # Not calling wrap_text() directly because it would paste the character
+  # vector obtained for 'collapse = NULL' into a single string.
   vapply(X = x, FUN = wrap_text, FUN.VALUE = character(1L), width = width,
          ignore_newlines = ignore_newlines, USE.NAMES = FALSE)
 }

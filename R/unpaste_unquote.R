@@ -1,4 +1,4 @@
-#' Undo `paste_quoted()`
+#' Undo paste_quoted()
 #'
 #' Split a character string into a vector and remove quotation marks, to undo
 #' `paste_quoted()` (but see `Details`).
@@ -34,11 +34,14 @@
 #' x
 #' unpaste_unquote(x = x, collapse = ", ", quotemarks = "'")
 #' unpaste_unquote(x = x, collapse = ", ", quotemarks = "\"")
-#' unpaste_unquote(x = x, collapse = character(0), quotemarks = c("'", "\""))
-#' unpaste_unquote(x = x, collapse = character(0), quotemarks = character(0))
+#' unpaste_unquote(x = x, collapse = character(0),
+#'                 quotemarks = c("'", "\""))
+#' unpaste_unquote(x = x, collapse = character(0),
+#'                 quotemarks = character(0))
 #'
 #' @export
-unpaste_unquote <- function(x, collapse = c(", ", "; "),
+unpaste_unquote <- function(x,
+                            collapse = c(", ", "; "),
                             quotemarks = c("'", "\"")) {
   stopifnot(is.character(x),
             checkinput::all_characters(collapse, allow_zerolength = TRUE),

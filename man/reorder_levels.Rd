@@ -2,7 +2,7 @@
 % Please edit documentation in R/reorder_levels.R
 \name{reorder_levels}
 \alias{reorder_levels}
-\title{Reorder factor levels}
+\title{Reorder Factor Levels}
 \usage{
 reorder_levels(x, new_order, warn_drop_order = TRUE)
 }
@@ -49,7 +49,8 @@ Reordering levels of factor \code{f} by replacing levels through code like
 }
 
 \examples{
-orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
+orig <- factor(letters[c(12:13, 13:11)],
+               levels = letters[13:11])
 orig
 reorder_levels(x = orig, new_order = letters[11:13])
 
@@ -60,7 +61,8 @@ reorder_levels(x_num, new_order = NULL)
 # Incorrectly sorts level "28" between "2" and "3"
 sort(levels(x_num))
 
-# Changing the levels directly does *not* work because it changes the values
+# Changing the levels directly does
+# *not* work: it changes the values
 levels(orig) <- letters[11:13]
 orig
 

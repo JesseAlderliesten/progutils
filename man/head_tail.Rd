@@ -2,7 +2,7 @@
 % Please edit documentation in R/head_tail.R
 \name{head_tail}
 \alias{head_tail}
-\title{Show first and last part of an object}
+\title{Show First and Last Part of an Object}
 \usage{
 head_tail(x, n = 3L)
 }
@@ -16,7 +16,7 @@ the number of elements or rows to return as \code{head} and \code{tail}.}
 The \code{n} first and last elements or rows of \code{x}.
 }
 \description{
-Show first and last part of an object
+Show First and Last Part of an Object
 }
 \examples{
 x <- letters[1:10]
@@ -28,8 +28,9 @@ head_tail(x, n = 40)
 try(head_tail(x, n = 0))
 try(head_tail(x, n = 4.1))
 
-mat <- head_tail(matrix(data = 1:40, ncol = 4,
-                       dimnames = list(LETTERS[1:10], letters[1:4])))
+mat <- head_tail(
+  matrix(data = 1:40, ncol = 4,
+         dimnames = list(LETTERS[1:10], letters[1:4])))
 head_tail(mat)
 
 }

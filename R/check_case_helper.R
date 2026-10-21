@@ -1,4 +1,4 @@
-#' Check for values that differ only in their case
+#' Check for Values that Differ Only in Their Case
 #'
 #' @inheritParams signal_text signal
 #' @param x Character vector to check.
@@ -22,9 +22,14 @@
 #' progutils:::check_case_helper(x = x, signal = "warning")
 #'
 #' @keywords internal
-check_case_helper <- function(x, signal = c("error", "warning", "message", "quiet")) {
-  stopifnot(checkinput::all_characters(
-    x, allow_empty = TRUE, allow_zerolength = TRUE, allow_NA = TRUE))
+check_case_helper <- function(
+    x,
+    signal = c("error", "warning", "message", "quiet")) {
+
+  stopifnot(
+    checkinput::all_characters(
+      x, allow_empty = TRUE, allow_zerolength = TRUE, allow_NA = TRUE)
+  )
 
   x_deparsed <- deparse1(substitute(x))
   x_name <- paste_quoted(x_deparsed)
@@ -49,8 +54,8 @@ check_case_helper <- function(x, signal = c("error", "warning", "message", "quie
   bool_anylower <- x == tolower(x)
   bool_anyupper <- x == toupper(x)
 
-  # The combination x[bool_anylower & bool_anyupper] would identify values that
-  # cannot occur in different case, so does not have to be used.
+  # The combination x[bool_anylower & bool_anyupper] would identify values
+  # that cannot occur in different case, so does not have to be used.
   x_lower <- x[bool_anylower & !bool_anyupper]
   x_upper <- x[bool_anyupper & !bool_anylower]
   x_mixed <- x[!bool_anylower & !bool_anyupper]
@@ -72,8 +77,8 @@ check_case_helper <- function(x, signal = c("error", "warning", "message", "quie
     x_mixed <- x_mixed[!bool_mixed_in_upper]
   }
 
-  # Duplicated values have been removed from 'x' so any duplicate found is
-  # caused by a difference in case
+  # Duplicated values have been removed from 'x' so any
+  # found duplicate is caused by a difference in case
   x_mixed_diff <- x_mixed[duplicated(tolower(x_mixed))]
   if(length(x_mixed_diff) > 0L) {
     x_mixed_diff <- c(x_mixed_diff,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_case_helper.R
 \name{check_case_helper}
 \alias{check_case_helper}
-\title{Check for values that differ only in their case}
+\title{Check for Values that Differ Only in Their Case}
 \usage{
 check_case_helper(x, signal = c("error", "warning", "message", "quiet"))
 }
@@ -20,7 +20,7 @@ values in \code{x} that only differ from each other in their case, or
 \code{character(0)} if no such values are present, returned \link[=invisible]{invisibly}.
 }
 \description{
-Check for values that differ only in their case
+Check for Values that Differ Only in Their Case
 }
 \details{
 Values in \code{x} that only differ from each other in their case lead to a

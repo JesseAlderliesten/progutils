@@ -2,7 +2,7 @@
 % Please edit documentation in R/signal_text.R
 \name{signal_text}
 \alias{signal_text}
-\title{Signal a text to the user}
+\title{Signal a Text to the User}
 \usage{
 signal_text(
   text,
@@ -50,40 +50,47 @@ signal_text(text = test_text, signal = "warn")
 signal_text(text = test_text, signal = "message")
 signal_text(text = test_text, signal = "quiet")
 
-# signal_text() handles input to 'text' with length larger than one more
-# sensible than message():
+# signal_text() handles input to 'text' with length
+# larger than one more sensible than message():
 test_numbers <- 11:13
 signal_text(text = test_numbers, signal = "message")
 message(test_numbers)
 
 # Newlines in 'signal' are respected:
-signal_text(text = paste0(test_text, collapse = "\n"), signal = "warn")
+signal_text(text = paste0(test_text, collapse = "\n"),
+            signal = "warn")
 
-# 'vect_to_char()' is used to display the different NA's in the signal
-# clearer than standard printing:
-signal_text(text = NA_integer_, signal = "message") # prints NA_integer_
-message(NA_integer_) # prints NA
+# vect_to_char()' is used to display the different
+# NA's in the signal clearer than standard printing,
+# e.g., printing 'NA_integer_' instead of 'NA'
+signal_text(text = NA_integer_, signal = "message")
+message(NA_integer_)
 
-# Call 'vect_to_char()' beforehand on 'text' for finer control of rounding
-# and wrapping of text:
+# Call 'vect_to_char()' beforehand on 'text' for
+# finer control of rounding and wrapping of text:
 message(test_numbers / 7)
 signal_text(text = test_numbers / 7, signal = "message")
-signal_text(text = vect_to_char(x = test_numbers / 7, signif = 4, width = 15,
+signal_text(text = vect_to_char(x = test_numbers / 7,
+                                signif = 4, width = 15,
                                 collapse = "\n"),
             signal = "message")
 
-# This example shows how to make the content of the signal available for
-# further queries:
-signal_negative <- function(x, signal = c("error", "warning", "message", "quiet")) {
+# This example shows how to make the content
+# of the signal available for further queries:
+signal_negative <- function(
+    x,
+    signal = c("error", "warning", "message", "quiet")) {
   text_signal <- "This is a negative number"
   if(x < 0) {
     progutils::signal_text(text = text_signal, signal = signal)
     attributes(x) <- list(text_signal = text_signal)
   } else {
     # Using '""' as attribute such that
-    # grepl(pattern = "<text>", x = attr(x, "text_signal"), fixed = TRUE)
-    # returns 'FALSE' if <text> is not found in 'text_signal' (using
-    # 'character(0)' as attribute would lead to 'logical(0)' as return).
+    # grepl(pattern = "<text>", x = attr(x, "text_signal"),
+    #       fixed = TRUE)
+    # returns 'FALSE' if <text> is not found in 'text_signal'
+    # (using 'character(0)' as attribute would
+    # lead to 'logical(0)' as return).
     attributes(x) <- list(text_signal = "")
   }
   x
@@ -93,9 +100,11 @@ res_negative <- signal_negative(x = -1, signal = "warning")
 res_positive <- signal_negative(x = 1, signal = "warning")
 res_negative
 res_positive
-grepl(pattern = "negative", x = attr(res_negative, "text_signal"),
+grepl(pattern = "negative",
+      x = attr(res_negative, "text_signal"),
       ignore.case = FALSE, fixed = TRUE) # TRUE
-grepl(pattern = "negative", x = attr(res_positive, "text_signal"),
+grepl(pattern = "negative",
+      x = attr(res_positive, "text_signal"),
       ignore.case = FALSE, fixed = TRUE) # FALSE
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrap_text.R
 \name{wrap_text}
 \alias{wrap_text}
-\title{Wrap text}
+\title{Wrap Text}
 \usage{
 wrap_text(x, width = 80L, ignore_newlines = TRUE, warn_length = FALSE)
 }
@@ -66,7 +66,8 @@ text should be wrapped.
 }
 
 \examples{
-example_text <- "A piece\nof text that you want to wrap over multiple lines"
+example_text <-
+  "A piece\nof text that you want to wrap over multiple lines"
 cat(wrap_text(example_text,
               width = 20, ignore_newlines = TRUE))
 cat(wrap_text(example_text,
