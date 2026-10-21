@@ -1,4 +1,4 @@
-# Replace non-alphanumeric characters
+# Replace Non-Alphanumeric Characters
 
 Replace or remove non-alphanumeric characters, keeping dots and handling
 underscores as indicated by `keep_underscores`.
@@ -45,7 +45,7 @@ characters.
 This implementation uses the [character
 class](https://rdrr.io/r/base/regex.html) `[:alnum:]` that depends on
 the current [locale](https://rdrr.io/r/base/locales.html), see the
-`Programming notes` in
+`Programming Notes` in
 [`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html).
 
 ## See also
@@ -93,11 +93,15 @@ replace_nonalnum("a+b.txt", replacement = "") # "ab.txt"
 #> [1] "ab.txt"
 
 # Handling underscores
-replace_nonalnum("a+bc_d.txt", replacement = "", keep_underscore = TRUE)  # "abc_d.txt"
+replace_nonalnum("a+bc_d.txt", replacement = "",
+                 keep_underscore = TRUE)  # "abc_d.txt"
 #> [1] "abc_d.txt"
-replace_nonalnum("a+bc_d.txt", replacement = "", keep_underscore = FALSE) # "abcd.txt"
+replace_nonalnum("a+bc_d.txt", replacement = "",
+                 keep_underscore = FALSE) # "abcd.txt"
 #> [1] "abcd.txt"
-# Seems to keep the underscore because the default 'replacement' is an underscore
-replace_nonalnum("a+bc_d.txt", keep_underscore = FALSE) # "a_bc_d.txt"
+# Seems to keep the underscore because the
+# default 'replacement' is an underscore
+replace_nonalnum("a+bc_d.txt",
+                 keep_underscore = FALSE) # "a_bc_d.txt"
 #> [1] "a_bc_d.txt"
 ```

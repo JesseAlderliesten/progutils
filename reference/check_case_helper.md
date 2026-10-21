@@ -1,6 +1,6 @@
-# Check for values that differ only in their case
+# Check for Values that Differ Only in Their Case
 
-Check for values that differ only in their case
+Check for Values that Differ Only in Their Case
 
 ## Usage
 

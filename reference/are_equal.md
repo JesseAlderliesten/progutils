@@ -1,4 +1,4 @@
-# Check values in numeric vectors for near-equality
+# Check Values in Numeric Vectors for Near-Equality
 
 Check element-wise near-equality of numeric vectors while allowing for
 small numeric errors to make `are_equal()` safer than

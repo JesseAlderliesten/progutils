@@ -1,4 +1,4 @@
-# Create a directory
+# Create a Directory
 
 Create a directory if it does not yet exist.
 
@@ -16,7 +16,7 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
   path](https://jessealderliesten.github.io/checkinput/reference/is_path.html),
-  see `Details` and the section `Notes on paths` below.
+  see `Details` and the section `Notes on Paths` below.
 
 - add_date:
 
@@ -30,7 +30,7 @@ A character string with the [absolute
 normalised](https://fs.r-lib.org/reference/path_math.html) path to the
 requested directory, returned
 [invisibly](https://rdrr.io/r/base/invisible.html), see the section
-`Notes on paths` and the `Examples` below.
+`Notes on Paths` and the `Examples` below.
 
 By default a subdirectory with the current date in the
 [format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` is created
@@ -46,15 +46,15 @@ directory.
 The path in `dir` is interpreted as a **relative** path to the directory
 that should be created, starting from the [working
 directory](https://rdrr.io/r/base/getwd.html), see the section
-`Notes on paths` below.
+`Notes on Paths` below.
 
-## Side effects
+## Side Effects
 
 The directory indicated by the returned path is
 [created](https://fs.r-lib.org/reference/create.html) if it does not yet
 [exist](https://fs.r-lib.org/reference/file_access.html).
 
-## Notes on paths
+## Notes on Paths
 
 The file separator is a backslash (`\`) on Windows but a forward slash
 (`/`) on other operating systems: use
@@ -111,39 +111,42 @@ Other functions to handle paths and directories:
 ## Examples
 
 ``` r
-# Use a temporary subdirectory to not write in the user's directory
+# Use a temporary directory to not write in the user's directory
 my_tempdir <- create_tempdir(prefix = "examplecreatedir")
 
 # Create directory 'dir_one' inside this temporary directory
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
-#> /tmp/RtmpErmCfJ/examplecreatedir187d6ac390de/dir_one 
-#>                                                 TRUE 
+#> /tmp/Rtmpo1KNmc/examplecreatedir1aaabadb6c7/dir_one 
+#>                                                TRUE 
 
-# An attempt to create a directory that already exists does not change any
-# directory and the same directory is returned.
-res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
-                             add_date = FALSE)
+# An attempt to create a directory that already exists does
+# not change any directory and the same directory is returned.
+res_dir_one_v2 <- create_dir(
+  dir = fs::path(my_tempdir, "dir_one"),
+  add_date = FALSE)
 identical(res_dir_one, res_dir_one_v2) # TRUE
 #> [1] TRUE
 
-# On case-insensitive file systems, the directories 'res_dir_ONE' and
-# 'res_dir_one' are the same directory. On case-sensitive file systems they
-# are different directories.
+# On case-insensitive file systems, the directories
+# 'res_dir_ONE' and 'res_dir_one' are the same directory. On
+# case-sensitive file systems they are different directories.
 res_dir_ONE <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                           add_date = FALSE)
 identical(res_dir_one, res_dir_ONE)
 #> [1] FALSE
 
-# Create directory 'dir_two' with a subdirectory containing the current date
-res_dir_date <- create_dir(dir = fs::path(my_tempdir, "dir_date"),
-                           add_date = TRUE)
+# Create directory 'dir_two' with a subdirectory containing
+# the current date
+res_dir_date <- create_dir(
+  dir = fs::path(my_tempdir, "dir_date"), add_date = TRUE)
 fs::dir_exists(res_dir_date) # TRUE
-#> /tmp/RtmpErmCfJ/examplecreatedir187d6ac390de/dir_date/2026_10_17 
-#>                                                             TRUE 
+#> /tmp/Rtmpo1KNmc/examplecreatedir1aaabadb6c7/dir_date/2026_10_21 
+#>                                                            TRUE 
 
 # Cleaning up
 unlink(my_tempdir, recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_date, res_dir_ONE)
+rm(my_tempdir, res_dir_one, res_dir_one_v2,
+   res_dir_date, res_dir_ONE)
 ```

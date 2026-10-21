@@ -1,4 +1,4 @@
-# Reorder factor levels
+# Reorder Factor Levels
 
 Reorder columns, warning about mismatches between factor levels and
 `new_order`.
@@ -96,7 +96,8 @@ Other functions to modify sorting order:
 ## Examples
 
 ``` r
-orig <- factor(letters[c(12:13, 13:11)], levels = letters[13:11])
+orig <- factor(letters[c(12:13, 13:11)],
+               levels = letters[13:11])
 orig
 #> [1] l m m l k
 #> Levels: m l k
@@ -114,7 +115,8 @@ reorder_levels(x_num, new_order = NULL)
 sort(levels(x_num))
 #> [1] "2"  "28" "3" 
 
-# Changing the levels directly does *not* work because it changes the values
+# Changing the levels directly does
+# *not* work: it changes the values
 levels(orig) <- letters[11:13]
 orig
 #> [1] l k k l m

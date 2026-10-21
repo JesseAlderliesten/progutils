@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progutils</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,27 +54,28 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-<div class="section level1">
+  <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="progutils">progutils<a class="anchor" aria-label="anchor" href="#progutils"></a>
 </h1></div>
-<p><code>progutils</code> contains utility functions, for example to reorder values, check equality, construct messages, or handle files and directories.</p>
+<!-- badges: start -->
+
+<p><strong>progutils</strong> contains <a href="https://jessealderliesten.github.io/progutils/reference/index.html">utility functions</a>, for example to reorder values, check equality, construct messages, or handle files and directories.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Visit the <a href="https://jessealderliesten.github.io/progutils/"><code>progutils</code> website</a> to explore the package, or install <code>progutils</code> from <a href="https://github.com/JesseAlderliesten/progutils" class="external-link">GitHub</a> using the following R code:</p>
+<p>Visit the <a href="https://jessealderliesten.github.io/progutils/"><strong>progutils</strong> website</a> to explore the package, or install <strong>progutils</strong> <a href="https://github.com/JesseAlderliesten/progutils" class="external-link">from GitHub</a> using the following <a href="https://www.r-project.org/" class="external-link">R</a> code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"JesseAlderliesten/progutils"</span>,</span>
 <span>                        upgrade <span class="op">=</span> <span class="cn">FALSE</span>, lib <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
-<p>For more information about installing and configuring R and RStudio, see my package <a href="https://jessealderliesten.github.io/checkrpkgs/" class="external-link"><code>checkrpkgs</code></a>.</p>
+<p>For more information about installing and configuring R, see my package <a href="https://jessealderliesten.github.io/checkrpkgs/" class="external-link"><strong>checkrpkgs</strong></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>Every once in a while, reading data into R results in a factor that should be converted to a numeric vector. The code below illustrates that using <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code> from base R does <strong>not</strong> work to achieve this while using <code><a href="reference/as.numeric_safe.html">as.numeric_safe()</a></code> from <code>progutils</code> <strong>does</strong> work.</p>
+<p>Every once in a while, reading data into R results in a factor that should be converted to a numeric vector. The code below illustrates that using <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code> from base R does <strong>not</strong> work to achieve this while using <code><a href="reference/as.numeric_safe.html">as.numeric_safe()</a></code> from <strong>progutils</strong> <strong>does</strong> work.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JesseAlderliesten/progutils" class="external-link">progutils</a></span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fl">11</span><span class="op">:</span><span class="fl">13</span><span class="op">)</span></span>
@@ -85,7 +86,7 @@
 <span><span class="co">#&gt; [1] 1 2 3</span></span>
 <span><span class="fu"><a href="reference/as.numeric_safe.html">as.numeric_safe</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Returns the values.</span></span>
 <span><span class="co">#&gt; [1] 11 12 13</span></span></code></pre></div>
-<p>Similarly, <code><a href="https://rdrr.io/r/stats/relevel.html" class="external-link">relevel()</a></code> from base R can only be used to assign a reference level to a factor and using <code><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels()</a></code> from base R does <strong>not</strong> work to reorder factor levels, whereas using <code><a href="reference/reorder_levels.html">reorder_levels()</a></code> from <code>progutils</code> <strong>does</strong> work:</p>
+<p>Similarly, <code><a href="https://rdrr.io/r/stats/relevel.html" class="external-link">relevel()</a></code> from base R can only be used to assign a reference level to a factor and using <code><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels()</a></code> from base R does <strong>not</strong> work to reorder factor levels, whereas using <code><a href="reference/reorder_levels.html">reorder_levels()</a></code> from <strong>progutils</strong> <strong>does</strong> work:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JesseAlderliesten/progutils" class="external-link">progutils</a></span><span class="op">)</span></span>
 <span><span class="va">f_orig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span><span class="op">:</span><span class="fl">13</span>, <span class="fl">13</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span><span class="op">]</span>, levels <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">13</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span></span>
@@ -98,16 +99,21 @@
 <span><span class="va">f_test</span> <span class="co"># Also changes the values!</span></span>
 <span><span class="co">#&gt; [1] l k k l m</span></span>
 <span><span class="co">#&gt; Levels: k l m</span></span>
-<span><span class="fu"><a href="reference/reorder_levels.html">reorder_levels</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_orig</span>, new_order <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span><span class="op">)</span> <span class="co"># Only changes the levels</span></span>
+<span><span class="co"># Only changes the levels:</span></span>
+<span><span class="fu"><a href="reference/reorder_levels.html">reorder_levels</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_orig</span>, new_order <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] l m m l k</span></span>
 <span><span class="co">#&gt; Levels: k l m</span></span></code></pre></div>
-<p>To use a named numeric vector in the subtitle of a plot, the vector should be converted to a character string wrapped to an appropriate length, to prevent text from running off the plot. <code>progutils</code> provides a way to achieve that by combining <code><a href="reference/vect_to_char.html">vect_to_char()</a></code> and <code><a href="reference/wrap_text.html">wrap_text()</a></code>:</p>
+<p>To use a named numeric vector in the subtitle of a plot, the vector should be converted to a character string wrapped to an appropriate length, to prevent text from running off the plot. <strong>progutils</strong> provides a way to achieve that by combining <code><a href="reference/vect_to_char.html">vect_to_char()</a></code> and <code><a href="reference/wrap_text.html">wrap_text()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JesseAlderliesten/progutils" class="external-link">progutils</a></span><span class="op">)</span></span>
 <span><span class="va">msg_part_one</span> <span class="op">&lt;-</span> <span class="st">"Some\nmessage you want to display"</span></span>
 <span><span class="va">num_vect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>j <span class="op">=</span> <span class="fl">10</span>, k <span class="op">=</span> <span class="fl">11</span>, l <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="reference/wrap_text.html">wrap_text</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">msg_part_one</span>, <span class="fu"><a href="reference/vect_to_char.html">vect_to_char</a></span><span class="op">(</span><span class="va">num_vect</span><span class="op">)</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="reference/wrap_text.html">wrap_text</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">msg_part_one</span>, <span class="fu"><a href="reference/vect_to_char.html">vect_to_char</a></span><span class="op">(</span><span class="va">num_vect</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    width <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Some message you</span></span>
 <span><span class="co">#&gt; want to display j:</span></span>
 <span><span class="co">#&gt; 10, k: 11, l: 12</span></span>
@@ -135,7 +141,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>To cite package <span class="st">'progutils'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  Alderliesten <span class="fu">J</span> (<span class="dv">2026</span>). _progutils<span class="sc">:</span> Programming Utilities_. R package</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="dv">1</span>.<span class="fl">0.0</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils<span class="sc">&gt;</span>.</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  version <span class="dv">1</span>.<span class="fl">0.1</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils<span class="sc">&gt;</span>.</span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
@@ -143,22 +149,21 @@
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    title <span class="ot">=</span> {progutils<span class="sc">:</span> Programming Utilities},</span>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    author <span class="ot">=</span> {Jesse Alderliesten},</span>
 <span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2026</span>},</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">1</span>.<span class="fl">0.0</span>},</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">1</span>.<span class="fl">0.1</span>},</span>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>JesseAlderliesten<span class="sc">/</span>progutils},</span>
 <span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
 </h2>
-<p>Please open a <a href="https://github.com/JesseAlderliesten/progutils/issues" class="external-link">GitHub issue</a> if you have suggestions for improvement of <code>progutils</code>.</p>
+<p>Please open a <a href="https://github.com/JesseAlderliesten/progutils/issues" class="external-link">GitHub issue</a> if you have suggestions for improvement of <strong>progutils</strong>.</p>
 </div>
 <div class="section level2">
 <h2 id="similar-packages">Similar packages<a class="anchor" aria-label="anchor" href="#similar-packages"></a>
 </h2>
-<p>Many packages with miscellaneous functions exist on <a href="https://github.com/" class="external-link">GitHub</a> and <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" class="external-link">CRAN</a>: frequently they have <code>misc</code> or <code>util</code> in their title or description. In addition, many packages have an <code>utils</code> folder in their <code>R</code> directory.</p>
+<p>Many packages with miscellaneous functions exist on <a href="https://github.com/" class="external-link">GitHub</a> and <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" class="external-link">CRAN</a>: frequently they have ‘misc’ or ‘util’ in their title or description. In addition, many packages have an ‘utils’ folder inside their ‘R’ folder.</p>
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="table-of-contents">
 <h2 data-toc-skip>Table of contents</h2>
 <ul class="list-unstyled">

@@ -1,4 +1,4 @@
-# Check for case differences
+# Check for Case Differences
 
 Signal the presence of values that differ only in their case.
 
@@ -83,7 +83,8 @@ z <- c("a", "b", "C", "D", "A")
 try(check_case(x = x, y = y, signal = "error")) # an error
 #> Error : 'x' contains values that only differ in their case from values in 'y':
 #> 'b', 'C'
-(check_case(x = x, y = y, signal = "warning")) # c("b", "C"), with a warning
+# c("b", "C"), with a warning:
+(check_case(x = x, y = y, signal = "warning"))
 #> Warning: 'x' contains values that only differ in their case from values in 'y':
 #> 'b', 'C'
 #> [1] "b" "C"
@@ -91,18 +92,21 @@ try(check_case(x = x, y = y, signal = "error")) # an error
 (check_case(x = x, y = "h", signal = "warning")) # character(0)
 #> character(0)
 
-(check_case(x = z, y = NULL, signal = "warning", signal_within = "message"))
+(check_case(x = z, y = NULL, signal = "warning",
+            signal_within = "message"))
 #> 'x' contains values that only differ in their case: 'a', 'A'
 #> [1] "a" "A"
 # c("a", "A"), with a message:
 # 'x' contains values that only differ in their case: 'a', 'A'
 
-(check_case(x = z, y = "h", signal = "warning", signal_within = "warning"))
+(check_case(x = z, y = "h", signal = "warning",
+            signal_within = "warning"))
 #> Warning: 'x' contains values that only differ in their case: 'a', 'A'
 #> character(0)
 # character(0), with a warning:
 # 'x' contains values that only differ in their case: 'a', 'A'
-(check_case(x = z, y = "h", signal = "warning", signal_within = "quiet"))
+(check_case(x = z, y = "h", signal = "warning",
+            signal_within = "quiet"))
 #> character(0)
 # character(0), without a warning
 
@@ -112,6 +116,8 @@ try(check_case(x = x, y = y, signal = "error")) # an error
 #> 'a'
 #> [1] "a"
 # "a", with warnings
-# 1: 'y' contains values that only differ in their case: 'a', 'A'
-# 2: 'x' contains values that only differ in their case from values in 'y': 'a'
+# 1: 'y' contains values that only differ in their case:
+# 'a', 'A'
+# 2: 'x' contains values that only differ in their case
+# from values in 'y': 'a'
 ```

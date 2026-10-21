@@ -1,4 +1,4 @@
-# Create a file path
+# Create a File Path
 
 Create a file path, creating the indicated directory if it does not yet
 exist.
@@ -40,7 +40,7 @@ create_file_path(
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
   path](https://jessealderliesten.github.io/checkinput/reference/is_path.html),
-  see `Details` and the section `Notes on paths` below.
+  see `Details` and the section `Notes on Paths` below.
 
 - add_date:
 
@@ -87,13 +87,13 @@ Calls where date **nor** time stamps are added (i.e, using
 a warning if the file already
 [exists](https://fs.r-lib.org/reference/is_file.html).
 
-## Side effects
+## Side Effects
 
 The directory indicated by the returned path is
 [created](https://fs.r-lib.org/reference/create.html) if it does not yet
 [exist](https://fs.r-lib.org/reference/file_access.html).
 
-## Notes on paths
+## Notes on Paths
 
 The file separator is a backslash (`\`) on Windows but a forward slash
 (`/`) on other operating systems: use
@@ -147,30 +147,38 @@ Other functions to handle paths and directories:
 # Use a temporary directory to not write in the user's directory
 my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 
-(create_file_path(filename = "abc.txt", format_stamp = "",
-                  dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpErmCfJ/examplecreatefilepath187d7759999d/2026_10_17/abc.txt
-(create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-                  dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpErmCfJ/examplecreatefilepath187d7759999d/2026_10_17/17_10_2026_abc.txt
-(create_file_path(filename = "def.html", format_stamp = "",
-                  dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpErmCfJ/examplecreatefilepath187d7759999d/def.html
-(create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-                  dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpErmCfJ/examplecreatefilepath187d7759999d/17_10_2026_def.html
-(create_file_path(filename = "abc.txt", format_stamp = "",
-                  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpErmCfJ/examplecreatefilepath187d7759999d/subdir/2026_10_17/abc.txt
-(create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-                  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpErmCfJ/examplecreatefilepath187d7759999d/subdir/2026_10_17/17_10_2026_abc.txt
-(create_file_path(filename = "def.html", format_stamp = "",
-                  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpErmCfJ/examplecreatefilepath187d7759999d/subdir/def.html
-(create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-                  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpErmCfJ/examplecreatefilepath187d7759999d/subdir/17_10_2026_def.html
+(create_file_path(
+  filename = "abc.txt", format_stamp = "",
+  dir = my_tempdir, add_date = TRUE))
+#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/2026_10_21/abc.txt
+(create_file_path(
+  filename = "abc.txt", format_stamp = "%d_%m_%Y",
+  dir = my_tempdir, add_date = TRUE))
+#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/2026_10_21/21_10_2026_abc.txt
+(create_file_path(
+  filename = "def.html", format_stamp = "",
+  dir = my_tempdir, add_date = FALSE))
+#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/def.html
+(create_file_path(
+  filename = "def.html", format_stamp = "%d_%m_%Y",
+  dir = my_tempdir, add_date = FALSE))
+#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/21_10_2026_def.html
+(create_file_path(
+  filename = "abc.txt", format_stamp = "",
+  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
+#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/subdir/2026_10_21/abc.txt
+(create_file_path(
+  filename = "abc.txt", format_stamp = "%d_%m_%Y",
+  dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
+#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/subdir/2026_10_21/21_10_2026_abc.txt
+(create_file_path(
+  filename = "def.html", format_stamp = "",
+  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
+#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/subdir/def.html
+(create_file_path(
+  filename = "def.html", format_stamp = "%d_%m_%Y",
+  dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
+#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/subdir/21_10_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

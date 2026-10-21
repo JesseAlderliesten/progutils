@@ -1,4 +1,4 @@
-# Round numbers
+# Round Numbers
 
 Round numbers to a specified minimum number of [significant
 digits](https://rdrr.io/r/base/Round.html) while ensuring the integer
@@ -88,9 +88,10 @@ Other functions to check equality:
 
 ``` r
 x1 <- (1e5) / 7
-signif(x = x1, digits = 3) # returns 14300
+signif(x = x1, digits = 3) # 14300
 #> [1] 14300
-signif_custom(x1, digits = 3) # returns 14286 to not round the integer part
+# 14286 to not round the integer part:
+signif_custom(x1, digits = 3)
 #> [1] 14286
 
 x2 <- 10^c(-1, 5) / 7
@@ -116,7 +117,8 @@ signif_custom(x = x4, digits = 3, type = "expanded")
 #> [1] -1.4286e-02  1.4286e-01 -1.4286e+03  1.4286e+04
 # returns c(-0.014286, 0.14286, -1428.6, 14286)
 
-x_df <- data.frame(a = 1:3, b = letters[11:13], c = c(1e5, 1e3, 1) / 7, d = pi)
+x_df <- data.frame(a = 1:3, b = letters[11:13],
+                   c = c(1e5, 1e3, 1) / 7, d = pi)
 signif_custom(x_df, type = "selective")
 #>   a b         c    d
 #> 1 1 k 14286.000 3.14

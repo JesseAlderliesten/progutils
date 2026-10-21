@@ -1,4 +1,4 @@
-# Wrap text
+# Wrap Text
 
 Wrap text at blank characters to achieve a maximum line width.
 
@@ -101,7 +101,8 @@ Other functions to modify character vectors:
 ## Examples
 
 ``` r
-example_text <- "A piece\nof text that you want to wrap over multiple lines"
+example_text <-
+  "A piece\nof text that you want to wrap over multiple lines"
 cat(wrap_text(example_text,
               width = 20, ignore_newlines = TRUE))
 #> A piece of text that

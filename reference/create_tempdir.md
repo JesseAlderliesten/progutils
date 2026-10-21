@@ -1,4 +1,4 @@
-# Create a temporary directory
+# Create a Temporary Directory
 
 Create a temporary directory that can safely be removed.
 
@@ -54,7 +54,7 @@ empty the temporary directory), the created subdirectories should be
 [removed](https://rdrr.io/r/base/unlink.html) once they are not needed
 anymore, see the section `Usage in practice` below.
 
-## Usage in practice
+## Usage in Practice
 
 [Examples](https://rdrr.io/r/utils/example.html) and
 [tests](https://r-pkgs.org/testing-basics.html) should write to a
@@ -82,13 +82,13 @@ required files and folders before running any test for the presence or
 absence of particular files or folders: this ensures no spurious matches
 occur if examples or tests are removed or added.
 
-## Side effects
+## Side Effects
 
 The directory indicated by the returned path is
 [created](https://fs.r-lib.org/reference/create.html) if it does not yet
 [exist](https://fs.r-lib.org/reference/file_access.html).
 
-## Notes on paths
+## Notes on Paths
 
 The file separator is a backslash (`\`) on Windows but a forward slash
 (`/`) on other operating systems: use
@@ -121,7 +121,7 @@ Paths can be normalised, e.g., through
 case-insensitive file systems, this also adjusts the case to match names
 of directories that are already present.
 
-## Programming notes
+## Programming Notes
 
 The output of [`tempdir()`](https://rdrr.io/r/base/tempfile.html) during
 [`R CMD checks`](https://r-pkgs.org/R-CMD-check.html) on MacOS contains
@@ -161,24 +161,26 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/RtmpErmCfJ"
+#> [1] "/tmp/Rtmpo1KNmc"
 # Create a directory inside the directory returned by 'tempdir()'
-(my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpErmCfJ/subtempdir187d3bfc19a9"
+(tempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
+#> [1] "/tmp/Rtmpo1KNmc/subtempdir1aaa80141c7"
 
 # Using the same 'prefix' again creates another directory
-(my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpErmCfJ/subtempdir187d6f53ac71"
+(tempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
+#> [1] "/tmp/Rtmpo1KNmc/subtempdir1aaa1ae0962d"
 
 # It is not possible to create recursive subdirectories
-try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))
+try(no_subtempdir <- create_tempdir(
+    prefix = "subtempdir/otherdir"))
 #> Error in create_tempdir(prefix = "subtempdir/otherdir") : 
 #>   'prefix' should not include file separators
-try(no_subtempdir <- create_tempdir(prefix = "subtempdir\\otherdir"))
+try(no_subtempdir <- create_tempdir(
+    prefix = "subtempdir\\otherdir"))
 #> Error in create_tempdir(prefix = "subtempdir\\otherdir") : 
 #>   'prefix' should not include file separators
 
 # Clean up
-unlink(c(my_subtempdir_ex1, my_subtempdir_ex2), recursive = TRUE)
-rm(my_subtempdir_ex1, my_subtempdir_ex2)
+unlink(c(tempdir_ex1, tempdir_ex2), recursive = TRUE)
+rm(tempdir_ex1, tempdir_ex2)
 ```

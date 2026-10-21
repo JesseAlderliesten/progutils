@@ -1,4 +1,4 @@
-# Get the file path to a matching file
+# Get the File Path to a Matching File
 
 Get the file path to a matching file while ensuring that only one file
 in a directory has a name matching `pattern`, for example before
@@ -18,7 +18,7 @@ get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
   path](https://jessealderliesten.github.io/checkinput/reference/is_path.html),
-  see `Details` and the section `Notes on paths` below.
+  see `Details` and the section `Notes on Paths` below.
 
 - pattern:
 
@@ -55,14 +55,14 @@ case-insensitive match is present.
 The path in `dir` is interpreted as a **relative** path to the directory
 where to look for a file, starting from the [working
 directory](https://rdrr.io/r/base/getwd.html), see the section
-`Notes on paths` below.
+`Notes on Paths` below.
 
 In contrast to the default of
 [`list.files()`](https://rdrr.io/r/base/list.files.html),
 `get_file_path()` includes 'hidden' files, i.e., files with names that
 start with a dot, but excludes directories.
 
-## Notes on paths
+## Notes on Paths
 
 The file separator is a backslash (`\`) on Windows but a forward slash
 (`/`) on other operating systems: use
@@ -127,10 +127,11 @@ Other functions to check equality:
 ## Examples
 
 ``` r
-# Create files in a temporary directory so we know what is present.
+# Create files in a temporary directory
 my_tempdir <- create_tempdir(prefix = "examplegetfilepath")
 my_tempfiles <- fs::path_abs(
-  fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
+  fs::path(my_tempdir,
+           c("some_filename.txt", "another_filename.txt"))
 )
 
 # Create the files
@@ -138,45 +139,49 @@ file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
 get_file_path(dir = my_tempdir, pattern = "some_file")
-#> Using file '/tmp/RtmpErmCfJ/examplegetfilepath187d651cf444/some_filename.txt'
-#> /tmp/RtmpErmCfJ/examplegetfilepath187d651cf444/some_filename.txt
+#> Using file '/tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0/some_filename.txt'
+#> /tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0/some_filename.txt
 
 # The same file is found if case-insensitive matching is used:
-get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = TRUE)
-#> Using file '/tmp/RtmpErmCfJ/examplegetfilepath187d651cf444/some_filename.txt'
-#> /tmp/RtmpErmCfJ/examplegetfilepath187d651cf444/some_filename.txt
+get_file_path(dir = my_tempdir, pattern = "SOME_FILE",
+              ignore_case = TRUE)
+#> Using file '/tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0/some_filename.txt'
+#> /tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0/some_filename.txt
 
 # Error reporting the presence of a case-insensitive match.
-try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE))
+try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE",
+                  ignore_case = FALSE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/RtmpErmCfJ/examplegetfilepath187d651cf444'.
+#> '/tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0'.
 #> However, one or more case-insensitive matches to 'pattern' are present:
 #> 'some_filename.txt'.
 
 # 'pattern' is interpreted as a regular expression
 get_file_path(dir = my_tempdir, pattern = "^.+er_file")
-#> Using file '/tmp/RtmpErmCfJ/examplegetfilepath187d651cf444/another_filename.txt'
-#> /tmp/RtmpErmCfJ/examplegetfilepath187d651cf444/another_filename.txt
+#> Using file '/tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0/another_filename.txt'
+#> /tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0/another_filename.txt
 
 # Error reporting no match found.
-try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
+try(get_file_path(dir = my_tempdir,
+                 pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpErmCfJ/examplegetfilepath187d651cf444'.
-try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
+#> '/tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0'.
+try(get_file_path(dir = my_tempdir,
+                 pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpErmCfJ/examplegetfilepath187d651cf444'.
+#> '/tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
 try(get_file_path(dir = my_tempdir, pattern = "_filename"))
 #> Error in get_file_path(dir = my_tempdir, pattern = "_filename") : 
 #>   Multiple matches to pattern '_filename' are present in directory
-#> '/tmp/RtmpErmCfJ/examplegetfilepath187d651cf444':
+#> '/tmp/Rtmpo1KNmc/examplegetfilepath1aaa6bc6cbd0':
 #> 'another_filename.txt'
 #> 'some_filename.txt'!
 

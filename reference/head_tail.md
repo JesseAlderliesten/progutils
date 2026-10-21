@@ -1,6 +1,6 @@
-# Show first and last part of an object
+# Show First and Last Part of an Object
 
-Show first and last part of an object
+Show First and Last Part of an Object
 
 ## Usage
 
@@ -54,8 +54,9 @@ try(head_tail(x, n = 4.1))
 #> Error in checkinput::make_natural(n, strict = TRUE) : 
 #>   checkinput::is_natural(n) is not TRUE
 
-mat <- head_tail(matrix(data = 1:40, ncol = 4,
-                       dimnames = list(LETTERS[1:10], letters[1:4])))
+mat <- head_tail(
+  matrix(data = 1:40, ncol = 4,
+         dimnames = list(LETTERS[1:10], letters[1:4])))
 head_tail(mat)
 #>    a  b  c  d
 #> A  1 11 21 31

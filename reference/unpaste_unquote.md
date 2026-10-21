@@ -1,4 +1,4 @@
-# Undo `paste_quoted()`
+# Undo paste_quoted()
 
 Split a character string into a vector and remove quotation marks, to
 undo
@@ -72,8 +72,10 @@ unpaste_unquote(x = x, collapse = ", ", quotemarks = "'")
 #> [1] "ff" "gG" "HH"
 unpaste_unquote(x = x, collapse = ", ", quotemarks = "\"")
 #> [1] "'ff'" "'gG'" "'HH'"
-unpaste_unquote(x = x, collapse = character(0), quotemarks = c("'", "\""))
+unpaste_unquote(x = x, collapse = character(0),
+                quotemarks = c("'", "\""))
 #> [1] "ff, gG, HH"
-unpaste_unquote(x = x, collapse = character(0), quotemarks = character(0))
+unpaste_unquote(x = x, collapse = character(0),
+                quotemarks = character(0))
 #> [1] "'ff', 'gG', 'HH'"
 ```

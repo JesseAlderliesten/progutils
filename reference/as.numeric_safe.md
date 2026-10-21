@@ -1,4 +1,4 @@
-# Convert x to numeric
+# Convert x to Numeric
 
 Convert `x` to a vector with
 [numeric](https://rdrr.io/r/base/numeric.html)
@@ -104,7 +104,8 @@ str(as.numeric_safe(x_int, keep_integer = FALSE))
 
 str_as_num_safe <- function(x) {str(as.numeric_safe(x))}
 str_as_num_fact <- function(x) {str(as.numeric(levels(x))[x])}
-str_as_num_7.10 <- function(x) {str(as.numeric(levels(x))[as.integer(x)])}
+str_as_num_7.10 <- function(x) {
+  str(as.numeric(levels(x))[as.integer(x)])}
 str_as_num_base <- function(x) {str(as.numeric(x))}
 
 # as.numeric_safe() works irrespective the type of x
@@ -117,8 +118,8 @@ str_as_num_safe(x_char) # correct
 str_as_num_safe(x_fact) # correct
 #>  num [1:3] 5 6 7
 
-# The 'more efficient' suggestions in `help(factor)` and
-# R FAQ 7.10 *only* work for factors.
+# The 'more efficient' suggestions in `help(factor)`
+# and R FAQ 7.10 *only* work for factors.
 str_as_num_fact(x_int)  # clearly wrong
 #>  num [1:3] NA NA NA
 str_as_num_7.10(x_int)  # clearly wrong
@@ -136,8 +137,8 @@ str_as_num_fact(x_fact) # correct
 str_as_num_7.10(x_fact) # correct
 #>  num [1:3] 5 6 7
 
-# as.numeric() gives the *indices* of the factor levels
-# for factors
+# as.numeric() gives the *indices*
+# of the factor levels for factors
 str_as_num_base(x_int)  # correct
 #>  num [1:3] 5 6 7
 str_as_num_base(x_num)  # correct
