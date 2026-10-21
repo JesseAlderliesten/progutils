@@ -2,14 +2,14 @@
 % Please edit documentation in R/get_file_path.R
 \name{get_file_path}
 \alias{get_file_path}
-\title{Get the file path to a matching file}
+\title{Get the File Path to a Matching File}
 \usage{
 get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
 \item{dir}{\link[checkinput:is_character]{character string} containing a
 \link[checkinput:is_path]{valid path}, see \code{Details} and the section
-\verb{Notes on paths} below.}
+\verb{Notes on Paths} below.}
 
 \item{pattern}{\link[checkinput:is_character]{character string} containing a
 \link[base:regex]{regular expression}
@@ -39,13 +39,13 @@ directory has a name matching \code{pattern}, for example before attempting to
 \details{
 The path in \code{dir} is interpreted as a \strong{relative} path to the directory
 where to look for a file, starting from the \link[=getwd]{working directory},
-see the section \verb{Notes on paths} below.
+see the section \verb{Notes on Paths} below.
 
 In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_file_path()} includes
 'hidden' files, i.e., files with names that start with a dot, but excludes
 directories.
 }
-\section{Notes on paths}{
+\section{Notes on Paths}{
 
 
 The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
@@ -53,10 +53,9 @@ on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\
 paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
 get the file separator used on the current platform.
 
-Furthermore, the backslash is also used as
-\link[=regex]{escape character} in \R, such that backslashes need to be escaped in
-\R code by doubling them. Use \code{cat(x)} to omit the escape characters to see
-how \code{x} would be printed.
+Furthermore, the backslash is also used as \link[=regex]{escape character} in \R,
+such that backslashes need to be escaped in \R code by doubling them. Use
+\code{cat(x)} to omit the escape characters to see how \code{x} would be printed.
 
 The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
 the parent directory can be indicated by two dots (\code{".."}).
@@ -74,10 +73,11 @@ present.
 }
 
 \examples{
-# Create files in a temporary directory so we know what is present.
+# Create files in a temporary directory
 my_tempdir <- create_tempdir(prefix = "examplegetfilepath")
 my_tempfiles <- fs::path_abs(
-  fs::path(my_tempdir, paste0(c("some_filename", "another_filename"), ".txt"))
+  fs::path(my_tempdir,
+           c("some_filename.txt", "another_filename.txt"))
 )
 
 # Create the files
@@ -86,18 +86,22 @@ file.create(my_tempfiles)
 get_file_path(dir = my_tempdir, pattern = "some_file")
 
 # The same file is found if case-insensitive matching is used:
-get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = TRUE)
+get_file_path(dir = my_tempdir, pattern = "SOME_FILE",
+              ignore_case = TRUE)
 
 # Error reporting the presence of a case-insensitive match.
-try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE))
+try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE",
+                  ignore_case = FALSE))
 
 # 'pattern' is interpreted as a regular expression
 get_file_path(dir = my_tempdir, pattern = "^.+er_file")
 
 # Error reporting no match found.
-try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
+try(get_file_path(dir = my_tempdir,
+                 pattern = "missing_filename_abcde",
                  ignore_case = TRUE))
-try(get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",
+try(get_file_path(dir = my_tempdir,
+                 pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 
 # Error if multiple matches are present.

@@ -1,4 +1,4 @@
-#' Round numbers
+#' Round Numbers
 #'
 #' Round numbers to a specified minimum number of [significant digits][signif()]
 #' while ensuring the integer part is not rounded. This prevents values from
@@ -43,8 +43,9 @@
 #'
 #' @examples
 #' x1 <- (1e5) / 7
-#' signif(x = x1, digits = 3) # returns 14300
-#' signif_custom(x1, digits = 3) # returns 14286 to not round the integer part
+#' signif(x = x1, digits = 3) # 14300
+#' # 14286 to not round the integer part:
+#' signif_custom(x1, digits = 3)
 #'
 #' x2 <- 10^c(-1, 5) / 7
 #' signif(x = x2, digits = 3) # returns c(1.43e-02, 1.43e+04)
@@ -63,12 +64,15 @@
 #' signif_custom(x = x4, digits = 3, type = "expanded")
 #' # returns c(-0.014286, 0.14286, -1428.6, 14286)
 #'
-#' x_df <- data.frame(a = 1:3, b = letters[11:13], c = c(1e5, 1e3, 1) / 7, d = pi)
+#' x_df <- data.frame(a = 1:3, b = letters[11:13],
+#'                    c = c(1e5, 1e3, 1) / 7, d = pi)
 #' signif_custom(x_df, type = "selective")
 #' signif_custom(x_df, type = "expanded")
 #'
 #' @export
-signif_custom <- function(x, digits = 3L, type = c("selective", "expanded")) {
+signif_custom <- function(x,
+                          digits = 3L,
+                          type = c("selective", "expanded")) {
   type <- match.arg(type, several.ok = FALSE)
 
   # Notes:
@@ -95,8 +99,8 @@ signif_custom <- function(x, digits = 3L, type = c("selective", "expanded")) {
 
   # Notes:
   # - Using abs(x) to also work if x contains negative values.
-  # - Selecting finite elements of 'x' to prevent -Inf and Inf from putting
-  #   'ceiling_digits_x' at Inf
+  # - Selecting finite elements of 'x' to prevent -Inf
+  #   and Inf from putting 'ceiling_digits_x' at Inf
   ceiling_digits_x <- ceiling(log10(abs(x[is.finite(x)])))
 
   if(type == "expanded") {

@@ -1,4 +1,4 @@
-#' Create a temporary directory
+#' Create a Temporary Directory
 #'
 #' Create a temporary directory that can safely be removed.
 #'
@@ -34,9 +34,9 @@
 #' An error is thrown when attempting to create subdirectories (see `Details`)
 #' and if creating the directory fails.
 #'
-#' @inheritSection create_dir Side effects
+#' @inheritSection create_dir Side Effects
 #'
-#' @section Usage in practice:
+#' @section Usage in Practice:
 #' [Examples][utils::example()] and [tests](https://r-pkgs.org/testing-basics.html)
 #' should write to a temporary directory that is cleaned
 #' up afterwards (otherwise [`R cmd check`](https://r-pkgs.org/R-CMD-check.html)
@@ -61,8 +61,8 @@
 #' absence of particular files or folders: this ensures no spurious matches
 #' occur if examples or tests are removed or added.
 #'
-#' @inheritSection checkinput::is_path Notes on paths
-#' @inheritSection checkinput::is_path Programming notes
+#' @inheritSection checkinput::is_path Notes on Paths
+#' @inheritSection checkinput::is_path Programming Notes
 #'
 #' @seealso
 #' [checkinput::is_path()] to check if a path is valid, with extensive
@@ -84,25 +84,27 @@
 #' @examples
 #' tempdir(check = TRUE)
 #' # Create a directory inside the directory returned by 'tempdir()'
-#' (my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
+#' (tempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
 #'
 #' # Using the same 'prefix' again creates another directory
-#' (my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
+#' (tempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
 #'
 #' # It is not possible to create recursive subdirectories
-#' try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))
-#' try(no_subtempdir <- create_tempdir(prefix = "subtempdir\\otherdir"))
+#' try(no_subtempdir <- create_tempdir(
+#'     prefix = "subtempdir/otherdir"))
+#' try(no_subtempdir <- create_tempdir(
+#'     prefix = "subtempdir\\otherdir"))
 #'
 #' # Clean up
-#' unlink(c(my_subtempdir_ex1, my_subtempdir_ex2), recursive = TRUE)
-#' rm(my_subtempdir_ex1, my_subtempdir_ex2)
+#' unlink(c(tempdir_ex1, tempdir_ex2), recursive = TRUE)
+#' rm(tempdir_ex1, tempdir_ex2)
 #'
 #' @export
 create_tempdir <- function(prefix = "tempdir") {
   stopifnot(
     checkinput::is_path(prefix, require_sep = FALSE),
-    # Using 'prefix == basename(prefix)' to detect slashes does not work on
-    # Ubuntu and MacOS
+    # Using 'prefix == basename(prefix)' to detect
+    # slashes does not work on Ubuntu and MacOS
     "'prefix' should not include file separators" =
       !grepl(pattern = "\\", x = prefix, fixed = TRUE) &&
       !grepl(pattern = "/", x = prefix, fixed = TRUE))

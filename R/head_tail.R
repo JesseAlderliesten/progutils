@@ -1,4 +1,4 @@
-#' Show first and last part of an object
+#' Show First and Last Part of an Object
 #'
 #' @param x object of which the first and last part should be returned.
 #' @param n [natural][checkinput::make_natural] number (default `3L`) indicating
@@ -19,8 +19,9 @@
 #' try(head_tail(x, n = 0))
 #' try(head_tail(x, n = 4.1))
 #'
-#' mat <- head_tail(matrix(data = 1:40, ncol = 4,
-#'                        dimnames = list(LETTERS[1:10], letters[1:4])))
+#' mat <- head_tail(
+#'   matrix(data = 1:40, ncol = 4,
+#'          dimnames = list(LETTERS[1:10], letters[1:4])))
 #' head_tail(mat)
 #'
 #' @export

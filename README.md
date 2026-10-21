@@ -1,4 +1,6 @@
 
+# progutils
+
 <!-- badges: start -->
 
 ![](https://img.shields.io/github/r-package/v/JesseAlderliesten/progutils?color=blue)
@@ -6,18 +8,18 @@
 [![R-CMD-check-no-suggests](https://github.com/JesseAlderliesten/progutils/actions/workflows/check-no-suggests.yaml/badge.svg)](https://github.com/JesseAlderliesten/progutils/actions/workflows/check-no-suggests.yaml)
 <!-- badges: end -->
 
-# progutils
-
-`progutils` contains utility functions, for example to reorder values,
-check equality, construct messages, or handle files and directories.
+**progutils** contains [utility
+functions](https://jessealderliesten.github.io/progutils/reference/index.html),
+for example to reorder values, check equality, construct messages, or
+handle files and directories.
 
 ## Installation
 
-Visit the [`progutils`
+Visit the [**progutils**
 website](https://jessealderliesten.github.io/progutils/) to explore the
-package, or install `progutils` from
-[GitHub](https://github.com/JesseAlderliesten/progutils) using the
-following R code:
+package, or install **progutils** [from
+GitHub](https://github.com/JesseAlderliesten/progutils) using the
+following [R](https://www.r-project.org/) code:
 
 ``` r
 if(!requireNamespace("remotes")) {
@@ -27,16 +29,15 @@ remotes::install_github(repo = "JesseAlderliesten/progutils",
                         upgrade = FALSE, lib = NULL)
 ```
 
-For more information about installing and configuring R and RStudio, see
-my package
-[`checkrpkgs`](https://jessealderliesten.github.io/checkrpkgs/).
+For more information about installing and configuring R, see my package
+[**checkrpkgs**](https://jessealderliesten.github.io/checkrpkgs/).
 
 ## Examples
 
 Every once in a while, reading data into R results in a factor that
 should be converted to a numeric vector. The code below illustrates that
 using `as.numeric()` from base R does **not** work to achieve this while
-using `as.numeric_safe()` from `progutils` **does** work.
+using `as.numeric_safe()` from **progutils** **does** work.
 
 ``` r
 library(progutils)
@@ -53,7 +54,7 @@ as.numeric_safe(x) # Returns the values.
 Similarly, `relevel()` from base R can only be used to assign a
 reference level to a factor and using `levels()` from base R does
 **not** work to reorder factor levels, whereas using `reorder_levels()`
-from `progutils` **does** work:
+from **progutils** **does** work:
 
 ``` r
 library(progutils)
@@ -67,22 +68,28 @@ levels(f_test) <- letters[11:13]
 f_test # Also changes the values!
 #> [1] l k k l m
 #> Levels: k l m
-reorder_levels(x = f_orig, new_order = letters[11:13]) # Only changes the levels
+# Only changes the levels:
+reorder_levels(x = f_orig, new_order = letters[11:13])
 #> [1] l m m l k
 #> Levels: k l m
 ```
 
 To use a named numeric vector in the subtitle of a plot, the vector
 should be converted to a character string wrapped to an appropriate
-length, to prevent text from running off the plot. `progutils` provides
-a way to achieve that by combining `vect_to_char()` and `wrap_text()`:
+length, to prevent text from running off the plot. **progutils**
+provides a way to achieve that by combining `vect_to_char()` and
+`wrap_text()`:
 
 ``` r
 library(progutils)
 msg_part_one <- "Some\nmessage you want to display"
 num_vect <- c(j = 10, k = 11, l = 12)
 
-cat(wrap_text(paste(msg_part_one, vect_to_char(num_vect)), width = 20))
+cat(
+  wrap_text(
+    paste(msg_part_one, vect_to_char(num_vect)),
+    width = 20)
+)
 #> Some message you
 #> want to display j:
 #> 10, k: 11, l: 12
@@ -110,7 +117,7 @@ License](LICENSE.md).
     To cite package 'progutils' in publications use:
 
       Alderliesten J (2026). _progutils: Programming Utilities_. R package
-      version 1.0.0, <https://github.com/JesseAlderliesten/progutils>.
+      version 1.0.1, <https://github.com/JesseAlderliesten/progutils>.
 
     A BibTeX entry for LaTeX users is
 
@@ -118,7 +125,7 @@ License](LICENSE.md).
         title = {progutils: Programming Utilities},
         author = {Jesse Alderliesten},
         year = {2026},
-        note = {R package version 1.0.0},
+        note = {R package version 1.0.1},
         url = {https://github.com/JesseAlderliesten/progutils},
       }
 
@@ -126,12 +133,12 @@ License](LICENSE.md).
 
 Please open a [GitHub
 issue](https://github.com/JesseAlderliesten/progutils/issues) if you
-have suggestions for improvement of `progutils`.
+have suggestions for improvement of **progutils**.
 
 ## Similar packages
 
 Many packages with miscellaneous functions exist on
 [GitHub](https://github.com/) and
 [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html):
-frequently they have `misc` or `util` in their title or description. In
-addition, many packages have an `utils` folder in their `R` directory.
+frequently they have ‘misc’ or ‘util’ in their title or description. In
+addition, many packages have an ‘utils’ folder inside their ‘R’ folder.

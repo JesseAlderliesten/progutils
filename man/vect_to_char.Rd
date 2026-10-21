@@ -2,7 +2,7 @@
 % Please edit documentation in R/vect_to_char.R
 \name{vect_to_char}
 \alias{vect_to_char}
-\title{Convert a vector to a character string}
+\title{Convert a Vector to a Character String}
 \usage{
 vect_to_char(
   x,
@@ -78,7 +78,7 @@ while ensuring their integer parts are unrounded if \code{round_type} is
 while their integer parts might be rounded if \code{round_type} is \code{"signif"}, see
 \code{\link[=signif_custom]{signif_custom()}} for details.
 }
-\section{Programming notes}{
+\section{Programming Notes}{
 
 To get a cross-tabulation of \code{x} into a character string, one can use
 \code{paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")},
@@ -92,10 +92,13 @@ vect_to_char(x = x) # "a: 1, b: 2, c: 3"
 vect_to_char(x = x, collapse = NULL) # c("a: 1", "b: 2", "c: 3")
 vect_to_char(x = unname(x)) # "1, 2, 3"
 y <- x / 7
-vect_to_char(x = y, signif = 7) # "a: 0.1428571, b: 0.2857143, c: 0.4285714"
-vect_to_char(x = y, signif = 2, sep = " = ", collapse = " and ", width = 15)
-# "a = 0.14 and b\n= 0.29 and c =\n0.43"
-vect_to_char(x = 1e3/7, signif = 2) # not 140: completely display integer part
+# "a: 0.1428571, b: 0.2857143, c: 0.4285714":
+vect_to_char(x = y, signif = 7)
+# "a = 0.14 and b\n= 0.29 and c =\n0.43":
+vect_to_char(x = y, signif = 2, sep = " = ",
+             collapse = " and ", width = 15)
+# not 140: completely display integer part:
+vect_to_char(x = 1e3/7, signif = 2)
 
 x_char <- c(a = "abc", b = "def", c = "this is text")
 vect_to_char(x = x_char) # "a: abc, b: def, c: this is text"
@@ -112,7 +115,12 @@ names(x) <- letters[x]
 y <- 5:15
 names(y) <- letters[y]
 x <- c(x, y)
-paste0(vect_to_char(c(table(x)), sep = " (", collapse =  "), "), ")")
+paste0(
+  vect_to_char(
+    c(table(x)),
+    sep = " (",
+    collapse =  "), "),
+  ")")
 
 }
 \seealso{

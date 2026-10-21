@@ -1,4 +1,4 @@
-#' Replace non-alphanumeric characters
+#' Replace Non-Alphanumeric Characters
 #'
 #' Replace or remove non-alphanumeric characters, keeping dots and handling
 #' underscores as indicated by `keep_underscores`.
@@ -21,7 +21,7 @@
 #'
 #' @details
 #' This implementation uses the [character class][regex] `[:alnum:]` that
-#' depends on the current [locale][locales], see the `Programming notes` in
+#' depends on the current [locale][locales], see the `Programming Notes` in
 #' [checkinput::all_names()].
 #'
 #' @seealso
@@ -43,13 +43,19 @@
 #' replace_nonalnum("a+b.txt", replacement = "") # "ab.txt"
 #'
 #' # Handling underscores
-#' replace_nonalnum("a+bc_d.txt", replacement = "", keep_underscore = TRUE)  # "abc_d.txt"
-#' replace_nonalnum("a+bc_d.txt", replacement = "", keep_underscore = FALSE) # "abcd.txt"
-#' # Seems to keep the underscore because the default 'replacement' is an underscore
-#' replace_nonalnum("a+bc_d.txt", keep_underscore = FALSE) # "a_bc_d.txt"
+#' replace_nonalnum("a+bc_d.txt", replacement = "",
+#'                  keep_underscore = TRUE)  # "abc_d.txt"
+#' replace_nonalnum("a+bc_d.txt", replacement = "",
+#'                  keep_underscore = FALSE) # "abcd.txt"
+#' # Seems to keep the underscore because the
+#' # default 'replacement' is an underscore
+#' replace_nonalnum("a+bc_d.txt",
+#'                  keep_underscore = FALSE) # "a_bc_d.txt"
 #'
 #' @export
-replace_nonalnum <- function(x, replacement = "_", keep_underscore = TRUE) {
+replace_nonalnum <- function(x,
+                             replacement = "_",
+                             keep_underscore = TRUE) {
   stopifnot(checkinput::all_characters(x, allow_empty = TRUE),
             checkinput::is_character(replacement, allow_empty = TRUE),
             checkinput::is_logical(keep_underscore))

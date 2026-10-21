@@ -2,14 +2,14 @@
 % Please edit documentation in R/create_dir.R
 \name{create_dir}
 \alias{create_dir}
-\title{Create a directory}
+\title{Create a Directory}
 \usage{
 create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 }
 \arguments{
 \item{dir}{\link[checkinput:is_character]{character string} containing a
 \link[checkinput:is_path]{valid path}, see \code{Details} and the section
-\verb{Notes on paths} below.}
+\verb{Notes on Paths} below.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
@@ -17,7 +17,7 @@ current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 \value{
 A character string with the \link[fs:path_abs]{absolute normalised} path to the
 requested directory, returned \link[=invisible]{invisibly}, see the section
-\verb{Notes on paths} and the \code{Examples} below.
+\verb{Notes on Paths} and the \code{Examples} below.
 
 By default a subdirectory with the current date in the \link[=strftime]{format}
 \code{YYYY_mm_dd} is created in directory \code{output} below the
@@ -32,15 +32,15 @@ Create a directory if it does not yet exist.
 \details{
 The path in \code{dir} is interpreted as a \strong{relative} path to the directory that
 should be created, starting from the \link[=getwd]{working directory}, see the
-section \verb{Notes on paths} below.
+section \verb{Notes on Paths} below.
 }
-\section{Side effects}{
+\section{Side Effects}{
 
 The directory indicated by the returned path is \link[fs:dir_create]{created}
 if it does not yet \link[fs:dir_exists]{exist}.
 }
 
-\section{Notes on paths}{
+\section{Notes on Paths}{
 
 
 The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
@@ -48,10 +48,9 @@ on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\
 paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
 get the file separator used on the current platform.
 
-Furthermore, the backslash is also used as
-\link[=regex]{escape character} in \R, such that backslashes need to be escaped in
-\R code by doubling them. Use \code{cat(x)} to omit the escape characters to see
-how \code{x} would be printed.
+Furthermore, the backslash is also used as \link[=regex]{escape character} in \R,
+such that backslashes need to be escaped in \R code by doubling them. Use
+\code{cat(x)} to omit the escape characters to see how \code{x} would be printed.
 
 The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
 the parent directory can be indicated by two dots (\code{".."}).
@@ -69,7 +68,7 @@ present.
 }
 
 \examples{
-# Use a temporary subdirectory to not write in the user's directory
+# Use a temporary directory to not write in the user's directory
 my_tempdir <- create_tempdir(prefix = "examplecreatedir")
 
 # Create directory 'dir_one' inside this temporary directory
@@ -77,27 +76,30 @@ res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
 
-# An attempt to create a directory that already exists does not change any
-# directory and the same directory is returned.
-res_dir_one_v2 <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
-                             add_date = FALSE)
+# An attempt to create a directory that already exists does
+# not change any directory and the same directory is returned.
+res_dir_one_v2 <- create_dir(
+  dir = fs::path(my_tempdir, "dir_one"),
+  add_date = FALSE)
 identical(res_dir_one, res_dir_one_v2) # TRUE
 
-# On case-insensitive file systems, the directories 'res_dir_ONE' and
-# 'res_dir_one' are the same directory. On case-sensitive file systems they
-# are different directories.
+# On case-insensitive file systems, the directories
+# 'res_dir_ONE' and 'res_dir_one' are the same directory. On
+# case-sensitive file systems they are different directories.
 res_dir_ONE <- create_dir(dir = fs::path(my_tempdir, "dir_ONE"),
                           add_date = FALSE)
 identical(res_dir_one, res_dir_ONE)
 
-# Create directory 'dir_two' with a subdirectory containing the current date
-res_dir_date <- create_dir(dir = fs::path(my_tempdir, "dir_date"),
-                           add_date = TRUE)
+# Create directory 'dir_two' with a subdirectory containing
+# the current date
+res_dir_date <- create_dir(
+  dir = fs::path(my_tempdir, "dir_date"), add_date = TRUE)
 fs::dir_exists(res_dir_date) # TRUE
 
 # Cleaning up
 unlink(my_tempdir, recursive = TRUE)
-rm(my_tempdir, res_dir_one, res_dir_one_v2, res_dir_date, res_dir_ONE)
+rm(my_tempdir, res_dir_one, res_dir_one_v2,
+   res_dir_date, res_dir_ONE)
 
 }
 \seealso{

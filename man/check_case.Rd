@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_case.R
 \name{check_case}
 \alias{check_case}
-\title{Check for case differences}
+\title{Check for Case Differences}
 \usage{
 check_case(
   x,
@@ -47,24 +47,30 @@ y <- c("a", "B", "c", "D")
 z <- c("a", "b", "C", "D", "A")
 
 try(check_case(x = x, y = y, signal = "error")) # an error
-(check_case(x = x, y = y, signal = "warning")) # c("b", "C"), with a warning
+# c("b", "C"), with a warning:
+(check_case(x = x, y = y, signal = "warning"))
 
 (check_case(x = x, y = "h", signal = "warning")) # character(0)
 
-(check_case(x = z, y = NULL, signal = "warning", signal_within = "message"))
+(check_case(x = z, y = NULL, signal = "warning",
+            signal_within = "message"))
 # c("a", "A"), with a message:
 # 'x' contains values that only differ in their case: 'a', 'A'
 
-(check_case(x = z, y = "h", signal = "warning", signal_within = "warning"))
+(check_case(x = z, y = "h", signal = "warning",
+            signal_within = "warning"))
 # character(0), with a warning:
 # 'x' contains values that only differ in their case: 'a', 'A'
-(check_case(x = z, y = "h", signal = "warning", signal_within = "quiet"))
+(check_case(x = z, y = "h", signal = "warning",
+            signal_within = "quiet"))
 # character(0), without a warning
 
 (check_case(x = x, y = z, signal = "warning"))
 # "a", with warnings
-# 1: 'y' contains values that only differ in their case: 'a', 'A'
-# 2: 'x' contains values that only differ in their case from values in 'y': 'a'
+# 1: 'y' contains values that only differ in their case:
+# 'a', 'A'
+# 2: 'x' contains values that only differ in their case
+# from values in 'y': 'a'
 
 }
 \seealso{

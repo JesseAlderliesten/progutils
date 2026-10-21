@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_tempdir.R
 \name{create_tempdir}
 \alias{create_tempdir}
-\title{Create a temporary directory}
+\title{Create a Temporary Directory}
 \usage{
 create_tempdir(prefix = "tempdir")
 }
@@ -42,7 +42,7 @@ empty the temporary directory), the created subdirectories should be
 \link[=unlink]{removed} once they are not needed anymore, see the section
 \verb{Usage in practice} below.
 }
-\section{Usage in practice}{
+\section{Usage in Practice}{
 
 \link[utils:example]{Examples} and \href{https://r-pkgs.org/testing-basics.html}{tests}
 should write to a temporary directory that is cleaned
@@ -67,13 +67,13 @@ absence of particular files or folders: this ensures no spurious matches
 occur if examples or tests are removed or added.
 }
 
-\section{Side effects}{
+\section{Side Effects}{
 
 The directory indicated by the returned path is \link[fs:dir_create]{created}
 if it does not yet \link[fs:dir_exists]{exist}.
 }
 
-\section{Notes on paths}{
+\section{Notes on Paths}{
 
 
 The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
@@ -81,10 +81,9 @@ on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\
 paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
 get the file separator used on the current platform.
 
-Furthermore, the backslash is also used as
-\link[=regex]{escape character} in \R, such that backslashes need to be escaped in
-\R code by doubling them. Use \code{cat(x)} to omit the escape characters to see
-how \code{x} would be printed.
+Furthermore, the backslash is also used as \link[=regex]{escape character} in \R,
+such that backslashes need to be escaped in \R code by doubling them. Use
+\code{cat(x)} to omit the escape characters to see how \code{x} would be printed.
 
 The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
 the parent directory can be indicated by two dots (\code{".."}).
@@ -101,33 +100,36 @@ present.
 
 }
 
-\section{Programming notes}{
+\section{Programming Notes}{
 
 
 The output of \code{\link[=tempdir]{tempdir()}} during
-\href{https://r-pkgs.org/R-CMD-check.html}{\verb{R CMD checks}} on MacOS contains successive
-forward slashes (e.g., \verb{/var/<...>/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR})
-which in earlier versions of \code{\link[checkinput:is_path]{is_path()}} (then in package
-\href{https://jessealderliesten.github.io/progutils/}{progutils}) led to
-spurious warnings about duplicated file separators.
+\href{https://r-pkgs.org/R-CMD-check.html}{\verb{R CMD checks}} on MacOS contains
+successive forward slashes (e.g.,
+\verb{/var/<...>/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR}) which in earlier versions
+of \code{\link[checkinput:is_path]{is_path()}} (then in package
+\href{https://jessealderliesten.github.io/progutils/}{progutils}) led to spurious
+warnings about duplicated file separators.
 
 }
 
 \examples{
 tempdir(check = TRUE)
 # Create a directory inside the directory returned by 'tempdir()'
-(my_subtempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
+(tempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
 
 # Using the same 'prefix' again creates another directory
-(my_subtempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
+(tempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
 
 # It is not possible to create recursive subdirectories
-try(no_subtempdir <- create_tempdir(prefix = "subtempdir/otherdir"))
-try(no_subtempdir <- create_tempdir(prefix = "subtempdir\\\\otherdir"))
+try(no_subtempdir <- create_tempdir(
+    prefix = "subtempdir/otherdir"))
+try(no_subtempdir <- create_tempdir(
+    prefix = "subtempdir\\\\otherdir"))
 
 # Clean up
-unlink(c(my_subtempdir_ex1, my_subtempdir_ex2), recursive = TRUE)
-rm(my_subtempdir_ex1, my_subtempdir_ex2)
+unlink(c(tempdir_ex1, tempdir_ex2), recursive = TRUE)
+rm(tempdir_ex1, tempdir_ex2)
 
 }
 \seealso{

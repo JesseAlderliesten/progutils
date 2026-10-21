@@ -1,4 +1,4 @@
-#' Wrap text
+#' Wrap Text
 #'
 #' Wrap text at blank characters to achieve a maximum line width.
 #'
@@ -56,18 +56,22 @@
 #' @family functions to modify character vectors
 #'
 #' @examples
-#' example_text <- "A piece\nof text that you want to wrap over multiple lines"
+#' example_text <-
+#'   "A piece\nof text that you want to wrap over multiple lines"
 #' cat(wrap_text(example_text,
 #'               width = 20, ignore_newlines = TRUE))
 #' cat(wrap_text(example_text,
 #'               width = 20, ignore_newlines = FALSE))
 #'
 #' @export
-wrap_text <- function(x, width = 80L, ignore_newlines = TRUE,
+wrap_text <- function(x,
+                      width = 80L,
+                      ignore_newlines = TRUE,
                       warn_length = FALSE) {
   stopifnot(
     checkinput::all_characters(x, allow_empty = TRUE, allow_zerolength = TRUE),
-    checkinput::is_logical(ignore_newlines), checkinput::is_logical(warn_length))
+    checkinput::is_logical(ignore_newlines),
+    checkinput::is_logical(warn_length))
   if(!is.infinite(width)) {
     width <- checkinput::make_natural(width)
   }

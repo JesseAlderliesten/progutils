@@ -2,7 +2,7 @@
 % Please edit documentation in R/replace_vals.R
 \name{replace_vals}
 \alias{replace_vals}
-\title{Replace values}
+\title{Replace Values}
 \usage{
 replace_vals(
   x,
@@ -70,7 +70,7 @@ which returns \code{c("b", "b")}.
 If \code{quiet} is \code{FALSE}, a message indicates which values have been replaced.
 The used order in the message is determined by the order of the factor
 \strong{levels}, which is influenced by the \link[=locales]{locale} at the time of their
-creation, see the \code{Warning} in \code{\link[=factor]{factor()}} and the \verb{Programming notes} in
+creation, see the \code{Warning} in \code{\link[=factor]{factor()}} and the \verb{Programming Notes} in
 \code{\link[checkinput:all_names]{checkinput::all_names()}}.
 
 \code{replace_vals()} does \strong{not} allow input of \link[=typeof]{type} \code{double} because
@@ -80,25 +80,29 @@ tolerance, for example using \code{\link[=are_equal]{are_equal()}}.
 \examples{
 x <- c("k", "l", "m")
 
-# All values in 'x' that match any value of 'old' are replaced by 'new'.
-replace_vals(x = rep(x, 2), old = x[3:2], new = "b", allow_multiple = TRUE)
+# All values in 'x' that match any value
+# of 'old' are replaced by 'new'.
+replace_vals(x = rep(x, 2), old = x[3:2],
+            new = "b", allow_multiple = TRUE)
 
-# Factor input to 'x' is handled by replacing the values and levels. The
-# levels are not reordered
-replace_vals(x = as.factor(x), old = x[3:2], new = "b", allow_multiple = TRUE)
+# Factor input to 'x' is handled by replacing the
+# values and levels. The levels are not reordered.
+replace_vals(x = as.factor(x), old = x[3:2],
+             new = "b", allow_multiple = TRUE)
 
-# Case-insensitive matching is used if 'ignore_case' is TRUE, with a warning
-# if 'signal_case_old' is '"warning"'
+# Case-insensitive matching is used if 'ignore_case' is
+# TRUE, with a warning if 'signal_case_old' is '"warning"'
 replace_vals(x = "A", old = "a", new = "b", ignore_case = TRUE,
              signal_case_old = "warning")
 
-# Case-sensitive matching is used if 'ignore_case' is FALSE. A warning is
-# issued if no match is found and 'warn_absent' is 'TRUE'
+# Case-sensitive matching is used if 'ignore_case'
+# is FALSE. A warning is issued if no match is
+# found and 'warn_absent' is 'TRUE'
 replace_vals(x = "A", old = "a", new = "b", ignore_case = FALSE,
              warn_absent = TRUE)
 
-# If 'allow_multiple' is FALSE, an error is thrown if multiple values of
-# 'old' match 'x'.
+# If 'allow_multiple' is FALSE, an error is thrown
+# if multiple values of 'old' match 'x'.
 try(replace_vals(x = x, old = letters[13:12], new = "b",
                  allow_multiple = FALSE))
 

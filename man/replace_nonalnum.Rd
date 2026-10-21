@@ -2,7 +2,7 @@
 % Please edit documentation in R/replace_nonalnum.R
 \name{replace_nonalnum}
 \alias{replace_nonalnum}
-\title{Replace non-alphanumeric characters}
+\title{Replace Non-Alphanumeric Characters}
 \usage{
 replace_nonalnum(x, replacement = "_", keep_underscore = TRUE)
 }
@@ -31,7 +31,7 @@ underscores as indicated by \code{keep_underscores}.
 }
 \details{
 This implementation uses the \link[=regex]{character class} \verb{[:alnum:]} that
-depends on the current \link[=locales]{locale}, see the \verb{Programming notes} in
+depends on the current \link[=locales]{locale}, see the \verb{Programming Notes} in
 \code{\link[checkinput:all_names]{checkinput::all_names()}}.
 }
 \examples{
@@ -44,10 +44,14 @@ replace_nonalnum(c("a+b.txt", "a b.txt", "ab12._"))
 replace_nonalnum("a+b.txt", replacement = "") # "ab.txt"
 
 # Handling underscores
-replace_nonalnum("a+bc_d.txt", replacement = "", keep_underscore = TRUE)  # "abc_d.txt"
-replace_nonalnum("a+bc_d.txt", replacement = "", keep_underscore = FALSE) # "abcd.txt"
-# Seems to keep the underscore because the default 'replacement' is an underscore
-replace_nonalnum("a+bc_d.txt", keep_underscore = FALSE) # "a_bc_d.txt"
+replace_nonalnum("a+bc_d.txt", replacement = "",
+                 keep_underscore = TRUE)  # "abc_d.txt"
+replace_nonalnum("a+bc_d.txt", replacement = "",
+                 keep_underscore = FALSE) # "abcd.txt"
+# Seems to keep the underscore because the
+# default 'replacement' is an underscore
+replace_nonalnum("a+bc_d.txt",
+                 keep_underscore = FALSE) # "a_bc_d.txt"
 
 }
 \seealso{

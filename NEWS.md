@@ -1,3 +1,16 @@
+# progutils 1.0.1
+
+### Breaking changes
+- Dependency `checkinput`: increase minimum version from `1.5.0` to `1.5.1` to
+  be able to inherit sections with capitalized titles.
+
+### Documentation
+- Make layout more uniform.
+- Wrap lines in `Usage` and `Example` sections to 65 characters.
+- Capitalize function titles.
+- Avoid markup in section titles.
+
+
 # progutils 1.0.0
 
 ### Documentation

@@ -1,4 +1,4 @@
-#' Create a file path
+#' Create a File Path
 #'
 #' Create a file path, creating the indicated directory if it does not yet exist.
 #'
@@ -43,8 +43,8 @@
 #' An error is thrown if the attempt to create a file path fails. A warning is
 #' issued if the file already [exists][fs::is_file()], see `Details`.
 #'
-#' @inheritSection create_dir Side effects
-#' @inheritSection checkinput::is_path Notes on paths
+#' @inheritSection create_dir Side Effects
+#' @inheritSection checkinput::is_path Notes on Paths
 #'
 #' @seealso
 #' [checkinput::is_path()] to check if a path is valid, with extensive
@@ -59,35 +59,46 @@
 #' # Use a temporary directory to not write in the user's directory
 #' my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 #'
-#' (create_file_path(filename = "abc.txt", format_stamp = "",
-#'                   dir = my_tempdir, add_date = TRUE))
-#' (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#'                   dir = my_tempdir, add_date = TRUE))
-#' (create_file_path(filename = "def.html", format_stamp = "",
-#'                   dir = my_tempdir, add_date = FALSE))
-#' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#'                   dir = my_tempdir, add_date = FALSE))
-#' (create_file_path(filename = "abc.txt", format_stamp = "",
-#'                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#' (create_file_path(filename = "abc.txt", format_stamp = "%d_%m_%Y",
-#'                   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#' (create_file_path(filename = "def.html", format_stamp = "",
-#'                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#' (create_file_path(filename = "def.html", format_stamp = "%d_%m_%Y",
-#'                   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
+#' (create_file_path(
+#'   filename = "abc.txt", format_stamp = "",
+#'   dir = my_tempdir, add_date = TRUE))
+#' (create_file_path(
+#'   filename = "abc.txt", format_stamp = "%d_%m_%Y",
+#'   dir = my_tempdir, add_date = TRUE))
+#' (create_file_path(
+#'   filename = "def.html", format_stamp = "",
+#'   dir = my_tempdir, add_date = FALSE))
+#' (create_file_path(
+#'   filename = "def.html", format_stamp = "%d_%m_%Y",
+#'   dir = my_tempdir, add_date = FALSE))
+#' (create_file_path(
+#'   filename = "abc.txt", format_stamp = "",
+#'   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
+#' (create_file_path(
+#'   filename = "abc.txt", format_stamp = "%d_%m_%Y",
+#'   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
+#' (create_file_path(
+#'   filename = "def.html", format_stamp = "",
+#'   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
+#' (create_file_path(
+#'   filename = "def.html", format_stamp = "%d_%m_%Y",
+#'   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
 #'
 #' # Cleaning up
 #' unlink(x = my_tempdir, recursive = TRUE)
 #' rm(my_tempdir)
 #'
 #' @export
-create_file_path <- function(filename, format_stamp = "%Y_%m_%d_%H_%M_%S",
-                             dir = fs::path(".", "output"), add_date = TRUE) {
+create_file_path <- function(filename,
+                             format_stamp = "%Y_%m_%d_%H_%M_%S",
+                             dir = fs::path(".", "output"),
+                             add_date = TRUE) {
   filename_label <- deparse1(substitute(filename))
 
   stopifnot(checkinput::is_path(filename, require_sep = FALSE),
             checkinput::is_character(format_stamp, allow_empty = TRUE),
-            checkinput::is_path(dir), checkinput::is_logical(add_date))
+            checkinput::is_path(dir),
+            checkinput::is_logical(add_date))
 
   filename_no_ext <- fs::path_ext_remove(path = filename)
   file_ext <- fs::path_ext(path = filename)
