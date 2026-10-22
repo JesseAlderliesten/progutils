@@ -11,7 +11,7 @@
 #' @param keep_underscore `TRUE` or `FALSE`: keep underscores? If `FALSE`,
 #' underscores are replaced by `replacement`, which is only apparent if a
 #' non-default `replacement` is used such that it is not an underscore, see the
-#' last `Example`.
+#' last 'Example'.
 #'
 #' @returns
 #' `x` with non-alphanumeric characters other than dots, as well as underscores
@@ -21,7 +21,7 @@
 #'
 #' @details
 #' This implementation uses the [character class][regex] `[:alnum:]` that
-#' depends on the current [locale][locales], see the `Programming Notes` in
+#' depends on the current [locale][locales], see the 'Programming Notes' in
 #' [checkinput::all_names()].
 #'
 #' @seealso

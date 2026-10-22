@@ -1,6 +1,6 @@
 #' Reorder Columns
 #'
-#' Reorder columns, warning about mismatches between columns and `new_order`.
+#' Reorder columns, [warning] about mismatches between columns and `new_order`.
 #'
 #' @param x object with at least one column. Columns should have unique,
 #' syntactically valid names, see [checkinput::all_names()].
@@ -9,7 +9,7 @@
 #'
 #' @details
 #' Column names of `x` that are missing from `new_order` are appended to
-#' `new_order`, with a warning.
+#' `new_order`, with a [warning].
 #'
 #' Values in `new_order` that are missing from column names of `x` are dropped,
 #' with a warning.

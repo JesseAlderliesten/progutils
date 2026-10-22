@@ -1,14 +1,14 @@
 #' Convert a Vector to a Character String
 #'
-#' Convert a vector to a character string while preserving names and rounding
-#' numeric values.
+#' Convert a vector to a [character string][checkinput::is_character()] while
+#' preserving names and rounding numeric values.
 #'
 #' @inheritParams wrap_text width ignore_newlines
-#' @param x vector, [factor], [NULL], or a non-dataframe [list] (unlisted
-#' through `unlist(x, use.names = TRUE)`, with a warning).
+#' @param x vector, [factor], [`NULL`], or a non-dataframe [list] (unlisted
+#' through `unlist(x, use.names = TRUE)`, with a [warning]).
 #' @param signif positive [number][checkinput::is_number()] indicating the
 #' number of [significant digits][signif()] to round numeric `x` to (see
-#' `Details`) or `Inf` to not round values.
+#' 'Details') or `Inf` to not round values.
 #' @param sep [character string][checkinput::is_character()] used to separate
 #' the [names] and the values. Ignored if `x` does not have names.
 #' @param collapse [character string][checkinput::is_character()] to collapse
@@ -16,7 +16,7 @@
 #' element of a character vector.
 #' @param round_type [character string][checkinput::is_character()]
 #' `"selective"`, `"expanded"`, or `"signif"` indicating the type of rounding to
-#' be used, see `Details`.
+#' be used, see 'Details'.
 #'
 #' @details
 #' Some values are handled specially to better distinguish different values than
@@ -32,7 +32,7 @@
 #'   for [factors][factor] this is `"NA_character_"` because `vect_to_char()`
 #'   converts factors to characters).
 #'
-#' Numeric values are not rounded if `digits` is [Inf]. Otherwise, numeric
+#' Numeric values are not rounded if `digits` is [`Inf`]. Otherwise, numeric
 #' values are rounded to **at least** `digits` [significant digits][signif()]
 #' while ensuring their integer parts are unrounded if `round_type` is
 #' `"selective"` or `"expanded"`, or to **exactly** `digits` significant digits
@@ -44,12 +44,12 @@
 #' with values of numeric `x` rounded to `signif` [significant][signif()]
 #' digits, wrapped to `width` characters.
 #'
-#' If `collapse` is [NULL], a [character vector][checkinput::all_characters()]
+#' If `collapse` is [`NULL`], a [character vector][checkinput::all_characters()]
 #' with the same elements as `x` is returned, wrapping on a per-element basis.
 #' If `collapse` is not `NULL`, the name-value pairs are separated by
 #' `collapse`, thus returning a [character string][checkinput::is_character()].
 #'
-#' See `Details` on the handling of some special values.
+#' See 'Details' on the handling of some special values.
 #'
 #' @section Programming Notes:
 #' To get a cross-tabulation of `x` into a character string, one can use

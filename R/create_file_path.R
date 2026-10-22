@@ -8,9 +8,9 @@
 #' the restrictions described in [checkinput::is_path()].
 #' @param format_stamp [character string][checkinput::is_character()] indicating
 #' the [format][strftime()] of the stamp to be added in front of the file name.
-#' No stamp is added if `format_stamp` is an empty string (i.e., `""`). The
-#' formatted stamp is treated as part of the filename, such that the same
-#' restrictions apply to `format_stamp` as to `filename`, see `Details`.
+#' No stamp is added if `format_stamp` is an empty string (`""`). The formatted
+#' stamp is treated as part of the filename, such that the same restrictions
+#' apply to `format_stamp` as to `filename`, see 'Details'.
 #'
 #' @details
 #' `filename` **should** contain a file extension (i.e., a dot followed by any
@@ -19,9 +19,9 @@
 #'
 #' The path in `dir` is interpreted as a **relative** path to the directory that
 #' should be created, starting from the [working directory][getwd()], see the
-#' section `Notes on paths` below.
+#' section 'Notes on Paths' below.
 #'
-#' A warning is issued if the **file** indicated by the returned path already
+#' A [warning] is issued if the **file** indicated by the returned path already
 #' exists. To prevent this when creating files in quick succession, use `"%OSn"`
 #' as part of `format_stamp` to create precise stamps by truncating seconds to
 #' `0 <= n <= 6` decimal places, see [strftime()] for details.
@@ -33,15 +33,16 @@
 #' Calls where date **nor** time stamps are added (i.e, using
 #' `format_stamp = ""` and `add_date = FALSE`) can be replaced by
 #' `fs::path(fs::dir_create(path = "<dir>"), "<filename>")` to **not** get a
-#' warning if the file already [exists][fs::is_file()].
+#' [warning] if the file already [exists][fs::is_file()].
 #'
 #' @returns
 #' A character string with the created [absolute normalized][fs::path_abs()]
-#' path, returned [invisibly][invisible()], see the section `Notes on paths`
+#' path, returned [invisibly][invisible()], see the section 'Notes on Paths'
 #' below.
 #'
-#' An error is thrown if the attempt to create a file path fails. A warning is
-#' issued if the file already [exists][fs::is_file()], see `Details`.
+#' An [error][stop()] is thrown if the attempt to create a file path fails. A
+#' [warning] is issued if the file already [exists][fs::is_file()], see
+#' 'Details'.
 #'
 #' @inheritSection create_dir Side Effects
 #' @inheritSection checkinput::is_path Notes on Paths

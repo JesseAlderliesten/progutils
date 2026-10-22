@@ -1,6 +1,6 @@
 #' Reorder Factor Levels
 #'
-#' Reorder columns, warning about mismatches between factor levels and
+#' Reorder columns, [warning] about mismatches between factor levels and
 #' `new_order`.
 #'
 #' @param x [factor] with [levels] to be reordered to `new_order`, or a
@@ -8,7 +8,7 @@
 #' with levels ordered as `new_order`. Should have length larger than zero.
 #' @param new_order [character vector][checkinput::all_characters()] with a
 #' length larger than zero containing [unique] [levels] giving the desired
-#' order, or [NULL] to sort levels on increasing numerical value.
+#' order, or [`NULL`] to sort levels on increasing numerical value.
 #' @param warn_drop_order `TRUE` or `FALSE`: warn if values of `new_order` are
 #' dropped because they are not present in `x`?
 #'
@@ -18,7 +18,7 @@
 #'
 #' Values of factor `x` that are not present in its levels are added to its
 #' levels, and levels that are not present in its values are dropped, both with
-#' a warning.
+#' a [warning].
 #'
 #' Levels of `x` that are missing from `new_order` are appended to `new_order`,
 #' with a warning. Values of `new_order` that are missing from levels of `x` are
@@ -34,7 +34,7 @@
 #' @section Notes:
 #' Reordering levels of factor `f` by replacing levels through code like
 #' `levels(f) <- levels(f)[<some order>]` or through assigning a named list does
-#' **not** work because it also changes the values, see the last `Example`.
+#' **not** work because it also changes the values, see the last 'Example'.
 #'
 #' @seealso
 #' the examples in [levels()] on combining levels, [stats::relevel()] to assign

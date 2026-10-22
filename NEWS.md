@@ -1,12 +1,12 @@
 # progutils 1.0.1
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `1.5.0` to `1.5.1` to
-  be able to inherit sections with capitalized titles.
+- Dependency **checkinput**: increase minimum version from 1.5.0 to 1.5.1 to be
+  able to inherit sections with capitalized titles.
 
 ### Documentation
 - Make layout more uniform.
-- Wrap lines in `Usage` and `Example` sections to 65 characters.
+- Wrap lines in 'Usage' and 'Example' sections to 65 characters.
 - Capitalize function titles.
 - Avoid markup in section titles.
 
@@ -21,8 +21,8 @@
 # progutils 0.17.0
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `1.4.0` to `1.5.0` to
-  be able to inherit updates to section `Note on paths` from
+- Dependency **checkinput**: increase minimum version from 1.4.0 to 1.5.0 to be
+  able to inherit updates to section 'Note on paths' from
   `checkinput::is_path()`.
 - Some warning messages changed: `checkinput::is_character(<path>)` is already
   checked in `checkinput::is_path(<path>)`.
@@ -30,26 +30,27 @@
 ### Documentation
 - Clarify that `dir` is considered relative to the working directory instead of
   an absolute path.
-- Inherit section `Note on paths` from `checkinput::is_path()` when appropriate.
+- Inherit section 'Note on paths' from `checkinput::is_path()` when appropriate.
 - Stylistic updates to documentation, including added cross-references.
 
 
 # progutils 0.16.0
 
 ### Breaking changes
-- Dependency on `R >= 4.0.0` to be able to use `deparse1(substitute(x))` to get
-  the correct argument names when one function calls another function.
+- Dependency on **R** with minimum version 4.0.0 to be able to use
+  `deparse1(substitute(x))` to get the correct argument names when one function
+  calls another function.
 
 ### New features
 - `check_case()` gains argument `y` to check for values that only differ in
   their case between two vectors. Output is no longer sorted, making it
-  independent of the used `locale`.
+  independent of the used locale.
 - `not_in()`: add argument `ignore_case` to make matching case-insensitive and
   argument `warn_case` to warn about values that would be absent when using
   case-sensitive matching.
 
 ### Documentation
-- Version of `roxygen2` bumped to 8.1.1.
+- Version of **roxygen2** bumped to 8.1.1.
 
 
 # progutils 0.15.1
@@ -65,8 +66,8 @@
   numerical value.
 - `vect_to_char()` uses `signif_custom()` instead of `signif()`, ensuring that
   at least the integer part of numbers is displayed completely.
-- Dependency `checkinput`: increase minimum version from `1.3.0` to `1.4.0` to
-  use stricter argument checking for `all_numbers()`, `is_number()` and related
+- Dependency **checkinput**: increase minimum version from 1.3.0 to 1.4.0 to use
+  stricter argument checking for `all_numbers()`, `is_number()` and related
   functions.
 
 ### New functions
@@ -76,14 +77,14 @@
   not rounded.
 
 ### Miscellaneous
-- The used version of `roxygen2` increased from `8.0.0` to `8.1.0`.
+- The used version of **roxygen2** increased from 8.0.0 to 8.1.0.
 
 
 # progutils 0.14.0
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `1.0.0` to `1.3.0` to
-  be able to use argument `collapse` of `paste_quoted()`.
+- Dependency **checkinput**: increase minimum version from 1.0.0 to 1.3.0 to be
+  able to use argument `collapse` of `paste_quoted()`.
 - `get_file_path()`: use argument `collapse` of `paste_quoted()` to separate the
   quoted file paths by newlines instead of by commas.
 
@@ -101,10 +102,10 @@
 
 ### Breaking changes
 - `create_tempdir()`: rename argument `pattern` to `prefix`.
-- Dependency `fs`: require minimum version of `1.3.0` to use argument `recurse`.
-- Remove suggested dependency `tools` that has been obsolete since replacing
+- Dependency **fs**: require minimum version of 1.3.0 to use argument `recurse`.
+- Remove suggested dependency **tools** that has been obsolete since replacing
   `file_path_no_ext()` by `fs::path_ext_remove()` and `file_path_ext()` by
-  `fs::path_ext()` in `progutils 0.3.0`.
+  `fs::path_ext()` in **progutils** 0.3.0.
 
 
 # progutils 0.11.0
@@ -128,10 +129,10 @@
 ### Documentation
 - `signal_text()`: document and show example how to make `text` available for
   further queries.
-- Update grouping of functions in the `See Also` sections and in the package
+- Update grouping of functions in the 'See Also' sections and in the package
   index on the website, adding the re-exported function `paste_quoted()`.
 - Apply a few more stylistic suggestions provided by various packages like
-  `goodpractice` that check code sanity.
+  **goodpractice** that check code sanity.
 
 
 # progutils 0.10.0
@@ -140,7 +141,7 @@
 - Fix pattern used to detect backslashes in `pattern`.
 
 ### Documentation
-- Apply stylistic suggestions provided by various packages like `goodpractice`
+- Apply stylistic suggestions provided by various packages like **goodpractice**
   that check code sanity.
 
 
@@ -156,14 +157,14 @@
 # progutils 0.8.0
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `0.12.0` to `1.0.0` to
+- Dependency **checkinput**: increase minimum version from 0.12.0 to 1.0.0 to
   depend on a stable version.
 
 
 # progutils 0.7.0
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `0.11.0` to `0.12.0` to
+- Dependency **checkinput**: increase minimum version from 0.11.0 to 0.12.0 to
   use argument `require_sep` from `is_path()` in `create_file_path()` and in
   `create_tempdir()`.
 
@@ -171,14 +172,14 @@
 # progutils 0.6.0
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `0.10.0` to `0.11.0` to
+- Dependency **checkinput**: increase minimum version from 0.10.0 to 0.11.0 to
   incorporate change of argument name `allow_zero_length` to `allow_zerolength`.
 
 
 # progutils 0.5.1
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `0.9.0` to `0.10.0` to
+- Dependency **checkinput**: increase minimum version from 0.9.0 to 0.10.0 to
   incorporate bugfix: `is_path("C:")` would warn that `filename` should not
   contain `:`.
 
@@ -204,7 +205,7 @@
 # progutils 0.4.0
 
 ### Breaking changes
-- `is_path()`: move to package `checkinput`. Rename argument `path` to `x`.
+- `is_path()`: move to package **checkinput**. Rename argument `path` to `x`.
   Adjusted to warn and return `FALSE` instead of throwing an error if `path` is
   not a valid path. Not allow filenames to start with a hyphen. Not warn about
   duplicated file separators or pointing to `tempdir()`.
@@ -213,7 +214,7 @@
 # progutils 0.3.0
 
 ### Breaking changes
-- Added dependency `fs` to `Imports`.
+- Added dependency **fs** to `Imports`.
 - `create_file_path()`: no longer replace non-alphanumeric characters in the
   filename because reconstituting the filename is brittle.
 - Replace `file_path_no_ext()` by `fs::path_ext_remove()` and `file_path_ext()`  
@@ -230,14 +231,14 @@
 # progutils 0.2.0
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `0.7.0` to `0.8.0` to
+- Dependency **checkinput**: increase minimum version from 0.7.0 to 0.8.0 to
   update argument name `allow_zero` to `allow_zero_length`.
 
 
 # progutils 0.1.0
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `0.6.0` to `0.7.0` to
+- Dependency **checkinput**: increase minimum version from 0.6.0 to 0.7.0 to
   have the new default `all = FALSE` instead of `all = TRUE` in `make_natural()`.
 
 
@@ -278,10 +279,10 @@
 # progutils 0.0.9
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `0.5.0` to `0.6.0`,
+- Dependency **checkinput**: increase minimum version from 0.5.0 to 0.6.0,
   needed to use re-exported `paste_quoted()`.
-- `progutils::paste_quoted()`: move to `checkinput` and re-export it to
-  `progutils`.
+- `progutils::paste_quoted()`: move to **checkinput** and re-export it to
+  **progutils**.
 
 ### Added functions
 - Add function `create_tempdir()` to create a temporary directory that can
@@ -292,7 +293,7 @@
 
 ### Breaking changes
 - Removed unused `check_os_is_windows()`.
-- Use `roxygen2` version 8.0.0.
+- Use **roxygen2** version 8.0.0.
 - `not_in()`: `x` and `table` have to be a vector or factor (as was always
   documented) to prevent returning `x` if `x` or `table` is a `list`.
 
@@ -316,11 +317,11 @@
 # progutils 0.0.6
 
 ### Breaking changes
-- Dependency `checkinput`: increase minimum version from `0.1.0` to `0.5.0`.
-  This increases the minimum version of `R` to `4.1.0` but removes the
-  dependency on `vctrs`.
-- Dependency `tinytest`: declare version `>= 1.4.1` because argument `strict`
-  is used in `expect_message()` and `expect_warning()`.
+- Dependency **checkinput**: increase minimum version from 0.1.0 to 0.5.0. This
+  increases the minimum version of **R** to 4.1.0 but removes the dependency on
+  **vctrs**.
+- Dependency **tinytest**: declare minimum version 1.4.1 because argument
+  `strict` is used in `expect_message()` and `expect_warning()`.
 - `create_dir()`: `dir` ending in `\.` now is, as was documented, an error
   instead of silently denoting the working directory. Hardcode newlines instead
   of using `wrap_text()` makes it easier to test warnings.
@@ -349,9 +350,9 @@
 # progutils 0.0.3
 
 ### Breaking changes
-- `checkinput`: increased minimum version to `0.1.0`.
-- Add dependencies `stats` and `tools` to `Suggests` because they are linked to
-  in help pages.
+- **checkinput**: increased minimum version to 0.1.0.
+- Add dependencies **stats** and **tools** to `Suggests` because they are linked
+  to in help pages.
 - No longer import `methods::formalArgs()`.
 - `create_dir()`: show the warnings if creating a directory fails.
 - `create_dir()`: use `winslash = "/"` instead of `winslash = "\\"` to normalise

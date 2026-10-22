@@ -15,16 +15,15 @@ vect_to_char(
 )
 }
 \arguments{
-\item{x}{vector, \link{factor}, \link{NULL}, or a non-dataframe \link{list} (unlisted
-through \code{unlist(x, use.names = TRUE)}, with a warning).}
+\item{x}{vector, \link{factor}, \code{\link{NULL}}, or a non-dataframe \link{list} (unlisted
+through \code{unlist(x, use.names = TRUE)}, with a \link{warning}).}
 
 \item{signif}{positive \link[checkinput:is_number]{number} indicating the
 number of \link[=signif]{significant digits} to round numeric \code{x} to (see
-\code{Details}) or \code{Inf} to not round values.}
+'Details') or \code{Inf} to not round values.}
 
 \item{width}{\link[checkinput:is_natural]{natural number} giving the maximum
-line width (in characters)
-after wrapping. Can be \code{Inf} to not wrap text.}
+number of characters at a line after wrapping. Can be \code{Inf} to not wrap text.}
 
 \item{sep}{\link[checkinput:is_character]{character string} used to separate
 the \link{names} and the values. Ignored if \code{x} does not have names.}
@@ -38,23 +37,23 @@ by blank characters?}
 
 \item{round_type}{\link[checkinput:is_character]{character string}
 \code{"selective"}, \code{"expanded"}, or \code{"signif"} indicating the type of rounding to
-be used, see \code{Details}.}
+be used, see 'Details'.}
 }
 \value{
 A character vector or character string with the \link{names} and values in \code{x},
 with values of numeric \code{x} rounded to \code{signif} \link[=signif]{significant}
 digits, wrapped to \code{width} characters.
 
-If \code{collapse} is \link{NULL}, a \link[checkinput:all_characters]{character vector}
+If \code{collapse} is \code{\link{NULL}}, a \link[checkinput:all_characters]{character vector}
 with the same elements as \code{x} is returned, wrapping on a per-element basis.
 If \code{collapse} is not \code{NULL}, the name-value pairs are separated by
 \code{collapse}, thus returning a \link[checkinput:is_character]{character string}.
 
-See \code{Details} on the handling of some special values.
+See 'Details' on the handling of some special values.
 }
 \description{
-Convert a vector to a character string while preserving names and rounding
-numeric values.
+Convert a vector to a \link[checkinput:is_character]{character string} while
+preserving names and rounding numeric values.
 }
 \details{
 Some values are handled specially to better distinguish different values than
@@ -71,7 +70,7 @@ for \link[=factor]{factors} this is \code{"NA_character_"} because \code{vect_to
 converts factors to characters).
 }
 
-Numeric values are not rounded if \code{digits} is \link{Inf}. Otherwise, numeric
+Numeric values are not rounded if \code{digits} is \code{\link{Inf}}. Otherwise, numeric
 values are rounded to \strong{at least} \code{digits} \link[=signif]{significant digits}
 while ensuring their integer parts are unrounded if \code{round_type} is
 \code{"selective"} or \code{"expanded"}, or to \strong{exactly} \code{digits} significant digits

@@ -4,30 +4,30 @@
 #' numeric errors to make `are_equal()` safer than [`==`][Comparison].
 #'
 #' @param x,y Numeric vectors with length larger than zero to compare for
-#' equality. They may contain [NA]s or [NaN]s, see `Value`.
+#' equality. They may contain [`NA`]s or [`NaN`]s, see 'Value'.
 #' @inheritParams checkinput::is_natural tol
 #'
 #' @details
 #' `are_equal()` allows for small numeric errors when comparing numbers. Such
 #' numeric errors can arise because of rounding or representation error. As the
-#' `Note` at [`==`] warns, `x == round(x)` does **not** allow for such errors
+#' 'Note' at [`==`] warns, `x == round(x)` does **not** allow for such errors
 #' but tests exact equality.
 #'
 #' @returns A vector with logical values (`TRUE`, `FALSE` or `NA`) indicating if
-#' elements in `x` and `y` are equal to each other. [NA] is returned for
+#' elements in `x` and `y` are equal to each other. [`NA`] is returned for
 #' comparisons involving numeric `NA` (i.e., `NA_integer_` or `NA_real_`),
-#' [NaN], or [infinite values][Inf] with the same sign.
+#' [`NaN`], or [infinite values][Inf] with the same sign.
 #'
 #' @section Acknowledgement:
 #' Code `abs(x - y) < tol` was taken from
-#' [`dplyr::near()`](https://dplyr.tidyverse.org/reference/near.html).
+#' [dplyr::near()](https://dplyr.tidyverse.org/reference/near.html).
 #'
 #' @seealso
 #' [checkinput::is_natural()] to check for element-wise near-equality to natural
 #' numbers; [all.equal()] to check more generally for near-equality;
 #' [identical()], [not_in()] and [match()] (containing `%in%` and, from \R
 #' `4.6.0` onwards, `'%notin%'`) to check for exact (in)equality, with
-#' [`Comparison`] to do so using binary operators;
+#' [Comparison] to do so using binary operators;
 #' [\R FAQ 7.31](
 #' https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
 #' for background on numerical equality;

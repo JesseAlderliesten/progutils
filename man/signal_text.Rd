@@ -34,14 +34,14 @@ Signal a text to the user through an error, warning, or message.
 \details{
 \code{text} is coerced to a character vector using \code{\link[=vect_to_char]{vect_to_char()}}, which treats
 zero-length input and input with length larger than one better than
-\code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}, see the \code{Examples}. Call
+\code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}, see the 'Examples'. Call
 \code{\link[=vect_to_char]{vect_to_char()}} beforehand on \code{text} for finer control of rounding and
-wrapping of text, see the \code{Examples}.
+wrapping of text, see the 'Examples'.
 
 \code{text} is signalled through an \link[=stop]{error}, \link{warning}, \link{message}, or
 quietly, depending on argument \code{signal}. To make \code{text} available for further
 queries when using \code{signal_text()} in another function, add the content of
-the signal as an attribute to the returned object, see the last \code{Example}.
+the signal as an attribute to the returned object, see the last 'Example'.
 }
 \examples{
 test_text <- c("Some text", "Some other text")

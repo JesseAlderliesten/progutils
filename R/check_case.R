@@ -4,7 +4,7 @@
 #'
 #' @inheritParams signal_text signal
 #' @param x,y [character vectors][checkinput::all_characters()] to check, see
-#' `Value`.
+#' 'Value'.
 #' @param signal_within as `signal` but indicating the type of
 #' [signal][signal_text()] to be used if values within `x` or within `y` differ
 #' only in their case.
@@ -17,11 +17,11 @@
 #' If `y` is **not** `NULL`: values in `x` that only differ from values in `y`
 #' in their case. Such values lead to a [signal][signal_text()] as indicated by
 #' argument `signal`. Values within `x` or within `y` only differ in their case
-#' lead to a [signal][signal_text()] as indicated by argument `signal_within`.
+#' lead to a signal as indicated by argument `signal_within`.
 #'
 #' If `y` is `NULL`: values in `x` that only differ from other values in `x` in
-#' their case. Such values lead to a [signal][signal_text()] as indicated by
-#' argument `signal_within`.
+#' their case. Such values lead to a signal as indicated by argument
+#' `signal_within`.
 #'
 #' @seealso
 #' [tolower()] and [toupper()] to change case.

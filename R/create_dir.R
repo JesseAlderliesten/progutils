@@ -3,27 +3,27 @@
 #' Create a directory if it does not yet exist.
 #'
 #' @param dir [character string][checkinput::is_character()] containing a
-#' [valid path][checkinput::is_path()], see `Details` and the section
-#' `Notes on Paths` below.
+#' [valid path][checkinput::is_path()], see 'Details' and the section
+#' 'Notes on Paths' below.
 #' @param add_date `TRUE` or `FALSE`: create a subdirectory in `dir` with the
 #' current date in the [format][strftime()] `YYYY_mm_dd`?
 #'
 #' @details
 #' The path in `dir` is interpreted as a **relative** path to the directory that
 #' should be created, starting from the [working directory][getwd()], see the
-#' section `Notes on Paths` below.
+#' section 'Notes on Paths' below.
 #'
 #' @returns
 #' A character string with the [absolute normalised][fs::path_abs()] path to the
 #' requested directory, returned [invisibly][invisible], see the section
-#' `Notes on Paths` and the `Examples` below.
+#' 'Notes on Paths' and the 'Examples' below.
 #'
 #' By default a subdirectory with the current date in the [format][strftime()]
 #' `YYYY_mm_dd` is created in directory `output` below the
 #' [working directory][getwd()].
 #'
-#' An error is thrown if the attempt to create a directory fails, for example
-#' because `dir` points to an existing file instead of to an directory.
+#' An [error][stop()] is thrown if the attempt to create a directory fails, for
+#' example because `dir` points to an existing file instead of to an directory.
 #'
 #' @section Side Effects:
 #' The directory indicated by the returned path is [created][fs::dir_create()]

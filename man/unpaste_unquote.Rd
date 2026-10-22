@@ -23,8 +23,8 @@ any quotation marks.}
 string in \code{collapse}.
 }
 \description{
-Split a character string into a vector and remove quotation marks, to undo
-\code{paste_quoted()} (but see \code{Details}).
+Split a character string into a vector and remove quotation marks to undo
+\code{paste_quoted()} but see 'Details'.
 }
 \details{
 \code{unpaste_unquote()} does \strong{not} restore \code{NA}s or zero-length elements to

@@ -10,8 +10,7 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE, warn_length = FALSE)
 \item{x}{\link[checkinput:all_characters]{character vector} to be wrapped.}
 
 \item{width}{\link[checkinput:is_natural]{natural number} giving the maximum
-line width (in characters)
-after wrapping. Can be \code{Inf} to not wrap text.}
+number of characters at a line after wrapping. Can be \code{Inf} to not wrap text.}
 
 \item{ignore_newlines}{\code{TRUE} or \code{FALSE}: should newlines in \code{x} be replaced
 by blank characters?}
@@ -21,7 +20,7 @@ by blank characters?}
 \value{
 A \link[checkinput:is_character]{character string} containing \code{x} wrapped to a
 maximum of \code{width} characters, with newlines inserted at blank characters. A
-warning is issued if \code{warn_length} is \code{TRUE} and the width of a fragment in
+\link{warning} is issued if \code{warn_length} is \code{TRUE} and the width of a fragment in
 the output exceeds \code{width}: this occurs if a stretch of characters longer
 than \code{width} occurs without a blank character to wrap at.
 }
@@ -29,14 +28,14 @@ than \code{width} occurs without a blank character to wrap at.
 Wrap text at blank characters to achieve a maximum line width.
 }
 \details{
-\code{character(0)} input to \code{x} is returned unchanged, with a warning.
+\code{character(0)} input to \code{x} is returned unchanged, with a \link{warning}.
 
 \code{x} of length larger than one is pasted into a single string, separating the
 parts by blank characters.
 
 Consecutive white space is collapsed into a single blank character, except
-for double spaces after periods, question marks and exclamation marks (as
-documented in the section \code{Details} of \code{\link[=strwrap]{strwrap()}}).
+for double spaces after periods, question marks and exclamation marks, as
+documented in the section 'Details' of \code{\link[=strwrap]{strwrap()}}.
 
 Leading and trailing newlines are collapsed into a single blank character if
 \code{ignore_newlines} is \code{TRUE} and are retained if \code{ignore_newlines} is \code{FALSE}.

@@ -19,7 +19,7 @@ instead of a boolean vector?}
 \item{ignore_case}{\code{TRUE} or \code{FALSE}: should case be ignored when comparing
 \code{x} and \code{table}?}
 
-\item{warn_case}{\code{TRUE} or \code{FALSE}: should a warning be issued when
+\item{warn_case}{\code{TRUE} or \code{FALSE}: should a \link{warning} be issued when
 \code{ignore_case} is \code{FALSE} and values that are considered present would be
 absent when using case-sensitive matching?}
 }
@@ -34,7 +34,7 @@ for each element in \code{x} if it is absent from \code{table}.
 Check that values from one vector are absent from another vector
 }
 \details{
-Duplicates in \code{x} are kept, in contrast to \code{\link[=setdiff]{setdiff()}}, see the \code{Examples}.
+Duplicates in \code{x} are kept, in contrast to \code{\link[=setdiff]{setdiff()}}, see the 'Examples'.
 
 \link[=factor]{Factor-input} to \code{x} is converted to character, to prevent
 returning a factor with all values of \code{x} as \link{levels}.
@@ -44,9 +44,9 @@ returns \code{logical(0)} for zero-length input to \code{x} if that is absent fr
 \code{table} if \code{value} is \code{FALSE}. If \code{value} is \code{TRUE}, the behaviour is normal:
 returning \code{x}.
 
-\link{NA} is allowed in \code{x} and \code{table} and behaves the same as other values: the
-returned \code{NA} (if \code{value} is \code{TRUE}) and the returned zero-length value (if
-\code{value} is \code{FALSE}) have the same type as the \code{NA} in \code{x} if \code{NA} is
+\code{\link{NA}} is allowed in \code{x} and \code{table} and behaves the same as other values:
+the returned \code{NA} (if \code{value} is \code{TRUE}) and the returned zero-length value
+(if \code{value} is \code{FALSE}) have the same type as the \code{NA} in \code{x} if \code{NA} is
 absent from \code{table}. \code{NA}s of different types in \code{x} and \code{table} match each
 other.
 

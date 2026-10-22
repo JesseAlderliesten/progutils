@@ -8,8 +8,8 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
 }
 \arguments{
 \item{dir}{\link[checkinput:is_character]{character string} containing a
-\link[checkinput:is_path]{valid path}, see \code{Details} and the section
-\verb{Notes on Paths} below.}
+\link[checkinput:is_path]{valid path}, see 'Details' and the section
+'Notes on Paths' below.}
 
 \item{add_date}{\code{TRUE} or \code{FALSE}: create a subdirectory in \code{dir} with the
 current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
@@ -17,14 +17,14 @@ current date in the \link[=strftime]{format} \code{YYYY_mm_dd}?}
 \value{
 A character string with the \link[fs:path_abs]{absolute normalised} path to the
 requested directory, returned \link[=invisible]{invisibly}, see the section
-\verb{Notes on Paths} and the \code{Examples} below.
+'Notes on Paths' and the 'Examples' below.
 
 By default a subdirectory with the current date in the \link[=strftime]{format}
 \code{YYYY_mm_dd} is created in directory \code{output} below the
 \link[=getwd]{working directory}.
 
-An error is thrown if the attempt to create a directory fails, for example
-because \code{dir} points to an existing file instead of to an directory.
+An \link[=stop]{error} is thrown if the attempt to create a directory fails, for
+example because \code{dir} points to an existing file instead of to an directory.
 }
 \description{
 Create a directory if it does not yet exist.
@@ -32,7 +32,7 @@ Create a directory if it does not yet exist.
 \details{
 The path in \code{dir} is interpreted as a \strong{relative} path to the directory that
 should be created, starting from the \link[=getwd]{working directory}, see the
-section \verb{Notes on Paths} below.
+section 'Notes on Paths' below.
 }
 \section{Side Effects}{
 
@@ -45,11 +45,11 @@ if it does not yet \link[fs:dir_exists]{exist}.
 
 The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
 on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\link[fs:path]{fs::path()}} to construct
-paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
+paths in a platform-independent way and \code{\link[=.Platform]{.Platform$file.sep}} to
 get the file separator used on the current platform.
 
-Furthermore, the backslash is also used as \link[=regex]{escape character} in \R,
-such that backslashes need to be escaped in \R code by doubling them. Use
+Furthermore, the backslash is also used as an \link[=regex]{escape character} in
+\R, such that backslashes need to be escaped in \R code by doubling them. Use
 \code{cat(x)} to omit the escape characters to see how \code{x} would be printed.
 
 The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
@@ -57,8 +57,8 @@ the parent directory can be indicated by two dots (\code{".."}).
 
 \strong{relative} paths start from the \link[=getwd]{working directory}. In contrast,
 \strong{absolute} paths start from the root directory and thus give the complete
-path, such that the path still points to the same directory if the
-\link[=getwd]{working directory} changes.
+path, such that the path still points to the same directory if the working
+directory changes.
 
 Paths can be normalised, e.g., through \code{\link[=normalizePath]{normalizePath()}} or \code{\link[fs:path_norm]{fs::path_norm()}}
 (which is also called by \code{\link[fs:path_abs]{fs::path_abs()}}). On case-insensitive file systems,

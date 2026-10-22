@@ -5,20 +5,20 @@
 #' @param x [character][character] vector with values to be replaced, or
 #' [factor] with [levels] to be replaced.
 #' @param old character vector with values to be replaced. Should be [unique]
-#' and not contain the value in `new`, otherwise an error is thrown.
+#' and not contain the value in `new`, otherwise an [error][stop()] is thrown.
 #' @param new character string with the new value.
-#' @param ignore_case `TRUE` or `FALSE`: ignore [case][tolower()] when looking for
-#' `old`? See `Details`.
+#' @param ignore_case `TRUE` or `FALSE`: ignore [case][tolower()] when looking
+#' for `old`? See 'Details'.
 #' @param allow_multiple `TRUE` or `FALSE`: allow multiple values of `old` to
-#' match `x`? See `Details`.
+#' match `x`? See 'Details'.
 #' @param warn_absent `TRUE` or `FALSE`: warn if neither `old` nor `new` is
 #' found in `x`? It is silently assumed replacement is **not** necessary anymore
 #' if `new` is found in `x`.
 #' @param signal_case_old,signal_case_new `"error"`, `"warning"`, `"message"`,
 #' or `"quiet"`: character string indicating the type of [signal][signal_text()]
-#' to give if values in `x` are a case-insensitive match but not a case-sensitive
-#' match to `old` or `new`, respectively. For `signal_case_old`, this is also
-#' influenced by argument `signal_old_ignore_case`.
+#' to give if values in `x` are a case-insensitive match but not a
+#' case-sensitive match to `old` or `new`, respectively. For `signal_case_old`,
+#' this is also influenced by argument `signal_old_ignore_case`.
 #' @param signal_old_ignore_case `TRUE` or `FALSE`: use `signal_case_old` if
 #' `ignore_case` is `TRUE`? If `FALSE`, no signal is emitted if `ignore_case` is
 #' `TRUE`.
@@ -30,16 +30,16 @@
 #' **not** adjusted, but lead to a [signal][signal_text()] as indicated by
 #' argument `signal_case_new`.
 #'
-#' An error is thrown if `allow_multiple` is `FALSE` and multiple values of
-#' `old` match `x`, unless those values of `old` only differ in their case and
-#' `ignore_case` is `TRUE`. An example of such an exception is
+#' An [error][stop()] is thrown if `allow_multiple` is `FALSE` and multiple
+#' values of `old` match `x`, unless those values of `old` only differ in their
+#' case and `ignore_case` is `TRUE`. An example of such an exception is
 #' `replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)`,
 #' which returns `c("b", "b")`.
 #'
 #' If `quiet` is `FALSE`, a message indicates which values have been replaced.
 #' The used order in the message is determined by the order of the factor
 #' **levels**, which is influenced by the [locale][locales] at the time of their
-#' creation, see the `Warning` in [factor()] and the `Programming Notes` in
+#' creation, see the 'Warning' in [factor()] and the 'Programming Notes' in
 #' [checkinput::all_names()].
 #'
 #' `replace_vals()` does **not** allow input of [type][typeof] `double` because

@@ -13,7 +13,7 @@ check_case(
 }
 \arguments{
 \item{x, y}{\link[checkinput:all_characters]{character vectors} to check, see
-\code{Value}.}
+'Value'.}
 
 \item{signal}{\link[checkinput:is_character]{character string} indicating the
 type of signal to be used:
@@ -32,11 +32,11 @@ no such values are present, returned \link[=invisible]{invisibly}.
 If \code{y} is \strong{not} \code{NULL}: values in \code{x} that only differ from values in \code{y}
 in their case. Such values lead to a \link[=signal_text]{signal} as indicated by
 argument \code{signal}. Values within \code{x} or within \code{y} only differ in their case
-lead to a \link[=signal_text]{signal} as indicated by argument \code{signal_within}.
+lead to a signal as indicated by argument \code{signal_within}.
 
 If \code{y} is \code{NULL}: values in \code{x} that only differ from other values in \code{x} in
-their case. Such values lead to a \link[=signal_text]{signal} as indicated by
-argument \code{signal_within}.
+their case. Such values lead to a signal as indicated by argument
+\code{signal_within}.
 }
 \description{
 Signal the presence of values that differ only in their case.

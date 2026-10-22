@@ -4,21 +4,20 @@
 #'
 #' @param x [character vector][checkinput::all_characters()] to be wrapped.
 #' @param width [natural number][checkinput::is_natural()] giving the maximum
-#' line width (in characters)
-#' after wrapping. Can be `Inf` to not wrap text.
+#' number of characters at a line after wrapping. Can be `Inf` to not wrap text.
 #' @param ignore_newlines `TRUE` or `FALSE`: should newlines in `x` be replaced
 #' by blank characters?
 #' @param warn_length `TRUE` or `FALSE`: warn if a fragment exceeds `width`?
 #'
 #' @details
-#' `character(0)` input to `x` is returned unchanged, with a warning.
+#' `character(0)` input to `x` is returned unchanged, with a [warning].
 #'
 #' `x` of length larger than one is pasted into a single string, separating the
 #' parts by blank characters.
 #'
 #' Consecutive white space is collapsed into a single blank character, except
-#' for double spaces after periods, question marks and exclamation marks (as
-#' documented in the section `Details` of [strwrap()]).
+#' for double spaces after periods, question marks and exclamation marks, as
+#' documented in the section 'Details' of [strwrap()].
 #'
 #' Leading and trailing newlines are collapsed into a single blank character if
 #' `ignore_newlines` is `TRUE` and are retained if `ignore_newlines` is `FALSE`.
@@ -26,7 +25,7 @@
 #' @returns
 #' A [character string][checkinput::is_character()] containing `x` wrapped to a
 #' maximum of `width` characters, with newlines inserted at blank characters. A
-#' warning is issued if `warn_length` is `TRUE` and the width of a fragment in
+#' [warning] is issued if `warn_length` is `TRUE` and the width of a fragment in
 #' the output exceeds `width`: this occurs if a stretch of characters longer
 #' than `width` occurs without a blank character to wrap at.
 #'

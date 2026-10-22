@@ -10,12 +10,12 @@
 #' instead of a boolean vector?
 #' @param ignore_case `TRUE` or `FALSE`: should case be ignored when comparing
 #' `x` and `table`?
-#' @param warn_case `TRUE` or `FALSE`: should a warning be issued when
+#' @param warn_case `TRUE` or `FALSE`: should a [warning] be issued when
 #' `ignore_case` is `FALSE` and values that are considered present would be
 #' absent when using case-sensitive matching?
 #'
 #' @details
-#' Duplicates in `x` are kept, in contrast to [setdiff()], see the `Examples`.
+#' Duplicates in `x` are kept, in contrast to [setdiff()], see the 'Examples'.
 #'
 #' [Factor-input][factor()] to `x` is converted to character, to prevent
 #' returning a factor with all values of `x` as [levels].
@@ -25,9 +25,9 @@
 #' `table` if `value` is `FALSE`. If `value` is `TRUE`, the behaviour is normal:
 #' returning `x`.
 #'
-#' [NA] is allowed in `x` and `table` and behaves the same as other values: the
-#' returned `NA` (if `value` is `TRUE`) and the returned zero-length value (if
-#' `value` is `FALSE`) have the same type as the `NA` in `x` if `NA` is
+#' [`NA`] is allowed in `x` and `table` and behaves the same as other values:
+#' the returned `NA` (if `value` is `TRUE`) and the returned zero-length value
+#' (if `value` is `FALSE`) have the same type as the `NA` in `x` if `NA` is
 #' absent from `table`. `NA`s of different types in `x` and `table` match each
 #' other.
 #'

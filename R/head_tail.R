@@ -1,8 +1,8 @@
-#' Show First and Last Part of an Object
+#' Get the First and Last Part of an Object
 #'
 #' @param x object of which the first and last part should be returned.
-#' @param n [natural][checkinput::make_natural] number (default `3L`) indicating
-#' the number of elements or rows to return as `head` and `tail`.
+#' @param n [natural number][checkinput::make_natural] indicating the number of
+#' elements or rows to return as `head` and `tail`.
 #'
 #' @returns The `n` first and last elements or rows of `x`.
 #'
