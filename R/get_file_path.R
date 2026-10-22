@@ -16,7 +16,7 @@
 #' @details
 #' The path in `dir` is interpreted as a **relative** path to the directory
 #' where to look for a file, starting from the [working directory][getwd()],
-#' see the section `Notes on Paths` below.
+#' see the section 'Notes on Paths' below.
 #'
 #' In contrast to the default of [list.files()], `get_file_path()` includes
 #' 'hidden' files, i.e., files with names that start with a dot, but excludes
@@ -28,7 +28,7 @@
 #' directory `dir`. Use [basename()] on the result to obtain the filename
 #' itself.
 #'
-#' An error is thrown if no match, or multiple matches, are found. If
+#' An [error][stop()] is thrown if no match, or multiple matches, are found. If
 #' `ignore_case` is `FALSE`, the error message indicates if any case-insensitive
 #' match is present.
 #'

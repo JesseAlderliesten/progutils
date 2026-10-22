@@ -17,7 +17,7 @@ instead of replace non-alphanumeric characters.}
 \item{keep_underscore}{\code{TRUE} or \code{FALSE}: keep underscores? If \code{FALSE},
 underscores are replaced by \code{replacement}, which is only apparent if a
 non-default \code{replacement} is used such that it is not an underscore, see the
-last \code{Example}.}
+last 'Example'.}
 }
 \value{
 \code{x} with non-alphanumeric characters other than dots, as well as underscores
@@ -31,7 +31,7 @@ underscores as indicated by \code{keep_underscores}.
 }
 \details{
 This implementation uses the \link[=regex]{character class} \verb{[:alnum:]} that
-depends on the current \link[=locales]{locale}, see the \verb{Programming Notes} in
+depends on the current \link[=locales]{locale}, see the 'Programming Notes' in
 \code{\link[checkinput:all_names]{checkinput::all_names()}}.
 }
 \examples{

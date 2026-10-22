@@ -14,10 +14,10 @@ characters that are \link[checkinput:is_path]{valid in a path}.}
 \value{
 A character string with the \link[fs:path_abs]{absolute normalised} path to the
 created temporary directory, returned \link[=invisible]{invisibly}, see the section
-\verb{Notes on paths} below.
+'Notes on Paths' below.
 
-An error is thrown when attempting to create subdirectories (see \code{Details})
-and if creating the directory fails.
+An \link[=stop]{error} is thrown when attempting to create subdirectories (see
+'Details') and if creating the directory fails.
 }
 \description{
 Create a temporary directory that can safely be removed.
@@ -30,7 +30,7 @@ dot (\code{.}) such that the directory appears to have a file extension, see the
 section \code{Source} in \code{help("tempdir")}.
 
 It is \strong{not} possible to create recursive subdirectories (e.g.,
-\code{tempdir/subtempdir/otherdir}, see the \code{Examples}) because
+\code{tempdir/subtempdir/otherdir}, see the 'Examples') because
 \link[=unlink]{removing} such directories might remove files that are still
 needed by other processes.
 
@@ -46,9 +46,9 @@ empty the temporary directory), the created subdirectories should be
 
 \link[utils:example]{Examples} and \href{https://r-pkgs.org/testing-basics.html}{tests}
 should write to a temporary directory that is cleaned
-up afterwards (otherwise \href{https://r-pkgs.org/R-CMD-check.html}{\verb{R cmd check}}
-will issue a \code{Note} about \href{https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory}{\verb{detritus in the temp directory}}
-and CRAN will not accept your package, see section \verb{Source packages} from the
+up afterwards (otherwise \href{https://r-pkgs.org/R-CMD-check.html}{R cmd check}
+will issue a 'Note' about \href{https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory}{detritus in the temp directory}
+and CRAN will not accept your package, see section 'Source packages' from the
 \href{https://cran.r-project.org/web/packages/policies.html}{CRAN policies}).
 Although \code{\link[=tempdir]{tempdir()}} points to a temporary
 directory, that directory should \strong{not} be removed because other processes
@@ -78,11 +78,11 @@ if it does not yet \link[fs:dir_exists]{exist}.
 
 The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
 on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\link[fs:path]{fs::path()}} to construct
-paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
+paths in a platform-independent way and \code{\link[=.Platform]{.Platform$file.sep}} to
 get the file separator used on the current platform.
 
-Furthermore, the backslash is also used as \link[=regex]{escape character} in \R,
-such that backslashes need to be escaped in \R code by doubling them. Use
+Furthermore, the backslash is also used as an \link[=regex]{escape character} in
+\R, such that backslashes need to be escaped in \R code by doubling them. Use
 \code{cat(x)} to omit the escape characters to see how \code{x} would be printed.
 
 The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
@@ -90,8 +90,8 @@ the parent directory can be indicated by two dots (\code{".."}).
 
 \strong{relative} paths start from the \link[=getwd]{working directory}. In contrast,
 \strong{absolute} paths start from the root directory and thus give the complete
-path, such that the path still points to the same directory if the
-\link[=getwd]{working directory} changes.
+path, such that the path still points to the same directory if the working
+directory changes.
 
 Paths can be normalised, e.g., through \code{\link[=normalizePath]{normalizePath()}} or \code{\link[fs:path_norm]{fs::path_norm()}}
 (which is also called by \code{\link[fs:path_abs]{fs::path_abs()}}). On case-insensitive file systems,
@@ -108,8 +108,8 @@ The output of \code{\link[=tempdir]{tempdir()}} during
 successive forward slashes (e.g.,
 \verb{/var/<...>/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR}) which in earlier versions
 of \code{\link[checkinput:is_path]{is_path()}} (then in package
-\href{https://jessealderliesten.github.io/progutils/}{progutils}) led to spurious
-warnings about duplicated file separators.
+\href{https://jessealderliesten.github.io/progutils/}{\strong{progutils}}) led to
+spurious warnings about duplicated file separators.
 
 }
 

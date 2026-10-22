@@ -8,16 +8,16 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 }
 \arguments{
 \item{x, y}{Numeric vectors with length larger than zero to compare for
-equality. They may contain \link{NA}s or \link{NaN}s, see \code{Value}.}
+equality. They may contain \code{\link{NA}}s or \code{\link{NaN}}s, see 'Value'.}
 
 \item{tol}{A small \link[checkinput:is_positive]{positive} number. Numbers that differ less
 than \code{tol} are considered equal.}
 }
 \value{
 A vector with logical values (\code{TRUE}, \code{FALSE} or \code{NA}) indicating if
-elements in \code{x} and \code{y} are equal to each other. \link{NA} is returned for
+elements in \code{x} and \code{y} are equal to each other. \code{\link{NA}} is returned for
 comparisons involving numeric \code{NA} (i.e., \code{NA_integer_} or \code{NA_real_}),
-\link{NaN}, or \link[=Inf]{infinite values} with the same sign.
+\code{\link{NaN}}, or \link[=Inf]{infinite values} with the same sign.
 }
 \description{
 Check element-wise near-equality of numeric vectors while allowing for small
@@ -26,13 +26,13 @@ numeric errors to make \code{are_equal()} safer than \code{\link[=Comparison]{==
 \details{
 \code{are_equal()} allows for small numeric errors when comparing numbers. Such
 numeric errors can arise because of rounding or representation error. As the
-\code{Note} at \code{\link{==}} warns, \code{x == round(x)} does \strong{not} allow for such errors
+'Note' at \code{\link{==}} warns, \code{x == round(x)} does \strong{not} allow for such errors
 but tests exact equality.
 }
 \section{Acknowledgement}{
 
 Code \code{abs(x - y) < tol} was taken from
-\href{https://dplyr.tidyverse.org/reference/near.html}{\code{dplyr::near()}}.
+\href{https://dplyr.tidyverse.org/reference/near.html}{dplyr::near()}.
 }
 
 \examples{
@@ -51,7 +51,7 @@ are_equal(x = 3, y = c(2, 3, 3 + 1e-8, NA, Inf))
 numbers; \code{\link[=all.equal]{all.equal()}} to check more generally for near-equality;
 \code{\link[=identical]{identical()}}, \code{\link[=not_in]{not_in()}} and \code{\link[=match]{match()}} (containing \code{\%in\%} and, from \R
 \verb{4.6.0} onwards, \code{'\%notin\%'}) to check for exact (in)equality, with
-\code{\link{Comparison}} to do so using binary operators;
+\link{Comparison} to do so using binary operators;
 \href{https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f}{\R FAQ 7.31}
 for background on numerical equality;
 the vignette \emph{Type coercion} in package \code{checkinput}:

@@ -8,13 +8,13 @@ signif_custom(x, digits = 3L, type = c("selective", "expanded"))
 }
 \arguments{
 \item{x}{\link[=is.numeric]{numeric vector}, \link{matrix} or \link{data.frame}, see
-\code{Details}.}
+'Details'.}
 
 \item{digits}{the \strong{minimum} number of \link[=signif]{significant digits} to
-round to (see \code{Details}) or \code{Inf} to not round values.}
+round to (see 'Details') or \code{Inf} to not round values.}
 
 \item{type}{\link[checkinput:is_character]{character string} \code{"selective"} or
-\code{"expanded"} indicating the type of rounding to be used, see \code{Details}.}
+\code{"expanded"} indicating the type of rounding to be used, see 'Details'.}
 }
 \value{
 \code{x} with values rounded according to \code{digits} and \code{type}.
@@ -27,13 +27,13 @@ ending in rounded zeros, e.g., \code{14300} instead of \code{14286} when roundin
 }
 \details{
 \link[=Inf]{Infinite values} are returned unchanged. \code{NA_integer_} and \code{NA_real_}
-are returned as \link[=NA]{NA_real_}. \link[=matrix]{matrices} and
-\link[=data.frame]{dataframes} are handled by rounding values of numeric columns.
-\link[=is.numeric]{Non-numeric} (e.g., \link{factor}) \code{x} is \strong{not} supported, use
+are returned as \code{\link[=NA]{NA_real_}}. \link[=matrix]{matrices} and
+\link[=data.frame]{data frames} are handled by rounding values of numeric columns.
+\link[=is.numeric]{Non-numeric} (e.g., \code{\link{factor}}) \code{x} is \strong{not} supported, use
 \code{\link[=as.numeric_safe]{as.numeric_safe()}} beforehand on \code{x} if appropriate.
 
 Numeric values are rounded according to arguments \code{digits} and \code{type}. Values
-are \strong{not} rounded if \code{digits} is \link{Inf}. Otherwise, the value of \code{digits}
+are \strong{not} rounded if \code{digits} is \code{\link{Inf}}. Otherwise, the value of \code{digits}
 rounded to the nearest positive integer is used as the \strong{minimum} number of
 \link[=signif]{significant digits} to round numeric values in \code{x} to while
 ensuring their integer parts are not rounded.

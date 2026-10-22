@@ -14,7 +14,7 @@
 #' section `Source` in `help("tempdir")`.
 #'
 #' It is **not** possible to create recursive subdirectories (e.g.,
-#' `tempdir/subtempdir/otherdir`, see the `Examples`) because
+#' `tempdir/subtempdir/otherdir`, see the 'Examples') because
 #' [removing][unlink()] such directories might remove files that are still
 #' needed by other processes.
 #'
@@ -29,20 +29,20 @@
 #' @returns
 #' A character string with the [absolute normalised][fs::path_abs()] path to the
 #' created temporary directory, returned [invisibly][invisible], see the section
-#' `Notes on paths` below.
+#' 'Notes on Paths' below.
 #'
-#' An error is thrown when attempting to create subdirectories (see `Details`)
-#' and if creating the directory fails.
+#' An [error][stop()] is thrown when attempting to create subdirectories (see
+#' 'Details') and if creating the directory fails.
 #'
 #' @inheritSection create_dir Side Effects
 #'
 #' @section Usage in Practice:
 #' [Examples][utils::example()] and [tests](https://r-pkgs.org/testing-basics.html)
 #' should write to a temporary directory that is cleaned
-#' up afterwards (otherwise [`R cmd check`](https://r-pkgs.org/R-CMD-check.html)
-#' will issue a `Note` about [`detritus in the temp directory`](
+#' up afterwards (otherwise [R cmd check](https://r-pkgs.org/R-CMD-check.html)
+#' will issue a 'Note' about [detritus in the temp directory](
 #' https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)
-#' and CRAN will not accept your package, see section `Source packages` from the
+#' and CRAN will not accept your package, see section 'Source packages' from the
 #' [CRAN policies](https://cran.r-project.org/web/packages/policies.html)).
 #' Although [tempdir()] points to a temporary
 #' directory, that directory should **not** be removed because other processes

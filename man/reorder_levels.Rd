@@ -13,7 +13,7 @@ with levels ordered as \code{new_order}. Should have length larger than zero.}
 
 \item{new_order}{\link[checkinput:all_characters]{character vector} with a
 length larger than zero containing \link{unique} \link{levels} giving the desired
-order, or \link{NULL} to sort levels on increasing numerical value.}
+order, or \code{\link{NULL}} to sort levels on increasing numerical value.}
 
 \item{warn_drop_order}{\code{TRUE} or \code{FALSE}: warn if values of \code{new_order} are
 dropped because they are not present in \code{x}?}
@@ -23,7 +23,7 @@ dropped because they are not present in \code{x}?}
 \code{new_order}, dropping values in \code{new_order} that are not present in \code{x}.
 }
 \description{
-Reorder columns, warning about mismatches between factor levels and
+Reorder columns, \link{warning} about mismatches between factor levels and
 \code{new_order}.
 }
 \details{
@@ -32,7 +32,7 @@ the factor levels.
 
 Values of factor \code{x} that are not present in its levels are added to its
 levels, and levels that are not present in its values are dropped, both with
-a warning.
+a \link{warning}.
 
 Levels of \code{x} that are missing from \code{new_order} are appended to \code{new_order},
 with a warning. Values of \code{new_order} that are missing from levels of \code{x} are
@@ -45,7 +45,7 @@ converted by \code{\link[=as.numeric_safe]{as.numeric_safe()}}.
 
 Reordering levels of factor \code{f} by replacing levels through code like
 \verb{levels(f) <- levels(f)[<some order>]} or through assigning a named list does
-\strong{not} work because it also changes the values, see the last \code{Example}.
+\strong{not} work because it also changes the values, see the last 'Example'.
 }
 
 \examples{

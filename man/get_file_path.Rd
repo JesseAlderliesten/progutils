@@ -8,8 +8,8 @@ get_file_path(dir = ".", pattern, ignore_case = TRUE, quietly = FALSE)
 }
 \arguments{
 \item{dir}{\link[checkinput:is_character]{character string} containing a
-\link[checkinput:is_path]{valid path}, see \code{Details} and the section
-\verb{Notes on Paths} below.}
+\link[checkinput:is_path]{valid path}, see 'Details' and the section
+'Notes on Paths' below.}
 
 \item{pattern}{\link[checkinput:is_character]{character string} containing a
 \link[base:regex]{regular expression}
@@ -27,7 +27,7 @@ file with a name matching \code{pattern} if there is exactly one such file in
 directory \code{dir}. Use \code{\link[=basename]{basename()}} on the result to obtain the filename
 itself.
 
-An error is thrown if no match, or multiple matches, are found. If
+An \link[=stop]{error} is thrown if no match, or multiple matches, are found. If
 \code{ignore_case} is \code{FALSE}, the error message indicates if any case-insensitive
 match is present.
 }
@@ -39,7 +39,7 @@ directory has a name matching \code{pattern}, for example before attempting to
 \details{
 The path in \code{dir} is interpreted as a \strong{relative} path to the directory
 where to look for a file, starting from the \link[=getwd]{working directory},
-see the section \verb{Notes on Paths} below.
+see the section 'Notes on Paths' below.
 
 In contrast to the default of \code{\link[=list.files]{list.files()}}, \code{get_file_path()} includes
 'hidden' files, i.e., files with names that start with a dot, but excludes
@@ -50,11 +50,11 @@ directories.
 
 The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
 on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\link[fs:path]{fs::path()}} to construct
-paths in a platform-independent way and \link[=.Platform]{.Platform$file.sep} to
+paths in a platform-independent way and \code{\link[=.Platform]{.Platform$file.sep}} to
 get the file separator used on the current platform.
 
-Furthermore, the backslash is also used as \link[=regex]{escape character} in \R,
-such that backslashes need to be escaped in \R code by doubling them. Use
+Furthermore, the backslash is also used as an \link[=regex]{escape character} in
+\R, such that backslashes need to be escaped in \R code by doubling them. Use
 \code{cat(x)} to omit the escape characters to see how \code{x} would be printed.
 
 The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
@@ -62,8 +62,8 @@ the parent directory can be indicated by two dots (\code{".."}).
 
 \strong{relative} paths start from the \link[=getwd]{working directory}. In contrast,
 \strong{absolute} paths start from the root directory and thus give the complete
-path, such that the path still points to the same directory if the
-\link[=getwd]{working directory} changes.
+path, such that the path still points to the same directory if the working
+directory changes.
 
 Paths can be normalised, e.g., through \code{\link[=normalizePath]{normalizePath()}} or \code{\link[fs:path_norm]{fs::path_norm()}}
 (which is also called by \code{\link[fs:path_abs]{fs::path_abs()}}). On case-insensitive file systems,

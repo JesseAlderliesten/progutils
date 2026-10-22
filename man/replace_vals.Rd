@@ -22,15 +22,15 @@ replace_vals(
 \link{factor} with \link{levels} to be replaced.}
 
 \item{old}{character vector with values to be replaced. Should be \link{unique}
-and not contain the value in \code{new}, otherwise an error is thrown.}
+and not contain the value in \code{new}, otherwise an \link[=stop]{error} is thrown.}
 
 \item{new}{character string with the new value.}
 
-\item{ignore_case}{\code{TRUE} or \code{FALSE}: ignore \link[=tolower]{case} when looking for
-\code{old}? See \code{Details}.}
+\item{ignore_case}{\code{TRUE} or \code{FALSE}: ignore \link[=tolower]{case} when looking
+for \code{old}? See 'Details'.}
 
 \item{allow_multiple}{\code{TRUE} or \code{FALSE}: allow multiple values of \code{old} to
-match \code{x}? See \code{Details}.}
+match \code{x}? See 'Details'.}
 
 \item{warn_absent}{\code{TRUE} or \code{FALSE}: warn if neither \code{old} nor \code{new} is
 found in \code{x}? It is silently assumed replacement is \strong{not} necessary anymore
@@ -38,9 +38,9 @@ if \code{new} is found in \code{x}.}
 
 \item{signal_case_old, signal_case_new}{\code{"error"}, \code{"warning"}, \code{"message"},
 or \code{"quiet"}: character string indicating the type of \link[=signal_text]{signal}
-to give if values in \code{x} are a case-insensitive match but not a case-sensitive
-match to \code{old} or \code{new}, respectively. For \code{signal_case_old}, this is also
-influenced by argument \code{signal_old_ignore_case}.}
+to give if values in \code{x} are a case-insensitive match but not a
+case-sensitive match to \code{old} or \code{new}, respectively. For \code{signal_case_old},
+this is also influenced by argument \code{signal_old_ignore_case}.}
 
 \item{signal_old_ignore_case}{\code{TRUE} or \code{FALSE}: use \code{signal_case_old} if
 \code{ignore_case} is \code{TRUE}? If \code{FALSE}, no signal is emitted if \code{ignore_case} is
@@ -61,16 +61,16 @@ Values in \code{x} that \link[=check_case]{only differ} from \code{new} in their
 \strong{not} adjusted, but lead to a \link[=signal_text]{signal} as indicated by
 argument \code{signal_case_new}.
 
-An error is thrown if \code{allow_multiple} is \code{FALSE} and multiple values of
-\code{old} match \code{x}, unless those values of \code{old} only differ in their case and
-\code{ignore_case} is \code{TRUE}. An example of such an exception is
+An \link[=stop]{error} is thrown if \code{allow_multiple} is \code{FALSE} and multiple
+values of \code{old} match \code{x}, unless those values of \code{old} only differ in their
+case and \code{ignore_case} is \code{TRUE}. An example of such an exception is
 \code{replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)},
 which returns \code{c("b", "b")}.
 
 If \code{quiet} is \code{FALSE}, a message indicates which values have been replaced.
 The used order in the message is determined by the order of the factor
 \strong{levels}, which is influenced by the \link[=locales]{locale} at the time of their
-creation, see the \code{Warning} in \code{\link[=factor]{factor()}} and the \verb{Programming Notes} in
+creation, see the 'Warning' in \code{\link[=factor]{factor()}} and the 'Programming Notes' in
 \code{\link[checkinput:all_names]{checkinput::all_names()}}.
 
 \code{replace_vals()} does \strong{not} allow input of \link[=typeof]{type} \code{double} because

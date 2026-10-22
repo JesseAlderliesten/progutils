@@ -11,7 +11,7 @@ as.numeric_safe(x, keep_integer = TRUE)
 numeric vector.}
 
 \item{keep_integer}{\code{TRUE} or \code{FALSE}: return input of \link[=typeof]{type} integer
-without converting it to double, see \code{Details}.}
+without converting it to double, see 'Details'.}
 }
 \value{
 A numeric vector, possibly \code{numeric(0)} or containing \code{NA_real_}.
@@ -27,7 +27,7 @@ The \link[=typeof]{type} of \link[=integer]{integers} is kept \code{integer} if
 
 \code{NULL} and zero-length vectors are converted to \code{numeric(0)}, except for
 \code{integer(0)} that is kept unchanged if \code{keep_integer} is \code{TRUE}, which is the
-default. \code{FALSE} and \code{TRUE} are converted to \code{NA_real_}, with warning,
+default. \code{FALSE} and \code{TRUE} are converted to \code{NA_real_}, with a \link{warning},
 whereas \code{\link[=as.numeric]{as.numeric()}} converts those values to \code{0} and \code{1}, respectively.
 
 \code{as.numeric_safe()} uses a suggestion from \code{\link[=factor]{factor()}} and
@@ -37,13 +37,13 @@ vector, even though the last example of \code{\link[=as.numeric]{as.numeric()}} 
 approach is less efficient for long vectors.
 
 In contrast, the alternative conversions \code{as.numeric(levels(x))[x]} (suggested
-in the \code{Warning} of \link{factor}) and \code{as.numeric(levels(x))[as.integer(x)]}
+in the 'Warning' of \link{factor}) and \code{as.numeric(levels(x))[as.integer(x)]}
 (suggested in \R \verb{FAQ 7.10} linked to above) \strong{only} work if \code{x} is a
-\link{factor}, see the \code{Examples}.
+factor, see the 'Examples'.
 
-Furthermore, \code{as.numeric()} \strong{cannot} be used to convert a \link{factor} to
+Furthermore, \code{as.numeric()} \strong{cannot} be used to convert a factor to
 numeric because it returns their underlying numeric integer representation
-(i.e., the indices of the factor levels), see the \code{Warnings} in
+(i.e., the indices of the factor levels), see the section 'Warnings' in
 \code{\link[=as.numeric]{as.numeric()}} and \link{factor}.
 }
 \examples{

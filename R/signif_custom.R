@@ -6,24 +6,24 @@
 #' `1e5 / 7` to three significant digits.
 #'
 #' @param x [numeric vector][is.numeric()], [matrix] or [data.frame], see
-#' `Details`.
+#' 'Details'.
 #' @param digits the **minimum** number of [significant digits][signif()] to
-#' round to (see `Details`) or `Inf` to not round values.
+#' round to (see 'Details') or `Inf` to not round values.
 #' @param type [character string][checkinput::is_character()] `"selective"` or
-#' `"expanded"` indicating the type of rounding to be used, see `Details`.
+#' `"expanded"` indicating the type of rounding to be used, see 'Details'.
 #'
 #' @returns
 #' `x` with values rounded according to `digits` and `type`.
 #'
 #' @details
 #' [Infinite values][Inf] are returned unchanged. `NA_integer_` and `NA_real_`
-#' are returned as [NA_real_][NA]. [matrices][matrix] and
-#' [dataframes][data.frame] are handled by rounding values of numeric columns.
-#' [Non-numeric][is.numeric()] (e.g., [factor]) `x` is **not** supported, use
+#' are returned as [`NA_real_`][NA]. [matrices][matrix] and
+#' [data frames][data.frame] are handled by rounding values of numeric columns.
+#' [Non-numeric][is.numeric()] (e.g., [`factor`]) `x` is **not** supported, use
 #' [as.numeric_safe()] beforehand on `x` if appropriate.
 #'
 #' Numeric values are rounded according to arguments `digits` and `type`. Values
-#' are **not** rounded if `digits` is [Inf]. Otherwise, the value of `digits`
+#' are **not** rounded if `digits` is [`Inf`]. Otherwise, the value of `digits`
 #' rounded to the nearest positive integer is used as the **minimum** number of
 #' [significant digits][signif()] to round numeric values in `x` to while
 #' ensuring their integer parts are not rounded.

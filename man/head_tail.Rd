@@ -2,21 +2,21 @@
 % Please edit documentation in R/head_tail.R
 \name{head_tail}
 \alias{head_tail}
-\title{Show First and Last Part of an Object}
+\title{Get the First and Last Part of an Object}
 \usage{
 head_tail(x, n = 3L)
 }
 \arguments{
 \item{x}{object of which the first and last part should be returned.}
 
-\item{n}{\link[checkinput:make_natural]{natural} number (default \code{3L}) indicating
-the number of elements or rows to return as \code{head} and \code{tail}.}
+\item{n}{\link[checkinput:make_natural]{natural number} indicating the number of
+elements or rows to return as \code{head} and \code{tail}.}
 }
 \value{
 The \code{n} first and last elements or rows of \code{x}.
 }
 \description{
-Show First and Last Part of an Object
+Get the First and Last Part of an Object
 }
 \examples{
 x <- letters[1:10]
