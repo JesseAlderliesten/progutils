@@ -52,11 +52,11 @@ containing `text`, with a phrase indicating the origin of the signal if
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md),
 which treats zero-length input and input with length larger than one
 better than [`message()`](https://rdrr.io/r/base/message.html) etc. that
-use [`paste0()`](https://rdrr.io/r/base/paste.html), see the `Examples`.
+use [`paste0()`](https://rdrr.io/r/base/paste.html), see the 'Examples'.
 Call
 [`vect_to_char()`](https://jessealderliesten.github.io/progutils/reference/vect_to_char.md)
 beforehand on `text` for finer control of rounding and wrapping of text,
-see the `Examples`.
+see the 'Examples'.
 
 `text` is signalled through an
 [error](https://rdrr.io/r/base/stop.html),
@@ -64,7 +64,7 @@ see the `Examples`.
 [message](https://rdrr.io/r/base/message.html), or quietly, depending on
 argument `signal`. To make `text` available for further queries when
 using `signal_text()` in another function, add the content of the signal
-as an attribute to the returned object, see the last `Example`.
+as an attribute to the returned object, see the last 'Example'.
 
 ## See also
 

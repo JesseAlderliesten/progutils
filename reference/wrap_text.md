@@ -20,8 +20,8 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE, warn_length = FALSE)
 
   [natural
   number](https://jessealderliesten.github.io/checkinput/reference/is_natural.html)
-  giving the maximum line width (in characters) after wrapping. Can be
-  `Inf` to not wrap text.
+  giving the maximum number of characters at a line after wrapping. Can
+  be `Inf` to not wrap text.
 
 - ignore_newlines:
 
@@ -37,22 +37,24 @@ wrap_text(x, width = 80L, ignore_newlines = TRUE, warn_length = FALSE)
 A [character
 string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
 containing `x` wrapped to a maximum of `width` characters, with newlines
-inserted at blank characters. A warning is issued if `warn_length` is
-`TRUE` and the width of a fragment in the output exceeds `width`: this
-occurs if a stretch of characters longer than `width` occurs without a
-blank character to wrap at.
+inserted at blank characters. A
+[warning](https://rdrr.io/r/base/warning.html) is issued if
+`warn_length` is `TRUE` and the width of a fragment in the output
+exceeds `width`: this occurs if a stretch of characters longer than
+`width` occurs without a blank character to wrap at.
 
 ## Details
 
-`character(0)` input to `x` is returned unchanged, with a warning.
+`character(0)` input to `x` is returned unchanged, with a
+[warning](https://rdrr.io/r/base/warning.html).
 
 `x` of length larger than one is pasted into a single string, separating
 the parts by blank characters.
 
 Consecutive white space is collapsed into a single blank character,
 except for double spaces after periods, question marks and exclamation
-marks (as documented in the section `Details` of
-[`strwrap()`](https://rdrr.io/r/base/strwrap.html)).
+marks, as documented in the section 'Details' of
+[`strwrap()`](https://rdrr.io/r/base/strwrap.html).
 
 Leading and trailing newlines are collapsed into a single blank
 character if `ignore_newlines` is `TRUE` and are retained if

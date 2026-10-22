@@ -51,7 +51,7 @@
 ## Order
 
 - [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md)
-  : Show First and Last Part of an Object
+  : Get the First and Last Part of an Object
 - [`reorder_cols()`](https://jessealderliesten.github.io/progutils/reference/reorder_cols.md)
   : Reorder Columns
 - [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md)

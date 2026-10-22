@@ -1,7 +1,8 @@
 # Convert a Vector to a Character String
 
-Convert a vector to a character string while preserving names and
-rounding numeric values.
+Convert a vector to a [character
+string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
+while preserving names and rounding numeric values.
 
 ## Usage
 
@@ -22,9 +23,10 @@ vect_to_char(
 - x:
 
   vector, [factor](https://rdrr.io/r/base/factor.html),
-  [NULL](https://rdrr.io/r/base/NULL.html), or a non-dataframe
+  [`NULL`](https://rdrr.io/r/base/NULL.html), or a non-dataframe
   [list](https://rdrr.io/r/base/list.html) (unlisted through
-  `unlist(x, use.names = TRUE)`, with a warning).
+  `unlist(x, use.names = TRUE)`, with a
+  [warning](https://rdrr.io/r/base/warning.html)).
 
 - signif:
 
@@ -32,14 +34,14 @@ vect_to_char(
   [number](https://jessealderliesten.github.io/checkinput/reference/is_number.html)
   indicating the number of [significant
   digits](https://rdrr.io/r/base/Round.html) to round numeric `x` to
-  (see `Details`) or `Inf` to not round values.
+  (see 'Details') or `Inf` to not round values.
 
 - width:
 
   [natural
   number](https://jessealderliesten.github.io/checkinput/reference/is_natural.html)
-  giving the maximum line width (in characters) after wrapping. Can be
-  `Inf` to not wrap text.
+  giving the maximum number of characters at a line after wrapping. Can
+  be `Inf` to not wrap text.
 
 - sep:
 
@@ -65,7 +67,7 @@ vect_to_char(
   [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   `"selective"`, `"expanded"`, or `"signif"` indicating the type of
-  rounding to be used, see `Details`.
+  rounding to be used, see 'Details'.
 
 ## Value
 
@@ -75,14 +77,15 @@ values of numeric `x` rounded to `signif`
 [significant](https://rdrr.io/r/base/Round.html) digits, wrapped to
 `width` characters.
 
-If `collapse` is [NULL](https://rdrr.io/r/base/NULL.html), a [character
+If `collapse` is [`NULL`](https://rdrr.io/r/base/NULL.html), a
+[character
 vector](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
 with the same elements as `x` is returned, wrapping on a per-element
 basis. If `collapse` is not `NULL`, the name-value pairs are separated
 by `collapse`, thus returning a [character
 string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html).
 
-See `Details` on the handling of some special values.
+See 'Details' on the handling of some special values.
 
 ## Details
 
@@ -106,8 +109,8 @@ than [`message()`](https://rdrr.io/r/base/message.html) etc. that use
   characters).
 
 Numeric values are not rounded if `digits` is
-[Inf](https://rdrr.io/r/base/is.finite.html). Otherwise, numeric values
-are rounded to **at least** `digits` [significant
+[`Inf`](https://rdrr.io/r/base/is.finite.html). Otherwise, numeric
+values are rounded to **at least** `digits` [significant
 digits](https://rdrr.io/r/base/Round.html) while ensuring their integer
 parts are unrounded if `round_type` is `"selective"` or `"expanded"`, or
 to **exactly** `digits` significant digits while their integer parts

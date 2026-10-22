@@ -30,7 +30,7 @@ replace_nonalnum(x, replacement = "_", keep_underscore = TRUE)
   `TRUE` or `FALSE`: keep underscores? If `FALSE`, underscores are
   replaced by `replacement`, which is only apparent if a non-default
   `replacement` is used such that it is not an underscore, see the last
-  `Example`.
+  'Example'.
 
 ## Value
 
@@ -45,7 +45,7 @@ characters.
 This implementation uses the [character
 class](https://rdrr.io/r/base/regex.html) `[:alnum:]` that depends on
 the current [locale](https://rdrr.io/r/base/locales.html), see the
-`Programming Notes` in
+'Programming Notes' in
 [`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html).
 
 ## See also

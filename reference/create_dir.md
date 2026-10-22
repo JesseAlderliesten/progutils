@@ -16,7 +16,7 @@ create_dir(dir = fs::path(".", "output"), add_date = TRUE)
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
   path](https://jessealderliesten.github.io/checkinput/reference/is_path.html),
-  see `Details` and the section `Notes on Paths` below.
+  see 'Details' and the section 'Notes on Paths' below.
 
 - add_date:
 
@@ -30,23 +30,23 @@ A character string with the [absolute
 normalised](https://fs.r-lib.org/reference/path_math.html) path to the
 requested directory, returned
 [invisibly](https://rdrr.io/r/base/invisible.html), see the section
-`Notes on Paths` and the `Examples` below.
+'Notes on Paths' and the 'Examples' below.
 
 By default a subdirectory with the current date in the
 [format](https://rdrr.io/r/base/strptime.html) `YYYY_mm_dd` is created
 in directory `output` below the [working
 directory](https://rdrr.io/r/base/getwd.html).
 
-An error is thrown if the attempt to create a directory fails, for
-example because `dir` points to an existing file instead of to an
-directory.
+An [error](https://rdrr.io/r/base/stop.html) is thrown if the attempt to
+create a directory fails, for example because `dir` points to an
+existing file instead of to an directory.
 
 ## Details
 
 The path in `dir` is interpreted as a **relative** path to the directory
 that should be created, starting from the [working
-directory](https://rdrr.io/r/base/getwd.html), see the section
-`Notes on Paths` below.
+directory](https://rdrr.io/r/base/getwd.html), see the section 'Notes on
+Paths' below.
 
 ## Side Effects
 
@@ -61,10 +61,10 @@ The file separator is a backslash (`\`) on Windows but a forward slash
 [`file.path()`](https://rdrr.io/r/base/file.path.html) or
 [`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
 paths in a platform-independent way and
-[.Platform\$file.sep](https://rdrr.io/r/base/Platform.html) to get the
+[`.Platform$file.sep`](https://rdrr.io/r/base/Platform.html) to get the
 file separator used on the current platform.
 
-Furthermore, the backslash is also used as [escape
+Furthermore, the backslash is also used as an [escape
 character](https://rdrr.io/r/base/regex.html) in R, such that
 backslashes need to be escaped in R code by doubling them. Use `cat(x)`
 to omit the escape characters to see how `x` would be printed.
@@ -76,8 +76,8 @@ indicated by two dots (`".."`).
 **relative** paths start from the [working
 directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
 paths start from the root directory and thus give the complete path,
-such that the path still points to the same directory if the [working
-directory](https://rdrr.io/r/base/getwd.html) changes.
+such that the path still points to the same directory if the working
+directory changes.
 
 Paths can be normalised, e.g., through
 [`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
@@ -118,8 +118,8 @@ my_tempdir <- create_tempdir(prefix = "examplecreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
-#> /tmp/Rtmpo1KNmc/examplecreatedir1aaabadb6c7/dir_one 
-#>                                                TRUE 
+#> /tmp/RtmpmaAUni/examplecreatedir1aa921157838/dir_one 
+#>                                                 TRUE 
 
 # An attempt to create a directory that already exists does
 # not change any directory and the same directory is returned.
@@ -142,8 +142,8 @@ identical(res_dir_one, res_dir_ONE)
 res_dir_date <- create_dir(
   dir = fs::path(my_tempdir, "dir_date"), add_date = TRUE)
 fs::dir_exists(res_dir_date) # TRUE
-#> /tmp/Rtmpo1KNmc/examplecreatedir1aaabadb6c7/dir_date/2026_10_21 
-#>                                                            TRUE 
+#> /tmp/RtmpmaAUni/examplecreatedir1aa921157838/dir_date/2026_10_22 
+#>                                                             TRUE 
 
 # Cleaning up
 unlink(my_tempdir, recursive = TRUE)

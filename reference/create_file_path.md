@@ -30,9 +30,9 @@ create_file_path(
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   indicating the [format](https://rdrr.io/r/base/strptime.html) of the
   stamp to be added in front of the file name. No stamp is added if
-  `format_stamp` is an empty string (i.e., `""`). The formatted stamp is
+  `format_stamp` is an empty string (`""`). The formatted stamp is
   treated as part of the filename, such that the same restrictions apply
-  to `format_stamp` as to `filename`, see `Details`.
+  to `format_stamp` as to `filename`, see 'Details'.
 
 - dir:
 
@@ -40,7 +40,7 @@ create_file_path(
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   containing a [valid
   path](https://jessealderliesten.github.io/checkinput/reference/is_path.html),
-  see `Details` and the section `Notes on Paths` below.
+  see 'Details' and the section 'Notes on Paths' below.
 
 - add_date:
 
@@ -53,11 +53,13 @@ create_file_path(
 A character string with the created [absolute
 normalized](https://fs.r-lib.org/reference/path_math.html) path,
 returned [invisibly](https://rdrr.io/r/base/invisible.html), see the
-section `Notes on paths` below.
+section 'Notes on Paths' below.
 
-An error is thrown if the attempt to create a file path fails. A warning
-is issued if the file already
-[exists](https://fs.r-lib.org/reference/is_file.html), see `Details`.
+An [error](https://rdrr.io/r/base/stop.html) is thrown if the attempt to
+create a file path fails. A
+[warning](https://rdrr.io/r/base/warning.html) is issued if the file
+already [exists](https://fs.r-lib.org/reference/is_file.html), see
+'Details'.
 
 ## Details
 
@@ -67,13 +69,14 @@ slashes or backslashes: use `dir` to indicate subdirectories.
 
 The path in `dir` is interpreted as a **relative** path to the directory
 that should be created, starting from the [working
-directory](https://rdrr.io/r/base/getwd.html), see the section
-`Notes on paths` below.
+directory](https://rdrr.io/r/base/getwd.html), see the section 'Notes on
+Paths' below.
 
-A warning is issued if the **file** indicated by the returned path
-already exists. To prevent this when creating files in quick succession,
-use `"%OSn"` as part of `format_stamp` to create precise stamps by
-truncating seconds to `0 <= n <= 6` decimal places, see
+A [warning](https://rdrr.io/r/base/warning.html) is issued if the
+**file** indicated by the returned path already exists. To prevent this
+when creating files in quick succession, use `"%OSn"` as part of
+`format_stamp` to create precise stamps by truncating seconds to
+`0 <= n <= 6` decimal places, see
 [`strftime()`](https://rdrr.io/r/base/strptime.html) for details.
 
 `create_file_path()` creates the directory but does **not** create the
@@ -84,7 +87,7 @@ file: wrap the call to `create_file_path()` in
 Calls where date **nor** time stamps are added (i.e, using
 `format_stamp = ""` and `add_date = FALSE`) can be replaced by
 `fs::path(fs::dir_create(path = "<dir>"), "<filename>")` to **not** get
-a warning if the file already
+a [warning](https://rdrr.io/r/base/warning.html) if the file already
 [exists](https://fs.r-lib.org/reference/is_file.html).
 
 ## Side Effects
@@ -100,10 +103,10 @@ The file separator is a backslash (`\`) on Windows but a forward slash
 [`file.path()`](https://rdrr.io/r/base/file.path.html) or
 [`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
 paths in a platform-independent way and
-[.Platform\$file.sep](https://rdrr.io/r/base/Platform.html) to get the
+[`.Platform$file.sep`](https://rdrr.io/r/base/Platform.html) to get the
 file separator used on the current platform.
 
-Furthermore, the backslash is also used as [escape
+Furthermore, the backslash is also used as an [escape
 character](https://rdrr.io/r/base/regex.html) in R, such that
 backslashes need to be escaped in R code by doubling them. Use `cat(x)`
 to omit the escape characters to see how `x` would be printed.
@@ -115,8 +118,8 @@ indicated by two dots (`".."`).
 **relative** paths start from the [working
 directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
 paths start from the root directory and thus give the complete path,
-such that the path still points to the same directory if the [working
-directory](https://rdrr.io/r/base/getwd.html) changes.
+such that the path still points to the same directory if the working
+directory changes.
 
 Paths can be normalised, e.g., through
 [`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
@@ -150,35 +153,35 @@ my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 (create_file_path(
   filename = "abc.txt", format_stamp = "",
   dir = my_tempdir, add_date = TRUE))
-#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/2026_10_21/abc.txt
+#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/2026_10_22/abc.txt
 (create_file_path(
   filename = "abc.txt", format_stamp = "%d_%m_%Y",
   dir = my_tempdir, add_date = TRUE))
-#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/2026_10_21/21_10_2026_abc.txt
+#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/2026_10_22/22_10_2026_abc.txt
 (create_file_path(
   filename = "def.html", format_stamp = "",
   dir = my_tempdir, add_date = FALSE))
-#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/def.html
+#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/def.html
 (create_file_path(
   filename = "def.html", format_stamp = "%d_%m_%Y",
   dir = my_tempdir, add_date = FALSE))
-#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/21_10_2026_def.html
+#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/22_10_2026_def.html
 (create_file_path(
   filename = "abc.txt", format_stamp = "",
   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/subdir/2026_10_21/abc.txt
+#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/subdir/2026_10_22/abc.txt
 (create_file_path(
   filename = "abc.txt", format_stamp = "%d_%m_%Y",
   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/subdir/2026_10_21/21_10_2026_abc.txt
+#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/subdir/2026_10_22/22_10_2026_abc.txt
 (create_file_path(
   filename = "def.html", format_stamp = "",
   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/subdir/def.html
+#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/subdir/def.html
 (create_file_path(
   filename = "def.html", format_stamp = "%d_%m_%Y",
   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/Rtmpo1KNmc/examplecreatefilepath1aaa49c3b802/subdir/21_10_2026_def.html
+#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/subdir/22_10_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

@@ -11,7 +11,7 @@ Visit the [**progutils**
 website](https://jessealderliesten.github.io/progutils/) to explore the
 package, or install **progutils** [from
 GitHub](https://github.com/JesseAlderliesten/progutils) using the
-following [R](https://www.r-project.org/) code:
+following [**R**](https://www.r-project.org/) code:
 
 ``` r
 
@@ -49,7 +49,7 @@ as.numeric_safe(x) # Returns the values.
 
 Similarly, [`relevel()`](https://rdrr.io/r/stats/relevel.html) from base
 R can only be used to assign a reference level to a factor and using
-[`levels()`](https://rdrr.io/r/base/levels.html) from base R does
+[`levels()`](https://rdrr.io/r/base/levels.html) from base **R** does
 **not** work to reorder factor levels, whereas using
 [`reorder_levels()`](https://jessealderliesten.github.io/progutils/reference/reorder_levels.md)
 from **progutils** **does** work:
@@ -137,7 +137,7 @@ A BibTeX entry for LaTeX users is
 
 Please open a [GitHub
 issue](https://github.com/JesseAlderliesten/progutils/issues) if you
-have suggestions for improvement of **progutils**.
+have suggestions to improve **progutils**.
 
 ## Similar packages
 
@@ -145,4 +145,4 @@ Many packages with miscellaneous functions exist on
 [GitHub](https://github.com/) and
 [CRAN](https://cran.r-project.org/web/packages/available_packages_by_name.html):
 frequently they have ‘misc’ or ‘util’ in their title or description. In
-addition, many packages have an ‘utils’ folder inside their ‘R’ folder.
+addition, many packages have an ‘utils’ folder inside their `R` folder.

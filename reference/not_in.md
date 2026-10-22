@@ -32,9 +32,10 @@ not_in(x, table, value = TRUE, ignore_case = FALSE, warn_case = TRUE)
 
 - warn_case:
 
-  `TRUE` or `FALSE`: should a warning be issued when `ignore_case` is
-  `FALSE` and values that are considered present would be absent when
-  using case-sensitive matching?
+  `TRUE` or `FALSE`: should a
+  [warning](https://rdrr.io/r/base/warning.html) be issued when
+  `ignore_case` is `FALSE` and values that are considered present would
+  be absent when using case-sensitive matching?
 
 ## Value
 
@@ -47,7 +48,7 @@ vector indicating for each element in `x` if it is absent from `table`.
 ## Details
 
 Duplicates in `x` are kept, in contrast to
-[`setdiff()`](https://rdrr.io/r/base/sets.html), see the `Examples`.
+[`setdiff()`](https://rdrr.io/r/base/sets.html), see the 'Examples'.
 
 [Factor-input](https://rdrr.io/r/base/factor.html) to `x` is converted
 to character, to prevent returning a factor with all values of `x` as
@@ -58,7 +59,7 @@ Zero-length input behaves slightly different from other values:
 absent from `table` if `value` is `FALSE`. If `value` is `TRUE`, the
 behaviour is normal: returning `x`.
 
-[NA](https://rdrr.io/r/base/NA.html) is allowed in `x` and `table` and
+[`NA`](https://rdrr.io/r/base/NA.html) is allowed in `x` and `table` and
 behaves the same as other values: the returned `NA` (if `value` is
 `TRUE`) and the returned zero-length value (if `value` is `FALSE`) have
 the same type as the `NA` in `x` if `NA` is absent from `table`. `NA`s

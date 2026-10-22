@@ -23,7 +23,7 @@ as.numeric_safe(x, keep_integer = TRUE)
 
   `TRUE` or `FALSE`: return input of
   [type](https://rdrr.io/r/base/typeof.html) integer without converting
-  it to double, see `Details`.
+  it to double, see 'Details'.
 
 ## Value
 
@@ -38,9 +38,10 @@ The [type](https://rdrr.io/r/base/typeof.html) of
 
 `NULL` and zero-length vectors are converted to `numeric(0)`, except for
 `integer(0)` that is kept unchanged if `keep_integer` is `TRUE`, which
-is the default. `FALSE` and `TRUE` are converted to `NA_real_`, with
-warning, whereas [`as.numeric()`](https://rdrr.io/r/base/numeric.html)
-converts those values to `0` and `1`, respectively.
+is the default. `FALSE` and `TRUE` are converted to `NA_real_`, with a
+[warning](https://rdrr.io/r/base/warning.html), whereas
+[`as.numeric()`](https://rdrr.io/r/base/numeric.html) converts those
+values to `0` and `1`, respectively.
 
 `as.numeric_safe()` uses a suggestion from
 [`factor()`](https://rdrr.io/r/base/factor.html) and [R FAQ
@@ -51,17 +52,15 @@ example of [`as.numeric()`](https://rdrr.io/r/base/numeric.html)
 comments that this approach is less efficient for long vectors.
 
 In contrast, the alternative conversions `as.numeric(levels(x))[x]`
-(suggested in the `Warning` of
+(suggested in the 'Warning' of
 [factor](https://rdrr.io/r/base/factor.html)) and
 `as.numeric(levels(x))[as.integer(x)]` (suggested in R `FAQ 7.10` linked
-to above) **only** work if `x` is a
-[factor](https://rdrr.io/r/base/factor.html), see the `Examples`.
+to above) **only** work if `x` is a factor, see the 'Examples'.
 
 Furthermore, [`as.numeric()`](https://rdrr.io/r/base/numeric.html)
-**cannot** be used to convert a
-[factor](https://rdrr.io/r/base/factor.html) to numeric because it
-returns their underlying numeric integer representation (i.e., the
-indices of the factor levels), see the `Warnings` in
+**cannot** be used to convert a factor to numeric because it returns
+their underlying numeric integer representation (i.e., the indices of
+the factor levels), see the section 'Warnings' in
 [`as.numeric()`](https://rdrr.io/r/base/numeric.html) and
 [factor](https://rdrr.io/r/base/factor.html).
 

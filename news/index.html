@@ -42,12 +42,12 @@
 <h2 class="pkg-version" data-toc-text="1.0.1" id="progutils-101">progutils 1.0.1<a class="anchor" aria-label="anchor" href="#progutils-101"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-1-0-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-1"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>1.5.0</code> to <code>1.5.1</code> to be able to inherit sections with capitalized titles.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 1.5.0 to 1.5.1 to be able to inherit sections with capitalized titles.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="documentation-1-0-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-0-1"></a></h4>
 <ul><li>Make layout more uniform.</li>
-<li>Wrap lines in <code>Usage</code> and <code>Example</code> sections to 65 characters.</li>
+<li>Wrap lines in ‘Usage’ and ‘Example’ sections to 65 characters.</li>
 <li>Capitalize function titles.</li>
 <li>Avoid markup in section titles.</li>
 </ul></div>
@@ -65,13 +65,13 @@
 <h2 class="pkg-version" data-toc-text="0.17.0" id="progutils-0170">progutils 0.17.0<a class="anchor" aria-label="anchor" href="#progutils-0170"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-17-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-17-0"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>1.4.0</code> to <code>1.5.0</code> to be able to inherit updates to section <code>Note on paths</code> from <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 1.4.0 to 1.5.0 to be able to inherit updates to section ‘Note on paths’ from <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code>.</li>
 <li>Some warning messages changed: <code>checkinput::is_character(&lt;path&gt;)</code> is already checked in <code>checkinput::is_path(&lt;path&gt;)</code>.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="documentation-0-17-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-17-0"></a></h4>
 <ul><li>Clarify that <code>dir</code> is considered relative to the working directory instead of an absolute path.</li>
-<li>Inherit section <code>Note on paths</code> from <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> when appropriate.</li>
+<li>Inherit section ‘Note on paths’ from <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">checkinput::is_path()</a></code> when appropriate.</li>
 <li>Stylistic updates to documentation, including added cross-references.</li>
 </ul></div>
 </div>
@@ -79,18 +79,18 @@
 <h2 class="pkg-version" data-toc-text="0.16.0" id="progutils-0160">progutils 0.16.0<a class="anchor" aria-label="anchor" href="#progutils-0160"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-16-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-16-0"></a></h4>
-<ul><li>Dependency on <code>R &gt;= 4.0.0</code> to be able to use <code>deparse1(substitute(x))</code> to get the correct argument names when one function calls another function.</li>
+<ul><li>Dependency on <strong>R</strong> with minimum version 4.0.0 to be able to use <code>deparse1(substitute(x))</code> to get the correct argument names when one function calls another function.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="new-features-0-16-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-16-0"></a></h4>
 <ul><li>
-<code><a href="../reference/check_case.html">check_case()</a></code> gains argument <code>y</code> to check for values that only differ in their case between two vectors. Output is no longer sorted, making it independent of the used <code>locale</code>.</li>
+<code><a href="../reference/check_case.html">check_case()</a></code> gains argument <code>y</code> to check for values that only differ in their case between two vectors. Output is no longer sorted, making it independent of the used locale.</li>
 <li>
 <code><a href="../reference/not_in.html">not_in()</a></code>: add argument <code>ignore_case</code> to make matching case-insensitive and argument <code>warn_case</code> to warn about values that would be absent when using case-sensitive matching.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="documentation-0-16-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-16-0"></a></h4>
-<ul><li>Version of <code>roxygen2</code> bumped to 8.1.1.</li>
+<ul><li>Version of <strong>roxygen2</strong> bumped to 8.1.1.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -109,7 +109,7 @@
 <code><a href="../reference/reorder_levels.html">reorder_levels()</a></code> accepts <code>NULL</code> for <code>new_order</code> to sort levels on increasing numerical value.</li>
 <li>
 <code><a href="../reference/vect_to_char.html">vect_to_char()</a></code> uses <code><a href="../reference/signif_custom.html">signif_custom()</a></code> instead of <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">signif()</a></code>, ensuring that at least the integer part of numbers is displayed completely.</li>
-<li>Dependency <code>checkinput</code>: increase minimum version from <code>1.3.0</code> to <code>1.4.0</code> to use stricter argument checking for <code>all_numbers()</code>, <code>is_number()</code> and related functions.</li>
+<li>Dependency <strong>checkinput</strong>: increase minimum version from 1.3.0 to 1.4.0 to use stricter argument checking for <code>all_numbers()</code>, <code>is_number()</code> and related functions.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="new-functions-0-15-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-15-0"></a></h4>
@@ -120,14 +120,14 @@
 </ul></div>
 <div class="section level4">
 <h4 id="miscellaneous-0-15-0">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-15-0"></a></h4>
-<ul><li>The used version of <code>roxygen2</code> increased from <code>8.0.0</code> to <code>8.1.0</code>.</li>
+<ul><li>The used version of <strong>roxygen2</strong> increased from 8.0.0 to 8.1.0.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.14.0" id="progutils-0140">progutils 0.14.0<a class="anchor" aria-label="anchor" href="#progutils-0140"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-14-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-14-0"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>1.0.0</code> to <code>1.3.0</code> to be able to use argument <code>collapse</code> of <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 1.0.0 to 1.3.0 to be able to use argument <code>collapse</code> of <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>.</li>
 <li>
 <code><a href="../reference/get_file_path.html">get_file_path()</a></code>: use argument <code>collapse</code> of <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code> to separate the quoted file paths by newlines instead of by commas.</li>
 </ul></div>
@@ -146,8 +146,8 @@
 <h4 id="breaking-changes-0-12-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-12-0"></a></h4>
 <ul><li>
 <code><a href="../reference/create_tempdir.html">create_tempdir()</a></code>: rename argument <code>pattern</code> to <code>prefix</code>.</li>
-<li>Dependency <code>fs</code>: require minimum version of <code>1.3.0</code> to use argument <code>recurse</code>.</li>
-<li>Remove suggested dependency <code>tools</code> that has been obsolete since replacing <code>file_path_no_ext()</code> by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">fs::path_ext_remove()</a></code> and <code>file_path_ext()</code> by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">fs::path_ext()</a></code> in <code>progutils 0.3.0</code>.</li>
+<li>Dependency <strong>fs</strong>: require minimum version of 1.3.0 to use argument <code>recurse</code>.</li>
+<li>Remove suggested dependency <strong>tools</strong> that has been obsolete since replacing <code>file_path_no_ext()</code> by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">fs::path_ext_remove()</a></code> and <code>file_path_ext()</code> by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">fs::path_ext()</a></code> in <strong>progutils</strong> 0.3.0.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -173,8 +173,8 @@
 <h4 id="documentation-0-10-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-10-1"></a></h4>
 <ul><li>
 <code><a href="../reference/signal_text.html">signal_text()</a></code>: document and show example how to make <code>text</code> available for further queries.</li>
-<li>Update grouping of functions in the <code>See Also</code> sections and in the package index on the website, adding the re-exported function <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>.</li>
-<li>Apply a few more stylistic suggestions provided by various packages like <code>goodpractice</code> that check code sanity.</li>
+<li>Update grouping of functions in the ‘See Also’ sections and in the package index on the website, adding the re-exported function <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>.</li>
+<li>Apply a few more stylistic suggestions provided by various packages like <strong>goodpractice</strong> that check code sanity.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -185,7 +185,7 @@
 </ul></div>
 <div class="section level4">
 <h4 id="documentation-0-10-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-10-0"></a></h4>
-<ul><li>Apply stylistic suggestions provided by various packages like <code>goodpractice</code> that check code sanity.</li>
+<ul><li>Apply stylistic suggestions provided by various packages like <strong>goodpractice</strong> that check code sanity.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -199,28 +199,28 @@
 <h2 class="pkg-version" data-toc-text="0.8.0" id="progutils-080">progutils 0.8.0<a class="anchor" aria-label="anchor" href="#progutils-080"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-8-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-8-0"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.12.0</code> to <code>1.0.0</code> to depend on a stable version.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 0.12.0 to 1.0.0 to depend on a stable version.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.0" id="progutils-070">progutils 0.7.0<a class="anchor" aria-label="anchor" href="#progutils-070"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-7-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-7-0"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.11.0</code> to <code>0.12.0</code> to use argument <code>require_sep</code> from <code>is_path()</code> in <code><a href="../reference/create_file_path.html">create_file_path()</a></code> and in <code><a href="../reference/create_tempdir.html">create_tempdir()</a></code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 0.11.0 to 0.12.0 to use argument <code>require_sep</code> from <code>is_path()</code> in <code><a href="../reference/create_file_path.html">create_file_path()</a></code> and in <code><a href="../reference/create_tempdir.html">create_tempdir()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="progutils-060">progutils 0.6.0<a class="anchor" aria-label="anchor" href="#progutils-060"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-6-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-6-0"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.10.0</code> to <code>0.11.0</code> to incorporate change of argument name <code>allow_zero_length</code> to <code>allow_zerolength</code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 0.10.0 to 0.11.0 to incorporate change of argument name <code>allow_zero_length</code> to <code>allow_zerolength</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="progutils-051">progutils 0.5.1<a class="anchor" aria-label="anchor" href="#progutils-051"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-5-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-5-1"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.9.0</code> to <code>0.10.0</code> to incorporate bugfix: <code>is_path("C:")</code> would warn that <code>filename</code> should not contain <code>:</code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 0.9.0 to 0.10.0 to incorporate bugfix: <code>is_path("C:")</code> would warn that <code>filename</code> should not contain <code>:</code>.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="bugfixes-0-5-1">Bugfixes<a class="anchor" aria-label="anchor" href="#bugfixes-0-5-1"></a></h4>
@@ -245,14 +245,14 @@
 <div class="section level4">
 <h4 id="breaking-changes-0-4-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-4-0"></a></h4>
 <ul><li>
-<code>is_path()</code>: move to package <code>checkinput</code>. Rename argument <code>path</code> to <code>x</code>. Adjusted to warn and return <code>FALSE</code> instead of throwing an error if <code>path</code> is not a valid path. Not allow filenames to start with a hyphen. Not warn about duplicated file separators or pointing to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>.</li>
+<code>is_path()</code>: move to package <strong>checkinput</strong>. Rename argument <code>path</code> to <code>x</code>. Adjusted to warn and return <code>FALSE</code> instead of throwing an error if <code>path</code> is not a valid path. Not allow filenames to start with a hyphen. Not warn about duplicated file separators or pointing to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.0" id="progutils-030">progutils 0.3.0<a class="anchor" aria-label="anchor" href="#progutils-030"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h4>
-<ul><li>Added dependency <code>fs</code> to <code>Imports</code>.</li>
+<ul><li>Added dependency <strong>fs</strong> to <code>Imports</code>.</li>
 <li>
 <code><a href="../reference/create_file_path.html">create_file_path()</a></code>: no longer replace non-alphanumeric characters in the filename because reconstituting the filename is brittle.</li>
 <li>Replace <code>file_path_no_ext()</code> by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external-link">fs::path_ext_remove()</a></code> and <code>file_path_ext()</code><br>
@@ -270,14 +270,14 @@ by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external
 <h2 class="pkg-version" data-toc-text="0.2.0" id="progutils-020">progutils 0.2.0<a class="anchor" aria-label="anchor" href="#progutils-020"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-2-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-2-0"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.7.0</code> to <code>0.8.0</code> to update argument name <code>allow_zero</code> to <code>allow_zero_length</code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 0.7.0 to 0.8.0 to update argument name <code>allow_zero</code> to <code>allow_zero_length</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="progutils-010">progutils 0.1.0<a class="anchor" aria-label="anchor" href="#progutils-010"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-1-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-1-0"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.6.0</code> to <code>0.7.0</code> to have the new default <code>all = FALSE</code> instead of <code>all = TRUE</code> in <code>make_natural()</code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 0.6.0 to 0.7.0 to have the new default <code>all = FALSE</code> instead of <code>all = TRUE</code> in <code>make_natural()</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -320,9 +320,9 @@ by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external
 <h2 class="pkg-version" data-toc-text="0.0.9" id="progutils-009">progutils 0.0.9<a class="anchor" aria-label="anchor" href="#progutils-009"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-0-9">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-9"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.5.0</code> to <code>0.6.0</code>, needed to use re-exported <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 0.5.0 to 0.6.0, needed to use re-exported <code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">paste_quoted()</a></code>.</li>
 <li>
-<code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">progutils::paste_quoted()</a></code>: move to <code>checkinput</code> and re-export it to <code>progutils</code>.</li>
+<code><a href="https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html" class="external-link">progutils::paste_quoted()</a></code>: move to <strong>checkinput</strong> and re-export it to <strong>progutils</strong>.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="added-functions-0-0-9">Added functions<a class="anchor" aria-label="anchor" href="#added-functions-0-0-9"></a></h4>
@@ -334,7 +334,7 @@ by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external
 <div class="section level4">
 <h4 id="breaking-changes-0-0-8">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-8"></a></h4>
 <ul><li>Removed unused <code>check_os_is_windows()</code>.</li>
-<li>Use <code>roxygen2</code> version 8.0.0.</li>
+<li>Use <strong>roxygen2</strong> version 8.0.0.</li>
 <li>
 <code><a href="../reference/not_in.html">not_in()</a></code>: <code>x</code> and <code>table</code> have to be a vector or factor (as was always documented) to prevent returning <code>x</code> if <code>x</code> or <code>table</code> is a <code>list</code>.</li>
 </ul></div>
@@ -359,8 +359,8 @@ by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external
 <h2 class="pkg-version" data-toc-text="0.0.6" id="progutils-006">progutils 0.0.6<a class="anchor" aria-label="anchor" href="#progutils-006"></a></h2>
 <div class="section level4">
 <h4 id="breaking-changes-0-0-6">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-6"></a></h4>
-<ul><li>Dependency <code>checkinput</code>: increase minimum version from <code>0.1.0</code> to <code>0.5.0</code>. This increases the minimum version of <code>R</code> to <code>4.1.0</code> but removes the dependency on <code>vctrs</code>.</li>
-<li>Dependency <code>tinytest</code>: declare version <code>&gt;= 1.4.1</code> because argument <code>strict</code> is used in <code>expect_message()</code> and <code>expect_warning()</code>.</li>
+<ul><li>Dependency <strong>checkinput</strong>: increase minimum version from 0.1.0 to 0.5.0. This increases the minimum version of <strong>R</strong> to 4.1.0 but removes the dependency on <strong>vctrs</strong>.</li>
+<li>Dependency <strong>tinytest</strong>: declare minimum version 1.4.1 because argument <code>strict</code> is used in <code>expect_message()</code> and <code>expect_warning()</code>.</li>
 <li>
 <code><a href="../reference/create_dir.html">create_dir()</a></code>: <code>dir</code> ending in <code>\.</code> now is, as was documented, an error instead of silently denoting the working directory. Hardcode newlines instead of using <code><a href="../reference/wrap_text.html">wrap_text()</a></code> makes it easier to test warnings.</li>
 </ul></div>
@@ -397,8 +397,8 @@ by <code><a href="https://fs.r-lib.org/reference/path_file.html" class="external
 <div class="section level4">
 <h4 id="breaking-changes-0-0-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-0-3"></a></h4>
 <ul><li>
-<code>checkinput</code>: increased minimum version to <code>0.1.0</code>.</li>
-<li>Add dependencies <code>stats</code> and <code>tools</code> to <code>Suggests</code> because they are linked to in help pages.</li>
+<strong>checkinput</strong>: increased minimum version to 0.1.0.</li>
+<li>Add dependencies <strong>stats</strong> and <strong>tools</strong> to <code>Suggests</code> because they are linked to in help pages.</li>
 <li>No longer import <code><a href="https://rdrr.io/r/methods/methodUtilities.html" class="external-link">methods::formalArgs()</a></code>.</li>
 <li>
 <code><a href="../reference/create_dir.html">create_dir()</a></code>: show the warnings if creating a directory fails.</li>

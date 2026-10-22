@@ -1,7 +1,7 @@
 # Reorder Columns
 
-Reorder columns, warning about mismatches between columns and
-`new_order`.
+Reorder columns, [warning](https://rdrr.io/r/base/warning.html) about
+mismatches between columns and `new_order`.
 
 ## Usage
 
@@ -32,7 +32,7 @@ reorder_cols(x, new_order)
 ## Details
 
 Column names of `x` that are missing from `new_order` are appended to
-`new_order`, with a warning.
+`new_order`, with a [warning](https://rdrr.io/r/base/warning.html).
 
 Values in `new_order` that are missing from column names of `x` are
 dropped, with a warning.

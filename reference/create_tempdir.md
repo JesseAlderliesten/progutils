@@ -24,10 +24,11 @@ A character string with the [absolute
 normalised](https://fs.r-lib.org/reference/path_math.html) path to the
 created temporary directory, returned
 [invisibly](https://rdrr.io/r/base/invisible.html), see the section
-`Notes on paths` below.
+'Notes on Paths' below.
 
-An error is thrown when attempting to create subdirectories (see
-`Details`) and if creating the directory fails.
+An [error](https://rdrr.io/r/base/stop.html) is thrown when attempting
+to create subdirectories (see 'Details') and if creating the directory
+fails.
 
 ## Details
 
@@ -41,7 +42,7 @@ file extension, see the section `Source` in
 [`help("tempdir")`](https://rdrr.io/r/base/tempfile.html).
 
 It is **not** possible to create recursive subdirectories (e.g.,
-`tempdir/subtempdir/otherdir`, see the `Examples`) because
+`tempdir/subtempdir/otherdir`, see the 'Examples') because
 [removing](https://rdrr.io/r/base/unlink.html) such directories might
 remove files that are still needed by other processes.
 
@@ -58,11 +59,11 @@ anymore, see the section `Usage in practice` below.
 
 [Examples](https://rdrr.io/r/utils/example.html) and
 [tests](https://r-pkgs.org/testing-basics.html) should write to a
-temporary directory that is cleaned up afterwards (otherwise
-[`R cmd check`](https://r-pkgs.org/R-CMD-check.html) will issue a `Note`
-about
-[`detritus in the temp directory`](https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)
-and CRAN will not accept your package, see section `Source packages`
+temporary directory that is cleaned up afterwards (otherwise [R cmd
+check](https://r-pkgs.org/R-CMD-check.html) will issue a 'Note' about
+[detritus in the temp
+directory](https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory)
+and CRAN will not accept your package, see section 'Source packages'
 from the [CRAN
 policies](https://cran.r-project.org/web/packages/policies.html)).
 Although [`tempdir()`](https://rdrr.io/r/base/tempfile.html) points to a
@@ -95,10 +96,10 @@ The file separator is a backslash (`\`) on Windows but a forward slash
 [`file.path()`](https://rdrr.io/r/base/file.path.html) or
 [`fs::path()`](https://fs.r-lib.org/reference/path.html) to construct
 paths in a platform-independent way and
-[.Platform\$file.sep](https://rdrr.io/r/base/Platform.html) to get the
+[`.Platform$file.sep`](https://rdrr.io/r/base/Platform.html) to get the
 file separator used on the current platform.
 
-Furthermore, the backslash is also used as [escape
+Furthermore, the backslash is also used as an [escape
 character](https://rdrr.io/r/base/regex.html) in R, such that
 backslashes need to be escaped in R code by doubling them. Use `cat(x)`
 to omit the escape characters to see how `x` would be printed.
@@ -110,8 +111,8 @@ indicated by two dots (`".."`).
 **relative** paths start from the [working
 directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
 paths start from the root directory and thus give the complete path,
-such that the path still points to the same directory if the [working
-directory](https://rdrr.io/r/base/getwd.html) changes.
+such that the path still points to the same directory if the working
+directory changes.
 
 Paths can be normalised, e.g., through
 [`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
@@ -130,7 +131,7 @@ successive forward slashes (e.g.,
 versions of
 [`is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
 (then in package
-[progutils](https://jessealderliesten.github.io/progutils/)) led to
+[**progutils**](https://jessealderliesten.github.io/progutils/)) led to
 spurious warnings about duplicated file separators.
 
 ## See also
@@ -161,14 +162,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/Rtmpo1KNmc"
+#> [1] "/tmp/RtmpmaAUni"
 # Create a directory inside the directory returned by 'tempdir()'
 (tempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/Rtmpo1KNmc/subtempdir1aaa80141c7"
+#> [1] "/tmp/RtmpmaAUni/subtempdir1aa9476bbef9"
 
 # Using the same 'prefix' again creates another directory
 (tempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/Rtmpo1KNmc/subtempdir1aaa1ae0962d"
+#> [1] "/tmp/RtmpmaAUni/subtempdir1aa92f04e0d0"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(

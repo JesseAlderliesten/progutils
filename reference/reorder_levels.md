@@ -1,7 +1,7 @@
 # Reorder Factor Levels
 
-Reorder columns, warning about mismatches between factor levels and
-`new_order`.
+Reorder columns, [warning](https://rdrr.io/r/base/warning.html) about
+mismatches between factor levels and `new_order`.
 
 ## Usage
 
@@ -27,7 +27,7 @@ reorder_levels(x, new_order, warn_drop_order = TRUE)
   with a length larger than zero containing
   [unique](https://rdrr.io/r/base/unique.html)
   [levels](https://rdrr.io/r/base/levels.html) giving the desired order,
-  or [NULL](https://rdrr.io/r/base/NULL.html) to sort levels on
+  or [`NULL`](https://rdrr.io/r/base/NULL.html) to sort levels on
   increasing numerical value.
 
 - warn_drop_order:
@@ -50,7 +50,7 @@ factor levels.
 
 Values of factor `x` that are not present in its levels are added to its
 levels, and levels that are not present in its values are dropped, both
-with a warning.
+with a [warning](https://rdrr.io/r/base/warning.html).
 
 Levels of `x` that are missing from `new_order` are appended to
 `new_order`, with a warning. Values of `new_order` that are missing from
@@ -66,7 +66,7 @@ converted by
 Reordering levels of factor `f` by replacing levels through code like
 `levels(f) <- levels(f)[<some order>]` or through assigning a named list
 does **not** work because it also changes the values, see the last
-`Example`.
+'Example'.
 
 ## See also
 

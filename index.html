@@ -63,7 +63,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Visit the <a href="https://jessealderliesten.github.io/progutils/"><strong>progutils</strong> website</a> to explore the package, or install <strong>progutils</strong> <a href="https://github.com/JesseAlderliesten/progutils" class="external-link">from GitHub</a> using the following <a href="https://www.r-project.org/" class="external-link">R</a> code:</p>
+<p>Visit the <a href="https://jessealderliesten.github.io/progutils/"><strong>progutils</strong> website</a> to explore the package, or install <strong>progutils</strong> <a href="https://github.com/JesseAlderliesten/progutils" class="external-link">from GitHub</a> using the following <a href="https://www.r-project.org/" class="external-link"><strong>R</strong></a> code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span>pkgs <span class="op">=</span> <span class="st">"remotes"</span><span class="op">)</span></span>
@@ -86,7 +86,7 @@
 <span><span class="co">#&gt; [1] 1 2 3</span></span>
 <span><span class="fu"><a href="reference/as.numeric_safe.html">as.numeric_safe</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Returns the values.</span></span>
 <span><span class="co">#&gt; [1] 11 12 13</span></span></code></pre></div>
-<p>Similarly, <code><a href="https://rdrr.io/r/stats/relevel.html" class="external-link">relevel()</a></code> from base R can only be used to assign a reference level to a factor and using <code><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels()</a></code> from base R does <strong>not</strong> work to reorder factor levels, whereas using <code><a href="reference/reorder_levels.html">reorder_levels()</a></code> from <strong>progutils</strong> <strong>does</strong> work:</p>
+<p>Similarly, <code><a href="https://rdrr.io/r/stats/relevel.html" class="external-link">relevel()</a></code> from base R can only be used to assign a reference level to a factor and using <code><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels()</a></code> from base <strong>R</strong> does <strong>not</strong> work to reorder factor levels, whereas using <code><a href="reference/reorder_levels.html">reorder_levels()</a></code> from <strong>progutils</strong> <strong>does</strong> work:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/JesseAlderliesten/progutils" class="external-link">progutils</a></span><span class="op">)</span></span>
 <span><span class="va">f_orig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span><span class="op">:</span><span class="fl">13</span>, <span class="fl">13</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span><span class="op">]</span>, levels <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">13</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span></span>
@@ -156,12 +156,12 @@
 <div class="section level2">
 <h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
 </h2>
-<p>Please open a <a href="https://github.com/JesseAlderliesten/progutils/issues" class="external-link">GitHub issue</a> if you have suggestions for improvement of <strong>progutils</strong>.</p>
+<p>Please open a <a href="https://github.com/JesseAlderliesten/progutils/issues" class="external-link">GitHub issue</a> if you have suggestions to improve <strong>progutils</strong>.</p>
 </div>
 <div class="section level2">
 <h2 id="similar-packages">Similar packages<a class="anchor" aria-label="anchor" href="#similar-packages"></a>
 </h2>
-<p>Many packages with miscellaneous functions exist on <a href="https://github.com/" class="external-link">GitHub</a> and <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" class="external-link">CRAN</a>: frequently they have ‘misc’ or ‘util’ in their title or description. In addition, many packages have an ‘utils’ folder inside their ‘R’ folder.</p>
+<p>Many packages with miscellaneous functions exist on <a href="https://github.com/" class="external-link">GitHub</a> and <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html" class="external-link">CRAN</a>: frequently they have ‘misc’ or ‘util’ in their title or description. In addition, many packages have an ‘utils’ folder inside their <code>R</code> folder.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="table-of-contents">

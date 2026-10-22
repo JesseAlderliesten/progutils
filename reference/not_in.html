@@ -73,7 +73,7 @@ instead of a boolean vector?</p></dd>
 
 
 <dt id="arg-warn-case">warn_case<a class="anchor" aria-label="anchor" href="#arg-warn-case"></a></dt>
-<dd><p><code>TRUE</code> or <code>FALSE</code>: should a warning be issued when
+<dd><p><code>TRUE</code> or <code>FALSE</code>: should a <a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a> be issued when
 <code>ignore_case</code> is <code>FALSE</code> and values that are considered present would be
 absent when using case-sensitive matching?</p></dd>
 
@@ -88,16 +88,16 @@ for each element in <code>x</code> if it is absent from <code>table</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Duplicates in <code>x</code> are kept, in contrast to <code><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff()</a></code>, see the <code>Examples</code>.</p>
+    <p>Duplicates in <code>x</code> are kept, in contrast to <code><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff()</a></code>, see the 'Examples'.</p>
 <p><a href="https://rdrr.io/r/base/factor.html" class="external-link">Factor-input</a> to <code>x</code> is converted to character, to prevent
 returning a factor with all values of <code>x</code> as <a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a>.</p>
 <p>Zero-length input behaves slightly different from other values: <code>not_in()</code>
 returns <code>logical(0)</code> for zero-length input to <code>x</code> if that is absent from
 <code>table</code> if <code>value</code> is <code>FALSE</code>. If <code>value</code> is <code>TRUE</code>, the behaviour is normal:
 returning <code>x</code>.</p>
-<p><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a> is allowed in <code>x</code> and <code>table</code> and behaves the same as other values: the
-returned <code>NA</code> (if <code>value</code> is <code>TRUE</code>) and the returned zero-length value (if
-<code>value</code> is <code>FALSE</code>) have the same type as the <code>NA</code> in <code>x</code> if <code>NA</code> is
+<p><code><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a></code> is allowed in <code>x</code> and <code>table</code> and behaves the same as other values:
+the returned <code>NA</code> (if <code>value</code> is <code>TRUE</code>) and the returned zero-length value
+(if <code>value</code> is <code>FALSE</code>) have the same type as the <code>NA</code> in <code>x</code> if <code>NA</code> is
 absent from <code>table</code>. <code>NA</code>s of different types in <code>x</code> and <code>table</code> match each
 other.</p>
 <p><code>not_in()</code> does <strong>not</strong> allow input of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code> because

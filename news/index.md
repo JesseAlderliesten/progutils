@@ -4,13 +4,13 @@
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `1.5.0` to
-  `1.5.1` to be able to inherit sections with capitalized titles.
+- Dependency **checkinput**: increase minimum version from 1.5.0 to
+  1.5.1 to be able to inherit sections with capitalized titles.
 
 #### Documentation
 
 - Make layout more uniform.
-- Wrap lines in `Usage` and `Example` sections to 65 characters.
+- Wrap lines in ‘Usage’ and ‘Example’ sections to 65 characters.
 - Capitalize function titles.
 - Avoid markup in section titles.
 
@@ -26,8 +26,8 @@
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `1.4.0` to
-  `1.5.0` to be able to inherit updates to section `Note on paths` from
+- Dependency **checkinput**: increase minimum version from 1.4.0 to
+  1.5.0 to be able to inherit updates to section ‘Note on paths’ from
   [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html).
 - Some warning messages changed: `checkinput::is_character(<path>)` is
   already checked in `checkinput::is_path(<path>)`.
@@ -36,7 +36,7 @@
 
 - Clarify that `dir` is considered relative to the working directory
   instead of an absolute path.
-- Inherit section `Note on paths` from
+- Inherit section ‘Note on paths’ from
   [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
   when appropriate.
 - Stylistic updates to documentation, including added cross-references.
@@ -45,16 +45,16 @@
 
 #### Breaking changes
 
-- Dependency on `R >= 4.0.0` to be able to use `deparse1(substitute(x))`
-  to get the correct argument names when one function calls another
-  function.
+- Dependency on **R** with minimum version 4.0.0 to be able to use
+  `deparse1(substitute(x))` to get the correct argument names when one
+  function calls another function.
 
 #### New features
 
 - [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md)
   gains argument `y` to check for values that only differ in their case
   between two vectors. Output is no longer sorted, making it independent
-  of the used `locale`.
+  of the used locale.
 - [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md):
   add argument `ignore_case` to make matching case-insensitive and
   argument `warn_case` to warn about values that would be absent when
@@ -62,7 +62,7 @@
 
 #### Documentation
 
-- Version of `roxygen2` bumped to 8.1.1.
+- Version of **roxygen2** bumped to 8.1.1.
 
 ## progutils 0.15.1
 
@@ -82,8 +82,8 @@
   [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
   instead of [`signif()`](https://rdrr.io/r/base/Round.html), ensuring
   that at least the integer part of numbers is displayed completely.
-- Dependency `checkinput`: increase minimum version from `1.3.0` to
-  `1.4.0` to use stricter argument checking for `all_numbers()`,
+- Dependency **checkinput**: increase minimum version from 1.3.0 to
+  1.4.0 to use stricter argument checking for `all_numbers()`,
   `is_number()` and related functions.
 
 #### New functions
@@ -97,14 +97,14 @@
 
 #### Miscellaneous
 
-- The used version of `roxygen2` increased from `8.0.0` to `8.1.0`.
+- The used version of **roxygen2** increased from 8.0.0 to 8.1.0.
 
 ## progutils 0.14.0
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `1.0.0` to
-  `1.3.0` to be able to use argument `collapse` of
+- Dependency **checkinput**: increase minimum version from 1.0.0 to
+  1.3.0 to be able to use argument `collapse` of
   [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html).
 - [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md):
   use argument `collapse` of
@@ -128,14 +128,14 @@
 
 - [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md):
   rename argument `pattern` to `prefix`.
-- Dependency `fs`: require minimum version of `1.3.0` to use argument
+- Dependency **fs**: require minimum version of 1.3.0 to use argument
   `recurse`.
-- Remove suggested dependency `tools` that has been obsolete since
+- Remove suggested dependency **tools** that has been obsolete since
   replacing `file_path_no_ext()` by
   [`fs::path_ext_remove()`](https://fs.r-lib.org/reference/path_file.html)
   and `file_path_ext()` by
   [`fs::path_ext()`](https://fs.r-lib.org/reference/path_file.html) in
-  `progutils 0.3.0`.
+  **progutils** 0.3.0.
 
 ## progutils 0.11.0
 
@@ -166,11 +166,11 @@
 - [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md):
   document and show example how to make `text` available for further
   queries.
-- Update grouping of functions in the `See Also` sections and in the
+- Update grouping of functions in the ‘See Also’ sections and in the
   package index on the website, adding the re-exported function
   [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html).
 - Apply a few more stylistic suggestions provided by various packages
-  like `goodpractice` that check code sanity.
+  like **goodpractice** that check code sanity.
 
 ## progutils 0.10.0
 
@@ -181,7 +181,7 @@
 #### Documentation
 
 - Apply stylistic suggestions provided by various packages like
-  `goodpractice` that check code sanity.
+  **goodpractice** that check code sanity.
 
 ## progutils 0.9.0
 
@@ -198,15 +198,15 @@
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `0.12.0` to
-  `1.0.0` to depend on a stable version.
+- Dependency **checkinput**: increase minimum version from 0.12.0 to
+  1.0.0 to depend on a stable version.
 
 ## progutils 0.7.0
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `0.11.0` to
-  `0.12.0` to use argument `require_sep` from `is_path()` in
+- Dependency **checkinput**: increase minimum version from 0.11.0 to
+  0.12.0 to use argument `require_sep` from `is_path()` in
   [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md)
   and in
   [`create_tempdir()`](https://jessealderliesten.github.io/progutils/reference/create_tempdir.md).
@@ -215,16 +215,16 @@
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `0.10.0` to
-  `0.11.0` to incorporate change of argument name `allow_zero_length` to
+- Dependency **checkinput**: increase minimum version from 0.10.0 to
+  0.11.0 to incorporate change of argument name `allow_zero_length` to
   `allow_zerolength`.
 
 ## progutils 0.5.1
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `0.9.0` to
-  `0.10.0` to incorporate bugfix: `is_path("C:")` would warn that
+- Dependency **checkinput**: increase minimum version from 0.9.0 to
+  0.10.0 to incorporate bugfix: `is_path("C:")` would warn that
   `filename` should not contain `:`.
 
 #### Bugfixes
@@ -256,7 +256,7 @@
 
 #### Breaking changes
 
-- `is_path()`: move to package `checkinput`. Rename argument `path` to
+- `is_path()`: move to package **checkinput**. Rename argument `path` to
   `x`. Adjusted to warn and return `FALSE` instead of throwing an error
   if `path` is not a valid path. Not allow filenames to start with a
   hyphen. Not warn about duplicated file separators or pointing to
@@ -266,7 +266,7 @@
 
 #### Breaking changes
 
-- Added dependency `fs` to `Imports`.
+- Added dependency **fs** to `Imports`.
 - [`create_file_path()`](https://jessealderliesten.github.io/progutils/reference/create_file_path.md):
   no longer replace non-alphanumeric characters in the filename because
   reconstituting the filename is brittle.
@@ -289,16 +289,16 @@
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `0.7.0` to
-  `0.8.0` to update argument name `allow_zero` to `allow_zero_length`.
+- Dependency **checkinput**: increase minimum version from 0.7.0 to
+  0.8.0 to update argument name `allow_zero` to `allow_zero_length`.
 
 ## progutils 0.1.0
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `0.6.0` to
-  `0.7.0` to have the new default `all = FALSE` instead of `all = TRUE`
-  in `make_natural()`.
+- Dependency **checkinput**: increase minimum version from 0.6.0 to
+  0.7.0 to have the new default `all = FALSE` instead of `all = TRUE` in
+  `make_natural()`.
 
 ## progutils 0.0.13
 
@@ -346,11 +346,11 @@
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `0.5.0` to
-  `0.6.0`, needed to use re-exported
+- Dependency **checkinput**: increase minimum version from 0.5.0 to
+  0.6.0, needed to use re-exported
   [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html).
 - [`progutils::paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html):
-  move to `checkinput` and re-export it to `progutils`.
+  move to **checkinput** and re-export it to **progutils**.
 
 #### Added functions
 
@@ -363,7 +363,7 @@
 #### Breaking changes
 
 - Removed unused `check_os_is_windows()`.
-- Use `roxygen2` version 8.0.0.
+- Use **roxygen2** version 8.0.0.
 - [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md):
   `x` and `table` have to be a vector or factor (as was always
   documented) to prevent returning `x` if `x` or `table` is a `list`.
@@ -395,11 +395,12 @@
 
 #### Breaking changes
 
-- Dependency `checkinput`: increase minimum version from `0.1.0` to
-  `0.5.0`. This increases the minimum version of `R` to `4.1.0` but
-  removes the dependency on `vctrs`.
-- Dependency `tinytest`: declare version `>= 1.4.1` because argument
-  `strict` is used in `expect_message()` and `expect_warning()`.
+- Dependency **checkinput**: increase minimum version from 0.1.0 to
+  0.5.0. This increases the minimum version of **R** to 4.1.0 but
+  removes the dependency on **vctrs**.
+- Dependency **tinytest**: declare minimum version 1.4.1 because
+  argument `strict` is used in `expect_message()` and
+  `expect_warning()`.
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):
   `dir` ending in `\.` now is, as was documented, an error instead of
   silently denoting the working directory. Hardcode newlines instead of
@@ -437,9 +438,9 @@
 
 #### Breaking changes
 
-- `checkinput`: increased minimum version to `0.1.0`.
-- Add dependencies `stats` and `tools` to `Suggests` because they are
-  linked to in help pages.
+- **checkinput**: increased minimum version to 0.1.0.
+- Add dependencies **stats** and **tools** to `Suggests` because they
+  are linked to in help pages.
 - No longer import
   [`methods::formalArgs()`](https://rdrr.io/r/methods/methodUtilities.html).
 - [`create_dir()`](https://jessealderliesten.github.io/progutils/reference/create_dir.md):

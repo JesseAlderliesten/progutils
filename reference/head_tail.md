@@ -1,6 +1,6 @@
-# Show First and Last Part of an Object
+# Get the First and Last Part of an Object
 
-Show First and Last Part of an Object
+Get the First and Last Part of an Object
 
 ## Usage
 
@@ -16,9 +16,10 @@ head_tail(x, n = 3L)
 
 - n:
 
-  [natural](https://jessealderliesten.github.io/checkinput/reference/is_natural.html)
-  number (default `3L`) indicating the number of elements or rows to
-  return as `head` and `tail`.
+  [natural
+  number](https://jessealderliesten.github.io/checkinput/reference/is_natural.html)
+  indicating the number of elements or rows to return as `head` and
+  `tail`.
 
 ## Value
 

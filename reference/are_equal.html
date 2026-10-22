@@ -57,7 +57,7 @@ numeric errors to make <code>are_equal()</code> safer than <code><a href="https:
 
 <dl><dt id="arg-x-y">x, y<a class="anchor" aria-label="anchor" href="#arg-x-y"></a></dt>
 <dd><p>Numeric vectors with length larger than zero to compare for
-equality. They may contain <a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a>s or <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a>s, see <code>Value</code>.</p></dd>
+equality. They may contain <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a></code>s or <code><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a></code>s, see 'Value'.</p></dd>
 
 
 <dt id="arg-tol">tol<a class="anchor" aria-label="anchor" href="#arg-tol"></a></dt>
@@ -68,15 +68,15 @@ than <code>tol</code> are considered equal.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A vector with logical values (<code>TRUE</code>, <code>FALSE</code> or <code>NA</code>) indicating if
-elements in <code>x</code> and <code>y</code> are equal to each other. <a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a> is returned for
+elements in <code>x</code> and <code>y</code> are equal to each other. <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a></code> is returned for
 comparisons involving numeric <code>NA</code> (i.e., <code>NA_integer_</code> or <code>NA_real_</code>),
-<a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a>, or <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">infinite values</a> with the same sign.</p>
+<code><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a></code>, or <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">infinite values</a> with the same sign.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>are_equal()</code> allows for small numeric errors when comparing numbers. Such
 numeric errors can arise because of rounding or representation error. As the
-<code>Note</code> at <code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">==</a></code> warns, <code>x == round(x)</code> does <strong>not</strong> allow for such errors
+'Note' at <code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">==</a></code> warns, <code>x == round(x)</code> does <strong>not</strong> allow for such errors
 but tests exact equality.</p>
     </div>
     <div class="section level2">
@@ -84,7 +84,7 @@ but tests exact equality.</p>
 
 
 <p>Code <code>abs(x - y) &lt; tol</code> was taken from
-<a href="https://dplyr.tidyverse.org/reference/near.html" class="external-link"><code>dplyr::near()</code></a>.</p>
+<a href="https://dplyr.tidyverse.org/reference/near.html" class="external-link">dplyr::near()</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -92,7 +92,7 @@ but tests exact equality.</p>
 numbers; <code><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal()</a></code> to check more generally for near-equality;
 <code><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical()</a></code>, <code><a href="not_in.html">not_in()</a></code> and <code><a href="https://rdrr.io/r/base/match.html" class="external-link">match()</a></code> (containing <code>%in%</code> and, from <span style="R">R</span>
 <code>4.6.0</code> onwards, <code>'%notin%'</code>) to check for exact (in)equality, with
-<code><a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a></code> to do so using binary operators;
+<a href="https://rdrr.io/r/base/Comparison.html" class="external-link">Comparison</a> to do so using binary operators;
 <a href="https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" class="external-link"><span style="R">R</span> FAQ 7.31</a>
 for background on numerical equality;
 the vignette <em>Type coercion</em> in package <code>checkinput</code>:

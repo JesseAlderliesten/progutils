@@ -18,12 +18,12 @@ signif_custom(x, digits = 3L, type = c("selective", "expanded"))
 
   [numeric vector](https://rdrr.io/r/base/numeric.html),
   [matrix](https://rdrr.io/r/base/matrix.html) or
-  [data.frame](https://rdrr.io/r/base/data.frame.html), see `Details`.
+  [data.frame](https://rdrr.io/r/base/data.frame.html), see 'Details'.
 
 - digits:
 
   the **minimum** number of [significant
-  digits](https://rdrr.io/r/base/Round.html) to round to (see `Details`)
+  digits](https://rdrr.io/r/base/Round.html) to round to (see 'Details')
   or `Inf` to not round values.
 
 - type:
@@ -31,7 +31,7 @@ signif_custom(x, digits = 3L, type = c("selective", "expanded"))
   [character
   string](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
   `"selective"` or `"expanded"` indicating the type of rounding to be
-  used, see `Details`.
+  used, see 'Details'.
 
 ## Value
 
@@ -41,19 +41,19 @@ signif_custom(x, digits = 3L, type = c("selective", "expanded"))
 
 [Infinite values](https://rdrr.io/r/base/is.finite.html) are returned
 unchanged. `NA_integer_` and `NA_real_` are returned as
-[NA_real\_](https://rdrr.io/r/base/NA.html).
-[matrices](https://rdrr.io/r/base/matrix.html) and
-[dataframes](https://rdrr.io/r/base/data.frame.html) are handled by
-rounding values of numeric columns.
+[`NA_real_`](https://rdrr.io/r/base/NA.html).
+[matrices](https://rdrr.io/r/base/matrix.html) and [data
+frames](https://rdrr.io/r/base/data.frame.html) are handled by rounding
+values of numeric columns.
 [Non-numeric](https://rdrr.io/r/base/numeric.html) (e.g.,
-[factor](https://rdrr.io/r/base/factor.html)) `x` is **not** supported,
-use
+[`factor`](https://rdrr.io/r/base/factor.html)) `x` is **not**
+supported, use
 [`as.numeric_safe()`](https://jessealderliesten.github.io/progutils/reference/as.numeric_safe.md)
 beforehand on `x` if appropriate.
 
 Numeric values are rounded according to arguments `digits` and `type`.
 Values are **not** rounded if `digits` is
-[Inf](https://rdrr.io/r/base/is.finite.html). Otherwise, the value of
+[`Inf`](https://rdrr.io/r/base/is.finite.html). Otherwise, the value of
 `digits` rounded to the nearest positive integer is used as the
 **minimum** number of [significant
 digits](https://rdrr.io/r/base/Round.html) to round numeric values in

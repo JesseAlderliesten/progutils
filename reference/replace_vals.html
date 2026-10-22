@@ -70,7 +70,7 @@
 
 <dt id="arg-old">old<a class="anchor" aria-label="anchor" href="#arg-old"></a></dt>
 <dd><p>character vector with values to be replaced. Should be <a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a>
-and not contain the value in <code>new</code>, otherwise an error is thrown.</p></dd>
+and not contain the value in <code>new</code>, otherwise an <a href="https://rdrr.io/r/base/stop.html" class="external-link">error</a> is thrown.</p></dd>
 
 
 <dt id="arg-new">new<a class="anchor" aria-label="anchor" href="#arg-new"></a></dt>
@@ -78,13 +78,13 @@ and not contain the value in <code>new</code>, otherwise an error is thrown.</p>
 
 
 <dt id="arg-ignore-case">ignore_case<a class="anchor" aria-label="anchor" href="#arg-ignore-case"></a></dt>
-<dd><p><code>TRUE</code> or <code>FALSE</code>: ignore <a href="https://rdrr.io/r/base/chartr.html" class="external-link">case</a> when looking for
-<code>old</code>? See <code>Details</code>.</p></dd>
+<dd><p><code>TRUE</code> or <code>FALSE</code>: ignore <a href="https://rdrr.io/r/base/chartr.html" class="external-link">case</a> when looking
+for <code>old</code>? See 'Details'.</p></dd>
 
 
 <dt id="arg-allow-multiple">allow_multiple<a class="anchor" aria-label="anchor" href="#arg-allow-multiple"></a></dt>
 <dd><p><code>TRUE</code> or <code>FALSE</code>: allow multiple values of <code>old</code> to
-match <code>x</code>? See <code>Details</code>.</p></dd>
+match <code>x</code>? See 'Details'.</p></dd>
 
 
 <dt id="arg-warn-absent">warn_absent<a class="anchor" aria-label="anchor" href="#arg-warn-absent"></a></dt>
@@ -96,9 +96,9 @@ if <code>new</code> is found in <code>x</code>.</p></dd>
 <dt id="arg-signal-case-old-signal-case-new">signal_case_old, signal_case_new<a class="anchor" aria-label="anchor" href="#arg-signal-case-old-signal-case-new"></a></dt>
 <dd><p><code>"error"</code>, <code>"warning"</code>, <code>"message"</code>,
 or <code>"quiet"</code>: character string indicating the type of <a href="signal_text.html">signal</a>
-to give if values in <code>x</code> are a case-insensitive match but not a case-sensitive
-match to <code>old</code> or <code>new</code>, respectively. For <code>signal_case_old</code>, this is also
-influenced by argument <code>signal_old_ignore_case</code>.</p></dd>
+to give if values in <code>x</code> are a case-insensitive match but not a
+case-sensitive match to <code>old</code> or <code>new</code>, respectively. For <code>signal_case_old</code>,
+this is also influenced by argument <code>signal_old_ignore_case</code>.</p></dd>
 
 
 <dt id="arg-signal-old-ignore-case">signal_old_ignore_case<a class="anchor" aria-label="anchor" href="#arg-signal-old-ignore-case"></a></dt>
@@ -122,15 +122,15 @@ after the replacement.</p>
     <p>Values in <code>x</code> that <a href="check_case.html">only differ</a> from <code>new</code> in their case are
 <strong>not</strong> adjusted, but lead to a <a href="signal_text.html">signal</a> as indicated by
 argument <code>signal_case_new</code>.</p>
-<p>An error is thrown if <code>allow_multiple</code> is <code>FALSE</code> and multiple values of
-<code>old</code> match <code>x</code>, unless those values of <code>old</code> only differ in their case and
-<code>ignore_case</code> is <code>TRUE</code>. An example of such an exception is
+<p>An <a href="https://rdrr.io/r/base/stop.html" class="external-link">error</a> is thrown if <code>allow_multiple</code> is <code>FALSE</code> and multiple
+values of <code>old</code> match <code>x</code>, unless those values of <code>old</code> only differ in their
+case and <code>ignore_case</code> is <code>TRUE</code>. An example of such an exception is
 <code>replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)</code>,
 which returns <code>c("b", "b")</code>.</p>
 <p>If <code>quiet</code> is <code>FALSE</code>, a message indicates which values have been replaced.
 The used order in the message is determined by the order of the factor
 <strong>levels</strong>, which is influenced by the <a href="https://rdrr.io/r/base/locales.html" class="external-link">locale</a> at the time of their
-creation, see the <code>Warning</code> in <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor()</a></code> and the <code>Programming Notes</code> in
+creation, see the 'Warning' in <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor()</a></code> and the 'Programming Notes' in
 <code><a href="https://jessealderliesten.github.io/checkinput/reference/all_names.html" class="external-link">checkinput::all_names()</a></code>.</p>
 <p><code>replace_vals()</code> does <strong>not</strong> allow input of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> <code>double</code> because
 matching such input should allow for small numerical errors by using a

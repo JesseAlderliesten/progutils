@@ -31,7 +31,8 @@ replace_vals(
 
   character vector with values to be replaced. Should be
   [unique](https://rdrr.io/r/base/unique.html) and not contain the value
-  in `new`, otherwise an error is thrown.
+  in `new`, otherwise an [error](https://rdrr.io/r/base/stop.html) is
+  thrown.
 
 - new:
 
@@ -40,12 +41,12 @@ replace_vals(
 - ignore_case:
 
   `TRUE` or `FALSE`: ignore [case](https://rdrr.io/r/base/chartr.html)
-  when looking for `old`? See `Details`.
+  when looking for `old`? See 'Details'.
 
 - allow_multiple:
 
   `TRUE` or `FALSE`: allow multiple values of `old` to match `x`? See
-  `Details`.
+  'Details'.
 
 - warn_absent:
 
@@ -87,9 +88,10 @@ from `new` in their case are **not** adjusted, but lead to a
 [signal](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
 as indicated by argument `signal_case_new`.
 
-An error is thrown if `allow_multiple` is `FALSE` and multiple values of
-`old` match `x`, unless those values of `old` only differ in their case
-and `ignore_case` is `TRUE`. An example of such an exception is
+An [error](https://rdrr.io/r/base/stop.html) is thrown if
+`allow_multiple` is `FALSE` and multiple values of `old` match `x`,
+unless those values of `old` only differ in their case and `ignore_case`
+is `TRUE`. An example of such an exception is
 `replace_vals(x = c("a", "A"), old = c("a", "A"), new = "b", ignore_case = TRUE, allow_multiple = FALSE)`,
 which returns `c("b", "b")`.
 
@@ -97,9 +99,9 @@ If `quiet` is `FALSE`, a message indicates which values have been
 replaced. The used order in the message is determined by the order of
 the factor **levels**, which is influenced by the
 [locale](https://rdrr.io/r/base/locales.html) at the time of their
-creation, see the `Warning` in
-[`factor()`](https://rdrr.io/r/base/factor.html) and the
-`Programming Notes` in
+creation, see the 'Warning' in
+[`factor()`](https://rdrr.io/r/base/factor.html) and the 'Programming
+Notes' in
 [`checkinput::all_names()`](https://jessealderliesten.github.io/checkinput/reference/all_names.html).
 
 `replace_vals()` does **not** allow input of

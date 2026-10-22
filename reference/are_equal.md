@@ -15,8 +15,8 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 - x, y:
 
   Numeric vectors with length larger than zero to compare for equality.
-  They may contain [NA](https://rdrr.io/r/base/NA.html)s or
-  [NaN](https://rdrr.io/r/base/is.finite.html)s, see `Value`.
+  They may contain [`NA`](https://rdrr.io/r/base/NA.html)s or
+  [`NaN`](https://rdrr.io/r/base/is.finite.html)s, see 'Value'.
 
 - tol:
 
@@ -28,23 +28,23 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 
 A vector with logical values (`TRUE`, `FALSE` or `NA`) indicating if
 elements in `x` and `y` are equal to each other.
-[NA](https://rdrr.io/r/base/NA.html) is returned for comparisons
+[`NA`](https://rdrr.io/r/base/NA.html) is returned for comparisons
 involving numeric `NA` (i.e., `NA_integer_` or `NA_real_`),
-[NaN](https://rdrr.io/r/base/is.finite.html), or [infinite
+[`NaN`](https://rdrr.io/r/base/is.finite.html), or [infinite
 values](https://rdrr.io/r/base/is.finite.html) with the same sign.
 
 ## Details
 
 `are_equal()` allows for small numeric errors when comparing numbers.
 Such numeric errors can arise because of rounding or representation
-error. As the `Note` at [`==`](https://rdrr.io/r/base/Comparison.html)
+error. As the 'Note' at [`==`](https://rdrr.io/r/base/Comparison.html)
 warns, `x == round(x)` does **not** allow for such errors but tests
 exact equality.
 
 ## Acknowledgement
 
 Code `abs(x - y) < tol` was taken from
-[`dplyr::near()`](https://dplyr.tidyverse.org/reference/near.html).
+[dplyr::near()](https://dplyr.tidyverse.org/reference/near.html).
 
 ## See also
 
@@ -56,9 +56,8 @@ generally for near-equality;
 [`not_in()`](https://jessealderliesten.github.io/progutils/reference/not_in.md)
 and [`match()`](https://rdrr.io/r/base/match.html) (containing `%in%`
 and, from R `4.6.0` onwards, `'%notin%'`) to check for exact
-(in)equality, with
-[`Comparison`](https://rdrr.io/r/base/Comparison.html) to do so using
-binary operators; [R FAQ
+(in)equality, with [Comparison](https://rdrr.io/r/base/Comparison.html)
+to do so using binary operators; [R FAQ
 7.31](https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
 for background on numerical equality; the vignette *Type coercion* in
 package `checkinput`:

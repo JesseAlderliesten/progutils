@@ -1,9 +1,9 @@
 # Undo paste_quoted()
 
-Split a character string into a vector and remove quotation marks, to
+Split a character string into a vector and remove quotation marks to
 undo
 [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html)
-(but see `Details`).
+but see 'Details'.
 
 ## Usage
 

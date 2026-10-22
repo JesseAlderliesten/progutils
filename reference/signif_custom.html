@@ -63,17 +63,17 @@ ending in rounded zeros, e.g., <code>14300</code> instead of <code>14286</code> 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric vector</a>, <a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a> or <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a>, see
-<code>Details</code>.</p></dd>
+'Details'.</p></dd>
 
 
 <dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
 <dd><p>the <strong>minimum</strong> number of <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant digits</a> to
-round to (see <code>Details</code>) or <code>Inf</code> to not round values.</p></dd>
+round to (see 'Details') or <code>Inf</code> to not round values.</p></dd>
 
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
 <dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> <code>"selective"</code> or
-<code>"expanded"</code> indicating the type of rounding to be used, see <code>Details</code>.</p></dd>
+<code>"expanded"</code> indicating the type of rounding to be used, see 'Details'.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -83,12 +83,12 @@ round to (see <code>Details</code>) or <code>Inf</code> to not round values.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">Infinite values</a> are returned unchanged. <code>NA_integer_</code> and <code>NA_real_</code>
-are returned as <a href="https://rdrr.io/r/base/NA.html" class="external-link">NA_real_</a>. <a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrices</a> and
-<a href="https://rdrr.io/r/base/data.frame.html" class="external-link">dataframes</a> are handled by rounding values of numeric columns.
-<a href="https://rdrr.io/r/base/numeric.html" class="external-link">Non-numeric</a> (e.g., <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a>) <code>x</code> is <strong>not</strong> supported, use
+are returned as <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA_real_</a></code>. <a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrices</a> and
+<a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data frames</a> are handled by rounding values of numeric columns.
+<a href="https://rdrr.io/r/base/numeric.html" class="external-link">Non-numeric</a> (e.g., <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></code>) <code>x</code> is <strong>not</strong> supported, use
 <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code> beforehand on <code>x</code> if appropriate.</p>
 <p>Numeric values are rounded according to arguments <code>digits</code> and <code>type</code>. Values
-are <strong>not</strong> rounded if <code>digits</code> is <a href="https://rdrr.io/r/base/is.finite.html" class="external-link">Inf</a>. Otherwise, the value of <code>digits</code>
+are <strong>not</strong> rounded if <code>digits</code> is <code><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">Inf</a></code>. Otherwise, the value of <code>digits</code>
 rounded to the nearest positive integer is used as the <strong>minimum</strong> number of
 <a href="https://rdrr.io/r/base/Round.html" class="external-link">significant digits</a> to round numeric values in <code>x</code> to while
 ensuring their integer parts are not rounded.</p>

@@ -19,7 +19,7 @@ check_case(
 
   [character
   vectors](https://jessealderliesten.github.io/checkinput/reference/all_characters.html)
-  to check, see `Value`.
+  to check, see 'Value'.
 
 - signal:
 
@@ -51,14 +51,12 @@ If `y` is **not** `NULL`: values in `x` that only differ from values in
 `y` in their case. Such values lead to a
 [signal](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
 as indicated by argument `signal`. Values within `x` or within `y` only
-differ in their case lead to a
-[signal](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
-as indicated by argument `signal_within`.
+differ in their case lead to a signal as indicated by argument
+`signal_within`.
 
 If `y` is `NULL`: values in `x` that only differ from other values in
-`x` in their case. Such values lead to a
-[signal](https://jessealderliesten.github.io/progutils/reference/signal_text.md)
-as indicated by argument `signal_within`.
+`x` in their case. Such values lead to a signal as indicated by argument
+`signal_within`.
 
 ## See also
 

@@ -42,7 +42,7 @@ new_order."></head><body>
     </div>
 
     <div class="ref-description section level2">
-    <p>Reorder columns, warning about mismatches between factor levels and
+    <p>Reorder columns, <a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a> about mismatches between factor levels and
 <code>new_order</code>.</p>
     </div>
 
@@ -64,7 +64,7 @@ with levels ordered as <code>new_order</code>. Should have length larger than ze
 <dt id="arg-new-order">new_order<a class="anchor" aria-label="anchor" href="#arg-new-order"></a></dt>
 <dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character vector</a> with a
 length larger than zero containing <a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a> <a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a> giving the desired
-order, or <a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a> to sort levels on increasing numerical value.</p></dd>
+order, or <code><a href="https://rdrr.io/r/base/NULL.html" class="external-link">NULL</a></code> to sort levels on increasing numerical value.</p></dd>
 
 
 <dt id="arg-warn-drop-order">warn_drop_order<a class="anchor" aria-label="anchor" href="#arg-warn-drop-order"></a></dt>
@@ -83,7 +83,7 @@ dropped because they are not present in <code>x</code>?</p></dd>
 the factor levels.</p>
 <p>Values of factor <code>x</code> that are not present in its levels are added to its
 levels, and levels that are not present in its values are dropped, both with
-a warning.</p>
+a <a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a>.</p>
 <p>Levels of <code>x</code> that are missing from <code>new_order</code> are appended to <code>new_order</code>,
 with a warning. Values of <code>new_order</code> that are missing from levels of <code>x</code> are
 dropped, with a warning if <code>warn_drop_order</code> is <code>TRUE</code>.</p>
@@ -96,7 +96,7 @@ converted by <code><a href="as.numeric_safe.html">as.numeric_safe()</a></code>.<
 
 <p>Reordering levels of factor <code>f</code> by replacing levels through code like
 <code>levels(f) &lt;- levels(f)[&lt;some order&gt;]</code> or through assigning a named list does
-<strong>not</strong> work because it also changes the values, see the last <code>Example</code>.</p>
+<strong>not</strong> work because it also changes the values, see the last 'Example'.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -58,8 +58,7 @@
 
 <dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
 <dd><p><a href="https://jessealderliesten.github.io/checkinput/reference/is_natural.html" class="external-link">natural number</a> giving the maximum
-line width (in characters)
-after wrapping. Can be <code>Inf</code> to not wrap text.</p></dd>
+number of characters at a line after wrapping. Can be <code>Inf</code> to not wrap text.</p></dd>
 
 
 <dt id="arg-ignore-newlines">ignore_newlines<a class="anchor" aria-label="anchor" href="#arg-ignore-newlines"></a></dt>
@@ -75,18 +74,18 @@ by blank characters?</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <a href="https://jessealderliesten.github.io/checkinput/reference/all_characters.html" class="external-link">character string</a> containing <code>x</code> wrapped to a
 maximum of <code>width</code> characters, with newlines inserted at blank characters. A
-warning is issued if <code>warn_length</code> is <code>TRUE</code> and the width of a fragment in
+<a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a> is issued if <code>warn_length</code> is <code>TRUE</code> and the width of a fragment in
 the output exceeds <code>width</code>: this occurs if a stretch of characters longer
 than <code>width</code> occurs without a blank character to wrap at.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>character(0)</code> input to <code>x</code> is returned unchanged, with a warning.</p>
+    <p><code>character(0)</code> input to <code>x</code> is returned unchanged, with a <a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a>.</p>
 <p><code>x</code> of length larger than one is pasted into a single string, separating the
 parts by blank characters.</p>
 <p>Consecutive white space is collapsed into a single blank character, except
-for double spaces after periods, question marks and exclamation marks (as
-documented in the section <code>Details</code> of <code><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap()</a></code>).</p>
+for double spaces after periods, question marks and exclamation marks, as
+documented in the section 'Details' of <code><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap()</a></code>.</p>
 <p>Leading and trailing newlines are collapsed into a single blank character if
 <code>ignore_newlines</code> is <code>TRUE</code> and are retained if <code>ignore_newlines</code> is <code>FALSE</code>.</p>
     </div>

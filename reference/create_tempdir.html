@@ -62,9 +62,9 @@ characters that are <a href="https://jessealderliesten.github.io/checkinput/refe
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A character string with the <a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">absolute normalised</a> path to the
 created temporary directory, returned <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisibly</a>, see the section
-<code>Notes on paths</code> below.</p>
-<p>An error is thrown when attempting to create subdirectories (see <code>Details</code>)
-and if creating the directory fails.</p>
+'Notes on Paths' below.</p>
+<p>An <a href="https://rdrr.io/r/base/stop.html" class="external-link">error</a> is thrown when attempting to create subdirectories (see
+'Details') and if creating the directory fails.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -74,7 +74,7 @@ and is followed by a random string. This random string <strong>might</strong> co
 dot (<code>.</code>) such that the directory appears to have a file extension, see the
 section <code>Source</code> in <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">help("tempdir")</a></code>.</p>
 <p>It is <strong>not</strong> possible to create recursive subdirectories (e.g.,
-<code>tempdir/subtempdir/otherdir</code>, see the <code>Examples</code>) because
+<code>tempdir/subtempdir/otherdir</code>, see the 'Examples') because
 <a href="https://rdrr.io/r/base/unlink.html" class="external-link">removing</a> such directories might remove files that are still
 needed by other processes.</p>
 <p>Although the temporary directory given by <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> will normally be
@@ -91,9 +91,9 @@ empty the temporary directory), the created subdirectories should be
 
 <p><a href="https://rdrr.io/r/utils/example.html" class="external-link">Examples</a> and <a href="https://r-pkgs.org/testing-basics.html" class="external-link">tests</a>
 should write to a temporary directory that is cleaned
-up afterwards (otherwise <a href="https://r-pkgs.org/R-CMD-check.html" class="external-link"><code>R cmd check</code></a>
-will issue a <code>Note</code> about <a href="https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory" class="external-link"><code>detritus in the temp directory</code></a>
-and CRAN will not accept your package, see section <code>Source packages</code> from the
+up afterwards (otherwise <a href="https://r-pkgs.org/R-CMD-check.html" class="external-link">R cmd check</a>
+will issue a 'Note' about <a href="https://contributor.r-project.org/cran-cookbook/code_issues.html#leaving-files-in-the-temporary-directory" class="external-link">detritus in the temp directory</a>
+and CRAN will not accept your package, see section 'Source packages' from the
 <a href="https://cran.r-project.org/web/packages/policies.html" class="external-link">CRAN policies</a>).
 Although <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> points to a temporary
 directory, that directory should <strong>not</strong> be removed because other processes
@@ -122,17 +122,17 @@ if it does not yet <a href="https://fs.r-lib.org/reference/file_access.html" cla
 
 <p>The file separator is a backslash (<code>\</code>) on Windows but a forward slash (<code>/</code>)
 on other operating systems: use <code><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path()</a></code> or <code><a href="https://fs.r-lib.org/reference/path.html" class="external-link">fs::path()</a></code> to construct
-paths in a platform-independent way and <a href="https://rdrr.io/r/base/Platform.html" class="external-link">.Platform$file.sep</a> to
+paths in a platform-independent way and <code><a href="https://rdrr.io/r/base/Platform.html" class="external-link">.Platform$file.sep</a></code> to
 get the file separator used on the current platform.</p>
-<p>Furthermore, the backslash is also used as <a href="https://rdrr.io/r/base/regex.html" class="external-link">escape character</a> in <span style="R">R</span>,
-such that backslashes need to be escaped in <span style="R">R</span> code by doubling them. Use
+<p>Furthermore, the backslash is also used as an <a href="https://rdrr.io/r/base/regex.html" class="external-link">escape character</a> in
+<span style="R">R</span>, such that backslashes need to be escaped in <span style="R">R</span> code by doubling them. Use
 <code>cat(x)</code> to omit the escape characters to see how <code>x</code> would be printed.</p>
 <p>The <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> can be indicated by a single dot (<code>"."</code>) and
 the parent directory can be indicated by two dots (<code>".."</code>).</p>
 <p><strong>relative</strong> paths start from the <a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a>. In contrast,
 <strong>absolute</strong> paths start from the root directory and thus give the complete
-path, such that the path still points to the same directory if the
-<a href="https://rdrr.io/r/base/getwd.html" class="external-link">working directory</a> changes.</p>
+path, such that the path still points to the same directory if the working
+directory changes.</p>
 <p>Paths can be normalised, e.g., through <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code> or <code><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">fs::path_norm()</a></code>
 (which is also called by <code><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">fs::path_abs()</a></code>). On case-insensitive file systems,
 this also adjusts the case to match names of directories that are already
@@ -148,8 +148,8 @@ present.</p>
 successive forward slashes (e.g.,
 <code>/var/&lt;...&gt;/T//RtmpxC2Fyl/working_dir/RtmpdnqgUR</code>) which in earlier versions
 of <code><a href="https://jessealderliesten.github.io/checkinput/reference/is_path.html" class="external-link">is_path()</a></code> (then in package
-<a href="https://jessealderliesten.github.io/progutils/">progutils</a>) led to spurious
-warnings about duplicated file separators.</p>
+<a href="https://jessealderliesten.github.io/progutils/"><strong>progutils</strong></a>) led to
+spurious warnings about duplicated file separators.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -175,14 +175,14 @@ directory</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpo1KNmc"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpmaAUni"</span>
 <span class="r-in"><span><span class="co"># Create a directory inside the directory returned by 'tempdir()'</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_ex1</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpo1KNmc/subtempdir1aaa80141c7"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpmaAUni/subtempdir1aa9476bbef9"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using the same 'prefix' again creates another directory</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">tempdir_ex2</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span>prefix <span class="op">=</span> <span class="st">"subtempdir"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmpo1KNmc/subtempdir1aaa1ae0962d"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpmaAUni/subtempdir1aa92f04e0d0"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># It is not possible to create recursive subdirectories</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">no_subtempdir</span> <span class="op">&lt;-</span> <span class="fu">create_tempdir</span><span class="op">(</span></span></span>

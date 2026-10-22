@@ -62,7 +62,7 @@ numeric vector.</p></dd>
 
 <dt id="arg-keep-integer">keep_integer<a class="anchor" aria-label="anchor" href="#arg-keep-integer"></a></dt>
 <dd><p><code>TRUE</code> or <code>FALSE</code>: return input of <a href="https://rdrr.io/r/base/typeof.html" class="external-link">type</a> integer
-without converting it to double, see <code>Details</code>.</p></dd>
+without converting it to double, see 'Details'.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -76,7 +76,7 @@ without converting it to double, see <code>Details</code>.</p></dd>
 <code>FALSE</code>.</p>
 <p><code>NULL</code> and zero-length vectors are converted to <code>numeric(0)</code>, except for
 <code>integer(0)</code> that is kept unchanged if <code>keep_integer</code> is <code>TRUE</code>, which is the
-default. <code>FALSE</code> and <code>TRUE</code> are converted to <code>NA_real_</code>, with warning,
+default. <code>FALSE</code> and <code>TRUE</code> are converted to <code>NA_real_</code>, with a <a href="https://rdrr.io/r/base/warning.html" class="external-link">warning</a>,
 whereas <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code> converts those values to <code>0</code> and <code>1</code>, respectively.</p>
 <p><code>as.numeric_safe()</code> uses a suggestion from <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor()</a></code> and
 <a href="https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-do-I-convert-factors-to-numeric_003f" class="external-link"><span style="R">R</span> FAQ 7.10</a>
@@ -84,12 +84,12 @@ that works if <code>x</code> is a <a href="https://rdrr.io/r/base/factor.html" c
 vector, even though the last example of <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code> comments that this
 approach is less efficient for long vectors.</p>
 <p>In contrast, the alternative conversions <code>as.numeric(levels(x))[x]</code> (suggested
-in the <code>Warning</code> of <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a>) and <code>as.numeric(levels(x))[as.integer(x)]</code>
+in the 'Warning' of <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a>) and <code>as.numeric(levels(x))[as.integer(x)]</code>
 (suggested in <span style="R">R</span> <code>FAQ 7.10</code> linked to above) <strong>only</strong> work if <code>x</code> is a
-<a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a>, see the <code>Examples</code>.</p>
-<p>Furthermore, <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code> <strong>cannot</strong> be used to convert a <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a> to
+factor, see the 'Examples'.</p>
+<p>Furthermore, <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code> <strong>cannot</strong> be used to convert a factor to
 numeric because it returns their underlying numeric integer representation
-(i.e., the indices of the factor levels), see the <code>Warnings</code> in
+(i.e., the indices of the factor levels), see the section 'Warnings' in
 <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric()</a></code> and <a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a>.</p>
     </div>
     <div class="section level2">
