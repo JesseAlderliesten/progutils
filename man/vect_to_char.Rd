@@ -60,8 +60,9 @@ Some values are handled specially to better distinguish different values than
 \code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}:
 \itemize{
 \item \code{NULL} is returned as \code{"NULL"}
-\item non-\code{NULL} zero-length objects are returned as \code{"<type>(0)"} (e.g.,
-\code{"logical(0)"}; for \code{numeric(0)} this is \code{"double(0)"})
+\item non-\code{NULL} \link[checkinput:is_zerolength]{zero-length objects} are returned
+as \code{"<type>(0)"} (e.g., \code{"logical(0)"}; for \code{numeric(0)} this is
+\code{"double(0)"})
 \item \code{""} is returned as \code{""}
 \item logical \code{NA} is returned as \code{"NA"}
 \item non-logical \code{NA} is returned as \code{"NA_<type>_"} (e.g., \code{"NA_character_"};
