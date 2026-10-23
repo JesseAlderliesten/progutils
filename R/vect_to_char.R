@@ -122,7 +122,8 @@ vect_to_char <- function(
   stopifnot(checkinput::is_number(signif),
             checkinput::is_positive(width),
             checkinput::is_character(sep),
-            is.null(collapse) || checkinput::is_character(collapse))
+            is.null(collapse) || checkinput::is_character(collapse),
+            checkinput::is_logical(ignore_newlines))
   round_type <- match.arg(round_type, several.ok = FALSE)
 
   if(is.list(x) && !is.data.frame(x)) {
