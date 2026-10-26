@@ -60,7 +60,8 @@
 #' @seealso
 #' [toString()] which is shorthand for `paste(x, collapse = ", ")` and can be
 #' used instead of `vect_to_char()` if names of `x` can be removed;
-#' `vignette("type_coercion", package = "checkinput")` and
+#' [`vignette("type_coercion", package = "checkinput")`](https://jessealderliesten.github.io/checkinput/articles/type_coercion.html)
+#' and
 #' `help("is_zerolength", package = "checkinput")` for a discussion of some
 #' issues with type conversion and zero-length input when [combining][c()]
 #' objects into a vector.

@@ -31,7 +31,9 @@
 #' [\R FAQ 7.31](
 #' https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
 #' for background on numerical equality;
-#' the vignette *Type coercion* in package `checkinput`:
+#' the vignette
+#' [*Type coercion*](https://jessealderliesten.github.io/checkinput/articles/type_coercion.html)
+#' in package `checkinput`:
 #' `vignette("Type_Coercion", package = "checkinput")`.
 #'
 #' @family functions to check equality

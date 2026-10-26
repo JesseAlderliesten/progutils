@@ -126,7 +126,8 @@ paste0(
 \seealso{
 \code{\link[=toString]{toString()}} which is shorthand for \code{paste(x, collapse = ", ")} and can be
 used instead of \code{vect_to_char()} if names of \code{x} can be removed;
-\code{vignette("type_coercion", package = "checkinput")} and
+\href{https://jessealderliesten.github.io/checkinput/articles/type_coercion.html}{\code{vignette("type_coercion", package = "checkinput")}}
+and
 \code{help("is_zerolength", package = "checkinput")} for a discussion of some
 issues with type conversion and zero-length input when \link[=c]{combining}
 objects into a vector.
