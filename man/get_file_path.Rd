@@ -48,6 +48,8 @@ directories.
 \section{Notes on Paths}{
 
 
+\subsection{Slashes}{
+
 The file separator is a backslash (\verb{\\}) on Windows but a forward slash (\code{/})
 on other operating systems: use \code{\link[=file.path]{file.path()}} or \code{\link[fs:path]{fs::path()}} to construct
 paths in a platform-independent way and \code{\link[=.Platform]{.Platform$file.sep}} to
@@ -56,19 +58,27 @@ get the file separator used on the current platform.
 Furthermore, the backslash is also used as an \link[=regex]{escape character} in
 \R, such that backslashes need to be escaped in \R code by doubling them. Use
 \code{cat(x)} to omit the escape characters to see how \code{x} would be printed.
+}
+
+\subsection{Dots}{
 
 The \link[=getwd]{working directory} can be indicated by a single dot (\code{"."}) and
 the parent directory can be indicated by two dots (\code{".."}).
+\code{checkinput::is_path()} only allows those in the first path component.
 
 \strong{relative} paths start from the \link[=getwd]{working directory}. In contrast,
 \strong{absolute} paths start from the root directory and thus give the complete
 path, such that the path still points to the same directory if the working
 directory changes.
+}
+
+\subsection{Normalisation}{
 
 Paths can be normalised, e.g., through \code{\link[=normalizePath]{normalizePath()}} or \code{\link[fs:path_norm]{fs::path_norm()}}
 (which is also called by \code{\link[fs:path_abs]{fs::path_abs()}}). On case-insensitive file systems,
 this also adjusts the case to match names of directories that are already
 present.
+}
 
 }
 
