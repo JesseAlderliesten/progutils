@@ -23,7 +23,8 @@ An \link[=stop]{error} is thrown when attempting to create subdirectories (see
 Create a temporary directory that can safely be removed.
 }
 \details{
-The new directory is \link[=dir.create]{created} inside the directory returned by
+The new directory is \link[fs:dir_create]{created} inside the directory
+returned by
 \code{\link[=tempdir]{tempdir()}}. Its \link[=tempfile]{name} starts with the string given by \code{prefix}
 and is followed by a random string. This random string \strong{might} contain a
 dot (\code{.}) such that the directory appears to have a file extension, see the
