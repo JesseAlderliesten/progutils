@@ -103,8 +103,8 @@ create_file_path <- function(filename,
 
   filename_no_ext <- fs::path_ext_remove(path = filename)
   file_ext <- fs::path_ext(path = filename)
-  if(length(filename_no_ext) == 0L || !nzchar(filename_no_ext) ||
-     length(file_ext) == 0L || !nzchar(file_ext)) {
+  if(checkinput::is_zerolength(filename_no_ext) || !nzchar(filename_no_ext) ||
+     checkinput::is_zerolength(file_ext) || !nzchar(file_ext)) {
     stop("Empty filename or missing extension:\n", filename)
   }
 

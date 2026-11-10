@@ -146,7 +146,7 @@ vect_to_char <- function(
     x <- as.character(x)
   }
 
-  if(length(x) == 0L) {
+  if(checkinput::is_zerolength(x)) {
     if(is.null(x)) {
       x <- "NULL"
     } else {
