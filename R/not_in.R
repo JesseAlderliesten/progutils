@@ -96,7 +96,7 @@ not_in <- function(x,
   # because it leads to 'x' being returned.
   stopifnot(is.null(dim(x)), is.atomic(x),
             is.null(dim(table)), is.atomic(table),
-            "Use are_equal() to match input of type 'double'" =
+            "Use progutils::are_equal() to match input of type 'double'" =
               !is.double(x) && !is.double(table),
             checkinput::is_logical(value),
             checkinput::is_logical(ignore_case),
