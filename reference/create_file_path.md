@@ -98,6 +98,8 @@ The directory indicated by the returned path is
 
 ## Notes on Paths
 
+### Slashes
+
 The file separator is a backslash (`\`) on Windows but a forward slash
 (`/`) on other operating systems: use
 [`file.path()`](https://rdrr.io/r/base/file.path.html) or
@@ -111,15 +113,21 @@ character](https://rdrr.io/r/base/regex.html) in R, such that
 backslashes need to be escaped in R code by doubling them. Use `cat(x)`
 to omit the escape characters to see how `x` would be printed.
 
+### Dots
+
 The [working directory](https://rdrr.io/r/base/getwd.html) can be
 indicated by a single dot (`"."`) and the parent directory can be
 indicated by two dots (`".."`).
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+only allows those in the first path component.
 
 **relative** paths start from the [working
 directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
 paths start from the root directory and thus give the complete path,
 such that the path still points to the same directory if the working
 directory changes.
+
+### Normalisation
 
 Paths can be normalised, e.g., through
 [`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
@@ -153,35 +161,35 @@ my_tempdir <- create_tempdir(prefix = "examplecreatefilepath")
 (create_file_path(
   filename = "abc.txt", format_stamp = "",
   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/2026_10_22/abc.txt
+#> /tmp/RtmpFBystE/examplecreatefilepath19aa29a9389c/2026_11_13/abc.txt
 (create_file_path(
   filename = "abc.txt", format_stamp = "%d_%m_%Y",
   dir = my_tempdir, add_date = TRUE))
-#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/2026_10_22/22_10_2026_abc.txt
+#> /tmp/RtmpFBystE/examplecreatefilepath19aa29a9389c/2026_11_13/13_11_2026_abc.txt
 (create_file_path(
   filename = "def.html", format_stamp = "",
   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/def.html
+#> /tmp/RtmpFBystE/examplecreatefilepath19aa29a9389c/def.html
 (create_file_path(
   filename = "def.html", format_stamp = "%d_%m_%Y",
   dir = my_tempdir, add_date = FALSE))
-#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/22_10_2026_def.html
+#> /tmp/RtmpFBystE/examplecreatefilepath19aa29a9389c/13_11_2026_def.html
 (create_file_path(
   filename = "abc.txt", format_stamp = "",
   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/subdir/2026_10_22/abc.txt
+#> /tmp/RtmpFBystE/examplecreatefilepath19aa29a9389c/subdir/2026_11_13/abc.txt
 (create_file_path(
   filename = "abc.txt", format_stamp = "%d_%m_%Y",
   dir = fs::path(my_tempdir, "subdir"), add_date = TRUE))
-#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/subdir/2026_10_22/22_10_2026_abc.txt
+#> /tmp/RtmpFBystE/examplecreatefilepath19aa29a9389c/subdir/2026_11_13/13_11_2026_abc.txt
 (create_file_path(
   filename = "def.html", format_stamp = "",
   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/subdir/def.html
+#> /tmp/RtmpFBystE/examplecreatefilepath19aa29a9389c/subdir/def.html
 (create_file_path(
   filename = "def.html", format_stamp = "%d_%m_%Y",
   dir = fs::path(my_tempdir, "subdir"), add_date = FALSE))
-#> /tmp/RtmpmaAUni/examplecreatefilepath1aa922c9aed/subdir/22_10_2026_def.html
+#> /tmp/RtmpFBystE/examplecreatefilepath19aa29a9389c/subdir/13_11_2026_def.html
 
 # Cleaning up
 unlink(x = my_tempdir, recursive = TRUE)

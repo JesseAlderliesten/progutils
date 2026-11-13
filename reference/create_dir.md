@@ -56,6 +56,8 @@ The directory indicated by the returned path is
 
 ## Notes on Paths
 
+### Slashes
+
 The file separator is a backslash (`\`) on Windows but a forward slash
 (`/`) on other operating systems: use
 [`file.path()`](https://rdrr.io/r/base/file.path.html) or
@@ -69,15 +71,21 @@ character](https://rdrr.io/r/base/regex.html) in R, such that
 backslashes need to be escaped in R code by doubling them. Use `cat(x)`
 to omit the escape characters to see how `x` would be printed.
 
+### Dots
+
 The [working directory](https://rdrr.io/r/base/getwd.html) can be
 indicated by a single dot (`"."`) and the parent directory can be
 indicated by two dots (`".."`).
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+only allows those in the first path component.
 
 **relative** paths start from the [working
 directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
 paths start from the root directory and thus give the complete path,
 such that the path still points to the same directory if the working
 directory changes.
+
+### Normalisation
 
 Paths can be normalised, e.g., through
 [`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
@@ -118,7 +126,7 @@ my_tempdir <- create_tempdir(prefix = "examplecreatedir")
 res_dir_one <- create_dir(dir = fs::path(my_tempdir, "dir_one"),
                           add_date = FALSE)
 fs::dir_exists(res_dir_one) # TRUE
-#> /tmp/RtmpmaAUni/examplecreatedir1aa921157838/dir_one 
+#> /tmp/RtmpFBystE/examplecreatedir19aa429552b3/dir_one 
 #>                                                 TRUE 
 
 # An attempt to create a directory that already exists does
@@ -142,7 +150,7 @@ identical(res_dir_one, res_dir_ONE)
 res_dir_date <- create_dir(
   dir = fs::path(my_tempdir, "dir_date"), add_date = TRUE)
 fs::dir_exists(res_dir_date) # TRUE
-#> /tmp/RtmpmaAUni/examplecreatedir1aa921157838/dir_date/2026_10_22 
+#> /tmp/RtmpFBystE/examplecreatedir19aa429552b3/dir_date/2026_11_13 
 #>                                                             TRUE 
 
 # Cleaning up

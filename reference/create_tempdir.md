@@ -32,8 +32,9 @@ fails.
 
 ## Details
 
-The new directory is [created](https://rdrr.io/r/base/files2.html)
-inside the directory returned by
+The new directory is
+[created](https://fs.r-lib.org/reference/create.html) inside the
+directory returned by
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html). Its
 [name](https://rdrr.io/r/base/tempfile.html) starts with the string
 given by `prefix` and is followed by a random string. This random string
@@ -91,6 +92,8 @@ The directory indicated by the returned path is
 
 ## Notes on Paths
 
+### Slashes
+
 The file separator is a backslash (`\`) on Windows but a forward slash
 (`/`) on other operating systems: use
 [`file.path()`](https://rdrr.io/r/base/file.path.html) or
@@ -104,15 +107,21 @@ character](https://rdrr.io/r/base/regex.html) in R, such that
 backslashes need to be escaped in R code by doubling them. Use `cat(x)`
 to omit the escape characters to see how `x` would be printed.
 
+### Dots
+
 The [working directory](https://rdrr.io/r/base/getwd.html) can be
 indicated by a single dot (`"."`) and the parent directory can be
 indicated by two dots (`".."`).
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+only allows those in the first path component.
 
 **relative** paths start from the [working
 directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
 paths start from the root directory and thus give the complete path,
 such that the path still points to the same directory if the working
 directory changes.
+
+### Normalisation
 
 Paths can be normalised, e.g., through
 [`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
@@ -162,14 +171,14 @@ Other functions to handle paths and directories:
 
 ``` r
 tempdir(check = TRUE)
-#> [1] "/tmp/RtmpmaAUni"
+#> [1] "/tmp/RtmpFBystE"
 # Create a directory inside the directory returned by 'tempdir()'
 (tempdir_ex1 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpmaAUni/subtempdir1aa9476bbef9"
+#> [1] "/tmp/RtmpFBystE/subtempdir19aa3609588f"
 
 # Using the same 'prefix' again creates another directory
 (tempdir_ex2 <- create_tempdir(prefix = "subtempdir"))
-#> [1] "/tmp/RtmpmaAUni/subtempdir1aa92f04e0d0"
+#> [1] "/tmp/RtmpFBystE/subtempdir19aa5b26faa2"
 
 # It is not possible to create recursive subdirectories
 try(no_subtempdir <- create_tempdir(

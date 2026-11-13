@@ -64,6 +64,8 @@ start with a dot, but excludes directories.
 
 ## Notes on Paths
 
+### Slashes
+
 The file separator is a backslash (`\`) on Windows but a forward slash
 (`/`) on other operating systems: use
 [`file.path()`](https://rdrr.io/r/base/file.path.html) or
@@ -77,15 +79,21 @@ character](https://rdrr.io/r/base/regex.html) in R, such that
 backslashes need to be escaped in R code by doubling them. Use `cat(x)`
 to omit the escape characters to see how `x` would be printed.
 
+### Dots
+
 The [working directory](https://rdrr.io/r/base/getwd.html) can be
 indicated by a single dot (`"."`) and the parent directory can be
 indicated by two dots (`".."`).
+[`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
+only allows those in the first path component.
 
 **relative** paths start from the [working
 directory](https://rdrr.io/r/base/getwd.html). In contrast, **absolute**
 paths start from the root directory and thus give the complete path,
 such that the path still points to the same directory if the working
 directory changes.
+
+### Normalisation
 
 Paths can be normalised, e.g., through
 [`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) or
@@ -139,28 +147,28 @@ file.create(my_tempfiles)
 #> [1] TRUE TRUE
 
 get_file_path(dir = my_tempdir, pattern = "some_file")
-#> Using file '/tmp/RtmpmaAUni/examplegetfilepath1aa919616985/some_filename.txt'
-#> /tmp/RtmpmaAUni/examplegetfilepath1aa919616985/some_filename.txt
+#> Using file '/tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3/some_filename.txt'
+#> /tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3/some_filename.txt
 
 # The same file is found if case-insensitive matching is used:
 get_file_path(dir = my_tempdir, pattern = "SOME_FILE",
               ignore_case = TRUE)
-#> Using file '/tmp/RtmpmaAUni/examplegetfilepath1aa919616985/some_filename.txt'
-#> /tmp/RtmpmaAUni/examplegetfilepath1aa919616985/some_filename.txt
+#> Using file '/tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3/some_filename.txt'
+#> /tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3/some_filename.txt
 
 # Error reporting the presence of a case-insensitive match.
 try(get_file_path(dir = my_tempdir, pattern = "SOME_FILE",
                   ignore_case = FALSE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "SOME_FILE", ignore_case = FALSE) : 
 #>   No case-sensitive matches to pattern 'SOME_FILE' are present in directory
-#> '/tmp/RtmpmaAUni/examplegetfilepath1aa919616985'.
+#> '/tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3'.
 #> However, one or more case-insensitive matches to 'pattern' are present:
 #> 'some_filename.txt'.
 
 # 'pattern' is interpreted as a regular expression
 get_file_path(dir = my_tempdir, pattern = "^.+er_file")
-#> Using file '/tmp/RtmpmaAUni/examplegetfilepath1aa919616985/another_filename.txt'
-#> /tmp/RtmpmaAUni/examplegetfilepath1aa919616985/another_filename.txt
+#> Using file '/tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3/another_filename.txt'
+#> /tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3/another_filename.txt
 
 # Error reporting no match found.
 try(get_file_path(dir = my_tempdir,
@@ -168,20 +176,20 @@ try(get_file_path(dir = my_tempdir,
                  ignore_case = TRUE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpmaAUni/examplegetfilepath1aa919616985'.
+#> '/tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3'.
 try(get_file_path(dir = my_tempdir,
                  pattern = "missing_filename_abcde",
                  ignore_case = FALSE))
 #> Error in get_file_path(dir = my_tempdir, pattern = "missing_filename_abcde",  : 
 #>   No case-sensitive matches to pattern 'missing_filename_abcde' are present in directory
-#> '/tmp/RtmpmaAUni/examplegetfilepath1aa919616985'.
+#> '/tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3'.
 #> No case-insensitive match is present either.
 
 # Error if multiple matches are present.
 try(get_file_path(dir = my_tempdir, pattern = "_filename"))
 #> Error in get_file_path(dir = my_tempdir, pattern = "_filename") : 
 #>   Multiple matches to pattern '_filename' are present in directory
-#> '/tmp/RtmpmaAUni/examplegetfilepath1aa919616985':
+#> '/tmp/RtmpFBystE/examplegetfilepath19aa3271f7a3':
 #> 'another_filename.txt'
 #> 'some_filename.txt'!
 

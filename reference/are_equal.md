@@ -20,7 +20,7 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 
 - tol:
 
-  A small
+  a small
   [positive](https://jessealderliesten.github.io/checkinput/reference/is_number.html)
   number. Numbers that differ less than `tol` are considered equal.
 
@@ -59,8 +59,9 @@ and, from R `4.6.0` onwards, `'%notin%'`) to check for exact
 (in)equality, with [Comparison](https://rdrr.io/r/base/Comparison.html)
 to do so using binary operators; [R FAQ
 7.31](https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f)
-for background on numerical equality; the vignette *Type coercion* in
-package `checkinput`:
+for background on numerical equality; the vignette [*Type
+coercion*](https://jessealderliesten.github.io/checkinput/articles/type_coercion.html)
+in package `checkinput`:
 `vignette("Type_Coercion", package = "checkinput")`.
 
 Other functions to check equality:

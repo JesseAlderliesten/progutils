@@ -95,8 +95,10 @@ than [`message()`](https://rdrr.io/r/base/message.html) etc. that use
 
 - `NULL` is returned as `"NULL"`
 
-- non-`NULL` zero-length objects are returned as `"<type>(0)"` (e.g.,
-  `"logical(0)"`; for `numeric(0)` this is `"double(0)"`)
+- non-`NULL` [zero-length
+  objects](https://jessealderliesten.github.io/checkinput/reference/is_zerolength.html)
+  are returned as `"<type>(0)"` (e.g., `"logical(0)"`; for `numeric(0)`
+  this is `"double(0)"`)
 
 - `""` is returned as `""`
 

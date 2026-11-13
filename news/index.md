@@ -1,5 +1,19 @@
 # Changelog
 
+## progutils 1.1.0
+
+#### Breaking changes
+
+- Dependency **checkinput**: increase minimum version from 1.5.1 to
+  1.6.0 to no longer require `x` in check functions to be atomic.
+- [`check_case()`](https://jessealderliesten.github.io/progutils/reference/check_case.md)
+  no longer requires `x` and non-missing `y` to be atomic.
+
+#### Documentation
+
+- Prune the NEWS file.
+- Include URLs when referring to vignette sections.
+
 ## progutils 1.0.1
 
 #### Breaking changes
@@ -9,10 +23,9 @@
 
 #### Documentation
 
-- Make layout more uniform.
-- Wrap lines in ‘Usage’ and ‘Example’ sections to 65 characters.
-- Capitalize function titles.
-- Avoid markup in section titles.
+- Make layout more uniform: wrap lines in ‘Usage’ and ‘Example’ sections
+  to 65 characters, capitalize function titles, and avoid markup in
+  section titles.
 
 ## progutils 1.0.0
 
@@ -31,15 +44,6 @@
   [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html).
 - Some warning messages changed: `checkinput::is_character(<path>)` is
   already checked in `checkinput::is_path(<path>)`.
-
-#### Documentation
-
-- Clarify that `dir` is considered relative to the working directory
-  instead of an absolute path.
-- Inherit section ‘Note on paths’ from
-  [`checkinput::is_path()`](https://jessealderliesten.github.io/checkinput/reference/is_path.html)
-  when appropriate.
-- Stylistic updates to documentation, including added cross-references.
 
 ## progutils 0.16.0
 
@@ -62,13 +66,7 @@
 
 #### Documentation
 
-- Version of **roxygen2** bumped to 8.1.1.
-
-## progutils 0.15.1
-
-#### Documentation
-
-- `README`: add contact/contribution info.
+- The used version of **roxygen2** increased from 8.1.0 to 8.1.1.
 
 ## progutils 0.15.0
 
@@ -152,36 +150,11 @@
   allow `character(0)` as input to `x`, returning it unchanged, with a
   warning. `width` now has to be a natural number.
 
-#### Minor updates
-
-- [`get_file_path()`](https://jessealderliesten.github.io/progutils/reference/get_file_path.md):
-  use [`fs::dir_ls()`](https://fs.r-lib.org/reference/dir_ls.html)
-  instead of [`list.files()`](https://rdrr.io/r/base/list.files.html) to
-  more easily list only files.
-
-## progutils 0.10.1
-
-#### Documentation
-
-- [`signal_text()`](https://jessealderliesten.github.io/progutils/reference/signal_text.md):
-  document and show example how to make `text` available for further
-  queries.
-- Update grouping of functions in the ‘See Also’ sections and in the
-  package index on the website, adding the re-exported function
-  [`paste_quoted()`](https://jessealderliesten.github.io/checkinput/reference/paste_quoted.html).
-- Apply a few more stylistic suggestions provided by various packages
-  like **goodpractice** that check code sanity.
-
 ## progutils 0.10.0
 
 #### Bugfixes
 
 - Fix pattern used to detect backslashes in `pattern`.
-
-#### Documentation
-
-- Apply stylistic suggestions provided by various packages like
-  **goodpractice** that check code sanity.
 
 ## progutils 0.9.0
 
