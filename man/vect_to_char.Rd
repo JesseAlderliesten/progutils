@@ -60,8 +60,9 @@ Some values are handled specially to better distinguish different values than
 \code{\link[=message]{message()}} etc. that use \code{\link[=paste0]{paste0()}}:
 \itemize{
 \item \code{NULL} is returned as \code{"NULL"}
-\item non-\code{NULL} zero-length objects are returned as \code{"<type>(0)"} (e.g.,
-\code{"logical(0)"}; for \code{numeric(0)} this is \code{"double(0)"})
+\item non-\code{NULL} \link[checkinput:is_zerolength]{zero-length objects} are returned
+as \code{"<type>(0)"} (e.g., \code{"logical(0)"}; for \code{numeric(0)} this is
+\code{"double(0)"})
 \item \code{""} is returned as \code{""}
 \item logical \code{NA} is returned as \code{"NA"}
 \item non-logical \code{NA} is returned as \code{"NA_<type>_"} (e.g., \code{"NA_character_"};
@@ -125,7 +126,8 @@ paste0(
 \seealso{
 \code{\link[=toString]{toString()}} which is shorthand for \code{paste(x, collapse = ", ")} and can be
 used instead of \code{vect_to_char()} if names of \code{x} can be removed;
-\code{vignette("type_coercion", package = "checkinput")} and
+\href{https://jessealderliesten.github.io/checkinput/articles/type_coercion.html}{\code{vignette("type_coercion", package = "checkinput")}}
+and
 \code{help("is_zerolength", package = "checkinput")} for a discussion of some
 issues with type conversion and zero-length input when \link[=c]{combining}
 objects into a vector.

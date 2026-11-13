@@ -10,7 +10,7 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 \item{x, y}{Numeric vectors with length larger than zero to compare for
 equality. They may contain \code{\link{NA}}s or \code{\link{NaN}}s, see 'Value'.}
 
-\item{tol}{A small \link[checkinput:is_positive]{positive} number. Numbers that differ less
+\item{tol}{a small \link[checkinput:is_positive]{positive} number. Numbers that differ less
 than \code{tol} are considered equal.}
 }
 \value{
@@ -54,7 +54,9 @@ numbers; \code{\link[=all.equal]{all.equal()}} to check more generally for near-
 \link{Comparison} to do so using binary operators;
 \href{https://CRAN.R-project.org/doc/manuals/R-FAQ.html#Why-doesn_0027t-R-think-these-numbers-are-equal_003f}{\R FAQ 7.31}
 for background on numerical equality;
-the vignette \emph{Type coercion} in package \code{checkinput}:
+the vignette
+\href{https://jessealderliesten.github.io/checkinput/articles/type_coercion.html}{\emph{Type coercion}}
+in package \code{checkinput}:
 \code{vignette("Type_Coercion", package = "checkinput")}.
 
 Other functions to check equality:

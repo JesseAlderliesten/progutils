@@ -23,8 +23,9 @@
 #' [message()] etc. that use [paste0()]:
 #'
 #' - `NULL` is returned as `"NULL"`
-#' - non-`NULL` zero-length objects are returned as `"<type>(0)"` (e.g.,
-#'   `"logical(0)"`; for `numeric(0)` this is `"double(0)"`)
+#' - non-`NULL` [zero-length objects][checkinput::is_zerolength()] are returned
+#'   as `"<type>(0)"` (e.g., `"logical(0)"`; for `numeric(0)` this is
+#'   `"double(0)"`)
 #' - `""` is returned as `""`
 #' - logical `NA` is returned as `"NA"`
 #' - non-logical `NA` is returned as `"NA_<type>_"` (e.g., `"NA_character_"`;
@@ -59,7 +60,8 @@
 #' @seealso
 #' [toString()] which is shorthand for `paste(x, collapse = ", ")` and can be
 #' used instead of `vect_to_char()` if names of `x` can be removed;
-#' `vignette("type_coercion", package = "checkinput")` and
+#' [`vignette("type_coercion", package = "checkinput")`](https://jessealderliesten.github.io/checkinput/articles/type_coercion.html)
+#' and
 #' `help("is_zerolength", package = "checkinput")` for a discussion of some
 #' issues with type conversion and zero-length input when [combining][c()]
 #' objects into a vector.
@@ -122,7 +124,8 @@ vect_to_char <- function(
   stopifnot(checkinput::is_number(signif),
             checkinput::is_positive(width),
             checkinput::is_character(sep),
-            is.null(collapse) || checkinput::is_character(collapse))
+            is.null(collapse) || checkinput::is_character(collapse),
+            checkinput::is_logical(ignore_newlines))
   round_type <- match.arg(round_type, several.ok = FALSE)
 
   if(is.list(x) && !is.data.frame(x)) {
@@ -143,7 +146,7 @@ vect_to_char <- function(
     x <- as.character(x)
   }
 
-  if(length(x) == 0L) {
+  if(checkinput::is_zerolength(x)) {
     if(is.null(x)) {
       x <- "NULL"
     } else {

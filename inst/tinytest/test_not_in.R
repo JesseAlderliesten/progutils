@@ -87,24 +87,24 @@ expect_silent(expect_identical(
 # 2b (not allow input of type 'double')
 expect_error(
   not_in(x = c(10, 11, 12, 13), table = c(12, 13, 14, 15), value = TRUE),
-  pattern = "Use are_equal() to match input of type 'double'", fixed = TRUE)
+  pattern = "Use progutils::are_equal() to match input of type 'double'", fixed = TRUE)
 
 expect_error(
   not_in(x = c(10, 11, 12, 13), table = c(12, 13, 14, 15), value = FALSE),
-  pattern = "Use are_equal() to match input of type 'double'", fixed = TRUE)
+  pattern = "Use progutils::are_equal() to match input of type 'double'", fixed = TRUE)
 
 ##### Behaviour of NAs #####
 for(value in c(TRUE, FALSE)) {
   # 3a (NA_real_ is not allowed in 'table' because it is of type 'double')
   expect_error(
     not_in(x = c("a", "b"), table = NA_real_, value = value),
-    pattern = "Use are_equal() to match input of type 'double'",
+    pattern = "Use progutils::are_equal() to match input of type 'double'",
     fixed = TRUE)
 
   # 3b (logical NAs are not allowed in 'x')
   expect_error(
     not_in(x = NA_real_, table = c("a", "b"), value = value),
-    pattern = "Use are_equal() to match input of type 'double'",
+    pattern = "Use progutils::are_equal() to match input of type 'double'",
     fixed = TRUE)
 
   # 3c (NAs match each other, the returned zero-length value has the same type

@@ -7,7 +7,8 @@
 #' characters that are [valid in a path][checkinput::is_path()].
 #'
 #' @details
-#' The new directory is [created][dir.create()] inside the directory returned by
+#' The new directory is [created][fs::dir_create()] inside the directory
+#' returned by
 #' [tempdir()]. Its [name][tempfile()] starts with the string given by `prefix`
 #' and is followed by a random string. This random string **might** contain a
 #' dot (`.`) such that the directory appears to have a file extension, see the

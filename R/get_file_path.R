@@ -118,7 +118,7 @@ get_file_path <- function(dir = ".",
          paste_quoted(basename(files_present), collapse = "\n"), "!")
   }
 
-  if(length(files_present) == 0L) {
+  if(checkinput::is_zerolength(files_present)) {
     if(!ignore_case) {
       # Check if any case-insensitive match is present
       match_case_insensitive <- fs::path_abs(
@@ -126,7 +126,7 @@ get_file_path <- function(dir = ".",
                    regexp = pattern, fail = FALSE, ignore.case = TRUE)
       )
 
-      if(length(match_case_insensitive) == 0L) {
+      if(checkinput::is_zerolength(match_case_insensitive)) {
         msg_match <- paste0(
           msg_match, ".\nNo case-insensitive match is present either")
       } else {

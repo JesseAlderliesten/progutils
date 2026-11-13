@@ -176,12 +176,11 @@ expect_error(vect_to_char(x = x_in, collapse = 3),
 
 expect_silent(expect_identical(
   vect_to_char(x = x_in / 8, signif = 2, collapse = NULL),
-  paste(names(x_in), signif(x = x_in / 8, digits = 2), sep = ": ",
-        collapse = NULL)))
+  paste(names(x_in), signif(x = x_in / 8, digits = 2), sep = ": ")))
 
 expect_silent(expect_identical(
   vect_to_char(x = unname(x_in / 8), signif = 2L, collapse = NULL),
-  paste(signif(x = x_in / 8, digits = 2), collapse = NULL)))
+  paste(signif(x = x_in / 8, digits = 2))))
 
 
 #### Remove objects used in tests ####

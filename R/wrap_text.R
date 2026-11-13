@@ -74,7 +74,7 @@ wrap_text <- function(x,
   if(!is.infinite(width)) {
     width <- checkinput::make_natural(width)
   }
-  if(length(x) == 0L) {
+  if(checkinput::is_zerolength(x)) {
     warning("'x' is 'character(0)'")
     return(x)
   }
