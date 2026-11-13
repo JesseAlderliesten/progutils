@@ -10,7 +10,7 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 \item{x, y}{Numeric vectors with length larger than zero to compare for
 equality. They may contain \code{\link{NA}}s or \code{\link{NaN}}s, see 'Value'.}
 
-\item{tol}{A small \link[checkinput:is_positive]{positive} number. Numbers that differ less
+\item{tol}{a small \link[checkinput:is_positive]{positive} number. Numbers that differ less
 than \code{tol} are considered equal.}
 }
 \value{
