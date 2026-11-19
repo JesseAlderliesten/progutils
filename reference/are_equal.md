@@ -20,9 +20,10 @@ are_equal(x, y, tol = sqrt(.Machine$double.eps))
 
 - tol:
 
-  a small
+  a
   [positive](https://jessealderliesten.github.io/checkinput/reference/is_number.html)
-  number. Numbers that differ less than `tol` are considered equal.
+  number smaller than `0.5`. Numbers that differ less than `tol` are
+  considered equal.
 
 ## Value
 

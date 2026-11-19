@@ -1,5 +1,17 @@
 # Changelog
 
+## progutils 1.2.0
+
+#### Breaking changes
+
+- Dependency **checkinput**: increase minimum version from 1.6.0 to
+  1.9.0 to use updated arguments to
+  [`checkinput::make_natural()`](https://jessealderliesten.github.io/checkinput/reference/is_natural.html)
+  in
+  [`head_tail()`](https://jessealderliesten.github.io/progutils/reference/head_tail.md).
+- [`wrap_text()`](https://jessealderliesten.github.io/progutils/reference/wrap_text.md):
+  no longer allow negative `Inf` as input to argument `width`.
+
 ## progutils 1.1.0
 
 #### Breaking changes

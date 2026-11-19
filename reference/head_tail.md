@@ -49,10 +49,10 @@ head_tail(x, n = 40)
 #>   A   B   C   D   E   F   G   H   I   J 
 #> "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" 
 try(head_tail(x, n = 0))
-#> Error in checkinput::make_natural(n, strict = TRUE) : 
+#> Error in checkinput::make_natural(n, allow_zero = FALSE) : 
 #>   checkinput::is_natural(n) is not TRUE
 try(head_tail(x, n = 4.1))
-#> Error in checkinput::make_natural(n, strict = TRUE) : 
+#> Error in checkinput::make_natural(n, allow_zero = FALSE) : 
 #>   checkinput::is_natural(n) is not TRUE
 
 mat <- head_tail(
