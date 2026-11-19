@@ -121,8 +121,8 @@ vect_to_char <- function(
   # - Values in argument 'digits' of signif() are rounded to the nearest integer
   #   in the range from 0 to 22 (unless it is Inf such that no rounding is
   #   applied), so no need to check that 'signif' is nonnegative and integer.
+  # - Argument 'width' is checked upon use by wrap_text().
   stopifnot(checkinput::is_number(signif),
-            checkinput::is_positive(width),
             checkinput::is_character(sep),
             is.null(collapse) || checkinput::is_character(collapse),
             checkinput::is_logical(ignore_newlines))
