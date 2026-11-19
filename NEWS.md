@@ -1,3 +1,11 @@
+# progutils 1.2.0
+
+### Breaking changes
+- Dependency **checkinput**: increase minimum version from 1.6.0 to 1.9.0 to use
+  updated arguments to `checkinput::make_natural()` in `head_tail()`.
+- `wrap_text()`: no longer allow negative `Inf` as input to argument `width`.
+
+
 # progutils 1.1.0
 
 ### Breaking changes

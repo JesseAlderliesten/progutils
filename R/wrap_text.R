@@ -71,7 +71,7 @@ wrap_text <- function(x,
     checkinput::all_characters(x, allow_empty = TRUE, allow_zerolength = TRUE),
     checkinput::is_logical(ignore_newlines),
     checkinput::is_logical(warn_length))
-  if(!is.infinite(width)) {
+  if(!(is.infinite(width) && sign(width) > 0)) {
     width <- checkinput::make_natural(width)
   }
   if(checkinput::is_zerolength(x)) {
@@ -101,8 +101,8 @@ wrap_text <- function(x,
   #   newlines; and converts each leading newline to an element with an empty
   #   character string. See 'Details' about their handling in 'wrap_text()'.
   # - Using floor(x = width) because floor(Inf) is Inf, whereas as.integer(Inf)
-  #   is NA. Using 'width = width + 1L' to have a more intuitive meaning for
-  #   argument 'width', see 'Notes'.
+  #   is NA_integer_. Using 'width = width + 1L' to have a more intuitive
+  #   meaning for argument 'width', see 'Notes'.
   width <- floor(x = width)
   x <- strwrap(x, width = width + 1L)
   if(n_discard > 0L) {
