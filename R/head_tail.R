@@ -26,7 +26,7 @@
 #'
 #' @export
 head_tail <- function(x, n = 3L) {
-  n <- checkinput::make_natural(n, strict = TRUE)
+  n <- checkinput::make_natural(n, allow_zero = FALSE)
 
   if(is.null(dim(x))) {
     if(length(x) > 2L * n) {
