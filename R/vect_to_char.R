@@ -4,8 +4,8 @@
 #' preserving names and rounding numeric values.
 #'
 #' @inheritParams wrap_text width ignore_newlines
-#' @param x vector, [factor], [`NULL`], or a non-dataframe [list] (unlisted
-#' through `unlist(x, use.names = TRUE)`, with a [warning]).
+#' @param x vector, [factor], [`NULL`], or a non-[data frame][data.frame()]
+#' [list] (see 'Details').
 #' @param signif positive [number][checkinput::is_number()] indicating the
 #' number of [significant digits][signif()] to round numeric `x` to (see
 #' 'Details') or `Inf` to not round values.
@@ -39,6 +39,9 @@
 #' `"selective"` or `"expanded"`, or to **exactly** `digits` significant digits
 #' while their integer parts might be rounded if `round_type` is `"signif"`, see
 #' [signif_custom()] for details.
+#'
+#' Non-dataframe lists are handled through [lapply()]. List elements are
+#' preceded by `<name> =` if they are named and are separated by `;`.
 #'
 #' @returns
 #' A character vector or character string with the [names] and values in `x`,
@@ -94,6 +97,14 @@
 #' message(logical(0)) # <empty>
 #' message(vect_to_char(logical(0))) # logical(0)
 #'
+#' # Handling list input
+#' list_x <- list(
+#'   p1 = c(a = -1/3, x = NA_real_),
+#'   p2 = y, p3 = unname(y))
+#' vect_to_char(x = list_x, signif = 2)
+#' # "p1 = a: -0.33, x: NA_double_; p2 = a: 0.14, b: 0.29, c: 0.43;
+#' # p3 = 0.14, 0.29, 0.43"
+#'
 #' # Using vect_to_char() to get a frequency table
 #' x <- 1:10
 #' names(x) <- letters[x]
@@ -129,9 +140,18 @@ vect_to_char <- function(
   round_type <- match.arg(round_type, several.ok = FALSE)
 
   if(is.list(x) && !is.data.frame(x)) {
-    x <- unlist(x, use.names = TRUE)
-    warning("Unlisted 'x' to obtain a vector!")
+    # Using 'width = Inf': wrapping is done below using 'wrap_text()'
+    out_list <- lapply(x, vect_to_char, signif = signif, width = Inf, sep = sep,
+                       collapse = collapse, ignore_newlines = ignore_newlines,
+                       round_type = round_type)
+    if(!is.null(names(out_list))) {
+      out <- paste(names(out_list), out_list, sep = " = ", collapse = "; ")
+    } else {
+      out <- paste(out_list, collapse = "; ")
+    }
+    return(wrap_text(x = out, width = width, ignore_newlines = ignore_newlines))
   }
+
   stopifnot(is.vector(x) || is.factor(x) || is.null(x))
 
   if(is.double(x)) {
@@ -172,8 +192,10 @@ vect_to_char <- function(
     x <- paste(x, collapse = collapse)
   }
 
-  # Not calling wrap_text() directly because it would paste the character
-  # vector obtained for 'collapse = NULL' into a single string.
+  # Notes:
+  # - An early return has occurred for non-data frame lists.
+  # - Not calling wrap_text() directly because it would paste the character
+  #   vector obtained for 'collapse = NULL' into a single string.
   vapply(X = x, FUN = wrap_text, FUN.VALUE = character(1L), width = width,
          ignore_newlines = ignore_newlines, USE.NAMES = FALSE)
 }
