@@ -41,7 +41,7 @@ expect_message(message(vect_to_char(logical(0))),
 
 expect_silent(
   expect_identical(
-    vect_to_char(x = list(p1 = c(a = -1/3, x = NA_real_),
+    vect_to_char(x = list(p1 = c(a = - 1/3, x = NA_real_),
                           p2 = b, p3 = unname(b)), signif = 2),
     paste0("p1 = a: -0.33, x: NA_double_; p2 = a: 0.14, b: 0.29, c:",
            " 0.43; p3 = 0.14, 0.29, 0.43"))
