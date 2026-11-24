@@ -23,10 +23,9 @@ vect_to_char(
 - x:
 
   vector, [factor](https://rdrr.io/r/base/factor.html),
-  [`NULL`](https://rdrr.io/r/base/NULL.html), or a non-dataframe
-  [list](https://rdrr.io/r/base/list.html) (unlisted through
-  `unlist(x, use.names = TRUE)`, with a
-  [warning](https://rdrr.io/r/base/warning.html)).
+  [`NULL`](https://rdrr.io/r/base/NULL.html), or a non-[data
+  frame](https://rdrr.io/r/base/data.frame.html)
+  [list](https://rdrr.io/r/base/list.html) (see 'Details').
 
 - signif:
 
@@ -120,6 +119,10 @@ might be rounded if `round_type` is `"signif"`, see
 [`signif_custom()`](https://jessealderliesten.github.io/progutils/reference/signif_custom.md)
 for details.
 
+Non-dataframe lists are handled through
+[`lapply()`](https://rdrr.io/r/base/lapply.html). List elements are
+preceded by `<name> =` if they are named and are separated by `;`.
+
 ## Programming Notes
 
 To get a cross-tabulation of `x` into a character string, one can use
@@ -194,6 +197,15 @@ message(logical(0)) # <empty>
 #> 
 message(vect_to_char(logical(0))) # logical(0)
 #> logical(0)
+
+# Handling list input
+list_x <- list(
+  p1 = c(a = -1/3, x = NA_real_),
+  p2 = y, p3 = unname(y))
+vect_to_char(x = list_x, signif = 2)
+#> [1] "p1 = a: -0.33, x: NA_double_; p2 = a: 0.14, b: 0.29, c: 0.43; p3 = 0.14, 0.29, 0.43"
+# "p1 = a: -0.33, x: NA_double_; p2 = a: 0.14, b: 0.29, c: 0.43;
+# p3 = 0.14, 0.29, 0.43"
 
 # Using vect_to_char() to get a frequency table
 x <- 1:10
