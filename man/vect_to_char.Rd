@@ -15,8 +15,8 @@ vect_to_char(
 )
 }
 \arguments{
-\item{x}{vector, \link{factor}, \code{\link{NULL}}, or a non-dataframe \link{list} (unlisted
-through \code{unlist(x, use.names = TRUE)}, with a \link{warning}).}
+\item{x}{vector, \link{factor}, \code{\link{NULL}}, or a non-\link[=data.frame]{data frame}
+\link{list} (see 'Details').}
 
 \item{signif}{positive \link[checkinput:is_number]{number} indicating the
 number of \link[=signif]{significant digits} to round numeric \code{x} to (see
@@ -77,6 +77,9 @@ while ensuring their integer parts are unrounded if \code{round_type} is
 \code{"selective"} or \code{"expanded"}, or to \strong{exactly} \code{digits} significant digits
 while their integer parts might be rounded if \code{round_type} is \code{"signif"}, see
 \code{\link[=signif_custom]{signif_custom()}} for details.
+
+Non-dataframe lists are handled through \code{\link[=lapply]{lapply()}}. List elements are
+preceded by \verb{<name> =} if they are named and are separated by \verb{;}.
 }
 \section{Programming Notes}{
 
@@ -108,6 +111,14 @@ vect_to_char(x = unname(x_char)) # "abc, def, this is some text"
 vect_to_char(logical(0)) # "logical(0)"
 message(logical(0)) # <empty>
 message(vect_to_char(logical(0))) # logical(0)
+
+# Handling list input
+list_x <- list(
+  p1 = c(a = -1/3, x = NA_real_),
+  p2 = y, p3 = unname(y))
+vect_to_char(x = list_x, signif = 2)
+# "p1 = a: -0.33, x: NA_double_; p2 = a: 0.14, b: 0.29, c: 0.43;
+# p3 = 0.14, 0.29, 0.43"
 
 # Using vect_to_char() to get a frequency table
 x <- 1:10

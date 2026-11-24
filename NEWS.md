@@ -1,3 +1,10 @@
+# progutils 1.3.0
+
+### Breaking changes
+- `vect_to_char()`: include the names of list `x` in the output (separated by
+  ` = `). Omit extraneous colons in output for unnamed list-elements.
+
+
 # progutils 1.2.0
 
 ### Breaking changes

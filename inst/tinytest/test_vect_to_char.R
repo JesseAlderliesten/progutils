@@ -39,6 +39,14 @@ expect_message(message(logical(0)), pattern = "")
 expect_message(message(vect_to_char(logical(0))),
                pattern = "logical(0)", strict = TRUE, fixed = TRUE)
 
+expect_silent(
+  expect_identical(
+    vect_to_char(x = list(p1 = c(a = - 1/3, x = NA_real_),
+                          p2 = b, p3 = unname(b)), signif = 2),
+    paste0("p1 = a: -0.33, x: NA_double_; p2 = a: 0.14, b: 0.29, c:",
+           " 0.43; p3 = 0.14, 0.29, 0.43"))
+)
+
 expect_identical(
   paste0(vect_to_char(c(table(c(c, d))), sep = " (", collapse =  "), "), ")"),
   paste0("1 (1), 2 (1), 3 (1), 4 (1), 5 (2), 6 (2), 7 (2), 8 (2), 9 (2),",
@@ -132,11 +140,48 @@ expect_silent(expect_identical(vect_to_char(x = x_fact_int), "4, 5, 6, 5"))
 expect_silent(expect_identical(vect_to_char(x = x_fact_num),
                                "0.25, 0.3125, 0.375, 0.3125"))
 
-expect_warning(expect_identical(
-  vect_to_char(x = list(x_in_InfNa, b, unname(b)), signif = 2),
-  paste0("am: -1, bm: -2, i: 9, l: NA_double_, m: NaN, n: Inf, o: -Inf, j: 10, z: 26,",
-         " a: 1, b: 2, c: 3, a: 0.14, b: 0.29, c: 0.43, : 0.14, : 0.29, : 0.43")),
-  pattern = "Unlisted 'x' to obtain a vector!", strict = TRUE)
+out_p1 <- paste0("am: -1, bm: -2, i: 9, l: NA_double_, m:\nNaN, n: Inf, o: -Inf, j: 10,",
+                 " z: 26, a:\n1, b: 2, c: 3; a: 0.14, b: 0.29, c:\n0.43; 0.14, 0.29, 0.43")
+
+expect_silent(expect_identical(
+  vect_to_char(x = list(x_in_InfNa, b, unname(b), "ab\ncd"),
+               signif = 2, width = 40, ignore_newlines = TRUE),
+  paste0(out_p1, "; ab cd")))
+
+expect_silent(expect_identical(
+  vect_to_char(x = list(x_in_InfNa, b, unname(b), "ab\ncd"),
+               signif = 2, width = 40, ignore_newlines = FALSE),
+  paste0(out_p1, "; ab\ncd")))
+
+out_p2 <- paste0("p1 = am: -1, bm: -2, i: 9, l:\nNA_double_, m: NaN, n: Inf, o: -Inf,",
+                 " j:\n10, z: 26, a: 1, b: 2, c: 3; p2 = a:\n0.14, b: 0.29, c: 0.43;",
+                 " p3 = 0.14, 0.29,\n0.43")
+
+expect_silent(expect_identical(
+  vect_to_char(x = list(p1 = x_in_InfNa, p2 = b, p3 = unname(b), p4 = "ab\ncd"),
+               signif = 2, width = 40, ignore_newlines = TRUE),
+  paste0(out_p2, "; p4 = ab cd")))
+
+expect_silent(expect_identical(
+  vect_to_char(x = list(p1 = x_in_InfNa, p2 = b, p3 = unname(b), p4 = "ab\ncd"),
+               signif = 2, width = 40, ignore_newlines = FALSE),
+  paste0(out_p2, "; p4 = ab\ncd")))
+
+out_p3 <- paste0("p1 = am | -1 & bm | -2 & i | 9 & l |\nNA_double_ & m | NaN &",
+                 " n | Inf & o |\n-Inf & j | 10 & z | 26 & a | 1 & b | 2 &\nc",
+                 " | 3; p2 = a | 0.14 & b | 0.29 & c |\n0.43; p3 = 0.14 & 0.29",
+                 " & 0.43")
+expect_silent(expect_identical(
+  vect_to_char(x = list(p1 = x_in_InfNa, p2 = b, p3 = unname(b), p4 = "\nabc"),
+               signif = 2, width = 40, sep = " | ", collapse = " & ",
+               ignore_newlines = TRUE),
+  paste0(out_p3, "; p4 = abc")))
+
+expect_silent(expect_identical(
+  vect_to_char(x = list(p1 = x_in_InfNa, p2 = b, p3 = unname(b), p4 = "\nabc"),
+               signif = 2, width = 40, sep = " | ", collapse = " & ",
+               ignore_newlines = FALSE),
+  paste0(out_p3, "; p4 =\nabc")))
 
 expect_error(vect_to_char(x = data.frame(a = 1:3)),
              pattern = "is.vector(x) || is.factor(x) || is.null(x) is not TRUE",
@@ -184,5 +229,6 @@ expect_silent(expect_identical(
 
 
 #### Remove objects used in tests ####
-rm(a, b, c, d, x_fact, x_fact_ind, x_fact_int, x_fact_num, x_in, x_in_char,
-   x_in_InfNa, x_out_char, x_out_named, x_out_nonint)
+rm(a, b, c, d, out_p1, out_p2, out_p3, x_char_newlines, x_fact, x_fact_ind,
+   x_fact_int, x_fact_num, x_in, x_in_char, x_in_InfNa, x_out_char, x_out_named,
+   x_out_nonint)
